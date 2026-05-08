@@ -474,6 +474,116 @@ h2 em{color:var(--accent);font-style:normal}
 .svc-after strong{color:var(--text)}
 @media (max-width:780px){.services-grid{grid-template-columns:1fr}}
 
+/* ========== FOUNDER-VIDEO (Anker) ========== */
+.svc-video{
+  position:relative;margin:0 0 36px;
+  border:1px solid var(--line);border-radius:14px;
+  background:#0a0a0a;overflow:hidden;
+  aspect-ratio:16/9;
+  cursor:pointer;
+  transition:border-color .2s ease, transform .2s ease;
+}
+.svc-video:hover{border-color:var(--accent);transform:translateY(-2px)}
+.svc-video-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,107,61,.18) 0%, transparent 55%),
+    radial-gradient(circle at 75% 60%, rgba(255,107,61,.08) 0%, transparent 50%),
+    linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
+}
+.svc-video-inner{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:#f5f5f0;gap:14px;padding:24px;
+}
+.svc-video-play{
+  width:84px;height:84px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 8px rgba(255,107,61,.18), 0 0 0 22px rgba(255,107,61,.08);
+  transition:transform .25s ease;
+  margin-bottom:6px;
+}
+.svc-video:hover .svc-video-play{transform:scale(1.06)}
+.svc-video-play svg{width:30px;height:30px;color:#fff;margin-left:4px}
+.svc-video-label{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,107,61,.85);
+}
+.svc-video-title{
+  font-size:24px;font-weight:600;letter-spacing:-.005em;
+  max-width:560px;line-height:1.35;color:#f5f5f0;
+}
+.svc-video-meta{
+  font-size:13px;color:rgba(245,245,240,.5);letter-spacing:.01em;
+}
+.svc-video-tag{
+  position:absolute;top:18px;right:18px;
+  background:rgba(255,107,61,.16);color:#ff8a63;
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:7px 14px;border-radius:99px;
+  border:1px solid rgba(255,107,61,.35);
+  z-index:2;
+}
+@media (max-width:780px){
+  .svc-video-title{font-size:17px}
+  .svc-video-play{width:60px;height:60px}
+  .svc-video-play svg{width:24px;height:24px}
+  .svc-video-tag{top:12px;right:12px;font-size:9.5px;padding:5px 10px}
+}
+
+/* ========== SVC-CARD DETAILS ========== */
+.svc-more{
+  margin-top:20px;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.svc-more-q{
+  cursor:pointer;
+  font-size:13px;font-weight:700;
+  color:var(--accent);letter-spacing:.04em;text-transform:uppercase;
+  list-style:none;
+  display:flex;align-items:center;gap:8px;
+  transition:color .15s ease;
+}
+.svc-more-q::-webkit-details-marker{display:none}
+.svc-more-q::after{
+  content:"+";font-size:20px;font-weight:300;color:var(--accent);
+  margin-left:auto;transition:transform .2s ease;
+}
+.svc-more[open] .svc-more-q::after{content:"−"}
+.svc-more-q:hover{color:var(--accent-hover)}
+.svc-more-body{
+  padding-top:18px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.svc-more-block h4{
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;
+  color:var(--text-3);margin:0 0 8px;
+}
+.svc-more-block p{
+  font-size:14px;line-height:1.65;color:var(--text-2);margin:0;
+}
+.svc-more-block ul{
+  list-style:none;padding:0;margin:0;
+}
+.svc-more-block li{
+  font-size:13.5px;color:var(--text-2);line-height:1.55;
+  padding:4px 0;display:flex;gap:8px;
+}
+.svc-more-block li::before{
+  content:"→";color:var(--accent);flex-shrink:0;font-weight:700;
+}
+.svc-more-block li strong{color:var(--text);font-weight:600}
+.svc-more-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  padding-top:14px;border-top:1px dashed var(--line);
+  font-size:12.5px;color:var(--text-3);
+}
+.svc-more-meta strong{color:var(--text-2);font-weight:600}
+
 /* ========== COMPARE HERO (Bachgold-Pattern) ========== */
 section.compare-hero,
 section.compare-hero:nth-of-type(even){
@@ -1115,6 +1225,20 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <h2>Vier Bausteine.<br>Einzeln oder kombiniert.</h2>
     <p class="section-sub">Keine Phasen-Pakete, keine Pflicht-Bundles. Du buchst, was du brauchst — wir verzahnen es.</p>
 
+    <!-- Founder-Video · Anker (Platzhalter bis Aufnahme) -->
+    <div class="svc-video" role="button" tabindex="0" aria-label="Founder-Video Platzhalter — Aufnahme folgt">
+      <span class="svc-video-tag">Coming Soon</span>
+      <div class="svc-video-bg"></div>
+      <div class="svc-video-inner">
+        <div class="svc-video-play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="svc-video-label">Founder · 60–75s</div>
+        <div class="svc-video-title">Warum vier Bausteine — und nicht fünf Agenturen.</div>
+        <div class="svc-video-meta">Aufnahme diese Woche · Embed folgt</div>
+      </div>
+    </div>
+
     <div class="services-grid">
       <div class="svc-card">
         <div class="svc-icon">
@@ -1129,6 +1253,37 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <li>Voice-Guidelines + Visual-Direction</li>
           <li>Messaging-Framework (Hero, Sub, Trigger)</li>
         </ul>
+        <details class="svc-more">
+          <summary class="svc-more-q">Was steckt drin →</summary>
+          <div class="svc-more-body">
+            <div class="svc-more-block">
+              <h4>Was du bekommst</h4>
+              <ul>
+                <li>Brand-Doctrine: 40–60 Seiten operatives Framework, kein Pitch-Deck</li>
+                <li>Positioning-Statement, das dein Team in 30 Sekunden wiedergibt</li>
+                <li>Voice-Guidelines mit Do/Don't-Listen für Copy</li>
+                <li>Visual-Direction: Typografie, Farb-Token, Tonalität</li>
+                <li>Messaging-Framework: Hero, Sub, 5 Trigger-Sätze</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Wann das passt</h4>
+              <ul>
+                <li>Re-Brand vor Skalierungs-Phase</li>
+                <li>„Looks amateur" trotz gutem Produkt</li>
+                <li>Team variiert die Brand-Story an fünf Touchpoints unterschiedlich</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Realer Case</h4>
+              <p>Bachgold: Repositioning vor Re-Launch. Hearo: Brand-Doctrine als Spine für 14 Custom-PDPs und 12 Section-Templates.</p>
+            </div>
+            <div class="svc-more-meta">
+              <span>Dauer · <strong>2–3 Wochen</strong></span>
+              <span>Scope wird im Strategy Audit definiert</span>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="svc-card">
@@ -1144,6 +1299,38 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <li>Bundle- &amp; Cross-Sell-Architektur</li>
           <li>Mobile-Speed + Tech-Stack-Konsolidierung</li>
         </ul>
+        <details class="svc-more">
+          <summary class="svc-more-q">Was steckt drin →</summary>
+          <div class="svc-more-body">
+            <div class="svc-more-block">
+              <h4>Was du bekommst</h4>
+              <ul>
+                <li>Custom-Theme auf Dawn-Basis — nicht zugekauft, nicht aus dem Theme-Store</li>
+                <li>Section-Library mit 12–18 wiederverwendbaren Komponenten</li>
+                <li>5–15 Custom-PDPs, generator-driven (idempotent, deterministisch)</li>
+                <li>Bundle- &amp; Cross-Sell-Architektur, die mit dir wächst</li>
+                <li>Mobile-Speed-Tuning auf PageSpeed 85+</li>
+                <li>Migration: 301-Plan, Pre-Launch-A/B, Rollback-Plan</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Wann das passt</h4>
+              <ul>
+                <li>Bestehender Shop bremst die Conversion oder limitiert Bundle-Logik</li>
+                <li>Re-Platform aus WooCommerce, Magento oder Custom-Stack</li>
+                <li>Theme-Store-Theme passt nicht mehr zum Volumen</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Realer Case</h4>
+              <p>Hearo: kompletter Shop in 8 Wochen, 14+ wiederverwendbare Sections. Bachgold: Re-Launch mit 7 Bundles und idempotentem Section-Generator — kein Traffic-Verlust, kein Downtime.</p>
+            </div>
+            <div class="svc-more-meta">
+              <span>Dauer · <strong>4–8 Wochen</strong></span>
+              <span>Scope wird im Strategy Audit definiert</span>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="svc-card">
@@ -1159,6 +1346,37 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <li>SMS- + Loyalty-Integration (wenn passend)</li>
           <li>Profit-per-Visitor Tracking</li>
         </ul>
+        <details class="svc-more">
+          <summary class="svc-more-q">Was steckt drin →</summary>
+          <div class="svc-more-body">
+            <div class="svc-more-block">
+              <h4>Was du bekommst</h4>
+              <ul>
+                <li>Conversion-Audit auf 12+ Hebeln: Hero, PDP, Cart, Checkout, Email-Capture, Bundle-Logic</li>
+                <li>Klaviyo-Lifecycle: Welcome, Browse-Abandon, Cart-Abandon, Post-Purchase, Win-Back</li>
+                <li>SMS-Integration, wenn das Volumen es trägt</li>
+                <li>A/B-Test-Framework mit klaren Hypothesen statt Random-Tests</li>
+                <li>Reports auf Margen-Ebene — Per-Order-Math statt ROAS-Theater</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Wann das passt</h4>
+              <ul>
+                <li>Traffic da, Conversion zu niedrig</li>
+                <li>„ROAS sieht okay aus, Marge erodiert trotzdem"</li>
+                <li>Klaviyo halb gebaut — niemand pflegt's, niemand misst es</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Realer Case</h4>
+              <p>Bachgold: Bundle-Architektur mit 7 abgestimmten Paketen statt Single-SKU. Hearo: Per-Order-Math als Standard-Reporting, nicht Blended-ROAS.</p>
+            </div>
+            <div class="svc-more-meta">
+              <span>Dauer · <strong>3–4 Wochen</strong></span>
+              <span>Scope wird im Strategy Audit definiert</span>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="svc-card">
@@ -1174,6 +1392,35 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <li>Heavy: Custom AI-Agents + eigene Dashboards</li>
           <li>Schulung + Übergabe inklusive</li>
         </ul>
+        <details class="svc-more">
+          <summary class="svc-more-q">Was steckt drin →</summary>
+          <div class="svc-more-body">
+            <div class="svc-more-block">
+              <h4>Drei Tiefen-Stufen</h4>
+              <ul>
+                <li><strong>Light</strong> · 1–2 Wochen: KI-Leitfaden, 10–15 Custom-Prompts, Team-Workshop</li>
+                <li><strong>Medium</strong> · 3–4 Wochen: 3–5 No-Code-Workflows in n8n, Make oder Zapier — dokumentiert und geschult</li>
+                <li><strong>Heavy</strong> · 6–10 Wochen: Custom AI-Agents, eigene Dashboards, API-Integration in deinen Stack</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Wann das passt</h4>
+              <ul>
+                <li>Team duplicates Recherche-, Reporting- oder Content-Tasks</li>
+                <li>„AI" steht auf der Roadmap, niemand hat Zeit zum Implementieren</li>
+                <li>Reporting frisst täglich 1–2 Stunden Founder-Time</li>
+              </ul>
+            </div>
+            <div class="svc-more-block">
+              <h4>Realer Case</h4>
+              <p>AdFlow-Pipeline: Creative-Briefs aus Kunden-Daten in 30 Minuten statt 2 Tagen. Section-Generator: 14 Custom-PDPs in 3 Tagen statt 3 Wochen Hand-Code.</p>
+            </div>
+            <div class="svc-more-meta">
+              <span>Dauer · <strong>1–10 Wochen</strong></span>
+              <span>Tier wird im Audit definiert</span>
+            </div>
+          </div>
+        </details>
       </div>
     </div>
 
