@@ -430,180 +430,85 @@ h2 em{color:var(--accent);font-style:normal}
   .trust-track img{height:24px}
 }
 
-/* ========== SERVICES — STICKY-SIDEBAR STAGE ========== */
-.bs-stage{
-  margin-top:8px;
-  display:grid;grid-template-columns:240px 1fr;gap:64px;
-  align-items:start;position:relative;min-height:520px;
+/* ========== SERVICES — COMPACT STRIP + DRAWER ========== */
+.bs-compact{margin-top:4px}
+.bs-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  margin-bottom:14px;
 }
-.bs-rail{
-  position:sticky;top:120px;
-  display:flex;flex-direction:column;gap:28px;
-  padding-left:18px;
-}
-.bs-rail::before{
-  content:'';position:absolute;
-  left:7px;top:6px;bottom:6px;
-  width:2px;background:var(--line);border-radius:2px;
-}
-.bs-rail-indicator{
-  position:absolute;left:5px;top:0;
-  width:6px;height:22px;background:var(--accent);
-  border-radius:6px;
-  transition:transform .85s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 0 14px rgba(255,107,61,.4);
-}
-.bs-tab{
-  display:flex;align-items:center;gap:18px;
-  background:none;border:none;padding:0;
+.bs-pill{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;
   cursor:pointer;text-align:left;
-  font-family:inherit;position:relative;
+  font-family:inherit;color:inherit;
+  transition:all .2s ease;
 }
-.bs-dot{
-  width:16px;height:16px;border-radius:50%;
-  border:2px solid var(--accent);background:var(--bg);
-  flex-shrink:0;margin-left:-11px;
-  transition:all .5s cubic-bezier(.16,1,.3,1);
+.bs-pill:hover{border-color:var(--line-strong)}
+.bs-pill.active{
+  background:var(--bg-elev);border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,107,61,.08);
 }
-@keyframes bs-breathe{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,107,61,.35);transform:scale(1)}
-  50%{box-shadow:0 0 0 8px rgba(255,107,61,0);transform:scale(1.18)}
-}
-.bs-tab.active .bs-dot{
-  background:var(--accent);
-  animation:bs-breathe 2.4s infinite ease-in-out;
-}
-.bs-tab-text{
-  display:flex;flex-direction:column;gap:2px;
-  transition:transform .4s cubic-bezier(.16,1,.3,1);
-}
-.bs-tab:hover .bs-tab-text{transform:translateX(3px)}
-.bs-tab-phase{
-  font-size:10px;font-weight:800;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--text-3);
-  transition:color .4s ease;
-}
-.bs-tab-name{
-  font-size:14px;font-weight:600;color:var(--text-3);
-  transition:color .4s ease;
-}
-.bs-tab.active .bs-tab-phase,
-.bs-tab.active .bs-tab-name{color:var(--accent)}
-.bs-tab.active .bs-tab-name{font-weight:700}
-
-.bs-content-area{position:relative;min-height:520px}
-.bs-bg-num{
-  position:absolute;top:-90px;left:-40px;
+.bs-pill-num{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:clamp(280px, 32vw, 460px);
-  font-weight:900;line-height:1;letter-spacing:-.04em;
-  -webkit-text-stroke:2px var(--accent);
-  color:transparent;opacity:.07;
-  pointer-events:none;user-select:none;
-  transition:opacity .4s ease, transform .55s cubic-bezier(.4,0,.2,1);
-  z-index:0;
+  font-weight:600;font-size:22px;letter-spacing:-.01em;
+  color:var(--text-3);transition:color .2s ease;
+  flex-shrink:0;
 }
-.bs-bg-num.swapping{opacity:0;transform:translateY(20px) scale(.92)}
-
-.bs-step{
-  position:absolute;top:0;left:0;width:100%;
+.bs-pill.active .bs-pill-num{color:var(--accent)}
+.bs-pill-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.bs-pill-label{
+  font-size:14px;font-weight:600;letter-spacing:-.005em;
+  color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.bs-pill-meta{
+  font-size:11px;color:var(--text-3);letter-spacing:.04em;
+}
+.bs-drawer{
+  position:relative;min-height:200px;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:14px;padding:30px 34px;
+  overflow:hidden;
+}
+.bs-panel{
+  position:absolute;inset:30px 34px;
   opacity:0;visibility:hidden;
-  transform:translateY(28px) scale(.985);
-  filter:blur(10px);
-  transition:opacity .8s cubic-bezier(.16,1,.3,1),
-             transform .8s cubic-bezier(.16,1,.3,1),
-             filter .8s cubic-bezier(.16,1,.3,1);
-  padding-top:24px;z-index:1;
+  transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;
 }
-.bs-step.active{
-  position:relative;
-  opacity:1;visibility:visible;
-  transform:none;filter:blur(0);
+.bs-panel.active{
+  position:relative;inset:auto;
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .35s ease,transform .35s ease;
 }
-.bs-day-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:800;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--accent);
-  margin-bottom:18px;
+.bs-panel h3{
+  font-size:26px;font-weight:600;letter-spacing:-.015em;
+  line-height:1.2;margin:0 0 12px;
 }
-.bs-day-tag::before{
-  content:"";width:18px;height:1px;background:var(--accent);
+.bs-panel h3 em{font-style:italic;font-weight:400;color:var(--text-2)}
+.bs-panel p{
+  font-size:15px;line-height:1.6;color:var(--text-2);
+  margin:0 0 18px;max-width:680px;
 }
-.bs-step h3{
-  font-size:clamp(34px, 4vw, 52px);
-  font-weight:700;letter-spacing:-.018em;line-height:1.05;
-  color:var(--text);margin:0 0 22px;
-}
-.bs-step h3 em{font-style:italic;font-weight:500;color:var(--text-2)}
-.bs-step-lead{
-  font-size:17px;line-height:1.6;color:var(--text-2);
-  max-width:620px;margin:0 0 30px;
-}
-.bs-blocks{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:28px 40px;margin-bottom:30px;max-width:660px;
-}
-.bs-block h4{
-  font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.14em;color:var(--text-3);margin:0 0 10px;
-}
-.bs-block ul{list-style:none;padding:0;margin:0}
-.bs-block li{
-  font-size:13.5px;color:var(--text-2);line-height:1.55;
-  padding:4px 0;display:flex;gap:8px;
-}
-.bs-block li::before{
-  content:"→";color:var(--accent);flex-shrink:0;font-weight:700;
-}
-.bs-block li strong{color:var(--text);font-weight:600}
-.bs-case{
-  padding:18px 22px;background:var(--bg-alt);
-  border-left:2px solid var(--accent);border-radius:6px;
-  margin-bottom:24px;max-width:660px;
-}
-.bs-case-label{
-  font-size:10.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.16em;color:var(--accent);
-  display:block;margin-bottom:6px;
-}
-.bs-case p{font-size:14px;line-height:1.6;color:var(--text-2);margin:0}
-.bs-chips{display:flex;flex-wrap:wrap;gap:10px}
+.bs-chips{display:flex;flex-wrap:wrap;gap:8px}
 .bs-chip{
   font-size:12px;font-weight:600;color:var(--accent);
-  padding:9px 16px;border-radius:99px;
+  padding:6px 12px;border-radius:99px;
   background:var(--accent-bg);
   border:1px solid rgba(255,107,61,.18);
-  opacity:0;transform:translateY(10px) scale(.94);
-  transition:opacity .5s cubic-bezier(.34,1.56,.64,1),
-             transform .5s cubic-bezier(.34,1.56,.64,1);
 }
-.bs-step.active .bs-chip{opacity:1;transform:none}
-.bs-step.active .bs-chip:nth-child(1){transition-delay:.34s}
-.bs-step.active .bs-chip:nth-child(2){transition-delay:.42s}
-.bs-step.active .bs-chip:nth-child(3){transition-delay:.50s}
-.bs-step.active .bs-chip:nth-child(4){transition-delay:.58s}
-.bs-step.active .bs-chip:nth-child(5){transition-delay:.66s}
 
-@media (max-width:900px){
-  .bs-stage{grid-template-columns:1fr;gap:30px;min-height:0}
-  .bs-rail{
-    position:static;flex-direction:row;
-    overflow-x:auto;gap:14px;padding:4px 0 14px;
-    scrollbar-width:none;
-  }
-  .bs-rail::-webkit-scrollbar{display:none}
-  .bs-rail::before,.bs-rail-indicator{display:none}
-  .bs-tab{
-    flex-shrink:0;padding:10px 14px;
-    border:1px solid var(--line);border-radius:10px;
-    background:var(--bg);
-  }
-  .bs-tab.active{border-color:var(--accent);background:var(--accent-bg)}
-  .bs-dot{display:none}
-  .bs-content-area{min-height:0}
-  .bs-bg-num{top:-50px;left:-10px;font-size:clamp(180px,40vw,280px)}
-  .bs-step{padding-top:8px}
-  .bs-blocks{grid-template-columns:1fr;gap:22px}
+@media (max-width:780px){
+  .bs-strip{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+  .bs-pill{padding:12px 14px;gap:10px}
+  .bs-pill-num{font-size:18px}
+  .bs-pill-label{font-size:13px}
+  .bs-pill-meta{font-size:10.5px}
+  .bs-drawer{padding:24px 22px;min-height:0}
+  .bs-panel{inset:24px 22px}
+  .bs-panel h3{font-size:21px}
+  .bs-panel p{font-size:14.5px}
 }
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
@@ -1320,187 +1225,81 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
     </div>
 
-    <div class="bs-stage" id="bsStage">
-      <div class="bs-rail">
-        <div class="bs-rail-indicator" id="bsRailIndicator"></div>
-        <button class="bs-tab active" data-step="1" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 01</span>
-            <span class="bs-tab-name">Brand</span>
+    <div class="bs-compact" id="bsStage">
+      <div class="bs-strip" role="tablist">
+        <button class="bs-pill active" data-step="1" type="button" role="tab">
+          <span class="bs-pill-num">01</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Brand</span>
+            <span class="bs-pill-meta">2–3 Wochen</span>
           </span>
         </button>
-        <button class="bs-tab" data-step="2" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 02</span>
-            <span class="bs-tab-name">Shopify-Store</span>
+        <button class="bs-pill" data-step="2" type="button" role="tab">
+          <span class="bs-pill-num">02</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Shopify-Store</span>
+            <span class="bs-pill-meta">4–8 Wochen</span>
           </span>
         </button>
-        <button class="bs-tab" data-step="3" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 03</span>
-            <span class="bs-tab-name">Conversion &amp; E-Mail</span>
+        <button class="bs-pill" data-step="3" type="button" role="tab">
+          <span class="bs-pill-num">03</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Conversion &amp; E-Mail</span>
+            <span class="bs-pill-meta">3–4 Wochen</span>
           </span>
         </button>
-        <button class="bs-tab" data-step="4" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 04</span>
-            <span class="bs-tab-name">AI Operations</span>
+        <button class="bs-pill" data-step="4" type="button" role="tab">
+          <span class="bs-pill-num">04</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">AI Operations</span>
+            <span class="bs-pill-meta">1–10 Wochen</span>
           </span>
         </button>
       </div>
 
-      <div class="bs-content-area">
-        <div class="bs-bg-num" id="bsBgNum">01</div>
-
-        <div class="bs-step active" data-step="1">
-          <span class="bs-day-tag">Dauer · 2–3 Wochen</span>
+      <div class="bs-drawer">
+        <article class="bs-panel active" data-step="1">
           <h3>Positioning &amp; <em>Voice</em></h3>
-          <p class="bs-step-lead">Markenstrategie, mit der dein ganzes Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework, das Hero-Copy, Ad-Headlines und Customer-Service-Antworten gleich klingen lässt.</p>
-          <div class="bs-blocks">
-            <div class="bs-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Brand-Doctrine: 40–60 Seiten operatives Framework</li>
-                <li>Positioning-Statement, das dein Team in 30 Sek wiedergibt</li>
-                <li>Voice-Guidelines mit Do/Don't-Listen</li>
-                <li>Visual-Direction: Typo, Farb-Token, Tonalität</li>
-                <li>Messaging-Framework: Hero, Sub, 5 Trigger-Sätze</li>
-              </ul>
-            </div>
-            <div class="bs-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Re-Brand vor Skalierungs-Phase</li>
-                <li>„Looks amateur" trotz gutem Produkt</li>
-                <li>Brand-Story variiert an 5 Touchpoints unterschiedlich</li>
-              </ul>
-            </div>
-          </div>
-          <div class="bs-case">
-            <span class="bs-case-label">Realer Case</span>
-            <p>Bachgold: Repositioning vor Re-Launch. Hearo: Brand-Doctrine als Spine für 14 Custom-PDPs und 12 Section-Templates.</p>
-          </div>
+          <p>Markenstrategie, mit der dein Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework. Bei Hearo Spine für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
           <div class="bs-chips">
-            <span class="bs-chip">Positioning-Doctrine</span>
+            <span class="bs-chip">Brand-Doctrine</span>
             <span class="bs-chip">Voice-Guidelines</span>
             <span class="bs-chip">Messaging-Framework</span>
           </div>
-        </div>
+        </article>
 
-        <div class="bs-step" data-step="2">
-          <span class="bs-day-tag">Dauer · 4–8 Wochen</span>
+        <article class="bs-panel" data-step="2">
           <h3>Custom-Theme statt <em>Theme-Adaption</em></h3>
-          <p class="bs-step-lead">Hochkonvertierender, skalierbarer Shop auf Dawn-Basis. Bundle- und PDP-Architektur, die mit dir wächst — nicht ein Theme-Store-Skin, der bei der ersten Erweiterung bricht.</p>
-          <div class="bs-blocks">
-            <div class="bs-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Custom-Theme auf Dawn-Basis</li>
-                <li>Section-Library: 12–18 wiederverwendbare Komponenten</li>
-                <li>5–15 Custom-PDPs, generator-driven (idempotent)</li>
-                <li>Bundle- &amp; Cross-Sell-Architektur</li>
-                <li>Mobile-Speed-Tuning, PageSpeed 85+</li>
-                <li>Migration: 301-Plan, Pre-Launch-A/B, Rollback</li>
-              </ul>
-            </div>
-            <div class="bs-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Bestehender Shop limitiert Bundle-Logik</li>
-                <li>Re-Platform aus WooCommerce, Magento, Custom</li>
-                <li>Theme-Store-Theme passt nicht mehr zum Volumen</li>
-              </ul>
-            </div>
-          </div>
-          <div class="bs-case">
-            <span class="bs-case-label">Realer Case</span>
-            <p>Hearo: kompletter Shop in 8 Wochen, 14+ wiederverwendbare Sections. Bachgold: Re-Launch mit 7 Bundles und idempotentem Section-Generator — kein Traffic-Verlust, kein Downtime.</p>
-          </div>
+          <p>Hochkonvertierender Shop auf Dawn-Basis. Section-Library, die mit dir wächst. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
           <div class="bs-chips">
-            <span class="bs-chip">Custom-Liquid-Theme</span>
+            <span class="bs-chip">Custom-Liquid</span>
             <span class="bs-chip">Section-Library</span>
             <span class="bs-chip">Bundle-Architektur</span>
             <span class="bs-chip">PageSpeed 85+</span>
           </div>
-        </div>
+        </article>
 
-        <div class="bs-step" data-step="3">
-          <span class="bs-day-tag">Dauer · 3–4 Wochen</span>
+        <article class="bs-panel" data-step="3">
           <h3>Profit-per-Visitor <em>maximieren</em></h3>
-          <p class="bs-step-lead">A/B-Test-Framework und Klaviyo-Lifecycle, die auf Margen-Ebene messen. Wir reden Per-Order-Math, nicht ROAS-Theater. Damit jeder Besucher mehr zurücklässt.</p>
-          <div class="bs-blocks">
-            <div class="bs-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Conversion-Audit auf 12+ Hebeln</li>
-                <li>Klaviyo-Lifecycle: Welcome bis Win-Back</li>
-                <li>SMS-Integration wenn das Volumen es trägt</li>
-                <li>A/B-Test-Framework mit klaren Hypothesen</li>
-                <li>Reports auf Margen-Ebene, nicht Blended-ROAS</li>
-              </ul>
-            </div>
-            <div class="bs-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Traffic da, Conversion zu niedrig</li>
-                <li>„ROAS sieht okay aus, Marge erodiert trotzdem"</li>
-                <li>Klaviyo halb gebaut — niemand pflegt's</li>
-              </ul>
-            </div>
-          </div>
-          <div class="bs-case">
-            <span class="bs-case-label">Realer Case</span>
-            <p>Bachgold: Bundle-Architektur mit 7 abgestimmten Paketen statt Single-SKU. Hearo: Per-Order-Math als Standard-Reporting, nicht Blended-ROAS.</p>
-          </div>
+          <p>A/B-Tests und Klaviyo-Lifecycle auf Margen-Ebene. Per-Order-Math statt ROAS-Theater. Welcome-Flow bis Win-Back, dokumentiert und übergeben.</p>
           <div class="bs-chips">
             <span class="bs-chip">Conversion-Audit</span>
             <span class="bs-chip">Klaviyo-Lifecycle</span>
             <span class="bs-chip">Per-Order-Math</span>
           </div>
-        </div>
+        </article>
 
-        <div class="bs-step" data-step="4">
-          <span class="bs-day-tag">Dauer · 1–10 Wochen</span>
+        <article class="bs-panel" data-step="4">
           <h3>Workflows, die <em>Zeit sparen</em></h3>
-          <p class="bs-step-lead">Drei Tiefen-Stufen — Light, Medium, Heavy. Im Discovery wählen wir, was zu deinem Reifegrad passt. Kein „AI-powered"-Geschwafel, sondern Workflows, die deinem Team morgen 10 Stunden zurückgeben.</p>
-          <div class="bs-blocks">
-            <div class="bs-block">
-              <h4>Drei Tiefen-Stufen</h4>
-              <ul>
-                <li><strong>Light</strong> · 1–2 Wo · KI-Leitfaden + 10–15 Custom-Prompts</li>
-                <li><strong>Medium</strong> · 3–4 Wo · 3–5 No-Code-Workflows (n8n/Make)</li>
-                <li><strong>Heavy</strong> · 6–10 Wo · Custom AI-Agents + Dashboards</li>
-              </ul>
-            </div>
-            <div class="bs-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Team duplicates Recherche-, Reporting-, Content-Tasks</li>
-                <li>„AI" steht auf der Roadmap, niemand hat Zeit</li>
-                <li>Reporting frisst täglich 1–2 h Founder-Time</li>
-              </ul>
-            </div>
-          </div>
-          <div class="bs-case">
-            <span class="bs-case-label">Realer Case</span>
-            <p>AdFlow-Pipeline: Creative-Briefs aus Kunden-Daten in 30 Min statt 2 Tagen. Section-Generator: 14 Custom-PDPs in 3 Tagen statt 3 Wochen Hand-Code.</p>
-          </div>
+          <p>Drei Stufen — Light (1–2 Wo, Prompts + Workshop), Medium (3–4 Wo, n8n-Workflows), Heavy (6–10 Wo, Custom-Agents + Dashboards). Im Discovery wählen wir, was passt.</p>
           <div class="bs-chips">
             <span class="bs-chip">Custom-Prompts</span>
             <span class="bs-chip">No-Code-Workflows</span>
             <span class="bs-chip">AI-Agents</span>
             <span class="bs-chip">Schulung &amp; Übergabe</span>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
-
-    <div class="svc-after">
-      <strong>Bridge oder Bundle?</strong> &nbsp;&nbsp;Im Strategy Audit klären wir gemeinsam, was passt — Bridge-Paket für Re-Brand / Re-Launch (Tier 2), einzelne Phase als Add-On, oder Full Transformation für etablierte 1–20 Mio Brands (Tier 3).
     </div>
   </div>
 </section>
@@ -1870,62 +1669,30 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 </script>
 
 <script>
-/* === BAUSTEINE-STAGE: Tab-Switch + Indicator + BG-Number === */
+/* === BAUSTEINE: Compact Strip + Drawer Tab-Switch === */
 (function(){
   var stage = document.getElementById('bsStage');
   if(!stage) return;
-  var tabs = stage.querySelectorAll('.bs-tab');
-  var steps = stage.querySelectorAll('.bs-step');
-  var indicator = document.getElementById('bsRailIndicator');
-  var bgNum = document.getElementById('bsBgNum');
+  var pills = stage.querySelectorAll('.bs-pill');
+  var panels = stage.querySelectorAll('.bs-panel');
   var current = 1;
-  var swapping = false;
-
-  function moveIndicator(n){
-    if(!indicator) return;
-    var target = stage.querySelector('.bs-tab[data-step="'+n+'"]');
-    if(!target) return;
-    var rail = target.parentElement;
-    var rRect = rail.getBoundingClientRect();
-    var tRect = target.getBoundingClientRect();
-    var offset = tRect.top - rRect.top + (tRect.height/2) - 11;
-    indicator.style.transform = 'translateY('+offset+'px)';
-  }
 
   function switchStep(n){
     if(n === current) return;
     current = n;
-    tabs.forEach(function(t){
-      t.classList.toggle('active', parseInt(t.dataset.step,10) === n);
+    pills.forEach(function(p){
+      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
     });
-    steps.forEach(function(s){
-      s.classList.toggle('active', parseInt(s.dataset.step,10) === n);
+    panels.forEach(function(p){
+      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
     });
-    moveIndicator(n);
-    if(bgNum && !swapping){
-      swapping = true;
-      bgNum.classList.add('swapping');
-      setTimeout(function(){
-        bgNum.textContent = String(n).padStart(2,'0');
-        bgNum.classList.remove('swapping');
-        swapping = false;
-      }, 320);
-    }
   }
 
-  tabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      switchStep(parseInt(tab.dataset.step,10));
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      switchStep(parseInt(pill.dataset.step,10));
     });
   });
-
-  function init(){ moveIndicator(1); }
-  if(document.readyState === 'complete' || document.readyState === 'interactive'){
-    setTimeout(init, 60);
-  } else {
-    window.addEventListener('load', init);
-  }
-  window.addEventListener('resize', function(){ moveIndicator(current); });
 })();
 </script>
 
