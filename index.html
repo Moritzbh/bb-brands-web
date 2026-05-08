@@ -430,49 +430,86 @@ h2 em{color:var(--accent);font-style:normal}
   .trust-track img{height:24px}
 }
 
-/* ========== SERVICES ========== */
-.services-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+/* ========== SERVICES — COMPACT STRIP + DRAWER ========== */
+.bs-compact{margin-top:4px}
+.bs-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  margin-bottom:14px;
 }
-.svc-card{
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:14px;padding:32px 30px;
+.bs-pill{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;
+  cursor:pointer;text-align:left;
+  font-family:inherit;color:inherit;
   transition:all .2s ease;
-  position:relative;
 }
-.svc-card:hover{border-color:var(--line-strong);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.05)}
-.svc-icon{
-  width:42px;height:42px;border-radius:10px;
-  background:var(--accent-bg);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;
+.bs-pill:hover{border-color:var(--line-strong)}
+.bs-pill.active{
+  background:var(--bg-elev);border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,107,61,.08);
 }
-.svc-icon svg{width:22px;height:22px;color:var(--accent)}
-.svc-num{
-  font-size:11px;color:var(--text-3);font-weight:700;
-  text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;
+.bs-pill-num{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-weight:600;font-size:22px;letter-spacing:-.01em;
+  color:var(--text-3);transition:color .2s ease;
+  flex-shrink:0;
 }
-.svc-card h3{
-  font-size:24px;font-weight:700;letter-spacing:-.01em;
-  margin-bottom:10px;
+.bs-pill.active .bs-pill-num{color:var(--accent)}
+.bs-pill-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.bs-pill-label{
+  font-size:14px;font-weight:600;letter-spacing:-.005em;
+  color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.svc-card p{color:var(--text-2);font-size:15px;line-height:1.55;margin-bottom:14px}
-.svc-card ul{list-style:none;padding:0;margin:0}
-.svc-card li{
-  font-size:13.5px;color:var(--text-3);
-  padding:5px 0;display:flex;gap:8px;align-items:flex-start;
+.bs-pill-meta{
+  font-size:11px;color:var(--text-3);letter-spacing:.04em;
 }
-.svc-card li::before{
-  content:"→";color:var(--accent);flex-shrink:0;font-weight:700;
-}
-.svc-after{
-  margin-top:36px;padding:18px 22px;
+.bs-drawer{
+  position:relative;min-height:200px;
   background:var(--bg-card);border:1px solid var(--line);
-  border-radius:10px;color:var(--text-2);font-size:14.5px;
-  text-align:center;
+  border-radius:14px;padding:30px 34px;
+  overflow:hidden;
 }
-.svc-after strong{color:var(--text)}
-@media (max-width:780px){.services-grid{grid-template-columns:1fr}}
+.bs-panel{
+  position:absolute;inset:30px 34px;
+  opacity:0;visibility:hidden;
+  transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;
+}
+.bs-panel.active{
+  position:relative;inset:auto;
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .35s ease,transform .35s ease;
+}
+.bs-panel h3{
+  font-size:26px;font-weight:600;letter-spacing:-.015em;
+  line-height:1.2;margin:0 0 12px;
+}
+.bs-panel h3 em{font-style:italic;font-weight:400;color:var(--text-2)}
+.bs-panel p{
+  font-size:15px;line-height:1.6;color:var(--text-2);
+  margin:0 0 18px;max-width:680px;
+}
+.bs-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bs-chip{
+  font-size:12px;font-weight:600;color:var(--accent);
+  padding:6px 12px;border-radius:99px;
+  background:var(--accent-bg);
+  border:1px solid rgba(255,107,61,.18);
+}
+
+@media (max-width:780px){
+  .bs-strip{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+  .bs-pill{padding:12px 14px;gap:10px}
+  .bs-pill-num{font-size:18px}
+  .bs-pill-label{font-size:13px}
+  .bs-pill-meta{font-size:10.5px}
+  .bs-drawer{padding:24px 22px;min-height:0}
+  .bs-panel{inset:24px 22px}
+  .bs-panel h3{font-size:21px}
+  .bs-panel p{font-size:14.5px}
+}
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
 .svc-video{
@@ -532,57 +569,6 @@ h2 em{color:var(--accent);font-style:normal}
   .svc-video-play svg{width:24px;height:24px}
   .svc-video-tag{top:12px;right:12px;font-size:9.5px;padding:5px 10px}
 }
-
-/* ========== SVC-CARD DETAILS ========== */
-.svc-more{
-  margin-top:20px;
-  border-top:1px solid var(--line);
-  padding-top:14px;
-}
-.svc-more-q{
-  cursor:pointer;
-  font-size:13px;font-weight:700;
-  color:var(--accent);letter-spacing:.04em;text-transform:uppercase;
-  list-style:none;
-  display:flex;align-items:center;gap:8px;
-  transition:color .15s ease;
-}
-.svc-more-q::-webkit-details-marker{display:none}
-.svc-more-q::after{
-  content:"+";font-size:20px;font-weight:300;color:var(--accent);
-  margin-left:auto;transition:transform .2s ease;
-}
-.svc-more[open] .svc-more-q::after{content:"−"}
-.svc-more-q:hover{color:var(--accent-hover)}
-.svc-more-body{
-  padding-top:18px;
-  display:flex;flex-direction:column;gap:18px;
-}
-.svc-more-block h4{
-  font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.14em;
-  color:var(--text-3);margin:0 0 8px;
-}
-.svc-more-block p{
-  font-size:14px;line-height:1.65;color:var(--text-2);margin:0;
-}
-.svc-more-block ul{
-  list-style:none;padding:0;margin:0;
-}
-.svc-more-block li{
-  font-size:13.5px;color:var(--text-2);line-height:1.55;
-  padding:4px 0;display:flex;gap:8px;
-}
-.svc-more-block li::before{
-  content:"→";color:var(--accent);flex-shrink:0;font-weight:700;
-}
-.svc-more-block li strong{color:var(--text);font-weight:600}
-.svc-more-meta{
-  display:flex;gap:18px;flex-wrap:wrap;
-  padding-top:14px;border-top:1px dashed var(--line);
-  font-size:12.5px;color:var(--text-3);
-}
-.svc-more-meta strong{color:var(--text-2);font-weight:600}
 
 /* ========== COMPARE HERO (Bachgold-Pattern) ========== */
 section.compare-hero,
@@ -1250,193 +1236,81 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
     </div>
 
-    <div class="services-grid">
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-        </div>
-        <div class="svc-num">01 — Brand</div>
-        <h3>Positioning &amp; Voice</h3>
-        <p>Markenstrategie, mit der dein ganzes Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework.</p>
-        <ul>
-          <li>Tiefen-Audit: Brand, Markt, Wettbewerb</li>
-          <li>Positioning-Doctrine</li>
-          <li>Voice-Guidelines + Visual-Direction</li>
-          <li>Messaging-Framework (Hero, Sub, Trigger)</li>
-        </ul>
-        <details class="svc-more">
-          <summary class="svc-more-q">Was steckt drin →</summary>
-          <div class="svc-more-body">
-            <div class="svc-more-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Brand-Doctrine: 40–60 Seiten operatives Framework, kein Pitch-Deck</li>
-                <li>Positioning-Statement, das dein Team in 30 Sekunden wiedergibt</li>
-                <li>Voice-Guidelines mit Do/Don't-Listen für Copy</li>
-                <li>Visual-Direction: Typografie, Farb-Token, Tonalität</li>
-                <li>Messaging-Framework: Hero, Sub, 5 Trigger-Sätze</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Re-Brand vor Skalierungs-Phase</li>
-                <li>„Looks amateur" trotz gutem Produkt</li>
-                <li>Team variiert die Brand-Story an fünf Touchpoints unterschiedlich</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Realer Case</h4>
-              <p>Bachgold: Repositioning vor Re-Launch. Hearo: Brand-Doctrine als Spine für 14 Custom-PDPs und 12 Section-Templates.</p>
-            </div>
-            <div class="svc-more-meta">
-              <span>Dauer · <strong>2–3 Wochen</strong></span>
-              <span>Scope wird im Strategy Audit definiert</span>
-            </div>
-          </div>
-        </details>
+    <div class="bs-compact" id="bsStage">
+      <div class="bs-strip" role="tablist">
+        <button class="bs-pill active" data-step="1" type="button" role="tab">
+          <span class="bs-pill-num">01</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Brand</span>
+            <span class="bs-pill-meta">2–3 Wochen</span>
+          </span>
+        </button>
+        <button class="bs-pill" data-step="2" type="button" role="tab">
+          <span class="bs-pill-num">02</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Shopify-Store</span>
+            <span class="bs-pill-meta">4–8 Wochen</span>
+          </span>
+        </button>
+        <button class="bs-pill" data-step="3" type="button" role="tab">
+          <span class="bs-pill-num">03</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">Conversion &amp; E-Mail</span>
+            <span class="bs-pill-meta">3–4 Wochen</span>
+          </span>
+        </button>
+        <button class="bs-pill" data-step="4" type="button" role="tab">
+          <span class="bs-pill-num">04</span>
+          <span class="bs-pill-text">
+            <span class="bs-pill-label">AI Operations</span>
+            <span class="bs-pill-meta">1–10 Wochen</span>
+          </span>
+        </button>
       </div>
 
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h2M8 17h6"/></svg>
-        </div>
-        <div class="svc-num">02 — Shopify-Store</div>
-        <h3>Custom-Theme statt Theme-Adaption</h3>
-        <p>Hochkonvertierender, skalierbarer Shop. Bundle- und PDP-Architektur, die mit dir wächst.</p>
-        <ul>
-          <li>Custom-Theme mit wiederverwendbaren Sections</li>
-          <li>5–15 Custom-PDPs (generator-driven)</li>
-          <li>Bundle- &amp; Cross-Sell-Architektur</li>
-          <li>Mobile-Speed + Tech-Stack-Konsolidierung</li>
-        </ul>
-        <details class="svc-more">
-          <summary class="svc-more-q">Was steckt drin →</summary>
-          <div class="svc-more-body">
-            <div class="svc-more-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Custom-Theme auf Dawn-Basis — nicht zugekauft, nicht aus dem Theme-Store</li>
-                <li>Section-Library mit 12–18 wiederverwendbaren Komponenten</li>
-                <li>5–15 Custom-PDPs, generator-driven (idempotent, deterministisch)</li>
-                <li>Bundle- &amp; Cross-Sell-Architektur, die mit dir wächst</li>
-                <li>Mobile-Speed-Tuning auf PageSpeed 85+</li>
-                <li>Migration: 301-Plan, Pre-Launch-A/B, Rollback-Plan</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Bestehender Shop bremst die Conversion oder limitiert Bundle-Logik</li>
-                <li>Re-Platform aus WooCommerce, Magento oder Custom-Stack</li>
-                <li>Theme-Store-Theme passt nicht mehr zum Volumen</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Realer Case</h4>
-              <p>Hearo: kompletter Shop in 8 Wochen, 14+ wiederverwendbare Sections. Bachgold: Re-Launch mit 7 Bundles und idempotentem Section-Generator — kein Traffic-Verlust, kein Downtime.</p>
-            </div>
-            <div class="svc-more-meta">
-              <span>Dauer · <strong>4–8 Wochen</strong></span>
-              <span>Scope wird im Strategy Audit definiert</span>
-            </div>
+      <div class="bs-drawer">
+        <article class="bs-panel active" data-step="1">
+          <h3>Positioning &amp; <em>Voice</em></h3>
+          <p>Markenstrategie, mit der dein Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework. Bei Hearo Spine für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
+          <div class="bs-chips">
+            <span class="bs-chip">Brand-Doctrine</span>
+            <span class="bs-chip">Voice-Guidelines</span>
+            <span class="bs-chip">Messaging-Framework</span>
           </div>
-        </details>
-      </div>
+        </article>
 
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-        </div>
-        <div class="svc-num">03 — Conversion + Email</div>
-        <h3>Profit-per-Visitor maximieren</h3>
-        <p>A/B-Test-Framework + Email-Lifecycle. Damit jeder Besucher mehr zurücklässt.</p>
-        <ul>
-          <li>Conversion-Audit auf 12+ Hebeln</li>
-          <li>Klaviyo-Lifecycle (Welcome bis Win-Back)</li>
-          <li>SMS- + Loyalty-Integration (wenn passend)</li>
-          <li>Profit-per-Visitor Tracking</li>
-        </ul>
-        <details class="svc-more">
-          <summary class="svc-more-q">Was steckt drin →</summary>
-          <div class="svc-more-body">
-            <div class="svc-more-block">
-              <h4>Was du bekommst</h4>
-              <ul>
-                <li>Conversion-Audit auf 12+ Hebeln: Hero, PDP, Cart, Checkout, Email-Capture, Bundle-Logic</li>
-                <li>Klaviyo-Lifecycle: Welcome, Browse-Abandon, Cart-Abandon, Post-Purchase, Win-Back</li>
-                <li>SMS-Integration, wenn das Volumen es trägt</li>
-                <li>A/B-Test-Framework mit klaren Hypothesen statt Random-Tests</li>
-                <li>Reports auf Margen-Ebene — Per-Order-Math statt ROAS-Theater</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Traffic da, Conversion zu niedrig</li>
-                <li>„ROAS sieht okay aus, Marge erodiert trotzdem"</li>
-                <li>Klaviyo halb gebaut — niemand pflegt's, niemand misst es</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Realer Case</h4>
-              <p>Bachgold: Bundle-Architektur mit 7 abgestimmten Paketen statt Single-SKU. Hearo: Per-Order-Math als Standard-Reporting, nicht Blended-ROAS.</p>
-            </div>
-            <div class="svc-more-meta">
-              <span>Dauer · <strong>3–4 Wochen</strong></span>
-              <span>Scope wird im Strategy Audit definiert</span>
-            </div>
+        <article class="bs-panel" data-step="2">
+          <h3>Custom-Theme statt <em>Theme-Adaption</em></h3>
+          <p>Hochkonvertierender Shop auf Dawn-Basis. Section-Library, die mit dir wächst. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
+          <div class="bs-chips">
+            <span class="bs-chip">Custom-Liquid</span>
+            <span class="bs-chip">Section-Library</span>
+            <span class="bs-chip">Bundle-Architektur</span>
+            <span class="bs-chip">PageSpeed 85+</span>
           </div>
-        </details>
-      </div>
+        </article>
 
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="svc-num">04 — AI Operations</div>
-        <h3>Workflows, die Zeit sparen</h3>
-        <p>Drei Tiefen-Stufen — Light, Medium, Heavy. Im Discovery wählen wir, was zu deinem Reifegrad passt.</p>
-        <ul>
-          <li>Light: KI-Leitfaden + 10–15 Custom-Prompts</li>
-          <li>Medium: 3–5 No-Code-Workflows (n8n / Make)</li>
-          <li>Heavy: Custom AI-Agents + eigene Dashboards</li>
-          <li>Schulung + Übergabe inklusive</li>
-        </ul>
-        <details class="svc-more">
-          <summary class="svc-more-q">Was steckt drin →</summary>
-          <div class="svc-more-body">
-            <div class="svc-more-block">
-              <h4>Drei Tiefen-Stufen</h4>
-              <ul>
-                <li><strong>Light</strong> · 1–2 Wochen: KI-Leitfaden, 10–15 Custom-Prompts, Team-Workshop</li>
-                <li><strong>Medium</strong> · 3–4 Wochen: 3–5 No-Code-Workflows in n8n, Make oder Zapier — dokumentiert und geschult</li>
-                <li><strong>Heavy</strong> · 6–10 Wochen: Custom AI-Agents, eigene Dashboards, API-Integration in deinen Stack</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Wann das passt</h4>
-              <ul>
-                <li>Team duplicates Recherche-, Reporting- oder Content-Tasks</li>
-                <li>„AI" steht auf der Roadmap, niemand hat Zeit zum Implementieren</li>
-                <li>Reporting frisst täglich 1–2 Stunden Founder-Time</li>
-              </ul>
-            </div>
-            <div class="svc-more-block">
-              <h4>Realer Case</h4>
-              <p>AdFlow-Pipeline: Creative-Briefs aus Kunden-Daten in 30 Minuten statt 2 Tagen. Section-Generator: 14 Custom-PDPs in 3 Tagen statt 3 Wochen Hand-Code.</p>
-            </div>
-            <div class="svc-more-meta">
-              <span>Dauer · <strong>1–10 Wochen</strong></span>
-              <span>Tier wird im Audit definiert</span>
-            </div>
+        <article class="bs-panel" data-step="3">
+          <h3>Profit-per-Visitor <em>maximieren</em></h3>
+          <p>A/B-Tests und Klaviyo-Lifecycle auf Margen-Ebene. Per-Order-Math statt ROAS-Theater. Welcome-Flow bis Win-Back, dokumentiert und übergeben.</p>
+          <div class="bs-chips">
+            <span class="bs-chip">Conversion-Audit</span>
+            <span class="bs-chip">Klaviyo-Lifecycle</span>
+            <span class="bs-chip">Per-Order-Math</span>
           </div>
-        </details>
-      </div>
-    </div>
+        </article>
 
-    <div class="svc-after">
-      <strong>Bridge oder Bundle?</strong> &nbsp;&nbsp;Im Strategy Audit klären wir gemeinsam, was passt — Bridge-Paket für Re-Brand / Re-Launch (Tier 2), einzelne Phase als Add-On, oder Full Transformation für etablierte 1–20 Mio Brands (Tier 3).
+        <article class="bs-panel" data-step="4">
+          <h3>Workflows, die <em>Zeit sparen</em></h3>
+          <p>Drei Stufen — Light (1–2 Wo, Prompts + Workshop), Medium (3–4 Wo, n8n-Workflows), Heavy (6–10 Wo, Custom-Agents + Dashboards). Im Discovery wählen wir, was passt.</p>
+          <div class="bs-chips">
+            <span class="bs-chip">Custom-Prompts</span>
+            <span class="bs-chip">No-Code-Workflows</span>
+            <span class="bs-chip">AI-Agents</span>
+            <span class="bs-chip">Schulung &amp; Übergabe</span>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -1497,31 +1371,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
           <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= 5 · STATS BANNER ============= -->
-<section class="stats-banner">
-  <div class="wrap">
-    <div class="eyebrow">In Zahlen</div>
-    <h2>Was uns von <em>klassischen Agenturen</em> unterscheidet.</h2>
-    <div class="stats-grid">
-      <div class="stat">
-        <div class="stat-num">5<span class="plus">+</span></div>
-        <div class="stat-label">DTC-Brands transformed</div>
-        <p class="stat-desc">Hearo · Bachgold · Wake Performance · Reerect — Custom-Architektur statt Theme-Adaption.</p>
-      </div>
-      <div class="stat">
-        <div class="stat-num">1<span class="plus">–20M</span></div>
-        <div class="stat-label">€ Umsatz-Range</div>
-        <p class="stat-desc">Tier 2 (&lt;1 Mio · Re-Brand &amp; Skalierung) und Tier 3 (1–20 Mio · Hauptziel). DACH primär · EU optional. Pre-Launch &rarr; <a href="https://founderos.bb-brands.de" style="color:var(--accent);text-decoration:underline">Founder OS</a>.</p>
-      </div>
-      <div class="stat">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Junior-Layer</div>
-        <p class="stat-desc">Kein Account-Manager dazwischen, keine Übergaben. Direkter Founder-Zugang vom Discovery bis Hypercare.</p>
       </div>
     </div>
   </div>
@@ -1831,6 +1680,34 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   };
   window.addEventListener('scroll', update, {passive:true});
   update();
+})();
+</script>
+
+<script>
+/* === BAUSTEINE: Compact Strip + Drawer Tab-Switch === */
+(function(){
+  var stage = document.getElementById('bsStage');
+  if(!stage) return;
+  var pills = stage.querySelectorAll('.bs-pill');
+  var panels = stage.querySelectorAll('.bs-panel');
+  var current = 1;
+
+  function switchStep(n){
+    if(n === current) return;
+    current = n;
+    pills.forEach(function(p){
+      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
+    });
+    panels.forEach(function(p){
+      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
+    });
+  }
+
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      switchStep(parseInt(pill.dataset.step,10));
+    });
+  });
 })();
 </script>
 
