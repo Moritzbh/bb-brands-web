@@ -74,10 +74,10 @@ a:hover{text-decoration:underline}
 /* ========== HEADER ========== */
 header.site-header{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:saturate(180%) blur(16px);
-  -webkit-backdrop-filter:saturate(180%) blur(16px);
-  border-bottom:1px solid rgba(232,232,227,.6);
+  background:rgba(255,255,255,.78);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(232,232,227,.5);
 }
 header.site-header .wrap{
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;
