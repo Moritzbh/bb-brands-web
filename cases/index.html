@@ -218,8 +218,8 @@ section.dark .lede{color:rgba(255,255,255,.85)}
 .case-mockup .browser-content{
   aspect-ratio:16/10;background:#fafaf7;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:36px;
-  color:var(--text-3);letter-spacing:-.01em;
+  font-family:var(--display);font-weight:700;font-size:42px;
+  color:var(--text-2);letter-spacing:-.015em;
   position:relative;
 }
 .case-mockup .browser-content::before{
@@ -542,8 +542,10 @@ section.dark .btn-secondary:hover{color:#fff}
   margin:48px auto 0;max-width:900px;
 }
 .trust-row .stars{
-  display:inline-flex;gap:2px;color:#FDE047;font-size:22px;letter-spacing:0;
-  -webkit-text-stroke:1px #0a0a0a;
+  display:inline-flex;gap:2px;
+  color:#F59E0B;
+  font-size:22px;letter-spacing:0;
+  text-shadow:0 0 1px #0a0a0a, 1px 1px 0 rgba(0,0,0,.15);
 }
 .trust-row .item{
   font-family:var(--display);font-weight:700;font-size:14.5px;
@@ -607,13 +609,22 @@ h1.page-h1 .hl{
   margin-bottom:18px;
 }
 .dirty-h2 .stamp{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 14px;border-radius:4px;
+  display:inline-block;
+  background-color:#0a0a0a;
+  color:#fff !important;
+  padding:6px 16px;border-radius:4px;
   transform:rotate(-2deg);
   font-weight:800;letter-spacing:-.005em;
   border:3px solid #0a0a0a;
-  box-shadow:3px 3px 0 0 #0a0a0a;
+  box-shadow:4px 4px 0 0 #FF6B3D;
   margin:0 4px;
+  text-shadow:0 1px 0 rgba(0,0,0,.4);
+}
+.dirty-h2 .stamp.blue{
+  background-color:#0305C6;
+  border-color:#0305C6;
+  box-shadow:4px 4px 0 0 #0a0a0a;
+  transform:rotate(2deg);
 }
 </style>
 </head>
@@ -748,7 +759,7 @@ h1.page-h1 .hl{
       <p>Wir zeigen hier <strong>Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Hearo ist <strong>live</strong>, Bachgold im <strong>Cutover Mai 2026</strong>, Wake Performance &amp; Reerect <strong>im Build</strong>. Tiefere Conversion-Daten gibt's im 60-Min-Audit — nicht als Marketing-Häppchen auf der Startseite.</p>
     </div>
 
-    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp" style="background:var(--blue)">mit uns.</span></h2>
+    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp blue">mit uns.</span></h2>
 
     <div class="beforeafter" data-reveal>
       <div class="ba-card before">
