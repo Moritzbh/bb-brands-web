@@ -368,6 +368,253 @@ section.dark .btn-secondary:hover{color:#fff}
   [data-reveal]{opacity:1;transform:none;transition:none}
   .cases-hero::before,.cases-hero::after{animation:none}
 }
+
+/* ============= "DERTY" DIRECT-RESPONSE-ELEMENTS ============= */
+
+/* Yellow Highlighter — wirkt wie nachträglich mit Marker durchgezogen */
+.hl{
+  position:relative;display:inline-block;
+  background:linear-gradient(180deg, transparent 0%, transparent 55%, rgba(253,224,71,.85) 55%, rgba(253,224,71,.85) 92%, transparent 92%);
+  padding:0 2px;
+}
+.hl-blue{
+  background:linear-gradient(180deg, transparent 0%, transparent 55%, rgba(3,5,198,.18) 55%, rgba(3,5,198,.18) 92%, transparent 92%);
+}
+
+/* Underline Scribble — wirkt handgezeichnet */
+.scribble{
+  position:relative;display:inline-block;
+}
+.scribble::after{
+  content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:8px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 4 Q 30 1 60 4 T 120 5 T 198 3' stroke='%23FF6B3D' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%;
+}
+
+/* Sticker / Seal Badge — gedreht, plakativ */
+.sticker{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  width:130px;height:130px;border-radius:50%;
+  background:#FDE047;color:#0a0a0a;
+  font-family:var(--display);font-weight:800;
+  letter-spacing:.04em;line-height:.95;
+  transform:rotate(-8deg);
+  box-shadow:0 6px 18px rgba(0,0,0,.18), inset 0 0 0 4px rgba(0,0,0,.06);
+  flex-shrink:0;
+  position:relative;
+  text-transform:uppercase;
+}
+.sticker::before{
+  content:"";position:absolute;inset:6px;border-radius:50%;
+  border:2px dashed rgba(0,0,0,.35);
+}
+.sticker .sticker-top{font-size:11px;letter-spacing:.18em;margin-bottom:2px}
+.sticker .sticker-mid{font-size:24px;letter-spacing:-.01em;line-height:1}
+.sticker .sticker-bot{font-size:9px;letter-spacing:.18em;margin-top:3px;font-weight:700;opacity:.75}
+.sticker.blue{background:var(--blue);color:#fff}
+.sticker.blue::before{border-color:rgba(255,255,255,.4)}
+.sticker.orange{background:var(--accent);color:#fff;transform:rotate(6deg)}
+.sticker.orange::before{border-color:rgba(255,255,255,.45)}
+
+/* "ACHTUNG"-Box · rote Warnbox */
+.achtung-box{
+  background:#FEF3C7;
+  border:3px solid #0a0a0a;
+  border-radius:6px;
+  padding:24px 28px;
+  margin:32px 0 8px;
+  position:relative;
+  box-shadow:6px 6px 0 0 var(--blue);
+  transform:rotate(-.4deg);
+}
+.achtung-box::before{
+  content:"!";
+  position:absolute;top:-22px;left:24px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:32px;font-weight:800;line-height:1;
+  border:3px solid #0a0a0a;
+  box-shadow:3px 3px 0 0 #0a0a0a;
+}
+.achtung-box .label{
+  font-family:var(--display);font-size:11px;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:#0a0a0a;margin-bottom:6px;display:block;
+}
+.achtung-box p{
+  font-size:15.5px;color:#0a0a0a;line-height:1.55;font-weight:500;
+}
+.achtung-box strong{font-weight:800;background:#FDE047;padding:0 4px}
+
+/* VORHER → NACHHER Box */
+.beforeafter{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;
+  margin:48px 0 8px;
+}
+@media (max-width:780px){.beforeafter{grid-template-columns:1fr;gap:14px}}
+.ba-card{
+  border:2px solid #0a0a0a;border-radius:8px;
+  padding:24px 22px;
+  position:relative;background:#fff;
+  box-shadow:5px 5px 0 0 #0a0a0a;
+}
+.ba-card.before{
+  background:#FFF5F5;
+}
+.ba-card.before::before{
+  content:"VORHER · OHNE UNS";
+  position:absolute;top:-13px;left:14px;
+  background:#0a0a0a;color:#fff;padding:4px 10px;
+  font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.18em;
+  border-radius:3px;
+}
+.ba-card.after{
+  background:#ECFDF5;border-color:var(--blue);
+  box-shadow:5px 5px 0 0 var(--blue);
+}
+.ba-card.after::before{
+  content:"NACHHER · MIT BB BRANDS";
+  position:absolute;top:-13px;left:14px;
+  background:var(--blue);color:#fff;padding:4px 10px;
+  font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.18em;
+  border-radius:3px;
+}
+.ba-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.ba-card li{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:14px;color:#0a0a0a;line-height:1.45;
+}
+.ba-card.before li::before{
+  content:"✕";color:#DC2626;font-weight:900;font-size:16px;line-height:1.2;flex-shrink:0;
+}
+.ba-card.after li::before{
+  content:"✓";color:#16A34A;font-weight:900;font-size:16px;line-height:1.2;flex-shrink:0;
+}
+.ba-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:800;font-size:36px;color:var(--accent);
+  align-self:center;
+}
+@media (max-width:780px){.ba-arrow{transform:rotate(90deg);font-size:32px;padding:8px 0}}
+
+/* Hand-drawn Arrow zum CTA · animiert wackelnd */
+.scribble-wrap{position:absolute;width:140px;height:100px;pointer-events:none}
+.scribble-wrap.right{right:-130px;top:-12px}
+.scribble-wrap.left{left:-130px;top:-12px}
+.scribble-wrap svg{
+  width:100%;height:100%;color:var(--accent);
+  animation:wiggle 2.4s ease-in-out infinite;
+}
+.scribble-wrap.left svg{transform:scaleX(-1)}
+.scribble-wrap .label{
+  position:absolute;top:-8px;
+  font-family:var(--display);font-weight:700;font-size:13px;
+  color:#0a0a0a;background:#FDE047;
+  padding:3px 10px;border-radius:3px;
+  white-space:nowrap;
+  border:2px solid #0a0a0a;
+  box-shadow:2px 2px 0 0 #0a0a0a;
+  transform:rotate(-6deg);
+}
+.scribble-wrap.right .label{left:6px}
+.scribble-wrap.left .label{right:6px;transform:rotate(6deg)}
+@keyframes wiggle{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-3deg) translateY(-2px)}
+  75%{transform:rotate(3deg) translateY(2px)}
+}
+.scribble-wrap.left svg{animation:wiggle-left 2.4s ease-in-out infinite}
+@keyframes wiggle-left{
+  0%,100%{transform:scaleX(-1) rotate(0)}
+  25%{transform:scaleX(-1) rotate(-3deg) translateY(-2px)}
+  75%{transform:scaleX(-1) rotate(3deg) translateY(2px)}
+}
+@media (max-width:980px){.scribble-wrap{display:none}}
+
+/* Trust-Strip mit Stars + Plakativem Counter */
+.trust-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:32px;flex-wrap:wrap;
+  padding:18px 24px;border-radius:99px;
+  background:#fff;border:2px solid #0a0a0a;
+  box-shadow:4px 4px 0 0 var(--accent);
+  margin:48px auto 0;max-width:900px;
+}
+.trust-row .stars{
+  display:inline-flex;gap:2px;color:#FDE047;font-size:22px;letter-spacing:0;
+  -webkit-text-stroke:1px #0a0a0a;
+}
+.trust-row .item{
+  font-family:var(--display);font-weight:700;font-size:14.5px;
+  letter-spacing:-.005em;color:#0a0a0a;
+}
+.trust-row .item strong{color:var(--blue);font-size:18px;font-weight:800}
+.trust-row .sep{width:1px;height:22px;background:#d0d0cb}
+@media (max-width:780px){.trust-row{gap:16px;padding:14px 20px}.trust-row .sep{display:none}}
+
+/* Mega-Number Sticker für Stats */
+.stat-mega{
+  font-family:var(--display);font-weight:800;
+  font-size:78px;line-height:.9;letter-spacing:-.025em;
+  color:var(--blue);
+  position:relative;display:inline-block;
+}
+.stat-mega .arrow-sub{
+  position:absolute;font-family:var(--display);font-weight:700;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;background:var(--accent);
+  padding:3px 8px;border-radius:3px;
+  transform:rotate(-6deg);
+  bottom:-4px;right:-32px;white-space:nowrap;
+  border:2px solid #0a0a0a;
+}
+
+/* Headline mit Highlight-Variante */
+h1.page-h1 .hl{
+  background:linear-gradient(180deg, transparent 0%, transparent 60%, rgba(253,224,71,.85) 60%, rgba(253,224,71,.85) 92%, transparent 92%);
+}
+
+/* Quote-Card mit Bauarbeiter-Look */
+.proof-quote{
+  background:#fff;border:3px solid #0a0a0a;border-radius:8px;
+  padding:32px 32px 28px;margin:32px 0;position:relative;
+  box-shadow:8px 8px 0 0 var(--blue);
+  max-width:760px;
+}
+.proof-quote::before{
+  content:"\201E";
+  font-family:Georgia,serif;font-weight:900;font-size:120px;color:var(--accent);
+  position:absolute;top:-30px;left:18px;line-height:1;
+}
+.proof-quote .pq-text{
+  font-family:var(--display);font-weight:600;font-size:24px;line-height:1.25;
+  color:#0a0a0a;margin-bottom:18px;letter-spacing:-.005em;
+  padding-left:32px;
+}
+.proof-quote .pq-attribution{
+  font-size:13px;color:var(--text-2);font-weight:600;padding-left:32px;
+  display:flex;align-items:center;gap:10px;
+}
+.proof-quote .pq-attribution::before{
+  content:"";width:32px;height:2px;background:var(--accent);display:inline-block;
+}
+
+/* Section-Title mit "ACHTUNG"-Style */
+.dirty-h2{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-.018em;
+  margin-bottom:18px;
+}
+.dirty-h2 .stamp{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 14px;border-radius:4px;
+  transform:rotate(-2deg);
+  font-weight:800;letter-spacing:-.005em;
+  border:3px solid #0a0a0a;
+  box-shadow:3px 3px 0 0 #0a0a0a;
+  margin:0 4px;
+}
 </style>
 </head>
 <body>
@@ -428,8 +675,8 @@ section.dark .btn-secondary:hover{color:#fff}
 <section class="cases-hero">
   <div class="wrap">
     <div class="eyebrow" data-reveal>Cases · Stand 2026/Q2</div>
-    <h1 class="page-h1" data-reveal>Was wir <em>gebaut haben.</em></h1>
-    <p class="lede" data-reveal>Vier DTC-Brands. Custom-Architekturen statt Theme-Adaption. Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert.</p>
+    <h1 class="page-h1" data-reveal>Was wir <em>gebaut haben.</em><br><span class="hl">Echte Brands. Echte Builds.</span></h1>
+    <p class="lede" data-reveal>Vier DTC-Brands. <strong>Custom-Architekturen statt Theme-Adaption.</strong> Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert — <span class="hl-blue">nicht in 6 Monaten irrelevant ist.</span></p>
 
     <ul class="hero-bullets" data-reveal>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Custom-Theme</strong> auf Dawn-Basis — keine Drag-and-Drop-Limits.</span></li>
@@ -440,12 +687,30 @@ section.dark .btn-secondary:hover{color:#fff}
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>30 Tage Hypercare</strong> nach Launch — Bug-Fixes, Schulung, eingespielt.</span></li>
     </ul>
 
-    <div class="cta-row" data-reveal>
-      <a href="/#apply" class="btn-primary">
+    <div class="cta-row" data-reveal style="position:relative">
+      <a href="/#apply" class="btn-primary" style="position:relative">
         <span>Strategy Audit buchen</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="scribble-wrap right" aria-hidden="true">
+          <span class="label">hier klicken</span>
+          <svg viewBox="0 0 140 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 70 C 30 40, 55 22, 95 30 C 110 33, 120 40, 128 48"/>
+            <path d="M115 36 L 130 48 L 118 62"/>
+          </svg>
+        </span>
       </a>
       <a href="#cases" class="btn-secondary">↓ direkt zu den Cases</a>
+    </div>
+
+    <div class="trust-row" data-reveal>
+      <span class="stars">★★★★★</span>
+      <span class="item"><strong>4</strong> DTC-Brands</span>
+      <span class="sep"></span>
+      <span class="item">Founder-Direct · <strong>0</strong> Junior-Layer</span>
+      <span class="sep"></span>
+      <span class="item">DACH · <strong>1–20 Mio €</strong></span>
+      <span class="sep"></span>
+      <span class="item"><strong>3–4</strong> Slots / Quartal</span>
     </div>
   </div>
 </section>
@@ -476,18 +741,32 @@ section.dark .btn-secondary:hover{color:#fff}
       </div>
     </div>
 
-    <div class="disclaimer">
-      <div class="disclaimer-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <span><strong>Stand 2026/Q2</strong>Hearo ist live. Bachgold im Cutover Mai. Wake Performance &amp; Reerect im Build.</span>
+    <div class="achtung-box" data-reveal>
+      <span class="label">Achtung · Bevor du weiterscrollst</span>
+      <p>Wir zeigen hier <strong>Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Hearo ist <strong>live</strong>, Bachgold im <strong>Cutover Mai 2026</strong>, Wake Performance &amp; Reerect <strong>im Build</strong>. Tiefere Conversion-Daten gibt's im 60-Min-Audit — nicht als Marketing-Häppchen auf der Startseite.</p>
+    </div>
+
+    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp" style="background:var(--blue)">mit uns.</span></h2>
+
+    <div class="beforeafter" data-reveal>
+      <div class="ba-card before">
+        <ul>
+          <li>Theme-Adaption mit 200 Klicks pro Layout-Change</li>
+          <li>Account-Manager als Telefon-Klingel zwischen dir und Dev</li>
+          <li>"Wachstums-Agentur" mit 12-monatiger Roadmap, die nichts liefert</li>
+          <li>Generischer "Section-Builder", der bei Sortiment-Skalierung kaputtgeht</li>
+          <li>ROAS-Versprechen ohne Datenbasis — Vanity-Metriken statt Profit</li>
+        </ul>
       </div>
-      <div class="disclaimer-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5 3.5 9 9 11 5.5-2 9-6 9-11V7l-9-5z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span><strong>Keine ROAS-Versprechen</strong>Wir zeigen Build-Outcomes, nicht erfundene Conversion-Zahlen. ROAS hängt von Markt, Saison, Budget — Faktoren, die wir nicht kontrollieren.</span>
-      </div>
-      <div class="disclaimer-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
-        <span><strong>Tiefere Daten im Audit</strong>Conversion-Vorher/Nachher, AOV-Effekte, Tech-Stack-Decisions — im 60-Min-Strategy-Audit. Nicht als Marketing-Häppchen.</span>
+      <div class="ba-arrow">→</div>
+      <div class="ba-card after">
+        <ul>
+          <li>Custom-Theme auf Dawn-Basis, jede Section dokumentiert &amp; reusable</li>
+          <li>Founder-Direct — Moritz, vom ersten Call bis Hypercare</li>
+          <li>Build-Sprints in 4–8 Wochen, nicht 4–8 Monate</li>
+          <li>Idempotente PDP-Generatoren — bei 15 Bachgold-PDPs identisch reproduzierbar</li>
+          <li>Outcome-fokussiert — Profit, LTV, CAC. Garantie auf Speed, nicht auf Wunder</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -500,7 +779,12 @@ section.dark .btn-secondary:hover{color:#fff}
     <div class="main-cases">
 
       <!-- CASE 1: HEARO -->
-      <article class="case-card" data-reveal>
+      <article class="case-card" data-reveal style="position:relative">
+        <div class="sticker blue" style="position:absolute;top:-26px;right:-22px;z-index:5">
+          <span class="sticker-top">Build</span>
+          <span class="sticker-mid">8 WO</span>
+          <span class="sticker-bot">bis Launch</span>
+        </div>
         <div class="case-mockup">
           <span class="case-status-pill live">Live</span>
           <div class="browser">
@@ -547,7 +831,12 @@ section.dark .btn-secondary:hover{color:#fff}
       </article>
 
       <!-- CASE 2: BACHGOLD -->
-      <article class="case-card" data-reveal>
+      <article class="case-card" data-reveal style="position:relative">
+        <div class="sticker orange" style="position:absolute;top:-26px;left:-24px;z-index:5">
+          <span class="sticker-top">Generator</span>
+          <span class="sticker-mid">15 PDPs</span>
+          <span class="sticker-bot">idempotent</span>
+        </div>
         <div class="case-mockup">
           <span class="case-status-pill soon">Cutover Mai 2026</span>
           <div class="browser">
@@ -689,6 +978,16 @@ section.dark .btn-secondary:hover{color:#fff}
   </div>
 </section>
 
+<!-- ============= 3.5 · MEGA-QUOTE / PROOF ============= -->
+<section style="padding:64px 0">
+  <div class="wrap" style="display:flex;justify-content:center">
+    <div class="proof-quote" data-reveal>
+      <p class="pq-text">"Section-Library, die mit dem Sortiment <span class="hl">wirklich</span> mitwächst. Kein Theme-Editor-Frickeln, kein <span class="scribble">Account-Manager</span> dazwischen. Direkt mit Moritz, <strong>direkt geliefert.</strong>"</p>
+      <p class="pq-attribution">Build-Pattern bei Hearo &amp; Bachgold · 28+ wiederverwendbare Sections · 15 Custom-PDPs</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============= 4 · METHOD ============= -->
 <section>
   <div class="wrap">
@@ -717,17 +1016,29 @@ section.dark .btn-secondary:hover{color:#fff}
 </section>
 
 <!-- ============= 5 · FINAL CTA ============= -->
-<section class="dark">
+<section class="dark" style="position:relative">
   <div class="wrap">
-    <div class="final-cta-block" data-reveal>
-      <div class="eyebrow" style="color:var(--accent)">Strategy Audit</div>
+    <div class="final-cta-block" data-reveal style="position:relative">
+      <div class="sticker orange" style="position:absolute;top:-46px;right:-10px">
+        <span class="sticker-top">Garantie</span>
+        <span class="sticker-mid">SPEED</span>
+        <span class="sticker-bot">to market</span>
+      </div>
+      <div class="eyebrow" style="color:var(--accent)">Strategy Audit · 60 Min</div>
       <h2>Bereit für die <em>Transformation?</em></h2>
       <p>60-Min-Audit mit Founder. Diagnose deines Setups, konkrete Hebel, Timeline. Ehrlich oder nicht — danach weißt du, ob wir der richtige Partner sind.</p>
-      <a href="/#apply" class="btn-primary">
-        <span>Slot wählen</span>
+      <a href="/#apply" class="btn-primary" style="position:relative">
+        <span>Jetzt Slot wählen</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="scribble-wrap left" aria-hidden="true">
+          <span class="label">nur 3–4 Slots Q2</span>
+          <svg viewBox="0 0 140 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 70 C 30 40, 55 22, 95 30 C 110 33, 120 40, 128 48"/>
+            <path d="M115 36 L 130 48 L 118 62"/>
+          </svg>
+        </span>
       </a>
-      <div class="final-cta-meta">Pro Quartal max. 3–4 neue Projekte · Antwort innerhalb 1 Werktag</div>
+      <div class="final-cta-meta">★★★★★ · Pro Quartal max. <strong style="color:var(--accent)">3–4 neue Projekte</strong> · Antwort innerhalb 1 Werktag</div>
     </div>
   </div>
 </section>
