@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Wir verwandeln wachsende DTC-Brands in AI-native Marktführer. Brand Systems. Conversion Infrastructure. Operational Scale.">
 <title>BB Brands · AI-native Growth Infrastructure für DTC-Brands</title>
+
+<!-- Akzent-Schrift: Manrope (Fallback bis Dax OT eingebunden) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#ffffff;
@@ -33,6 +38,31 @@ body{
   font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
+}
+
+/* ========== AKZENT-SCHRIFT ==========
+   Aktuell: Manrope (Google Fonts) als Fallback
+   Sobald Dax OT Files in /assets/fonts/ liegen: @font-face uncommenten unten
+*/
+/*
+@font-face{
+  font-family:'Dax OT';
+  src:url('/assets/fonts/DaxOT-Regular.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Dax OT';
+  src:url('/assets/fonts/DaxOT-Bold.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+*/
+.accent-font,
+h1 em,
+h2 em,
+h3 em,
+.stat-num{
+  font-family:'Dax OT','Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  letter-spacing:-.018em;
 }
 .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
 @media (max-width:780px){.wrap{padding:0 20px}}

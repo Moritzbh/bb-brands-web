@@ -32,6 +32,31 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
+
+/* ========== AKZENT-SCHRIFT ==========
+   Aktuell: Manrope (Google Fonts, fallback)
+   Sobald Dax OT Files in /assets/fonts/ liegen: @font-face uncommenten
+*/
+/*
+@font-face{
+  font-family:'Dax OT';
+  src:url('/assets/fonts/DaxOT-Regular.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Dax OT';
+  src:url('/assets/fonts/DaxOT-Bold.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+*/
+.accent-font,
+h1 em,
+h2 em,
+h3 em,
+.stat-num{
+  font-family:'Dax OT','Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  letter-spacing:-.018em;
+}
 .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
 @media (max-width:780px){.wrap{padding:0 20px}}
 
