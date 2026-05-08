@@ -4,22 +4,36 @@
    ============================================ */
 
 :root{
+  /* Brand-Tokens — Quelle: Marke/Brand/brand-guidelines.html */
+  /* Primary */
+  --blue:#0305C6;
+  --blue-soft:#1E3AFF;
+  --blue-tint:#EEF1FF;
+  --blue-deep:#02038F;
+  /* Accent */
+  --accent:#FF6B3D;
+  --accent-bg:#FFF4EE;
+  --accent-hover:#E85A2C;
+  /* Neutrals */
   --bg:#ffffff;
   --bg-alt:#fafaf7;
   --bg-card:#ffffff;
   --bg-elev:#f5f5f0;
   --bg-input:#fafaf7;
+  --cream:#F5F1E8;
+  --cream-2:#EFE9DA;
   --text:#0a0a0a;
-  --text-2:#3d3d3a;
+  --text-2:#3D3D3A;
   --text-3:#787872;
   --text-4:#b8b8b3;
-  --line:#e8e8e3;
-  --line-strong:#d0d0cb;
-  --accent:#ff6b3d;
-  --accent-bg:#fff4ee;
-  --accent-hover:#e85a2c;
+  --line:#E8E8E3;
+  --line-strong:#D0D0CB;
+  /* Status */
   --green:#16a34a;
   --green-bg:#ecfdf5;
+  /* Typography */
+  --display:'Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -27,7 +41,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;
+  font-family:var(--body);
   font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
@@ -119,10 +133,14 @@ header.site-header .wrap{
 }
 
 /* ========== BRAND LOGO (Typo-Lockup mit gespiegeltem B) ========== */
+/* Brand Guidelines §3 Logo:
+   - Default (auf Weiß/Cream): Blue
+   - Auf Black/Dark: Orange
+   - Auf Blue: White */
 .brand-logo{
   display:inline-flex;align-items:baseline;
-  text-decoration:none;color:var(--text);
-  font-family:'Dax OT','Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
+  text-decoration:none;color:var(--blue);
+  font-family:var(--display);
   font-weight:300;font-size:34px;line-height:1;
   letter-spacing:-.01em;
   transition:opacity .15s ease,color .3s ease;
