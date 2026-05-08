@@ -598,10 +598,21 @@ section.compare-hero:nth-of-type(even){
   background-image:url('/assets/images/comparison-workspace.jpg');
   background-size:cover;background-position:center;
   opacity:.5;
+  overflow:hidden;
+}
+.compare-hero-bg video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
 }
 .compare-hero-bg::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,.55) 50%,rgba(10,10,10,.85) 100%);
+  z-index:1;
+}
+@media (max-width:780px){
+  .compare-hero-bg video{display:none}
 }
 .compare-hero .wrap{
   position:relative;z-index:1;
@@ -1432,7 +1443,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 <!-- ============= 4 · VERGLEICH (Hero-Comparison) ============= -->
 <section class="compare-hero">
-  <div class="compare-hero-bg"></div>
+  <div class="compare-hero-bg">
+    <video autoplay muted loop playsinline preload="metadata" poster="/assets/images/comparison-workspace.jpg" aria-hidden="true">
+      <source src="/assets/videos/comparison-workspace.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="wrap">
     <div class="headline-col">
       <div class="eyebrow">Vergleich</div>
