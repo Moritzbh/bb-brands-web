@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /brand-guidelines
+Disallow: /brand-guidelines/
 
 Sitemap: https://bb-brands.de/sitemap.xml
