@@ -93,27 +93,31 @@ nav .wrap{
 
 /* ========== HERO ========== */
 .hero{
-  padding:140px 0 100px;
+  padding:100px 0 80px;
   position:relative;
   overflow:hidden;
 }
 .hero::before{
   content:"";position:absolute;top:-300px;right:-200px;
   width:720px;height:720px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,107,61,.07) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(255,107,61,.05) 0%,transparent 65%);
   pointer-events:none;
 }
 .hero::after{
   content:"";position:absolute;bottom:0;left:0;right:0;
   height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
 }
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:60px;align-items:center;
+}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;font-weight:700;color:var(--accent);
-  text-transform:uppercase;letter-spacing:.18em;
+  font-size:11px;font-weight:700;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.2em;
   margin-bottom:28px;
-  padding:7px 14px;background:var(--accent-bg);
-  border-radius:100px;border:1px solid rgba(255,107,61,.2);
+  padding:7px 14px;background:#fff;
+  border-radius:100px;border:1px solid rgba(255,107,61,.3);
 }
 .hero-eyebrow::before{
   content:"";width:6px;height:6px;border-radius:50%;
@@ -124,22 +128,46 @@ nav .wrap{
   0%,100%{opacity:1;transform:scale(1)}
   50%{opacity:.6;transform:scale(.8)}
 }
+.hero-visual{
+  position:relative;
+  aspect-ratio:3/4;
+  border-radius:18px;overflow:hidden;
+  background:linear-gradient(135deg,#f5f5f0 0%,#fff4ee 100%);
+  box-shadow:0 24px 60px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04);
+}
+.hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-visual-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:14px;
+  color:var(--text-3);font-size:11px;
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
+}
+.hero-visual-placeholder svg{width:48px;height:48px;opacity:.3}
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .hero-visual{aspect-ratio:4/3;max-width:480px}
+}
 .hero h1{
-  font-size:62px;font-weight:800;
-  letter-spacing:-.028em;line-height:1.05;
-  margin-bottom:24px;max-width:980px;
+  font-size:54px;font-weight:800;
+  letter-spacing:-.028em;line-height:1.06;
+  margin-bottom:24px;
 }
 .hero h1 em{
-  font-style:normal;color:var(--accent);
+  font-style:normal;color:var(--text);
+  background:rgba(255,107,61,.16);
+  padding:0 10px;border-radius:6px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
 }
 .hero .sub{
-  font-size:22px;color:var(--text);
-  max-width:680px;line-height:1.45;margin-bottom:14px;
+  font-size:20px;color:var(--text);
+  line-height:1.45;margin-bottom:14px;
   font-weight:600;letter-spacing:-.005em;
 }
 .hero .sub-tertiary{
-  font-size:15px;color:var(--text-3);
-  max-width:620px;line-height:1.6;margin-bottom:38px;
+  font-size:14.5px;color:var(--text-3);
+  line-height:1.6;margin-bottom:36px;
 }
 .hero .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .btn-primary{
@@ -166,11 +194,28 @@ nav .wrap{
 }
 .btn-ghost:hover{color:var(--text);text-decoration:none}
 
-@media (max-width:780px){
+.hero-specs{
+  display:flex;flex-wrap:wrap;gap:24px;
+  margin-top:32px;padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.hero-specs .spec{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--text-2);font-weight:500;
+}
+.hero-specs .spec svg{
+  width:18px;height:18px;color:var(--accent);flex-shrink:0;
+}
+.hero-specs .spec strong{color:var(--text);font-weight:700}
+
+@media (max-width:980px){
   .hero{padding:60px 0 50px}
-  .hero h1{font-size:38px;line-height:1.1}
+  .hero h1{font-size:42px;line-height:1.08}
   .hero .sub{font-size:18px}
   .hero .sub-tertiary{font-size:14px}
+}
+@media (max-width:600px){
+  .hero h1{font-size:34px}
 }
 
 /* ========== SECTION GENERIC ========== */
@@ -326,6 +371,53 @@ h2 em{color:var(--accent);font-style:normal}
     border-right:none;border-bottom:1px solid var(--line);
   }
   .compare-row .old,.compare-row .new{padding:14px 18px;font-size:14px}
+}
+
+/* ========== STATS BANNER ========== */
+section.stats-banner,
+section.stats-banner:nth-of-type(even){
+  background:#0a0a0a;
+  color:#fff;
+  padding:96px 0;
+  position:relative;
+  overflow:hidden;
+}
+.stats-banner::before{
+  content:"";position:absolute;top:0;right:0;bottom:0;left:50%;
+  background:radial-gradient(circle at 70% 40%,rgba(255,107,61,.12) 0%,transparent 60%);
+  pointer-events:none;
+}
+.stats-banner .wrap{position:relative;z-index:1}
+.stats-banner .eyebrow{color:var(--accent);margin-bottom:14px}
+.stats-banner h2{color:#fff;font-size:38px;margin-bottom:48px;max-width:680px}
+.stats-banner h2 em{color:var(--accent);font-style:normal}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:48px;
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:48px;
+}
+.stat{position:relative}
+.stat-num{
+  font-size:88px;font-weight:800;
+  letter-spacing:-.04em;line-height:.95;
+  color:#fff;display:flex;align-items:baseline;gap:4px;
+  margin-bottom:14px;
+}
+.stat-num .plus{color:var(--accent);font-size:.6em;font-weight:700}
+.stat-label{
+  font-size:11px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
+  margin-bottom:8px;
+}
+.stat-desc{
+  font-size:14px;color:rgba(255,255,255,.7);
+  line-height:1.5;
+}
+@media (max-width:780px){
+  section.stats-banner{padding:64px 0}
+  .stats-banner h2{font-size:28px;margin-bottom:32px}
+  .stats-grid{grid-template-columns:1fr;gap:32px;padding-top:32px}
+  .stat-num{font-size:64px}
 }
 
 /* ========== CASES ========== */
@@ -546,6 +638,32 @@ h2 em{color:var(--accent);font-style:normal}
   .founder-photo{max-width:240px}
 }
 
+/* ========== HAND-DRAWN ARROW ========== */
+.handdrawn-cta{
+  display:flex;align-items:center;justify-content:center;
+  gap:24px;padding:60px 0 0;flex-wrap:wrap;
+  position:relative;
+}
+.handdrawn-cta .arrow{
+  width:90px;height:90px;color:var(--text-3);
+  flex-shrink:0;animation:handdrawn-wiggle 4s ease-in-out infinite;
+}
+.handdrawn-cta .text{
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;font-size:18px;
+  color:var(--text-2);max-width:280px;
+  line-height:1.4;
+}
+@keyframes handdrawn-wiggle{
+  0%,100%{transform:rotate(-2deg)}
+  50%{transform:rotate(3deg)}
+}
+@media (max-width:780px){
+  .handdrawn-cta{padding:40px 0 0;gap:14px}
+  .handdrawn-cta .arrow{width:60px;height:60px}
+  .handdrawn-cta .text{font-size:15px}
+}
+
 /* ========== APPLY ========== */
 .apply-section{
   background:linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%);
@@ -685,16 +803,37 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 1 · HERO ============= -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
-    <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
-    <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
-    <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
-    <div class="cta-row">
-      <a href="/audit/" class="btn-primary">
-        Strategy Audit anfragen
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="#was" class="btn-ghost">Was wir machen ↓</a>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
+        <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
+        <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
+        <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
+        <div class="cta-row">
+          <a href="/audit/" class="btn-primary">
+            Strategy Audit anfragen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#was" class="btn-ghost">Was wir machen ↓</a>
+        </div>
+        <div class="hero-specs">
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>8 Wochen</strong> bis Launch</span>
+          </div>
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Direkter</strong> Founder-Zugang</span>
+          </div>
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>30 Tage</strong> Hypercare</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="/assets/images/hero-workspace.jpg" alt="Workspace mit Macbook und externem Monitor — BB Brands AI-native Setup" loading="eager">
+      </div>
     </div>
   </div>
 </header>
@@ -828,7 +967,32 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 5 · CASES ============= -->
+<!-- ============= 5 · STATS BANNER ============= -->
+<section class="stats-banner">
+  <div class="wrap">
+    <div class="eyebrow">In Zahlen</div>
+    <h2>Was uns von <em>klassischen Agenturen</em> unterscheidet.</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Wochen</div>
+        <p class="stat-desc">Avg-Time-to-Launch von Brand bis Go-Live. Klassische Agenturen brauchen 4–6 Monate.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5<span class="plus">+</span></div>
+        <div class="stat-label">DTC-Brands gebaut</div>
+        <p class="stat-desc">Hearo · Bachgold · Wake · Face Evolution · RDY4TAKEOFF — Custom-Architektur statt Theme-Adaption.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Junior-Layer</div>
+        <p class="stat-desc">Kein Account-Manager dazwischen, keine Übergaben. Direkter Founder-Zugang vom Discovery-Call bis Launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 6 · CASES ============= -->
 <section>
   <div class="wrap">
     <div class="eyebrow">Cases</div>
@@ -986,7 +1150,18 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 7 · APPLY ============= -->
+<!-- ============= HAND-DRAWN BRIDGE TO APPLY ============= -->
+<div class="wrap">
+  <div class="handdrawn-cta">
+    <p class="text">Wenn das nach dir klingt — der Audit ist hier:</p>
+    <svg class="arrow" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 15 C 20 35, 30 50, 45 60 C 55 67, 65 70, 78 70" />
+      <path d="M68 60 L 82 70 L 72 82" />
+    </svg>
+  </div>
+</div>
+
+<!-- ============= 8 · APPLY ============= -->
 <section class="apply-section" id="apply">
   <div class="wrap">
     <div class="apply-block">
