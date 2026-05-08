@@ -374,9 +374,9 @@ h2 em{color:var(--accent);font-style:normal}
   .section-sub{font-size:15px;margin-bottom:36px}
 }
 
-/* ========== TRUST STRIP (Dark · Marquee) ========== */
+/* ========== TRUST STRIP (Light · Marquee) ========== */
 .trust{
-  background:#0a0a0a;
+  background:#fff;
   padding:54px 0;
   border-top:none;
   position:relative;
@@ -388,7 +388,7 @@ h2 em{color:var(--accent);font-style:normal}
 .trust-label{
   flex-shrink:0;width:180px;
   font-size:13px;font-weight:600;
-  color:rgba(255,255,255,.7);
+  color:var(--text-3);
   line-height:1.45;letter-spacing:-.005em;
 }
 .trust-marquee{
@@ -398,19 +398,17 @@ h2 em{color:var(--accent);font-style:normal}
 }
 .trust-track{
   display:flex;align-items:center;gap:80px;
-  animation:trust-scroll 30s linear infinite;
+  animation:trust-scroll 18s linear infinite;
   width:max-content;
 }
 .trust-track:hover{animation-play-state:paused}
 .trust-track img{
   height:34px;width:auto;display:block;
-  filter:brightness(0) invert(1);
-  opacity:.85;
+  opacity:.7;
   transition:opacity .2s ease;
   flex-shrink:0;
 }
 .trust-track img:hover{opacity:1}
-.trust-track img.no-invert{filter:none}
 @keyframes trust-scroll{
   from{transform:translateX(0)}
   to{transform:translateX(calc(-50% - 40px))}
@@ -420,7 +418,7 @@ h2 em{color:var(--accent);font-style:normal}
   .trust .wrap{flex-direction:column;align-items:flex-start;gap:18px}
   .trust-label{width:auto;font-size:12px}
   .trust-marquee{width:100%}
-  .trust-track{gap:48px;animation-duration:22s}
+  .trust-track{gap:48px;animation-duration:14s}
   .trust-track img{height:26px}
 }
 
@@ -1032,12 +1030,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <div class="trust-marquee">
       <div class="trust-track">
         <img src="/assets/images/logos/hearo.png" alt="Hearo" loading="lazy">
-        <img src="/assets/images/logos/bachgold.png" alt="Bachgold" class="no-invert" loading="lazy">
+        <img src="/assets/images/logos/bachgold.png" alt="Bachgold" loading="lazy">
         <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance" loading="lazy">
         <img src="/assets/images/logos/reerect.png" alt="Reerect" loading="lazy">
         <!-- Duplikate für seamless loop -->
         <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true" loading="lazy">
-        <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true" class="no-invert" loading="lazy">
+        <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true" loading="lazy">
         <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true" loading="lazy">
         <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true" loading="lazy">
       </div>
