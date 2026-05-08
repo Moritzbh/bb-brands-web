@@ -107,10 +107,6 @@ nav .wrap{
   content:"";position:absolute;bottom:0;left:0;right:0;
   height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
 }
-.hero-grid{
-  display:grid;grid-template-columns:1.15fr .85fr;
-  gap:60px;align-items:center;
-}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:11px;font-weight:700;color:var(--accent);
@@ -128,30 +124,10 @@ nav .wrap{
   0%,100%{opacity:1;transform:scale(1)}
   50%{opacity:.6;transform:scale(.8)}
 }
-.hero-visual{
-  position:relative;
-  aspect-ratio:3/4;
-  border-radius:18px;overflow:hidden;
-  background:linear-gradient(135deg,#f5f5f0 0%,#fff4ee 100%);
-  box-shadow:0 24px 60px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04);
-}
-.hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-visual-placeholder{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:14px;
-  color:var(--text-3);font-size:11px;
-  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
-}
-.hero-visual-placeholder svg{width:48px;height:48px;opacity:.3}
-@media (max-width:980px){
-  .hero-grid{grid-template-columns:1fr;gap:48px}
-  .hero-visual{aspect-ratio:4/3;max-width:480px}
-}
 .hero h1{
-  font-size:54px;font-weight:800;
-  letter-spacing:-.028em;line-height:1.06;
-  margin-bottom:24px;
+  font-size:62px;font-weight:800;
+  letter-spacing:-.028em;line-height:1.05;
+  margin-bottom:24px;max-width:920px;
 }
 .hero h1 em{
   font-style:normal;color:var(--text);
@@ -161,13 +137,13 @@ nav .wrap{
   -webkit-box-decoration-break:clone;
 }
 .hero .sub{
-  font-size:20px;color:var(--text);
-  line-height:1.45;margin-bottom:14px;
+  font-size:22px;color:var(--text);
+  line-height:1.45;margin-bottom:14px;max-width:680px;
   font-weight:600;letter-spacing:-.005em;
 }
 .hero .sub-tertiary{
-  font-size:14.5px;color:var(--text-3);
-  line-height:1.6;margin-bottom:36px;
+  font-size:15px;color:var(--text-3);
+  line-height:1.6;margin-bottom:36px;max-width:620px;
 }
 .hero .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .btn-primary{
@@ -208,14 +184,11 @@ nav .wrap{
 }
 .hero-specs .spec strong{color:var(--text);font-weight:700}
 
-@media (max-width:980px){
+@media (max-width:780px){
   .hero{padding:60px 0 50px}
-  .hero h1{font-size:42px;line-height:1.08}
+  .hero h1{font-size:38px;line-height:1.1}
   .hero .sub{font-size:18px}
   .hero .sub-tertiary{font-size:14px}
-}
-@media (max-width:600px){
-  .hero h1{font-size:34px}
 }
 
 /* ========== SECTION GENERIC ========== */
@@ -803,36 +776,29 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 1 · HERO ============= -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
-        <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
-        <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
-        <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
-        <div class="cta-row">
-          <a href="/audit/" class="btn-primary">
-            Strategy Audit anfragen
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#was" class="btn-ghost">Was wir machen ↓</a>
-        </div>
-        <div class="hero-specs">
-          <div class="spec">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-            <span><strong>8 Wochen</strong> bis Launch</span>
-          </div>
-          <div class="spec">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-            <span><strong>Direkter</strong> Founder-Zugang</span>
-          </div>
-          <div class="spec">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-            <span><strong>30 Tage</strong> Hypercare</span>
-          </div>
-        </div>
+    <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
+    <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
+    <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
+    <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
+    <div class="cta-row">
+      <a href="/audit/" class="btn-primary">
+        Strategy Audit anfragen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#was" class="btn-ghost">Was wir machen ↓</a>
+    </div>
+    <div class="hero-specs">
+      <div class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <span><strong>Re-Brand</strong> · Re-Launch · Skalierung</span>
       </div>
-      <div class="hero-visual">
-        <img src="/assets/images/hero-workspace.jpg" alt="Workspace mit Macbook und externem Monitor — BB Brands AI-native Setup" loading="eager">
+      <div class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <span><strong>Direkter</strong> Founder-Zugang</span>
+      </div>
+      <div class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <span><strong>DACH</strong> · 1–20 Mio € Range</span>
       </div>
     </div>
   </div>
@@ -974,19 +940,19 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <h2>Was uns von <em>klassischen Agenturen</em> unterscheidet.</h2>
     <div class="stats-grid">
       <div class="stat">
-        <div class="stat-num">8</div>
-        <div class="stat-label">Wochen</div>
-        <p class="stat-desc">Avg-Time-to-Launch von Brand bis Go-Live. Klassische Agenturen brauchen 4–6 Monate.</p>
+        <div class="stat-num">5<span class="plus">+</span></div>
+        <div class="stat-label">DTC-Brands transformed</div>
+        <p class="stat-desc">Hearo · Bachgold · Wake · Face Evolution · RDY4TAKEOFF — Custom-Architektur statt Theme-Adaption.</p>
       </div>
       <div class="stat">
-        <div class="stat-num">5<span class="plus">+</span></div>
-        <div class="stat-label">DTC-Brands gebaut</div>
-        <p class="stat-desc">Hearo · Bachgold · Wake · Face Evolution · RDY4TAKEOFF — Custom-Architektur statt Theme-Adaption.</p>
+        <div class="stat-num">1<span class="plus">–20M</span></div>
+        <div class="stat-label">€ Umsatz-Range</div>
+        <p class="stat-desc">Etablierte DTC-Brands mit Skalierungs-Ambition oder Re-Brand-Bedarf. DACH primär · EU optional.</p>
       </div>
       <div class="stat">
         <div class="stat-num">0</div>
         <div class="stat-label">Junior-Layer</div>
-        <p class="stat-desc">Kein Account-Manager dazwischen, keine Übergaben. Direkter Founder-Zugang vom Discovery-Call bis Launch.</p>
+        <p class="stat-desc">Kein Account-Manager dazwischen, keine Übergaben. Direkter Founder-Zugang vom Discovery bis Hypercare.</p>
       </div>
     </div>
   </div>
