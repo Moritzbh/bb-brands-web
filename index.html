@@ -140,7 +140,7 @@ body.home header.site-header.scrolled{
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid rgba(232,232,227,.5);
 }
-body.home header.site-header:not(.scrolled) .brand-name{color:#fff}
+body.home header.site-header:not(.scrolled) .brand-logo{color:#fff}
 body.home header.site-header:not(.scrolled) .main-nav a{color:rgba(255,255,255,.85)}
 body.home header.site-header:not(.scrolled) .main-nav a:hover{color:#fff}
 body.home header.site-header:not(.scrolled) .header-search{color:rgba(255,255,255,.85)}
@@ -153,24 +153,21 @@ header.site-header .wrap{
   height:78px;gap:36px;
 }
 
-/* ========== BRAND LOGO ========== */
+/* ========== BRAND LOGO (Typo-Lockup mit gespiegeltem B) ========== */
 .brand-logo{
-  display:flex;align-items:center;gap:10px;
+  display:inline-flex;align-items:baseline;
   text-decoration:none;color:var(--text);
-  transition:opacity .15s ease;
+  font-family:'Dax OT','Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:300;font-size:34px;line-height:1;
+  letter-spacing:-.01em;
+  transition:opacity .15s ease,color .3s ease;
+  white-space:nowrap;
 }
-.brand-logo:hover{text-decoration:none;opacity:.8}
-.brand-mark{
-  background:var(--accent);color:#fff;
-  padding:8px 11px;border-radius:7px;
-  font-weight:900;font-size:15px;letter-spacing:-.04em;
-  line-height:1;
-  box-shadow:0 2px 8px rgba(255,107,61,.3);
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-}
-.brand-name{
-  font-weight:800;font-size:18px;letter-spacing:-.015em;
-  color:var(--text);
+.brand-logo:hover{text-decoration:none;opacity:.85}
+.brand-mark-mirror{
+  display:inline-block;
+  transform:scaleX(-1);
+  margin-right:-1px;
 }
 
 /* ========== MAIN NAV ========== */
@@ -235,8 +232,7 @@ header.site-header .wrap{
 }
 @media (max-width:780px){
   header.site-header .wrap{height:64px;gap:14px}
-  .brand-name{font-size:16px}
-  .brand-mark{padding:6px 9px;font-size:13px}
+  .brand-logo{font-size:26px}
   .header-search{display:none}
 }
 
@@ -946,8 +942,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <header class="site-header">
   <div class="wrap">
     <a href="/" class="brand-logo" aria-label="BB Brands Startseite">
-      <span class="brand-mark">BB</span>
-      <span class="brand-name">Brands</span>
+      <span class="brand-mark-mirror">B</span>Brands
     </a>
     <nav class="main-nav" aria-label="Hauptnavigation">
       <a href="/" class="active">Startseite</a>
