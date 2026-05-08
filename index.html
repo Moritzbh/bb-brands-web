@@ -10,6 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Calendly Inline Widget · async loaded -->
+<link rel="preconnect" href="https://assets.calendly.com">
+<script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
+
 <style>
 :root{
   /* Brand-Tokens — Quelle: Marke/Brand/brand-guidelines.html */
@@ -148,16 +153,21 @@ a:hover{text-decoration:underline}
 }
 
 /* ========== HEADER ========== */
+/* Default: transparent über Hero (Mesh-Gradient flowed durch).
+   Erst beim Scroll: blurred white-tint + Border einblenden. */
 header.site-header{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid rgba(232,232,227,.5);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-bottom:1px solid transparent;
   transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
 }
 header.site-header.scrolled{
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom-color:rgba(232,232,227,.5);
 }
 header.site-header .wrap{
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;
@@ -322,6 +332,11 @@ header.site-header .wrap{
   50%{transform:translate(-90px,-50px) scale(1.15)}
 }
 .hero .wrap{position:relative;z-index:1}
+.hero-grid{
+  display:grid;grid-template-columns:1.35fr 1fr;
+  gap:64px;align-items:center;
+}
+.hero-text{min-width:0}
 .hero h1{
   font-size:64px;font-weight:800;
   letter-spacing:-.028em;line-height:1.02;
@@ -330,6 +345,68 @@ header.site-header .wrap{
   font-family:'Dax OT','Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
   font-weight:700;
 }
+
+/* Studio-Portrait Placeholder */
+.hero-portrait{
+  position:relative;aspect-ratio:4/5;
+  border-radius:18px;overflow:hidden;
+  background:linear-gradient(180deg, #0a0a0a 0%, #1a1a18 60%, #0a0a0a 100%);
+  border:1px solid var(--line);
+  box-shadow:0 24px 48px rgba(3,5,198,.10), 0 8px 24px rgba(0,0,0,.18);
+}
+.hero-portrait-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 30% 25%, rgba(3,5,198,.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(255,107,61,.18) 0%, transparent 55%);
+  filter:blur(8px);
+}
+.hero-portrait-tag{
+  position:absolute;top:16px;right:16px;z-index:3;
+  background:rgba(255,107,61,.16);color:#ff8a63;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:7px 12px;border-radius:99px;
+  border:1px solid rgba(255,107,61,.35);
+}
+.hero-portrait-inner{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:#f5f5f0;gap:18px;padding:24px;
+}
+.hero-portrait-silhouette{
+  width:140px;height:140px;border-radius:50%;
+  background:rgba(245,245,240,.04);
+  border:1px solid rgba(245,245,240,.08);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:6px;
+}
+.hero-portrait-silhouette svg{
+  width:64px;height:64px;color:rgba(245,245,240,.35);
+}
+.hero-portrait-label{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,107,61,.85);
+}
+.hero-portrait-title{
+  font-family:'Dax OT','Saira Condensed',Manrope,sans-serif;
+  font-size:18px;font-weight:600;letter-spacing:-.005em;
+  color:#f5f5f0;line-height:1.35;max-width:240px;
+}
+.hero-portrait-meta{
+  font-size:12px;color:rgba(245,245,240,.45);letter-spacing:.02em;
+}
+.hero-portrait-name{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:18px 24px;
+  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 100%);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,245,240,.7);
+}
+.hero-portrait-name strong{color:#fff;font-weight:700;letter-spacing:-.005em}
 .hero h1 em{
   font-style:normal;
   color:var(--blue);
@@ -393,11 +470,19 @@ header.site-header .wrap{
 }
 .hero-specs .spec strong{color:var(--text);font-weight:700}
 
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-portrait{max-width:380px;margin:0 auto;width:100%}
+}
 @media (max-width:780px){
   .hero{padding:60px 0 50px}
   .hero h1{font-size:38px;line-height:1.1}
   .hero .sub{font-size:18px}
   .hero .sub-tertiary{font-size:14px}
+  .hero-portrait{max-width:300px}
+  .hero-portrait-silhouette{width:110px;height:110px}
+  .hero-portrait-silhouette svg{width:50px;height:50px}
+  .hero-portrait-title{font-size:16px}
 }
 
 /* ========== SECTION GENERIC ========== */
@@ -1130,11 +1215,42 @@ section.guarantees-dirty::before{
   border:1px solid var(--line);
   border-radius:18px;
   padding:48px 48px;
-  max-width:720px;
+  max-width:780px;margin:0 auto;
   box-shadow:0 4px 28px rgba(0,0,0,.04);
+  text-align:center;
 }
-.apply-block h2{margin-bottom:14px}
-.apply-block .section-sub{margin-bottom:36px}
+.apply-block .eyebrow{display:inline-block}
+.apply-block h2{margin:0 auto 14px;text-align:center;max-width:560px}
+.apply-block .section-sub{margin:0 auto 32px;text-align:center;max-width:520px}
+
+/* Calendly-Embed-Container */
+.calendly-shell{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:8px;
+  min-height:680px;
+  position:relative;
+}
+.calendly-inline-widget{
+  min-width:280px;
+  width:100%;
+  height:680px;
+}
+.calendly-fallback{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;padding:32px;
+  text-align:center;color:var(--text-3);font-size:14px;
+  pointer-events:none;
+}
+.calendly-fallback a{color:var(--blue);font-weight:600;pointer-events:auto}
+.calendly-inline-widget:not(:empty) + .calendly-fallback{display:none}
+@media (max-width:780px){
+  .calendly-inline-widget{height:760px}
+  .calendly-shell{min-height:760px}
+}
 form .field{margin-bottom:18px}
 form label{
   display:block;font-size:12px;
@@ -1335,28 +1451,50 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 1 · HERO ============= -->
 <header class="hero" id="top">
   <div class="wrap">
-    <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
-    <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
-    <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
-    <div class="cta-row">
-      <a href="/audit/" class="btn-primary">
-        Strategy Audit anfragen
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="#was" class="btn-ghost">Was wir machen ↓</a>
-    </div>
-    <div class="hero-specs">
-      <div class="spec">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        <span><strong>Re-Brand</strong> · Re-Launch · Skalierung</span>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
+        <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
+        <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
+        <div class="cta-row">
+          <a href="/audit/" class="btn-primary">
+            Strategy Audit anfragen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#was" class="btn-ghost">Was wir machen ↓</a>
+        </div>
+        <div class="hero-specs">
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Re-Brand</strong> · Re-Launch · Skalierung</span>
+          </div>
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Direkter</strong> Founder-Zugang</span>
+          </div>
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            <span><strong>DACH</strong> · 1–20 Mio € Range</span>
+          </div>
+        </div>
       </div>
-      <div class="spec">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        <span><strong>Direkter</strong> Founder-Zugang</span>
-      </div>
-      <div class="spec">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        <span><strong>DACH</strong> · 1–20 Mio € Range</span>
+
+      <!-- Studio-Portrait Placeholder · ersetzt durch echtes Foto sobald Studio-Shoot durch -->
+      <div class="hero-portrait" role="img" aria-label="Studio-Portrait Moritz Bohmbach — Aufnahme folgt">
+        <div class="hero-portrait-bg"></div>
+        <span class="hero-portrait-tag">Coming Soon</span>
+        <div class="hero-portrait-inner">
+          <div class="hero-portrait-silhouette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="hero-portrait-label">Studio · Founder</div>
+          <div class="hero-portrait-title">Moritz Bohmbach</div>
+          <div class="hero-portrait-meta">Studio-Portrait folgt diese Woche</div>
+        </div>
+        <div class="hero-portrait-name">
+          <span><strong>Moritz Bohmbach</strong></span>
+          <span>Founder</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1720,44 +1858,20 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <h2>Bereit für die <em>Transformation?</em></h2>
       <p class="section-sub">Wenn dein Setup zu uns passt, melden wir uns innerhalb 1 Werktag.</p>
 
-      <form action="mailto:info@bb-brands.de" method="post" enctype="text/plain">
-        <div class="field-row">
-          <div class="field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="field">
-            <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email" required>
-          </div>
+      <!-- Calendly Inline-Embed · URL bei Bedarf in data-url tauschen -->
+      <div class="calendly-shell">
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/moritz-bohmbach/strategy-audit?hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff"
+          aria-label="Termin-Buchung Strategy Audit"
+        ></div>
+        <div class="calendly-fallback">
+          <span>Lädt …</span>
+          <span>Falls der Kalender nicht erscheint:<br>
+          <a href="https://calendly.com/moritz-bohmbach/strategy-audit" target="_blank" rel="noopener">calendly.com/moritz-bohmbach/strategy-audit&nbsp;→</a></span>
         </div>
-
-        <div class="field">
-          <label for="brand">Brand-URL</label>
-          <input type="url" id="brand" name="brand" placeholder="https:// — optional, wenn schon vorhanden">
-        </div>
-
-        <div class="field">
-          <label for="stage">Brand-Stage</label>
-          <select id="stage" name="stage" required>
-            <option value="">Bitte wählen…</option>
-            <option value="tier-2-low">Unter 500k Jahresumsatz · Tier 2</option>
-            <option value="tier-2-mid">500k – 1 Mio Jahresumsatz · Tier 2</option>
-            <option value="tier-3-low">1 – 5 Mio Jahresumsatz · Tier 3</option>
-            <option value="tier-3-mid">5 – 10 Mio Jahresumsatz · Tier 3</option>
-            <option value="tier-3-high">10 – 20 Mio+ Jahresumsatz · Tier 3</option>
-          </select>
-          <p style="font-size:12px;color:var(--text-3);margin-top:6px;line-height:1.5">Pre-Launch / Idee-Stadium? Dann ist <a href="https://founderos.bb-brands.de" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Founder OS</a> dein Weg, nicht der Strategy Audit.</p>
-        </div>
-
-        <div class="field">
-          <label for="pain">Was ist gerade dein größter Engpass?</label>
-          <textarea id="pain" name="pain" maxlength="280" placeholder="Max. 280 Zeichen — ein Satz reicht." required></textarea>
-        </div>
-
-        <button type="submit" class="apply-submit">Strategy Audit anfragen →</button>
-        <p class="apply-meta">Antwort innerhalb 1 Werktag. Pro Quartal nur 3–4 neue Projekte.</p>
-      </form>
+      </div>
+      <p class="apply-meta">Antwort innerhalb 1 Werktag. Pro Quartal nur 3–4 neue Projekte.</p>
     </div>
   </div>
 </section>
