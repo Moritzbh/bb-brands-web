@@ -79,14 +79,36 @@ a:hover{text-decoration:underline}
   .top-bar{display:none}
 }
 
-/* ========== HEADER (transparent über Hero) ========== */
+/* ========== HEADER ========== */
 header.site-header{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(232,232,227,.5);
+  transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+}
+/* HOME: transparent header over dark hero, solid when scrolled */
+body.home header.site-header{
+  background:transparent;
+  border-bottom-color:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+body.home header.site-header.scrolled{
+  background:rgba(255,255,255,.88);
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid rgba(232,232,227,.5);
 }
+body.home header.site-header:not(.scrolled) .brand-name{color:#fff}
+body.home header.site-header:not(.scrolled) .main-nav a{color:rgba(255,255,255,.85)}
+body.home header.site-header:not(.scrolled) .main-nav a:hover{color:#fff}
+body.home header.site-header:not(.scrolled) .header-search{color:rgba(255,255,255,.85)}
+body.home header.site-header:not(.scrolled) .header-search:hover{
+  background:rgba(255,255,255,.1);color:#fff;
+}
+body.home header.site-header:not(.scrolled) .mobile-toggle span{background:#fff}
 header.site-header .wrap{
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;
   height:78px;gap:36px;
@@ -204,30 +226,32 @@ header.site-header .wrap{
 
 /* ========== HERO ========== */
 .hero{
-  padding:140px 0 100px;
+  padding:180px 0 120px;
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(ellipse 90% 70% at 75% 0%,rgba(255,107,61,.18) 0%,transparent 55%),
-    radial-gradient(ellipse 70% 80% at 0% 60%,rgba(255,107,61,.08) 0%,transparent 65%),
-    linear-gradient(180deg,#fff8f3 0%,#ffffff 65%,#fafaf7 100%);
+    radial-gradient(ellipse 80% 60% at 70% 20%,rgba(255,107,61,.35) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 70% at 10% 80%,rgba(255,107,61,.12) 0%,transparent 60%),
+    linear-gradient(180deg,#181612 0%,#0d0c0a 60%,#0a0a0a 100%);
+  margin-top:-78px; /* Hero extends behind sticky header */
+  z-index:1;
 }
 .hero::before{
-  content:"";position:absolute;top:80px;right:-120px;
-  width:620px;height:620px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,107,61,.16) 0%,transparent 60%);
-  pointer-events:none;filter:blur(40px);
+  content:"";position:absolute;top:120px;right:-100px;
+  width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,61,.25) 0%,transparent 60%);
+  pointer-events:none;filter:blur(60px);
 }
 .hero::after{
   content:"";position:absolute;bottom:0;left:0;right:0;
-  height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
+  height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:11px;font-weight:700;color:var(--accent);
   text-transform:uppercase;letter-spacing:.2em;
   margin-bottom:28px;
-  padding:7px 14px;background:#fff;
+  padding:7px 14px;background:rgba(255,107,61,.12);
   border-radius:100px;border:1px solid rgba(255,107,61,.3);
 }
 .hero-eyebrow::before{
@@ -243,21 +267,22 @@ header.site-header .wrap{
   font-size:62px;font-weight:800;
   letter-spacing:-.028em;line-height:1.05;
   margin-bottom:24px;max-width:920px;
+  color:#fff;
 }
 .hero h1 em{
-  font-style:normal;color:var(--text);
-  background:rgba(255,107,61,.16);
-  padding:0 10px;border-radius:6px;
+  font-style:normal;color:#fff;
+  background:rgba(255,107,61,.28);
+  padding:0 12px;border-radius:6px;
   box-decoration-break:clone;
   -webkit-box-decoration-break:clone;
 }
 .hero .sub{
-  font-size:22px;color:var(--text);
+  font-size:22px;color:rgba(255,255,255,.95);
   line-height:1.45;margin-bottom:14px;max-width:680px;
   font-weight:600;letter-spacing:-.005em;
 }
 .hero .sub-tertiary{
-  font-size:15px;color:var(--text-3);
+  font-size:15px;color:rgba(255,255,255,.65);
   line-height:1.6;margin-bottom:36px;max-width:620px;
 }
 .hero .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
@@ -280,24 +305,24 @@ header.site-header .wrap{
 .btn-primary svg{width:14px;height:14px;transition:transform .2s ease}
 .btn-primary:hover svg{transform:translateX(2px)}
 .btn-ghost{
-  color:var(--text-2);font-size:14px;font-weight:600;
+  color:rgba(255,255,255,.75);font-size:14px;font-weight:600;
   display:inline-flex;align-items:center;gap:6px;
 }
-.btn-ghost:hover{color:var(--text);text-decoration:none}
+.btn-ghost:hover{color:#fff;text-decoration:none}
 
 .hero-specs{
   display:flex;flex-wrap:wrap;gap:24px;
   margin-top:32px;padding-top:24px;
-  border-top:1px solid var(--line);
+  border-top:1px solid rgba(255,255,255,.12);
 }
 .hero-specs .spec{
   display:flex;align-items:center;gap:8px;
-  font-size:13px;color:var(--text-2);font-weight:500;
+  font-size:13px;color:rgba(255,255,255,.7);font-weight:500;
 }
 .hero-specs .spec svg{
   width:18px;height:18px;color:var(--accent);flex-shrink:0;
 }
-.hero-specs .spec strong{color:var(--text);font-weight:700}
+.hero-specs .spec strong{color:#fff;font-weight:700}
 
 @media (max-width:780px){
   .hero{padding:60px 0 50px}
@@ -870,7 +895,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 </style>
 </head>
-<body>
+<body class="home">
 
 <!-- ============= TOP-BAR (Ankündigungsleiste) ============= -->
 <div class="top-bar">
@@ -1392,6 +1417,22 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var header = document.querySelector('header.site-header');
+  if(!header) return;
+  var update = function(){
+    if(window.scrollY > 60){
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
 
 </body>
 </html>
