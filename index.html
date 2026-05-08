@@ -474,61 +474,118 @@ h2 em{color:var(--accent);font-style:normal}
 .svc-after strong{color:var(--text)}
 @media (max-width:780px){.services-grid{grid-template-columns:1fr}}
 
-/* ========== COMPARE TABLE ========== */
-.compare-table{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:14px;
+/* ========== COMPARE HERO (Bachgold-Pattern) ========== */
+section.compare-hero,
+section.compare-hero:nth-of-type(even){
+  background:#0a0a0a;
+  color:#fff;
+  padding:120px 0;
+  position:relative;
   overflow:hidden;
 }
-.compare-table-head{
-  display:grid;grid-template-columns:1fr 1fr;
-  background:var(--bg-elev);
-  border-bottom:1px solid var(--line);
+.compare-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('/assets/images/comparison-workspace.jpg');
+  background-size:cover;background-position:center;
+  opacity:.5;
 }
-.compare-table-head div{
-  padding:16px 24px;
-  font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.14em;
-  color:var(--text-3);
+.compare-hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,.55) 50%,rgba(10,10,10,.85) 100%);
 }
-.compare-table-head div:first-child{border-right:1px solid var(--line)}
-.compare-table-head div:last-child{color:var(--text)}
+.compare-hero .wrap{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1.05fr;gap:80px;
+  align-items:end;min-height:520px;
+}
+.compare-hero .headline-col{display:flex;flex-direction:column;justify-content:flex-end}
+.compare-hero .eyebrow{
+  color:var(--accent);margin-bottom:22px;
+}
+.compare-hero h2{
+  color:#fff;font-size:46px;
+  letter-spacing:-.022em;line-height:1.08;
+  margin-bottom:20px;max-width:560px;
+}
+.compare-hero h2 em{
+  color:#fff;
+  background:linear-gradient(180deg,transparent 60%,rgba(255,107,61,.5) 60%);
+  padding:0 4px;border-radius:0;
+}
+.compare-hero .section-sub{
+  font-size:17px;color:rgba(255,255,255,.85);
+  line-height:1.55;margin-bottom:24px;max-width:540px;
+}
+.compare-hero .compare-disclaimer{
+  font-size:11.5px;color:rgba(255,255,255,.5);
+  font-style:italic;line-height:1.5;max-width:520px;
+}
 
-.compare-row{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--line);
+.compare-table-col{display:flex;flex-direction:column;align-items:flex-end}
+.compare-pill{
+  display:flex;flex-direction:column;align-items:center;
+  background:#fff;color:#0a0a0a;
+  padding:16px 38px;border-radius:12px;
+  margin-bottom:36px;
+  box-shadow:0 12px 32px rgba(0,0,0,.4);
+  text-align:center;min-width:240px;
 }
-.compare-row .old,
-.compare-row .new{
-  padding:20px 24px;font-size:15px;line-height:1.5;
-  display:flex;align-items:center;gap:14px;
+.compare-pill .pill-name{
+  font-family:'Dax OT','Saira Condensed',sans-serif;
+  font-weight:300;font-size:18px;letter-spacing:.05em;
+  color:#0a0a0a;margin-bottom:4px;
 }
-.compare-row .old{
-  border-right:1px solid var(--line);
-  color:var(--text-3);
-  text-decoration:line-through;
-  text-decoration-thickness:1px;
-  text-decoration-color:var(--text-4);
+.compare-pill .pill-meta{
+  font-size:9.5px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
 }
-.compare-row .new{
-  color:var(--text);font-weight:600;
+
+.compare-table-new{
+  width:100%;display:flex;flex-direction:column;
+}
+.compare-table-new .row{
+  display:grid;grid-template-columns:1fr 70px 70px;gap:16px;
+  align-items:center;padding:16px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.compare-table-new .row.headers{
+  border-top:none;padding:0 0 14px;
+  border-bottom:1px solid rgba(255,255,255,.15);
+  margin-bottom:0;
+}
+.compare-table-new .row .row-label{
+  font-size:14.5px;color:rgba(255,255,255,.92);font-weight:500;
   letter-spacing:-.005em;
 }
-.compare-row .new::before{
-  content:"";flex-shrink:0;
-  width:20px;height:20px;border-radius:50%;
-  background:var(--green-bg);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 7.2l2.5 2.5L11 4.3' stroke='%2322c55e' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat:no-repeat;background-position:center;
+.compare-table-new .col-header{
+  font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  text-align:center;
 }
-@media (max-width:780px){
-  .compare-table-head{display:none}
-  .compare-row{grid-template-columns:1fr}
-  .compare-row .old{
-    border-right:none;border-bottom:1px solid var(--line);
-  }
-  .compare-row .old,.compare-row .new{padding:14px 18px;font-size:14px}
+.compare-table-new .col-header.us{color:var(--accent)}
+.compare-table-new .col-header.them{color:rgba(255,255,255,.4)}
+.compare-table-new .cell{display:flex;align-items:center;justify-content:center}
+.compare-table-new .badge{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.compare-table-new .badge.yes{background:var(--accent)}
+.compare-table-new .badge.no{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.18);
+}
+.compare-table-new .badge.yes svg{width:13px;height:13px;color:#fff}
+.compare-table-new .badge.no svg{width:11px;height:11px;color:rgba(255,255,255,.35)}
+
+@media (max-width:980px){
+  section.compare-hero{padding:80px 0}
+  .compare-hero .wrap{grid-template-columns:1fr;gap:48px;min-height:auto}
+  .compare-hero h2{font-size:32px}
+  .compare-table-col{align-items:stretch}
+  .compare-pill{align-self:flex-start;margin-bottom:24px;min-width:auto}
+  .compare-table-new .row{grid-template-columns:1fr 50px 50px;gap:12px}
+  .compare-table-new .row .row-label{font-size:13.5px}
+  .compare-table-new .badge{width:26px;height:26px}
 }
 
 /* ========== STATS BANNER ========== */
@@ -1126,41 +1183,59 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 4 · VERGLEICH ============= -->
-<section>
+<!-- ============= 4 · VERGLEICH (Hero-Comparison) ============= -->
+<section class="compare-hero">
+  <div class="compare-hero-bg"></div>
   <div class="wrap">
-    <div class="eyebrow">Klassische Agentur vs. Growth Partner</div>
-    <h2>Sechs Gründe, warum klassische Agenturen<br>DTC-Brands <em>ausbremsen.</em></h2>
-    <p class="section-sub">Es liegt nicht am Talent. Es liegt am Modell — und Modelle ändern sich nicht über Nacht.</p>
+    <div class="headline-col">
+      <div class="eyebrow">Vergleich</div>
+      <h2>BB Brands gegen <em>klassische Agenturen.</em></h2>
+      <p class="section-sub">Sechs Punkte, harte Fakten — was wir liefern und was klassische DACH-Agenturen strukturell nicht abbilden können.</p>
+      <p class="compare-disclaimer">Stand Mai 2026. „Klassische Agentur" = DACH-Werbe-/Digital-Agentur mit Time-and-Material-Modell, Account-Manager-Layer und Silo-Strukturen. Basierend auf Marktbeobachtung und Founder-Erfahrung mit 1–3 vorangegangenen Agenturen pro Tier-3-Kunde.</p>
+    </div>
 
-    <div class="compare-table">
-      <div class="compare-table-head">
-        <div>Klassische Agentur</div>
-        <div>BB Brands · Growth Partner</div>
+    <div class="compare-table-col">
+      <div class="compare-pill">
+        <div class="pill-name">BB BRANDS</div>
+        <div class="pill-meta">GROWTH PARTNER · DACH</div>
       </div>
-      <div class="compare-row">
-        <div class="old">Verkauft Stunden &amp; Deliverables</div>
-        <div class="new">Verkauft Geschwindigkeit, Systeme &amp; Outcomes</div>
-      </div>
-      <div class="compare-row">
-        <div class="old">Komplexe Hierarchien &amp; Account Manager</div>
-        <div class="new">Direkter Founder-Zugang</div>
-      </div>
-      <div class="compare-row">
-        <div class="old">Silo-Denken — nur Ads oder nur Design</div>
-        <div class="new">Brand + Shop + Operations in einem Team</div>
-      </div>
-      <div class="compare-row">
-        <div class="old">Manuelle, langsame Prozesse</div>
-        <div class="new">AI-native Effizienz &amp; schnelle Iteration</div>
-      </div>
-      <div class="compare-row">
-        <div class="old">Fokus auf Vanity-Metriken (Reichweite, CTR)</div>
-        <div class="new">Fokus auf Business Impact (Profit, LTV, CAC)</div>
-      </div>
-      <div class="compare-row">
-        <div class="old">Fest angestelltes B-Player-Team</div>
-        <div class="new">Kuratiertes A-Player-Netzwerk pro Projekt</div>
+
+      <div class="compare-table-new">
+        <div class="row headers">
+          <div></div>
+          <div class="col-header us">BB BRANDS</div>
+          <div class="col-header them">KLASSISCH</div>
+        </div>
+        <div class="row">
+          <div class="row-label">Direkter Founder-Zugang</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Outcomes statt Stunden &amp; Deliverables</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Brand + Shop + Operations im selben Team</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
+        <div class="row">
+          <div class="row-label">AI-native Effizienz, schnelle Iteration</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Fokus auf Profit, LTV, CAC — nicht Vanity-Metriken</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Kuratiertes A-Player-Netzwerk pro Projekt</div>
+          <div class="cell"><div class="badge yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
+          <div class="cell"><div class="badge no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+        </div>
       </div>
     </div>
   </div>
