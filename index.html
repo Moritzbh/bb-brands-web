@@ -1031,6 +1031,209 @@ section.stats-banner:nth-of-type(even){
   .vid-name{font-size:22px}
 }
 
+/* ========== CASES (DIRTY · Baulig-Pattern) ========== */
+section.cases-dirty,
+section.cases-dirty:nth-of-type(even){
+  background:var(--cream);
+  position:relative;
+  padding:140px 0;
+  overflow:hidden;
+}
+section.cases-dirty::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='nc'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nc)'/%3E%3C/svg%3E");
+  opacity:.18;mix-blend-mode:multiply;
+}
+.cases-dirty .wrap{position:relative;z-index:1}
+.cases-dirty .eyebrow{color:var(--accent)}
+.cases-dirty h2{color:var(--black)}
+.cases-dirty h2 em{
+  font-style:normal;color:var(--blue);position:relative;
+}
+.cases-dirty h2 em::after{
+  content:"";position:absolute;left:-2px;right:-2px;bottom:6%;
+  height:38%;background:rgba(255,107,61,.45);
+  z-index:-1;transform:rotate(-1deg);
+}
+.cases-dirty .section-sub{color:var(--text-2);max-width:640px;margin-bottom:56px}
+
+.case-card-dirty{
+  background:#fff;
+  border:3px solid var(--black);
+  position:relative;
+  box-shadow:6px 6px 0 var(--black);
+  margin-bottom:48px;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+}
+.case-card-dirty:nth-of-type(odd){transform:rotate(-.5deg)}
+.case-card-dirty:nth-of-type(even){transform:rotate(.4deg)}
+.case-card-dirty:hover{
+  transform:rotate(0) translateY(-3px);
+  box-shadow:9px 9px 0 var(--black);
+}
+
+.case-stamp-dirty{
+  position:absolute;top:-14px;left:24px;
+  background:var(--accent);color:#fff;
+  font-family:var(--display);font-weight:800;
+  padding:5px 14px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;
+  transform:rotate(-2deg);
+  border:2px solid var(--black);
+  box-shadow:2px 2px 0 var(--black);
+  z-index:2;
+}
+.case-stamp-dirty.soon{background:var(--blue)}
+
+.case-grid-dirty{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.case-story{
+  padding:48px 44px 44px;
+  border-right:2px dashed var(--black);
+}
+.case-name-row{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:32px;border-bottom:1px solid var(--line);padding-bottom:18px;
+  gap:16px;
+}
+.case-name{
+  font-family:var(--display);
+  font-weight:800;font-size:38px;
+  letter-spacing:-.02em;line-height:1;
+  text-transform:uppercase;color:var(--black);margin:0;
+}
+.case-meta-label{
+  font-family:'Space Mono',monospace;
+  font-size:10.5px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.16em;
+  display:block;margin-bottom:14px;
+}
+.case-logo-mini{
+  height:30px;width:auto;
+  filter:brightness(0);opacity:.85;flex-shrink:0;
+}
+
+.case-block{margin-bottom:24px}
+.case-block:last-child{margin-bottom:0}
+.case-label{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:700;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.16em;margin-bottom:8px;
+}
+.case-label::before{content:"// ";color:var(--accent)}
+.case-block p{
+  font-size:14.5px;color:var(--text-2);line-height:1.6;margin:0;
+}
+.case-block p strong{color:var(--black);font-weight:600}
+
+.case-side{
+  padding:48px 44px 44px;
+  display:flex;flex-direction:column;gap:24px;
+  background:var(--cream);
+}
+.case-visual{
+  background:var(--black);
+  aspect-ratio:16/10;
+  border:2px solid var(--black);
+  position:relative;overflow:hidden;
+  box-shadow:4px 4px 0 var(--black);
+}
+.case-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.case-visual-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.4);
+  font-family:'Space Mono',monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.case-visual-tag{
+  position:absolute;top:10px;right:10px;
+  background:var(--accent);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:9.5px;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 9px;
+  border:1.5px solid var(--black);
+  z-index:1;
+}
+
+.case-stats-dirty{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.case-stat-dirty{
+  background:#fff;
+  border:2px solid var(--black);
+  padding:14px 16px;
+  position:relative;
+  box-shadow:3px 3px 0 var(--black);
+}
+.case-stat-dirty:first-child{transform:rotate(-1deg)}
+.case-stat-dirty:last-child{transform:rotate(.6deg)}
+.case-stat-num-dirty{
+  font-family:var(--display);
+  font-weight:800;font-size:30px;line-height:1;
+  color:var(--black);margin-bottom:4px;
+  letter-spacing:-.02em;
+}
+.case-stat-num-dirty .accent{color:var(--accent)}
+.case-stat-label-dirty{
+  font-family:'Space Mono',monospace;
+  font-size:10px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.14em;
+}
+
+.case-quote-dirty{
+  background:#fff;
+  border:2px solid var(--black);
+  padding:20px 22px;
+  position:relative;
+  box-shadow:3px 3px 0 var(--black);
+}
+.case-quote-dirty p{
+  font-family:'Caveat',cursive;
+  font-weight:600;font-size:19px;line-height:1.35;
+  color:var(--black);margin:0 0 0 22px;
+}
+.case-quote-dirty p::before{
+  content:"\201C";color:var(--accent);
+  font-family:var(--display);font-weight:800;font-size:36px;
+  position:absolute;top:6px;left:14px;line-height:1;
+}
+.case-quote-author{
+  margin:10px 0 0 22px;
+  font-family:'Space Mono',monospace;
+  font-size:10px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.14em;
+  font-weight:400;
+}
+
+.cases-cta-row{
+  margin-top:48px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  text-align:center;
+}
+.cases-cta-row .btn-primary{transform:rotate(-1deg)}
+.cases-cta-row .btn-primary:hover{transform:rotate(0) translateY(-1px)}
+.cases-trust-mini{
+  font-family:'Space Mono',monospace;
+  font-size:11px;color:var(--text-3);
+  letter-spacing:.06em;
+}
+
+@media (max-width:980px){
+  .case-grid-dirty{grid-template-columns:1fr}
+  .case-story{border-right:none;border-bottom:2px dashed var(--black)}
+}
+@media (max-width:780px){
+  section.cases-dirty{padding:80px 0}
+  .case-card-dirty{transform:none !important;margin-bottom:32px}
+  .case-card-dirty:hover{transform:translateY(-3px) !important}
+  .case-name{font-size:30px}
+  .case-story,.case-side{padding:36px 28px 28px}
+  .case-stat-dirty{transform:none !important}
+  .case-stat-num-dirty{font-size:24px}
+}
+
 /* ========== GUARANTEES (DIRTY · BRUTAL) ========== */
 section.guarantees-dirty,
 section.guarantees-dirty:nth-of-type(even){
@@ -1729,13 +1932,126 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 6 · CASES ============= -->
-<section>
+<!-- ============= 6 · CASES (Dirty · Baulig-Pattern) ============= -->
+<section class="cases-dirty">
   <div class="wrap">
     <div class="eyebrow">Cases</div>
-    <h2>Was wir gebaut haben.</h2>
-    <p class="section-sub">Echte Brands, echte Builds. Mehr Detail im Strategy-Audit-Call.</p>
+    <h2>Echte Brands. Echte <em>Bauarbeit.</em></h2>
+    <p class="section-sub">Keine Vorher-Nachher-Märchen, keine erfundenen ROAS-Zahlen. Was wir tatsächlich gebaut haben — Problem, Ziel, Lösung.</p>
 
+    <!-- Case 1 · HEARO -->
+    <article class="case-card-dirty">
+      <div class="case-stamp-dirty">Live · Premium-Audio</div>
+      <div class="case-grid-dirty">
+        <div class="case-story">
+          <span class="case-meta-label">// dtc-brand</span>
+          <div class="case-name-row">
+            <h3 class="case-name">Hearo</h3>
+            <img src="/assets/images/logos/hearo.png" alt="Hearo" class="case-logo-mini">
+          </div>
+
+          <div class="case-block">
+            <div class="case-label">Problem</div>
+            <p>Premium-Audio-Brand mit Standard-Theme, kein Brand-System, keine Differenzierung im Audiophilen-Segment. Der Founder wollte etwas bauen, das visuell und narrativ aus dem Markt heraussticht — kein "noch ein Shopify-Shop".</p>
+          </div>
+          <div class="case-block">
+            <div class="case-label">Ziel</div>
+            <p>Premium-DTC-Brand mit Custom-Architektur — eindeutige Brand-Doctrine, Voice-Guidelines, hochkonvertierender Shop ab Tag 1.</p>
+          </div>
+          <div class="case-block">
+            <div class="case-label">Lösung</div>
+            <p>Custom Shopify-Theme von Grund auf, Brand-Doctrine + Voice-Guidelines, <strong>10+ wiederverwendbare Sections</strong>, Multi-Section-PDP-Architektur. Alles aus einer Hand, ohne Fremdteam-Übergabe.</p>
+          </div>
+        </div>
+
+        <div class="case-side">
+          <div class="case-visual">
+            <span class="case-visual-tag">Live</span>
+            <span class="case-visual-placeholder">Screenshot folgt</span>
+          </div>
+
+          <div class="case-stats-dirty">
+            <div class="case-stat-dirty">
+              <div class="case-stat-num-dirty">10<span class="accent">+</span></div>
+              <div class="case-stat-label-dirty">Custom Sections</div>
+            </div>
+            <div class="case-stat-dirty">
+              <div class="case-stat-num-dirty">1</div>
+              <div class="case-stat-label-dirty">Custom Theme</div>
+            </div>
+          </div>
+
+          <div class="case-quote-dirty">
+            <p>Echte Customer-Quote folgt nach Interview.</p>
+            <div class="case-quote-author">— Founder Hearo</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 2 · BACHGOLD -->
+    <article class="case-card-dirty">
+      <div class="case-stamp-dirty soon">Cutover Mai 2026 · Re-Launch</div>
+      <div class="case-grid-dirty">
+        <div class="case-story">
+          <span class="case-meta-label">// wasserfilter</span>
+          <div class="case-name-row">
+            <h3 class="case-name">Bachgold</h3>
+            <img src="/assets/images/logos/bachgold.png" alt="Bachgold" class="case-logo-mini">
+          </div>
+
+          <div class="case-block">
+            <div class="case-label">Problem</div>
+            <p>Etablierte Wasserfilter-Brand mit veraltetem Standard-Theme, App-Sprawl, kein Bundle-Konzept. Keine Custom-PDPs für die unterschiedlichen Filter-Modelle, Conversion lag deutlich unter Potential.</p>
+          </div>
+          <div class="case-block">
+            <div class="case-label">Ziel</div>
+            <p>Re-Launch mit Bundle-Architektur, individuellen Custom-PDPs für jedes Produkt, conversion-optimierter Storefront. Tech-Stack-Konsolidierung, weg vom App-Sprawl.</p>
+          </div>
+          <div class="case-block">
+            <div class="case-label">Lösung</div>
+            <p><strong>15 Custom-PDPs (generator-driven)</strong>, 14+ wiederverwendbare Sections, idempotenter Section-Generator für künftige Filter-Modelle, Bundle-Master-System für Produktkombinationen.</p>
+          </div>
+        </div>
+
+        <div class="case-side">
+          <div class="case-visual">
+            <span class="case-visual-tag">Mai 2026</span>
+            <span class="case-visual-placeholder">Mockup folgt nach Cutover</span>
+          </div>
+
+          <div class="case-stats-dirty">
+            <div class="case-stat-dirty">
+              <div class="case-stat-num-dirty">15</div>
+              <div class="case-stat-label-dirty">Custom-PDPs</div>
+            </div>
+            <div class="case-stat-dirty">
+              <div class="case-stat-num-dirty">14<span class="accent">+</span></div>
+              <div class="case-stat-label-dirty">Sections</div>
+            </div>
+          </div>
+
+          <div class="case-quote-dirty">
+            <p>Echte Quote + Conversion-Vergleich folgt nach Cutover.</p>
+            <div class="case-quote-author">— Founder Bachgold</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="cases-cta-row">
+      <a href="/audit/" class="btn-primary">
+        Strategy Audit anfragen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="cases-trust-mini">5+ DTC-Brands transformed · Hearo · Bachgold · Wake Performance · Reerect</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= LEGACY VID-FEED (versteckt — wird später als alternative Variante reaktiviert) ============= -->
+<section style="display:none">
+  <div class="wrap">
     <div class="vid-feed-wrap">
       <div class="vid-feed" id="vidFeed">
 
