@@ -285,23 +285,6 @@ header.site-header .wrap{
   content:"";position:absolute;bottom:0;left:0;right:0;
   height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
 }
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;color:var(--accent);
-  text-transform:uppercase;letter-spacing:.2em;
-  margin-bottom:28px;
-  padding:7px 14px;background:rgba(255,107,61,.12);
-  border-radius:100px;border:1px solid rgba(255,107,61,.3);
-}
-.hero-eyebrow::before{
-  content:"";width:6px;height:6px;border-radius:50%;
-  background:var(--accent);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.6;transform:scale(.8)}
-}
 .hero h1{
   font-size:62px;font-weight:800;
   letter-spacing:-.028em;line-height:1.05;
@@ -999,7 +982,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 1 · HERO ============= -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
     <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
     <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
     <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
