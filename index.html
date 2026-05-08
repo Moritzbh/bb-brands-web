@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Wir verwandeln wachsende DTC-Brands in AI-native Marktführer. Brand Systems. Conversion Infrastructure. Operational Scale.">
+<title>BB Brands · AI-native Growth Infrastructure für DTC-Brands</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-alt:#fafaf7;
+  --bg-card:#ffffff;
+  --bg-elev:#f5f5f0;
+  --bg-input:#fafaf7;
+  --text:#0a0a0a;
+  --text-2:#3d3d3a;
+  --text-3:#787872;
+  --text-4:#b8b8b3;
+  --line:#e8e8e3;
+  --line-strong:#d0d0cb;
+  --accent:#ff6b3d;
+  --accent-bg:#fff4ee;
+  --accent-hover:#e85a2c;
+  --green:#16a34a;
+  --green-bg:#ecfdf5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.wrap{padding:0 20px}}
+
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ========== NAV ========== */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.logo{
+  font-weight:800;font-size:17px;letter-spacing:-.01em;
+  color:var(--text);display:flex;align-items:center;gap:8px;
+}
+.logo-mark{
+  width:26px;height:26px;background:var(--accent);
+  border-radius:6px;display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:13px;
+  box-shadow:0 2px 6px rgba(255,107,61,.25);
+  letter-spacing:-.01em;
+}
+.nav-cta{
+  background:var(--accent);color:#fff;
+  padding:9px 18px;border-radius:6px;
+  font-size:13px;font-weight:700;
+  transition:all .2s ease;
+  letter-spacing:-.005em;
+  box-shadow:0 2px 8px rgba(255,107,61,.2);
+}
+.nav-cta:hover{
+  background:var(--accent-hover);text-decoration:none;
+  transform:translateY(-1px);
+  box-shadow:0 4px 14px rgba(255,107,61,.3);
+}
+.nav-links{
+  display:flex;gap:28px;font-size:14px;
+}
+.nav-links a{
+  color:var(--text-2);font-weight:500;
+  text-decoration:none;
+  transition:color .15s ease;
+  letter-spacing:-.005em;
+}
+.nav-links a:hover{color:var(--text);text-decoration:none}
+.nav-links a.active{color:var(--accent);font-weight:600}
+@media (max-width:780px){
+  .nav-links{display:none}
+}
+
+/* ========== HERO ========== */
+.hero{
+  padding:140px 0 100px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;top:-300px;right:-200px;
+  width:720px;height:720px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,61,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;
+  height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.18em;
+  margin-bottom:28px;
+  padding:7px 14px;background:var(--accent-bg);
+  border-radius:100px;border:1px solid rgba(255,107,61,.2);
+}
+.hero-eyebrow::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.6;transform:scale(.8)}
+}
+.hero h1{
+  font-size:62px;font-weight:800;
+  letter-spacing:-.028em;line-height:1.05;
+  margin-bottom:24px;max-width:980px;
+}
+.hero h1 em{
+  font-style:normal;color:var(--accent);
+}
+.hero .sub{
+  font-size:22px;color:var(--text);
+  max-width:680px;line-height:1.45;margin-bottom:14px;
+  font-weight:600;letter-spacing:-.005em;
+}
+.hero .sub-tertiary{
+  font-size:15px;color:var(--text-3);
+  max-width:620px;line-height:1.6;margin-bottom:38px;
+}
+.hero .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--accent);color:#fff;
+  padding:16px 28px;border-radius:8px;
+  font-weight:700;font-size:15px;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:all .2s ease;
+  border:none;cursor:pointer;font-family:inherit;
+  box-shadow:0 4px 14px rgba(255,107,61,.25);
+  letter-spacing:-.005em;
+}
+.btn-primary:hover{
+  background:var(--accent-hover);text-decoration:none;
+  transform:translateY(-1px);
+  box-shadow:0 8px 22px rgba(255,107,61,.35);
+}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary svg{width:14px;height:14px;transition:transform .2s ease}
+.btn-primary:hover svg{transform:translateX(2px)}
+.btn-ghost{
+  color:var(--text-2);font-size:14px;font-weight:600;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-ghost:hover{color:var(--text);text-decoration:none}
+
+@media (max-width:780px){
+  .hero{padding:60px 0 50px}
+  .hero h1{font-size:38px;line-height:1.1}
+  .hero .sub{font-size:18px}
+  .hero .sub-tertiary{font-size:14px}
+}
+
+/* ========== SECTION GENERIC ========== */
+section{padding:112px 0;border-top:1px solid var(--line)}
+section:nth-of-type(even){background:var(--bg-alt)}
+.eyebrow{
+  display:inline-block;
+  font-size:11px;font-weight:700;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.2em;
+  margin-bottom:20px;
+}
+h2{
+  font-size:46px;font-weight:800;
+  letter-spacing:-.022em;line-height:1.08;
+  margin-bottom:20px;max-width:820px;
+}
+h2 em{color:var(--accent);font-style:normal}
+.section-sub{
+  font-size:18px;color:var(--text-2);
+  max-width:660px;margin-bottom:56px;line-height:1.55;
+}
+@media (max-width:780px){
+  section{padding:72px 0}
+  h2{font-size:30px}
+  .section-sub{font-size:15px;margin-bottom:36px}
+}
+
+/* ========== TRUST STRIP ========== */
+.trust{padding:48px 0;border-top:1px solid var(--line)}
+.trust-label{
+  font-size:11px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
+  margin-bottom:24px;
+}
+.trust-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:32px;align-items:center;
+}
+.trust-logo{
+  height:38px;display:flex;align-items:center;justify-content:center;
+  font-size:19px;font-weight:700;letter-spacing:-.02em;
+  color:var(--text-3);
+  transition:color .2s ease;
+  padding:0 8px;
+  filter:grayscale(100%);
+  opacity:.6;
+}
+.trust-logo:hover{color:var(--text);opacity:1}
+.trust-logo.h{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.trust-logo.b{font-weight:800;letter-spacing:-.03em}
+.trust-logo.w{font-weight:300;letter-spacing:.18em;text-transform:uppercase;font-size:13px}
+.trust-logo.f{font-weight:600;letter-spacing:-.01em}
+.trust-logo.r{font-family:"SF Mono",Menlo,monospace;font-weight:700;letter-spacing:-.02em;font-size:14px}
+@media (max-width:780px){
+  .trust-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+}
+
+/* ========== SERVICES ========== */
+.services-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+}
+.svc-card{
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:14px;padding:32px 30px;
+  transition:all .2s ease;
+  position:relative;
+}
+.svc-card:hover{border-color:var(--line-strong);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.05)}
+.svc-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--accent-bg);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;
+}
+.svc-icon svg{width:22px;height:22px;color:var(--accent)}
+.svc-num{
+  font-size:11px;color:var(--text-3);font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;
+}
+.svc-card h3{
+  font-size:24px;font-weight:700;letter-spacing:-.01em;
+  margin-bottom:10px;
+}
+.svc-card p{color:var(--text-2);font-size:15px;line-height:1.55;margin-bottom:14px}
+.svc-card ul{list-style:none;padding:0;margin:0}
+.svc-card li{
+  font-size:13.5px;color:var(--text-3);
+  padding:5px 0;display:flex;gap:8px;align-items:flex-start;
+}
+.svc-card li::before{
+  content:"→";color:var(--accent);flex-shrink:0;font-weight:700;
+}
+.svc-after{
+  margin-top:36px;padding:18px 22px;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:10px;color:var(--text-2);font-size:14.5px;
+  text-align:center;
+}
+.svc-after strong{color:var(--text)}
+@media (max-width:780px){.services-grid{grid-template-columns:1fr}}
+
+/* ========== COMPARE TABLE ========== */
+.compare-table{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+.compare-table-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--bg-elev);
+  border-bottom:1px solid var(--line);
+}
+.compare-table-head div{
+  padding:16px 24px;
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;
+  color:var(--text-3);
+}
+.compare-table-head div:first-child{border-right:1px solid var(--line)}
+.compare-table-head div:last-child{color:var(--text)}
+
+.compare-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line);
+}
+.compare-row .old,
+.compare-row .new{
+  padding:20px 24px;font-size:15px;line-height:1.5;
+  display:flex;align-items:center;gap:14px;
+}
+.compare-row .old{
+  border-right:1px solid var(--line);
+  color:var(--text-3);
+  text-decoration:line-through;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--text-4);
+}
+.compare-row .new{
+  color:var(--text);font-weight:600;
+  letter-spacing:-.005em;
+}
+.compare-row .new::before{
+  content:"";flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--green-bg);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 7.2l2.5 2.5L11 4.3' stroke='%2322c55e' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;background-position:center;
+}
+@media (max-width:780px){
+  .compare-table-head{display:none}
+  .compare-row{grid-template-columns:1fr}
+  .compare-row .old{
+    border-right:none;border-bottom:1px solid var(--line);
+  }
+  .compare-row .old,.compare-row .new{padding:14px 18px;font-size:14px}
+}
+
+/* ========== CASES ========== */
+.cases-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+}
+.case-card{
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;
+  transition:all .25s ease;
+  cursor:pointer;
+}
+.case-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-3px);
+  box-shadow:0 16px 40px rgba(0,0,0,.06);
+}
+.case-mockup{
+  height:260px;
+  background:linear-gradient(135deg,var(--bg-elev) 0%,var(--bg-alt) 100%);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  padding:14px 14px 0;
+}
+.case-mockup-browser{
+  background:var(--bg-card);
+  border-radius:8px 8px 0 0;
+  height:100%;
+  border:1px solid var(--line);
+  border-bottom:none;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+.case-mockup-bar{
+  display:flex;align-items:center;gap:6px;
+  padding:9px 12px;border-bottom:1px solid var(--line);
+}
+.case-mockup-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
+.case-mockup-bar .url{
+  flex:1;margin-left:10px;
+  background:var(--bg-input);
+  border-radius:4px;
+  padding:3px 10px;
+  font-family:"SF Mono",Menlo,monospace;font-size:11px;
+  color:var(--text-3);
+  display:flex;align-items:center;gap:6px;
+}
+.case-mockup-bar .url::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  border:1.5px solid var(--text-3);border-top-color:transparent;
+  flex-shrink:0;
+}
+.case-mockup-content{
+  flex:1;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-alt) 100%);
+  position:relative;
+}
+.case-mockup-content::before{
+  content:"";position:absolute;top:18px;left:18px;right:18px;
+  height:14px;background:var(--line);border-radius:4px;
+}
+.case-mockup-content::after{
+  content:"";position:absolute;top:42px;left:18px;width:140px;
+  height:8px;background:var(--line);border-radius:4px;
+}
+.case-mockup-label{
+  font-size:11px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.14em;font-weight:700;
+  z-index:1;text-align:center;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:8px 14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.case-mockup-label strong{
+  display:block;color:var(--text);font-size:20px;
+  letter-spacing:-.01em;text-transform:none;font-weight:700;
+  margin-bottom:2px;
+}
+.case-body{padding:26px 28px}
+.case-meta{
+  font-size:12px;color:var(--accent);font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;
+}
+.case-card h3{font-size:22px;font-weight:700;margin-bottom:14px;letter-spacing:-.01em}
+.case-card ul{list-style:none;padding:0;margin:0 0 14px}
+.case-card li{
+  font-size:14px;color:var(--text-2);padding:4px 0;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.case-card li::before{content:"·";color:var(--accent);flex-shrink:0;font-weight:900}
+.case-status{
+  display:inline-block;
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:4px 10px;border-radius:4px;
+  background:var(--green-bg);color:var(--green);
+}
+.case-status.soon{background:var(--accent-bg);color:var(--accent)}
+.cases-disclaimer{
+  margin-top:32px;text-align:center;
+  font-size:13px;color:var(--text-3);font-style:italic;
+}
+@media (max-width:780px){.cases-grid{grid-template-columns:1fr}}
+
+/* ========== GUARANTEES ========== */
+.guar-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.guar-card{
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:14px;padding:32px 28px;
+  position:relative;
+  transition:all .2s ease;
+}
+.guar-card:hover{border-color:var(--line-strong);box-shadow:0 8px 28px rgba(0,0,0,.05)}
+.guar-icon{
+  width:44px;height:44px;border-radius:11px;
+  background:var(--accent-bg);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;
+}
+.guar-icon svg{width:22px;height:22px;color:var(--accent)}
+.guar-num{
+  font-size:11px;color:var(--text-3);font-weight:700;
+  text-transform:uppercase;letter-spacing:.16em;margin-bottom:6px;
+}
+.guar-card h3{
+  font-size:19px;font-weight:700;
+  letter-spacing:-.01em;margin-bottom:14px;
+}
+.guar-card .promise{
+  color:var(--text);font-size:14.5px;
+  line-height:1.55;margin-bottom:14px;font-style:italic;
+  border-left:2px solid var(--accent);padding-left:14px;
+}
+.guar-card p.why{
+  color:var(--text-3);font-size:13px;line-height:1.55;
+}
+@media (max-width:780px){.guar-grid{grid-template-columns:1fr}}
+
+/* ========== FOUNDER + PROCESS ========== */
+.founder-block{
+  display:grid;grid-template-columns:1fr 1.5fr;gap:48px;align-items:start;
+}
+.founder-photo{
+  aspect-ratio:1;border-radius:16px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#1a1a1a 0%,#0a0a0a 50%,#ff6b3d 100%);
+  display:flex;align-items:flex-end;
+  padding:28px;
+  box-shadow:0 12px 40px rgba(0,0,0,.08);
+}
+.founder-photo::before{
+  content:"M";
+  position:absolute;top:-40px;right:-30px;
+  font-size:340px;font-weight:900;
+  color:rgba(255,255,255,.06);
+  letter-spacing:-.05em;line-height:1;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+.founder-photo::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 100%,rgba(255,107,61,.4) 0%,transparent 60%);
+}
+.founder-photo-label{
+  position:relative;z-index:2;
+  font-size:11px;color:rgba(255,255,255,.65);
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
+}
+.founder-photo-label strong{
+  display:block;font-size:18px;color:#fff;
+  text-transform:none;letter-spacing:-.005em;font-weight:600;margin-bottom:2px;
+  font-style:italic;
+}
+.founder-info h3{
+  font-size:28px;font-weight:700;letter-spacing:-.015em;
+  margin-bottom:6px;
+}
+.founder-info .role{
+  font-size:14px;color:var(--accent);font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px;
+}
+.founder-info p.bio{
+  color:var(--text-2);font-size:16px;line-height:1.6;
+  font-style:italic;border-left:3px solid var(--accent);padding-left:18px;
+  margin-bottom:32px;
+}
+.process{margin-top:0}
+.process h4{
+  font-size:13px;font-weight:700;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:16px;
+}
+.process-step{
+  display:grid;grid-template-columns:36px 1fr;gap:16px;
+  padding:18px 0;border-top:1px solid var(--line);
+  position:relative;
+}
+.process-step:first-of-type{border-top:none;padding-top:8px}
+.process-step .num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;
+  box-shadow:0 2px 6px rgba(255,107,61,.2);
+}
+.process-step .body strong{
+  display:block;font-size:15px;color:var(--text);
+  margin-bottom:3px;font-weight:700;
+}
+.process-step .body span{
+  font-size:13.5px;color:var(--text-3);line-height:1.5;
+}
+@media (max-width:780px){
+  .founder-block{grid-template-columns:1fr;gap:28px}
+  .founder-photo{max-width:240px}
+}
+
+/* ========== APPLY ========== */
+.apply-section{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%);
+}
+.apply-block{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:48px 48px;
+  max-width:720px;
+  box-shadow:0 4px 28px rgba(0,0,0,.04);
+}
+.apply-block h2{margin-bottom:14px}
+.apply-block .section-sub{margin-bottom:36px}
+form .field{margin-bottom:18px}
+form label{
+  display:block;font-size:12px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:700;
+  color:var(--text-3);margin-bottom:6px;
+}
+form input,form select,form textarea{
+  width:100%;
+  background:var(--bg-input);
+  border:1px solid var(--line);
+  border-radius:8px;color:var(--text);
+  font-family:inherit;font-size:15px;
+  padding:13px 14px;
+  transition:border-color .15s ease;
+}
+form input:focus,form select:focus,form textarea:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,107,61,.12);
+}
+form input::placeholder,form textarea::placeholder{color:var(--text-4)}
+form textarea{resize:vertical;min-height:90px}
+form select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%23787872' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:40px;
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.apply-submit{
+  width:100%;background:var(--accent);color:#fff;
+  padding:17px 24px;border-radius:8px;
+  font-weight:700;font-size:15px;
+  border:none;cursor:pointer;font-family:inherit;
+  transition:all .2s ease;margin-top:6px;
+  box-shadow:0 4px 14px rgba(255,107,61,.25);
+  letter-spacing:-.005em;
+}
+.apply-submit:hover{
+  background:var(--accent-hover);
+  transform:translateY(-1px);
+  box-shadow:0 8px 22px rgba(255,107,61,.35);
+}
+.apply-meta{
+  font-size:12.5px;color:var(--text-3);
+  margin-top:18px;text-align:center;
+}
+@media (max-width:780px){
+  .apply-block{padding:30px 24px}
+  .field-row{grid-template-columns:1fr}
+}
+
+/* ========== FAQ ========== */
+.faq-grid{
+  border-top:1px solid var(--line);
+  max-width:820px;
+}
+.faq-item{
+  border-bottom:1px solid var(--line);
+}
+.faq-q{
+  cursor:pointer;
+  padding:24px 0;
+  font-size:17px;font-weight:600;
+  color:var(--text);letter-spacing:-.005em;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  list-style:none;
+  transition:color .15s ease;
+}
+.faq-q:hover{color:var(--accent)}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{
+  content:"+";
+  font-size:22px;font-weight:300;color:var(--text-3);
+  transition:transform .2s ease;
+  flex-shrink:0;
+}
+.faq-item[open] .faq-q::after{
+  content:"−";color:var(--accent);
+}
+.faq-a{
+  color:var(--text-2);font-size:15.5px;line-height:1.65;
+  padding:0 0 26px;max-width:680px;
+}
+@media (max-width:780px){
+  .faq-q{font-size:15px;padding:20px 0}
+  .faq-a{font-size:14.5px;padding-bottom:20px}
+}
+
+/* ========== FOOTER ========== */
+footer{
+  padding:48px 0 32px;border-top:1px solid var(--line);
+  background:var(--bg);
+}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.footer-brand{font-size:13px;color:var(--text-3)}
+.footer-links{display:flex;gap:22px;font-size:13px}
+.footer-links a{color:var(--text-3)}
+.footer-links a:hover{color:var(--text-2);text-decoration:none}
+@media (max-width:780px){
+  footer .wrap{flex-direction:column;align-items:flex-start;text-align:left}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============= NAV ============= -->
+<nav>
+  <div class="wrap">
+    <a href="/" class="logo">
+      <span class="logo-mark">B</span>
+      BB Brands
+    </a>
+    <div class="nav-links">
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="/founder-os/">Founder OS</a>
+    </div>
+    <a href="/audit/" class="nav-cta">Audit anfragen</a>
+  </div>
+</nav>
+
+<!-- ============= 1 · HERO ============= -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow">AI-native Growth Infrastructure</div>
+    <h1>Wir verwandeln wachsende DTC-Brands in <em>AI-native Marktführer.</em></h1>
+    <p class="sub">Brand Systems. Conversion Infrastructure. Operational Scale.</p>
+    <p class="sub-tertiary">Ein Founder als operativer Partner. Ein kuratiertes A-Player-Netzwerk. Keine Agentur-Loops.</p>
+    <div class="cta-row">
+      <a href="/audit/" class="btn-primary">
+        Strategy Audit anfragen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#was" class="btn-ghost">Was wir machen ↓</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============= 2 · TRUST STRIP ============= -->
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-label">Brands, die wir gebaut haben</div>
+    <div class="trust-grid">
+      <div class="trust-logo h">hearo</div>
+      <div class="trust-logo b">Bachgold</div>
+      <div class="trust-logo w">Wake Performance</div>
+      <div class="trust-logo f">Face Evolution</div>
+      <div class="trust-logo r">RDY4TAKEOFF</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= 3 · WAS WIR MACHEN ============= -->
+<section id="was">
+  <div class="wrap">
+    <div class="eyebrow">Was wir machen</div>
+    <h2>Vier Bausteine.<br>Einzeln oder kombiniert.</h2>
+    <p class="section-sub">Keine Phasen-Pakete, keine Pflicht-Bundles. Du buchst, was du brauchst — wir verzahnen es.</p>
+
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        </div>
+        <div class="svc-num">01 — Brand</div>
+        <h3>Positioning &amp; Voice</h3>
+        <p>Markenstrategie, mit der dein ganzes Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework.</p>
+        <ul>
+          <li>Tiefen-Audit: Brand, Markt, Wettbewerb</li>
+          <li>Positioning-Doctrine</li>
+          <li>Voice-Guidelines + Visual-Direction</li>
+          <li>Messaging-Framework (Hero, Sub, Trigger)</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h2M8 17h6"/></svg>
+        </div>
+        <div class="svc-num">02 — Shopify-Store</div>
+        <h3>Custom-Theme statt Theme-Adaption</h3>
+        <p>Hochkonvertierender, skalierbarer Shop. Bundle- und PDP-Architektur, die mit dir wächst.</p>
+        <ul>
+          <li>Custom-Theme mit wiederverwendbaren Sections</li>
+          <li>5–15 Custom-PDPs (generator-driven)</li>
+          <li>Bundle- &amp; Cross-Sell-Architektur</li>
+          <li>Mobile-Speed + Tech-Stack-Konsolidierung</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+        </div>
+        <div class="svc-num">03 — Conversion + Email</div>
+        <h3>Profit-per-Visitor maximieren</h3>
+        <p>A/B-Test-Framework + Email-Lifecycle. Damit jeder Besucher mehr zurücklässt.</p>
+        <ul>
+          <li>Conversion-Audit auf 12+ Hebeln</li>
+          <li>Klaviyo-Lifecycle (Welcome bis Win-Back)</li>
+          <li>SMS- + Loyalty-Integration (wenn passend)</li>
+          <li>Profit-per-Visitor Tracking</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="svc-num">04 — AI Operations</div>
+        <h3>Workflows, die Zeit sparen</h3>
+        <p>Drei Tiefen-Stufen — Light, Medium, Heavy. Im Discovery wählen wir, was zu deinem Reifegrad passt.</p>
+        <ul>
+          <li>Light: KI-Leitfaden + 10–15 Custom-Prompts</li>
+          <li>Medium: 3–5 No-Code-Workflows (n8n / Make)</li>
+          <li>Heavy: Custom AI-Agents + eigene Dashboards</li>
+          <li>Schulung + Übergabe inklusive</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-after">
+      <strong>Bridge oder Bundle?</strong> &nbsp;&nbsp;Im Strategy Audit klären wir gemeinsam, was Sinn macht — Bridge-Paket (Launch / Re-Brand), einzelne Phase, oder Full Transformation.
+    </div>
+  </div>
+</section>
+
+<!-- ============= 4 · VERGLEICH ============= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Klassische Agentur vs. Growth Partner</div>
+    <h2>Strukturelle Vorteile,<br>nicht <em>härter arbeiten.</em></h2>
+    <p class="section-sub">Sechs Unterschiede, die große Agenturen nicht einfach replizieren können — weil sie strukturell anders gebaut sind.</p>
+
+    <div class="compare-table">
+      <div class="compare-table-head">
+        <div>Klassische Agentur</div>
+        <div>BB Brands · Growth Partner</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Verkauft Stunden &amp; Deliverables</div>
+        <div class="new">Verkauft Geschwindigkeit, Systeme &amp; Outcomes</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Komplexe Hierarchien &amp; Account Manager</div>
+        <div class="new">Direkter Founder-Zugang</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Silo-Denken — nur Ads oder nur Design</div>
+        <div class="new">Brand + Shop + Operations in einem Team</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Manuelle, langsame Prozesse</div>
+        <div class="new">AI-native Effizienz &amp; schnelle Iteration</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Fokus auf Vanity-Metriken (Reichweite, CTR)</div>
+        <div class="new">Fokus auf Business Impact (Profit, LTV, CAC)</div>
+      </div>
+      <div class="compare-row">
+        <div class="old">Fest angestelltes B-Player-Team</div>
+        <div class="new">Kuratiertes A-Player-Netzwerk pro Projekt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 5 · CASES ============= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Cases</div>
+    <h2>Was wir gebaut haben.</h2>
+    <p class="section-sub">Echte Brands, echte Builds. Mehr Detail im Strategy-Audit-Call.</p>
+
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-mockup">
+          <div class="case-mockup-browser">
+            <div class="case-mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">hearo.de</span>
+            </div>
+            <div class="case-mockup-content">
+              <div class="case-mockup-label">
+                <strong>Hearo</strong>
+                Screenshot folgt
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">Premium-Audio · DTC</div>
+          <h3>Hearo</h3>
+          <ul>
+            <li>Custom Shopify-Theme</li>
+            <li>Multi-Section-Architektur</li>
+            <li>Brand-Doctrine + Voice-Guidelines</li>
+            <li>Bundle-Konzept &amp; PDP-System</li>
+          </ul>
+          <span class="case-status">Live</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-mockup">
+          <div class="case-mockup-browser">
+            <div class="case-mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">bachgold.de</span>
+            </div>
+            <div class="case-mockup-content">
+              <div class="case-mockup-label">
+                <strong>Bachgold</strong>
+                Screenshot folgt
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">Wasserfilter · Re-Launch</div>
+          <h3>Bachgold</h3>
+          <ul>
+            <li>15 Custom-PDPs (generator-driven)</li>
+            <li>14+ wiederverwendbare Sections</li>
+            <li>Idempotenter Section-Generator</li>
+            <li>Bundle-Master-Architektur</li>
+          </ul>
+          <span class="case-status soon">Cutover Mai 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="cases-disclaimer">Wir nehmen pro Quartal max. 3–4 neue Projekte. Kein Skalierungs-Hype.</p>
+  </div>
+</section>
+
+<!-- ============= 5 · GARANTIEN ============= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Drei Garantien</div>
+    <h2>Wir kippen das Risiko<br>vom Käufer auf <em>uns.</em></h2>
+    <p class="section-sub">Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: Qualität, Output, Geschwindigkeit. Schriftlich.</p>
+
+    <div class="guar-grid">
+      <div class="guar-card">
+        <div class="guar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="guar-num">Garantie 01</div>
+        <h3>No-Bloat</h3>
+        <p class="promise">"Keine Übergaben. Keine Juniors. Keine endlosen Loops. Nur direkte Umsetzung durch A-Player."</p>
+        <p class="why">Adressiert den größten Schmerz mit klassischen Agenturen: Qualitätsverlust durch Hierarchien. Du arbeitest direkt mit dem Founder + kuratiertem Spezialisten-Team.</p>
+      </div>
+
+      <div class="guar-card">
+        <div class="guar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="guar-num">Garantie 02</div>
+        <h3>AI Efficiency</h3>
+        <p class="promise">"Jedes System, das wir bauen, muss messbar Zeit sparen oder Umsatz erhöhen."</p>
+        <p class="why">Wenn ein AI-Workflow nach 4 Wochen weder Stunden spart noch Umsatz hebt — bauen wir um. Auf unsere Kosten.</p>
+      </div>
+
+      <div class="guar-card">
+        <div class="guar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <div class="guar-num">Garantie 03</div>
+        <h3>Speed-to-Market</h3>
+        <p class="promise">"Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht."</p>
+        <p class="why">Im Proposal steht ein konkretes Launch-Datum. Wenn es an uns liegt, dass es kippt, geht die Mehr-Zeit auf unsere Kappe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 6 · FOUNDER + PROCESS ============= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Wer du arbeitest mit</div>
+    <h2>Direkter Draht.<br>Kein Account-Manager-Layer.</h2>
+    <p class="section-sub">Du redest mit dem Founder. Vom ersten Call bis zum Launch.</p>
+
+    <div class="founder-block">
+      <div class="founder-photo">
+        <div class="founder-photo-label">
+          <strong>"Founder-zu-Founder."</strong>
+          Foto-Platzhalter · echtes Bild folgt
+        </div>
+      </div>
+      <div class="founder-info">
+        <h3>Moritz Bohmbach</h3>
+        <div class="role">Founder · BB Brands</div>
+        <p class="bio">"Brand-Strategie, Shopify-Architektur, AI-Workflows. Wir launchen Stores, in die ich mein eigenes Geld stecken würde — sonst bauen wir sie nicht."</p>
+
+        <div class="process">
+          <h4>Wie es konkret läuft</h4>
+          <div class="process-step">
+            <div class="num">1</div>
+            <div class="body">
+              <strong>Apply</strong>
+              <span>Kurzes Formular unten. Wir antworten innerhalb 1 Werktag.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="num">2</div>
+            <div class="body">
+              <strong>Strategy Audit · 2 Wochen</strong>
+              <span>Diagnose deines Setups + Transformations-Plan. Hier entscheiden wir gemeinsam, was du brauchst.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="num">3</div>
+            <div class="body">
+              <strong>Build · 4–18 Wochen</strong>
+              <span>Bridge-Paket, einzelne Phase, oder Full Transformation. Plus 30 Tage Hypercare nach Launch.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 7 · APPLY ============= -->
+<section class="apply-section" id="apply">
+  <div class="wrap">
+    <div class="apply-block">
+      <div class="eyebrow">Strategy Audit</div>
+      <h2>Bereit für die <em>Transformation?</em></h2>
+      <p class="section-sub">Wenn dein Setup zu uns passt, melden wir uns innerhalb 1 Werktag.</p>
+
+      <form action="mailto:info@bb-brands.de" method="post" enctype="text/plain">
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="brand">Brand-URL</label>
+          <input type="url" id="brand" name="brand" placeholder="https:// — optional, wenn schon vorhanden">
+        </div>
+
+        <div class="field">
+          <label for="stage">Brand-Stage</label>
+          <select id="stage" name="stage" required>
+            <option value="">Bitte wählen…</option>
+            <option value="pre-launch">Pre-Launch</option>
+            <option value="0-500">0 – 500k Jahresumsatz</option>
+            <option value="500-2m">500k – 2 Mio €</option>
+            <option value="2m-plus">2 Mio €+</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="pain">Was ist gerade dein größter Engpass?</label>
+          <textarea id="pain" name="pain" maxlength="280" placeholder="Max. 280 Zeichen — ein Satz reicht." required></textarea>
+        </div>
+
+        <button type="submit" class="apply-submit">Strategy Audit anfragen →</button>
+        <p class="apply-meta">Antwort innerhalb 1 Werktag. Pro Quartal nur 3–4 neue Projekte.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 9 · FAQ ============= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Häufige Fragen</div>
+    <h2>Was DTC-Founder typischerweise fragen.</h2>
+
+    <div class="faq-grid" style="margin-top:32px">
+      <details class="faq-item">
+        <summary class="faq-q">Wie lange dauert ein Projekt?</summary>
+        <div class="faq-a">Strategy Audit: 2 Wochen. Build danach 4–18 Wochen, je nachdem ob du einen einzelnen Baustein, das Bridge-Paket oder die Full Transformation buchst. Konkrete Timeline steht im Proposal.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Was kostet das?</summary>
+        <div class="faq-a">Wir kommunizieren keine Preise auf der Website, weil Scope, Komplexität und Stage stark variieren. Im Strategy Audit bekommst du eine konkrete Investment-Range für deinen Fall — Bridge-Paket, einzelne Phase oder Full Transformation.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Habt ihr ein festes Team oder Freelancer?</summary>
+        <div class="faq-a">Beides nicht im klassischen Sinn. Founder-Lead (Moritz) plus ein kuratiertes A-Player-Netzwerk, das pro Projekt zusammengestellt wird. Heißt: niedrigere Fixkosten als Festteam, höhere Skill-Tiefe als Freelance-Pool, gleiche Qualität ohne Junior-Layer.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Können wir auch nur einen Baustein buchen?</summary>
+        <div class="faq-a">Ja. Brand, Shop, Conversion oder AI Operations sind einzeln buchbar. Sie greifen ineinander, wenn du sie kombinierst — aber das ist keine Pflicht. Bridge-Paket ist der schmalste Einstieg, Full Transformation der maximale.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Garantiert ihr ROAS oder Umsatz?</summary>
+        <div class="faq-a">Nein. ROAS hängt von Produkt, Markt, Saison, Ad-Budget und Faktoren ab, die wir nicht kontrollieren — solche Garantien sind unseriös. Was wir garantieren: <strong>No-Bloat</strong> (keine Übergaben, keine Juniors), <strong>AI Efficiency</strong> (Systeme müssen messbar Zeit sparen oder Umsatz heben) und <strong>Speed-to-Market</strong> (Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht).</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Sind wir zu klein oder zu groß für euch?</summary>
+        <div class="faq-a">Bridge-Tier ist für Pre-Launch und Brands unter 2 Mio € Jahresumsatz. Premium-Tier für 2–15 Mio €. Im Strategy Audit schauen wir, ob die Stage zur Methode passt — wenn nicht, sagen wir das ehrlich und empfehlen Alternativen.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Was passiert nach dem Launch?</summary>
+        <div class="faq-a">30 Tage Hypercare sind in jedem Build inkludiert — direkter Draht, Bug-Fixes, Team-Schulung. Danach optional ein Retainer für laufende Optimierung, A/B-Tests und Workflow-Iterationen.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="/ueber/">Über</a>
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
