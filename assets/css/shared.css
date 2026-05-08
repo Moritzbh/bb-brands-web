@@ -34,10 +34,15 @@ body{
 }
 
 /* ========== AKZENT-SCHRIFT ==========
-   Aktuell: Manrope (Google Fonts, fallback)
+   Aktuell: Saira Condensed (Google Fonts) — humanistic condensed light
    Sobald Dax OT Files in /assets/fonts/ liegen: @font-face uncommenten
 */
 /*
+@font-face{
+  font-family:'Dax OT';
+  src:url('/assets/fonts/DaxOT-Light.woff2') format('woff2');
+  font-weight:300;font-style:normal;font-display:swap;
+}
 @font-face{
   font-family:'Dax OT';
   src:url('/assets/fonts/DaxOT-Regular.woff2') format('woff2');
@@ -53,10 +58,14 @@ body{
 h1 em,
 h2 em,
 h3 em,
-.stat-num{
-  font-family:'Dax OT','Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
-  letter-spacing:-.018em;
+.stat-num,
+.brand-name{
+  font-family:'Dax OT','Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:400;
+  letter-spacing:.005em;
 }
+.stat-num{font-weight:600}
+h1 em,h2 em{font-weight:500}
 .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
 @media (max-width:780px){.wrap{padding:0 20px}}
 
