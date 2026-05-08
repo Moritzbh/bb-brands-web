@@ -374,33 +374,54 @@ h2 em{color:var(--accent);font-style:normal}
   .section-sub{font-size:15px;margin-bottom:36px}
 }
 
-/* ========== TRUST STRIP ========== */
-.trust{padding:48px 0;border-top:1px solid var(--line)}
+/* ========== TRUST STRIP (Dark · Marquee) ========== */
+.trust{
+  background:#0a0a0a;
+  padding:54px 0;
+  border-top:none;
+  position:relative;
+  z-index:1;
+}
+.trust .wrap{
+  display:flex;align-items:center;gap:40px;
+}
 .trust-label{
-  font-size:11px;color:var(--text-3);
-  text-transform:uppercase;letter-spacing:.18em;font-weight:700;
-  margin-bottom:24px;
+  flex-shrink:0;width:180px;
+  font-size:13px;font-weight:600;
+  color:rgba(255,255,255,.7);
+  line-height:1.45;letter-spacing:-.005em;
 }
-.trust-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:32px;align-items:center;
+.trust-marquee{
+  flex:1;overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
 }
-.trust-logo{
-  height:38px;display:flex;align-items:center;justify-content:center;
-  font-size:19px;font-weight:700;letter-spacing:-.02em;
-  color:var(--text-3);
-  transition:color .2s ease;
-  padding:0 8px;
-  filter:grayscale(100%);
-  opacity:.6;
+.trust-track{
+  display:flex;align-items:center;gap:80px;
+  animation:trust-scroll 30s linear infinite;
+  width:max-content;
 }
-.trust-logo:hover{color:var(--text);opacity:1}
-.trust-logo.h{font-family:Georgia,"Times New Roman",serif;font-style:italic}
-.trust-logo.b{font-weight:800;letter-spacing:-.03em}
-.trust-logo.w{font-weight:300;letter-spacing:.18em;text-transform:uppercase;font-size:13px}
-.trust-logo.f{font-weight:600;letter-spacing:-.01em}
-.trust-logo.r{font-family:"SF Mono",Menlo,monospace;font-weight:700;letter-spacing:-.02em;font-size:14px}
+.trust-track:hover{animation-play-state:paused}
+.trust-track img{
+  height:34px;width:auto;display:block;
+  filter:brightness(0) invert(1);
+  opacity:.85;
+  transition:opacity .2s ease;
+  flex-shrink:0;
+}
+.trust-track img:hover{opacity:1}
+.trust-track img.no-invert{filter:none}
+@keyframes trust-scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(-50% - 40px))}
+}
 @media (max-width:780px){
-  .trust-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .trust{padding:36px 0}
+  .trust .wrap{flex-direction:column;align-items:flex-start;gap:18px}
+  .trust-label{width:auto;font-size:12px}
+  .trust-marquee{width:100%}
+  .trust-track{gap:48px;animation-duration:22s}
+  .trust-track img{height:26px}
 }
 
 /* ========== SERVICES ========== */
@@ -1004,16 +1025,22 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </header>
 
-<!-- ============= 2 · TRUST STRIP ============= -->
+<!-- ============= 2 · TRUST STRIP (Dark · Marquee) ============= -->
 <div class="trust">
   <div class="wrap">
-    <div class="trust-label">Brands, die wir gebaut haben</div>
-    <div class="trust-grid">
-      <div class="trust-logo h">hearo</div>
-      <div class="trust-logo b">Bachgold</div>
-      <div class="trust-logo w">Wake Performance</div>
-      <div class="trust-logo f">Face Evolution</div>
-      <div class="trust-logo r">RDY4TAKEOFF</div>
+    <div class="trust-label">Partner, die uns<br>bereits vertrauen:</div>
+    <div class="trust-marquee">
+      <div class="trust-track">
+        <img src="/assets/images/logos/hearo.png" alt="Hearo" loading="lazy">
+        <img src="/assets/images/logos/bachgold.png" alt="Bachgold" class="no-invert" loading="lazy">
+        <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance" loading="lazy">
+        <img src="/assets/images/logos/reerect.png" alt="Reerect" loading="lazy">
+        <!-- Duplikate für seamless loop -->
+        <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true" class="no-invert" loading="lazy">
+        <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true" loading="lazy">
+      </div>
     </div>
   </div>
 </div>
@@ -1142,7 +1169,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <div class="stat">
         <div class="stat-num">5<span class="plus">+</span></div>
         <div class="stat-label">DTC-Brands transformed</div>
-        <p class="stat-desc">Hearo · Bachgold · Wake · Face Evolution · RDY4TAKEOFF — Custom-Architektur statt Theme-Adaption.</p>
+        <p class="stat-desc">Hearo · Bachgold · Wake Performance · Reerect — Custom-Architektur statt Theme-Adaption.</p>
       </div>
       <div class="stat">
         <div class="stat-num">1<span class="plus">–20M</span></div>
