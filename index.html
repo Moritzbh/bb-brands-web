@@ -878,110 +878,158 @@ section.stats-banner:nth-of-type(even){
   .stat-num{font-size:64px}
 }
 
-/* ========== CASES ========== */
-.cases-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+/* ========== CASES — VIDEO SWIPE FEED (Hochformat 9:16) ========== */
+.vid-feed-wrap{position:relative;margin-top:4px}
+.vid-feed{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
 }
-.case-card{
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:14px;overflow:hidden;
-  transition:all .25s ease;
-  cursor:pointer;
-}
-.case-card:hover{
-  border-color:var(--line-strong);
-  transform:translateY(-3px);
-  box-shadow:0 16px 40px rgba(0,0,0,.06);
-}
-.case-mockup{
-  height:260px;
-  background:linear-gradient(135deg,var(--bg-elev) 0%,var(--bg-alt) 100%);
-  position:relative;overflow:hidden;
-  border-bottom:1px solid var(--line);
-  padding:14px 14px 0;
-}
-.case-mockup-browser{
-  background:var(--bg-card);
-  border-radius:8px 8px 0 0;
-  height:100%;
-  border:1px solid var(--line);
-  border-bottom:none;
-  display:flex;flex-direction:column;
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-.case-mockup-bar{
-  display:flex;align-items:center;gap:6px;
-  padding:9px 12px;border-bottom:1px solid var(--line);
-}
-.case-mockup-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
-.case-mockup-bar .url{
-  flex:1;margin-left:10px;
-  background:var(--bg-input);
-  border-radius:4px;
-  padding:3px 10px;
-  font-family:"SF Mono",Menlo,monospace;font-size:11px;
-  color:var(--text-3);
-  display:flex;align-items:center;gap:6px;
-}
-.case-mockup-bar .url::before{
-  content:"";width:8px;height:8px;border-radius:50%;
-  border:1.5px solid var(--text-3);border-top-color:transparent;
-  flex-shrink:0;
-}
-.case-mockup-content{
-  flex:1;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-alt) 100%);
+.vid-card{
   position:relative;
-}
-.case-mockup-content::before{
-  content:"";position:absolute;top:18px;left:18px;right:18px;
-  height:14px;background:var(--line);border-radius:4px;
-}
-.case-mockup-content::after{
-  content:"";position:absolute;top:42px;left:18px;width:140px;
-  height:8px;background:var(--line);border-radius:4px;
-}
-.case-mockup-label{
-  font-size:11px;color:var(--text-3);
-  text-transform:uppercase;letter-spacing:.14em;font-weight:700;
-  z-index:1;text-align:center;
-  background:var(--bg-card);
+  aspect-ratio:9/16;
+  border-radius:14px;
+  overflow:hidden;
+  background:#0a0a0a;
   border:1px solid var(--line);
-  border-radius:6px;
-  padding:8px 14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.case-mockup-label strong{
-  display:block;color:var(--text);font-size:20px;
-  letter-spacing:-.01em;text-transform:none;font-weight:700;
-  margin-bottom:2px;
+.vid-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  border-color:var(--line-strong);
 }
-.case-body{padding:26px 28px}
-.case-meta{
-  font-size:12px;color:var(--accent);font-weight:700;
-  text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;
+.vid-card video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  z-index:0;
 }
-.case-card h3{font-size:22px;font-weight:700;margin-bottom:14px;letter-spacing:-.01em}
-.case-card ul{list-style:none;padding:0;margin:0 0 14px}
-.case-card li{
-  font-size:14px;color:var(--text-2);padding:4px 0;
-  display:flex;gap:8px;align-items:flex-start;
+.vid-poster{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
 }
-.case-card li::before{content:"·";color:var(--accent);flex-shrink:0;font-weight:900}
-.case-status{
-  display:inline-block;
-  font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.1em;
-  padding:4px 10px;border-radius:4px;
-  background:var(--green-bg);color:var(--green);
+.vid-poster::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(3,5,198,.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,107,61,.18) 0%, transparent 55%);
+  filter:blur(8px);
 }
-.case-status.soon{background:var(--accent-bg);color:var(--accent)}
+.vid-poster-text{
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+  z-index:1;text-align:center;color:rgba(245,245,240,.45);
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+}
+.vid-overlay{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:14px 16px 18px;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 58%, rgba(0,0,0,.85) 100%);
+}
+.vid-tag{
+  align-self:flex-start;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  padding:5px 10px;border-radius:99px;
+  backdrop-filter:blur(6px);
+}
+.vid-tag.soon{background:rgba(255,107,61,.2);color:#ffb491;border-color:rgba(255,107,61,.4)}
+.vid-tag.live{background:rgba(22,163,74,.22);color:#7fe6a0;border-color:rgba(22,163,74,.45)}
+.vid-tag.placeholder{background:rgba(255,255,255,.08);color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.14)}
+.vid-vertical{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);margin-bottom:4px;
+}
+.vid-name{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:26px;font-weight:700;letter-spacing:-.012em;line-height:1.05;
+  color:#fff;
+}
+.vid-play{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:54px;height:54px;border-radius:50%;
+  background:rgba(255,107,61,.95);
+  display:flex;align-items:center;justify-content:center;
+  z-index:3;
+  box-shadow:0 0 0 6px rgba(255,107,61,.16), 0 0 0 14px rgba(255,107,61,.06);
+  transition:transform .25s ease, opacity .2s ease;
+  pointer-events:none;
+}
+.vid-card[data-playing="true"] .vid-play{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+.vid-play svg{width:20px;height:20px;color:#fff;margin-left:3px}
+.vid-card:hover .vid-play{transform:translate(-50%,-50%) scale(1.06)}
+
+/* Notes-Drawer */
+.vid-notes{
+  margin-top:36px;padding:18px 22px;
+  background:var(--bg-alt);
+  border:1px dashed var(--line-strong);
+  border-radius:10px;
+  max-width:780px;
+}
+.vid-notes summary{
+  cursor:pointer;font-weight:700;color:var(--text);
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  list-style:none;
+  display:flex;align-items:center;gap:10px;
+}
+.vid-notes summary::-webkit-details-marker{display:none}
+.vid-notes summary::after{
+  content:"+";font-size:20px;font-weight:300;color:var(--accent);
+  margin-left:auto;line-height:1;
+}
+.vid-notes[open] summary::after{content:"−"}
+.vid-notes-body{
+  margin-top:16px;
+  font-size:13.5px;color:var(--text-2);line-height:1.65;
+}
+.vid-notes-body code{
+  background:var(--bg-card);
+  padding:1px 6px;border-radius:3px;
+  font-family:"SF Mono",Menlo,monospace;
+  font-size:12px;color:var(--blue);
+  border:1px solid var(--line);
+}
+.vid-notes-body ol{padding-left:18px;margin:10px 0}
+.vid-notes-body li{margin-bottom:8px}
+.vid-notes-body pre{
+  background:#0a0a0a;color:#f5f1e8;
+  padding:14px 16px;border-radius:8px;
+  font-family:"SF Mono",Menlo,monospace;font-size:12px;line-height:1.55;
+  overflow-x:auto;margin:10px 0;
+}
+
 .cases-disclaimer{
-  margin-top:32px;text-align:center;
+  margin-top:24px;text-align:center;
   font-size:13px;color:var(--text-3);font-style:italic;
 }
-@media (max-width:780px){.cases-grid{grid-template-columns:1fr}}
+
+@media (max-width:980px){
+  .vid-feed{
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:62%;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:14px;
+    scroll-padding-left:0;
+    scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;
+  }
+  .vid-card{scroll-snap-align:start}
+  .vid-feed::-webkit-scrollbar{height:6px}
+  .vid-feed::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:3px}
+}
+@media (max-width:780px){
+  .vid-feed{grid-auto-columns:72%;gap:12px}
+  .vid-name{font-size:22px}
+}
 
 /* ========== GUARANTEES ========== */
 .guar-grid{
@@ -1604,65 +1652,102 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <h2>Was wir gebaut haben.</h2>
     <p class="section-sub">Echte Brands, echte Builds. Mehr Detail im Strategy-Audit-Call.</p>
 
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-mockup">
-          <div class="case-mockup-browser">
-            <div class="case-mockup-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">hearo.de</span>
-            </div>
-            <div class="case-mockup-content">
-              <div class="case-mockup-label">
-                <strong>Hearo</strong>
-                Screenshot folgt
-              </div>
+    <div class="vid-feed-wrap">
+      <div class="vid-feed" id="vidFeed">
+
+        <article class="vid-card" data-status="placeholder" data-brand="hearo" tabindex="0">
+          <!-- Sobald Video da: <video src="/assets/videos/hearo.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/hearo-poster.jpg"></video> -->
+          <div class="vid-poster">
+            <div class="vid-poster-text">Video folgt</div>
+          </div>
+          <div class="vid-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vid-overlay">
+            <span class="vid-tag live">Live</span>
+            <div>
+              <div class="vid-vertical">Premium-Audio · DTC</div>
+              <div class="vid-name">Hearo</div>
             </div>
           </div>
-        </div>
-        <div class="case-body">
-          <div class="case-meta">Premium-Audio · DTC</div>
-          <h3>Hearo</h3>
-          <ul>
-            <li>Custom Shopify-Theme</li>
-            <li>Multi-Section-Architektur</li>
-            <li>Brand-Doctrine + Voice-Guidelines</li>
-            <li>Bundle-Konzept &amp; PDP-System</li>
-          </ul>
-          <span class="case-status">Live</span>
-        </div>
+        </article>
+
+        <article class="vid-card" data-status="placeholder" data-brand="bachgold" tabindex="0">
+          <!-- Sobald Video da: <video src="/assets/videos/bachgold.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/bachgold-poster.jpg"></video> -->
+          <div class="vid-poster">
+            <div class="vid-poster-text">Video folgt</div>
+          </div>
+          <div class="vid-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vid-overlay">
+            <span class="vid-tag soon">Cutover Mai 2026</span>
+            <div>
+              <div class="vid-vertical">Wasserfilter · Re-Launch</div>
+              <div class="vid-name">Bachgold</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="vid-card" data-status="placeholder" data-brand="wake-performance" tabindex="0">
+          <!-- Sobald Video da: <video src="/assets/videos/wake.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/wake-poster.jpg"></video> -->
+          <div class="vid-poster">
+            <div class="vid-poster-text">Video folgt</div>
+          </div>
+          <div class="vid-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vid-overlay">
+            <span class="vid-tag soon">Pre-Launch</span>
+            <div>
+              <div class="vid-vertical">Sportswear · DTC</div>
+              <div class="vid-name">Wake Performance</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="vid-card" data-status="placeholder" data-brand="face-evolution" tabindex="0">
+          <!-- Sobald Video da: <video src="/assets/videos/face-evolution.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/face-evolution-poster.jpg"></video> -->
+          <div class="vid-poster">
+            <div class="vid-poster-text">Video folgt</div>
+          </div>
+          <div class="vid-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vid-overlay">
+            <span class="vid-tag placeholder">Coming Soon</span>
+            <div>
+              <div class="vid-vertical">Beauty-Tech · DTC</div>
+              <div class="vid-name">Face Evolution</div>
+            </div>
+          </div>
+        </article>
+
       </div>
 
-      <div class="case-card">
-        <div class="case-mockup">
-          <div class="case-mockup-browser">
-            <div class="case-mockup-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">bachgold.de</span>
-            </div>
-            <div class="case-mockup-content">
-              <div class="case-mockup-label">
-                <strong>Bachgold</strong>
-                Screenshot folgt
-              </div>
-            </div>
-          </div>
+      <details class="vid-notes">
+        <summary>So fügst du Videos hinzu</summary>
+        <div class="vid-notes-body">
+          <ol>
+            <li>Video als <code>.mp4</code> exportieren — H.264, max 5 MB, 9:16 Hochformat, 6–12 s Loop. Stumm geschnitten (Browser-Auto-Play geht nur muted).</li>
+            <li>Datei ablegen unter <code>/assets/videos/{brand}.mp4</code> (z. B. <code>hearo.mp4</code>).</li>
+            <li>Optional: Poster-Frame als <code>{brand}-poster.jpg</code> in den gleichen Ordner — wird gezeigt bevor das Video lädt.</li>
+            <li>Im HTML in der jeweiligen <code>.vid-card</code> den <code>&lt;div class="vid-poster"&gt;…&lt;/div&gt;</code>-Block ersetzen durch:</li>
+          </ol>
+<pre>&lt;video src="/assets/videos/hearo.mp4"
+       muted loop playsinline
+       preload="metadata"
+       poster="/assets/videos/hearo-poster.jpg"&gt;&lt;/video&gt;</pre>
+          <ol start="5">
+            <li>Auf der gleichen <code>&lt;article class="vid-card"&gt;</code> das Attribut <code>data-status="placeholder"</code> entfernen.</li>
+            <li>Optional: <code>&lt;span class="vid-tag placeholder"&gt;Coming Soon&lt;/span&gt;</code> auf <code>live</code> oder <code>soon</code> umstellen, je nach Status.</li>
+          </ol>
+          <p style="margin-top:14px"><strong>Verhalten nach Embed:</strong> Hover startet Auto-Play (muted). Klick toggelt Play/Pause. Mobile: Klick startet Video, zweiter Klick pausiert.</p>
         </div>
-        <div class="case-body">
-          <div class="case-meta">Wasserfilter · Re-Launch</div>
-          <h3>Bachgold</h3>
-          <ul>
-            <li>15 Custom-PDPs (generator-driven)</li>
-            <li>14+ wiederverwendbare Sections</li>
-            <li>Idempotenter Section-Generator</li>
-            <li>Bundle-Master-Architektur</li>
-          </ul>
-          <span class="case-status soon">Cutover Mai 2026</span>
-        </div>
-      </div>
+      </details>
+
+      <p class="cases-disclaimer">Wir nehmen pro Quartal max. 3–4 neue Projekte. Kein Skalierungs-Hype.</p>
     </div>
-
-    <p class="cases-disclaimer">Wir nehmen pro Quartal max. 3–4 neue Projekte. Kein Skalierungs-Hype.</p>
   </div>
 </section>
 
@@ -1903,6 +1988,45 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
   document.querySelectorAll('[data-reveal]').forEach(function(el){
     io.observe(el);
+  });
+})();
+</script>
+
+<script>
+/* === CASES: Video-Feed Hover-Autoplay + Click-Toggle === */
+(function(){
+  var feed = document.getElementById('vidFeed');
+  if(!feed) return;
+  var cards = feed.querySelectorAll('.vid-card');
+  var canHover = window.matchMedia('(hover: hover)').matches;
+
+  cards.forEach(function(card){
+    var v = card.querySelector('video');
+    if(!v) return; // Placeholder ohne Video — skip
+
+    // Click-Toggle (für Mobile + Desktop)
+    card.addEventListener('click', function(){
+      if(v.paused){
+        v.play().catch(function(){});
+        card.dataset.playing = 'true';
+      } else {
+        v.pause();
+        card.dataset.playing = 'false';
+      }
+    });
+
+    // Hover-Autoplay nur auf Geräten mit echtem Hover (Desktop)
+    if(canHover){
+      card.addEventListener('mouseenter', function(){
+        v.play().catch(function(){});
+        card.dataset.playing = 'true';
+      });
+      card.addEventListener('mouseleave', function(){
+        v.pause();
+        v.currentTime = 0;
+        card.dataset.playing = 'false';
+      });
+    }
   });
 })();
 </script>
