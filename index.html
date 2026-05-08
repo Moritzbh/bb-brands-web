@@ -9,7 +9,7 @@
 <!-- Akzent-Schrift: Saira Condensed (Fallback bis Dax OT eingebunden) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Brand-Tokens — Quelle: Marke/Brand/brand-guidelines.html */
@@ -898,41 +898,125 @@ section.stats-banner:nth-of-type(even){
 }
 @media (max-width:780px){.cases-grid{grid-template-columns:1fr}}
 
-/* ========== GUARANTEES ========== */
+/* ========== GUARANTEES (DIRTY · BRUTAL) ========== */
+section.guarantees-dirty,
+section.guarantees-dirty:nth-of-type(even){
+  background:var(--cream);
+  position:relative;
+  padding:140px 0;
+  overflow:hidden;
+}
+/* Paper-grain Noise-Overlay */
+section.guarantees-dirty::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.18;mix-blend-mode:multiply;
+}
+.guarantees-dirty .wrap{position:relative;z-index:1}
+.guarantees-dirty .eyebrow{color:var(--accent);font-weight:700}
+.guarantees-dirty h2{color:var(--black)}
+.guarantees-dirty h2 em{
+  font-style:normal;color:var(--blue);
+  background:none;padding:0;border-radius:0;
+  position:relative;
+}
+.guarantees-dirty h2 em::after{
+  content:"";position:absolute;left:-2px;right:-2px;bottom:6%;
+  height:38%;background:rgba(255,107,61,.45);
+  z-index:-1;transform:rotate(-1deg);
+}
+.guarantees-dirty .section-sub{color:var(--text-2)}
+
 .guar-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:36px;margin-top:28px;
+  perspective:1000px;
 }
 .guar-card{
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:14px;padding:32px 28px;
+  background:#fff;
+  border:3px solid var(--black);
+  border-radius:0;
+  padding:30px 28px 28px;
   position:relative;
-  transition:all .2s ease;
+  box-shadow:6px 6px 0 var(--black);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
 }
-.guar-card:hover{border-color:var(--line-strong);box-shadow:0 8px 28px rgba(0,0,0,.05)}
+.guar-card:nth-child(1){transform:rotate(-1.4deg)}
+.guar-card:nth-child(2){transform:rotate(.8deg);margin-top:18px}
+.guar-card:nth-child(3){transform:rotate(-.5deg)}
+.guar-card:hover{
+  transform:rotate(0) translateY(-3px);
+  box-shadow:9px 9px 0 var(--black);
+}
+
+/* Stempel oben links — schief, orange, hart geboradert */
+.guar-stamp{
+  position:absolute;top:-14px;left:18px;
+  background:var(--accent);color:#fff;
+  font-family:var(--display);font-weight:800;
+  padding:5px 12px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;
+  transform:rotate(-2.5deg);
+  border:2px solid var(--black);
+  box-shadow:2px 2px 0 var(--black);
+  z-index:2;
+}
+
+/* Hand-drawn check Icon — Kreis mit Border, leicht rotiert */
 .guar-icon{
-  width:44px;height:44px;border-radius:11px;
-  background:var(--accent-bg);
+  width:46px;height:46px;border-radius:50%;
+  background:var(--accent);
+  border:2.5px solid var(--black);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;
+  margin:14px 0 22px;
+  transform:rotate(-3deg);
+  box-shadow:3px 3px 0 var(--black);
 }
-.guar-icon svg{width:22px;height:22px;color:var(--blue)}
-.guar-num{
-  font-size:11px;color:var(--text-3);font-weight:700;
-  text-transform:uppercase;letter-spacing:.16em;margin-bottom:6px;
-}
+.guar-icon svg{width:22px;height:22px;color:#fff;stroke-width:3.5}
+
 .guar-card h3{
-  font-size:19px;font-weight:700;
-  letter-spacing:-.01em;margin-bottom:14px;
+  font-family:var(--display);
+  font-weight:800;font-size:30px;
+  letter-spacing:-.02em;line-height:1;
+  margin-bottom:16px;
+  text-transform:uppercase;
+  color:var(--black);
 }
+
+/* Promise — Handschrift, Quote-Mark in Orange */
 .guar-card .promise{
-  color:var(--text);font-size:14.5px;
-  line-height:1.55;margin-bottom:14px;font-style:italic;
-  border-left:2px solid var(--accent);padding-left:14px;
+  font-family:'Caveat',cursive;
+  font-weight:600;font-size:24px;line-height:1.25;
+  color:var(--black);
+  margin:0 0 18px;
+  border:none;padding:0 0 0 18px;
+  position:relative;font-style:normal;
 }
+.guar-card .promise::before{
+  content:"\201C";color:var(--accent);
+  font-family:var(--display);font-weight:800;font-size:42px;
+  position:absolute;left:-6px;top:-14px;line-height:1;
+}
+
+/* Why — Mono · gestrichelter Top-Border */
 .guar-card p.why{
-  color:var(--text-3);font-size:13px;line-height:1.55;
+  font-family:'Space Mono',monospace;
+  font-size:11.5px;color:var(--text-2);line-height:1.55;
+  border-top:1px dashed var(--black);
+  padding-top:14px;margin-top:auto;
 }
-@media (max-width:780px){.guar-grid{grid-template-columns:1fr}}
+.guar-card p.why::before{
+  content:"// ";color:var(--accent);font-weight:700;
+}
+
+@media (max-width:780px){
+  section.guarantees-dirty{padding:80px 0}
+  .guar-grid{grid-template-columns:1fr;gap:32px}
+  .guar-card{transform:none !important;margin:0 !important}
+  .guar-card:hover{transform:translateY(-3px) !important}
+  .guar-card h3{font-size:24px}
+  .guar-card .promise{font-size:21px}
+}
 
 /* ========== FOUNDER + PROCESS ========== */
 .founder-block{
@@ -1528,8 +1612,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 5 · GARANTIEN ============= -->
-<section>
+<!-- ============= 5 · GARANTIEN (Dirty / Brutalist) ============= -->
+<section class="guarantees-dirty">
   <div class="wrap">
     <div class="eyebrow">Drei Garantien</div>
     <h2>Wir kippen das Risiko<br>vom Käufer auf <em>uns.</em></h2>
@@ -1537,32 +1621,32 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
     <div class="guar-grid">
       <div class="guar-card">
+        <div class="guar-stamp">Garantie 01</div>
         <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
         </div>
-        <div class="guar-num">Garantie 01</div>
         <h3>No-Bloat</h3>
-        <p class="promise">"Keine Übergaben. Keine Juniors. Keine endlosen Loops. Nur direkte Umsetzung durch A-Player."</p>
-        <p class="why">Adressiert den größten Schmerz mit klassischen Agenturen: Qualitätsverlust durch Hierarchien. Du arbeitest direkt mit dem Founder + kuratiertem Spezialisten-Team.</p>
+        <p class="promise">Keine Übergaben. Keine Juniors. Keine endlosen Loops. Nur direkte Umsetzung durch A-Player.</p>
+        <p class="why">Adressiert den größten Schmerz mit klassischen Agenturen: Qualitätsverlust durch Hierarchien. Du arbeitest direkt mit dem Founder + Spezialisten-Team.</p>
       </div>
 
       <div class="guar-card">
+        <div class="guar-stamp">Garantie 02</div>
         <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
         </div>
-        <div class="guar-num">Garantie 02</div>
         <h3>AI Efficiency</h3>
-        <p class="promise">"Jedes System, das wir bauen, muss messbar Zeit sparen oder Umsatz erhöhen."</p>
+        <p class="promise">Jedes System, das wir bauen, muss messbar Zeit sparen oder Umsatz erhöhen.</p>
         <p class="why">Wenn ein AI-Workflow nach 4 Wochen weder Stunden spart noch Umsatz hebt — bauen wir um. Auf unsere Kosten.</p>
       </div>
 
       <div class="guar-card">
+        <div class="guar-stamp">Garantie 03</div>
         <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
         </div>
-        <div class="guar-num">Garantie 03</div>
         <h3>Speed-to-Market</h3>
-        <p class="promise">"Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht."</p>
+        <p class="promise">Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht.</p>
         <p class="why">Im Proposal steht ein konkretes Launch-Datum. Wenn es an uns liegt, dass es kippt, geht die Mehr-Zeit auf unsere Kappe.</p>
       </div>
     </div>
