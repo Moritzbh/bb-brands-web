@@ -289,9 +289,18 @@ header.site-header .wrap{
   .header-cta{display:none}
 }
 @media (max-width:780px){
-  header.site-header .wrap{height:64px;gap:14px}
-  .brand-logo{font-size:26px}
+  /* Baulig-Style Mobile-Header: Hamburger LINKS, Logo daneben */
+  header.site-header .wrap{
+    display:flex !important;
+    grid-template-columns:none;
+    align-items:center;
+    justify-content:flex-start;
+    height:64px;gap:10px;
+  }
+  .header-actions{order:1;gap:0;padding:0;flex:0 0 auto}
+  .brand-logo{order:2;font-size:26px;flex:1 1 auto}
   .header-search{display:none}
+  .mobile-toggle{margin-left:-6px}
 }
 
 /* ========== MOBILE MENU ========== */
@@ -869,22 +878,49 @@ section#was:nth-of-type(even){
 section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
 section#was .section-sub{margin-bottom:32px;font-size:16px}
 
-/* ========== "PHASEN-DETAIL" Sticky-Rail-Stage · pure white, kein Trenn-Strich ========== */
-section#bausteine,
-section#bausteine:nth-of-type(even){
-  padding:24px 0 96px;
-  background:#fff !important;
-  border-top:none !important;
-  border-bottom:none !important;
+/* ========== Phasen-Collapsible (klein per default, expandable) ========== */
+.bs-collapsible{margin-top:12px}
+.bs-collapsible-toggle{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;gap:18px;
+  padding:18px 24px;
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;
+  max-width:880px;margin:0 auto;
+  transition:border-color .2s ease, background .2s ease;
 }
-section#bausteine h2{font-size:38px;margin-bottom:12px;line-height:1.05}
-section#bausteine .section-sub{margin-bottom:32px;font-size:16px}
+.bs-collapsible-toggle::-webkit-details-marker{display:none}
+.bs-collapsible-toggle:hover{border-color:var(--blue);background:var(--blue-tint)}
+.bs-toggle-text-wrap{
+  display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;
+}
+.bs-toggle-text{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:16px;font-weight:700;letter-spacing:-.005em;
+  color:var(--text);
+}
+.bs-toggle-meta{
+  font-size:12.5px;color:var(--text-3);letter-spacing:.02em;
+}
+.bs-toggle-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.bs-toggle-icon svg{width:16px;height:16px}
+.bs-collapsible[open] .bs-toggle-icon{transform:rotate(180deg)}
+.bs-collapsible[open] .bs-collapsible-toggle{
+  border-color:var(--blue);background:var(--blue-tint);
+  margin-bottom:32px;
+}
 
 @media (max-width:780px){
   section#was{padding:48px 0 36px}
   section#was h2{font-size:28px}
-  section#bausteine{padding:16px 0 72px}
-  section#bausteine h2{font-size:28px}
+  .bs-collapsible-toggle{padding:14px 18px;gap:14px}
+  .bs-toggle-text{font-size:14.5px}
+  .bs-toggle-meta{font-size:11.5px}
 }
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
@@ -2478,15 +2514,18 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="svc-video-meta">Aufnahme diese Woche · Embed folgt</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============= 3b · PHASEN-DETAIL (Sticky-Rail-Stage) ============= -->
-<section id="bausteine">
-  <div class="wrap">
-    <div class="eyebrow">Wie wir liefern</div>
-    <h2>Phase für Phase erklärt.</h2>
-    <p class="section-sub">Jede Phase steht für sich. Du buchst, was zu deinem Reifegrad passt — wir verzahnen es.</p>
+    <!-- Phasen-Detail: kollabiert by default, optional auf Klick öffnen -->
+    <details class="bs-collapsible" id="bsCollapsible">
+      <summary class="bs-collapsible-toggle">
+        <span class="bs-toggle-text-wrap">
+          <span class="bs-toggle-text">Phasen im Detail nachlesen</span>
+          <span class="bs-toggle-meta">4 Phasen · was du in jeder bekommst</span>
+        </span>
+        <span class="bs-toggle-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+      </summary>
 
     <div class="bs-stage" id="bsStage">
       <div class="bs-rail">
@@ -2571,6 +2610,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </div>
       </div>
     </div>
+    </details>
   </div>
 </section>
 
@@ -3504,6 +3544,31 @@ window.addEventListener('load', function(){
   window.addEventListener('load', function(){ setTimeout(init, 120); });
   window.addEventListener('resize', function(){ moveIndicator(current); });
   setTimeout(init, 250);
+
+  // Re-init wenn das Collapsible aufklappt (Indicator/Char-Reveal brauchen Layout)
+  var collapsible = document.getElementById('bsCollapsible');
+  if(collapsible){
+    collapsible.addEventListener('toggle', function(){
+      if(collapsible.open){
+        setTimeout(function(){
+          moveIndicator(current);
+          // Re-trigger char-reveal auf aktivem step
+          var activeStep = stage.querySelector('.bs-step.active');
+          if(activeStep){
+            activeStep.classList.remove('active');
+            void activeStep.offsetWidth;
+            activeStep.classList.add('active');
+          }
+          startRing(current);
+          startAutoTimer();
+        }, 60);
+      } else {
+        stopAutoTimer();
+      }
+    });
+    // Auto-Timer pausieren solange noch geschlossen
+    if(!collapsible.open) stopAutoTimer();
+  }
 })();
 </script>
 
