@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Impressum · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Default-Header (shared.css) auf Legal-Pages aus, wir bauen Baulig-Header */
+.top-bar,header.site-header,.mobile-menu{display:none !important}
+
+.bb-topnav{
+  background:#000;color:#fff;
+  position:sticky;top:0;z-index:60;
+}
+.bb-topnav .wrap{
+  max-width:1340px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:90px;gap:32px;
+}
+.bb-topnav-brand{
+  display:inline-flex;align-items:baseline;
+  color:#fff;text-decoration:none;
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-weight:300;font-size:36px;line-height:1;
+  letter-spacing:-.01em;white-space:nowrap;
+}
+.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.9}
+.bb-topnav-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px}
+.bb-topnav-items{display:flex;gap:36px;font-size:14px;font-weight:600;letter-spacing:.02em;font-family:'Inter',sans-serif}
+.bb-topnav-items a{color:rgba(255,255,255,.85);transition:color .15s;text-decoration:none}
+.bb-topnav-items a:hover{color:var(--accent);text-decoration:none}
+.bb-topnav-cta{
+  background:transparent;color:#fff;border:1px solid #fff;
+  padding:14px 28px;font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.02em;
+  transition:all .2s;text-decoration:none;white-space:nowrap;
+}
+.bb-topnav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+.bb-topnav-mobile{display:none;width:40px;height:40px;background:transparent;border:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.bb-topnav-mobile span{display:block;width:22px;height:2px;background:#fff;border-radius:1px}
+.bb-topnav-mobile-menu{display:none;background:#000;border-top:1px solid rgba(255,255,255,.1);padding:24px 32px;flex-direction:column;gap:18px}
+.bb-topnav-mobile-menu.open{display:flex}
+.bb-topnav-mobile-menu a{color:#fff;font-size:16px;font-weight:600;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none;font-family:'Inter',sans-serif}
+.bb-topnav-mobile-menu a:last-child{border-bottom:none}
+.bb-topnav-mobile-menu a.cta{background:var(--accent);text-align:center;border:none;padding:14px;margin-top:8px}
+@media (max-width:980px){.bb-topnav-items,.bb-topnav-cta{display:none}.bb-topnav-mobile{display:flex}}
+@media (max-width:780px){.bb-topnav .wrap{height:64px;padding:0 20px}.bb-topnav-brand{font-size:28px}}
+
+/* ============= LEGAL CONTENT ============= */
+.legal-page{
+  background:#fff;color:var(--text);
+  font-family:var(--body);
+  min-height:80vh;
+}
+.legal-container{
+  max-width:780px;margin:0 auto;
+  padding:88px 32px 96px;
+}
+.legal-back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--body);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-3);text-decoration:none;
+  margin-bottom:48px;
+}
+.legal-back:hover{color:var(--accent);text-decoration:none}
+
+.legal-page h1{
+  font-family:var(--display);font-size:clamp(40px,5vw,64px);
+  font-weight:700;line-height:1;letter-spacing:-.02em;
+  color:var(--blue);margin-bottom:48px;
+}
+.legal-page h2{
+  font-family:var(--display);font-size:24px;font-weight:700;
+  letter-spacing:-.01em;color:var(--blue);
+  margin-top:48px;margin-bottom:14px;
+}
+.legal-page h3{
+  font-family:var(--display);font-size:18px;font-weight:600;
+  color:var(--text);margin-top:28px;margin-bottom:10px;
+}
+.legal-page p,.legal-page li{
+  font-size:16px;line-height:1.75;color:var(--text-2);
+  margin-bottom:14px;
+}
+.legal-page ul{padding-left:22px;margin-bottom:14px}
+.legal-page a{color:var(--accent);text-decoration:none;font-weight:500}
+.legal-page a:hover{text-decoration:underline}
+.legal-page strong{color:var(--text);font-weight:700}
+
+@media (max-width:780px){
+  .legal-container{padding:56px 20px 72px}
+  .legal-page h2{font-size:20px;margin-top:36px}
+}
+
+/* Footer (vom shared.css) */
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- BAULIG-STYLE TOP-NAV -->
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="/founder-os/">Founder OS</a>
+    </nav>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="/founder-os/">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="legal-page">
+  <div class="legal-container">
+    <a href="/" class="legal-back">← Zurück zur Startseite</a>
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>
+      BB Brands<br>
+      vertreten durch Moritz Bohmbach<br>
+      Kniggenkamp 40<br>
+      38444 Wolfsburg<br>
+      Deutschland
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: <a href="mailto:info@bb-brands.de">info@bb-brands.de</a><br>
+      Strategy Audit: <a href="/audit/">bb-brands.de / Audit anfragen</a>
+    </p>
+
+    <h2>Umsatzsteuer</h2>
+    <p>Gemäß § 19 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet und ausgewiesen.</p>
+
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>
+      Moritz Bohmbach<br>
+      Kniggenkamp 40<br>
+      38444 Wolfsburg
+    </p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+    <h2>Haftung für Links</h2>
+    <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+    <h2>Urheberrecht</h2>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
