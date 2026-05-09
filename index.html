@@ -594,9 +594,9 @@ h2 em{color:var(--blue);font-style:normal}
 
 /* ========== SERVICES — STICKY-RAIL STAGE (kinetic, Brand-V1) ========== */
 .bs-stage{
-  margin-top:24px;
+  margin-top:8px;
   display:grid;grid-template-columns:240px 1fr;gap:64px;
-  align-items:start;position:relative;min-height:520px;
+  align-items:start;position:relative;min-height:440px;
   perspective:1600px;
 }
 .bs-rail{
@@ -842,12 +842,22 @@ h2 em{color:var(--blue);font-style:normal}
   .bs-step h3 .char{opacity:1;transform:none}
 }
 
+/* ========== "WAS WIR MACHEN" Section · gestrafft ========== */
+section#was{padding:64px 0 80px}
+section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
+section#was .section-sub{margin-bottom:32px;font-size:16px}
+@media (max-width:780px){
+  section#was{padding:48px 0 60px}
+  section#was h2{font-size:28px}
+}
+
 /* ========== FOUNDER-VIDEO (Anker) ========== */
 .svc-video{
-  position:relative;margin:0 0 36px;
+  position:relative;margin:0 auto 28px;
+  max-width:760px;
   border:1px solid var(--line);border-radius:14px;
   background:#0a0a0a;overflow:hidden;
-  aspect-ratio:16/9;
+  aspect-ratio:21/9;
   cursor:pointer;
   transition:border-color .2s ease, transform .2s ease;
 }
