@@ -473,6 +473,33 @@ header.site-header .wrap{
 }
 .hero-specs .spec strong{color:var(--text);font-weight:700}
 
+/* Shopify-Partner-Badge unter Specs */
+.hero-shopify{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:20px;
+  text-decoration:none;
+  opacity:.85;transition:opacity .2s ease;
+}
+.hero-shopify:hover{opacity:1;text-decoration:none}
+.hero-shopify .shop-bag{
+  width:34px;height:38px;flex-shrink:0;
+  position:relative;
+}
+.hero-shopify .shop-bag svg{width:100%;height:100%;display:block}
+.hero-shopify .shop-text{
+  display:inline-flex;align-items:baseline;gap:7px;
+  font-size:22px;line-height:1;
+  letter-spacing:-.02em;
+}
+.hero-shopify .shop-shopify{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:700;color:#0a0a0a;
+}
+.hero-shopify .shop-partners{
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;font-weight:400;color:#0a0a0a;
+}
+
 @media (max-width:980px){
   .hero-grid{grid-template-columns:1fr;gap:40px}
   .hero-portrait{max-width:380px;margin:0 auto;width:100%}
@@ -2220,6 +2247,24 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <span><strong>Kein klarer ROI</strong> = kein Auftrag</span>
           </div>
         </div>
+
+        <!-- Shopify Partner Badge -->
+        <a class="hero-shopify" href="https://www.shopify.com/partners" target="_blank" rel="noopener" aria-label="Offizieller Shopify Partner">
+          <span class="shop-bag" aria-hidden="true">
+            <svg viewBox="0 0 32 36" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shopify-Bag Hauptkörper -->
+              <path d="M27.6 7.1c-.1-.1-.2-.2-.4-.2-.2 0-3.5-.3-3.5-.3s-2.3-2.3-2.6-2.5c-.3-.2-.8-.2-.9-.1-.1 0-.7.2-1.7.5-1-2.8-2.7-4-4.2-4-2 0-3.6 2-4.4 4-1.4.4-2.4.7-2.5.7-1 .3-1.1.3-1.2 1.2C6 7.1 4.5 23 4.5 23l16 3.1L29 23.7s-1.4-15.6-1.4-16.6zM18.7 5.2c-.6.2-1.3.4-2 .6 0-1.1-.2-2.6-.7-3.7 1.5.2 2.3 1.9 2.7 3.1zm-3.4-2.9c.5 1.1.8 2.6.7 3.8-.9.3-1.9.6-2.9.9.6-2 1.6-3.7 2.2-4.7zm-2-.3c-.5.9-1.4 2.7-2 4.6-.8.2-1.6.5-2.3.7C9.6 5 11.5 2.4 13.3 2z" fill="#95BF47"/>
+              <!-- Bag rechte (dunklere) Seite -->
+              <path d="M27.2 6.9c-.2 0-3.5-.3-3.5-.3s-2.3-2.3-2.6-2.5c-.1-.1-.2-.1-.4-.2v22.2L29 23.7s-1.4-15.6-1.4-16.6c-.1-.1-.2-.2-.4-.2z" fill="#5E8E3E"/>
+              <!-- "S"-Letter -->
+              <path d="M19.7 11l-1 3.7s-1.1-.5-2.4-.4c-1.9.1-1.9 1.3-1.9 1.6.1 1.6 4.3 2 4.6 5.8.2 3-1.5 5-4.1 5.2-3.1.2-4.8-1.6-4.8-1.6l.7-2.8s1.7 1.3 3.1 1.2c.9-.1 1.2-.8 1.2-1.3-.1-2.1-3.5-2-3.8-5.5-.2-2.9 1.7-5.9 5.9-6.1 1.6-.1 2.5.2 2.5.2z" fill="#fff"/>
+            </svg>
+          </span>
+          <span class="shop-text">
+            <span class="shop-shopify">shopify</span>
+            <span class="shop-partners">partners</span>
+          </span>
+        </a>
       </div>
 
     </div>
