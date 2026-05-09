@@ -5,7 +5,7 @@
    ============================================ */
 
 /* TOP-NAV (same as cases/wissen/garantien) */
-.top-bar,header.site-header,.mobile-menu{display:none !important}
+header.site-header,.mobile-menu{display:none !important}
 .bb-topnav{background:#000;color:#fff;position:sticky;top:0;z-index:60;font-family:'Montserrat',sans-serif}
 .bb-topnav .wrap{
   display:flex;align-items:center;
