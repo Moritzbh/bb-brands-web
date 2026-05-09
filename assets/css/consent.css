@@ -38,7 +38,7 @@
 .bb-cb-text a{
   color:#FF6B3D;text-decoration:underline;font-weight:600;
 }
-.bb-cb-text a:hover{color:#FFAC3B}
+.bb-cb-text a:hover{color:#E85A2C}
 .bb-cb-toggles{
   display:flex;flex-wrap:wrap;gap:18px 24px;
   margin-top:14px;
