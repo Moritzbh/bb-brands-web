@@ -1837,6 +1837,31 @@ section.guarantees-dirty{
   }
 }
 
+/* ========== TEAM-BANNER-STAGE · Photo-Stack LEFT + Headline/Info RIGHT (wie Founder) ========== */
+.team-banner-stage{
+  display:grid;grid-template-columns:1fr 1.15fr;
+  gap:64px;align-items:center;
+}
+.team-banner-stage .sdr-stack{
+  /* Photo-Stack ist max 380×475 (matched founder-portrait-Größe) */
+  max-width:420px;justify-self:end;width:100%;
+}
+.team-banner-text{min-width:0}
+.team-banner-text .step-eyebrow{margin-bottom:18px}
+.team-banner-text h2{font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:16px}
+.team-banner-text .section-sub{margin-bottom:28px;font-size:16px}
+@media (max-width:900px){
+  .team-banner-stage{
+    grid-template-columns:1fr;gap:36px;
+    text-align:center;
+  }
+  .team-banner-stage .sdr-stack{
+    margin:0 auto;justify-self:center;max-width:300px;
+  }
+  .team-banner-text{text-align:left}
+  .team-banner-text .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
+}
+
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
 /* team-section: identische Premium-Base wie founder-section · viewport-fixed
    damit beide Sections nahtlos zusammenfließen (kein cover-Reset zwischen Sections) */
@@ -3196,39 +3221,40 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 6 · TEAM-FLOW · 2 SDRs → Founder ============= -->
+<!-- ============= 6 · TEAM-FLOW · 2 SDRs · Banner-Layout (Photo-Stack LEFT, Text RIGHT) ============= -->
 <section class="team-section">
   <div class="light-overlay"></div>
   <div class="wrap">
-    <div class="step-eyebrow"><span class="num">01</span> · Discovery</div>
-    <h2>Wer dich <em>zuerst</em> abholt.</h2>
-    <p class="section-sub">Erst sprichst du mit einem unserer beiden Sales-Kollegen. Sie hören zu, qualifizieren ehrlich — passt es, kommt der nächste Schritt zu mir.</p>
 
-    <div class="team-stage">
-      <div class="sdr-stack-wrap" id="sdrStack">
-        <!-- Card-Stack — 2 Photo-Cards übereinander, Click swaps -->
-        <div class="sdr-stack">
-          <article class="sdr-stack-card front" data-sdr="0" tabindex="0" aria-label="Sales-Lead 01">
-            <div class="sdr-stack-photo"></div>
-            <div class="sdr-stack-silhouette">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-            </div>
-            <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
-            <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
-            <div class="sdr-stack-meta">Sales · 01</div>
-          </article>
-          <article class="sdr-stack-card back" data-sdr="1" tabindex="0" aria-label="Sales-Lead 02">
-            <div class="sdr-stack-photo"></div>
-            <div class="sdr-stack-silhouette">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-            </div>
-            <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
-            <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
-            <div class="sdr-stack-meta">Sales · 02</div>
-          </article>
-        </div>
+    <div class="team-banner-stage" id="sdrStack">
+      <!-- LEFT: 2 Photo-Cards übereinander gestackt -->
+      <div class="sdr-stack">
+        <article class="sdr-stack-card front" data-sdr="0" tabindex="0" aria-label="Sales-Lead 01">
+          <div class="sdr-stack-photo"></div>
+          <div class="sdr-stack-silhouette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
+          <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
+          <div class="sdr-stack-meta">Sales · 01</div>
+        </article>
+        <article class="sdr-stack-card back" data-sdr="1" tabindex="0" aria-label="Sales-Lead 02">
+          <div class="sdr-stack-photo"></div>
+          <div class="sdr-stack-silhouette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
+          <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
+          <div class="sdr-stack-meta">Sales · 02</div>
+        </article>
+      </div>
 
-        <!-- Info wechselt mit aktivem Stack-Card -->
+      <!-- RIGHT: Headline + Sub + aktive SDR-Info -->
+      <div class="team-banner-text">
+        <div class="step-eyebrow"><span class="num">01</span> · Discovery</div>
+        <h2>Wer dich <em>zuerst</em> abholt.</h2>
+        <p class="section-sub">Erst sprichst du mit einem unserer beiden Sales-Kollegen. Sie hören zu, qualifizieren ehrlich — passt es, kommt der nächste Schritt zu mir.</p>
+
         <div class="sdr-info-stack">
           <div class="sdr-info-item active" data-sdr="0">
             <div class="sdr-role">Sales · Discovery</div>
@@ -3250,15 +3276,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Step-Bridge zur Founder-Section drunter -->
-      <div class="step-bridge">
-        <span class="step-bridge-text">Wenn's passt — Hand-off</span>
-        <span class="step-bridge-line"></span>
-        <span class="step-bridge-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
-        </span>
-      </div>
+    <!-- Step-Bridge zur Founder-Section drunter -->
+    <div class="step-bridge">
+      <span class="step-bridge-text">Wenn's passt — Hand-off</span>
+      <span class="step-bridge-line"></span>
+      <span class="step-bridge-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
+      </span>
     </div>
   </div>
 </section>
