@@ -1682,25 +1682,32 @@ section.guarantees-dirty{
   .guar-card h3{font-size:22px}
 }
 
-/* ========== TEAM-FOUNDER-ROW · Desktop side-by-side, Mobile stacked ========== */
+/* ========== TEAM-FOUNDER-ROW · Desktop side-by-side mit Hand-off-Pfeil ========== */
+.tf-handoff{display:none}
+
 @media (min-width:1024px){
   .team-founder-row{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:stretch;
+    grid-template-columns:1fr 96px 1.1fr;
+    align-items:center;
+    background:#fff;
+    padding:8px 0;
+    position:relative;
   }
-  .team-founder-row > section{
-    padding-top:72px !important;
-    padding-bottom:72px !important;
-    background-attachment:scroll !important; /* fixed bricht im 2-col-Layout */
-    border-right:1px solid rgba(2,3,143,.08);
+  /* Sections transparent, kein BG, kein Border, kein Watermark — Wrapper trägt den Hintergrund.
+     Höhere Spezifität via doppelter Class-Selektor damit's gegen vorherige !important-rules wint */
+  .team-founder-row > section.team-section,
+  .team-founder-row > section.founder-section{
+    padding:64px 0 !important;
+    background-color:transparent !important;
+    background-image:none !important;
+    background:transparent !important;
+    border:none !important;
   }
-  .team-founder-row > section:last-child{border-right:none}
-  /* Watermarks (01/02) kleiner damit sie nicht in die andere Spalte ragen */
-  .team-founder-row > section::before{
-    font-size:clamp(180px, 22vw, 280px) !important;
-  }
-  /* SDR-Stack: vertikal stacken in der schmaleren Spalte */
+  .team-founder-row > section::before{display:none !important}
+  .team-founder-row > section .light-overlay{display:none}
+
+  /* SDR-Stack: vertikal stacken in der Spalte */
   .team-founder-row .sdr-stack-wrap{
     grid-template-columns:1fr;
     gap:28px;
@@ -1715,8 +1722,8 @@ section.guarantees-dirty{
   .team-founder-row .sdr-info-item{text-align:left;max-width:420px}
   .team-founder-row .sdr-quote{margin-left:0;margin-right:0}
   .team-founder-row .sdr-stack-toggle{justify-content:flex-start}
-  /* Step-Bridge im Desktop verstecken (kein vertikaler Hand-off mehr nötig) */
   .team-founder-row .step-bridge{display:none}
+
   /* Founder-Stage: vertikal stacken */
   .team-founder-row .founder-stage{
     grid-template-columns:1fr;
@@ -1732,6 +1739,38 @@ section.guarantees-dirty{
   }
   .team-founder-row .founder-text h2{font-size:36px}
   .team-founder-row .founder-bio{font-size:15px;line-height:1.65}
+
+  /* Hand-off-Bridge mittig zwischen den Spalten */
+  .tf-handoff{
+    display:flex;flex-direction:column;align-items:center;
+    grid-column:2;align-self:center;
+    gap:10px;padding:8px 0;
+  }
+  .tf-handoff-line{
+    width:1px;flex:1;min-height:48px;
+    background:linear-gradient(180deg, transparent 0%, var(--line-strong) 50%, transparent 100%);
+  }
+  .tf-handoff-meta{
+    font-family:'Saira Condensed',Manrope,sans-serif;
+    font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--text-3);white-space:nowrap;
+  }
+  .tf-handoff-arrow{
+    width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 22px -4px rgba(3,5,198,.45), inset 0 -2px 0 rgba(0,0,0,.12);
+    animation:tfArrowPulse 2.6s ease-in-out infinite;
+  }
+  .tf-handoff-arrow svg{width:18px;height:18px}
+  @keyframes tfArrowPulse{
+    0%,100%{transform:translateX(0)}
+    50%{transform:translateX(4px)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tf-handoff-arrow{animation:none}
+  }
 }
 
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
@@ -3087,6 +3126,17 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
+<!-- Hand-off-Bridge zwischen Discovery und Founder (nur Desktop sichtbar) -->
+<div class="tf-handoff" aria-hidden="true">
+  <span class="tf-handoff-line tf-handoff-line-top"></span>
+  <span class="tf-handoff-meta">Wenn's passt</span>
+  <span class="tf-handoff-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </span>
+  <span class="tf-handoff-meta">Hand-off</span>
+  <span class="tf-handoff-line tf-handoff-line-bot"></span>
+</div>
+
 <!-- ============= 7 · FOUNDER · Premium Cream-BG mit Brand-DNA · Text-Left + Photo-Right ============= -->
 <section class="founder-section">
   <div class="light-overlay"></div>
@@ -3149,19 +3199,14 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </ul>
       </div>
 
-      <!-- Calendly Inline-Embed · Pre-Block via consent.js (Kategorie: functional) -->
+      <!-- Calendly Inline-Widget Beginn -->
       <div class="calendly-shell">
-        <div class="bb-consent-embed"
-             data-embed="calendly"
-             data-url="https://calendly.com/moritzbohmbach/30min?hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call">
-          <div class="bb-consent-embed-fallback">
-            <h4>Termin-Buchung über Calendly</h4>
-            <p>Calendly ist ein US-Anbieter (zertifiziert unter EU-U.S. Data Privacy Framework). Wir laden das Buchungs-Widget erst, wenn du der Kategorie „Funktional" zustimmst.</p>
-            <button type="button" onclick="(function(){var c=window.bbConsent.get()||{necessary:true};c.functional=true;c.necessary=true;localStorage.setItem('bb_consent_v1',JSON.stringify({v:1,ts:Date.now(),choices:c}));window.location.reload();})()">Calendly laden →</button>
-            <p class="muted">Alternativ: <a href="https://calendly.com/moritzbohmbach/30min" target="_blank" rel="noopener" style="color:#FF6B3D">direkt bei Calendly öffnen</a></p>
-          </div>
-        </div>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/moritzbohmbach/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call"
+             style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
       </div>
+      <!-- Calendly Inline-Widget Ende -->
       <p class="apply-meta">Antwort innerhalb 1 Werktag · Pro Quartal nur 3–4 neue Projekte</p>
     </div>
   </div>
