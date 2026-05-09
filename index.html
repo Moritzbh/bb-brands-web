@@ -906,14 +906,12 @@ section.stats-banner:nth-of-type(even){
   background:#0a0a0a;
   border:1px solid var(--line);
   position:relative;
-  transform:scale(.8);
-  opacity:.55;
-  filter:saturate(.7) brightness(.88);
+  transform:scale(.82);
+  opacity:.92;
 }
 .vid-swiper .swiper-slide-active .vid-card-inner{
   transform:scale(1);
   opacity:1;
-  filter:saturate(1) brightness(1);
   box-shadow:0 28px 60px rgba(0,0,0,.28), 0 10px 28px rgba(3,5,198,.12);
 }
 .vid-swiper .swiper-slide-active{z-index:2}
@@ -2156,36 +2154,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           </div>
         </article>
 
-        <!-- Duplikate für sauberen Infinite-Loop (Swiper braucht mindestens 2× slidesPerView Anzahl) -->
-        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="hearo-2" tabindex="0">
-          <div class="vid-card-inner">
-            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
-            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-            <div class="vid-overlay"><span class="vid-tag live">Live</span><div><div class="vid-vertical">Premium-Audio · DTC</div><div class="vid-name">Hearo</div></div></div>
-          </div>
-        </article>
-        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="bachgold-2" tabindex="0">
-          <div class="vid-card-inner">
-            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
-            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-            <div class="vid-overlay"><span class="vid-tag soon">Cutover Mai 2026</span><div><div class="vid-vertical">Wasserfilter · Re-Launch</div><div class="vid-name">Bachgold</div></div></div>
-          </div>
-        </article>
-        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="wake-2" tabindex="0">
-          <div class="vid-card-inner">
-            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
-            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-            <div class="vid-overlay"><span class="vid-tag soon">Pre-Launch</span><div><div class="vid-vertical">Sportswear · DTC</div><div class="vid-name">Wake Performance</div></div></div>
-          </div>
-        </article>
-        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="face-2" tabindex="0">
-          <div class="vid-card-inner">
-            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
-            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-            <div class="vid-overlay"><span class="vid-tag placeholder">Coming Soon</span><div><div class="vid-vertical">Beauty-Tech · DTC</div><div class="vid-name">Face Evolution</div></div></div>
-          </div>
-        </article>
-
         </div>
 
         <div class="swiper-button-prev" aria-label="Vorheriges Case"></div>
@@ -2469,9 +2437,9 @@ window.addEventListener('load', function(){
   var swiper = new Swiper(el, {
     centeredSlides: true,
     slidesPerView: 'auto',
-    loop: true,
-    loopAdditionalSlides: 2,
-    initialSlide: 0,
+    loop: false,
+    rewind: true,
+    initialSlide: 1,
     grabCursor: true,
     speed: 550,
     spaceBetween: 24,
