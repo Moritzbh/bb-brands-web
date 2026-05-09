@@ -2049,6 +2049,12 @@ section.team-section .wrap{position:relative;z-index:2}
 .sdr-stack-card[data-sdr="1"] .sdr-stack-photo{
   background-image:url('/assets/team/sales-02.jpg');
 }
+/* Founder-Card der Founder-Section · echtes Moritz-Foto · oberer Bildbereich
+   damit Gesicht im 4:3-Crop sichtbar bleibt (Bild ist Portrait 3:4) */
+.founder-section .sdr-stack-card.front .sdr-stack-photo{
+  background-image:url('/assets/images/founder-moritz.jpg');
+  background-position:center 22%;
+}
 .sdr-stack-photo::after{
   content:"";position:absolute;inset:0;
   /* Subtle dunkles Vignette-Overlay damit BB-Lockup + Meta-Bar lesbar bleiben */
@@ -3188,7 +3194,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
         <article class="swiper-slide vid-card" data-status="image" data-brand="hearo" tabindex="0">
           <div class="vid-card-inner">
-            <img class="vid-poster-img" src="/assets/images/cases/hearo-cover.png" alt="Hearo · Premium Audio Brand" loading="lazy" decoding="async">
+            <img class="vid-poster-img" src="/assets/images/cases/hearo-cover.jpg" alt="Hearo · Premium Audio Brand" loading="lazy" decoding="async">
             <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="vid-overlay">
               <span class="vid-tag live">Live</span>
