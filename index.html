@@ -1707,38 +1707,78 @@ section.guarantees-dirty{
   .team-founder-row > section::before{display:none !important}
   .team-founder-row > section .light-overlay{display:none}
 
-  /* SDR-Stack: vertikal stacken in der Spalte */
+  /* === DISCOVERY: 2 Photo-Karten nebeneinander, Info darunter === */
   .team-founder-row .sdr-stack-wrap{
-    grid-template-columns:1fr;
-    gap:28px;
-    justify-items:center;
-    text-align:center;
+    display:block;
     max-width:none;
+    text-align:left;
   }
+  /* Stack-Container wird zu side-by-side Grid */
   .team-founder-row .sdr-stack{
-    width:300px;height:380px;
-    margin:0 auto;
+    width:100%;height:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    perspective:none;
+    margin:0;
   }
-  .team-founder-row .sdr-info-item{text-align:left;max-width:420px}
-  .team-founder-row .sdr-quote{margin-left:0;margin-right:0}
-  .team-founder-row .sdr-stack-toggle{justify-content:flex-start}
+  /* Beide Cards immer voll sichtbar (kein front/back Stack mehr) */
+  .team-founder-row .sdr-stack-card.front,
+  .team-founder-row .sdr-stack-card.back,
+  .team-founder-row .sdr-stack-card{
+    position:relative !important;inset:auto !important;
+    width:auto;height:auto;
+    aspect-ratio:3/4;
+    transform:none !important;
+    opacity:1 !important;
+    cursor:pointer;
+    transition:border-color .25s ease, box-shadow .25s ease, transform .2s ease !important;
+  }
+  .team-founder-row .sdr-stack-card:hover{
+    transform:translateY(-3px) !important;
+    box-shadow:0 24px 56px rgba(0,0,0,.22);
+  }
+  /* Aktive Card kriegt Blue-Akzent-Border */
+  .team-founder-row .sdr-stack-card.front{
+    border-color:var(--blue) !important;
+    box-shadow:0 0 0 3px rgba(3,5,198,.18);
+  }
+
+  /* Info-Block direkt unter den Cards */
+  .team-founder-row .sdr-info-stack{margin-top:28px;min-height:0}
+  .team-founder-row .sdr-info-item{
+    text-align:left;max-width:none;
+    position:relative !important;inset:auto !important;
+  }
+  .team-founder-row .sdr-quote{margin-left:0;margin-right:0;max-width:none}
+  .team-founder-row .sdr-stack-toggle{display:none}
   .team-founder-row .step-bridge{display:none}
 
-  /* Founder-Stage: vertikal stacken */
+  /* === FOUNDER: Photo LEFT + Text RIGHT inside der rechten Spalte === */
   .team-founder-row .founder-stage{
-    grid-template-columns:1fr;
-    gap:36px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:32px;
+    align-items:center;
   }
   .team-founder-row .founder-portrait-wrap{
-    max-width:300px;
-    margin:0 auto;
-    justify-self:center;
+    max-width:220px;
+    margin:0;
+    justify-self:start;
+    grid-column:1;grid-row:1;
   }
   .team-founder-row .founder-portrait-wrap::before{
-    top:20px;right:-20px;left:20px;bottom:-20px;
+    top:14px;right:-14px;left:14px;bottom:-14px;
   }
-  .team-founder-row .founder-text h2{font-size:36px}
-  .team-founder-row .founder-bio{font-size:15px;line-height:1.65}
+  .team-founder-row .founder-text{
+    grid-column:2;grid-row:1;
+  }
+  .team-founder-row .founder-text h2{font-size:30px;margin-bottom:14px;line-height:1.05}
+  .team-founder-row .founder-bio{font-size:14.5px;line-height:1.6;margin-bottom:18px}
+  .team-founder-row .founder-signature{font-size:26px;margin-bottom:20px}
+  .team-founder-row .founder-stat-num{font-size:30px}
+  .team-founder-row .founder-stat-label{font-size:13px}
+  .team-founder-row .founder-stats{padding-top:16px;gap:18px}
 
   /* Hand-off-Bridge mittig zwischen den Spalten */
   .tf-handoff{
