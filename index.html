@@ -2022,26 +2022,25 @@ section.team-section .wrap{position:relative;z-index:2}
 }
 .sdr-stack-photo{
   position:absolute;inset:0;
-  background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 60%, #15151a 100%);
+  background-color:#0a0a0a;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+/* Echte Fotos: data-sdr="0" / "1" greift auf assets/team/sales-01.jpg / sales-02.jpg */
+.sdr-stack-card[data-sdr="0"] .sdr-stack-photo{
+  background-image:url('/assets/team/sales-01.jpg');
+}
+.sdr-stack-card[data-sdr="1"] .sdr-stack-photo{
+  background-image:url('/assets/team/sales-02.jpg');
 }
 .sdr-stack-photo::after{
   content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 35% 25%, rgba(3,5,198,.22) 0%, transparent 55%),
-    radial-gradient(ellipse at 70% 80%, rgba(255,107,61,.14) 0%, transparent 55%);
+  /* Subtle dunkles Vignette-Overlay damit BB-Lockup + Meta-Bar lesbar bleiben */
+  background:linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 30%, transparent 60%, rgba(0,0,0,.55) 100%);
 }
-.sdr-stack-silhouette{
-  position:absolute;top:52%;left:50%;
-  transform:translate(-50%,-50%);
-  width:100px;height:100px;border-radius:50%;
-  background:rgba(245,245,240,.04);
-  border:1px solid rgba(245,245,240,.08);
-  display:flex;align-items:center;justify-content:center;
-  z-index:1;
-}
-.sdr-stack-silhouette svg{
-  width:48px;height:48px;color:rgba(245,245,240,.32);
-}
+/* Silhouette-Icon weg sobald echtes Foto da */
+.sdr-stack-silhouette{display:none}
 .sdr-stack-corner{
   position:absolute;z-index:2;
   font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
