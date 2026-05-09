@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<script src="/assets/js/consent.js" defer></script>
 <style>
 .top-bar,header.site-header,.mobile-menu{display:none !important}
 
@@ -175,10 +177,30 @@ footer .footer-links a:hover{color:var(--accent)}
     <h2>7. Externe Bilder (Unsplash)</h2>
     <p>Auf einigen Unterseiten (insbesondere Cases, Wissen, Garantie) werden Hintergrundbilder direkt von Servern des Bilder-Dienstes <strong>Unsplash</strong> (Unsplash Inc., 400-460 King Street West, Toronto, ON M5V 1L7, Kanada) geladen. Beim Aufruf der Seite wird Ihre IP-Adresse an Unsplash übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer ansprechenden Darstellung). Kanada wurde von der EU-Kommission als Land mit angemessenem Datenschutzniveau anerkannt (Angemessenheitsbeschluss). Datenschutzhinweise: <a href="https://unsplash.com/privacy" target="_blank" rel="noopener">unsplash.com/privacy</a>.</p>
 
-    <h2>8. Cookies und ähnliche Technologien</h2>
-    <p>Diese Website setzt aktuell <strong>keine Tracking-Cookies</strong> und keine Marketing- oder Statistik-Pixel ein. Lediglich die unter den Ziffern 5–7 genannten eingebetteten Drittanbieter-Dienste (Calendly, Google Fonts, Unsplash) können beim Aufruf der jeweiligen Seite eigene Cookies oder ähnliche Technologien setzen.</p>
-    <p>Rechtsgrundlage für notwendige Speichervorgänge: § 25 Abs. 2 Nr. 2 TTDSG sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website).</p>
-    <p>Sollten wir zukünftig zusätzliche Statistik- oder Marketing-Tools (z. B. Plausible Analytics, Google Analytics 4, Meta Pixel, Google Ads Conversion-Tracking, LinkedIn Insight Tag) einsetzen, werden diese ausschließlich nach Ihrer aktiven Einwilligung über ein Consent-Banner geladen.</p>
+    <h2>8. Cookies und ähnliche Technologien (Consent-Management)</h2>
+    <p>Beim ersten Besuch dieser Website öffnet sich ein Banner, in dem Sie über den Einsatz von Cookies und ähnlichen Technologien informiert werden und Ihre Einwilligung gemäß § 25 TTDSG sowie Art. 6 Abs. 1 lit. a DSGVO erteilen oder verweigern können. Sie können Ihre Auswahl jederzeit über den Link „Cookie-Einstellungen" im Footer ändern.</p>
+
+    <h3>8.1 Notwendige Speichervorgänge (immer aktiv)</h3>
+    <p>Diese Speichervorgänge sind technisch erforderlich, damit die Website funktioniert. Sie werden ohne Einwilligung gesetzt. Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TTDSG sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website).</p>
+    <ul>
+      <li><strong>Consent-Speicher</strong> (<code>bb_consent_v1</code>, localStorage): Speichert Ihre Cookie-Auswahl, damit Sie sie bei späteren Besuchen nicht erneut treffen müssen. Speicherdauer: bis zu Ihrem Widerruf oder manuellem Löschen.</li>
+      <li><strong>Lead-Attribution</strong> (sessionStorage, siehe Ziffer 9): Verschwindet beim Schließen des Tabs.</li>
+    </ul>
+
+    <h3>8.2 Funktional (Einwilligung erforderlich)</h3>
+    <p>Wenn Sie die Kategorie „Funktional" aktivieren, werden zusätzliche Inhalte direkt von Drittanbietern geladen:</p>
+    <ul>
+      <li><strong>Calendly</strong> — Termin-Buchungs-Widget auf der Startseite (siehe Ziffer 5).</li>
+      <li><strong>Unsplash</strong> — dekorative Hintergrundbilder auf den Seiten Cases, Wissen und im Garantie-Bereich (siehe Ziffer 7).</li>
+    </ul>
+    <p>Ohne Ihre Einwilligung wird das Calendly-Widget durch einen Platzhalter mit „Calendly laden →"-Button ersetzt; die Unsplash-Bilder werden nicht geladen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).</p>
+
+    <h3>8.3 Statistik (Einwilligung erforderlich)</h3>
+    <p>Sobald aktiviert, laden wir Web-Analytics-Tools, um die Nutzung der Website auszuwerten und Inhalte zu verbessern. Vorgesehen ist <strong>Google Analytics 4</strong> (Google Ireland Ltd. / Google LLC, USA) mit IP-Anonymisierung. Bei aktivierter Einwilligung werden Cookies gesetzt und Daten (u. a. anonymisierte IP-Adresse, Browser-Informationen, Klick-Events) an Google übermittelt. Die Übermittlung in die USA erfolgt auf Grundlage des EU-U.S. Data Privacy Framework (Angemessenheitsbeschluss der EU-Kommission vom 10. Juli 2023). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.</p>
+
+    <h3>8.4 Marketing (Einwilligung erforderlich)</h3>
+    <p>Sobald aktiviert, laden wir Marketing- und Conversion-Tracking-Pixel. Vorgesehen sind <strong>Meta Pixel</strong> (Meta Platforms Ireland Ltd. / Meta Platforms, Inc., USA) und <strong>Google Ads Conversion-Tracking</strong> (Google Ireland Ltd. / Google LLC, USA). Bei aktivierter Einwilligung werden Cookies gesetzt und personenbezogene Daten (u. a. IP-Adresse, Browser-Informationen, Klick-Events) an die jeweiligen Anbieter übermittelt. Bei Übermittlung in die USA basiert diese auf dem EU-U.S. Data Privacy Framework bzw. auf Standardvertragsklauseln gemäß Art. 46 Abs. 2 lit. c DSGVO. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.</p>
+    <p>Sie können Ihre Einwilligung jederzeit für die Zukunft widerrufen, indem Sie im Footer auf „Cookie-Einstellungen" klicken und die Auswahl anpassen.</p>
 
     <h2>9. Lead-Attribution</h2>
     <p>Wenn Sie ein Kontaktformular absenden, kann Ihr Browser zusätzlich technische Informationen mitsenden, die uns helfen nachzuvollziehen, wie Sie auf uns aufmerksam geworden sind:</p>
@@ -214,6 +236,7 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="footer-links">
       <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
       <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
       <a href="/impressum/">Impressum</a>
       <a href="/datenschutz/">Datenschutz</a>
     </div>

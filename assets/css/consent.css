@@ -1,0 +1,139 @@
+/* ============================================
+   BB Brands · Consent-Manager v1 · Styles
+   Banner unten · Pre-Block-CSS für Calendly, Unsplash-BGs
+   ============================================ */
+
+#bb-consent-banner{
+  position:fixed;left:0;right:0;bottom:0;
+  z-index:9999;
+  background:#000;color:#fff;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  border-top:1px solid rgba(255,255,255,.12);
+  box-shadow:0 -12px 40px rgba(0,0,0,.35);
+  padding:24px 28px;
+  animation:bb-cb-slide .35s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes bb-cb-slide{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+.bb-cb-shell{
+  max-width:1340px;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;
+  align-items:center;
+}
+@media (max-width:980px){
+  #bb-consent-banner{padding:20px}
+  .bb-cb-shell{grid-template-columns:1fr;gap:18px}
+}
+.bb-cb-text h3{
+  font-family:'Saira Condensed','Inter',sans-serif;
+  font-weight:700;font-size:22px;letter-spacing:-.01em;
+  margin:0 0 8px;color:#fff;
+}
+.bb-cb-text p{
+  font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.78);
+  margin:0;max-width:780px;
+}
+.bb-cb-text a{
+  color:#FF6B3D;text-decoration:underline;font-weight:600;
+}
+.bb-cb-text a:hover{color:#FFAC3B}
+.bb-cb-toggles{
+  display:flex;flex-wrap:wrap;gap:18px 24px;
+  margin-top:14px;
+}
+.bb-cb-toggles label{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,.92);
+  cursor:pointer;user-select:none;
+}
+.bb-cb-toggles input[type="checkbox"]{
+  width:16px;height:16px;
+  accent-color:#FF6B3D;
+  cursor:pointer;
+}
+.bb-cb-toggles input[disabled]{opacity:.6;cursor:not-allowed}
+.bb-cb-actions{
+  display:flex;gap:10px;flex-wrap:wrap;
+  align-self:start;
+}
+@media (max-width:980px){.bb-cb-actions{align-self:stretch;justify-content:flex-end}}
+.bb-cb-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 22px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;
+  border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;
+  cursor:pointer;transition:all .2s ease;
+  white-space:nowrap;
+}
+.bb-cb-btn:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.bb-cb-btn-primary{
+  background:#FF6B3D;border-color:#FF6B3D;color:#fff;
+}
+.bb-cb-btn-primary:hover{background:#E85A2C;border-color:#E85A2C}
+
+/* ===== EMBED-GATE (Calendly etc.) ===== */
+.bb-consent-embed{
+  position:relative;
+}
+.bb-consent-embed-fallback{
+  background:#fafaf7;border:1px solid #E8E8E3;
+  padding:48px 32px;text-align:center;
+  font-family:'Inter',sans-serif;
+  min-height:480px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;
+}
+.bb-consent-embed-fallback h4{
+  font-family:'Saira Condensed','Inter',sans-serif;
+  font-weight:700;font-size:24px;letter-spacing:-.01em;
+  color:#0a0a0a;margin:0;
+}
+.bb-consent-embed-fallback p{
+  font-size:14px;line-height:1.55;color:#3D3D3A;
+  max-width:480px;margin:0;
+}
+.bb-consent-embed-fallback p.muted{font-size:12px;color:#787872}
+.bb-consent-embed-fallback button{
+  background:#0305C6;color:#fff;border:none;
+  padding:14px 32px;font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.01em;
+  cursor:pointer;border-radius:8px;
+  box-shadow:0 4px 14px rgba(3,5,198,.22);
+  transition:all .2s ease;
+}
+.bb-consent-embed-fallback button:hover{
+  background:#02038F;transform:translateY(-1px);
+  box-shadow:0 8px 22px rgba(3,5,198,.32);
+}
+/* Wenn Funktional aktiv → fallback wird durch JS ersetzt */
+html[data-consent-functional="true"] .bb-consent-embed-fallback{display:none}
+
+/* ===== UNSPLASH-BG-GATE ===== */
+/* Wenn Funktional NICHT zugestimmt → Unsplash-BGs auf white */
+html[data-consent-functional="false"] .bb-section-80,
+html[data-consent-functional="false"] .bb-section-90,
+html[data-consent-functional="false"] .bb-section-95,
+html[data-consent-functional="false"] .bb-section-50{
+  background-image:none !important;
+  background-color:#fff !important;
+}
+html[data-consent-functional="false"] .bb-bottom{
+  background-image:linear-gradient(rgba(0,0,0,.95),rgba(0,0,0,.95)) !important;
+}
+html[data-consent-functional="false"] section.guarantees-dirty{
+  background-image:none !important;
+  background-color:#F5F1E8 !important;
+}
+html[data-consent-functional="false"] .bb-hero-video,
+html[data-consent-functional="false"] .bb-testimonial-photo{
+  background-image:none !important;
+  background-color:#F5F1E8 !important;
+}
+
+/* ===== FOOTER-LINK · Cookie-Einstellungen ===== */
+.bb-cookie-link{
+  cursor:pointer;background:none;border:none;padding:0;
+  color:inherit;font:inherit;text-decoration:none;
+}
+.bb-cookie-link:hover{color:#FF6B3D}
