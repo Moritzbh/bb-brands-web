@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="/assets/css/shared.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ============= TOKEN-OVERRIDES (Brand V1) ============= */
-/* shared.css hat noch alte Orange-CTAs — hier überschreiben */
+/* ============= TOKEN-OVERRIDES (Brand V1 + Baulig-DNA) ============= */
+/* Header bleibt im Brand V1 (Blue/Saira/Inter), Page-Content wechselt auf Baulig-DNA (Montserrat/Amber) */
 .brand-logo{color:var(--blue);font-weight:700;letter-spacing:-.02em}
 .main-nav a:hover{color:var(--blue)}
 .main-nav a.active{color:var(--blue)}
@@ -21,611 +21,332 @@
   position:relative;overflow:hidden;
   box-shadow:0 3px 10px rgba(3,5,198,.22);
 }
-.header-cta::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(120deg,var(--blue) 0%,var(--accent) 100%);
-  opacity:0;transition:opacity .35s ease;
-}
 .header-cta:hover{
   background:var(--blue);
   transform:translateY(-1px);
   box-shadow:0 6px 16px rgba(3,5,198,.32);
 }
-.header-cta:hover::before{opacity:1}
-.header-cta > *{position:relative;z-index:1}
 .mobile-menu a.mobile-cta{background:var(--blue)}
 
-/* Footer · Kontrast-Override (shared.css hat noch text-3) */
+/* Footer · Kontrast-Override */
 footer .footer-brand{color:var(--text-2)}
 footer .footer-links a{color:var(--text-2)}
 footer .footer-links a:hover{color:var(--blue)}
 
-/* ============= PAGE LAYOUT ============= */
-section{padding:96px 0;position:relative}
-section.cream{background:var(--cream)}
-section.dark{background:#0a0a0a;color:#fff}
-section.tint{background:var(--blue-tint)}
-
-.eyebrow{
-  display:inline-block;
-  font-family:var(--display);
-  font-size:11px;font-weight:700;color:#C44A1F;
-  text-transform:uppercase;letter-spacing:.2em;
-  margin-bottom:18px;
+/* ============= BAULIG-DNA · PAGE TOKENS ============= */
+:root{
+  --bg-amber:#FFAC3B;
+  --bg-amber-hover:#FF9518;
+  --bg-green-up:#16a34a;
+  --bg-text-body:#333;
+  --bg-text-muted:#666;
+  --bg-line:#e5e5e5;
+  /* Founder/Workshop-Fotos als subtle Backgrounds (Stock-Platzhalter, später durch echte Fotos ersetzen) */
+  --bg-founder-1:url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-2:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-3:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70');
 }
 
-h1.page-h1{
-  font-family:var(--display);font-weight:700;
-  font-size:clamp(48px,7vw,82px);line-height:.96;letter-spacing:-.022em;
-  margin-bottom:22px;max-width:880px;color:var(--text);
+/* ============= BAULIG-CONTAINER (alle Cases-Page-Sections) ============= */
+.bb-page{
+  font-family:'Montserrat',sans-serif;
+  font-size:15px;line-height:1.7;font-weight:400;
+  color:#000;
 }
-h1.page-h1 em{color:var(--blue);font-style:normal}
+.bb-page .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.bb-page .wrap{padding:0 20px}}
 
-h2.section-h2{
-  font-family:var(--display);font-weight:700;
-  font-size:clamp(32px,4.5vw,52px);line-height:1.04;letter-spacing:-.018em;
-  margin-bottom:18px;max-width:780px;
+.bb-section{
+  padding:80px 0;
+  background-color:#fff;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  position:relative;
 }
-h2.section-h2 em{color:var(--blue);font-style:normal}
-section.dark h2.section-h2{color:#fff}
-section.dark h2.section-h2 em{color:var(--accent)}
-
-.lede{
-  font-size:19px;color:var(--text-2);
-  line-height:1.55;margin-bottom:28px;max-width:680px;
-}
-section.dark .lede{color:rgba(255,255,255,.85)}
-
-.btn-primary{
-  background:var(--blue);color:#fff;
-  padding:16px 28px;border-radius:8px;
-  font-weight:700;font-size:15px;
-  display:inline-flex;align-items:center;gap:10px;
-  transition:transform .25s ease, box-shadow .25s ease;
-  border:none;cursor:pointer;font-family:inherit;
-  box-shadow:0 4px 14px rgba(3,5,198,.22);
-  letter-spacing:-.005em;
-  position:relative;overflow:hidden;
-  text-decoration:none;
-}
-.btn-primary::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(120deg,var(--blue) 0%,var(--accent) 100%);
-  opacity:0;transition:opacity .35s ease;
-}
-.btn-primary > *{position:relative;z-index:1}
-.btn-primary:hover{
-  text-decoration:none;
-  transform:translateY(-2px);
-  box-shadow:0 10px 26px rgba(3,5,198,.32);
-}
-.btn-primary:hover::before{opacity:1}
-.btn-primary svg{width:14px;height:14px;transition:transform .2s ease}
-.btn-primary:hover svg{transform:translateX(3px)}
+.bb-section-80{background-image:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),var(--bg-founder-1)}
+.bb-section-90{background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-2)}
+.bb-section-95{background-image:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),var(--bg-founder-1)}
+.bb-section-50{background-image:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),var(--bg-founder-3)}
+@media (max-width:780px){.bb-section{background-attachment:scroll}}
 
 /* ============= HERO ============= */
-.cases-hero{
-  padding:140px 0 100px;
-  position:relative;overflow:hidden;
-  background:var(--bg);
+.bb-hero{padding:64px 0 64px;text-align:center}
+.bb-hero-eyebrow{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.05em;color:var(--bg-text-body);margin-bottom:24px;
 }
-.cases-hero::before{
-  content:"";position:absolute;
-  top:-15vw;left:-10vw;
-  width:55vw;height:55vw;max-width:800px;max-height:800px;
-  border-radius:50%;
-  background:radial-gradient(circle, var(--blue) 0%, transparent 70%);
-  pointer-events:none;filter:blur(120px);opacity:.15;
-  animation:meshFloat1 18s ease-in-out infinite;
+.bb-hero-eyebrow strong{color:#000}
+.bb-hero h1{
+  font-family:'Montserrat',sans-serif;font-size:39px;font-weight:700;
+  line-height:50px;letter-spacing:normal;color:#000;
+  max-width:980px;margin:0 auto 24px;
 }
-.cases-hero::after{
-  content:"";position:absolute;
-  bottom:-12vw;right:-10vw;
-  width:48vw;height:48vw;max-width:720px;max-height:720px;
-  border-radius:50%;
-  background:radial-gradient(circle, var(--accent) 0%, transparent 70%);
-  pointer-events:none;filter:blur(110px);opacity:.20;
-  animation:meshFloat2 22s ease-in-out infinite;
-}
-@keyframes meshFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,60px) scale(1.1)}}
-@keyframes meshFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-90px,-50px) scale(1.15)}}
-.cases-hero .wrap{position:relative;z-index:1}
-.hero-bullets{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;
-  margin:32px 0 36px;max-width:780px;
-}
-@media (max-width:780px){.hero-bullets{grid-template-columns:1fr}}
-.hero-bullets li{
-  display:flex;align-items:flex-start;gap:10px;
-  list-style:none;font-size:15px;color:var(--text-2);line-height:1.45;
-}
-.hero-bullets svg{
-  width:18px;height:18px;color:var(--blue);flex-shrink:0;margin-top:2px;
-}
-.hero-bullets strong{color:var(--text);font-weight:700}
-
-/* ============= STATS GRID ============= */
-.stats-row{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:24px;
-  padding:32px;
-  background:var(--cream);border-radius:18px;
-  margin-bottom:48px;
-}
-@media (max-width:980px){.stats-row{grid-template-columns:repeat(2,1fr);gap:32px 24px}}
-@media (max-width:520px){.stats-row{grid-template-columns:1fr}}
-.stat{
-  text-align:center;
-}
-.stat-num{
-  font-family:var(--display);font-weight:700;
-  font-size:54px;line-height:1;letter-spacing:-.02em;
-  color:var(--blue);margin-bottom:6px;
-}
-.stat-num .plus{font-size:.55em;color:#0a0a0a;font-weight:700;vertical-align:.18em}
-.stat-label{
-  font-size:13px;color:var(--text-2);font-weight:500;
-  line-height:1.4;
+.bb-hero h1 .hl-blue{color:var(--blue)}
+.bb-hero-sub{
+  font-size:18px;font-weight:600;line-height:1.5;color:#000;
+  max-width:780px;margin:0 auto 40px;
 }
 
-/* ============= DISCLAIMER ============= */
-.disclaimer{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
-  padding:48px 0 0;
+.bb-hero-bullets{max-width:760px;margin:0 auto 40px;text-align:left}
+.bb-hero-bullets ul{list-style:disc outside;padding-left:22px}
+.bb-hero-bullets li{
+  font-size:15px;line-height:1.6;color:#000;
+  margin-bottom:18px;font-weight:500;
 }
-@media (max-width:780px){.disclaimer{grid-template-columns:1fr;gap:24px}}
-.disclaimer-item{
-  display:flex;align-items:flex-start;gap:14px;
-  font-size:14px;color:var(--text-2);line-height:1.55;
-}
-.disclaimer-item svg{
-  width:24px;height:24px;color:var(--blue);flex-shrink:0;margin-top:2px;
-}
-.disclaimer-item strong{display:block;color:var(--text);font-weight:700;margin-bottom:4px;font-size:14.5px}
+.bb-hero-bullets li::marker{color:var(--bg-green-up);font-size:1.3em}
+.bb-hero-bullets li strong{color:#000;font-weight:700}
 
-/* ============= MAIN CASES ============= */
-.main-cases{display:flex;flex-direction:column;gap:48px;margin-top:0}
-.case-card{
-  display:grid;grid-template-columns:1.1fr 1fr;gap:0;
-  background:var(--bg);border:1px solid var(--line);border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 6px 28px rgba(0,0,0,.04);
-}
-.case-card:nth-child(even){grid-template-columns:1fr 1.1fr}
-.case-card:nth-child(even) .case-mockup{order:2}
-.case-card:nth-child(even) .case-content{order:1}
-@media (max-width:980px){
-  .case-card,.case-card:nth-child(even){grid-template-columns:1fr}
-  .case-card:nth-child(even) .case-mockup{order:0}
-  .case-card:nth-child(even) .case-content{order:1}
-}
-
-.case-mockup{
-  position:relative;min-height:420px;
-  background:var(--cream);overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.case-mockup .browser{
-  width:88%;border-radius:10px;background:#fff;
-  box-shadow:0 20px 60px rgba(0,0,0,.18);
-  overflow:hidden;border:1px solid var(--line);
-}
-.case-mockup .browser-bar{
-  display:flex;align-items:center;gap:6px;
-  padding:10px 14px;background:#f4f4ee;border-bottom:1px solid var(--line);
-}
-.case-mockup .browser-bar .dot{
-  width:8px;height:8px;border-radius:50%;background:#d0d0cb;
-}
-.case-mockup .browser-bar .url{
-  margin-left:10px;font-family:'SF Mono',Menlo,monospace;
-  font-size:11px;color:var(--text-2);letter-spacing:.02em;
-}
-.case-mockup .browser-content{
-  aspect-ratio:16/10;background:#fafaf7;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:42px;
-  color:var(--text-2);letter-spacing:-.015em;
-  position:relative;
-}
-.case-mockup .browser-content::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(3,5,198,.06) 0%,rgba(255,107,61,.04) 100%);
-}
-.case-mockup .case-status-pill{
-  position:absolute;top:18px;left:18px;
-  font-family:var(--display);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:700;
-  padding:6px 12px;border-radius:99px;
-  background:#fff;color:var(--text);border:1px solid var(--line-strong);
-}
-.case-mockup .case-status-pill.live{background:var(--blue);color:#fff;border-color:var(--blue)}
-.case-mockup .case-status-pill.soon{background:#FF6B3D;color:#0a0a0a;border-color:#0a0a0a}
-
-.case-content{
-  padding:48px 44px;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.case-meta{
-  font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:#C44A1F;font-weight:700;margin-bottom:10px;
-}
-.case-content h3{
-  font-family:var(--display);font-weight:700;
-  font-size:42px;line-height:1;letter-spacing:-.02em;
-  margin-bottom:14px;color:var(--text);
-}
-.case-tagline{
-  font-family:var(--display);font-weight:500;
-  font-size:18px;line-height:1.3;color:var(--blue);
-  margin-bottom:22px;
-}
-.case-quote{
-  font-size:15px;line-height:1.6;color:var(--text-2);
-  font-style:italic;
-  border-left:3px solid var(--blue);
-  padding:4px 0 4px 14px;
-  margin-bottom:24px;
-}
-
-.case-stats{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
-  margin-bottom:24px;
-  padding:16px;background:var(--cream);border-radius:10px;
-}
-.case-stats-item{text-align:center}
-.case-stats-num{
-  font-family:var(--display);font-weight:700;
-  font-size:26px;line-height:1;color:var(--blue);
-  margin-bottom:4px;letter-spacing:-.01em;
-}
-.case-stats-num .plus{color:#0a0a0a;font-size:.7em;font-weight:700}
-.case-stats-label{
-  font-size:11px;color:var(--text-2);
-  text-transform:uppercase;letter-spacing:.1em;font-weight:600;
-  line-height:1.3;
-}
-
-.case-deliverables{
-  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;
-}
-.case-chip{
-  font-size:12px;font-weight:600;
-  padding:5px 12px;border-radius:99px;
-  background:var(--blue-tint);color:var(--blue-deep);
-  letter-spacing:-.005em;
-}
-
-.case-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--display);font-weight:600;
-  font-size:14px;color:var(--blue);
-  text-decoration:none;letter-spacing:.02em;
-  transition:gap .2s ease;
-}
-.case-cta:hover{gap:12px;text-decoration:none}
-.case-cta svg{width:14px;height:14px;transition:transform .2s ease}
-.case-cta:hover svg{transform:translateX(3px)}
-
-@media (max-width:780px){
-  .case-content{padding:32px 24px}
-  .case-content h3{font-size:32px}
-  .case-stats{grid-template-columns:1fr;gap:12px}
-}
-
-/* ============= MID-CTA / METHOD ============= */
-.method-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
-  margin-top:48px;
-}
-@media (max-width:980px){.method-grid{grid-template-columns:1fr}}
-.method-item{
-  padding:32px 28px;
-  background:var(--bg);border:1px solid var(--line);border-radius:14px;
-}
-.method-num{
-  font-family:var(--display);font-weight:300;
-  font-size:48px;line-height:1;color:var(--blue);
-  margin-bottom:12px;letter-spacing:-.02em;
-}
-.method-item h3{
-  font-family:var(--display);font-weight:700;
-  font-size:22px;letter-spacing:-.01em;margin-bottom:10px;color:var(--text);
-}
-.method-item p{font-size:14.5px;color:var(--text-2);line-height:1.55}
-
-/* ============= FINAL CTA ============= */
-.final-cta-block{
-  text-align:center;max-width:680px;margin:0 auto;
-}
-.final-cta-block h2{
-  font-family:var(--display);font-weight:700;
-  font-size:clamp(38px,5vw,60px);line-height:1.02;letter-spacing:-.02em;
-  margin-bottom:18px;color:#fff;
-}
-.final-cta-block h2 em{color:var(--accent);font-style:normal}
-.final-cta-block p{
-  font-size:17px;color:rgba(255,255,255,.85);
-  line-height:1.55;margin-bottom:32px;
-}
-.final-cta-meta{
-  font-size:13px;color:rgba(255,255,255,.55);margin-top:24px;
-  letter-spacing:.04em;
-}
-
-/* Hero CTA-row */
-.cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.btn-secondary{
-  color:var(--text-2);font-size:14px;font-weight:600;
-  display:inline-flex;align-items:center;gap:6px;
-  text-decoration:none;
-}
-.btn-secondary:hover{color:var(--blue);text-decoration:none}
-section.dark .btn-secondary{color:rgba(255,255,255,.7)}
-section.dark .btn-secondary:hover{color:#fff}
-
-/* Reveal */
-[data-reveal]{
-  opacity:0;transform:translateY(28px);
-  transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1);
-}
-[data-reveal].is-visible{opacity:1;transform:translateY(0)}
-@media (prefers-reduced-motion:reduce){
-  [data-reveal]{opacity:1;transform:none;transition:none}
-  .cases-hero::before,.cases-hero::after{animation:none}
-}
-
-/* ============= "DERTY" DIRECT-RESPONSE-ELEMENTS ============= */
-
-/* Yellow Highlighter — wirkt wie nachträglich mit Marker durchgezogen */
-.hl{
-  position:relative;display:inline-block;
-  background:linear-gradient(180deg, transparent 0%, transparent 55%, rgba(253,224,71,.85) 55%, rgba(253,224,71,.85) 92%, transparent 92%);
-  padding:0 2px;
-}
-.hl-blue{
-  background:linear-gradient(180deg, transparent 0%, transparent 55%, rgba(3,5,198,.18) 55%, rgba(3,5,198,.18) 92%, transparent 92%);
-}
-
-/* Underline Scribble — wirkt handgezeichnet */
-.scribble{
-  position:relative;display:inline-block;
-}
-.scribble::after{
-  content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:8px;
-  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 4 Q 30 1 60 4 T 120 5 T 198 3' stroke='%23FF6B3D' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%;
-}
-
-/* Sticker / Seal Badge — gedreht, plakativ */
-.sticker{
-  display:inline-flex;align-items:center;justify-content:center;
-  flex-direction:column;text-align:center;
-  width:130px;height:130px;border-radius:50%;
-  background:#FDE047;color:#0a0a0a;
-  font-family:var(--display);font-weight:800;
-  letter-spacing:.04em;line-height:.95;
-  transform:rotate(-8deg);
-  box-shadow:0 6px 18px rgba(0,0,0,.18), inset 0 0 0 4px rgba(0,0,0,.06);
-  flex-shrink:0;
-  position:relative;
+.bb-hero-meta{
+  display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;
+  margin-top:40px;font-size:13px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em;
   text-transform:uppercase;
 }
-.sticker::before{
-  content:"";position:absolute;inset:6px;border-radius:50%;
-  border:2px dashed rgba(0,0,0,.35);
-}
-.sticker .sticker-top{font-size:11px;letter-spacing:.18em;margin-bottom:2px}
-.sticker .sticker-mid{font-size:24px;letter-spacing:-.01em;line-height:1}
-.sticker .sticker-bot{font-size:9px;letter-spacing:.18em;margin-top:3px;font-weight:700;opacity:.75}
-.sticker.blue{background:var(--blue);color:#fff}
-.sticker.blue::before{border-color:rgba(255,255,255,.4)}
-.sticker.orange{background:#FF6B3D;color:#0a0a0a;transform:rotate(6deg)}
-.sticker.orange::before{border-color:rgba(0,0,0,.35)}
+.bb-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
+.bb-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-green-up)}
+.bb-hero-meta .item strong{color:#000}
 
-/* "ACHTUNG"-Box · rote Warnbox */
-.achtung-box{
-  background:#FEF3C7;
-  border:3px solid #0a0a0a;
-  border-radius:6px;
-  padding:24px 28px;
-  margin:32px 0 8px;
+/* ============= CASE-BLOCK (2-Spalten, Baulig-Pattern) ============= */
+.bb-case{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  display:grid;grid-template-columns:1.05fr 1fr;
+  margin:36px 0;overflow:hidden;
   position:relative;
-  box-shadow:6px 6px 0 0 var(--blue);
-  transform:rotate(-.4deg);
 }
-.achtung-box::before{
-  content:"!";
-  position:absolute;top:-22px;left:24px;
-  width:44px;height:44px;border-radius:50%;
-  background:var(--accent);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:32px;font-weight:800;line-height:1;
-  border:3px solid #0a0a0a;
-  box-shadow:3px 3px 0 0 #0a0a0a;
+.bb-case.reverse{grid-template-columns:1fr 1.05fr}
+.bb-case.reverse .bb-case-photo{order:2}
+.bb-case.reverse .bb-case-content{order:1}
+@media (max-width:880px){
+  .bb-case,.bb-case.reverse{grid-template-columns:1fr}
+  .bb-case.reverse .bb-case-photo{order:0}
+  .bb-case.reverse .bb-case-content{order:0}
 }
-.achtung-box .label{
-  font-family:var(--display);font-size:11px;font-weight:800;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:#0a0a0a;margin-bottom:6px;display:block;
-}
-.achtung-box p{
-  font-size:15.5px;color:#0a0a0a;line-height:1.55;font-weight:500;
-}
-.achtung-box strong{font-weight:800;background:#FDE047;padding:0 4px}
 
-/* VORHER → NACHHER Box */
-.beforeafter{
-  display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;
-  margin:48px 0 8px;
-}
-@media (max-width:780px){.beforeafter{grid-template-columns:1fr;gap:14px}}
-.ba-card{
-  border:2px solid #0a0a0a;border-radius:8px;
-  padding:24px 22px;
-  position:relative;background:#fff;
-  box-shadow:5px 5px 0 0 #0a0a0a;
-}
-.ba-card.before{
-  background:#FFF5F5;
-}
-.ba-card.before::before{
-  content:"VORHER · OHNE UNS";
-  position:absolute;top:-13px;left:14px;
-  background:#0a0a0a;color:#fff;padding:4px 10px;
-  font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.18em;
-  border-radius:3px;
-}
-.ba-card.after{
-  background:#ECFDF5;border-color:var(--blue);
-  box-shadow:5px 5px 0 0 var(--blue);
-}
-.ba-card.after::before{
-  content:"NACHHER · MIT BB BRANDS";
-  position:absolute;top:-13px;left:14px;
-  background:var(--blue);color:#fff;padding:4px 10px;
-  font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.18em;
-  border-radius:3px;
-}
-.ba-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
-.ba-card li{
-  display:flex;align-items:flex-start;gap:8px;
-  font-size:14px;color:#0a0a0a;line-height:1.45;
-}
-.ba-card.before li::before{
-  content:"✕";color:#DC2626;font-weight:900;font-size:16px;line-height:1.2;flex-shrink:0;
-}
-.ba-card.after li::before{
-  content:"✓";color:#16A34A;font-weight:900;font-size:16px;line-height:1.2;flex-shrink:0;
-}
-.ba-arrow{
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:800;font-size:36px;color:#0a0a0a;
-  align-self:center;
-}
-@media (max-width:780px){.ba-arrow{transform:rotate(90deg);font-size:32px;padding:8px 0}}
-
-/* Hand-drawn Arrow zum CTA · sanfte clean curve, zeigt klar AUF den Button */
-.scribble-wrap{position:absolute;width:155px;height:88px;pointer-events:none;z-index:3}
-.scribble-wrap.right{right:-95px;top:-46px}
-.scribble-wrap.left{left:-95px;top:-46px}
-.scribble-wrap svg{
-  width:100%;height:100%;color:var(--accent);
-  animation:wiggle 3.2s ease-in-out infinite;
-}
-.scribble-wrap.left svg{transform:scaleX(-1);animation:wiggle-left 3.2s ease-in-out infinite}
-.scribble-wrap .label{
-  position:absolute;top:0;
-  font-family:var(--display);font-weight:700;font-size:13px;
-  color:#0a0a0a;background:#FDE047;
-  padding:3px 10px;border-radius:3px;
-  white-space:nowrap;
-  border:2px solid #0a0a0a;
-  box-shadow:2px 2px 0 0 #0a0a0a;
-  z-index:2;
-}
-.scribble-wrap.right .label{right:6px;left:auto;transform:rotate(-5deg)}
-.scribble-wrap.left .label{left:6px;right:auto;transform:rotate(5deg)}
-@keyframes wiggle{
-  0%,100%{transform:rotate(0)}
-  50%{transform:rotate(1.5deg) translateY(-1px)}
-}
-@keyframes wiggle-left{
-  0%,100%{transform:scaleX(-1) rotate(0)}
-  50%{transform:scaleX(-1) rotate(1.5deg) translateY(-1px)}
-}
-@media (max-width:980px){.scribble-wrap{display:none}}
-
-/* Trust-Strip mit Stars + Plakativem Counter */
-.trust-row{
-  display:flex;align-items:center;justify-content:center;
-  gap:32px;flex-wrap:wrap;
-  padding:18px 24px;border-radius:99px;
-  background:#fff;border:2px solid #0a0a0a;
-  box-shadow:4px 4px 0 0 var(--accent);
-  margin:48px auto 0;max-width:900px;
-}
-.trust-row .stars{
-  display:inline-flex;gap:2px;
-  color:#92400E;
-  font-size:22px;letter-spacing:0;
-}
-.trust-row .item{
-  font-family:var(--display);font-weight:700;font-size:14.5px;
-  letter-spacing:-.005em;color:#0a0a0a;
-}
-.trust-row .item strong{color:var(--blue);font-size:18px;font-weight:800}
-.trust-row .sep{width:1px;height:22px;background:#d0d0cb}
-@media (max-width:780px){.trust-row{gap:16px;padding:14px 20px}.trust-row .sep{display:none}}
-
-/* Mega-Number Sticker für Stats */
-.stat-mega{
-  font-family:var(--display);font-weight:800;
-  font-size:78px;line-height:.9;letter-spacing:-.025em;
-  color:var(--blue);
-  position:relative;display:inline-block;
-}
-.stat-mega .arrow-sub{
-  position:absolute;font-family:var(--display);font-weight:700;
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:#fff;background:var(--accent);
-  padding:3px 8px;border-radius:3px;
+/* Sticker rotated -6deg (Baulig-Style) */
+.bb-sticker{
+  position:absolute;top:-20px;left:24px;z-index:5;
+  background:var(--bg-amber);color:#fff;
+  padding:14px 22px;
+  text-align:center;font-family:'Montserrat',sans-serif;
   transform:rotate(-6deg);
-  bottom:-4px;right:-32px;white-space:nowrap;
-  border:2px solid #0a0a0a;
+  box-shadow:2px 2px 12px rgba(0,0,0,.2);
+  display:flex;flex-direction:column;line-height:1;
+}
+.bb-sticker .top{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:4px}
+.bb-sticker .mid{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
+.bb-sticker .bot{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.bb-sticker.dark{background:#000}
+
+.bb-case-photo{
+  background-size:cover;background-position:center;min-height:480px;
+  position:relative;
+}
+.bb-case-photo.t1{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,var(--blue) 0%,var(--bg-amber) 100%)}
+.bb-case-photo.t2{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#000 0%,var(--blue) 100%)}
+.bb-case-photo.t3{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#FF7A00 0%,#000 100%)}
+.bb-case-photo.t4{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#02038F 0%,var(--bg-amber) 100%)}
+
+.bb-case-tag{
+  position:absolute;top:24px;left:24px;
+  background:rgba(0,0,0,.85);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 14px;
+}
+.bb-case-tag.live{background:var(--bg-green-up)}
+.bb-case-tag.live::before{content:"● ";color:#fff}
+.bb-case-url{
+  position:absolute;top:24px;right:24px;
+  background:rgba(255,255,255,.95);color:#000;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:.04em;
+  padding:8px 14px;
 }
 
-/* Headline mit Highlight-Variante */
-h1.page-h1 .hl{
-  background:linear-gradient(180deg, transparent 0%, transparent 60%, rgba(253,224,71,.85) 60%, rgba(253,224,71,.85) 92%, transparent 92%);
+/* Browser-Mockup (mittig im Photo) */
+.bb-browser{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:75%;background:#fff;
+  border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.bb-browser .bar{
+  background:#f5f5f5;padding:8px 12px;border-radius:6px 6px 0 0;
+  display:flex;align-items:center;gap:5px;
+}
+.bb-browser .dot{width:9px;height:9px;border-radius:50%;background:#ddd}
+.bb-browser .url{
+  background:#fff;padding:2px 12px;border-radius:3px;font-size:10px;
+  color:#666;margin-left:10px;font-family:monospace;
+}
+.bb-browser .body{
+  padding:36px 24px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;
+  text-align:center;color:#000;min-height:140px;
+  display:flex;align-items:center;justify-content:center;
 }
 
-/* Quote-Card mit Bauarbeiter-Look */
-.proof-quote{
-  background:#fff;border:3px solid #0a0a0a;border-radius:8px;
-  padding:32px 32px 28px;margin:32px 0;position:relative;
-  box-shadow:8px 8px 0 0 var(--blue);
-  max-width:760px;
+.bb-case-content{padding:48px 44px;display:flex;flex-direction:column}
+@media (max-width:780px){.bb-case-content{padding:32px 28px}.bb-case-photo{min-height:340px}}
+
+.bb-case-meta{
+  font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--bg-amber);margin-bottom:6px;
 }
-.proof-quote::before{
-  content:"\201E";
-  font-family:Georgia,serif;font-weight:900;font-size:120px;color:var(--accent);
-  position:absolute;top:-30px;left:18px;line-height:1;
+.bb-case-content h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:32px;line-height:1;margin-bottom:14px;color:#000;
 }
-.proof-quote .pq-text{
-  font-family:var(--display);font-weight:600;font-size:24px;line-height:1.25;
-  color:#0a0a0a;margin-bottom:18px;letter-spacing:-.005em;
-  padding-left:32px;
-}
-.proof-quote .pq-attribution{
-  font-size:13px;color:var(--text-2);font-weight:600;padding-left:32px;
-  display:flex;align-items:center;gap:10px;
-}
-.proof-quote .pq-attribution::before{
-  content:"";width:32px;height:2px;background:var(--accent);display:inline-block;
+.bb-case-tagline{
+  font-size:16px;font-weight:600;color:#000;margin-bottom:20px;line-height:1.4;
 }
 
-/* Section-Title mit "ACHTUNG"-Style */
-.dirty-h2{
-  font-family:var(--display);font-weight:800;
-  font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-.018em;
-  margin-bottom:18px;
+.bb-case-quote{
+  background:#FFF8EC;border-left:3px solid var(--bg-amber);
+  padding:16px 18px;margin-bottom:24px;
+  font-style:italic;font-size:14.5px;line-height:1.6;color:var(--bg-text-body);
 }
-.dirty-h2 .stamp{
+
+/* Stats-Row mit grünen ↑ Zahlen */
+.bb-case-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  margin:24px 0;padding:24px 0;border-top:1px solid var(--bg-line);border-bottom:1px solid var(--bg-line);
+}
+.bb-case-stat-num{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:30px;line-height:1;color:var(--bg-green-up);
+  margin-bottom:6px;display:flex;align-items:baseline;gap:4px;
+}
+.bb-case-stat-num::before{content:"↑";color:var(--bg-green-up);font-size:.85em}
+.bb-case-stat-num .plus{color:var(--bg-amber);font-weight:700}
+.bb-case-stat-label{
+  font-size:11px;color:var(--bg-text-muted);font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.3;
+}
+
+.bb-case-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.bb-chip{
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:11px;letter-spacing:.06em;
+  padding:6px 12px;background:#f5f5f5;
+  color:var(--bg-text-body);
+  border:1px solid var(--bg-line);
+}
+
+.bb-case-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;color:var(--bg-amber);
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:14px 0;border-top:1px solid var(--bg-line);
+  margin-top:auto;
+  text-decoration:none;
+}
+.bb-case-link::after{content:"→";transition:transform .2s}
+.bb-case:hover .bb-case-link::after{transform:translateX(4px)}
+
+/* ============= SECTION-HEAD ============= */
+.bb-head{text-align:center;margin-bottom:48px}
+.bb-head-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-amber);margin-bottom:18px;
+}
+.bb-head h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;letter-spacing:normal;
+  color:#000;max-width:900px;margin:0 auto 18px;
+}
+.bb-head h2 .hl-blue{color:var(--blue)}
+.bb-head p{
+  font-size:17px;color:var(--bg-text-body);
+  max-width:680px;margin:0 auto;line-height:1.65;
+}
+
+/* ============= METHODIK-GRID ============= */
+.bb-methodik{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  max-width:1100px;margin:0 auto;
+}
+@media (max-width:880px){.bb-methodik{grid-template-columns:1fr}}
+.bb-methodik-card{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  padding:36px 32px;
+}
+.bb-methodik-num{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;
+  color:var(--bg-amber);letter-spacing:.16em;margin-bottom:14px;
+}
+.bb-methodik-card h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:22px;line-height:1.2;margin-bottom:14px;color:#000;
+}
+.bb-methodik-card p{
+  font-size:14.5px;line-height:1.65;color:var(--bg-text-body);
+}
+
+/* ============= PULL-QUOTE ============= */
+.bb-pq{text-align:center;padding:64px 0;max-width:900px;margin:0 auto}
+.bb-pq-text{
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:28px;line-height:1.4;color:#000;
+  margin-bottom:24px;font-style:italic;
+}
+.bb-pq-text .hl{background:#FFE4B5;padding:0 6px}
+.bb-pq-text .scribble{text-decoration:line-through;color:var(--bg-text-muted)}
+.bb-pq-text strong{color:var(--bg-amber);font-style:normal}
+.bb-pq-author{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--bg-text-muted);
+}
+
+/* ============= CTA-BUTTON (Baulig-Style, ergänzend) ============= */
+.bb-cta{
   display:inline-block;
-  background-color:#0a0a0a;
-  color:#fff !important;
-  padding:6px 16px;border-radius:4px;
-  transform:rotate(-2deg);
-  font-weight:800;letter-spacing:-.005em;
-  border:3px solid #0a0a0a;
-  box-shadow:4px 4px 0 0 #FF6B3D;
-  margin:0 4px;
-  text-shadow:0 1px 0 rgba(0,0,0,.4);
+  background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.02em;
+  padding:18px 56px;border:none;border-radius:0;
+  box-shadow:1px 1px 20px rgba(0,0,0,.3);
+  transition:all .2s;text-align:center;line-height:1.3;cursor:pointer;
+  text-decoration:none;
 }
-.dirty-h2 .stamp.blue{
-  background-color:#0305C6;
-  border-color:#0305C6;
-  box-shadow:4px 4px 0 0 #0a0a0a;
-  transform:rotate(2deg);
+.bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);text-decoration:none;color:#fff}
+.bb-cta.large{font-size:18px;padding:22px 72px}
+
+.bb-cta-mid{text-align:center;padding:40px 0;margin:48px 0}
+.bb-cta-mid p{font-size:14px;color:var(--bg-text-muted);margin-top:14px;font-style:italic}
+
+/* ============= BOTTOM-CTA (dark mit Foto-BG) ============= */
+.bb-bottom{
+  text-align:center;padding:96px 0;
+  background-color:#000;color:#fff;
+  background-image:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),var(--bg-founder-2);
+  background-size:cover;background-position:center;
+}
+.bb-bottom h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#fff;
+  max-width:800px;margin:0 auto 24px;
+}
+.bb-bottom p{
+  font-size:17px;color:rgba(255,255,255,.82);
+  max-width:640px;margin:0 auto 36px;line-height:1.65;
+}
+.bb-bottom-secondary{
+  display:block;margin-top:18px;
+  font-size:13px;color:rgba(255,255,255,.6);
+  text-decoration:underline;
+}
+.bb-bottom-secondary strong{color:var(--bg-amber)}
+
+@media (max-width:780px){
+  .bb-hero h1,.bb-head h2,.bb-bottom h2{font-size:28px;line-height:1.25}
+  .bb-section{padding:56px 0}
+  .bb-case-content h3{font-size:26px}
+  .bb-pq-text{font-size:20px}
+  .bb-case-stats{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -665,7 +386,7 @@ h1.page-h1 .hl{
       <a href="/founder-os/">Founder OS</a>
     </nav>
     <div class="header-actions">
-      <a href="/#apply" class="header-cta"><span>Audit anfragen</span></a>
+      <a href="/audit/" class="header-cta"><span>Audit anfragen</span></a>
       <button class="mobile-toggle" aria-label="Menü" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
@@ -678,349 +399,311 @@ h1.page-h1 .hl{
   <a href="/cases/">Cases</a>
   <a href="/wissen/">Wissen</a>
   <a href="/founder-os/">Founder OS</a>
-  <a href="/#apply" class="mobile-cta">Strategy Audit anfragen →</a>
+  <a href="/audit/" class="mobile-cta">Strategy Audit anfragen →</a>
 </div>
 
-<!-- ============= 1 · HERO ============= -->
-<section class="cases-hero">
+<!-- ============= BAULIG-DNA PAGE ============= -->
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-80 bb-hero">
   <div class="wrap">
-    <div class="eyebrow" data-reveal>Cases · Stand 2026/Q2</div>
-    <h1 class="page-h1" data-reveal>Was wir <em>gebaut haben.</em><br><span class="hl">Echte Brands. Echte Builds.</span></h1>
-    <p class="lede" data-reveal>Eine kleine Auswahl unserer aktuellen Builds. <strong>Custom-Architekturen statt Theme-Adaption.</strong> Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert — <span class="hl-blue">nicht in 6 Monaten irrelevant ist.</span></p>
+    <div class="bb-hero-eyebrow"><strong>UNSERE CASE STUDIES:</strong></div>
+    <h1>Eine kleine Auswahl unserer aktuellen Builds. <span class="hl-blue">Custom-Architekturen statt Theme-Adaption.</span></h1>
+    <p class="bb-hero-sub">Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert — nicht in 6 Monaten irrelevant ist.</p>
 
-    <ul class="hero-bullets" data-reveal>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Custom-Theme</strong> auf Dawn-Basis — keine Drag-and-Drop-Limits.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Section-Library</strong> wächst mit dir — neue Produkte ohne Dev-Loop.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Brand-Doctrine</strong> + Voice-Guidelines, mit denen dein Team arbeiten kann.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Bundle-Architektur</strong> + idempotente Generatoren — skaliert ohne Chaos.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Direkter Founder-Zugang</strong> — kein Account-Manager, keine Übergaben.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>30 Tage Hypercare</strong> nach Launch — Bug-Fixes, Schulung, eingespielt.</span></li>
-    </ul>
-
-    <div class="cta-row" data-reveal style="position:relative">
-      <span class="cta-wrap" style="position:relative;display:inline-block">
-        <a href="/#apply" class="btn-primary">
-          <span>Strategy Audit buchen</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <span class="scribble-wrap right" aria-hidden="true">
-          <span class="label">hier klicken</span>
-          <svg viewBox="0 0 155 88" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 128 22 C 92 28, 50 38, 18 66"/>
-            <path d="M 28 50 L 18 66 L 36 70"/>
-          </svg>
-        </span>
-      </span>
-      <a href="#cases" class="btn-secondary">↓ direkt zu den Cases</a>
+    <div class="bb-hero-bullets">
+      <ul>
+        <li><strong>Custom-Theme</strong> auf Dawn-Basis — keine Drag-and-Drop-Limits.</li>
+        <li><strong>Section-Library</strong> wächst mit dir — neue Produkte ohne Dev-Loop.</li>
+        <li><strong>Brand-Doctrine</strong> + Voice-Guidelines, mit denen dein Team arbeiten kann.</li>
+        <li><strong>Bundle-Architektur</strong> + idempotente Generatoren — skaliert ohne Chaos.</li>
+        <li><strong>Direkter Founder-Zugang</strong> — kein Account-Manager, keine Übergaben.</li>
+        <li><strong>30 Tage Hypercare</strong> nach Launch — Bug-Fixes, Schulung, eingespielt.</li>
+      </ul>
     </div>
 
-    <div class="trust-row" data-reveal>
-      <span class="stars">★★★★★</span>
-      <span class="item">DTC-Builds · <strong>DACH-fokus</strong></span>
-      <span class="sep"></span>
+    <div class="bb-hero-meta">
+      <span class="item">DTC-Builds · <strong>DACH-Fokus</strong></span>
       <span class="item">Founder-Direct · <strong>0</strong> Junior-Layer</span>
-      <span class="sep"></span>
       <span class="item">Range <strong>1–20 Mio €</strong></span>
-      <span class="sep"></span>
       <span class="item"><strong>3–4</strong> Slots / Quartal</span>
     </div>
   </div>
 </section>
 
-<!-- ============= 2 · STATS GRID ============= -->
-<section style="padding-top:0">
+<!-- DISCLAIMER STRIP -->
+<section class="bb-section bb-section-95" style="padding:48px 0">
+  <div class="wrap" style="max-width:780px;text-align:center">
+    <p style="font-size:15px;line-height:1.65;color:var(--bg-text-body)">Wir zeigen hier <strong style="color:#000">Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Was du gleich siehst, ist eine <strong style="color:#000">kuratierte Auswahl</strong> unserer Builds — alle <strong style="color:#000">live</strong>, alle ausgeliefert. Weitere Cases &amp; tiefere Conversion-Daten gibt's im 60-Min-Audit, nicht als Marketing-Häppchen auf der Startseite.</p>
+  </div>
+</section>
+
+<!-- CASE 1: HEARO -->
+<section class="bb-section bb-section-90">
   <div class="wrap">
-    <div class="stats-row" data-reveal>
-      <div class="stat">
-        <div class="stat-num">DACH</div>
-        <div class="stat-label">DTC-Brands<br>fokussiert</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">100<span class="plus">+</span></div>
-        <div class="stat-label">Custom-Sections<br>gebaut</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">ROI-Rate<br>jeder Build rechnet sich</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">1</div>
-        <div class="stat-label">Founder<br>kein Junior-Layer</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">30</div>
-        <div class="stat-label">Tage Hypercare<br>nach jedem Launch</div>
-      </div>
+    <div class="bb-head">
+      <div class="bb-head-label">Case 01 · Premium-Audio · Live</div>
+      <h2>Hearo: Custom-Theme + Multi-Section-Architektur für Premium-Audio.</h2>
     </div>
 
-    <div class="achtung-box" data-reveal>
-      <span class="label">Achtung · Bevor du weiterscrollst</span>
-      <p>Wir zeigen hier <strong>Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Was du gleich siehst, ist eine <strong>kuratierte Auswahl</strong> unserer Builds — alle <strong>live</strong>, alle ausgeliefert. Weitere Cases &amp; tiefere Conversion-Daten gibt's im 60-Min-Audit, nicht als Marketing-Häppchen auf der Startseite.</p>
+    <article class="bb-case">
+      <div class="bb-sticker">
+        <span class="top">Build-Time</span>
+        <span class="mid">8 WO</span>
+        <span class="bot">bis Launch</span>
+      </div>
+
+      <div class="bb-case-photo t1">
+        <span class="bb-case-tag live">Live</span>
+        <span class="bb-case-url">hearo.de</span>
+        <div class="bb-browser">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">hearo.de</span></div>
+          <div class="body">Hearo</div>
+        </div>
+      </div>
+
+      <div class="bb-case-content">
+        <div class="bb-case-meta">Premium-Audio · DTC</div>
+        <h3>Hearo</h3>
+        <div class="bb-case-tagline">Custom-Theme + Multi-Section-Architektur für Premium-Audio.</div>
+
+        <div class="bb-case-quote">"Section-Library, die mit dem Sortiment wächst. Kein Theme-Editor-Frickeln, keine Dev-Loops für jedes neue Produkt."</div>
+
+        <div class="bb-case-stats">
+          <div>
+            <div class="bb-case-stat-num">14<span class="plus">+</span></div>
+            <div class="bb-case-stat-label">Custom Sections</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">100%</div>
+            <div class="bb-case-stat-label">Custom Liquid</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">8</div>
+            <div class="bb-case-stat-label">Wochen<br>bis Launch</div>
+          </div>
+        </div>
+
+        <div class="bb-case-chips">
+          <span class="bb-chip">Brand-Doctrine</span>
+          <span class="bb-chip">Voice-Guidelines</span>
+          <span class="bb-chip">PDP-System</span>
+          <span class="bb-chip">Bundle-Konzept</span>
+        </div>
+
+        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CASE 2: BACHGOLD -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Case 02 · Wasserfilter · Live</div>
+      <h2>Bachgold: 15 Custom-PDPs aus einem idempotenten Generator. <span class="hl-blue">Bundle-Architektur für 7 Bundles.</span></h2>
     </div>
 
-    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp blue">mit uns.</span></h2>
+    <article class="bb-case reverse">
+      <div class="bb-sticker dark">
+        <span class="top">Generator</span>
+        <span class="mid">15 PDPs</span>
+        <span class="bot">idempotent</span>
+      </div>
 
-    <div class="beforeafter" data-reveal>
-      <div class="ba-card before">
-        <ul>
-          <li>Theme-Adaption mit 200 Klicks pro Layout-Change</li>
-          <li>Account-Manager als Telefon-Klingel zwischen dir und Dev</li>
-          <li>"Wachstums-Agentur" mit 12-monatiger Roadmap, die nichts liefert</li>
-          <li>Generischer "Section-Builder", der bei Sortiment-Skalierung kaputtgeht</li>
-          <li>ROAS-Versprechen ohne Datenbasis — Vanity-Metriken statt Profit</li>
-        </ul>
+      <div class="bb-case-content">
+        <div class="bb-case-meta">Wasserfilter · Re-Launch</div>
+        <h3>Bachgold</h3>
+        <div class="bb-case-tagline">15 Custom-PDPs aus einem idempotenten Generator. Bundle-Architektur für 7 Bundles.</div>
+
+        <div class="bb-case-quote">"Re-Launch ohne Traffic-Verlust. Tausende Produkt-Varianten konsolidiert in eine PDP-Generator-Pipeline, die jedes Mal das gleiche Ergebnis liefert."</div>
+
+        <div class="bb-case-stats">
+          <div>
+            <div class="bb-case-stat-num">15</div>
+            <div class="bb-case-stat-label">Custom PDPs</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">14<span class="plus">+</span></div>
+            <div class="bb-case-stat-label">Reusable Sections</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">7</div>
+            <div class="bb-case-stat-label">Bundles<br>via Generator</div>
+          </div>
+        </div>
+
+        <div class="bb-case-chips">
+          <span class="bb-chip">Idempotenter Generator</span>
+          <span class="bb-chip">Bundle-Master</span>
+          <span class="bb-chip">Section-Library</span>
+          <span class="bb-chip">Repositioning</span>
+        </div>
+
+        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
       </div>
-      <div class="ba-arrow">→</div>
-      <div class="ba-card after">
-        <ul>
-          <li>Custom-Theme auf Dawn-Basis, jede Section dokumentiert &amp; reusable</li>
-          <li>Founder-Direct — Moritz, vom ersten Call bis Hypercare</li>
-          <li>Build-Sprints in 4–8 Wochen, nicht 4–8 Monate</li>
-          <li>Idempotente PDP-Generatoren — bei 15 Bachgold-PDPs identisch reproduzierbar</li>
-          <li>Outcome-fokussiert — Profit, LTV, CAC. Garantie auf Speed, nicht auf Wunder</li>
-        </ul>
+
+      <div class="bb-case-photo t2">
+        <span class="bb-case-tag live">Live</span>
+        <span class="bb-case-url">bachgold.de</span>
+        <div class="bb-browser">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">bachgold.de</span></div>
+          <div class="body">Bachgold</div>
+        </div>
       </div>
+    </article>
+  </div>
+</section>
+
+<!-- PULL-QUOTE -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="bb-pq">
+      <p class="bb-pq-text">"Section-Library, die mit dem Sortiment <span class="hl">wirklich</span> mitwächst. Kein Theme-Editor-Frickeln, kein <span class="scribble">Account-Manager</span> dazwischen. Direkt mit Moritz, <strong>direkt geliefert.</strong>"</p>
+      <div class="bb-pq-author">— DTC-Founder · 1–20 Mio € Range</div>
     </div>
   </div>
 </section>
 
-<!-- ============= 3 · MAIN CASES ============= -->
-<section class="cream" id="cases">
+<!-- MID-CTA -->
+<section class="bb-section bb-section-90" style="padding:48px 0">
   <div class="wrap">
-
-    <div class="main-cases">
-
-      <!-- CASE 1: HEARO -->
-      <article class="case-card" data-reveal style="position:relative">
-        <div class="sticker blue" style="position:absolute;top:-26px;right:-22px;z-index:5">
-          <span class="sticker-top">Build</span>
-          <span class="sticker-mid">8 WO</span>
-          <span class="sticker-bot">bis Launch</span>
-        </div>
-        <div class="case-mockup">
-          <span class="case-status-pill live">Live</span>
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">hearo.de</span>
-            </div>
-            <div class="browser-content">Hearo</div>
-          </div>
-        </div>
-        <div class="case-content">
-          <div class="case-meta">Premium-Audio · DTC</div>
-          <h3>Hearo</h3>
-          <div class="case-tagline">Custom-Theme + Multi-Section-Architektur für Premium-Audio.</div>
-          <p class="case-quote">"Section-Library, die mit dem Sortiment wächst. Kein Theme-Editor-Frickeln, keine Dev-Loops für jedes neue Produkt."</p>
-
-          <div class="case-stats">
-            <div class="case-stats-item">
-              <div class="case-stats-num">14<span class="plus">+</span></div>
-              <div class="case-stats-label">Custom Sections</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">100%</div>
-              <div class="case-stats-label">Custom Liquid</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">8</div>
-              <div class="case-stats-label">Wochen<br>bis Launch</div>
-            </div>
-          </div>
-
-          <div class="case-deliverables">
-            <span class="case-chip">Brand-Doctrine</span>
-            <span class="case-chip">Voice-Guidelines</span>
-            <span class="case-chip">PDP-System</span>
-            <span class="case-chip">Bundle-Konzept</span>
-          </div>
-
-          <a href="/#apply" class="case-cta">
-            <span>Tiefer im Strategy Audit besprechen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- CASE 2: BACHGOLD -->
-      <article class="case-card" data-reveal style="position:relative">
-        <div class="sticker orange" style="position:absolute;top:-26px;left:-24px;z-index:5">
-          <span class="sticker-top">Generator</span>
-          <span class="sticker-mid">15 PDPs</span>
-          <span class="sticker-bot">idempotent</span>
-        </div>
-        <div class="case-mockup">
-          <span class="case-status-pill live">Live</span>
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">bachgold.de</span>
-            </div>
-            <div class="browser-content">Bachgold</div>
-          </div>
-        </div>
-        <div class="case-content">
-          <div class="case-meta">Wasserfilter · Re-Launch</div>
-          <h3>Bachgold</h3>
-          <div class="case-tagline">15 Custom-PDPs aus einem idempotenten Generator. Bundle-Architektur für 7 Bundles.</div>
-          <p class="case-quote">"Re-Launch ohne Traffic-Verlust. Tausende Produkt-Varianten konsolidiert in eine PDP-Generator-Pipeline, die jedes Mal das gleiche Ergebnis liefert."</p>
-
-          <div class="case-stats">
-            <div class="case-stats-item">
-              <div class="case-stats-num">15</div>
-              <div class="case-stats-label">Custom PDPs</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">14<span class="plus">+</span></div>
-              <div class="case-stats-label">Reusable Sections</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">7</div>
-              <div class="case-stats-label">Bundles<br>via Generator</div>
-            </div>
-          </div>
-
-          <div class="case-deliverables">
-            <span class="case-chip">Idempotenter Generator</span>
-            <span class="case-chip">Bundle-Master</span>
-            <span class="case-chip">Section-Library</span>
-            <span class="case-chip">Repositioning</span>
-          </div>
-
-          <a href="/#apply" class="case-cta">
-            <span>Tiefer im Strategy Audit besprechen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- CASE 3: WAKE PERFORMANCE -->
-      <article class="case-card" data-reveal>
-        <div class="case-mockup">
-          <span class="case-status-pill live">Live</span>
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">wakeperformance.de</span>
-            </div>
-            <div class="browser-content">Wake Performance</div>
-          </div>
-        </div>
-        <div class="case-content">
-          <div class="case-meta">Performance-Apparel · DTC</div>
-          <h3>Wake Performance</h3>
-          <div class="case-tagline">Launch-Architektur mit Drop-System für Performance-Apparel.</div>
-          <p class="case-quote">"Launch-Architektur statt Catalog-Theme. Drop-Plan, E-Mail-Setup und Performance-Marketing-Strategie ineinander verzahnt — nicht als isolierte Silos."</p>
-
-          <div class="case-stats">
-            <div class="case-stats-item">
-              <div class="case-stats-num">v1</div>
-              <div class="case-stats-label">Drop-System<br>live</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">3</div>
-              <div class="case-stats-label">Phasen-Bundle<br>aktiv</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">100%</div>
-              <div class="case-stats-label">ROI<br>Build-rechnet</div>
-            </div>
-          </div>
-
-          <div class="case-deliverables">
-            <span class="case-chip">Custom-Theme</span>
-            <span class="case-chip">Drop-System</span>
-            <span class="case-chip">E-Mail-Setup</span>
-            <span class="case-chip">Launch-Beratung</span>
-          </div>
-
-          <a href="/#apply" class="case-cta">
-            <span>Tiefer im Strategy Audit besprechen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- CASE 4: REERECT -->
-      <article class="case-card" data-reveal>
-        <div class="case-mockup">
-          <span class="case-status-pill live">Live</span>
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="url">reerect.com</span>
-            </div>
-            <div class="browser-content">Reerect</div>
-          </div>
-        </div>
-        <div class="case-content">
-          <div class="case-meta">DTC · Custom-Build</div>
-          <h3>Reerect</h3>
-          <div class="case-tagline">Custom-Theme + Brand-System für skalierungsorientiertes DTC.</div>
-          <p class="case-quote">"Build-First-Mentalität. Brand-Doctrine, Theme und Section-Library so aufgesetzt, dass das Sortiment ohne Dev-Loop wachsen kann."</p>
-
-          <div class="case-stats">
-            <div class="case-stats-item">
-              <div class="case-stats-num">Custom</div>
-              <div class="case-stats-label">Theme<br>auf Dawn-Basis</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">Brand</div>
-              <div class="case-stats-label">System<br>komplett</div>
-            </div>
-            <div class="case-stats-item">
-              <div class="case-stats-num">100%</div>
-              <div class="case-stats-label">ROI<br>Build-rechnet</div>
-            </div>
-          </div>
-
-          <div class="case-deliverables">
-            <span class="case-chip">Custom-Theme</span>
-            <span class="case-chip">Brand-System</span>
-            <span class="case-chip">Section-Library</span>
-          </div>
-
-          <a href="/#apply" class="case-cta">
-            <span>Methode im Audit besprechen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
+    <div class="bb-cta-mid">
+      <a href="/audit/" class="bb-cta">Jetzt unverbindliches Strategy Audit buchen!</a>
+      <p>Pro Quartal nehmen wir maximal 3–4 neue Projekte an.</p>
     </div>
   </div>
 </section>
 
-<!-- ============= 3.5 · MEGA-QUOTE / PROOF ============= -->
-<section style="padding:64px 0">
-  <div class="wrap" style="display:flex;justify-content:center">
-    <div class="proof-quote" data-reveal>
-      <p class="pq-text">"Section-Library, die mit dem Sortiment <span class="hl">wirklich</span> mitwächst. Kein Theme-Editor-Frickeln, kein <span class="scribble">Account-Manager</span> dazwischen. Direkt mit Moritz, <strong>direkt geliefert.</strong>"</p>
-      <p class="pq-attribution">Build-Pattern bei Hearo &amp; Bachgold · 28+ wiederverwendbare Sections · 15 Custom-PDPs</p>
+<!-- CASE 3: WAKE PERFORMANCE -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Case 03 · Performance-Apparel · Live</div>
+      <h2>Wake Performance: Launch-Architektur mit Drop-System für Performance-Apparel.</h2>
     </div>
+
+    <article class="bb-case">
+      <div class="bb-case-photo t3">
+        <span class="bb-case-tag live">Live</span>
+        <span class="bb-case-url">wakeperformance.de</span>
+        <div class="bb-browser">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">wakeperformance.de</span></div>
+          <div class="body">Wake</div>
+        </div>
+      </div>
+
+      <div class="bb-case-content">
+        <div class="bb-case-meta">Performance-Apparel · DTC</div>
+        <h3>Wake Performance</h3>
+        <div class="bb-case-tagline">Launch-Architektur mit Drop-System für Performance-Apparel.</div>
+
+        <div class="bb-case-quote">"Launch-Architektur statt Catalog-Theme. Drop-Plan, E-Mail-Setup und Performance-Marketing-Strategie ineinander verzahnt — nicht als isolierte Silos."</div>
+
+        <div class="bb-case-stats">
+          <div>
+            <div class="bb-case-stat-num">v1</div>
+            <div class="bb-case-stat-label">Drop-System<br>live</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">3</div>
+            <div class="bb-case-stat-label">Phasen-Bundle<br>aktiv</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">100%</div>
+            <div class="bb-case-stat-label">ROI<br>Build-rechnet</div>
+          </div>
+        </div>
+
+        <div class="bb-case-chips">
+          <span class="bb-chip">Custom-Theme</span>
+          <span class="bb-chip">Drop-System</span>
+          <span class="bb-chip">E-Mail-Setup</span>
+          <span class="bb-chip">Launch-Beratung</span>
+        </div>
+
+        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============= 4 · METHOD ============= -->
-<section>
+<!-- CASE 4: REERECT -->
+<section class="bb-section bb-section-90">
   <div class="wrap">
-    <div class="eyebrow" data-reveal>Methode</div>
-    <h2 class="section-h2" data-reveal>Wie wir <em>bauen.</em></h2>
-    <p class="lede" data-reveal>Drei Prinzipien, die jeden Build durchziehen — Hearo wie Bachgold wie Wake Performance.</p>
+    <div class="bb-head">
+      <div class="bb-head-label">Case 04 · DTC · Custom-Build · Live</div>
+      <h2>Reerect: Custom-Theme + Brand-System für skalierungsorientiertes DTC.</h2>
+    </div>
 
-    <div class="method-grid">
-      <div class="method-item" data-reveal>
-        <div class="method-num">01</div>
+    <article class="bb-case reverse">
+      <div class="bb-case-content">
+        <div class="bb-case-meta">DTC · Custom-Build</div>
+        <h3>Reerect</h3>
+        <div class="bb-case-tagline">Custom-Theme + Brand-System für skalierungsorientiertes DTC.</div>
+
+        <div class="bb-case-quote">"Build-First-Mentalität. Brand-Doctrine, Theme und Section-Library so aufgesetzt, dass das Sortiment ohne Dev-Loop wachsen kann."</div>
+
+        <div class="bb-case-stats">
+          <div>
+            <div class="bb-case-stat-num">Custom</div>
+            <div class="bb-case-stat-label">Theme<br>auf Dawn-Basis</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">Brand</div>
+            <div class="bb-case-stat-label">System<br>komplett</div>
+          </div>
+          <div>
+            <div class="bb-case-stat-num">Live</div>
+            <div class="bb-case-stat-label">Production<br>seit Launch</div>
+          </div>
+        </div>
+
+        <div class="bb-case-chips">
+          <span class="bb-chip">Custom-Theme</span>
+          <span class="bb-chip">Brand-Doctrine</span>
+          <span class="bb-chip">Section-Library</span>
+          <span class="bb-chip">Skalierungs-Setup</span>
+        </div>
+
+        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
+      </div>
+
+      <div class="bb-case-photo t4">
+        <span class="bb-case-tag live">Live</span>
+        <span class="bb-case-url">reerect.com</span>
+        <div class="bb-browser">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">reerect.com</span></div>
+          <div class="body">Reerect</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- METHODIK 3-PILLAR -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Was alle Builds verbindet</div>
+      <h2>Drei Prinzipien, die jeder unserer Builds folgt.</h2>
+    </div>
+
+    <div class="bb-methodik">
+      <div class="bb-methodik-card">
+        <div class="bb-methodik-num">01</div>
         <h3>Doctrine vor Design</h3>
         <p>Bevor irgendetwas gebaut wird: Brand-Doctrine + Voice-Guidelines auf Papier. Jede Section, jede PDP-Headline, jeder E-Mail-Subject hat danach einen klaren Bezug. Kein "macht halt schön".</p>
       </div>
-      <div class="method-item" data-reveal>
-        <div class="method-num">02</div>
+      <div class="bb-methodik-card">
+        <div class="bb-methodik-num">02</div>
         <h3>Section-Library statt Wegwerf-Code</h3>
         <p>Jeder Build hinterlässt eine Library wiederverwendbarer Sections. Hearo: 14+. Bachgold: 14+. Du bekommst einen Theme, der mit deinem Sortiment skaliert — nicht eine Landingpage, die in 6 Monaten irrelevant wird.</p>
       </div>
-      <div class="method-item" data-reveal>
-        <div class="method-num">03</div>
+      <div class="bb-methodik-card">
+        <div class="bb-methodik-num">03</div>
         <h3>Idempotente Generatoren</h3>
         <p>Bei 15+ ähnlichen PDPs schreiben wir Generatoren statt Copy-Paste. Bachgold-Pattern: Eine Source-of-Truth, ein Generator, 15 PDPs raus, jedes Mal identisch. Re-Launch-fähig ohne Excel-Hölle.</p>
       </div>
@@ -1028,35 +711,17 @@ h1.page-h1 .hl{
   </div>
 </section>
 
-<!-- ============= 5 · FINAL CTA ============= -->
-<section class="dark" style="position:relative">
+<!-- BOTTOM-CTA (dark mit Foto-BG) -->
+<section class="bb-bottom">
   <div class="wrap">
-    <div class="final-cta-block" data-reveal style="position:relative">
-      <div class="sticker orange" style="position:absolute;top:-46px;right:-10px">
-        <span class="sticker-top">Garantie</span>
-        <span class="sticker-mid">SPEED</span>
-        <span class="sticker-bot">to market</span>
-      </div>
-      <div class="eyebrow" style="color:var(--accent)">Strategy Audit · 60 Min</div>
-      <h2>Bereit für die <em>Transformation?</em></h2>
-      <p>60-Min-Audit mit Founder. Diagnose deines Setups, konkrete Hebel, Timeline. Ehrlich oder nicht — danach weißt du, ob wir der richtige Partner sind.</p>
-      <span class="cta-wrap" style="position:relative;display:inline-block">
-        <a href="/#apply" class="btn-primary">
-          <span>Jetzt Slot wählen</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <span class="scribble-wrap left" aria-hidden="true">
-          <span class="label">nur 3–4 Slots Q2</span>
-          <svg viewBox="0 0 155 88" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 128 22 C 92 28, 50 38, 18 66"/>
-            <path d="M 28 50 L 18 66 L 36 70"/>
-          </svg>
-        </span>
-      </span>
-      <div class="final-cta-meta">★★★★★ · Pro Quartal max. <strong style="color:var(--accent)">3–4 neue Projekte</strong> · Antwort innerhalb 1 Werktag</div>
-    </div>
+    <h2>Wirst du der nächste Case?</h2>
+    <p>60-Min-Audit mit Founder. Diagnose deines Setups, konkrete Hebel, Timeline. Ehrlich oder nicht — danach weißt du, ob wir der richtige Partner sind.</p>
+    <a href="/audit/" class="bb-cta large">Strategy Audit buchen</a>
+    <a href="/founder-os/" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
   </div>
 </section>
+
+</main>
 
 <!-- ============= FOOTER ============= -->
 <footer>
@@ -1070,24 +735,6 @@ h1.page-h1 .hl{
     </div>
   </div>
 </footer>
-
-<script>
-/* === Scroll Reveal === */
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('[data-reveal]').forEach(function(el){
-    io.observe(el);
-  });
-})();
-</script>
 
 </body>
 </html>

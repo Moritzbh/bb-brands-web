@@ -3,253 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Wissen, Frameworks und Live-Tools für DTC-Founder. Guides, AI Check, Brand Audit plus 3 Rechner für ROAS, Marge und AOV. Kostenlos. Ohne E-Mail-Pflicht.">
-<meta name="robots" content="index, follow">
-<title>Wissen-Hub · BB Brands</title>
-<link rel="canonical" href="https://bb-brands.de/wissen/">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wissen-Hub · BB Brands">
-<meta property="og:description" content="Vier Wege uns kennenzulernen: Guide, Framework, AI Check, Strategy Audit. Kostenlos.">
-<meta property="og:url" content="https://bb-brands.de/wissen/">
-
+<meta name="description" content="Wissen-Hub von BB Brands — Frameworks, Guides und Live-Tools für DTC-Founder. Kostenlos, ohne E-Mail-Pflicht.">
+<title>Wissen · BB Brands</title>
 <link rel="stylesheet" href="/assets/css/shared.css">
-<!-- Brand-Schriften: Saira Condensed (Display) + Inter (Body) + Caveat / Space Mono (Akzente) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ========== WISSEN-HUB ========== */
-.wissen-page{padding:80px 0 120px;background:var(--bg)}
+/* ============= TOKEN-OVERRIDES (Brand V1 + Baulig-DNA) ============= */
+.brand-logo{color:var(--blue);font-weight:700;letter-spacing:-.02em}
+.main-nav a:hover{color:var(--blue)}
+.main-nav a.active{color:var(--blue)}
+.main-nav a.active::after{background:var(--blue)}
+.header-cta{
+  background:var(--blue);color:#fff;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 10px rgba(3,5,198,.22);
+}
+.header-cta:hover{
+  background:var(--blue);
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(3,5,198,.32);
+}
+.mobile-menu a.mobile-cta{background:var(--blue)}
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--blue)}
 
-.wissen-hero{max-width:780px;margin-bottom:64px}
-.wissen-hero .eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--display);
-  font-size:11px;font-weight:700;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--accent);
-  padding:7px 14px;border-radius:100px;
-  background:var(--accent-bg);
-  border:1px solid rgba(255,107,61,.25);
-  margin-bottom:24px;
-}
-.wissen-hero .eyebrow::before{
-  content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;
-}
-.wissen-hero h1{
-  font-family:var(--display);font-weight:800;
-  font-size:clamp(40px,6vw,72px);
-  letter-spacing:-.025em;line-height:1.04;
-  color:var(--black);margin-bottom:24px;
-}
-.wissen-hero h1 em{
-  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
-  color:var(--accent);
-  font-size:1.05em;letter-spacing:0;
-}
-.wissen-hero p.lede{
-  font-size:19px;font-weight:400;color:var(--text-2);
-  line-height:1.65;max-width:680px;
+/* ============= BAULIG-DNA · PAGE TOKENS ============= */
+:root{
+  --bg-amber:#FFAC3B;
+  --bg-amber-hover:#FF9518;
+  --bg-green-up:#16a34a;
+  --bg-text-body:#333;
+  --bg-text-muted:#666;
+  --bg-line:#e5e5e5;
+  --bg-founder-1:url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-2:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-3:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70');
 }
 
-.journey-strip{
-  display:flex;gap:14px;align-items:flex-start;
-  margin:32px 0 0;padding:18px 22px;
-  border:1px solid var(--line);border-radius:14px;
-  background:var(--bg-alt);max-width:720px;
+.bb-page{
+  font-family:'Montserrat',sans-serif;
+  font-size:15px;line-height:1.7;font-weight:400;color:#000;
 }
-.journey-strip svg{flex-shrink:0;margin-top:2px;color:var(--blue)}
-.journey-strip p{
-  font-size:14px;color:var(--text-2);line-height:1.6;margin:0;
-}
-.journey-strip strong{color:var(--blue);font-weight:700}
+.bb-page .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.bb-page .wrap{padding:0 20px}}
 
-/* Grid */
-.wissen-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:32px;
+.bb-section{
+  padding:80px 0;background-color:#fff;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  background-attachment:fixed;position:relative;
 }
-@media (max-width:880px){.wissen-grid{grid-template-columns:1fr;gap:20px}}
+.bb-section-80{background-image:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),var(--bg-founder-1)}
+.bb-section-90{background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-2)}
+.bb-section-95{background-image:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),var(--bg-founder-1)}
+.bb-section-50{background-image:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),var(--bg-founder-3)}
+@media (max-width:780px){.bb-section{background-attachment:scroll}}
 
-.wissen-card{
-  display:flex;flex-direction:column;
-  background:#fff;border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;
-  transition:all .25s ease;position:relative;
-  text-decoration:none;color:inherit;
-  box-shadow:0 1px 3px rgba(0,0,0,.04);
+/* ============= HERO ============= */
+.bb-hero{padding:64px 0 80px;text-align:center}
+.bb-hero-eyebrow{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.05em;color:var(--bg-text-body);margin-bottom:24px;
 }
-.wissen-card:hover{
-  border-color:var(--blue);
-  transform:translateY(-3px);
-  box-shadow:0 18px 40px -12px rgba(3,5,198,.18);
+.bb-hero-eyebrow strong{color:#000}
+.bb-hero h1{
+  font-family:'Montserrat',sans-serif;font-size:39px;font-weight:700;
+  line-height:50px;color:#000;max-width:1000px;margin:0 auto 24px;
+}
+.bb-hero-sub{
+  font-size:18px;font-weight:600;line-height:1.5;color:#000;
+  max-width:760px;margin:0 auto 56px;
+}
+
+.bb-hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  max-width:1100px;margin:0 auto;align-items:center;text-align:left;
+}
+@media (max-width:880px){.bb-hero-grid{grid-template-columns:1fr}}
+
+.bb-hero-video{
+  background:#fff;padding:0;
+  box-shadow:1px 1px 30px rgba(0,0,0,.15);
+  position:relative;aspect-ratio:16/10;
+  display:flex;align-items:center;justify-content:center;
+  background-image:linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)),var(--bg-founder-1);
+  background-size:cover;background-position:center;
+}
+.bb-video-play{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(255,255,255,.95);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(0,0,0,.18);cursor:pointer;
+}
+.bb-video-play svg{width:32px;height:32px;color:#000;margin-left:4px}
+
+.bb-hero-bullets-list{list-style:disc outside;padding-left:22px;margin:0}
+.bb-hero-bullets-list li{
+  font-size:15px;line-height:1.6;color:#000;
+  margin-bottom:24px;font-weight:500;
+}
+.bb-hero-bullets-list li::marker{color:var(--bg-green-up);font-size:1.3em}
+
+/* ============= CTA-BUTTON (Baulig amber) ============= */
+.bb-cta{
+  display:inline-block;
+  background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.02em;
+  padding:18px 56px;border:none;border-radius:0;
+  box-shadow:1px 1px 20px rgba(0,0,0,.3);
+  transition:all .2s;text-align:center;line-height:1.3;cursor:pointer;
   text-decoration:none;
 }
-.card-step{
-  position:absolute;top:14px;right:14px;
-  font-family:var(--display);
-  font-size:10px;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;color:#fff;
-  background:rgba(10,10,10,.78);padding:5px 10px;
-  border-radius:100px;border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(8px);z-index:2;
+.bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);text-decoration:none;color:#fff}
+.bb-cta.large{font-size:18px;padding:22px 72px}
+.bb-cta-meta{font-size:13px;font-style:italic;color:var(--bg-text-muted);margin-top:14px}
+.bb-hero-cta{margin-top:28px}
+
+/* ============= TRUST-STRIPE ============= */
+.bb-trust{
+  display:flex;align-items:center;justify-content:center;
+  gap:48px;flex-wrap:wrap;margin-top:64px;
 }
-.card-thumb{
-  aspect-ratio:16/9;background:var(--bg-alt);
-  background-size:cover;background-position:center;
+.bb-trust-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.bb-trust-tuev{
+  width:80px;height:80px;background:#fff;
+  border:1px solid var(--bg-line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;
+  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:8px;
+}
+.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:4px;text-align:center}
+.bb-trust-reviews{display:flex;flex-direction:column;gap:4px}
+.bb-trust-reviews-name{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#000;
+}
+.bb-trust-reviews-rating{
+  display:flex;align-items:center;gap:8px;
+  font-size:32px;font-weight:800;color:#000;
+}
+.bb-trust-reviews-rating .stars{color:#22c55e;font-size:24px;letter-spacing:1px}
+.bb-trust-reviews-label{font-size:11px;color:var(--bg-text-muted);font-weight:600}
+.bb-trust-reviews-label a{color:var(--bg-amber);text-decoration:underline}
+.bb-trust-award{
+  width:90px;height:100px;
+  background:linear-gradient(135deg,#FFAC3B 0%,#FF7A00 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.bb-trust-award-text{
+  color:#fff;font-family:'Montserrat',sans-serif;
+  font-weight:800;font-size:9px;letter-spacing:.04em;
+  text-transform:uppercase;text-align:center;line-height:1.3;
+}
+
+/* ============= SECTION-HEAD ============= */
+.bb-head{text-align:center;margin-bottom:64px}
+.bb-head-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-amber);margin-bottom:18px;
+}
+.bb-head h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;
+  color:#000;max-width:900px;margin:0 auto 18px;
+}
+.bb-head p{font-size:17px;color:var(--bg-text-body);max-width:680px;margin:0 auto;line-height:1.65}
+
+/* ============= CARDS-GRID (Articles + Tools) ============= */
+.bb-cards{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:36px;
+  max-width:1100px;margin:0 auto;
+}
+@media (max-width:880px){.bb-cards{grid-template-columns:1fr}}
+.bb-cards.tools{grid-template-columns:repeat(3,1fr)}
+@media (max-width:1080px){.bb-cards.tools{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){.bb-cards.tools{grid-template-columns:1fr}}
+
+.bb-card{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  display:flex;flex-direction:column;
+  transition:all .25s ease;text-decoration:none;
+}
+.bb-card:hover{box-shadow:1px 1px 40px rgba(0,0,0,.22);transform:translateY(-3px);text-decoration:none}
+.bb-card-thumb{aspect-ratio:16/9;background-size:cover;background-position:center;position:relative}
+.bb-card-thumb.t1{background-image:linear-gradient(135deg,var(--blue) 0%,var(--bg-amber) 100%)}
+.bb-card-thumb.t2{background-image:linear-gradient(135deg,var(--bg-amber) 0%,var(--blue) 100%)}
+.bb-card-thumb.t3{background-image:linear-gradient(135deg,#000 0%,var(--bg-amber) 100%)}
+.bb-card-thumb.t4{background-image:linear-gradient(135deg,#02038F 0%,#000 100%)}
+.bb-card-thumb.t5{background-image:linear-gradient(135deg,#FF7A00 0%,var(--bg-amber) 100%)}
+.bb-card-tag{
+  position:absolute;top:18px;left:18px;
+  background:#fff;color:#000;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;
+}
+.bb-card-body{padding:36px 32px 32px;flex-grow:1;display:flex;flex-direction:column}
+.bb-card-body h3{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:22px;line-height:1.3;color:#000;margin-bottom:14px;
+}
+.bb-card-body p{font-size:15px;color:var(--bg-text-body);line-height:1.65;margin-bottom:24px;flex-grow:1}
+.bb-card-meta{
+  font-size:12px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em;
+  padding-top:18px;border-top:1px solid var(--bg-line);margin-bottom:18px;
+}
+.bb-card-link{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;color:var(--bg-amber);
+  letter-spacing:.04em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.bb-card-link::after{content:"→";transition:transform .2s}
+.bb-card:hover .bb-card-link::after{transform:translateX(4px)}
+
+/* ============= TESTIMONIAL-BLOCK ============= */
+.bb-testimonial{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  display:grid;grid-template-columns:1.2fr 1fr;
+  margin:48px 0;
+}
+@media (max-width:780px){.bb-testimonial{grid-template-columns:1fr}}
+.bb-testimonial-photo{
+  background-size:cover;background-position:center;aspect-ratio:1/1;
+  background-image:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),var(--bg-founder-2);
   position:relative;
 }
-.card-thumb.t1{background-image:linear-gradient(135deg,#0305C6 0%,#1E3AFF 100%)}
-.card-thumb.t2{background-image:linear-gradient(135deg,#FF6B3D 0%,#0305C6 100%)}
-.card-thumb.t3{background-image:linear-gradient(135deg,#02038F 0%,#FF6B3D 100%)}
-.card-thumb.t4{background-image:linear-gradient(135deg,#FF6B3D 0%,#1E3AFF 100%)}
-.card-thumb.t5{background-image:linear-gradient(135deg,#0305C6 0%,#FFE45C 140%)}
-.card-thumb.t6{background-image:linear-gradient(135deg,#FF6B3D 0%,#02038F 120%)}
-.card-thumb.t7{background-image:linear-gradient(135deg,#FFE45C 0%,#FF6B3D 100%)}
-.card-tag{
-  position:absolute;bottom:14px;left:14px;
-  font-family:var(--display);
-  font-size:10px;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:#fff;
-  background:rgba(0,0,0,.32);padding:6px 12px;
-  border-radius:100px;backdrop-filter:blur(8px);
+.bb-testimonial-photo-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.95);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(0,0,0,.18);cursor:pointer;
 }
-.card-body{padding:28px 28px 24px;flex-grow:1;display:flex;flex-direction:column}
-.card-body h3{
-  font-family:var(--display);font-weight:800;
-  font-size:22px;letter-spacing:-.01em;line-height:1.22;
-  color:var(--black);margin-bottom:12px;
+.bb-testimonial-photo-play svg{width:24px;height:24px;color:#000;margin-left:3px}
+.bb-testimonial-tag{
+  position:absolute;top:18px;left:18px;
+  background:rgba(0,0,0,.85);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.12em;padding:7px 14px;
 }
-.card-body p{
-  font-size:14.5px;font-weight:400;color:var(--text-2);
-  line-height:1.65;margin-bottom:18px;flex-grow:1;
+.bb-testimonial-content{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+.bb-label-strip{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  background:#FFE4B5;color:#000;
+  padding:5px 11px;display:inline-block;margin-bottom:14px;align-self:flex-start;
 }
-.card-meta{
-  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
-  font-size:12px;color:var(--text-3);font-weight:500;
-  padding-top:14px;border-top:1px solid var(--line);
-  margin-bottom:16px;
+.bb-testimonial-content h4{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:20px;line-height:1.3;margin-bottom:10px;
 }
-.card-link{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:13px;font-weight:700;letter-spacing:-.005em;
-  color:var(--blue);transition:gap .2s ease;
+.bb-testimonial-content p{font-size:15px;line-height:1.65;color:var(--bg-text-body);margin-bottom:14px}
+.bb-testimonial-stats{
+  display:flex;gap:32px;margin-top:18px;padding-top:18px;
+  border-top:1px solid var(--bg-line);
 }
-.card-link svg{transition:transform .2s ease}
-.wissen-card:hover .card-link svg{transform:translateX(4px)}
-.wissen-card:hover .card-link{color:var(--accent)}
+.bb-testimonial-stat{display:flex;flex-direction:column;gap:2px}
+.bb-testimonial-stat-num{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:24px;color:#22c55e;
+}
+.bb-testimonial-stat-num::before{content:"↑ ";color:#22c55e}
+.bb-testimonial-stat-label{font-size:11px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em}
+.bb-testimonial-author{
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--bg-line);
+  font-style:italic;font-size:14px;color:var(--bg-text-body);
+}
+.bb-testimonial-author strong{color:#000;font-style:normal;font-weight:700;display:block;font-size:15px;margin-bottom:2px}
+.bb-testimonial-author-stars{color:#22c55e;font-size:14px;letter-spacing:1px;margin-top:8px;display:inline-block}
+.bb-testimonial-author-url{font-size:12px;color:var(--bg-text-muted);margin-left:8px;font-style:normal}
 
-/* Section divider */
-.wissen-section-head{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:24px;flex-wrap:wrap;
-  margin:96px 0 28px;padding-top:36px;
-  border-top:1px solid var(--line);
+/* ============= BOTTOM CTA (dark) ============= */
+.bb-bottom{
+  text-align:center;padding:96px 0;background-color:#000;color:#fff;
+  background-image:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),var(--bg-founder-2);
+  background-size:cover;background-position:center;
 }
-.wissen-section-head-text{max-width:620px}
-.wissen-section-head .eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--display);
-  font-size:11px;font-weight:700;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--accent);
-  padding:7px 14px;border-radius:100px;
-  background:var(--accent-bg);
-  border:1px solid rgba(255,107,61,.25);
-  margin-bottom:18px;
+.bb-bottom h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#fff;
+  max-width:800px;margin:0 auto 24px;
 }
-.wissen-section-head .eyebrow::before{
-  content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;
+.bb-bottom p{font-size:17px;color:rgba(255,255,255,.82);max-width:640px;margin:0 auto 36px;line-height:1.65}
+.bb-bottom-secondary{
+  display:block;margin-top:18px;
+  font-size:13px;color:rgba(255,255,255,.6);text-decoration:underline;
 }
-.wissen-section-head h2{
-  font-family:var(--display);font-weight:800;
-  font-size:clamp(28px,3.6vw,42px);
-  letter-spacing:-.02em;line-height:1.1;
-  color:var(--black);margin-bottom:12px;
-}
-.wissen-section-head h2 em{
-  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
-  color:var(--accent);font-size:1.05em;letter-spacing:0;
-}
-.wissen-section-head p{
-  font-size:15px;font-weight:400;color:var(--text-2);line-height:1.7;
-}
-.wissen-section-head-meta{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--display);
-  font-size:11px;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--accent);
-  padding:8px 14px;border-radius:100px;
-  background:var(--accent-bg);flex-shrink:0;
-}
-.wissen-section-head-meta::before{
-  content:"";width:6px;height:6px;border-radius:50%;
-  background:var(--accent);animation:pulseDot 2s infinite;
-}
-@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.35}}
-
-.wissen-grid.tools{grid-template-columns:repeat(3,1fr)}
-@media (max-width:1080px){.wissen-grid.tools{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:720px){.wissen-grid.tools{grid-template-columns:1fr}}
-
-/* Bottom CTA */
-.wissen-bottom-cta{
-  margin-top:96px;padding:56px 48px;
-  background:linear-gradient(135deg,#0a0a0a 0%,#02038F 100%);
-  color:#fff;
-  border-radius:18px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:40px;flex-wrap:wrap;
-  position:relative;overflow:hidden;
-}
-.wissen-bottom-cta::before{
-  content:"";position:absolute;top:-50%;right:-10%;
-  width:60%;height:200%;
-  background:radial-gradient(ellipse at center,rgba(255,107,61,.32) 0%,transparent 60%);
-  filter:blur(40px);pointer-events:none;
-}
-.wissen-bottom-cta-text{position:relative;max-width:560px}
-.wissen-bottom-cta h2{
-  font-family:var(--display);font-weight:800;
-  font-size:clamp(24px,3vw,36px);
-  letter-spacing:-.018em;line-height:1.18;
-  margin-bottom:12px;color:#fff;
-}
-.wissen-bottom-cta h2 em{
-  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
-  color:var(--accent);font-size:1.05em;letter-spacing:0;
-}
-.wissen-bottom-cta p{
-  font-size:15px;font-weight:400;line-height:1.7;
-  color:rgba(255,255,255,.85);
-}
-.wissen-bottom-cta-actions{
-  position:relative;display:flex;flex-direction:column;gap:10px;flex-shrink:0;align-items:flex-start;
-}
-.wissen-bottom-cta-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:16px 28px;
-  background:var(--accent);color:#fff;
-  border-radius:8px;font-weight:700;font-size:14px;
-  letter-spacing:-.005em;transition:all .2s ease;
-  box-shadow:0 8px 22px rgba(255,107,61,.35);
-  text-decoration:none;
-}
-.wissen-bottom-cta-btn:hover{
-  background:var(--accent-hover);transform:translateY(-1px);
-  box-shadow:0 12px 28px rgba(255,107,61,.45);text-decoration:none;
-}
-.wissen-bottom-cta-link{
-  font-size:13px;color:rgba(255,255,255,.7);
-  text-decoration:underline;text-underline-offset:3px;
-}
-.wissen-bottom-cta-link:hover{color:#fff}
-.wissen-bottom-cta-link strong{color:var(--accent);font-weight:700}
+.bb-bottom-secondary strong{color:var(--bg-amber)}
 
 @media (max-width:780px){
-  .wissen-page{padding:48px 0 80px}
-  .wissen-bottom-cta{padding:36px 28px;flex-direction:column;align-items:flex-start;text-align:left}
-  .wissen-bottom-cta-actions{width:100%}
-  .wissen-section-head{margin:64px 0 24px}
+  .bb-hero h1,.bb-head h2,.bb-bottom h2{font-size:28px;line-height:1.25}
+  .bb-section{padding:56px 0}
+  .bb-testimonial-content{padding:32px 28px}
 }
 </style>
 </head>
@@ -289,10 +337,7 @@
       <a href="/founder-os/">Founder OS</a>
     </nav>
     <div class="header-actions">
-      <button class="header-search" aria-label="Suche">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-      </button>
-      <a href="/audit/" class="header-cta">Audit anfragen</a>
+      <a href="/audit/" class="header-cta"><span>Audit anfragen</span></a>
       <button class="mobile-toggle" aria-label="Menü" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
@@ -308,201 +353,219 @@
   <a href="/audit/" class="mobile-cta">Strategy Audit anfragen →</a>
 </div>
 
-<!-- ============= WISSEN-HUB ============= -->
-<main class="wissen-page">
+<!-- ============= BAULIG-DNA PAGE ============= -->
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-80 bb-hero">
   <div class="wrap">
+    <div class="bb-hero-eyebrow"><strong>FÜR DTC-FOUNDER, DIE WIRKLICH BAUEN:</strong></div>
+    <h1>Die 4 Frameworks, mit denen wir DTC-Brands auf 7-stellig skalieren — komplett kostenlos.</h1>
+    <p class="bb-hero-sub">Wie du die Methoden, die wir bei Hearo, Bachgold und Wake Performance einsetzen, 1:1 für deine eigene Brand nachbauen kannst — ohne dass du uns als Agentur buchen musst.</p>
 
-    <div class="wissen-hero">
-      <div class="eyebrow">Wissen-Hub</div>
-      <h1>Bevor wir reden, <em>lies dich ein.</em></h1>
-      <p class="lede">Vier Wege, BB Brands kennenzulernen — vom 5-Minuten-Read bis zum Strategy Audit. Such dir den passenden Einstieg in deine Customer Journey aus. Kein Newsletter, keine E-Mail-Pflicht, kein Pitch.</p>
+    <div class="bb-hero-grid">
+      <div class="bb-hero-video">
+        <div class="bb-video-play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
 
-      <div class="journey-strip">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
-        <p><strong>So liest du den Hub:</strong> Je weiter du nach unten gehst, desto näher kommst du dem direkten Gespräch. Oben Wissen, unten Aktion.</p>
+      <div>
+        <ul class="bb-hero-bullets-list">
+          <li>Erfahre, wie wir in 8 Wochen bauen, wofür Standard-Agenturen 4–6 Monate brauchen</li>
+          <li>Nutze unsere Frameworks für Brand, Conversion und AI Operations — 1:1 zum Mitnehmen</li>
+          <li>Verstehe, warum klassische DACH-Agenturen DTC-Brands strukturell ausbremsen</li>
+          <li>Sieh die echten Pain-Points, die wir bei Hearo, Bachgold &amp; Co. konkret gelöst haben</li>
+        </ul>
+
+        <div class="bb-hero-cta">
+          <a href="/audit/" class="bb-cta">Jetzt unverbindliches<br>Strategy Audit buchen!</a>
+          <p class="bb-cta-meta">Bereits 5+ DTC-Brands skaliert.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Customer Journey + Articles -->
-    <div class="wissen-grid">
+    <div class="bb-trust">
+      <div class="bb-trust-tuev">
+        DACH-FOKUS
+        <div class="badge">DTC-EXPERTEN</div>
+      </div>
+      <div class="bb-trust-tuev">
+        AI-NATIVE
+        <div class="badge">EXPERTEN-TEAM</div>
+      </div>
+      <div class="bb-trust-reviews">
+        <div class="bb-trust-reviews-name">Brands-Score</div>
+        <div class="bb-trust-reviews-rating">
+          <span class="stars">★★★★★</span>
+          <span>5,0</span>
+        </div>
+        <div class="bb-trust-reviews-label">5+ DTC-Brands · <a href="/cases/">Cases ansehen</a></div>
+      </div>
+      <div class="bb-trust-award">
+        <span class="bb-trust-award-text">FOUNDER<br>LED<br>2026</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <a href="https://bb-brands.de/wissen-d2c-launch.html" class="wissen-card">
-        <span class="card-step">Schritt 1 · Lesen</span>
-        <div class="card-thumb t1"><span class="card-tag">Guide</span></div>
-        <div class="card-body">
+<!-- ARTICLES / GUIDES -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Frameworks &amp; Guides</div>
+      <h2>Vier Wege, BB Brands kennenzulernen.</h2>
+      <p>Vom 9-Minuten-Read bis zum Strategy Audit. Such dir den passenden Einstieg in deine Customer Journey aus. Keine E-Mail-Pflicht.</p>
+    </div>
+
+    <div class="bb-cards">
+
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t1"><span class="bb-card-tag">Schritt 1 · Guide</span></div>
+        <div class="bb-card-body">
           <h3>D2C-Brand-Launch in 21 Tagen</h3>
           <p>Der komplette Fahrplan: Vom ersten Logo bis zum laufenden Shopify-Store mit ersten Verkäufen. Drei Wochen, drei Phasen, eine ehrliche Checkliste.</p>
-          <div class="card-meta"><span>📖 9 Min. Read</span><span>·</span><span>Für Founder vor dem Launch</span></div>
-          <span class="card-link">Guide lesen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
+          <div class="bb-card-meta">9 MIN. READ · FÜR FOUNDER VOR DEM LAUNCH</div>
+          <span class="bb-card-link">Guide lesen</span>
         </div>
       </a>
 
-      <a href="https://bb-brands.de/wissen-brand-system.html" class="wissen-card">
-        <span class="card-step">Schritt 2 · Verstehen</span>
-        <div class="card-thumb t3"><span class="card-tag">Framework</span></div>
-        <div class="card-body">
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t3"><span class="bb-card-tag">Schritt 2 · Framework</span></div>
+        <div class="bb-card-body">
           <h3>Das BB-Brands-Brand-System</h3>
           <p>Wie ein Styleguide aussieht, der nicht nur PDF-Deko ist, sondern Ads, Web und Verpackung trägt. Vier Schichten, ein Live-Beispiel, kein Buzzword-Bingo.</p>
-          <div class="card-meta"><span>📖 7 Min. Read</span><span>·</span><span>Mit ARCTIVE-Beispiel</span></div>
-          <span class="card-link">Framework sehen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
+          <div class="bb-card-meta">7 MIN. READ · MIT LIVE-BEISPIEL</div>
+          <span class="bb-card-link">Framework sehen</span>
         </div>
       </a>
 
-      <a href="https://bb-brands.de/wissen-ai-check.html" class="wissen-card">
-        <span class="card-step">Schritt 3 · Anfordern</span>
-        <div class="card-thumb t2"><span class="card-tag">Kostenlose Analyse</span></div>
-        <div class="card-body">
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t2"><span class="bb-card-tag">Schritt 3 · Analyse</span></div>
+        <div class="bb-card-body">
           <h3>AI Readiness Check für deinen Store</h3>
           <p>Wir analysieren deinen Shopify-Store auf vier KI-Hebel: Search, Produktberater, Support, Auto-Tagging. Konkrete Empfehlung statt Buzzword-Bingo.</p>
-          <div class="card-meta"><span>⚡ 90 Sek. Anfrage</span><span>·</span><span>Antwort in 24h</span></div>
-          <span class="card-link">Check anfordern
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
+          <div class="bb-card-meta">90 SEK. ANFRAGE · ANTWORT IN 24H</div>
+          <span class="bb-card-link">Check anfordern</span>
         </div>
       </a>
 
-      <a href="/audit/" class="wissen-card">
-        <span class="card-step">Schritt 4 · Sprechen</span>
-        <div class="card-thumb t4"><span class="card-tag">Strategy Audit</span></div>
-        <div class="card-body">
+      <a href="/audit/" class="bb-card">
+        <div class="bb-card-thumb t4"><span class="bb-card-tag">Schritt 4 · Audit</span></div>
+        <div class="bb-card-body">
           <h3>Strategy Audit anfragen</h3>
           <p>Zwei Wochen Diagnose-Sprint deines Setups. Brand-, Markt- und Conversion-Diagnose plus Transformations-Plan. Für Brands ab Umsatz.</p>
-          <div class="card-meta"><span>💼 Pre-Qualification</span><span>·</span><span>Antwort in 1 Werktag</span></div>
-          <span class="card-link">Audit anfragen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-shopify-store-erstellen-lassen-kosten.html" class="wissen-card">
-        <span class="card-step">Artikel · Lesen</span>
-        <div class="card-thumb t5"><span class="card-tag">How-To / Pricing Guide</span></div>
-        <div class="card-body">
-          <h3>Shopify-Store erstellen lassen: Was kostet er 2026? Ehrliche Rechnung</h3>
-          <p>Was kostet ein Shopify-Store wirklich? Echte Zahlen aus 4 Builds 2025–2026, ohne Agentur-Bullshit. Setup, laufende Kosten, versteckte Posten.</p>
-          <div class="card-meta"><span>📖 8 Min.</span><span>·</span><span>Für DTC-Founder</span></div>
-          <span class="card-link">Artikel lesen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-shopify-fehler-vermeiden.html" class="wissen-card">
-        <span class="card-step">Artikel · Lesen</span>
-        <div class="card-thumb t6"><span class="card-tag">Listicle / Audit-Guide</span></div>
-        <div class="card-body">
-          <h3>Shopify-Fehler vermeiden: 7 Conversion-Killer (2026, DACH)</h3>
-          <p>Die 7 Shopify-Fehler, die im DACH-Markt am meisten Umsatz kosten — mit konkretem Beispiel, Fix und Umsatzverlust-Schätzung pro Fehler.</p>
-          <div class="card-meta"><span>📖 11 Min.</span><span>·</span><span>DACH · Conversion</span></div>
-          <span class="card-link">Artikel lesen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-meta-ads-hooks-warum-konvertieren-nicht.html" class="wissen-card">
-        <span class="card-step">Artikel · Lesen</span>
-        <div class="card-thumb t7"><span class="card-tag">Teardown + Framework</span></div>
-        <div class="card-body">
-          <h3>Meta Ads Creative Strategie: Warum deine Hooks nicht ziehen</h3>
-          <p>Meta Ads Creative Strategie für DACH-DTC: Warum deine Hooks nicht konvertieren, 3-Sekunden-Stopp-Framework und 5 Teardowns aus echten Projekten.</p>
-          <div class="card-meta"><span>📖 10 Min.</span><span>·</span><span>Meta · CTR · Hooks</span></div>
-          <span class="card-link">Artikel lesen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-d2c-launch-30-tage.html" class="wissen-card">
-        <span class="card-step">Artikel · Lesen</span>
-        <div class="card-thumb t1"><span class="card-tag">Ultimate Guide</span></div>
-        <div class="card-body">
-          <h3>DTC-Brand aufbauen: 30-Tage-Launch-Plan (ehrlich, mit Budgets)</h3>
-          <p>Eine DTC-Brand aufbauen in 30 Tagen: realer Fahrplan, Budgets pro Phase, Unit Economics upfront. Für Founder, die ihre erste Brand launchen.</p>
-          <div class="card-meta"><span>📖 15 Min.</span><span>·</span><span>Pre-Launch · Budget 5–20k</span></div>
-          <span class="card-link">Artikel lesen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
+          <div class="bb-card-meta">FÜR BRANDS AB UMSATZ · ANTWORT IN 1 WERKTAG</div>
+          <span class="bb-card-link">Audit anfragen</span>
         </div>
       </a>
 
     </div>
-
-    <!-- Tools Section -->
-    <div class="wissen-section-head">
-      <div class="wissen-section-head-text">
-        <div class="eyebrow">Live-Tools</div>
-        <h2>Drei Rechner, <em>die du jetzt sofort brauchst.</em></h2>
-        <p>Reine Browser-Tools, kein Login, kein Download. Du gibst deine Zahlen ein, du siehst sofort die Wahrheit über deine Unit Economics. Inkl. Erklärung, was die Zahl bedeutet.</p>
-      </div>
-      <span class="wissen-section-head-meta">Live · Kostenlos · Ohne Login</span>
-    </div>
-
-    <div class="wissen-grid tools">
-
-      <a href="https://bb-brands.de/wissen-roas-rechner.html" class="wissen-card">
-        <span class="card-step">Tool · Ads</span>
-        <div class="card-thumb t5"><span class="card-tag">Rechner</span></div>
-        <div class="card-body">
-          <h3>Break-Even ROAS Rechner</h3>
-          <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren. Die Zahl, ohne die Meta Ads ein Bauchgefühl bleiben.</p>
-          <div class="card-meta"><span>⚡ Live-Berechnung</span><span>·</span><span>Für Meta-Ads-Founder</span></div>
-          <span class="card-link">Jetzt rechnen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-marge-rechner.html" class="wissen-card">
-        <span class="card-step">Tool · Profit</span>
-        <div class="card-thumb t6"><span class="card-tag">Rechner</span></div>
-        <div class="card-body">
-          <h3>Profit-Marge Rechner</h3>
-          <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht, die jeden Euro Schritt für Schritt aufschlüsselt.</p>
-          <div class="card-meta"><span>⚡ Live-Berechnung</span><span>·</span><span>Inkl. Wasserfall</span></div>
-          <span class="card-link">Marge prüfen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a href="https://bb-brands.de/wissen-aov-rechner.html" class="wissen-card">
-        <span class="card-step">Tool · Wachstum</span>
-        <div class="card-thumb t7"><span class="card-tag">Simulator</span></div>
-        <div class="card-body">
-          <h3>AOV-Uplift Simulator</h3>
-          <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber rechts, Profit links, plus 4 konkrete Hebel um da hinzukommen.</p>
-          <div class="card-meta"><span>⚡ Live-Slider</span><span>·</span><span>Inkl. Hebel-Liste</span></div>
-          <span class="card-link">Hebel testen
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- Bottom CTA -->
-    <div class="wissen-bottom-cta">
-      <div class="wissen-bottom-cta-text">
-        <h2>Schon entschieden? <em>Lass uns reden.</em></h2>
-        <p>Wenn du lieber direkt einsteigst statt vorher zu lesen — der Strategy Audit ist der Eintritt für Brands ab Umsatz. Pre-Launch? Dann ist Founder OS dein Weg.</p>
-      </div>
-      <div class="wissen-bottom-cta-actions">
-        <a href="/audit/" class="wissen-bottom-cta-btn">
-          Strategy Audit anfragen
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="https://founderos.bb-brands.de" target="_blank" rel="noopener" class="wissen-bottom-cta-link">Pre-Launch? → <strong>Founder OS</strong></a>
-      </div>
-    </div>
-
   </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Real Talk</div>
+      <h2>Was unsere Brands sagen.</h2>
+      <p>Echte Founder, echte Builds. Quotes nach Customer-Interviews — keine Fake-Testimonials, kein 9.800-Kunden-Fake-Anker.</p>
+    </div>
+
+    <div class="bb-testimonial">
+      <div class="bb-testimonial-photo">
+        <span class="bb-testimonial-tag">Wasserfilter · Re-Launch</span>
+        <div class="bb-testimonial-photo-play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <div class="bb-testimonial-content">
+        <span class="bb-label-strip">PROBLEM:</span>
+        <p>Etablierte Wasserfilter-Brand, veraltetes Theme, App-Sprawl, kein Bundle-Konzept. Conversion deutlich unter Potential.</p>
+        <span class="bb-label-strip">LÖSUNG:</span>
+        <p>15 Custom-PDPs, generator-driven, 14+ wiederverwendbare Sections, Bundle-Master-System.</p>
+
+        <div class="bb-testimonial-stats">
+          <div class="bb-testimonial-stat">
+            <span class="bb-testimonial-stat-num">15</span>
+            <span class="bb-testimonial-stat-label">Custom-PDPs</span>
+          </div>
+          <div class="bb-testimonial-stat">
+            <span class="bb-testimonial-stat-num">8 Wo</span>
+            <span class="bb-testimonial-stat-label">Build-Zeit</span>
+          </div>
+        </div>
+
+        <div class="bb-testimonial-author">
+          "Was Standard-Agenturen 6 Monate kosten würde, lief bei uns in 8 Wochen — ohne dass wir am Setup leiden."
+          <strong>Bachgold · Founder</strong>
+          <span class="bb-testimonial-author-stars">★★★★★</span>
+          <span class="bb-testimonial-author-url">www.bachgold.de</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS / RECHNER -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="bb-head">
+      <div class="bb-head-label">Live-Tools</div>
+      <h2>Drei Rechner, die du jetzt sofort brauchst.</h2>
+      <p>Reine Browser-Tools, kein Login, kein Download. Du gibst deine Zahlen ein, du siehst sofort die Wahrheit über deine Unit Economics.</p>
+    </div>
+
+    <div class="bb-cards tools">
+
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t5"><span class="bb-card-tag">Tool · Ads</span></div>
+        <div class="bb-card-body">
+          <h3>Break-Even ROAS Rechner</h3>
+          <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren.</p>
+          <div class="bb-card-meta">LIVE · BROWSER · KOSTENLOS</div>
+          <span class="bb-card-link">Jetzt rechnen</span>
+        </div>
+      </a>
+
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t2"><span class="bb-card-tag">Tool · Profit</span></div>
+        <div class="bb-card-body">
+          <h3>Profit-Marge Rechner</h3>
+          <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht.</p>
+          <div class="bb-card-meta">LIVE · INKL. WASSERFALL</div>
+          <span class="bb-card-link">Marge prüfen</span>
+        </div>
+      </a>
+
+      <a href="#" class="bb-card">
+        <div class="bb-card-thumb t1"><span class="bb-card-tag">Tool · Wachstum</span></div>
+        <div class="bb-card-body">
+          <h3>AOV-Uplift Simulator</h3>
+          <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber + 4 Hebel-Liste.</p>
+          <div class="bb-card-meta">LIVE-SLIDER · INKL. HEBEL-LISTE</div>
+          <span class="bb-card-link">Hebel testen</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM-CTA -->
+<section class="bb-bottom">
+  <div class="wrap">
+    <h2>Schon entschieden? Lass uns reden.</h2>
+    <p>Wenn du lieber direkt einsteigst statt vorher zu lesen — der Strategy Audit ist der Eintritt für Brands ab Umsatz. Kein Pitch-Deck, kein Smalltalk. 30 Minuten, geradeaus.</p>
+    <a href="/audit/" class="bb-cta large">Strategy Audit buchen</a>
+    <a href="/founder-os/" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
+  </div>
+</section>
+
 </main>
 
+<!-- ============= FOOTER ============= -->
 <footer>
   <div class="wrap">
     <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
@@ -514,18 +577,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-(function(){
-  var header = document.querySelector('header.site-header');
-  if(!header) return;
-  var update = function(){
-    if(window.scrollY > 60){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
-  };
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
-</script>
 
 </body>
 </html>
