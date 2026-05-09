@@ -9,7 +9,7 @@
 <!-- Akzent-Schrift: Saira Condensed (Fallback bis Dax OT eingebunden) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Calendly Inline Widget · async loaded -->
 <link rel="preconnect" href="https://assets.calendly.com">
@@ -1238,124 +1238,119 @@ section.cases-dirty::before{
   .case-stat-num-dirty{font-size:24px}
 }
 
-/* ========== GUARANTEES (DIRTY · BRUTAL) ========== */
-section.guarantees-dirty,
-section.guarantees-dirty:nth-of-type(even){
-  background:var(--cream);
-  position:relative;
-  padding:140px 0;
-  overflow:hidden;
+/* ========== GUARANTEES · BAULIG-DNA ========== */
+/* Baulig-DNA Tokens (homepage-scoped, share with future Baulig-Sections) */
+:root{
+  --bg-amber:#FFAC3B;
+  --bg-amber-hover:#FF9518;
+  --bg-green-up:#16a34a;
+  --bg-text-body:#333;
+  --bg-text-muted:#666;
+  --bg-line:#e5e5e5;
+  --bg-founder-1:url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-2:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-3:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70');
 }
-/* Paper-grain Noise-Overlay */
-section.guarantees-dirty::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:.18;mix-blend-mode:multiply;
-}
-.guarantees-dirty .wrap{position:relative;z-index:1}
-.guarantees-dirty .eyebrow{color:var(--accent);font-weight:700}
-.guarantees-dirty h2{color:var(--black)}
-.guarantees-dirty h2 em{
-  font-style:normal;color:var(--blue);
-  background:none;padding:0;border-radius:0;
-  position:relative;
-}
-.guarantees-dirty h2 em::after{
-  content:"";position:absolute;left:-2px;right:-2px;bottom:6%;
-  height:38%;background:rgba(255,107,61,.45);
-  z-index:-1;transform:rotate(-1deg);
-}
-.guarantees-dirty .section-sub{color:var(--text-2)}
 
+section.guarantees-dirty{
+  padding:96px 0;
+  background-color:#fff;
+  background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-1);
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  background-attachment:fixed;
+  font-family:'Montserrat',sans-serif;color:#000;
+  position:relative;
+}
+@media (max-width:780px){section.guarantees-dirty{background-attachment:scroll}}
+
+.guarantees-dirty .wrap{position:relative;z-index:1}
+
+.guarantees-dirty .bb-head{text-align:center;margin-bottom:48px}
+.guarantees-dirty .bb-head-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-amber);margin-bottom:18px;
+}
+.guarantees-dirty .bb-head h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;letter-spacing:normal;
+  color:#000;max-width:900px;margin:0 auto 18px;
+}
+.guarantees-dirty .bb-head h2 em{
+  font-style:normal;color:var(--blue);
+}
+.guarantees-dirty .bb-head p{
+  font-size:17px;color:var(--bg-text-body);
+  max-width:680px;margin:0 auto;line-height:1.65;
+}
+
+/* 3-Spalten-Grid — keine Rotations-Spielereien mehr (Baulig: clean, soft shadow) */
 .guar-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:36px;margin-top:28px;
-  perspective:1000px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  margin-top:48px;max-width:1100px;margin-left:auto;margin-right:auto;
 }
 .guar-card{
   background:#fff;
-  border:3px solid var(--black);
-  border-radius:0;
-  padding:30px 28px 28px;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  padding:48px 36px 36px;
   position:relative;
-  box-shadow:6px 6px 0 var(--black);
-  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+  display:flex;flex-direction:column;
+  transition:box-shadow .25s ease, transform .25s ease;
 }
-.guar-card:nth-child(1){transform:rotate(-1.4deg)}
-.guar-card:nth-child(2){transform:rotate(.8deg);margin-top:18px}
-.guar-card:nth-child(3){transform:rotate(-.5deg)}
 .guar-card:hover{
-  transform:rotate(0) translateY(-3px);
-  box-shadow:9px 9px 0 var(--black);
+  box-shadow:1px 1px 40px rgba(0,0,0,.22);
+  transform:translateY(-3px);
 }
 
-/* Stempel oben links — schief, orange, hart geboradert */
+/* Sticker rotated -6deg, oben-links — Baulig-Pattern (amber default, mid card dark) */
 .guar-stamp{
-  position:absolute;top:-14px;left:18px;
-  background:var(--accent);color:#fff;
-  font-family:var(--display);font-weight:800;
-  padding:5px 12px;font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;
-  transform:rotate(-2.5deg);
-  border:2px solid var(--black);
-  box-shadow:2px 2px 0 var(--black);
-  z-index:2;
+  position:absolute;top:-20px;left:24px;z-index:5;
+  background:var(--bg-amber);color:#fff;
+  padding:14px 22px;
+  text-align:center;font-family:'Montserrat',sans-serif;
+  transform:rotate(-6deg);
+  box-shadow:2px 2px 12px rgba(0,0,0,.2);
+  display:flex;flex-direction:column;line-height:1;
 }
-
-/* Hand-drawn check Icon — Kreis mit Border, leicht rotiert */
-.guar-icon{
-  width:46px;height:46px;border-radius:50%;
-  background:var(--accent);
-  border:2.5px solid var(--black);
-  display:flex;align-items:center;justify-content:center;
-  margin:14px 0 22px;
-  transform:rotate(-3deg);
-  box-shadow:3px 3px 0 var(--black);
-}
-.guar-icon svg{width:22px;height:22px;color:#fff;stroke-width:3.5}
+.guar-stamp .top{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:4px}
+.guar-stamp .mid{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
+.guar-stamp .bot{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.guar-card:nth-child(2) .guar-stamp{background:#000}
 
 .guar-card h3{
-  font-family:var(--display);
-  font-weight:800;font-size:30px;
-  letter-spacing:-.02em;line-height:1;
-  margin-bottom:16px;
-  text-transform:uppercase;
-  color:var(--black);
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:24px;line-height:1.15;
+  margin:8px 0 16px;color:#000;
 }
 
-/* Promise — Handschrift, Quote-Mark in Orange */
+/* Promise (Hauptaussage) — fett, schwarz */
 .guar-card .promise{
-  font-family:'Caveat',cursive;
-  font-weight:600;font-size:24px;line-height:1.25;
-  color:var(--black);
-  margin:0 0 18px;
-  border:none;padding:0 0 0 18px;
-  position:relative;font-style:normal;
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:16px;line-height:1.5;color:#000;
+  margin:0 0 20px;padding:0;border:none;
+  font-style:normal;position:static;
 }
-.guar-card .promise::before{
-  content:"\201C";color:var(--accent);
-  font-family:var(--display);font-weight:800;font-size:42px;
-  position:absolute;left:-6px;top:-14px;line-height:1;
+.guar-card .promise::before{content:none}
+
+/* Why — Body-Text mit grünem ↑ Marker */
+.guar-card .why{
+  font-family:'Montserrat',sans-serif;font-weight:400;
+  font-size:14px;color:var(--bg-text-body);line-height:1.6;
+  border-top:1px solid var(--bg-line);
+  padding-top:18px;margin-top:auto;
+  position:relative;
+}
+.guar-card .why::before{
+  content:"↑ ";color:var(--bg-green-up);font-weight:800;font-family:'Montserrat',sans-serif;
 }
 
-/* Why — Mono · gestrichelter Top-Border */
-.guar-card p.why{
-  font-family:'Space Mono',monospace;
-  font-size:11.5px;color:var(--text-2);line-height:1.55;
-  border-top:1px dashed var(--black);
-  padding-top:14px;margin-top:auto;
+@media (max-width:880px){
+  .guar-grid{grid-template-columns:1fr;gap:40px}
 }
-.guar-card p.why::before{
-  content:"// ";color:var(--accent);font-weight:700;
-}
-
 @media (max-width:780px){
-  section.guarantees-dirty{padding:80px 0}
-  .guar-grid{grid-template-columns:1fr;gap:32px}
-  .guar-card{transform:none !important;margin:0 !important}
-  .guar-card:hover{transform:translateY(-3px) !important}
-  .guar-card h3{font-size:24px}
-  .guar-card .promise{font-size:21px}
+  section.guarantees-dirty{padding:64px 0}
+  .guarantees-dirty .bb-head h2{font-size:28px;line-height:1.25}
+  .guar-card h3{font-size:22px}
 }
 
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
@@ -2346,18 +2341,21 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 5 · GARANTIEN (Dirty / Brutalist) ============= -->
+<!-- ============= 5 · GARANTIEN · BAULIG-DNA ============= -->
 <section class="guarantees-dirty">
   <div class="wrap">
-    <div class="eyebrow">Drei Garantien</div>
-    <h2>Wir kippen das Risiko<br>vom Käufer auf <em>uns.</em></h2>
-    <p class="section-sub">Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: Qualität, Output, Geschwindigkeit. Schriftlich.</p>
+    <div class="bb-head">
+      <div class="bb-head-label">Drei Garantien</div>
+      <h2>Wir kippen das Risiko<br>vom Käufer auf <em>uns.</em></h2>
+      <p>Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: Qualität, Output, Geschwindigkeit. Schriftlich.</p>
+    </div>
 
     <div class="guar-grid">
       <div class="guar-card">
-        <div class="guar-stamp">Garantie 01</div>
-        <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <div class="guar-stamp">
+          <span class="top">Garantie</span>
+          <span class="mid">01</span>
+          <span class="bot">No-Bloat</span>
         </div>
         <h3>No-Bloat</h3>
         <p class="promise">Keine Übergaben. Keine Juniors. Keine endlosen Loops. Nur direkte Umsetzung durch A-Player.</p>
@@ -2365,9 +2363,10 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
 
       <div class="guar-card">
-        <div class="guar-stamp">Garantie 02</div>
-        <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <div class="guar-stamp">
+          <span class="top">Garantie</span>
+          <span class="mid">02</span>
+          <span class="bot">AI Efficiency</span>
         </div>
         <h3>AI Efficiency</h3>
         <p class="promise">Jedes System, das wir bauen, muss messbar Zeit sparen oder Umsatz erhöhen.</p>
@@ -2375,9 +2374,10 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
 
       <div class="guar-card">
-        <div class="guar-stamp">Garantie 03</div>
-        <div class="guar-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <div class="guar-stamp">
+          <span class="top">Garantie</span>
+          <span class="mid">03</span>
+          <span class="bot">Speed-to-Market</span>
         </div>
         <h3>Speed-to-Market</h3>
         <p class="promise">Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht.</p>
