@@ -9,7 +9,7 @@
 <!-- Akzent-Schrift: Inter Tight -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/consent.css">
 <script src="/assets/js/consent.js" defer></script>
 <script src="/assets/js/attribution.js" defer></script>
@@ -70,6 +70,7 @@
   /* Typography */
   --display:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
   --body:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+  --accent-font:'Saira Condensed','Inter Tight',-apple-system,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{
@@ -541,9 +542,20 @@ section{padding:112px 0;border-top:1px solid var(--line)}
 section:nth-of-type(even){background:var(--bg-alt)}
 .eyebrow{
   display:inline-block;
-  font-size:11px;font-weight:700;color:var(--accent);
-  text-transform:uppercase;letter-spacing:.2em;
+  font-family:var(--accent-font);
+  font-size:12px;font-weight:600;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.18em;
   margin-bottom:20px;
+}
+/* Trust-Strip-Label, Step-Eyebrows, Tags · alle Akzent-Caps in Saira */
+.trust-label,
+.step-eyebrow,
+.tag,
+.case-meta,
+.bs-pill-meta,
+.guar-num,
+.process-step .body strong{
+  font-family:var(--accent-font);
 }
 h2{
   font-size:46px;font-weight:800;
