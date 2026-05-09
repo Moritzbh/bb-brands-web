@@ -460,13 +460,17 @@ header.site-header .wrap{
 .btn-ghost:hover{color:var(--blue);text-decoration:none}
 
 .hero-specs{
-  display:flex;flex-wrap:wrap;gap:24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+  gap:14px 28px;
   margin-top:32px;padding-top:24px;
   border-top:1px solid var(--line);
+  max-width:1100px;
 }
 .hero-specs .spec{
   display:flex;align-items:center;gap:8px;
   font-size:13px;color:var(--text-2);font-weight:500;
+  min-width:0;
 }
 .hero-specs .spec svg{
   width:18px;height:18px;color:var(--blue);flex-shrink:0;
