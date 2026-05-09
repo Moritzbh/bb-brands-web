@@ -2163,9 +2163,19 @@ section.founder-section{
   position:relative;overflow:hidden;
   border-top:none;
 }
-/* Watermark "02" + Grain raus · simple weiss */
-section.founder-section::before,
+/* Grain raus · simple weiss. "02"-Watermark links oben analog zur "01" der team-section ·
+   auf weiss braucht's mehr opacity + dickeren stroke + top:24 statt -60 (overflow:hidden). */
 section.founder-section::after{display:none !important}
+section.founder-section::before{
+  display:block !important;
+  z-index:1 !important;
+  top:24px !important;
+  left:-20px !important;
+  right:auto !important;
+  font-size:clamp(180px, 24vw, 340px) !important;
+  -webkit-text-stroke:2.5px var(--accent) !important;
+  opacity:.14 !important;
+}
 @media (max-width:780px){
   section.founder-section{background-attachment:scroll}
 }
