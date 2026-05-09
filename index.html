@@ -909,40 +909,39 @@ h2 em{color:var(--blue);font-style:normal}
   .svc-video-tag{top:12px;right:12px;font-size:9.5px;padding:5px 10px}
 }
 
-/* ========== COMPARE HERO · Dark Premium-BG mit Brand-DNA ========== */
+/* ========== COMPARE HERO · Video-BG mit Brand-Spotlight-Overlay ========== */
 section.compare-hero,
 section.compare-hero:nth-of-type(even){
-  background-color:#0a0a0a;
+  background:#0a0a0a;
   color:#fff;
   padding:120px 0;
   position:relative;
   overflow:hidden;
-  /* Wellen-Pattern in Bold Blue · subtle Brand-Anchor durch das Schwarze */
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d2' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='9'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d2)' stroke='%231E3AFF' stroke-width='0.7' fill='none' opacity='0.32'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
 }
-/* Workspace-Video raus · ::before wird Dark-Premium Light-Layer */
-.compare-hero-bg{display:none}
-section.compare-hero::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+/* Video-Container · Background-Layer */
+.compare-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  overflow:hidden;
+}
+.compare-hero-bg video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* Cinematic Dark-Overlay direkt auf dem Video für Lesbarkeit */
+.compare-hero-bg::after{
+  content:"";position:absolute;inset:0;z-index:1;
   background:
-    /* 1 · Hot-Spot oben-rechts · Bold Blue (Brand-Anker, dramatisch sichtbar auf schwarz) */
-    radial-gradient(ellipse 55% 45% at 75% 22%, rgba(30,58,255,.22) 0%, transparent 60%),
-    /* 2 · Subtle Orange-Whisper rechts unten (kleiner Akzent) */
-    radial-gradient(ellipse 35% 28% at 90% 78%, rgba(255,107,61,.10) 0%, transparent 65%),
-    /* 3 · Secondary Blue-Glow links-mitte */
-    radial-gradient(ellipse 40% 32% at 12% 50%, rgba(3,5,198,.16) 0%, transparent 65%),
-    /* 4 · Cinematic Vignette */
-    radial-gradient(ellipse 100% 90% at 50% 50%, transparent 50%, rgba(0,0,0,.45) 100%);
+    /* Brand-Spotlight oben-rechts · Bold Blue */
+    radial-gradient(ellipse 55% 45% at 75% 22%, rgba(30,58,255,.30) 0%, transparent 60%),
+    /* Subtle Orange-Whisper rechts unten */
+    radial-gradient(ellipse 35% 28% at 90% 78%, rgba(255,107,61,.12) 0%, transparent 65%),
+    /* Cinematic Vignette + dark overlay zur Lesbarkeit */
+    linear-gradient(135deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.55) 50%, rgba(10,10,10,.85) 100%);
 }
-section.compare-hero::after{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n2)'/%3E%3C/svg%3E");
-  background-size:300px 300px;
-  opacity:.7;
-  mix-blend-mode:screen;
+@media (max-width:780px){
+  .compare-hero-bg video{display:none}
 }
 .compare-hero .wrap{
   position:relative;z-index:1;
@@ -2437,11 +2436,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     </div>
 
     <div class="compare-table-col">
-      <div class="compare-pill">
-        <div class="pill-name">BB BRANDS</div>
-        <div class="pill-meta">GROWTH PARTNER · DACH</div>
-      </div>
-
       <div class="compare-table-new">
         <div class="row headers">
           <div></div>
