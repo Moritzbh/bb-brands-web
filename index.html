@@ -1360,24 +1360,32 @@ section.guarantees-dirty::before{
 
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
 section.team-section,
-section.team-section:nth-of-type(even){background:#fff !important}
+section.team-section:nth-of-type(even){
+  background:#fff !important;
+  padding-bottom:64px; /* Engerer Übergang zur Founder-Section */
+}
 
 .team-stage{margin-top:8px}
 
-/* Stage-Label (STEP 01 · DISCOVERY etc) */
-.team-stage-label{
-  display:flex;align-items:center;gap:14px;
+/* Step-Eyebrow · gemeinsamer Style für 01 / 02 (white + dark) */
+.step-eyebrow{
+  display:inline-flex;align-items:baseline;gap:10px;
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--text-3);margin-bottom:18px;
+  font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:20px;
+  padding:6px 14px 6px 12px;
+  border:1px solid var(--line);border-radius:99px;
+  background:var(--bg);
 }
-.team-stage-label::before,
-.team-stage-label::after{
-  content:"";flex:1;height:1px;background:var(--line);
+.step-eyebrow .num{
+  color:var(--accent);font-weight:800;font-size:14px;letter-spacing:0;
 }
-.team-stage-label .num{
-  color:var(--accent);font-weight:800;
+.step-eyebrow.inverse{
+  color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.12);
 }
+.step-eyebrow.inverse .num{color:#ff8a63}
 
 /* SDR Card-Stack · 2 Cards übereinander, switchable */
 .sdr-stack-wrap{
@@ -1504,27 +1512,43 @@ section.team-section:nth-of-type(even){background:#fff !important}
   background:var(--accent);border-color:var(--accent);color:#fff;
 }
 
-/* Hand-off Arrow */
-.team-handoff{
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  margin:0 0 36px;
+/* Step-Bridge — visuelle Verbindung zw. team-section (white) und founder-section (dark) */
+.step-bridge{
+  position:relative;
+  margin:48px auto 0;width:fit-content;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:18px 26px 22px;
+  background:linear-gradient(180deg, #fff 0%, var(--bg-alt) 100%);
+  border:1px solid var(--line);border-radius:14px;
   font-family:'Saira Condensed',Manrope,sans-serif;
+}
+.step-bridge-text{
   font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   color:var(--text-3);
 }
-.team-handoff::before,
-.team-handoff::after{
-  content:"";width:60px;height:1px;background:var(--accent);
-  position:relative;
+.step-bridge-line{
+  width:1px;height:18px;background:var(--accent);
 }
-.team-handoff svg{
-  width:18px;height:18px;color:var(--accent);
+.step-bridge-arrow{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px rgba(255,107,61,.35);
+  animation:bridgeBounce 2.4s ease-in-out infinite;
+}
+.step-bridge-arrow svg{width:16px;height:16px}
+@keyframes bridgeBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(4px)}
+}
+@media (prefers-reduced-motion: reduce){
+  .step-bridge-arrow{animation:none}
 }
 
 /* ===== FOUNDER SECTION · Dark · Photo-Left + Text-Right ===== */
 section.founder-section{
   background:#0a0a0a;color:#fff;
-  padding:120px 0;
+  padding:80px 0 120px;
   position:relative;overflow:hidden;
   border-top:none;
 }
@@ -2366,16 +2390,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 6 · TEAM-FLOW · 2 SDRs → Founder ============= -->
 <section class="team-section">
   <div class="wrap">
-    <div class="eyebrow">Mit wem du arbeitest</div>
-    <h2>Erst Sympathie.<br>Dann <em>Founder.</em></h2>
-    <p class="section-sub">Erst sprichst du mit einem unserer beiden Sales-Kollegen. Sie qualifizieren — passt es, oder nicht. Wenn's passt, übernehme ich. Ab da bin ich deine einzige Person bis zum Launch.</p>
+    <div class="step-eyebrow"><span class="num">01</span> · Discovery</div>
+    <h2>Wer dich <em>zuerst</em> abholt.</h2>
+    <p class="section-sub">Erst sprichst du mit einem unserer beiden Sales-Kollegen. Sie hören zu, qualifizieren ehrlich — passt es, kommt der nächste Schritt zu mir.</p>
 
     <div class="team-stage">
-      <!-- STEP 01 — Discovery via SDRs -->
-      <div class="team-stage-label">
-        <span><span class="num">01</span> · Discovery</span>
-      </div>
-
       <div class="sdr-stack-wrap" id="sdrStack">
         <!-- Card-Stack — 2 Photo-Cards übereinander, Click swaps -->
         <div class="sdr-stack">
@@ -2422,11 +2441,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </div>
       </div>
 
-      <!-- Hand-off → leitet auf nächste Section über -->
-      <div class="team-handoff">
-        <span>Wenn's passt</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
-        <span>Übernehme ich</span>
+      <!-- Step-Bridge zur Founder-Section drunter -->
+      <div class="step-bridge">
+        <span class="step-bridge-text">Wenn's passt — Hand-off</span>
+        <span class="step-bridge-line"></span>
+        <span class="step-bridge-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
+        </span>
       </div>
     </div>
   </div>
@@ -2445,7 +2466,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
 
       <div class="founder-text">
-        <div class="founder-eyebrow">Operativer Wachstumspartner · Direct-Founder</div>
+        <div class="step-eyebrow inverse"><span class="num">02</span> · Build &amp; Launch — übernehme ich</div>
         <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
         <p class="founder-bio">Mit 14 Jahren hatte ich meinen ersten Shopify-Store. Seitdem habe ich immer nach neuen Wegen gesucht, Dinge anders und besser zu machen. Besonders begeistert mich die stetige Innovation im gesamten E-Commerce-Bereich — zu sehen, wie sich Marken, Technologien und das Verhalten von Kunden verändern, hat meinen Blick auf Unternehmertum geprägt. Deshalb habe ich es mir zur Aufgabe gemacht, Experte für KI zu werden und ein Pionier der nächsten Generation von D2C-Brands zu sein.</p>
         <div class="founder-signature">— Moritz</div>
