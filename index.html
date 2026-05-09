@@ -15,6 +15,10 @@
 <link rel="preconnect" href="https://assets.calendly.com">
 <script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
 
+<!-- Swiper.js (Coverflow-Carousel) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
 <style>
 :root{
   /* Brand-Tokens — Quelle: Marke/Brand/brand-guidelines.html */
@@ -878,25 +882,47 @@ section.stats-banner:nth-of-type(even){
   .stat-num{font-size:64px}
 }
 
-/* ========== CASES — VIDEO SWIPE FEED (Hochformat 9:16) ========== */
+/* ========== CASES — SWIPER COVERFLOW CAROUSEL (Hochformat 9:16) ========== */
 .vid-feed-wrap{position:relative;margin-top:4px}
-.vid-feed{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
-}
-.vid-card{
+.vid-swiper{
   position:relative;
-  aspect-ratio:9/16;
-  border-radius:14px;
+  /* Negative margin damit Side-Cards über die wrap-Breite rausragen können */
+  margin:0 calc(50% - 50vw);
+  padding:36px 0 56px;
+  overflow:hidden;
+}
+.vid-swiper .swiper-wrapper{align-items:center}
+.vid-swiper .swiper-slide{
+  width:320px;height:569px;
+  background:transparent;border:none;
+  cursor:pointer;position:relative;
+  /* Slide selbst NUR Container — Swiper braucht hier transform für Positioning.
+     Visuelles Card + Scale-Effekt sitzen auf .swiper-slide > .vid-card-inner */
+}
+.vid-card-inner{
+  width:100%;height:100%;
+  border-radius:18px;
   overflow:hidden;
   background:#0a0a0a;
   border:1px solid var(--line);
-  cursor:pointer;
-  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  position:relative;
+  transform:scale(.8);
+  opacity:.55;
+  filter:saturate(.7) brightness(.88);
 }
-.vid-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
-  border-color:var(--line-strong);
+.vid-swiper .swiper-slide-active .vid-card-inner{
+  transform:scale(1);
+  opacity:1;
+  filter:saturate(1) brightness(1);
+  box-shadow:0 28px 60px rgba(0,0,0,.28), 0 10px 28px rgba(3,5,198,.12);
+}
+.vid-swiper .swiper-slide-active{z-index:2}
+/* Transitions erst aktiv nach Swiper-Init (verhindert Loop bei Layout-Updates) */
+.vid-swiper.ready .vid-card-inner{
+  transition:transform .5s cubic-bezier(.25,1,.3,1),
+             opacity .35s ease,
+             filter .35s ease,
+             box-shadow .35s ease;
 }
 .vid-card video{
   position:absolute;inset:0;
@@ -1011,23 +1037,48 @@ section.stats-banner:nth-of-type(even){
   font-size:13px;color:var(--text-3);font-style:italic;
 }
 
+/* Swiper Pagination · BB-Brands-Style */
+.vid-swiper .swiper-pagination{
+  position:relative;margin-top:8px;bottom:auto;
+}
+.vid-swiper .swiper-pagination-bullet{
+  width:8px;height:8px;background:var(--line-strong);
+  opacity:1;margin:0 4px !important;
+  transition:all .25s ease;
+}
+.vid-swiper .swiper-pagination-bullet-active{
+  background:var(--accent);width:24px;border-radius:4px;
+}
+
+/* Swiper Navigation Arrows · BB-Brands-Style */
+.vid-swiper .swiper-button-prev,
+.vid-swiper .swiper-button-next{
+  width:48px;height:48px;border-radius:50%;
+  background:#fff;border:1px solid var(--line-strong);
+  box-shadow:0 8px 22px rgba(0,0,0,.10);
+  color:var(--text);
+  transition:all .2s ease;
+  margin-top:-50px; /* Optisch über die Pagination zentriert */
+}
+.vid-swiper .swiper-button-prev:hover,
+.vid-swiper .swiper-button-next:hover{
+  background:var(--accent);border-color:var(--accent);color:#fff;
+}
+.vid-swiper .swiper-button-prev::after,
+.vid-swiper .swiper-button-next::after{
+  font-size:18px;font-weight:700;
+}
+.vid-swiper .swiper-button-prev{left:max(calc(50% - 240px), 16px)}
+.vid-swiper .swiper-button-next{right:max(calc(50% - 240px), 16px)}
+
 @media (max-width:980px){
-  .vid-feed{
-    grid-template-columns:none;
-    grid-auto-flow:column;
-    grid-auto-columns:62%;
-    overflow-x:auto;scroll-snap-type:x mandatory;
-    padding-bottom:14px;
-    scroll-padding-left:0;
-    scrollbar-width:thin;
-    -webkit-overflow-scrolling:touch;
-  }
-  .vid-card{scroll-snap-align:start}
-  .vid-feed::-webkit-scrollbar{height:6px}
-  .vid-feed::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:3px}
+  .vid-swiper .swiper-slide{width:280px;height:498px}
+  .vid-swiper .swiper-button-prev,
+  .vid-swiper .swiper-button-next{display:none}
 }
 @media (max-width:780px){
-  .vid-feed{grid-auto-columns:72%;gap:12px}
+  .vid-swiper .swiper-slide{width:76vw;height:135vw}
+  .vid-swiper{padding:24px 0 44px}
   .vid-name{font-size:22px}
 }
 
@@ -1930,8 +1981,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 6 · CASES (Dirty · Baulig-Pattern) ============= -->
-<section class="cases-dirty">
+<!-- ============= 6 · CASES (Dirty · Baulig-Pattern) — versteckt zugunsten Video-Coverflow weiter unten ============= -->
+<section class="cases-dirty" style="display:none">
   <div class="wrap">
     <div class="eyebrow">Cases</div>
     <h2>Echte Brands. Echte <em>Bauarbeit.</em></h2>
@@ -2047,80 +2098,99 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= LEGACY VID-FEED (versteckt — wird später als alternative Variante reaktiviert) ============= -->
-<section style="display:none">
+<!-- ============= 6 · CASES (Video-Coverflow · live) ============= -->
+<section>
   <div class="wrap">
+    <div class="eyebrow">Cases</div>
+    <h2>Was wir gebaut haben.</h2>
+    <p class="section-sub">Echte Brands, echte Builds. Mehr Detail im Strategy-Audit-Call.</p>
     <div class="vid-feed-wrap">
-      <div class="vid-feed" id="vidFeed">
+      <div class="swiper vid-swiper" id="vidFeed">
+        <div class="swiper-wrapper">
 
-        <article class="vid-card" data-status="placeholder" data-brand="hearo" tabindex="0">
-          <!-- Sobald Video da: <video src="/assets/videos/hearo.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/hearo-poster.jpg"></video> -->
-          <div class="vid-poster">
-            <div class="vid-poster-text">Video folgt</div>
-          </div>
-          <div class="vid-play">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="vid-overlay">
-            <span class="vid-tag live">Live</span>
-            <div>
-              <div class="vid-vertical">Premium-Audio · DTC</div>
-              <div class="vid-name">Hearo</div>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="hearo" tabindex="0">
+          <div class="vid-card-inner">
+            <!-- Sobald Video da: <video src="/assets/videos/hearo.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/hearo-poster.jpg"></video> -->
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay">
+              <span class="vid-tag live">Live</span>
+              <div><div class="vid-vertical">Premium-Audio · DTC</div><div class="vid-name">Hearo</div></div>
             </div>
           </div>
         </article>
 
-        <article class="vid-card" data-status="placeholder" data-brand="bachgold" tabindex="0">
-          <!-- Sobald Video da: <video src="/assets/videos/bachgold.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/bachgold-poster.jpg"></video> -->
-          <div class="vid-poster">
-            <div class="vid-poster-text">Video folgt</div>
-          </div>
-          <div class="vid-play">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="vid-overlay">
-            <span class="vid-tag soon">Cutover Mai 2026</span>
-            <div>
-              <div class="vid-vertical">Wasserfilter · Re-Launch</div>
-              <div class="vid-name">Bachgold</div>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="bachgold" tabindex="0">
+          <div class="vid-card-inner">
+            <!-- Sobald Video da: <video src="/assets/videos/bachgold.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/bachgold-poster.jpg"></video> -->
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay">
+              <span class="vid-tag soon">Cutover Mai 2026</span>
+              <div><div class="vid-vertical">Wasserfilter · Re-Launch</div><div class="vid-name">Bachgold</div></div>
             </div>
           </div>
         </article>
 
-        <article class="vid-card" data-status="placeholder" data-brand="wake-performance" tabindex="0">
-          <!-- Sobald Video da: <video src="/assets/videos/wake.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/wake-poster.jpg"></video> -->
-          <div class="vid-poster">
-            <div class="vid-poster-text">Video folgt</div>
-          </div>
-          <div class="vid-play">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="vid-overlay">
-            <span class="vid-tag soon">Pre-Launch</span>
-            <div>
-              <div class="vid-vertical">Sportswear · DTC</div>
-              <div class="vid-name">Wake Performance</div>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="wake-performance" tabindex="0">
+          <div class="vid-card-inner">
+            <!-- Sobald Video da: <video src="/assets/videos/wake.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/wake-poster.jpg"></video> -->
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay">
+              <span class="vid-tag soon">Pre-Launch</span>
+              <div><div class="vid-vertical">Sportswear · DTC</div><div class="vid-name">Wake Performance</div></div>
             </div>
           </div>
         </article>
 
-        <article class="vid-card" data-status="placeholder" data-brand="face-evolution" tabindex="0">
-          <!-- Sobald Video da: <video src="/assets/videos/face-evolution.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/face-evolution-poster.jpg"></video> -->
-          <div class="vid-poster">
-            <div class="vid-poster-text">Video folgt</div>
-          </div>
-          <div class="vid-play">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="vid-overlay">
-            <span class="vid-tag placeholder">Coming Soon</span>
-            <div>
-              <div class="vid-vertical">Beauty-Tech · DTC</div>
-              <div class="vid-name">Face Evolution</div>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="face-evolution" tabindex="0">
+          <div class="vid-card-inner">
+            <!-- Sobald Video da: <video src="/assets/videos/face-evolution.mp4" muted loop playsinline preload="metadata" poster="/assets/videos/face-evolution-poster.jpg"></video> -->
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay">
+              <span class="vid-tag placeholder">Coming Soon</span>
+              <div><div class="vid-vertical">Beauty-Tech · DTC</div><div class="vid-name">Face Evolution</div></div>
             </div>
           </div>
         </article>
 
+        <!-- Duplikate für sauberen Infinite-Loop (Swiper braucht mindestens 2× slidesPerView Anzahl) -->
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="hearo-2" tabindex="0">
+          <div class="vid-card-inner">
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay"><span class="vid-tag live">Live</span><div><div class="vid-vertical">Premium-Audio · DTC</div><div class="vid-name">Hearo</div></div></div>
+          </div>
+        </article>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="bachgold-2" tabindex="0">
+          <div class="vid-card-inner">
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay"><span class="vid-tag soon">Cutover Mai 2026</span><div><div class="vid-vertical">Wasserfilter · Re-Launch</div><div class="vid-name">Bachgold</div></div></div>
+          </div>
+        </article>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="wake-2" tabindex="0">
+          <div class="vid-card-inner">
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay"><span class="vid-tag soon">Pre-Launch</span><div><div class="vid-vertical">Sportswear · DTC</div><div class="vid-name">Wake Performance</div></div></div>
+          </div>
+        </article>
+        <article class="swiper-slide vid-card" data-status="placeholder" data-brand="face-2" tabindex="0">
+          <div class="vid-card-inner">
+            <div class="vid-poster"><div class="vid-poster-text">Video folgt</div></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-overlay"><span class="vid-tag placeholder">Coming Soon</span><div><div class="vid-vertical">Beauty-Tech · DTC</div><div class="vid-name">Face Evolution</div></div></div>
+          </div>
+        </article>
+
+        </div>
+
+        <div class="swiper-button-prev" aria-label="Vorheriges Case"></div>
+        <div class="swiper-button-next" aria-label="Nächstes Case"></div>
+        <div class="swiper-pagination"></div>
       </div>
 
       <details class="vid-notes">
@@ -2390,42 +2460,70 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 </script>
 
 <script>
-/* === CASES: Video-Feed Hover-Autoplay + Click-Toggle === */
-(function(){
-  var feed = document.getElementById('vidFeed');
-  if(!feed) return;
-  var cards = feed.querySelectorAll('.vid-card');
-  var canHover = window.matchMedia('(hover: hover)').matches;
+/* === CASES: Swiper Coverflow Carousel · Loop · Smooth Swipe === */
+window.addEventListener('load', function(){
+  if(typeof Swiper === 'undefined') return;
+  var el = document.getElementById('vidFeed');
+  if(!el) return;
 
-  cards.forEach(function(card){
-    var v = card.querySelector('video');
-    if(!v) return; // Placeholder ohne Video — skip
-
-    // Click-Toggle (für Mobile + Desktop)
-    card.addEventListener('click', function(){
-      if(v.paused){
-        v.play().catch(function(){});
-        card.dataset.playing = 'true';
-      } else {
-        v.pause();
-        card.dataset.playing = 'false';
+  var swiper = new Swiper(el, {
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: true,
+    loopAdditionalSlides: 2,
+    initialSlide: 0,
+    grabCursor: true,
+    speed: 550,
+    spaceBetween: 24,
+    watchSlidesProgress: true,
+    pagination: {
+      el: '.vid-swiper .swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.vid-swiper .swiper-button-next',
+      prevEl: '.vid-swiper .swiper-button-prev'
+    },
+    keyboard: {enabled:true},
+    on: {
+      init: function(){
+        // Transitions erst nach Layout-Settle einschalten
+        setTimeout(function(){ el.classList.add('ready'); }, 250);
+      },
+      slideChangeTransitionEnd: function(){
+        var slides = el.querySelectorAll('.swiper-slide');
+        slides.forEach(function(s){
+          var v = s.querySelector('video');
+          if(!v) return;
+          if(s.classList.contains('swiper-slide-active')){
+            v.play().catch(function(){});
+            s.dataset.playing = 'true';
+          } else {
+            v.pause();
+            v.currentTime = 0;
+            s.dataset.playing = 'false';
+          }
+        });
       }
-    });
-
-    // Hover-Autoplay nur auf Geräten mit echtem Hover (Desktop)
-    if(canHover){
-      card.addEventListener('mouseenter', function(){
-        v.play().catch(function(){});
-        card.dataset.playing = 'true';
-      });
-      card.addEventListener('mouseleave', function(){
-        v.pause();
-        v.currentTime = 0;
-        card.dataset.playing = 'false';
-      });
     }
   });
-})();
+
+  // Click auf Side-Slide → centern. Click auf Active → Video-Toggle.
+  el.querySelectorAll('.swiper-slide').forEach(function(slide){
+    slide.addEventListener('click', function(e){
+      if(slide.classList.contains('swiper-slide-active')){
+        var v = slide.querySelector('video');
+        if(v){
+          if(v.paused){v.play().catch(function(){}); slide.dataset.playing='true'}
+          else{v.pause(); slide.dataset.playing='false'}
+        }
+      } else {
+        var realIdx = parseInt(slide.getAttribute('data-swiper-slide-index'), 10);
+        if(!isNaN(realIdx)) swiper.slideToLoop(realIdx);
+      }
+    });
+  });
+});
 </script>
 
 <script>

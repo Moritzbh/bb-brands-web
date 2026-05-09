@@ -35,6 +35,11 @@
 .header-cta > *{position:relative;z-index:1}
 .mobile-menu a.mobile-cta{background:var(--blue)}
 
+/* Footer · Kontrast-Override (shared.css hat noch text-3) */
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--blue)}
+
 /* ============= PAGE LAYOUT ============= */
 section{padding:96px 0;position:relative}
 section.cream{background:var(--cream)}
@@ -44,7 +49,7 @@ section.tint{background:var(--blue-tint)}
 .eyebrow{
   display:inline-block;
   font-family:var(--display);
-  font-size:11px;font-weight:700;color:var(--accent);
+  font-size:11px;font-weight:700;color:#C44A1F;
   text-transform:uppercase;letter-spacing:.2em;
   margin-bottom:18px;
 }
@@ -156,7 +161,7 @@ section.dark .lede{color:rgba(255,255,255,.85)}
   font-size:54px;line-height:1;letter-spacing:-.02em;
   color:var(--blue);margin-bottom:6px;
 }
-.stat-num .plus{font-size:.55em;color:var(--accent);font-weight:700;vertical-align:.18em}
+.stat-num .plus{font-size:.55em;color:#0a0a0a;font-weight:700;vertical-align:.18em}
 .stat-label{
   font-size:13px;color:var(--text-2);font-weight:500;
   line-height:1.4;
@@ -213,13 +218,13 @@ section.dark .lede{color:rgba(255,255,255,.85)}
 }
 .case-mockup .browser-bar .url{
   margin-left:10px;font-family:'SF Mono',Menlo,monospace;
-  font-size:11px;color:var(--text-3);letter-spacing:.02em;
+  font-size:11px;color:var(--text-2);letter-spacing:.02em;
 }
 .case-mockup .browser-content{
   aspect-ratio:16/10;background:#fafaf7;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:36px;
-  color:var(--text-3);letter-spacing:-.01em;
+  font-family:var(--display);font-weight:700;font-size:42px;
+  color:var(--text-2);letter-spacing:-.015em;
   position:relative;
 }
 .case-mockup .browser-content::before{
@@ -234,7 +239,7 @@ section.dark .lede{color:rgba(255,255,255,.85)}
   background:#fff;color:var(--text);border:1px solid var(--line-strong);
 }
 .case-mockup .case-status-pill.live{background:var(--blue);color:#fff;border-color:var(--blue)}
-.case-mockup .case-status-pill.soon{background:var(--accent);color:#fff;border-color:var(--accent)}
+.case-mockup .case-status-pill.soon{background:#FF6B3D;color:#0a0a0a;border-color:#0a0a0a}
 
 .case-content{
   padding:48px 44px;
@@ -242,7 +247,7 @@ section.dark .lede{color:rgba(255,255,255,.85)}
 }
 .case-meta{
   font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);font-weight:700;margin-bottom:10px;
+  color:#C44A1F;font-weight:700;margin-bottom:10px;
 }
 .case-content h3{
   font-family:var(--display);font-weight:700;
@@ -273,9 +278,9 @@ section.dark .lede{color:rgba(255,255,255,.85)}
   font-size:26px;line-height:1;color:var(--blue);
   margin-bottom:4px;letter-spacing:-.01em;
 }
-.case-stats-num .plus{color:var(--accent);font-size:.7em;font-weight:700}
+.case-stats-num .plus{color:#0a0a0a;font-size:.7em;font-weight:700}
 .case-stats-label{
-  font-size:11px;color:var(--text-3);
+  font-size:11px;color:var(--text-2);
   text-transform:uppercase;letter-spacing:.1em;font-weight:600;
   line-height:1.3;
 }
@@ -413,8 +418,8 @@ section.dark .btn-secondary:hover{color:#fff}
 .sticker .sticker-bot{font-size:9px;letter-spacing:.18em;margin-top:3px;font-weight:700;opacity:.75}
 .sticker.blue{background:var(--blue);color:#fff}
 .sticker.blue::before{border-color:rgba(255,255,255,.4)}
-.sticker.orange{background:var(--accent);color:#fff;transform:rotate(6deg)}
-.sticker.orange::before{border-color:rgba(255,255,255,.45)}
+.sticker.orange{background:#FF6B3D;color:#0a0a0a;transform:rotate(6deg)}
+.sticker.orange::before{border-color:rgba(0,0,0,.35)}
 
 /* "ACHTUNG"-Box · rote Warnbox */
 .achtung-box{
@@ -493,7 +498,7 @@ section.dark .btn-secondary:hover{color:#fff}
 }
 .ba-arrow{
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:800;font-size:36px;color:var(--accent);
+  font-family:var(--display);font-weight:800;font-size:36px;color:#0a0a0a;
   align-self:center;
 }
 @media (max-width:780px){.ba-arrow{transform:rotate(90deg);font-size:32px;padding:8px 0}}
@@ -542,8 +547,9 @@ section.dark .btn-secondary:hover{color:#fff}
   margin:48px auto 0;max-width:900px;
 }
 .trust-row .stars{
-  display:inline-flex;gap:2px;color:#FDE047;font-size:22px;letter-spacing:0;
-  -webkit-text-stroke:1px #0a0a0a;
+  display:inline-flex;gap:2px;
+  color:#92400E;
+  font-size:22px;letter-spacing:0;
 }
 .trust-row .item{
   font-family:var(--display);font-weight:700;font-size:14.5px;
@@ -607,13 +613,22 @@ h1.page-h1 .hl{
   margin-bottom:18px;
 }
 .dirty-h2 .stamp{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 14px;border-radius:4px;
+  display:inline-block;
+  background-color:#0a0a0a;
+  color:#fff !important;
+  padding:6px 16px;border-radius:4px;
   transform:rotate(-2deg);
   font-weight:800;letter-spacing:-.005em;
   border:3px solid #0a0a0a;
-  box-shadow:3px 3px 0 0 #0a0a0a;
+  box-shadow:4px 4px 0 0 #FF6B3D;
   margin:0 4px;
+  text-shadow:0 1px 0 rgba(0,0,0,.4);
+}
+.dirty-h2 .stamp.blue{
+  background-color:#0305C6;
+  border-color:#0305C6;
+  box-shadow:4px 4px 0 0 #0a0a0a;
+  transform:rotate(2deg);
 }
 </style>
 </head>
@@ -674,7 +689,7 @@ h1.page-h1 .hl{
   <div class="wrap">
     <div class="eyebrow" data-reveal>Cases · Stand 2026/Q2</div>
     <h1 class="page-h1" data-reveal>Was wir <em>gebaut haben.</em><br><span class="hl">Echte Brands. Echte Builds.</span></h1>
-    <p class="lede" data-reveal>Vier DTC-Brands. <strong>Custom-Architekturen statt Theme-Adaption.</strong> Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert — <span class="hl-blue">nicht in 6 Monaten irrelevant ist.</span></p>
+    <p class="lede" data-reveal>Eine kleine Auswahl unserer aktuellen Builds. <strong>Custom-Architekturen statt Theme-Adaption.</strong> Jede Build-Session beginnt mit Strategy, endet mit Section-Library, die mit dem Sortiment skaliert — <span class="hl-blue">nicht in 6 Monaten irrelevant ist.</span></p>
 
     <ul class="hero-bullets" data-reveal>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span><strong>Custom-Theme</strong> auf Dawn-Basis — keine Drag-and-Drop-Limits.</span></li>
@@ -704,11 +719,11 @@ h1.page-h1 .hl{
 
     <div class="trust-row" data-reveal>
       <span class="stars">★★★★★</span>
-      <span class="item"><strong>4</strong> DTC-Brands</span>
+      <span class="item">DTC-Builds · <strong>DACH-fokus</strong></span>
       <span class="sep"></span>
       <span class="item">Founder-Direct · <strong>0</strong> Junior-Layer</span>
       <span class="sep"></span>
-      <span class="item">DACH · <strong>1–20 Mio €</strong></span>
+      <span class="item">Range <strong>1–20 Mio €</strong></span>
       <span class="sep"></span>
       <span class="item"><strong>3–4</strong> Slots / Quartal</span>
     </div>
@@ -720,15 +735,15 @@ h1.page-h1 .hl{
   <div class="wrap">
     <div class="stats-row" data-reveal>
       <div class="stat">
-        <div class="stat-num">4</div>
-        <div class="stat-label">DTC-Brands<br>transformed</div>
+        <div class="stat-num">DACH</div>
+        <div class="stat-label">DTC-Brands<br>im Build</div>
       </div>
       <div class="stat">
         <div class="stat-num">28<span class="plus">+</span></div>
         <div class="stat-label">Custom-Sections<br>gebaut</div>
       </div>
       <div class="stat">
-        <div class="stat-num">15</div>
+        <div class="stat-num">15<span class="plus">+</span></div>
         <div class="stat-label">Custom-PDPs<br>generator-driven</div>
       </div>
       <div class="stat">
@@ -743,10 +758,10 @@ h1.page-h1 .hl{
 
     <div class="achtung-box" data-reveal>
       <span class="label">Achtung · Bevor du weiterscrollst</span>
-      <p>Wir zeigen hier <strong>Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Hearo ist <strong>live</strong>, Bachgold im <strong>Cutover Mai 2026</strong>, Wake Performance &amp; Reerect <strong>im Build</strong>. Tiefere Conversion-Daten gibt's im 60-Min-Audit — nicht als Marketing-Häppchen auf der Startseite.</p>
+      <p>Wir zeigen hier <strong>Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Was du gleich siehst, ist eine <strong>kuratierte Auswahl</strong> aktueller Builds — manche sind live, manche kurz vor Cutover, andere noch im Aufbau. Weitere Cases &amp; tiefere Conversion-Daten gibt's im 60-Min-Audit, nicht als Marketing-Häppchen auf der Startseite.</p>
     </div>
 
-    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp" style="background:var(--blue)">mit uns.</span></h2>
+    <h2 class="dirty-h2" data-reveal style="margin-top:72px">Was du <span class="stamp">ohne</span> bekommst — und was <span class="stamp blue">mit uns.</span></h2>
 
     <div class="beforeafter" data-reveal>
       <div class="ba-card before">
