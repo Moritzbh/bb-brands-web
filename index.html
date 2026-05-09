@@ -1354,19 +1354,22 @@ section.guarantees-dirty{
 }
 
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
-/* team-section: SAME Premium-BG wie founder-section damit beide nahtlos zusammenfließen */
+/* team-section: identische Premium-Base wie founder-section · viewport-fixed
+   damit beide Sections nahtlos zusammenfließen (kein cover-Reset zwischen Sections) */
 section.team-section,
 section.team-section:nth-of-type(even){
-  background:#f4f0e7 !important;
-  background-image:
-    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d)' stroke='%2302038F' stroke-width='0.6' fill='none' opacity='0.18'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(ellipse 90% 75% at 55% 45%, #f8f4eb 0%, #ece7d9 100%);
-  background-blend-mode:multiply, normal;
-  background-size:cover, auto;
-  background-position:center, center;
-  background-repeat:no-repeat, no-repeat;
+  background-color:#f4f0e7 !important;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d)' stroke='%2302038F' stroke-width='0.6' fill='none' opacity='0.18'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-blend-mode:multiply;
   padding-bottom:64px;
   position:relative;overflow:hidden;
+}
+@media (max-width:780px){
+  section.team-section,section.team-section:nth-of-type(even){background-attachment:scroll}
 }
 /* Big "01"-Outline-Watermark als Brand-Anchor */
 section.team-section::before{
@@ -1588,17 +1591,19 @@ section.team-section .wrap{position:relative;z-index:2}
    5. ::after · Feines Grain
    6. .wrap (z:2) · Content darüber */
 section.founder-section{
-  background:#f4f0e7 !important;color:var(--text);
-  background-image:
-    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d)' stroke='%2302038F' stroke-width='0.6' fill='none' opacity='0.18'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(ellipse 90% 75% at 55% 45%, #f8f4eb 0%, #ece7d9 100%);
-  background-blend-mode:multiply, normal;
-  background-size:cover, auto;
-  background-position:center, center;
-  background-repeat:no-repeat, no-repeat;
+  background-color:#f4f0e7 !important;color:var(--text);
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d)' stroke='%2302038F' stroke-width='0.6' fill='none' opacity='0.18'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-blend-mode:multiply;
   padding:96px 0 128px;
   position:relative;overflow:hidden;
   border-top:none;
+}
+@media (max-width:780px){
+  section.founder-section{background-attachment:scroll}
 }
 /* "02"-Outline-Watermark (z:0, layer above bg) */
 section.founder-section::before{
