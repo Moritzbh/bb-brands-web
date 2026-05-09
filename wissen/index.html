@@ -10,25 +10,80 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ============= TOKEN-OVERRIDES (Brand V1 + Baulig-DNA) ============= */
-.brand-logo{color:var(--blue);font-weight:700;letter-spacing:-.02em}
-.main-nav a:hover{color:var(--blue)}
-.main-nav a.active{color:var(--blue)}
-.main-nav a.active::after{background:var(--blue)}
-.header-cta{
-  background:var(--blue);color:#fff;
-  position:relative;overflow:hidden;
-  box-shadow:0 3px 10px rgba(3,5,198,.22);
+/* ============= HIDE Default-Header (shared.css) — wir bauen eigenen ============= */
+.top-bar,header.site-header,.mobile-menu{display:none !important}
+
+/* ============= BAULIG-STYLE TOP-NAV (schwarz, full-width) ============= */
+.bb-topnav{
+  background:#000;color:#fff;
+  position:sticky;top:0;z-index:60;
+  font-family:'Montserrat',sans-serif;
 }
-.header-cta:hover{
-  background:var(--blue);
-  transform:translateY(-1px);
-  box-shadow:0 6px 16px rgba(3,5,198,.32);
+.bb-topnav .wrap{
+  max-width:1340px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:90px;gap:32px;
 }
-.mobile-menu a.mobile-cta{background:var(--blue)}
+.bb-topnav-brand{
+  display:inline-flex;align-items:center;gap:14px;
+  color:#fff;text-decoration:none;
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:22px;letter-spacing:.06em;
+}
+.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.92}
+.bb-topnav-mark{
+  width:42px;height:24px;position:relative;display:inline-block;flex-shrink:0;
+}
+.bb-topnav-mark::before,.bb-topnav-mark::after{
+  content:"";position:absolute;top:0;
+  width:24px;height:24px;border-radius:50%;
+  border:3px solid #fff;
+}
+.bb-topnav-mark::before{left:0}
+.bb-topnav-mark::after{right:0}
+.bb-topnav-items{
+  display:flex;gap:36px;font-size:14px;font-weight:600;letter-spacing:.02em;
+}
+.bb-topnav-items a{color:rgba(255,255,255,.85);transition:color .15s;text-decoration:none}
+.bb-topnav-items a:hover{color:var(--accent);text-decoration:none}
+.bb-topnav-items a.active{color:var(--accent)}
+.bb-topnav-cta{
+  background:transparent;color:#fff;
+  border:1px solid #fff;
+  padding:14px 28px;
+  font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:.02em;
+  transition:all .2s;text-decoration:none;white-space:nowrap;
+}
+.bb-topnav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+.bb-topnav-mobile{
+  display:none;width:40px;height:40px;
+  background:transparent;border:none;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+}
+.bb-topnav-mobile span{display:block;width:22px;height:2px;background:#fff;border-radius:1px;transition:all .2s ease}
+.bb-topnav-mobile-menu{
+  display:none;background:#000;border-top:1px solid rgba(255,255,255,.1);
+  padding:24px 32px;flex-direction:column;gap:18px;
+}
+.bb-topnav-mobile-menu.open{display:flex}
+.bb-topnav-mobile-menu a{
+  color:#fff;font-size:16px;font-weight:600;letter-spacing:.02em;
+  padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none;
+}
+.bb-topnav-mobile-menu a:last-child{border-bottom:none}
+.bb-topnav-mobile-menu a.cta{background:var(--accent);text-align:center;border:none;padding:14px;margin-top:8px}
+@media (max-width:980px){.bb-topnav-items{display:none}.bb-topnav-cta{display:none}.bb-topnav-mobile{display:flex}}
+@media (max-width:780px){
+  .bb-topnav .wrap{height:64px;padding:0 20px}
+  .bb-topnav-brand{font-size:18px;gap:10px}
+  .bb-topnav-mark{width:34px;height:20px}
+  .bb-topnav-mark::before,.bb-topnav-mark::after{width:20px;height:20px;border-width:2.5px}
+}
+
 footer .footer-brand{color:var(--text-2)}
 footer .footer-links a{color:var(--text-2)}
-footer .footer-links a:hover{color:var(--blue)}
+footer .footer-links a:hover{color:var(--accent)}
 
 /* ============= BAULIG-DNA · PAGE TOKENS ============= */
 :root{
@@ -303,55 +358,32 @@ footer .footer-links a:hover{color:var(--blue)}
 </head>
 <body>
 
-<!-- ============= TOP-BAR ============= -->
-<div class="top-bar">
+<!-- ============= BAULIG-STYLE TOP-NAV ============= -->
+<header class="bb-topnav">
   <div class="wrap">
-    <div class="top-bar-left">
-      <a href="mailto:info@bb-brands.de" class="top-bar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        info@bb-brands.de
-      </a>
-      <span class="top-bar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
-        Pro Quartal max. 3–4 neue Projekte
-      </span>
-    </div>
-    <div class="top-bar-right">
-      <div class="top-bar-socials">
-        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============= HEADER ============= -->
-<header class="site-header">
-  <div class="wrap">
-    <a href="/" class="brand-logo" aria-label="BB Brands Startseite"><span class="brand-mark-mirror">B</span>Brands</a>
-    <nav class="main-nav" aria-label="Hauptnavigation">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite">
+      <span class="bb-topnav-mark" aria-hidden="true"></span>
+      BB BRANDS
+    </a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
       <a href="/">Startseite</a>
       <a href="/cases/">Cases</a>
       <a href="/wissen/" class="active">Wissen</a>
       <a href="/founder-os/">Founder OS</a>
     </nav>
-    <div class="header-actions">
-      <a href="/audit/" class="header-cta"><span>Audit anfragen</span></a>
-      <button class="mobile-toggle" aria-label="Menü" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="/founder-os/">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
   </div>
 </header>
-
-<div class="mobile-menu">
-  <a href="/">Startseite</a>
-  <a href="/cases/">Cases</a>
-  <a href="/wissen/">Wissen</a>
-  <a href="/founder-os/">Founder OS</a>
-  <a href="/audit/" class="mobile-cta">Strategy Audit anfragen →</a>
-</div>
 
 <!-- ============= BAULIG-DNA PAGE ============= -->
 <main class="bb-page">
