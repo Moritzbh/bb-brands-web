@@ -1382,22 +1382,15 @@ section.team-section::before{
   color:transparent;opacity:.06;
   pointer-events:none;user-select:none;
 }
-/* Light-Overlay (Brand-Light-Sources) — gleiche Layer wie founder-section */
-section.team-section .light-overlay{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 50% 38% at 28% 18%, rgba(255,107,61,.14) 0%, transparent 60%),
-    radial-gradient(ellipse 32% 25% at 30% 20%, rgba(255,255,255,.40) 0%, transparent 65%),
-    radial-gradient(ellipse 38% 32% at 82% 58%, rgba(3,5,198,.08) 0%, transparent 65%),
-    radial-gradient(ellipse 32% 26% at 15% 80%, rgba(255,107,61,.06) 0%, transparent 65%),
-    radial-gradient(ellipse 100% 90% at 50% 50%, transparent 55%, rgba(3,5,198,.06) 95%, rgba(3,5,198,.10) 100%);
-}
-/* Grain-Layer — gleicher Pattern wie founder-section */
+/* Light-Overlay deaktiviert für team-section · würde Section-Grenze sichtbar machen */
+section.team-section .light-overlay{display:none}
+/* Grain-Layer · viewport-fixed wie der Wellen-Layer · sodass beide Sections gleichmäßig granulieren */
 section.team-section::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.13 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:300px 300px;
-  opacity:.55;
+  background-attachment:fixed;
+  opacity:.6;
   mix-blend-mode:multiply;
 }
 section.team-section .wrap{position:relative;z-index:2}
@@ -1616,27 +1609,15 @@ section.founder-section::before{
   color:transparent;opacity:.06;
   pointer-events:none;user-select:none;
 }
-/* Asymmetrische Brand-Light-Sources */
-.founder-section .light-overlay{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    /* 1 · Hot-Spot oben-rechts · Signal Orange */
-    radial-gradient(ellipse 50% 38% at 72% 18%, rgba(255,107,61,.14) 0%, transparent 60%),
-    /* 2 · White-Light eingebettet im Hot-Spot */
-    radial-gradient(ellipse 32% 25% at 73% 20%, rgba(255,255,255,.40) 0%, transparent 65%),
-    /* 3 · Secondary · Bold Blue links-mitte */
-    radial-gradient(ellipse 38% 32% at 18% 58%, rgba(3,5,198,.08) 0%, transparent 65%),
-    /* 4 · Tertiary · Orange-Whisper unten-rechts */
-    radial-gradient(ellipse 32% 26% at 85% 80%, rgba(255,107,61,.06) 0%, transparent 65%),
-    /* 5 · Subtle Blue-Vignette */
-    radial-gradient(ellipse 100% 90% at 50% 50%, transparent 55%, rgba(3,5,198,.06) 95%, rgba(3,5,198,.10) 100%);
-}
-/* Grain-Layer · feinkörnig, multiply */
+/* Light-Overlay deaktiviert · würde Section-Grenze zur team-section sichtbar machen */
+.founder-section .light-overlay{display:none}
+/* Grain-Layer · viewport-fixed wie der Wellen-Layer · sodass beide Sections gleichmäßig granulieren */
 section.founder-section::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.13 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:300px 300px;
-  opacity:.55;
+  background-attachment:fixed;
+  opacity:.6;
   mix-blend-mode:multiply;
 }
 .founder-section .wrap{position:relative;z-index:2}
