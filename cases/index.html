@@ -24,24 +24,20 @@
   display:flex;align-items:center;justify-content:space-between;
   height:90px;gap:32px;
 }
+/* Echtes Lockup: gespiegeltes B + "Brands" — Saira Condensed Light, weiß */
 .bb-topnav-brand{
-  display:inline-flex;align-items:center;gap:14px;
+  display:inline-flex;align-items:baseline;
   color:#fff;text-decoration:none;
-  font-family:'Montserrat',sans-serif;font-weight:800;
-  font-size:22px;letter-spacing:.06em;
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-weight:300;font-size:36px;line-height:1;
+  letter-spacing:-.01em;white-space:nowrap;
 }
-.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.92}
-/* Doppel-Kreis-Mark */
+.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.9}
 .bb-topnav-mark{
-  width:42px;height:24px;position:relative;display:inline-block;flex-shrink:0;
+  display:inline-block;
+  transform:scaleX(-1);
+  margin-right:-1px;
 }
-.bb-topnav-mark::before,.bb-topnav-mark::after{
-  content:"";position:absolute;top:0;
-  width:24px;height:24px;border-radius:50%;
-  border:3px solid #fff;
-}
-.bb-topnav-mark::before{left:0}
-.bb-topnav-mark::after{right:0}
 
 .bb-topnav-items{
   display:flex;gap:36px;font-size:14px;font-weight:600;letter-spacing:.02em;
@@ -100,9 +96,7 @@
 }
 @media (max-width:780px){
   .bb-topnav .wrap{height:64px;padding:0 20px}
-  .bb-topnav-brand{font-size:18px;gap:10px}
-  .bb-topnav-mark{width:34px;height:20px}
-  .bb-topnav-mark::before,.bb-topnav-mark::after{width:20px;height:20px;border-width:2.5px}
+  .bb-topnav-brand{font-size:28px}
 }
 
 /* Footer · Kontrast-Override */
@@ -432,10 +426,7 @@ footer .footer-links a:hover{color:var(--accent)}
 <!-- ============= BAULIG-STYLE TOP-NAV ============= -->
 <header class="bb-topnav">
   <div class="wrap">
-    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite">
-      <span class="bb-topnav-mark" aria-hidden="true"></span>
-      BB BRANDS
-    </a>
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
     <nav class="bb-topnav-items" aria-label="Hauptnavigation">
       <a href="/">Startseite</a>
       <a href="/cases/" class="active">Cases</a>
