@@ -883,28 +883,28 @@ section.stats-banner:nth-of-type(even){
 }
 
 /* ========== CASES — SWIPER COVERFLOW CAROUSEL (Hochformat 9:16) ========== */
+section.cases-section,
+section.cases-section:nth-of-type(even){background:#fff !important}
 .vid-feed-wrap{position:relative;margin-top:4px}
 .vid-swiper{
   position:relative;
-  /* Begrenzt auf exakt 3-Card-Layout: 3×320 + 2×24 = 1008 px sichtbar */
-  max-width:1056px;margin:0 auto;
+  /* Bust aus .wrap raus damit 3×380 Cards + Gaps reinpassen (1196 px) */
+  width:min(1196px, calc(100vw - 60px));
+  margin-left:calc((min(1056px, 100vw - 64px) - min(1196px, 100vw - 60px))/2);
   padding:36px 0 56px;
   overflow:hidden;
 }
 .vid-swiper .swiper-wrapper{align-items:center}
 .vid-swiper .swiper-slide{
-  width:320px;height:569px;
+  width:380px;height:676px;
   background:transparent;border:none;
   cursor:pointer;position:relative;
-  /* Slide selbst NUR Container — Swiper braucht hier transform für Positioning.
-     Visuelles Card + Scale-Effekt sitzen auf .swiper-slide > .vid-card-inner */
 }
 .vid-card-inner{
   width:100%;height:100%;
-  border-radius:18px;
+  border-radius:20px;
   overflow:hidden;
   background:#0a0a0a;
-  border:1px solid var(--line);
   position:relative;
   transform:scale(.82);
   opacity:.92;
@@ -912,7 +912,7 @@ section.stats-banner:nth-of-type(even){
 .vid-swiper .swiper-slide-active .vid-card-inner{
   transform:scale(1);
   opacity:1;
-  box-shadow:0 28px 60px rgba(0,0,0,.28), 0 10px 28px rgba(3,5,198,.12);
+  box-shadow:0 32px 72px rgba(0,0,0,.30), 0 12px 32px rgba(3,5,198,.14);
 }
 .vid-swiper .swiper-slide-active{z-index:2}
 /* Transitions erst aktiv nach Swiper-Init (verhindert Loop bei Layout-Updates) */
@@ -939,12 +939,7 @@ section.stats-banner:nth-of-type(even){
     radial-gradient(ellipse at 70% 80%, rgba(255,107,61,.18) 0%, transparent 55%);
   filter:blur(8px);
 }
-.vid-poster-text{
-  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
-  z-index:1;text-align:center;color:rgba(245,245,240,.45);
-  font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
-}
+.vid-poster-text{display:none}
 .vid-overlay{
   position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;justify-content:space-between;
@@ -972,7 +967,7 @@ section.stats-banner:nth-of-type(even){
 }
 .vid-name{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:26px;font-weight:700;letter-spacing:-.012em;line-height:1.05;
+  font-size:32px;font-weight:700;letter-spacing:-.015em;line-height:1.02;
   color:#fff;
 }
 .vid-play{
@@ -989,46 +984,6 @@ section.stats-banner:nth-of-type(even){
 .vid-card[data-playing="true"] .vid-play{opacity:0;transform:translate(-50%,-50%) scale(.8)}
 .vid-play svg{width:20px;height:20px;color:#fff;margin-left:3px}
 .vid-card:hover .vid-play{transform:translate(-50%,-50%) scale(1.06)}
-
-/* Notes-Drawer */
-.vid-notes{
-  margin-top:36px;padding:18px 22px;
-  background:var(--bg-alt);
-  border:1px dashed var(--line-strong);
-  border-radius:10px;
-  max-width:780px;
-}
-.vid-notes summary{
-  cursor:pointer;font-weight:700;color:var(--text);
-  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-  list-style:none;
-  display:flex;align-items:center;gap:10px;
-}
-.vid-notes summary::-webkit-details-marker{display:none}
-.vid-notes summary::after{
-  content:"+";font-size:20px;font-weight:300;color:var(--accent);
-  margin-left:auto;line-height:1;
-}
-.vid-notes[open] summary::after{content:"−"}
-.vid-notes-body{
-  margin-top:16px;
-  font-size:13.5px;color:var(--text-2);line-height:1.65;
-}
-.vid-notes-body code{
-  background:var(--bg-card);
-  padding:1px 6px;border-radius:3px;
-  font-family:"SF Mono",Menlo,monospace;
-  font-size:12px;color:var(--blue);
-  border:1px solid var(--line);
-}
-.vid-notes-body ol{padding-left:18px;margin:10px 0}
-.vid-notes-body li{margin-bottom:8px}
-.vid-notes-body pre{
-  background:#0a0a0a;color:#f5f1e8;
-  padding:14px 16px;border-radius:8px;
-  font-family:"SF Mono",Menlo,monospace;font-size:12px;line-height:1.55;
-  overflow-x:auto;margin:10px 0;
-}
 
 .cases-disclaimer{
   margin-top:24px;text-align:center;
@@ -1066,18 +1021,18 @@ section.stats-banner:nth-of-type(even){
 .vid-swiper .swiper-button-next::after{
   font-size:18px;font-weight:700;
 }
-.vid-swiper .swiper-button-prev{left:max(calc(50% - 240px), 16px)}
-.vid-swiper .swiper-button-next{right:max(calc(50% - 240px), 16px)}
+.vid-swiper .swiper-button-prev{left:24px}
+.vid-swiper .swiper-button-next{right:24px}
 
 @media (max-width:980px){
-  .vid-swiper .swiper-slide{width:280px;height:498px}
+  .vid-swiper .swiper-slide{width:320px;height:569px}
   .vid-swiper .swiper-button-prev,
   .vid-swiper .swiper-button-next{display:none}
 }
 @media (max-width:780px){
-  .vid-swiper .swiper-slide{width:76vw;height:135vw}
+  .vid-swiper .swiper-slide{width:78vw;height:138vw}
   .vid-swiper{padding:24px 0 44px}
-  .vid-name{font-size:22px}
+  .vid-name{font-size:24px}
 }
 
 /* ========== CASES (DIRTY · Baulig-Pattern) ========== */
@@ -2097,7 +2052,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 </section>
 
 <!-- ============= 6 · CASES (Video-Coverflow · live) ============= -->
-<section>
+<section class="cases-section">
   <div class="wrap">
     <div class="eyebrow">Cases</div>
     <h2>Was wir gebaut haben.</h2>
@@ -2160,27 +2115,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="swiper-button-next" aria-label="Nächstes Case"></div>
         <div class="swiper-pagination"></div>
       </div>
-
-      <details class="vid-notes">
-        <summary>So fügst du Videos hinzu</summary>
-        <div class="vid-notes-body">
-          <ol>
-            <li>Video als <code>.mp4</code> exportieren — H.264, max 5 MB, 9:16 Hochformat, 6–12 s Loop. Stumm geschnitten (Browser-Auto-Play geht nur muted).</li>
-            <li>Datei ablegen unter <code>/assets/videos/{brand}.mp4</code> (z. B. <code>hearo.mp4</code>).</li>
-            <li>Optional: Poster-Frame als <code>{brand}-poster.jpg</code> in den gleichen Ordner — wird gezeigt bevor das Video lädt.</li>
-            <li>Im HTML in der jeweiligen <code>.vid-card</code> den <code>&lt;div class="vid-poster"&gt;…&lt;/div&gt;</code>-Block ersetzen durch:</li>
-          </ol>
-<pre>&lt;video src="/assets/videos/hearo.mp4"
-       muted loop playsinline
-       preload="metadata"
-       poster="/assets/videos/hearo-poster.jpg"&gt;&lt;/video&gt;</pre>
-          <ol start="5">
-            <li>Auf der gleichen <code>&lt;article class="vid-card"&gt;</code> das Attribut <code>data-status="placeholder"</code> entfernen.</li>
-            <li>Optional: <code>&lt;span class="vid-tag placeholder"&gt;Coming Soon&lt;/span&gt;</code> auf <code>live</code> oder <code>soon</code> umstellen, je nach Status.</li>
-          </ol>
-          <p style="margin-top:14px"><strong>Verhalten nach Embed:</strong> Hover startet Auto-Play (muted). Klick toggelt Play/Pause. Mobile: Klick startet Video, zweiter Klick pausiert.</p>
-        </div>
-      </details>
 
       <p class="cases-disclaimer">Wir nehmen pro Quartal max. 3–4 neue Projekte. Kein Skalierungs-Hype.</p>
     </div>
@@ -2455,7 +2389,7 @@ window.addEventListener('load', function(){
     initialSlide: 0,
     grabCursor: true,
     speed: 550,
-    spaceBetween: 24,
+    spaceBetween: 28,
     watchSlidesProgress: true,
     pagination: {
       el: '.vid-swiper .swiper-pagination',
