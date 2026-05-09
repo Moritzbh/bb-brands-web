@@ -570,85 +570,254 @@ h2 em{color:var(--blue);font-style:normal}
   .trust-track img{height:24px}
 }
 
-/* ========== SERVICES — COMPACT STRIP + DRAWER ========== */
-.bs-compact{margin-top:4px}
-.bs-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
-  margin-bottom:14px;
+/* ========== SERVICES — STICKY-RAIL STAGE (kinetic, Brand-V1) ========== */
+.bs-stage{
+  margin-top:24px;
+  display:grid;grid-template-columns:240px 1fr;gap:64px;
+  align-items:start;position:relative;min-height:520px;
+  perspective:1600px;
 }
-.bs-pill{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 18px;
-  background:var(--bg);border:1px solid var(--line);border-radius:12px;
+.bs-rail{
+  position:sticky;top:120px;
+  display:flex;flex-direction:column;gap:28px;
+  padding-left:18px;
+}
+.bs-rail::before{
+  content:'';position:absolute;
+  left:7px;top:6px;bottom:6px;
+  width:2px;background:var(--line);border-radius:2px;
+}
+.bs-rail-indicator{
+  position:absolute;left:5px;top:0;
+  width:6px;height:22px;
+  background:var(--blue);border-radius:6px;
+  transition:transform .85s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 14px rgba(3,5,198,.4);
+}
+.bs-rail-indicator::before{
+  content:'';position:absolute;inset:-4px;
+  border-radius:10px;background:var(--blue);
+  filter:blur(8px);opacity:.45;z-index:-1;
+}
+.bs-tab{
+  display:flex;align-items:center;gap:18px;
+  background:none;border:none;padding:0;
   cursor:pointer;text-align:left;
-  font-family:inherit;color:inherit;
-  transition:all .2s ease;
+  font-family:inherit;position:relative;
 }
-.bs-pill:hover{border-color:var(--line-strong)}
-.bs-pill.active{
-  background:var(--blue-tint);border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(3,5,198,.08);
+.bs-dot{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--blue);background:#fff;
+  flex-shrink:0;margin-left:-11px;position:relative;
+  transition:all .5s cubic-bezier(.16,1,.3,1);
 }
-.bs-pill-num{
+@keyframes bsBreathe{
+  0%,100%{box-shadow:0 0 0 0 rgba(3,5,198,.35);transform:scale(1)}
+  50%{box-shadow:0 0 0 8px rgba(3,5,198,0);transform:scale(1.18)}
+}
+.bs-tab.active .bs-dot{
+  background:var(--blue);
+  animation:bsBreathe 2.4s infinite ease-in-out;
+}
+.bs-tab-text{
+  display:flex;flex-direction:column;gap:2px;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.bs-tab:hover .bs-tab-text{transform:translateX(3px)}
+.bs-tab-phase{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-weight:600;font-size:22px;letter-spacing:-.01em;
-  color:var(--text-3);transition:color .2s ease;
-  flex-shrink:0;
+  font-size:10px;font-weight:800;letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--text-3);
+  transition:color .4s ease;
 }
-.bs-pill.active .bs-pill-num{color:var(--blue)}
-.bs-pill-text{display:flex;flex-direction:column;gap:1px;min-width:0}
-.bs-pill-label{
-  font-size:14px;font-weight:600;letter-spacing:-.005em;
-  color:var(--text);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.bs-tab-name{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:15px;font-weight:600;color:var(--text-3);
+  transition:color .4s ease;letter-spacing:-.005em;
 }
-.bs-pill-meta{
-  font-size:11px;color:var(--text-3);letter-spacing:.04em;
+.bs-tab.active .bs-tab-phase,
+.bs-tab.active .bs-tab-name{color:var(--blue)}
+.bs-tab.active .bs-tab-name{font-weight:700}
+
+/* Auto-progress ring around active dot */
+.bs-progress-ring{
+  position:absolute;width:32px;height:32px;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%) rotate(-90deg);
+  pointer-events:none;opacity:0;
+  transition:opacity .5s ease;overflow:visible;
 }
-.bs-drawer{
-  position:relative;min-height:200px;
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:14px;padding:30px 34px;
-  overflow:hidden;
+.bs-tab.active .bs-progress-ring{opacity:1}
+.bs-progress-ring circle{
+  fill:none;stroke:var(--blue);
+  stroke-width:1.5;stroke-linecap:round;
+  stroke-dasharray:87.96;stroke-dashoffset:87.96;
+  opacity:.55;
 }
-.bs-panel{
-  position:absolute;inset:30px 34px;
-  opacity:0;visibility:hidden;
-  transform:translateY(8px);
-  transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;
-}
-.bs-panel.active{
-  position:relative;inset:auto;
-  opacity:1;visibility:visible;transform:none;
-  transition:opacity .35s ease,transform .35s ease;
-}
-.bs-panel h3{
-  font-size:26px;font-weight:600;letter-spacing:-.015em;
-  line-height:1.2;margin:0 0 12px;
-}
-.bs-panel h3 em{font-style:italic;font-weight:400;color:var(--text-2)}
-.bs-panel p{
-  font-size:15px;line-height:1.6;color:var(--text-2);
-  margin:0 0 18px;max-width:680px;
-}
-.bs-chips{display:flex;flex-wrap:wrap;gap:8px}
-.bs-chip{
-  font-size:12px;font-weight:600;color:var(--accent);
-  padding:6px 12px;border-radius:99px;
-  background:var(--accent-bg);
-  border:1px solid rgba(255,107,61,.18);
+.bs-progress-ring.running circle{
+  transition:stroke-dashoffset 5.5s linear;
+  stroke-dashoffset:0;
 }
 
-@media (max-width:780px){
-  .bs-strip{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
-  .bs-pill{padding:12px 14px;gap:10px}
-  .bs-pill-num{font-size:18px}
-  .bs-pill-label{font-size:13px}
-  .bs-pill-meta{font-size:10.5px}
-  .bs-drawer{padding:24px 22px;min-height:0}
-  .bs-panel{inset:24px 22px}
-  .bs-panel h3{font-size:21px}
-  .bs-panel p{font-size:14.5px}
+.bs-content-area{
+  position:relative;min-height:480px;
+  transform-style:preserve-3d;
+}
+.bs-bg-num{
+  position:absolute;top:-90px;left:-40px;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(280px,32vw,460px);
+  font-weight:900;line-height:1;letter-spacing:-.04em;
+  -webkit-text-stroke:2px var(--blue);
+  color:transparent;opacity:.06;
+  pointer-events:none;user-select:none;z-index:0;
+  transition:transform .55s cubic-bezier(.4,0,.2,1),opacity .5s ease;
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+  transform-origin:50% 55%;
+}
+.bs-bg-num.swapping{opacity:0;transform:translateY(40px) scale(.92) rotate(-2deg)}
+
+.bs-step{
+  position:absolute;top:0;left:0;width:100%;
+  opacity:0;visibility:hidden;
+  transform:translateY(28px) scale(.985);
+  filter:blur(10px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),
+             transform .8s cubic-bezier(.16,1,.3,1),
+             filter .8s cubic-bezier(.16,1,.3,1);
+  padding-top:24px;z-index:1;
+}
+.bs-step.active{
+  position:relative;
+  opacity:1;visibility:visible;
+  transform:translateY(0) scale(1);filter:blur(0);
+}
+.bs-step::before{
+  content:'';position:absolute;
+  top:-60px;left:-100px;right:-60px;bottom:-60px;
+  background:radial-gradient(ellipse at 22% 45%,
+    rgba(3,5,198,.05) 0%,
+    rgba(3,5,198,0) 55%);
+  pointer-events:none;z-index:-1;opacity:0;
+  transition:opacity 1.2s ease;
+}
+.bs-step.active::before{opacity:1}
+
+.bs-day-tag{
+  display:inline-block;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.bs-step h3{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(36px,4.4vw,56px);font-weight:700;
+  color:var(--text);line-height:1.05;
+  letter-spacing:-1.2px;margin:0 0 24px;
+}
+.bs-step h3 em{
+  font-style:italic;font-weight:500;color:var(--blue);
+}
+/* Char-by-char headline reveal */
+.bs-step h3 .char{
+  display:inline-block;opacity:0;
+  transform:translateY(.45em) rotateX(-65deg);
+  transform-origin:50% 100%;
+  transition:opacity .7s cubic-bezier(.16,1,.3,1),
+             transform .7s cubic-bezier(.16,1,.3,1);
+  transition-delay:0s;will-change:opacity,transform;
+}
+.bs-step h3 .char.space{width:.28em}
+.bs-step.active h3 .char{
+  opacity:1;transform:translateY(0) rotateX(0);
+  transition-delay:calc(var(--i,0) * 22ms + 200ms);
+}
+
+.bs-step p{
+  font-size:17px;font-weight:400;
+  color:var(--text-2);line-height:1.7;
+  max-width:580px;margin:0 0 32px;
+}
+
+.bs-chips{display:flex;flex-wrap:wrap;gap:10px}
+.bs-chip{
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:700;
+  color:var(--blue);
+  padding:10px 18px;border-radius:99px;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(3,5,198,.15);
+  box-shadow:0 6px 24px -8px rgba(3,5,198,.12);
+  opacity:0;transform:translateY(14px) scale(.85);
+  transition:opacity .6s cubic-bezier(.34,1.56,.64,1),
+             transform .6s cubic-bezier(.34,1.56,.64,1),
+             background .25s ease,
+             border-color .25s ease,
+             color .25s ease;
+  will-change:transform;
+}
+.bs-chip:hover{
+  background:rgba(255,107,61,.08);
+  border-color:rgba(255,107,61,.35);
+  color:var(--accent);
+}
+.bs-step.active .bs-chip{opacity:1;transform:translateY(0) scale(1)}
+.bs-step.active .bs-chip:nth-child(1){transition-delay:.42s,.42s,0s,0s,0s}
+.bs-step.active .bs-chip:nth-child(2){transition-delay:.52s,.52s,0s,0s,0s}
+.bs-step.active .bs-chip:nth-child(3){transition-delay:.62s,.62s,0s,0s,0s}
+.bs-step.active .bs-chip:nth-child(4){transition-delay:.72s,.72s,0s,0s,0s}
+.bs-step.active .bs-chip:nth-child(5){transition-delay:.82s,.82s,0s,0s,0s}
+
+/* Ambient blob behind active content */
+.bs-ambient{
+  position:absolute;top:50%;left:50%;
+  width:760px;height:760px;
+  margin-top:-380px;margin-left:-380px;
+  background:radial-gradient(circle at center,
+    rgba(3,5,198,.16) 0%,
+    rgba(3,5,198,.08) 28%,
+    rgba(3,5,198,0) 62%);
+  filter:blur(40px);
+  pointer-events:none;opacity:0;z-index:0;
+  will-change:transform,opacity;
+  transition:transform 1.6s cubic-bezier(.16,1,.3,1),
+             opacity 1.4s ease;
+}
+.bs-ambient.visible{opacity:1}
+
+@media (max-width:980px){
+  .bs-stage{grid-template-columns:1fr;gap:30px;min-height:0}
+  .bs-rail{
+    position:static;flex-direction:row;
+    overflow-x:auto;gap:14px;padding:4px 20px 14px;
+    margin:0 -20px;scrollbar-width:none;
+  }
+  .bs-rail::-webkit-scrollbar{display:none}
+  .bs-rail::before,.bs-rail-indicator{display:none}
+  .bs-tab{
+    flex-shrink:0;padding:10px 14px;gap:12px;
+    border:1px solid var(--line);border-radius:10px;
+    background:#fff;
+  }
+  .bs-tab.active{border-color:var(--blue);background:var(--blue-tint)}
+  .bs-dot{display:none}
+  .bs-content-area{min-height:0}
+  .bs-bg-num{top:-50px;left:-10px;font-size:clamp(180px,40vw,280px)}
+  .bs-step{padding-top:8px}
+  .bs-step h3{font-size:34px;margin-bottom:18px;letter-spacing:-.5px}
+  .bs-step p{font-size:15px;margin-bottom:24px}
+}
+@media (prefers-reduced-motion: reduce){
+  .bs-step,.bs-chip,.bs-bg-num,.bs-rail-indicator,
+  .bs-ambient,.bs-progress-ring circle,.bs-step h3 .char{
+    transition:none !important;
+  }
+  .bs-tab.active .bs-dot{animation:none}
+  .bs-step h3 .char{opacity:1;transform:none}
 }
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
@@ -2094,51 +2263,56 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
     </div>
 
-    <div class="bs-compact" id="bsStage">
-      <div class="bs-strip" role="tablist">
-        <button class="bs-pill active" data-step="1" type="button" role="tab">
-          <span class="bs-pill-num">01</span>
-          <span class="bs-pill-text">
-            <span class="bs-pill-label">Brand</span>
-            <span class="bs-pill-meta">2–3 Wochen</span>
+    <div class="bs-stage" id="bsStage">
+      <div class="bs-rail">
+        <div class="bs-rail-indicator" id="bsRailIndicator"></div>
+        <button class="bs-tab active" data-step="1" type="button">
+          <span class="bs-dot"></span>
+          <span class="bs-tab-text">
+            <span class="bs-tab-phase">Phase 01</span>
+            <span class="bs-tab-name">Brand</span>
           </span>
         </button>
-        <button class="bs-pill" data-step="2" type="button" role="tab">
-          <span class="bs-pill-num">02</span>
-          <span class="bs-pill-text">
-            <span class="bs-pill-label">Shopify-Store</span>
-            <span class="bs-pill-meta">4–8 Wochen</span>
+        <button class="bs-tab" data-step="2" type="button">
+          <span class="bs-dot"></span>
+          <span class="bs-tab-text">
+            <span class="bs-tab-phase">Phase 02</span>
+            <span class="bs-tab-name">Shopify-Store</span>
           </span>
         </button>
-        <button class="bs-pill" data-step="3" type="button" role="tab">
-          <span class="bs-pill-num">03</span>
-          <span class="bs-pill-text">
-            <span class="bs-pill-label">Conversion &amp; E-Mail</span>
-            <span class="bs-pill-meta">3–4 Wochen</span>
+        <button class="bs-tab" data-step="3" type="button">
+          <span class="bs-dot"></span>
+          <span class="bs-tab-text">
+            <span class="bs-tab-phase">Phase 03</span>
+            <span class="bs-tab-name">Conversion &amp; E-Mail</span>
           </span>
         </button>
-        <button class="bs-pill" data-step="4" type="button" role="tab">
-          <span class="bs-pill-num">04</span>
-          <span class="bs-pill-text">
-            <span class="bs-pill-label">AI Operations</span>
-            <span class="bs-pill-meta">1–10 Wochen</span>
+        <button class="bs-tab" data-step="4" type="button">
+          <span class="bs-dot"></span>
+          <span class="bs-tab-text">
+            <span class="bs-tab-phase">Phase 04</span>
+            <span class="bs-tab-name">AI Operations</span>
           </span>
         </button>
       </div>
 
-      <div class="bs-drawer">
-        <article class="bs-panel active" data-step="1">
-          <h3>Positioning &amp; <em>Voice</em></h3>
+      <div class="bs-content-area">
+        <div class="bs-bg-num" id="bsBgNum">01</div>
+
+        <div class="bs-step active" data-step="1">
+          <span class="bs-day-tag">Phase 01 · 2–3 Wochen</span>
+          <h3>Positioning &amp; Voice.</h3>
           <p>Markenstrategie, mit der dein Team arbeiten kann. Kein Pitch-Deck, sondern ein operatives Framework. Bei Hearo Spine für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
           <div class="bs-chips">
             <span class="bs-chip">Brand-Doctrine</span>
             <span class="bs-chip">Voice-Guidelines</span>
             <span class="bs-chip">Messaging-Framework</span>
           </div>
-        </article>
+        </div>
 
-        <article class="bs-panel" data-step="2">
-          <h3>Custom-Theme statt <em>Theme-Adaption</em></h3>
+        <div class="bs-step" data-step="2">
+          <span class="bs-day-tag">Phase 02 · 4–8 Wochen</span>
+          <h3>Custom-Theme statt Adaption.</h3>
           <p>Hochkonvertierender Shop auf Dawn-Basis. Section-Library, die mit dir wächst. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
           <div class="bs-chips">
             <span class="bs-chip">Custom-Liquid</span>
@@ -2146,20 +2320,22 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <span class="bs-chip">Bundle-Architektur</span>
             <span class="bs-chip">PageSpeed 85+</span>
           </div>
-        </article>
+        </div>
 
-        <article class="bs-panel" data-step="3">
-          <h3>Profit-per-Visitor <em>maximieren</em></h3>
+        <div class="bs-step" data-step="3">
+          <span class="bs-day-tag">Phase 03 · 3–4 Wochen</span>
+          <h3>Profit pro Visitor.</h3>
           <p>A/B-Tests und Klaviyo-Lifecycle auf Margen-Ebene. Per-Order-Math statt ROAS-Theater. Welcome-Flow bis Win-Back, dokumentiert und übergeben.</p>
           <div class="bs-chips">
             <span class="bs-chip">Conversion-Audit</span>
             <span class="bs-chip">Klaviyo-Lifecycle</span>
             <span class="bs-chip">Per-Order-Math</span>
           </div>
-        </article>
+        </div>
 
-        <article class="bs-panel" data-step="4">
-          <h3>Workflows, die <em>Zeit sparen</em></h3>
+        <div class="bs-step" data-step="4">
+          <span class="bs-day-tag">Phase 04 · 1–10 Wochen</span>
+          <h3>AI Operations live.</h3>
           <p>Drei Stufen — Light (1–2 Wo, Prompts + Workshop), Medium (3–4 Wo, n8n-Workflows), Heavy (6–10 Wo, Custom-Agents + Dashboards). Im Discovery wählen wir, was passt.</p>
           <div class="bs-chips">
             <span class="bs-chip">Custom-Prompts</span>
@@ -2167,7 +2343,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <span class="bs-chip">AI-Agents</span>
             <span class="bs-chip">Schulung &amp; Übergabe</span>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </div>
@@ -2845,30 +3021,252 @@ window.addEventListener('load', function(){
 </script>
 
 <script>
-/* === BAUSTEINE: Compact Strip + Drawer Tab-Switch === */
+/* === BAUSTEINE STAGE · Apple-Grade · Char-Reveal · BG-Number-Swap · Auto-Advance · Mag-Chips === */
 (function(){
   var stage = document.getElementById('bsStage');
   if(!stage) return;
-  var pills = stage.querySelectorAll('.bs-pill');
-  var panels = stage.querySelectorAll('.bs-panel');
-  var current = 1;
+  var tabs = stage.querySelectorAll('.bs-tab');
+  var steps = stage.querySelectorAll('.bs-step');
+  var indicator = document.getElementById('bsRailIndicator');
+  var bgNum = document.getElementById('bsBgNum');
+  var contentArea = stage.querySelector('.bs-content-area');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function switchStep(n){
-    if(n === current) return;
-    current = n;
-    pills.forEach(function(p){
-      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
+  var TOTAL_STEPS = steps.length;
+  var AUTO_INTERVAL = 5500;
+  var RING_DASH = 87.96;
+  var RING_DURATION = 5.5;
+
+  var current = 1;
+  var autoTimer = null;
+  var isHovered = false;
+  var bgSwapping = false;
+
+  // 1) Headlines char-by-char splitten
+  steps.forEach(function(step){
+    var h3 = step.querySelector('h3');
+    if(!h3 || h3.dataset.split) return;
+    var text = h3.textContent;
+    h3.textContent = '';
+    var i = 0;
+    var chars = Array.from(text);
+    chars.forEach(function(ch){
+      var span = document.createElement('span');
+      if(ch === ' '){
+        span.className = 'char space';
+        span.textContent = ' ';
+      } else {
+        span.className = 'char';
+        span.textContent = ch;
+      }
+      span.style.setProperty('--i', i++);
+      h3.appendChild(span);
     });
-    panels.forEach(function(p){
-      p.classList.toggle('active', parseInt(p.dataset.step,10) === n);
+    h3.dataset.split = 'true';
+  });
+
+  // 2) Ambient-Blob hinter aktivem Content
+  var ambient = document.createElement('div');
+  ambient.className = 'bs-ambient';
+  contentArea.insertBefore(ambient, contentArea.firstChild);
+  var ambientPositions = [
+    { x: -22, y: -18 },
+    { x:  28, y: -22 },
+    { x:   2, y:  18 },
+    { x: -28, y:  22 }
+  ];
+  function updateAmbient(stepNum){
+    var p = ambientPositions[stepNum - 1] || { x: 0, y: 0 };
+    ambient.style.transform = 'translate('+p.x+'%, '+p.y+'%)';
+    if(!ambient.classList.contains('visible')){
+      requestAnimationFrame(function(){ ambient.classList.add('visible'); });
+    }
+  }
+
+  // 3) Progress-Ring um aktivem Dot
+  var ringHTML = '<svg class="bs-progress-ring" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/></svg>';
+  tabs.forEach(function(tab){
+    var dot = tab.querySelector('.bs-dot');
+    if(dot && !dot.dataset.ringInit){
+      dot.insertAdjacentHTML('beforeend', ringHTML);
+      dot.dataset.ringInit = 'true';
+    }
+  });
+  function resetAllRings(){
+    stage.querySelectorAll('.bs-progress-ring').forEach(function(r){
+      r.classList.remove('running');
+      var c = r.querySelector('circle');
+      if(c){
+        c.style.transition = 'none';
+        c.style.strokeDashoffset = RING_DASH;
+      }
+    });
+  }
+  function startRing(stepNum){
+    resetAllRings();
+    if(reduceMotion || isHovered) return;
+    var ring = stage.querySelector('.bs-tab[data-step="'+stepNum+'"] .bs-progress-ring');
+    if(!ring) return;
+    var c = ring.querySelector('circle');
+    if(!c) return;
+    void c.offsetWidth;
+    c.style.transition = 'stroke-dashoffset '+RING_DURATION+'s linear';
+    requestAnimationFrame(function(){
+      ring.classList.add('running');
+      c.style.strokeDashoffset = '0';
+    });
+  }
+  function pauseRing(){
+    var ring = stage.querySelector('.bs-tab.active .bs-progress-ring');
+    if(!ring) return;
+    var c = ring.querySelector('circle');
+    if(!c) return;
+    var cs = getComputedStyle(c).strokeDashoffset;
+    c.style.transition = 'none';
+    c.style.strokeDashoffset = cs;
+  }
+  function resumeRing(){
+    var ring = stage.querySelector('.bs-tab.active .bs-progress-ring');
+    if(!ring) return;
+    var c = ring.querySelector('circle');
+    if(!c) return;
+    var remaining = parseFloat(getComputedStyle(c).strokeDashoffset) || 0;
+    if(remaining <= 0.5) return;
+    var remainingSec = (remaining / RING_DASH) * RING_DURATION;
+    void c.offsetWidth;
+    c.style.transition = 'stroke-dashoffset '+remainingSec+'s linear';
+    requestAnimationFrame(function(){ c.style.strokeDashoffset = '0'; });
+  }
+
+  // 4) BG-Number 3D-Mouse-Tilt
+  var tiltRAF = null;
+  var targetRX = 0, targetRY = 0;
+  var curRX = 0, curRY = 0;
+  function applyBgTransform(){
+    if(!bgNum || bgSwapping) return;
+    bgNum.style.transform = 'translate3d(0,0,0) rotateX('+curRX.toFixed(2)+'deg) rotateY('+curRY.toFixed(2)+'deg)';
+  }
+  function tiltLoop(){
+    curRX += (targetRX - curRX) * 0.09;
+    curRY += (targetRY - curRY) * 0.09;
+    applyBgTransform();
+    if(Math.abs(targetRX - curRX) > 0.02 || Math.abs(targetRY - curRY) > 0.02){
+      tiltRAF = requestAnimationFrame(tiltLoop);
+    } else {
+      curRX = targetRX; curRY = targetRY;
+      applyBgTransform();
+      tiltRAF = null;
+    }
+  }
+  if(!reduceMotion){
+    contentArea.addEventListener('mousemove', function(e){
+      var r = contentArea.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      targetRY = px * 9;
+      targetRX = -py * 6;
+      if(!tiltRAF) tiltRAF = requestAnimationFrame(tiltLoop);
+    });
+    contentArea.addEventListener('mouseleave', function(){
+      targetRX = 0; targetRY = 0;
+      if(!tiltRAF) tiltRAF = requestAnimationFrame(tiltLoop);
     });
   }
 
-  pills.forEach(function(pill){
-    pill.addEventListener('click', function(){
-      switchStep(parseInt(pill.dataset.step,10));
+  // 5) Magnetic Chips
+  if(!reduceMotion){
+    stage.querySelectorAll('.bs-chip').forEach(function(chip){
+      chip.addEventListener('mousemove', function(e){
+        var r = chip.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) * 0.25;
+        var dy = (e.clientY - r.top - r.height / 2) * 0.35;
+        chip.style.transform = 'translate('+dx+'px, '+dy+'px) scale(1.04)';
+      });
+      chip.addEventListener('mouseleave', function(){
+        chip.style.transform = '';
+      });
     });
+  }
+
+  // 6) Indikator
+  function moveIndicator(stepNumber){
+    if(!indicator) return;
+    var target = stage.querySelector('.bs-tab[data-step="'+stepNumber+'"]');
+    if(!target) return;
+    var railRect = target.parentElement.getBoundingClientRect();
+    var tabRect = target.getBoundingClientRect();
+    var offset = tabRect.top - railRect.top + (tabRect.height / 2) - 11;
+    indicator.style.transform = 'translateY('+offset+'px)';
+  }
+
+  // 7) Step-Switch
+  function switchStep(stepNumber, fromAuto){
+    if(stepNumber === current) return;
+    current = stepNumber;
+    tabs.forEach(function(t){ t.classList.toggle('active', parseInt(t.dataset.step) === stepNumber); });
+    steps.forEach(function(s){ s.classList.toggle('active', parseInt(s.dataset.step) === stepNumber); });
+    if(bgNum){
+      bgSwapping = true;
+      bgNum.classList.add('swapping');
+      bgNum.style.transform = 'translateY(20px) scale(0.92) rotateX(45deg) rotateY('+curRY.toFixed(2)+'deg)';
+      setTimeout(function(){
+        bgNum.textContent = String(stepNumber).padStart(2, '0');
+        bgSwapping = false;
+        bgNum.classList.remove('swapping');
+        applyBgTransform();
+      }, 380);
+    }
+    moveIndicator(stepNumber);
+    updateAmbient(stepNumber);
+    startRing(stepNumber);
+    if(!fromAuto) restartAutoTimer();
+  }
+
+  // 8) Auto-Advance
+  function startAutoTimer(){
+    if(reduceMotion || isHovered) return;
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(function(){
+      var next = current >= TOTAL_STEPS ? 1 : current + 1;
+      switchStep(next, true);
+    }, AUTO_INTERVAL);
+  }
+  function restartAutoTimer(){ clearTimeout(autoTimer); startAutoTimer(); }
+  function stopAutoTimer(){ clearTimeout(autoTimer); autoTimer = null; }
+
+  stage.addEventListener('mouseenter', function(){
+    isHovered = true;
+    stopAutoTimer();
+    pauseRing();
   });
+  stage.addEventListener('mouseleave', function(){
+    isHovered = false;
+    resumeRing();
+    startAutoTimer();
+  });
+
+  // 9) Tab-Clicks
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){ switchStep(parseInt(tab.dataset.step)); });
+  });
+
+  // 10) Init
+  function init(){
+    moveIndicator(1);
+    updateAmbient(1);
+    var firstStep = stage.querySelector('.bs-step[data-step="1"]');
+    if(firstStep){
+      firstStep.classList.remove('active');
+      void firstStep.offsetWidth;
+      firstStep.classList.add('active');
+    }
+    startRing(1);
+    startAutoTimer();
+  }
+
+  window.addEventListener('load', function(){ setTimeout(init, 120); });
+  window.addEventListener('resize', function(){ moveIndicator(current); });
+  setTimeout(init, 250);
 })();
 </script>
 
