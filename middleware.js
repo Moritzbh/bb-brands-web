@@ -14,8 +14,10 @@
 
 export const config = {
   matcher: [
-    // Alles außer: /lock.html, /api, /assets, /_vercel, /favicon, /robots, /sitemap
-    '/((?!lock\\.html|api|assets|_vercel|favicon|robots|sitemap).*)'
+    // Alles außer: /lock(.html), /api, /assets, /_vercel, /favicon, /robots, /sitemap
+    // WICHTIG: vercel.json hat cleanUrls:true → /lock.html === /lock
+    // Beide Pfade müssen ausgeschlossen sein, sonst Redirect-Loop.
+    '/((?!lock|api|assets|_vercel|favicon|robots|sitemap).*)'
   ]
 };
 
@@ -51,6 +53,6 @@ export default async function middleware(request) {
     return;
   }
 
-  // Unauthenticated → 307 redirect zur Lock-Page
-  return Response.redirect(new URL('/lock.html', request.url), 307);
+  // Unauthenticated → 307 redirect zur Lock-Page (clean URL wegen cleanUrls:true)
+  return Response.redirect(new URL('/lock', request.url), 307);
 }
