@@ -3,24 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Wissen-Hub von BB Brands — SEO-Artikel und Tools für DTC-Brands.">
-<title>Wissen · BB Brands</title>
+<meta name="description" content="Wissen, Frameworks und Live-Tools für DTC-Founder. Guides, AI Check, Brand Audit plus 3 Rechner für ROAS, Marge und AOV. Kostenlos. Ohne E-Mail-Pflicht.">
+<meta name="robots" content="index, follow">
+<title>Wissen-Hub · BB Brands</title>
+<link rel="canonical" href="https://bb-brands.de/wissen/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wissen-Hub · BB Brands">
+<meta property="og:description" content="Vier Wege uns kennenzulernen: Guide, Framework, AI Check, Strategy Audit. Kostenlos.">
+<meta property="og:url" content="https://bb-brands.de/wissen/">
+
 <link rel="stylesheet" href="/assets/css/shared.css">
-<!-- Akzent-Schrift: Saira Condensed (Fallback bis Dax OT eingebunden) -->
+<!-- Brand-Schriften: Saira Condensed (Display) + Inter (Body) + Caveat / Space Mono (Akzente) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-.stub-section{padding:120px 0 100px;min-height:60vh}
-.stub-section h1{font-size:54px;font-weight:800;letter-spacing:-.025em;line-height:1.05;margin-bottom:18px;max-width:780px}
-.stub-section h1 em{color:var(--accent);font-style:normal}
-.stub-section .lede{font-size:19px;color:var(--text-2);max-width:640px;margin-bottom:36px;line-height:1.55}
-.stub-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:36px 40px;max-width:680px;box-shadow:0 4px 28px rgba(0,0,0,.04)}
-.stub-card h2{font-size:20px;font-weight:700;margin-bottom:10px}
-.stub-card p{color:var(--text-2);font-size:15px;line-height:1.6;margin-bottom:14px}
-.stub-card a{color:var(--accent);font-weight:600}
-.stub-meta{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);background:var(--accent-bg);padding:5px 12px;border-radius:100px;margin-bottom:18px}
-@media (max-width:780px){.stub-section{padding:60px 0 50px}.stub-section h1{font-size:32px}.stub-card{padding:24px 22px}}
+/* ========== WISSEN-HUB ========== */
+.wissen-page{padding:80px 0 120px;background:var(--bg)}
+
+.wissen-hero{max-width:780px;margin-bottom:64px}
+.wissen-hero .eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);
+  font-size:11px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);
+  padding:7px 14px;border-radius:100px;
+  background:var(--accent-bg);
+  border:1px solid rgba(255,107,61,.25);
+  margin-bottom:24px;
+}
+.wissen-hero .eyebrow::before{
+  content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;
+}
+.wissen-hero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(40px,6vw,72px);
+  letter-spacing:-.025em;line-height:1.04;
+  color:var(--black);margin-bottom:24px;
+}
+.wissen-hero h1 em{
+  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
+  color:var(--accent);
+  font-size:1.05em;letter-spacing:0;
+}
+.wissen-hero p.lede{
+  font-size:19px;font-weight:400;color:var(--text-2);
+  line-height:1.65;max-width:680px;
+}
+
+.journey-strip{
+  display:flex;gap:14px;align-items:flex-start;
+  margin:32px 0 0;padding:18px 22px;
+  border:1px solid var(--line);border-radius:14px;
+  background:var(--bg-alt);max-width:720px;
+}
+.journey-strip svg{flex-shrink:0;margin-top:2px;color:var(--blue)}
+.journey-strip p{
+  font-size:14px;color:var(--text-2);line-height:1.6;margin:0;
+}
+.journey-strip strong{color:var(--blue);font-weight:700}
+
+/* Grid */
+.wissen-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:32px;
+}
+@media (max-width:880px){.wissen-grid{grid-template-columns:1fr;gap:20px}}
+
+.wissen-card{
+  display:flex;flex-direction:column;
+  background:#fff;border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;
+  transition:all .25s ease;position:relative;
+  text-decoration:none;color:inherit;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.wissen-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px -12px rgba(3,5,198,.18);
+  text-decoration:none;
+}
+.card-step{
+  position:absolute;top:14px;right:14px;
+  font-family:var(--display);
+  font-size:10px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;
+  background:rgba(10,10,10,.78);padding:5px 10px;
+  border-radius:100px;border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(8px);z-index:2;
+}
+.card-thumb{
+  aspect-ratio:16/9;background:var(--bg-alt);
+  background-size:cover;background-position:center;
+  position:relative;
+}
+.card-thumb.t1{background-image:linear-gradient(135deg,#0305C6 0%,#1E3AFF 100%)}
+.card-thumb.t2{background-image:linear-gradient(135deg,#FF6B3D 0%,#0305C6 100%)}
+.card-thumb.t3{background-image:linear-gradient(135deg,#02038F 0%,#FF6B3D 100%)}
+.card-thumb.t4{background-image:linear-gradient(135deg,#FF6B3D 0%,#1E3AFF 100%)}
+.card-thumb.t5{background-image:linear-gradient(135deg,#0305C6 0%,#FFE45C 140%)}
+.card-thumb.t6{background-image:linear-gradient(135deg,#FF6B3D 0%,#02038F 120%)}
+.card-thumb.t7{background-image:linear-gradient(135deg,#FFE45C 0%,#FF6B3D 100%)}
+.card-tag{
+  position:absolute;bottom:14px;left:14px;
+  font-family:var(--display);
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;
+  background:rgba(0,0,0,.32);padding:6px 12px;
+  border-radius:100px;backdrop-filter:blur(8px);
+}
+.card-body{padding:28px 28px 24px;flex-grow:1;display:flex;flex-direction:column}
+.card-body h3{
+  font-family:var(--display);font-weight:800;
+  font-size:22px;letter-spacing:-.01em;line-height:1.22;
+  color:var(--black);margin-bottom:12px;
+}
+.card-body p{
+  font-size:14.5px;font-weight:400;color:var(--text-2);
+  line-height:1.65;margin-bottom:18px;flex-grow:1;
+}
+.card-meta{
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+  font-size:12px;color:var(--text-3);font-weight:500;
+  padding-top:14px;border-top:1px solid var(--line);
+  margin-bottom:16px;
+}
+.card-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;letter-spacing:-.005em;
+  color:var(--blue);transition:gap .2s ease;
+}
+.card-link svg{transition:transform .2s ease}
+.wissen-card:hover .card-link svg{transform:translateX(4px)}
+.wissen-card:hover .card-link{color:var(--accent)}
+
+/* Section divider */
+.wissen-section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  margin:96px 0 28px;padding-top:36px;
+  border-top:1px solid var(--line);
+}
+.wissen-section-head-text{max-width:620px}
+.wissen-section-head .eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);
+  font-size:11px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);
+  padding:7px 14px;border-radius:100px;
+  background:var(--accent-bg);
+  border:1px solid rgba(255,107,61,.25);
+  margin-bottom:18px;
+}
+.wissen-section-head .eyebrow::before{
+  content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;
+}
+.wissen-section-head h2{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(28px,3.6vw,42px);
+  letter-spacing:-.02em;line-height:1.1;
+  color:var(--black);margin-bottom:12px;
+}
+.wissen-section-head h2 em{
+  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
+  color:var(--accent);font-size:1.05em;letter-spacing:0;
+}
+.wissen-section-head p{
+  font-size:15px;font-weight:400;color:var(--text-2);line-height:1.7;
+}
+.wissen-section-head-meta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);
+  font-size:11px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);
+  padding:8px 14px;border-radius:100px;
+  background:var(--accent-bg);flex-shrink:0;
+}
+.wissen-section-head-meta::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);animation:pulseDot 2s infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.35}}
+
+.wissen-grid.tools{grid-template-columns:repeat(3,1fr)}
+@media (max-width:1080px){.wissen-grid.tools{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){.wissen-grid.tools{grid-template-columns:1fr}}
+
+/* Bottom CTA */
+.wissen-bottom-cta{
+  margin-top:96px;padding:56px 48px;
+  background:linear-gradient(135deg,#0a0a0a 0%,#02038F 100%);
+  color:#fff;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.wissen-bottom-cta::before{
+  content:"";position:absolute;top:-50%;right:-10%;
+  width:60%;height:200%;
+  background:radial-gradient(ellipse at center,rgba(255,107,61,.32) 0%,transparent 60%);
+  filter:blur(40px);pointer-events:none;
+}
+.wissen-bottom-cta-text{position:relative;max-width:560px}
+.wissen-bottom-cta h2{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(24px,3vw,36px);
+  letter-spacing:-.018em;line-height:1.18;
+  margin-bottom:12px;color:#fff;
+}
+.wissen-bottom-cta h2 em{
+  font-family:'Caveat',cursive;font-style:normal;font-weight:600;
+  color:var(--accent);font-size:1.05em;letter-spacing:0;
+}
+.wissen-bottom-cta p{
+  font-size:15px;font-weight:400;line-height:1.7;
+  color:rgba(255,255,255,.85);
+}
+.wissen-bottom-cta-actions{
+  position:relative;display:flex;flex-direction:column;gap:10px;flex-shrink:0;align-items:flex-start;
+}
+.wissen-bottom-cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 28px;
+  background:var(--accent);color:#fff;
+  border-radius:8px;font-weight:700;font-size:14px;
+  letter-spacing:-.005em;transition:all .2s ease;
+  box-shadow:0 8px 22px rgba(255,107,61,.35);
+  text-decoration:none;
+}
+.wissen-bottom-cta-btn:hover{
+  background:var(--accent-hover);transform:translateY(-1px);
+  box-shadow:0 12px 28px rgba(255,107,61,.45);text-decoration:none;
+}
+.wissen-bottom-cta-link{
+  font-size:13px;color:rgba(255,255,255,.7);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.wissen-bottom-cta-link:hover{color:#fff}
+.wissen-bottom-cta-link strong{color:var(--accent);font-weight:700}
+
+@media (max-width:780px){
+  .wissen-page{padding:48px 0 80px}
+  .wissen-bottom-cta{padding:36px 28px;flex-direction:column;align-items:flex-start;text-align:left}
+  .wissen-bottom-cta-actions{width:100%}
+  .wissen-section-head{margin:64px 0 24px}
+}
 </style>
 </head>
 <body>
@@ -54,9 +284,9 @@
     <a href="/" class="brand-logo" aria-label="BB Brands Startseite"><span class="brand-mark-mirror">B</span>Brands</a>
     <nav class="main-nav" aria-label="Hauptnavigation">
       <a href="/">Startseite</a>
-      <a href="/cases/" >Cases</a>
+      <a href="/cases/">Cases</a>
       <a href="/wissen/" class="active">Wissen</a>
-      <a href="/founder-os/" >Founder OS</a>
+      <a href="/founder-os/">Founder OS</a>
     </nav>
     <div class="header-actions">
       <button class="header-search" aria-label="Suche">
@@ -78,19 +308,200 @@
   <a href="/audit/" class="mobile-cta">Strategy Audit anfragen →</a>
 </div>
 
-<section class="stub-section">
+<!-- ============= WISSEN-HUB ============= -->
+<main class="wissen-page">
   <div class="wrap">
-    <span class="stub-meta">Wissen-Hub · Migration läuft</span>
-    <h1>Tiefe Einblicke <em>für DTC-Founder.</em></h1>
-    <p class="lede">10 SEO-Artikel und 4 Tools (AOV-, Marge-, ROAS-Rechner, AI-Check) — gerade in Migration. Komplett neu strukturiert mit Categories, Featured Posts und Newsletter-Form.</p>
 
-    <div class="stub-card">
-      <h2>Bestehender Hub temporär hier:</h2>
-      <p>Aktuelle Artikel und Tools sind erreichbar unter <a href="https://bb-brands.de/wissen.html" target="_blank" rel="noopener">bb-brands.de/wissen</a> — bis die neue Hub-Struktur hier live ist.</p>
-      <p style="margin-top:18px">Themen: Shopify-Kosten · DTC-Launch in 30 Tagen · Meta-Ads-Hooks · Brand-System · Marge-Kalkulation</p>
+    <div class="wissen-hero">
+      <div class="eyebrow">Wissen-Hub</div>
+      <h1>Bevor wir reden, <em>lies dich ein.</em></h1>
+      <p class="lede">Vier Wege, BB Brands kennenzulernen — vom 5-Minuten-Read bis zum Strategy Audit. Such dir den passenden Einstieg in deine Customer Journey aus. Kein Newsletter, keine E-Mail-Pflicht, kein Pitch.</p>
+
+      <div class="journey-strip">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+        <p><strong>So liest du den Hub:</strong> Je weiter du nach unten gehst, desto näher kommst du dem direkten Gespräch. Oben Wissen, unten Aktion.</p>
+      </div>
     </div>
+
+    <!-- Customer Journey + Articles -->
+    <div class="wissen-grid">
+
+      <a href="https://bb-brands.de/wissen-d2c-launch.html" class="wissen-card">
+        <span class="card-step">Schritt 1 · Lesen</span>
+        <div class="card-thumb t1"><span class="card-tag">Guide</span></div>
+        <div class="card-body">
+          <h3>D2C-Brand-Launch in 21 Tagen</h3>
+          <p>Der komplette Fahrplan: Vom ersten Logo bis zum laufenden Shopify-Store mit ersten Verkäufen. Drei Wochen, drei Phasen, eine ehrliche Checkliste.</p>
+          <div class="card-meta"><span>📖 9 Min. Read</span><span>·</span><span>Für Founder vor dem Launch</span></div>
+          <span class="card-link">Guide lesen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-brand-system.html" class="wissen-card">
+        <span class="card-step">Schritt 2 · Verstehen</span>
+        <div class="card-thumb t3"><span class="card-tag">Framework</span></div>
+        <div class="card-body">
+          <h3>Das BB-Brands-Brand-System</h3>
+          <p>Wie ein Styleguide aussieht, der nicht nur PDF-Deko ist, sondern Ads, Web und Verpackung trägt. Vier Schichten, ein Live-Beispiel, kein Buzzword-Bingo.</p>
+          <div class="card-meta"><span>📖 7 Min. Read</span><span>·</span><span>Mit ARCTIVE-Beispiel</span></div>
+          <span class="card-link">Framework sehen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-ai-check.html" class="wissen-card">
+        <span class="card-step">Schritt 3 · Anfordern</span>
+        <div class="card-thumb t2"><span class="card-tag">Kostenlose Analyse</span></div>
+        <div class="card-body">
+          <h3>AI Readiness Check für deinen Store</h3>
+          <p>Wir analysieren deinen Shopify-Store auf vier KI-Hebel: Search, Produktberater, Support, Auto-Tagging. Konkrete Empfehlung statt Buzzword-Bingo.</p>
+          <div class="card-meta"><span>⚡ 90 Sek. Anfrage</span><span>·</span><span>Antwort in 24h</span></div>
+          <span class="card-link">Check anfordern
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="/audit/" class="wissen-card">
+        <span class="card-step">Schritt 4 · Sprechen</span>
+        <div class="card-thumb t4"><span class="card-tag">Strategy Audit</span></div>
+        <div class="card-body">
+          <h3>Strategy Audit anfragen</h3>
+          <p>Zwei Wochen Diagnose-Sprint deines Setups. Brand-, Markt- und Conversion-Diagnose plus Transformations-Plan. Für Brands ab Umsatz.</p>
+          <div class="card-meta"><span>💼 Pre-Qualification</span><span>·</span><span>Antwort in 1 Werktag</span></div>
+          <span class="card-link">Audit anfragen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-shopify-store-erstellen-lassen-kosten.html" class="wissen-card">
+        <span class="card-step">Artikel · Lesen</span>
+        <div class="card-thumb t5"><span class="card-tag">How-To / Pricing Guide</span></div>
+        <div class="card-body">
+          <h3>Shopify-Store erstellen lassen: Was kostet er 2026? Ehrliche Rechnung</h3>
+          <p>Was kostet ein Shopify-Store wirklich? Echte Zahlen aus 4 Builds 2025–2026, ohne Agentur-Bullshit. Setup, laufende Kosten, versteckte Posten.</p>
+          <div class="card-meta"><span>📖 8 Min.</span><span>·</span><span>Für DTC-Founder</span></div>
+          <span class="card-link">Artikel lesen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-shopify-fehler-vermeiden.html" class="wissen-card">
+        <span class="card-step">Artikel · Lesen</span>
+        <div class="card-thumb t6"><span class="card-tag">Listicle / Audit-Guide</span></div>
+        <div class="card-body">
+          <h3>Shopify-Fehler vermeiden: 7 Conversion-Killer (2026, DACH)</h3>
+          <p>Die 7 Shopify-Fehler, die im DACH-Markt am meisten Umsatz kosten — mit konkretem Beispiel, Fix und Umsatzverlust-Schätzung pro Fehler.</p>
+          <div class="card-meta"><span>📖 11 Min.</span><span>·</span><span>DACH · Conversion</span></div>
+          <span class="card-link">Artikel lesen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-meta-ads-hooks-warum-konvertieren-nicht.html" class="wissen-card">
+        <span class="card-step">Artikel · Lesen</span>
+        <div class="card-thumb t7"><span class="card-tag">Teardown + Framework</span></div>
+        <div class="card-body">
+          <h3>Meta Ads Creative Strategie: Warum deine Hooks nicht ziehen</h3>
+          <p>Meta Ads Creative Strategie für DACH-DTC: Warum deine Hooks nicht konvertieren, 3-Sekunden-Stopp-Framework und 5 Teardowns aus echten Projekten.</p>
+          <div class="card-meta"><span>📖 10 Min.</span><span>·</span><span>Meta · CTR · Hooks</span></div>
+          <span class="card-link">Artikel lesen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-d2c-launch-30-tage.html" class="wissen-card">
+        <span class="card-step">Artikel · Lesen</span>
+        <div class="card-thumb t1"><span class="card-tag">Ultimate Guide</span></div>
+        <div class="card-body">
+          <h3>DTC-Brand aufbauen: 30-Tage-Launch-Plan (ehrlich, mit Budgets)</h3>
+          <p>Eine DTC-Brand aufbauen in 30 Tagen: realer Fahrplan, Budgets pro Phase, Unit Economics upfront. Für Founder, die ihre erste Brand launchen.</p>
+          <div class="card-meta"><span>📖 15 Min.</span><span>·</span><span>Pre-Launch · Budget 5–20k</span></div>
+          <span class="card-link">Artikel lesen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Tools Section -->
+    <div class="wissen-section-head">
+      <div class="wissen-section-head-text">
+        <div class="eyebrow">Live-Tools</div>
+        <h2>Drei Rechner, <em>die du jetzt sofort brauchst.</em></h2>
+        <p>Reine Browser-Tools, kein Login, kein Download. Du gibst deine Zahlen ein, du siehst sofort die Wahrheit über deine Unit Economics. Inkl. Erklärung, was die Zahl bedeutet.</p>
+      </div>
+      <span class="wissen-section-head-meta">Live · Kostenlos · Ohne Login</span>
+    </div>
+
+    <div class="wissen-grid tools">
+
+      <a href="https://bb-brands.de/wissen-roas-rechner.html" class="wissen-card">
+        <span class="card-step">Tool · Ads</span>
+        <div class="card-thumb t5"><span class="card-tag">Rechner</span></div>
+        <div class="card-body">
+          <h3>Break-Even ROAS Rechner</h3>
+          <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren. Die Zahl, ohne die Meta Ads ein Bauchgefühl bleiben.</p>
+          <div class="card-meta"><span>⚡ Live-Berechnung</span><span>·</span><span>Für Meta-Ads-Founder</span></div>
+          <span class="card-link">Jetzt rechnen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-marge-rechner.html" class="wissen-card">
+        <span class="card-step">Tool · Profit</span>
+        <div class="card-thumb t6"><span class="card-tag">Rechner</span></div>
+        <div class="card-body">
+          <h3>Profit-Marge Rechner</h3>
+          <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht, die jeden Euro Schritt für Schritt aufschlüsselt.</p>
+          <div class="card-meta"><span>⚡ Live-Berechnung</span><span>·</span><span>Inkl. Wasserfall</span></div>
+          <span class="card-link">Marge prüfen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://bb-brands.de/wissen-aov-rechner.html" class="wissen-card">
+        <span class="card-step">Tool · Wachstum</span>
+        <div class="card-thumb t7"><span class="card-tag">Simulator</span></div>
+        <div class="card-body">
+          <h3>AOV-Uplift Simulator</h3>
+          <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber rechts, Profit links, plus 4 konkrete Hebel um da hinzukommen.</p>
+          <div class="card-meta"><span>⚡ Live-Slider</span><span>·</span><span>Inkl. Hebel-Liste</span></div>
+          <span class="card-link">Hebel testen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="wissen-bottom-cta">
+      <div class="wissen-bottom-cta-text">
+        <h2>Schon entschieden? <em>Lass uns reden.</em></h2>
+        <p>Wenn du lieber direkt einsteigst statt vorher zu lesen — der Strategy Audit ist der Eintritt für Brands ab Umsatz. Pre-Launch? Dann ist Founder OS dein Weg.</p>
+      </div>
+      <div class="wissen-bottom-cta-actions">
+        <a href="/audit/" class="wissen-bottom-cta-btn">
+          Strategy Audit anfragen
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://founderos.bb-brands.de" target="_blank" rel="noopener" class="wissen-bottom-cta-link">Pre-Launch? → <strong>Founder OS</strong></a>
+      </div>
+    </div>
+
   </div>
-</section>
+</main>
 
 <footer>
   <div class="wrap">
@@ -103,6 +514,18 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var header = document.querySelector('header.site-header');
+  if(!header) return;
+  var update = function(){
+    if(window.scrollY > 60){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
+  };
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
 
 </body>
 </html>
