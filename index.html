@@ -477,31 +477,31 @@ header.site-header .wrap{
 }
 .hero-specs .spec strong{color:var(--text);font-weight:700}
 
-/* Shopify-Partner-Badge unter Specs */
+/* Shopify-Partner-Badge unter Specs (Bag-only mit Caption) */
 .hero-shopify{
-  display:inline-flex;align-items:center;gap:10px;
-  margin-top:20px;
+  display:inline-flex;align-items:center;gap:14px;
+  margin-top:24px;
   text-decoration:none;
-  opacity:.85;transition:opacity .2s ease;
+  opacity:.9;transition:opacity .2s ease;
 }
 .hero-shopify:hover{opacity:1;text-decoration:none}
 .hero-shopify .shop-bag{
-  width:34px;height:38px;flex-shrink:0;
-  position:relative;
+  width:54px;height:60px;flex-shrink:0;
+  filter:drop-shadow(0 6px 14px rgba(149,191,71,.25));
 }
 .hero-shopify .shop-bag svg{width:100%;height:100%;display:block}
-.hero-shopify .shop-text{
-  display:inline-flex;align-items:baseline;gap:7px;
-  font-size:22px;line-height:1;
-  letter-spacing:-.02em;
+.hero-shopify .shop-caption{
+  display:inline-flex;flex-direction:column;gap:3px;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  line-height:1.05;
 }
-.hero-shopify .shop-shopify{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-weight:700;color:#0a0a0a;
+.hero-shopify .shop-cap-top{
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text-3);
 }
-.hero-shopify .shop-partners{
-  font-family:Georgia,"Times New Roman",serif;
-  font-style:italic;font-weight:400;color:#0a0a0a;
+.hero-shopify .shop-cap-main{
+  font-size:18px;font-weight:700;letter-spacing:-.005em;
+  color:#0a0a0a;
 }
 
 @media (max-width:980px){
@@ -2283,9 +2283,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
               <path d="M19.7 11l-1 3.7s-1.1-.5-2.4-.4c-1.9.1-1.9 1.3-1.9 1.6.1 1.6 4.3 2 4.6 5.8.2 3-1.5 5-4.1 5.2-3.1.2-4.8-1.6-4.8-1.6l.7-2.8s1.7 1.3 3.1 1.2c.9-.1 1.2-.8 1.2-1.3-.1-2.1-3.5-2-3.8-5.5-.2-2.9 1.7-5.9 5.9-6.1 1.6-.1 2.5.2 2.5.2z" fill="#fff"/>
             </svg>
           </span>
-          <span class="shop-text">
-            <span class="shop-shopify">shopify</span>
-            <span class="shop-partners">partners</span>
+          <span class="shop-caption">
+            <span class="shop-cap-top">Offizieller</span>
+            <span class="shop-cap-main">Shopify Partner</span>
           </span>
         </a>
       </div>
