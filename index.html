@@ -2234,6 +2234,75 @@ section.apply-section:nth-of-type(even){
   .apply-prebrief-list li{font-size:13.5px}
 }
 
+/* ============= APPLY · 2-Col Pattern (Headline links, Calendly rechts) ============= */
+.apply-grid{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:80px;align-items:center;
+}
+.apply-col-left{max-width:560px}
+.apply-h2{
+  font-family:var(--display);
+  font-size:clamp(40px, 5.2vw, 68px);
+  font-weight:800;line-height:1.02;letter-spacing:-.022em;
+  color:var(--text);margin-bottom:28px;
+}
+.apply-h2 em{
+  font-style:normal;
+  color:var(--blue);
+}
+.apply-lede{
+  font-size:17px;line-height:1.6;
+  margin-bottom:36px;
+  color:var(--text);
+  font-weight:500;
+}
+.apply-hl{
+  background:linear-gradient(180deg, transparent 50%, rgba(253,224,71,.7) 50%);
+  padding:0 2px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.apply-bullets{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:16px;
+}
+.apply-bullets li{
+  display:flex;align-items:center;gap:14px;
+  font-size:15.5px;line-height:1.4;
+  color:var(--text);font-weight:500;
+}
+.apply-check{
+  width:24px;height:24px;flex-shrink:0;
+  background:#16a34a;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.apply-check::before{
+  content:"";
+  width:11px;height:6px;
+  border-left:2.5px solid #fff;
+  border-bottom:2.5px solid #fff;
+  transform:rotate(-45deg) translate(1px,-2px);
+}
+.apply-col-right{position:relative;min-width:0}
+.apply-col-right .calendly-inline-widget{
+  border-radius:8px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.08);
+}
+
+/* Mobile: Single-Col, Calendly unten */
+@media (max-width:880px){
+  .apply-grid{grid-template-columns:1fr;gap:40px}
+  .apply-col-left{max-width:none;text-align:left}
+  .apply-h2{font-size:34px;margin-bottom:20px}
+  .apply-lede{font-size:15.5px;margin-bottom:24px}
+}
+@media (max-width:480px){
+  .apply-h2{font-size:28px}
+  .apply-bullets li{font-size:14.5px}
+}
+
 /* Calendly-Embed-Container */
 .calendly-shell{
   background:var(--bg);
@@ -3184,12 +3253,25 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 8 · APPLY ============= -->
 <section class="apply-section" id="apply">
   <div class="wrap">
-    <!-- Calendly Inline-Widget Beginn -->
-    <div class="calendly-inline-widget"
-         data-url="https://calendly.com/moritzbohmbach/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call"
-         style="min-width:320px;height:700px;"></div>
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <!-- Calendly Inline-Widget Ende -->
+    <div class="apply-grid">
+      <div class="apply-col-left">
+        <h2 class="apply-h2">Lass uns was bauen,<br>das <em>wirklich liefert.</em></h2>
+        <p class="apply-lede"><span class="apply-hl">Starte deinen Build mit einem Founder, der Brand, Shop und Operations in einem System denkt — kein Account-Manager dazwischen, keine endlosen Loops, kein Vanity-Reporting.</span></p>
+        <ul class="apply-bullets">
+          <li><span class="apply-check" aria-hidden="true"></span><span>Founder-Direct · 30 Min Erstgespräch, kostenlos</span></li>
+          <li><span class="apply-check" aria-hidden="true"></span><span>Klare Diagnose deines Setups · ehrliches Fit-Check</span></li>
+          <li><span class="apply-check" aria-hidden="true"></span><span>Pro Quartal max. 3–4 neue Projekte · DACH-Fokus</span></li>
+        </ul>
+      </div>
+      <div class="apply-col-right">
+        <!-- Calendly Inline-Widget Beginn -->
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/moritzbohmbach/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call"
+             style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Calendly Inline-Widget Ende -->
+      </div>
+    </div>
   </div>
 </section>
 
