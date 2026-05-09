@@ -1,10 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": true,
-  "rewrites": [
-    { "source": "/api/:path*/", "destination": "/api/:path*" }
-  ],
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/founder-os",
