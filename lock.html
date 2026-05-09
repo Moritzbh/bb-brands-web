@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BB Brands · Re-Launch in Vorbereitung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Saira+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0305C6;
+    --blue-deep:#02038F;
+    --blue-tint:#EEF1FF;
+    --accent:#FF6B3D;
+    --text:#0a0a0a;
+    --text-2:#3D3D3A;
+    --text-3:#787872;
+    --line:#e8e8e3;
+    --line-strong:#d0d0cb;
+    --cream:#F5F1E8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:#fff;color:var(--text);
+    font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+
+  /* Mesh-Glow im Hintergrund (Brand V1 Pattern 01) */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(3,5,198,.10) 0%, transparent 55%),
+      radial-gradient(circle at 82% 80%, rgba(255,107,61,.08) 0%, transparent 55%);
+  }
+
+  .lock-wrap{
+    position:relative;z-index:1;
+    width:100%;max-width:520px;margin:auto;padding:48px 28px;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+  }
+
+  /* Brand-Lockup */
+  .lock-brand{
+    display:inline-flex;align-items:baseline;
+    text-decoration:none;color:var(--blue);
+    font-family:'Inter Tight',sans-serif;
+    font-weight:800;font-size:32px;letter-spacing:-.025em;line-height:1;
+    margin-bottom:48px;
+  }
+  .lock-brand .mirror{display:inline-block;transform:scaleX(-1);margin-right:-1px}
+
+  /* Eyebrow */
+  .lock-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Saira Condensed',Inter,sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);
+    padding:7px 14px;border-radius:99px;
+    background:rgba(255,107,61,.08);
+    border:1px solid rgba(255,107,61,.22);
+    margin-bottom:24px;
+  }
+  .lock-eyebrow::before{
+    content:"";width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,107,61,.5)}
+    50%{box-shadow:0 0 0 6px rgba(255,107,61,0)}
+  }
+
+  h1{
+    font-size:clamp(36px,5vw,52px);
+    line-height:1.05;letter-spacing:-.022em;
+    font-weight:700;margin-bottom:18px;
+    color:var(--text);
+  }
+  h1 em{font-style:normal;color:var(--blue)}
+
+  .lock-sub{
+    color:var(--text-2);font-size:17px;line-height:1.55;
+    max-width:420px;margin-bottom:36px;
+  }
+
+  /* Password-Form */
+  form{
+    width:100%;max-width:380px;
+    display:flex;flex-direction:column;gap:14px;
+    margin-bottom:24px;
+  }
+  .lock-input-wrap{
+    position:relative;
+  }
+  input[type="password"]{
+    width:100%;
+    background:#fff;border:1px solid var(--line-strong);
+    border-radius:8px;padding:15px 18px;
+    font-family:inherit;font-size:15px;color:var(--text);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  input[type="password"]:focus{
+    outline:none;border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(3,5,198,.10);
+  }
+  input[type="password"]::placeholder{color:var(--text-3)}
+
+  .btn-unlock{
+    background:var(--blue);color:#fff;
+    padding:16px 28px;border-radius:8px;
+    font-weight:700;font-size:15px;font-family:inherit;
+    border:none;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow:0 4px 14px rgba(3,5,198,.22);
+    letter-spacing:-.005em;position:relative;overflow:hidden;
+  }
+  .btn-unlock::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,var(--blue) 0%,var(--accent) 100%);
+    opacity:0;transition:opacity .35s ease;z-index:0;
+  }
+  .btn-unlock > *{position:relative;z-index:1}
+  .btn-unlock:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(3,5,198,.32)}
+  .btn-unlock:hover::before{opacity:1}
+  .btn-unlock:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .btn-unlock svg{width:14px;height:14px;transition:transform .2s ease}
+  .btn-unlock:hover svg{transform:translateX(3px)}
+
+  .lock-error{
+    color:#dc2626;font-size:13.5px;font-weight:500;
+    min-height:20px;margin-top:-4px;
+  }
+
+  /* Vorschau-Link zur alten Site */
+  .lock-preview-link{
+    margin-top:8px;
+    font-size:14px;color:var(--text-3);
+    display:inline-flex;align-items:center;gap:6px;
+    text-decoration:none;
+    transition:color .15s ease;
+  }
+  .lock-preview-link strong{color:var(--text-2);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+  .lock-preview-link:hover{color:var(--blue)}
+  .lock-preview-link:hover strong{color:var(--blue)}
+
+  .lock-meta{
+    margin-top:48px;
+    font-family:'Saira Condensed',sans-serif;
+    font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--text-3);
+  }
+
+  @media (max-width:600px){
+    .lock-wrap{padding:32px 20px}
+    .lock-brand{font-size:26px;margin-bottom:32px}
+    h1{font-size:30px}
+    .lock-sub{font-size:15px;margin-bottom:28px}
+  }
+</style>
+</head>
+<body>
+
+<div class="lock-wrap">
+  <div class="lock-brand"><span class="mirror">B</span>Brands</div>
+
+  <div class="lock-eyebrow">Re-Launch in Vorbereitung</div>
+
+  <h1>Die neue Site geht <em>bald live.</em></h1>
+  <p class="lock-sub">Diese Seite ist im finalen Feinschliff. Wenn du Zugang hast, gib das Passwort ein.</p>
+
+  <form id="unlockForm" autocomplete="off">
+    <div class="lock-input-wrap">
+      <input type="password" id="password" name="password" placeholder="Passwort" autocomplete="current-password" required autofocus>
+    </div>
+    <button type="submit" class="btn-unlock" id="unlockBtn">
+      Zugang freischalten
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+    <div class="lock-error" id="lockError" role="alert" aria-live="polite"></div>
+  </form>
+
+  <a class="lock-preview-link" href="https://bb-brands.de" target="_blank" rel="noopener">
+    Aktuelle Live-Site öffnen <strong>bb-brands.de →</strong>
+  </a>
+
+  <div class="lock-meta">BB Brands · Re-Launch 2026</div>
+</div>
+
+<script>
+  (function(){
+    const form = document.getElementById('unlockForm');
+    const input = document.getElementById('password');
+    const btn = document.getElementById('unlockBtn');
+    const err = document.getElementById('lockError');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      err.textContent = '';
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = 'Prüfe…';
+      try {
+        const res = await fetch('/api/lock-unlock', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: input.value })
+        });
+        if (res.ok) {
+          // Cookie ist gesetzt — reload zur originalen URL
+          // Da middleware das hier auf /lock.html rewrite hat: gehe zu /
+          window.location.href = '/';
+        } else {
+          err.textContent = 'Falsches Passwort.';
+          btn.innerHTML = original;
+          btn.disabled = false;
+          input.focus();input.select();
+        }
+      } catch (ex) {
+        err.textContent = 'Verbindung fehlgeschlagen. Nochmal versuchen.';
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
