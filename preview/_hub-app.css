@@ -171,22 +171,21 @@ body {
   .wa-quick span { display: none; }
 }
 
-/* ===== Hero ===== */
-.hero { max-width: 1180px; margin: 0 auto; padding: 48px 28px 12px; }
+/* ===== Hero — kompakt, klar ===== */
+.hero { max-width: 1180px; margin: 0 auto; padding: 40px 28px 4px; }
 .hero-greeting {
-  font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--primary);
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--accent);
+  margin-bottom: 10px;
 }
-.hero-greeting::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--primary-soft), transparent);
-  max-width: 120px;
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 38px); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.1; margin-bottom: 10px;
+  color: var(--text);
 }
-.hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
-.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 640px; }
+.hero-sub { font-size: 15px; color: var(--text-muted); max-width: 640px; line-height: 1.55; }
 
 /* ===== Stage-Tracker ===== */
 .stage-strip { max-width: 1180px; margin: 28px auto; padding: 0 28px; }
@@ -323,96 +322,123 @@ body {
 .section-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
 .section-meta { font-size: 12px; color: var(--text-light); }
 
-/* ===== Cards ===== */
+/* ===== Cards · Liste statt Grid ===== */
 .cards {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 28px 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
 }
 .card {
-  display: block;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 22px 8px;
   text-decoration: none;
   color: inherit;
-  transition: all .2s ease;
+  transition: background .15s ease;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 100px; height: 100px;
-  background: radial-gradient(circle at top right, rgba(3, 5, 198, 0.06), transparent 60%);
-  pointer-events: none;
+.card:hover { background: #fafafa; }
+.card-main { flex: 1; min-width: 0; }
+.card-row {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 4px;
 }
-.card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(3, 5, 198, 0.10);
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 18px; line-height: 1.25;
+  color: var(--text); letter-spacing: -.01em;
 }
-
-/* Status-Badges */
-.card-badge {
-  position: absolute;
-  top: 18px; right: 18px;
-  font-size: 10px; font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  display: inline-flex; align-items: center; gap: 4px;
-}
-.card-badge::before {
-  content: ''; width: 6px; height: 6px;
-  border-radius: 50%; display: inline-block;
-}
-.card-badge.status-review               { background: var(--orange-soft); color: var(--orange); }
-.card-badge.status-review::before       { background: var(--orange); }
-.card-badge.status-approved             { background: var(--green-soft);  color: var(--green); }
-.card-badge.status-approved::before     { background: var(--green); }
-.card-badge.status-building             { background: var(--blue-soft);   color: var(--blue); }
-.card-badge.status-building::before     { background: var(--blue); animation: pulse-dot 1.4s ease-in-out infinite; }
-.card-badge.status-change_request       { background: var(--red-soft); color: var(--red); }
-.card-badge.status-change_request::before { background: var(--red); }
-.card-badge.status-pending_action       { background: var(--gold-soft); color: #8A6D2D; }
-.card-badge.status-pending_action::before { background: var(--gold); animation: pulse-dot 1.4s ease-in-out infinite; }
-.card-badge.status-ready                { background: var(--purple-soft); color: var(--purple); }
-.card-badge.status-ready::before        { background: var(--purple); }
-.card-badge.status-done                 { background: var(--green-soft); color: var(--green); }
-.card-badge.status-done::before         { background: var(--green); }
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+.card-sub {
+  font-size: 13px; color: var(--text-muted);
+  line-height: 1.55;
+  letter-spacing: .005em;
 }
 
-.card-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin-bottom: 14px;
-}
-.card-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
-.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 500; line-height: 1.5; }
-.card-cta {
-  margin-top: 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--primary);
+/* Status: schlichte Text-Tags, dezente Farbakzente */
+.card-status {
   display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 0;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
-.card-cta::after { content: '→'; transition: transform .15s ease; }
-.card:hover .card-cta::after { transform: translateX(3px); }
+.card-status::before {
+  content: ''; width: 6px; height: 6px;
+  background: currentColor; border-radius: 50%;
+  display: inline-block; opacity: .85;
+}
+.card-status.status-review            { color: #B45309; }
+.card-status.status-building          { color: var(--primary); }
+.card-status.status-approved          { color: var(--green); }
+.card-status.status-change_request    { color: var(--red); }
+.card-status.status-pending_action    { color: var(--accent); }
+.card-status.status-ready             { color: var(--text); }
+.card-status.status-done              { color: var(--green); }
+
+.card-cta {
+  font-size: 13px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap; flex-shrink: 0;
+}
+.card:hover .card-cta { color: var(--accent-hover); }
+
+@media (max-width: 600px) {
+  .card { padding: 18px 4px; gap: 14px; flex-wrap: wrap; }
+  .card-cta { font-size: 12px; }
+  .card-title { font-size: 16px; }
+}
+
+/* ===== Action-Pointer · Hero-CTA-Block ===== */
+.action-pointer {
+  max-width: 1180px;
+  margin: 12px auto 32px;
+  padding: 26px 28px;
+  background: #000; color: #fff;
+  display: flex; align-items: center; gap: 32px;
+  flex-wrap: wrap;
+}
+.action-pointer.is-hidden { display: none; }
+.ap-text { flex: 1; min-width: 280px; }
+.ap-title {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 22px; line-height: 1.2;
+  color: #fff; letter-spacing: -.01em;
+  margin-bottom: 4px;
+}
+.ap-sub {
+  font-size: 14px; line-height: 1.55;
+  color: rgba(255,255,255,.78);
+}
+.ap-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #fff;
+  font-family: var(--font); font-size: 13px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  padding: 14px 24px; text-decoration: none;
+  transition: background .2s ease;
+  white-space: nowrap;
+}
+.ap-cta:hover { background: var(--accent-hover); color: #fff; text-decoration: none; }
+@media (max-width: 600px) {
+  .action-pointer { padding: 22px 20px; gap: 18px; margin: 12px 16px 28px; }
+  .ap-title { font-size: 19px; }
+  .ap-cta { width: 100%; justify-content: center; }
+}
+
+/* Iteration-Card und Activity-List ausblenden */
+.iteration-card { display: none !important; }
+.activity { display: none !important; }
 
 /* ===== Activity ===== */
 .activity { max-width: 1180px; margin: 24px auto; padding: 0 28px 32px; }

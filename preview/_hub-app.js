@@ -108,10 +108,66 @@
     }
 
     const currentStage = resolveStage(brand);
+    renderActionPointer(brand);
     renderStages(currentStage);
-    renderIterationStats(currentStage, brand);
     renderCards(brand);
-    renderActivity(brand);
+  }
+
+  // ---------- Action-Pointer: Was muss der Kunde JETZT tun? ----------
+  function renderActionPointer(brand) {
+    const el = document.getElementById('action-pointer');
+    if (!el) return;
+    const pages = brand.pages || [];
+
+    const pendingActions = pages.filter((p) => p.status === 'pending_action');
+    const inReview = pages.filter((p) => p.status === 'review' && isThemePage(p.key));
+    const changeRequested = pages.filter((p) => p.status === 'change_request');
+
+    let title, sub, link, linkLabel;
+
+    if (pendingActions.length) {
+      const first = pendingActions[0];
+      const meta = PAGE_LABELS[first.key] || { label: first.label || first.key };
+      title = pendingActions.length === 1
+        ? 'Eine Aufgabe wartet auf dich.'
+        : pendingActions.length + ' Aufgaben warten auf dich.';
+      sub = 'Beginne mit: ' + (first.label || meta.label);
+      link = pageUrl(brand, first);
+      linkLabel = 'Jetzt erledigen';
+    } else if (inReview.length) {
+      const first = inReview[0];
+      const meta = PAGE_LABELS[first.key] || { label: first.label || first.key };
+      title = inReview.length === 1
+        ? 'Eine Vorschau wartet auf dein Feedback.'
+        : inReview.length + ' Vorschauen warten auf dein Feedback.';
+      sub = 'Schau dir an: ' + (first.label || meta.label) + ' — und sag uns was passt und was nicht.';
+      link = pageUrl(brand, first);
+      linkLabel = 'Erste Vorschau öffnen';
+    } else if (changeRequested.length) {
+      title = 'Wir arbeiten an deinen Change-Requests.';
+      sub = changeRequested.length + ' Page(s) in Anpassung — du bekommst Bescheid sobald die neue Version steht.';
+      link = '';
+      linkLabel = '';
+    } else if (pages.length === 0) {
+      title = 'Wir bereiten gerade deinen Bereich vor.';
+      sub = 'Du wirst per Mail informiert sobald die ersten Vorschauen da sind.';
+      link = '';
+      linkLabel = '';
+    } else {
+      title = 'Alles im Plan.';
+      sub = 'Wir bauen weiter. Sobald wir was Neues haben, landet es hier.';
+      link = '';
+      linkLabel = '';
+    }
+
+    el.classList.remove('is-hidden');
+    el.innerHTML = `
+      <div class="ap-text">
+        <div class="ap-title">${escapeHtml(title)}</div>
+        <div class="ap-sub">${escapeHtml(sub)}</div>
+      </div>
+      ${link ? `<a class="ap-cta" href="${escapeAttr(link)}">${escapeHtml(linkLabel)} <span aria-hidden="true">→</span></a>` : ''}
+    `;
   }
 
   function resolveStage(brand) {
@@ -206,7 +262,7 @@
     });
 
     cardsEl.innerHTML = pages.map((p) => {
-      const meta = PAGE_LABELS[p.key] || { icon: '📄', label: p.label || p.key, sub: '', default_status: 'review' };
+      const meta = PAGE_LABELS[p.key] || { icon: '', label: p.label || p.key, sub: '', default_status: 'review' };
       const label = p.label || meta.label;
       const sub = p.sub || meta.sub;
       const status = p.status || meta.default_status || 'review';
@@ -214,16 +270,20 @@
       const url = pageUrl(brand, p);
       const deployed = p.deployed_at ? new Date(p.deployed_at) : null;
       const deployedStr = deployed
-        ? deployed.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+        ? deployed.toLocaleString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
         : '';
       const isThemeUpdate = isThemePage(p.key);
+      const cta = ctaForStatus(status);
       return `
         <a class="card" href="${escapeAttr(url)}">
-          <span class="card-badge status-${escapeAttr(status)}">${escapeHtml(statusLabel)}</span>
-          <div class="card-icon">${meta.icon}</div>
-          <div class="card-title">${escapeHtml(label)}</div>
-          <div class="card-meta">${escapeHtml(sub)}${deployedStr && isThemeUpdate ? '<br>📅 aktualisiert ' + deployedStr : ''}</div>
-          <div class="card-cta">${ctaForStatus(status)}</div>
+          <div class="card-main">
+            <div class="card-row">
+              <div class="card-title">${escapeHtml(label)}</div>
+              <span class="card-status status-${escapeAttr(status)}">${escapeHtml(statusLabel)}</span>
+            </div>
+            <div class="card-sub">${escapeHtml(sub)}${deployedStr && isThemeUpdate ? ' · Stand ' + deployedStr : ''}</div>
+          </div>
+          <div class="card-cta">${escapeHtml(cta)} <span aria-hidden="true">→</span></div>
         </a>
       `;
     }).join('');
