@@ -31,9 +31,12 @@
   /* Status */
   --green:#16a34a;
   --green-bg:#ecfdf5;
-  /* Typography */
-  --display:'Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
-  --body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  /* Typography · BRAND-FONTS V1 (final · 2026-05-09)
+     · Body + Display: Inter Tight (single-font für h1/h2/h3 + body)
+     · Akzent: Saira Condensed (nur Eyebrows · Tags · Step-Labels · Caps) */
+  --display:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+  --accent-font:'Saira Condensed','Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -48,34 +51,18 @@ body{
 }
 
 /* ========== AKZENT-SCHRIFT ==========
-   Aktuell: Saira Condensed (Google Fonts) — humanistic condensed light
-   Sobald Dax OT Files in /assets/fonts/ liegen: @font-face uncommenten
-*/
-/*
-@font-face{
-  font-family:'Dax OT';
-  src:url('/assets/fonts/DaxOT-Light.woff2') format('woff2');
-  font-weight:300;font-style:normal;font-display:swap;
-}
-@font-face{
-  font-family:'Dax OT';
-  src:url('/assets/fonts/DaxOT-Regular.woff2') format('woff2');
-  font-weight:400;font-style:normal;font-display:swap;
-}
-@font-face{
-  font-family:'Dax OT';
-  src:url('/assets/fonts/DaxOT-Bold.woff2') format('woff2');
-  font-weight:700;font-style:normal;font-display:swap;
-}
-*/
+   Saira Condensed (Google Fonts) — nur für Eyebrows, Tags, Step-Labels.
+   Headlines + Body bleiben Inter Tight für single-font-Konsistenz. */
 .accent-font,
-h1 em,
-h2 em,
-h3 em,
-.stat-num,
+.eyebrow,
+.trust-label,
+.step-eyebrow,
+.tag,
+.case-meta,
+.bs-pill-meta,
+.guar-num,
 .brand-name{
-  font-family:'Dax OT','Saira Condensed',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-weight:400;
+  font-family:var(--accent-font);
   letter-spacing:.005em;
 }
 .stat-num{font-weight:600}
