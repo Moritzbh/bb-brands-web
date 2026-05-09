@@ -379,7 +379,13 @@ header.site-header .wrap{
 }
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{
-  display:block;
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:64px;
+  align-items:center;
+}
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
 }
 .hero-text{min-width:0}
 .hero h1{
@@ -391,67 +397,56 @@ header.site-header .wrap{
   font-weight:700;
 }
 
-/* Studio-Portrait Placeholder */
-.hero-portrait{
-  position:relative;aspect-ratio:4/5;
-  border-radius:18px;overflow:hidden;
-  background:linear-gradient(180deg, #0a0a0a 0%, #1a1a18 60%, #0a0a0a 100%);
-  border:1px solid var(--line);
-  box-shadow:0 24px 48px rgba(3,5,198,.10), 0 8px 24px rgba(0,0,0,.18);
+/* Founder-Photo · Editorial Studio (Baulig-Inspiriert) */
+.hero-photo{
+  position:relative;
+  aspect-ratio:3/4;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:
+    0 30px 60px -20px rgba(3,5,198,.18),
+    0 12px 28px -8px rgba(0,0,0,.16),
+    0 0 0 1px rgba(0,0,0,.04);
+  background:#f5f1e8;
 }
-.hero-portrait-bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 30% 25%, rgba(3,5,198,.28) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 75%, rgba(255,107,61,.18) 0%, transparent 55%);
-  filter:blur(8px);
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
 }
-.hero-portrait-tag{
-  position:absolute;top:16px;right:16px;z-index:3;
-  background:rgba(255,107,61,.16);color:#ff8a63;
+.hero-photo-tag{
+  position:absolute;top:18px;left:18px;z-index:3;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  color:var(--text);
   font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  padding:7px 12px;border-radius:99px;
-  border:1px solid rgba(255,107,61,.35);
+  font-size:10.5px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 13px;border-radius:99px;
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(0,0,0,.06);
 }
-.hero-portrait-inner{
-  position:absolute;inset:0;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;color:#f5f5f0;gap:18px;padding:24px;
+.hero-photo-tag::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,107,61,.18);
 }
-.hero-portrait-silhouette{
-  width:140px;height:140px;border-radius:50%;
-  background:rgba(245,245,240,.04);
-  border:1px solid rgba(245,245,240,.08);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:6px;
-}
-.hero-portrait-silhouette svg{
-  width:64px;height:64px;color:rgba(245,245,240,.35);
-}
-.hero-portrait-label{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,107,61,.85);
-}
-.hero-portrait-title{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:18px;font-weight:600;letter-spacing:-.005em;
-  color:#f5f5f0;line-height:1.35;max-width:240px;
-}
-.hero-portrait-meta{
-  font-size:12px;color:rgba(245,245,240,.45);letter-spacing:.02em;
-}
-.hero-portrait-name{
+.hero-photo-name{
   position:absolute;left:0;right:0;bottom:0;z-index:2;
-  padding:18px 24px;
-  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 100%);
-  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 22px 18px;
+  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.45) 100%);
+  display:flex;justify-content:space-between;align-items:flex-end;
   font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(245,245,240,.7);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.75);
+  pointer-events:none;
+  line-height:1.5;
 }
-.hero-portrait-name strong{color:#fff;font-weight:700;letter-spacing:-.005em}
+.hero-photo-name strong{
+  color:#fff;font-weight:700;
+  letter-spacing:-.005em;text-transform:none;
+  font-size:15px;display:block;margin-bottom:2px;
+}
+.hero-photo-name-meta{text-align:right}
 .hero h1 em{
   font-style:normal;
   color:var(--blue);
@@ -1847,8 +1842,20 @@ body section.team-section:nth-of-type(odd){
   background-color:#fff !important;
   background-attachment:scroll !important;
 }
-body section.team-section::before,
 body section.team-section::after{display:none !important}
+/* "01"-Watermark oben rechts · matcht "02" der founder-section · auf weissem BG braucht's
+   mehr opacity + dickeren stroke, sonst unsichtbar. top:24px statt -60 damit overflow:hidden
+   das Watermark nicht abschneidet. */
+body section.team-section::before{
+  display:block !important;
+  z-index:1 !important;
+  top:24px !important;
+  right:-20px !important;
+  left:auto !important;
+  font-size:clamp(180px, 24vw, 340px) !important;
+  -webkit-text-stroke:2.5px var(--blue) !important;
+  opacity:.14 !important;
+}
 body section.team-section .light-overlay{display:none !important}
 
 .team-banner-stage{
@@ -2150,11 +2157,15 @@ section.founder-section{
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  background-blend-mode:multiply;
+  background-blend-mode:normal;
+  background-image:none !important;
   padding:96px 0 128px;
   position:relative;overflow:hidden;
   border-top:none;
 }
+/* Watermark "02" + Grain raus · simple weiss */
+section.founder-section::before,
+section.founder-section::after{display:none !important}
 @media (max-width:780px){
   section.founder-section{background-attachment:scroll}
 }
@@ -2822,6 +2833,19 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <a class="hero-shopify" href="https://www.shopify.com/partners" target="_blank" rel="noopener" aria-label="Offizieller Shopify Partner">
           <img src="/assets/images/logos/shopify-partner-edited.png" alt="Offizieller Shopify Partner" loading="lazy" decoding="async">
         </a>
+      </div>
+
+      <!-- Founder-Photo · Founder-on-Phone-Warm · v10 Higgsfield Soul-2 -->
+      <div class="hero-photo">
+        <span class="hero-photo-tag">Founder · 2026</span>
+        <img src="/assets/images/hero-founder-v10-clean.png" alt="Moritz Bohmbach · Founder BB Brands" decoding="async" fetchpriority="high">
+        <div class="hero-photo-name">
+          <div>
+            <strong>Moritz Bohmbach</strong>
+            Founder · Operativer Wachstumspartner
+          </div>
+          <div class="hero-photo-name-meta">DACH<br>2026</div>
+        </div>
       </div>
 
     </div>
