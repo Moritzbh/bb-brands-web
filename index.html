@@ -1357,8 +1357,21 @@ section.guarantees-dirty{
 section.team-section,
 section.team-section:nth-of-type(even){
   background:#fff !important;
-  padding-bottom:64px; /* Engerer Übergang zur Founder-Section */
+  padding-bottom:64px;
+  position:relative;overflow:hidden;
 }
+/* Big "01"-Outline-Watermark als Brand-Anchor */
+section.team-section::before{
+  content:"01";
+  position:absolute;top:-60px;right:-30px;z-index:0;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(320px, 38vw, 540px);
+  font-weight:900;line-height:1;letter-spacing:-.05em;
+  -webkit-text-stroke:2px var(--blue);
+  color:transparent;opacity:.06;
+  pointer-events:none;user-select:none;
+}
+section.team-section .wrap{position:relative;z-index:1}
 
 .team-stage{margin-top:8px}
 
@@ -1388,7 +1401,7 @@ section.team-section:nth-of-type(even){
   align-items:center;margin-bottom:36px;max-width:880px;margin-left:auto;margin-right:auto;
 }
 .sdr-stack{
-  position:relative;width:300px;height:380px;flex-shrink:0;
+  position:relative;width:380px;height:475px;flex-shrink:0;
   perspective:1200px;
 }
 .sdr-stack-card{
@@ -1540,36 +1553,50 @@ section.team-section:nth-of-type(even){
   .step-bridge-arrow{animation:none}
 }
 
-/* ===== FOUNDER SECTION · Dark · Photo-Left + Text-Right ===== */
+/* ===== FOUNDER SECTION · White · Text-Left + Photo-Right · Cream-Anchor ===== */
 section.founder-section{
-  background:#0a0a0a;color:#fff;
-  padding:80px 0 120px;
+  background:#fff !important;color:var(--text);
+  padding:96px 0 128px;
   position:relative;overflow:hidden;
   border-top:none;
 }
+/* Big "02"-Outline-Watermark als Brand-Anchor */
 section.founder-section::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 18% 25%, rgba(3,5,198,.22) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 80%, rgba(255,107,61,.14) 0%, transparent 55%);
-  pointer-events:none;
+  content:"02";
+  position:absolute;top:-60px;left:-30px;z-index:0;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(320px, 38vw, 540px);
+  font-weight:900;line-height:1;letter-spacing:-.05em;
+  -webkit-text-stroke:2px var(--accent);
+  color:transparent;opacity:.06;
+  pointer-events:none;user-select:none;
 }
 .founder-section .wrap{position:relative;z-index:1}
 
 .founder-stage{
-  display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;
+  display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center;
 }
 
-/* Portrait Card — gleiche Optik wie SDR-Stack-Card */
-.founder-portrait{
+/* Portrait-Wrap mit Cream-Block dahinter für Depth */
+.founder-portrait-wrap{
   position:relative;
+  justify-self:end;
+  width:100%;max-width:520px;
+}
+.founder-portrait-wrap::before{
+  content:"";position:absolute;
+  top:36px;right:-36px;bottom:-36px;left:36px;
+  background:var(--cream);
+  border-radius:20px;z-index:0;
+}
+.founder-portrait{
+  position:relative;z-index:1;
   aspect-ratio:4/5;
-  max-width:480px;
   border-radius:20px;
   overflow:hidden;
   background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 100%);
   border:6px solid #0a0a0a;
-  box-shadow:0 32px 70px rgba(0,0,0,.45);
+  box-shadow:0 32px 70px rgba(0,0,0,.18), 0 12px 28px rgba(3,5,198,.10);
 }
 .founder-portrait::after{
   content:"";position:absolute;inset:0;
@@ -1580,47 +1607,42 @@ section.founder-section::before{
 .founder-portrait-silhouette{
   position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%);
-  width:140px;height:140px;border-radius:50%;
+  width:160px;height:160px;border-radius:50%;
   background:rgba(245,245,240,.04);
   border:1px solid rgba(245,245,240,.1);
   display:flex;align-items:center;justify-content:center;
   z-index:1;
 }
 .founder-portrait-silhouette svg{
-  width:60px;height:60px;color:rgba(245,245,240,.4);
+  width:70px;height:70px;color:rgba(245,245,240,.4);
 }
 .founder-portrait .corner{
   position:absolute;z-index:2;
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-weight:700;font-size:28px;letter-spacing:-.02em;
+  font-weight:700;font-size:30px;letter-spacing:-.02em;
   color:rgba(255,255,255,.95);line-height:1;
   display:inline-flex;align-items:baseline;
 }
 .founder-portrait .corner .mirror{display:inline-block;transform:scaleX(-1)}
-.founder-portrait .corner.tl{top:20px;left:20px}
-.founder-portrait .corner.br{bottom:20px;right:20px}
+.founder-portrait .corner.tl{top:22px;left:22px}
+.founder-portrait .corner.br{bottom:22px;right:22px}
 
 .founder-text{min-width:0}
-.founder-eyebrow{
-  font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  color:#ff8a63;margin-bottom:20px;
-}
 .founder-text h2{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:clamp(38px, 5vw, 60px);font-weight:700;
-  letter-spacing:-.02em;line-height:1.02;
-  color:#fff;margin-bottom:26px;
+  font-size:clamp(40px, 5.5vw, 68px);font-weight:700;
+  letter-spacing:-.022em;line-height:1;
+  color:var(--text);margin-bottom:28px;
 }
-.founder-text h2 em{font-style:italic;font-weight:500;color:#fff}
+.founder-text h2 em{font-style:italic;font-weight:500;color:var(--blue)}
 .founder-bio{
-  font-size:16px;line-height:1.75;color:rgba(255,255,255,.8);
-  margin-bottom:30px;max-width:560px;
+  font-size:16.5px;line-height:1.75;color:var(--text-2);
+  margin-bottom:30px;max-width:520px;
 }
 .founder-signature{
-  margin-bottom:44px;
-  font-family:'Caveat',cursive;font-size:34px;
-  color:rgba(255,255,255,.78);font-weight:500;
+  margin-bottom:40px;
+  font-family:'Caveat',cursive;font-size:38px;
+  color:var(--text-2);font-weight:500;
   display:inline-block;line-height:1;
   letter-spacing:.005em;
 }
@@ -1628,31 +1650,38 @@ section.founder-section::before{
 .founder-stats{
   display:grid;grid-template-columns:auto;justify-content:start;gap:32px;
   max-width:520px;
-  padding-top:24px;border-top:1px solid rgba(255,255,255,.1);
+  padding-top:24px;border-top:1px solid var(--line);
 }
 .founder-stat-num{
   font-family:'Saira Condensed',Manrope,sans-serif;
   font-size:44px;font-weight:700;letter-spacing:-.02em;
-  color:#ff6b3d;line-height:1;margin-bottom:12px;
+  color:var(--accent);line-height:1;margin-bottom:12px;
 }
 .founder-stat-label{
-  font-size:14px;color:rgba(255,255,255,.7);line-height:1.5;
+  font-size:14.5px;color:var(--text-2);line-height:1.5;
 }
 
+@media (max-width:980px){
+  .sdr-stack{width:320px;height:400px}
+}
 @media (max-width:780px){
   .sdr-stack-wrap{grid-template-columns:1fr;gap:32px;justify-items:center;text-align:center}
-  .sdr-stack{width:260px;height:330px;margin:0 auto}
+  .sdr-stack{width:280px;height:350px;margin:0 auto}
   .sdr-info-item{text-align:left}
   .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
   .sdr-stack-toggle{justify-content:center}
   /* Founder Section Mobile */
-  section.founder-section{padding:80px 0}
-  .founder-stage{grid-template-columns:1fr;gap:48px}
-  .founder-portrait{max-width:300px;margin:0 auto}
-  .founder-text h2{font-size:32px}
+  section.founder-section{padding:64px 0 96px}
+  section.founder-section::before{font-size:clamp(220px, 50vw, 320px);top:-30px;left:-20px}
+  .founder-stage{grid-template-columns:1fr;gap:56px}
+  .founder-portrait-wrap{max-width:340px;margin:0 auto;justify-self:center}
+  .founder-portrait-wrap::before{top:24px;right:-20px;left:24px;bottom:-24px}
+  .founder-text h2{font-size:36px}
   .founder-stats{grid-template-columns:1fr;gap:20px}
-  .founder-stat-num{font-size:34px;margin-bottom:6px}
-  .founder-signature{font-size:28px;margin-bottom:32px}
+  .founder-stat-num{font-size:36px;margin-bottom:6px}
+  .founder-signature{font-size:30px;margin-bottom:32px}
+  /* Team-Section "01" Watermark Mobile */
+  section.team-section::before{font-size:clamp(220px, 50vw, 320px);top:-30px;right:-20px}
 }
 
 /* ========== HAND-DRAWN ARROW ========== */
@@ -2453,20 +2482,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 7 · FOUNDER · Dark Section · Photo + Text + Stats ============= -->
+<!-- ============= 7 · FOUNDER · White Section · Text-Left + Photo-Right · Cream-Anchor ============= -->
 <section class="founder-section">
   <div class="wrap">
     <div class="founder-stage">
-      <div class="founder-portrait">
-        <div class="founder-portrait-silhouette">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <span class="corner tl"><span class="mirror">B</span>B</span>
-        <span class="corner br"><span class="mirror">B</span>B</span>
-      </div>
-
       <div class="founder-text">
-        <div class="step-eyebrow inverse"><span class="num">02</span> · Build &amp; Launch — übernehme ich</div>
+        <div class="step-eyebrow"><span class="num">02</span> · Build &amp; Launch — übernehme ich</div>
         <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
         <p class="founder-bio">Mit 14 Jahren hatte ich meinen ersten Shopify-Store. Seitdem habe ich immer nach neuen Wegen gesucht, Dinge anders und besser zu machen. Besonders begeistert mich die stetige Innovation im gesamten E-Commerce-Bereich — zu sehen, wie sich Marken, Technologien und das Verhalten von Kunden verändern, hat meinen Blick auf Unternehmertum geprägt. Deshalb habe ich es mir zur Aufgabe gemacht, Experte für KI zu werden und ein Pionier der nächsten Generation von D2C-Brands zu sein.</p>
         <div class="founder-signature">— Moritz</div>
@@ -2476,6 +2497,16 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <div class="founder-stat-num">4+ Jahre</div>
             <div class="founder-stat-label">Erfahrung im Bereich E-commerce und Software</div>
           </div>
+        </div>
+      </div>
+
+      <div class="founder-portrait-wrap">
+        <div class="founder-portrait">
+          <div class="founder-portrait-silhouette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span class="corner tl"><span class="mirror">B</span>B</span>
+          <span class="corner br"><span class="mirror">B</span>B</span>
         </div>
       </div>
     </div>
