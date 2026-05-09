@@ -1870,27 +1870,8 @@ body section.team-section .light-overlay{display:none !important}
   margin:0 0 32px;max-width:520px;
   font-family:'Inter',sans-serif;font-weight:400;
 }
-.team-banner-text .banner-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--blue);color:#fff;
-  font-family:'Inter',sans-serif;
-  font-size:15px;font-weight:600;letter-spacing:-.005em;
-  padding:15px 28px;border-radius:99px;
-  text-decoration:none;
-  box-shadow:0 8px 22px -6px rgba(3,5,198,.40);
-  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-}
-.team-banner-text .banner-cta::after{
-  content:"→";font-size:17px;
-  transition:transform .25s ease;
-}
-.team-banner-text .banner-cta:hover{
-  background:var(--blue-deep);
-  transform:translateY(-2px);
-  box-shadow:0 14px 30px -6px rgba(3,5,198,.55);
-  text-decoration:none;
-}
-.team-banner-text .banner-cta:hover::after{transform:translateX(3px)}
+/* banner-cta nutzt .btn-primary (Hero-Style: Blue, 8px Radius, Gradient-Hover, Arrow-Slide) */
+.team-banner-text .banner-cta{margin-top:8px}
 
 @media (max-width:900px){
   .team-banner-stage{
@@ -3294,18 +3275,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <div class="team-banner-text">
         <h2>Mit Experten reden, nicht mit Verkäufern.</h2>
         <p class="banner-body">Im Discovery sprichst du mit jemandem aus meinem Team — DTC-Operatoren, die dein Geschäft sofort einordnen. Keine Pitch-Decks, kein Push. 30 Minuten ehrliche Diagnose. Passt es nicht, sagen wir's. Passt es, übernehme ich.</p>
-        <a href="/audit/" class="banner-cta">Jetzt Termin vereinbaren</a>
+        <a href="/audit/" class="btn-primary banner-cta">
+          Jetzt Termin vereinbaren
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
 
-    <!-- Step-Bridge zur Founder-Section drunter -->
-    <div class="step-bridge">
-      <span class="step-bridge-text">Wenn's passt — Hand-off</span>
-      <span class="step-bridge-line"></span>
-      <span class="step-bridge-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
-      </span>
-    </div>
   </div>
 </section>
 
