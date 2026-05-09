@@ -2159,6 +2159,42 @@ section.apply-section:nth-of-type(even){
 .apply-block h2{margin:0 auto 14px;text-align:center;max-width:560px}
 .apply-block .section-sub{margin:0 auto 32px;text-align:center;max-width:520px}
 
+/* Pre-Brief vor dem Calendly-Embed · zeigt was im Booking-Form abgefragt wird */
+.apply-prebrief{
+  background:var(--cream);
+  border:1px solid var(--cream-2);
+  border-left:3px solid var(--blue);
+  border-radius:10px;
+  padding:18px 20px;
+  margin:0 0 24px;
+  font-family:var(--body);
+  text-align:left;
+}
+.apply-prebrief-title{
+  font-family:var(--display);
+  font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:#C44A1F;
+  margin-bottom:10px;
+}
+.apply-prebrief-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:6px;
+}
+.apply-prebrief-list li{
+  font-size:14px;line-height:1.5;color:var(--text-2);
+  padding-left:18px;position:relative;
+}
+.apply-prebrief-list li::before{
+  content:"→";position:absolute;left:0;top:0;
+  color:var(--blue);font-weight:700;
+}
+.apply-prebrief-list strong{color:var(--text);font-weight:700}
+@media (max-width:780px){
+  .apply-prebrief{padding:16px;margin-bottom:18px}
+  .apply-prebrief-list li{font-size:13.5px}
+}
+
 /* Calendly-Embed-Container */
 .calendly-shell{
   background:var(--bg);
@@ -3099,24 +3135,34 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <section class="apply-section" id="apply">
   <div class="wrap">
     <div class="apply-block">
-      <div class="eyebrow">Strategy Audit</div>
+      <div class="eyebrow">Discovery Call · 30 Min · kostenlos</div>
       <h2>Bereit für die <em>Transformation?</em></h2>
-      <p class="section-sub">Wenn dein Setup zu uns passt, melden wir uns innerhalb 1 Werktag.</p>
+      <p class="section-sub">30 Min Erstgespräch, ehrliches Fit-Check. Wenn's passt, kommt der bezahlte Strategy Audit als nächster Schritt.</p>
+
+      <!-- Was du vor dem Buchen wissen solltest -->
+      <div class="apply-prebrief">
+        <div class="apply-prebrief-title">Was wir im Booking-Formular fragen:</div>
+        <ul class="apply-prebrief-list">
+          <li><strong>Brand-URL</strong> — damit ich vor dem Call dein Setup ansehe</li>
+          <li><strong>Jahresumsatz-Range</strong> — Tier-Filter (unter 1 Mio · 1–5 Mio · 5–20 Mio · 20+ Mio)</li>
+          <li><strong>Größter Engpass</strong> — ein Satz reicht</li>
+        </ul>
+      </div>
 
       <!-- Calendly Inline-Embed · Pre-Block via consent.js (Kategorie: functional) -->
       <div class="calendly-shell">
         <div class="bb-consent-embed"
              data-embed="calendly"
-             data-url="https://calendly.com/moritz-bohmbach/strategy-audit?hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff">
+             data-url="https://calendly.com/moritzbohmbach/30min?hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call">
           <div class="bb-consent-embed-fallback">
             <h4>Termin-Buchung über Calendly</h4>
             <p>Calendly ist ein US-Anbieter (zertifiziert unter EU-U.S. Data Privacy Framework). Wir laden das Buchungs-Widget erst, wenn du der Kategorie „Funktional" zustimmst.</p>
             <button type="button" onclick="(function(){var c=window.bbConsent.get()||{necessary:true};c.functional=true;c.necessary=true;localStorage.setItem('bb_consent_v1',JSON.stringify({v:1,ts:Date.now(),choices:c}));window.location.reload();})()">Calendly laden →</button>
-            <p class="muted">Alternativ: <a href="https://calendly.com/moritz-bohmbach/strategy-audit" target="_blank" rel="noopener" style="color:#FF6B3D">direkt bei Calendly öffnen</a></p>
+            <p class="muted">Alternativ: <a href="https://calendly.com/moritzbohmbach/30min" target="_blank" rel="noopener" style="color:#FF6B3D">direkt bei Calendly öffnen</a></p>
           </div>
         </div>
       </div>
-      <p class="apply-meta">Antwort innerhalb 1 Werktag. Pro Quartal nur 3–4 neue Projekte.</p>
+      <p class="apply-meta">Antwort innerhalb 1 Werktag · Pro Quartal nur 3–4 neue Projekte</p>
     </div>
   </div>
 </section>
