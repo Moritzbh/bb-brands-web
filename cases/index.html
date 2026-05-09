@@ -503,17 +503,17 @@ section.dark .btn-secondary:hover{color:#fff}
 }
 @media (max-width:780px){.ba-arrow{transform:rotate(90deg);font-size:32px;padding:8px 0}}
 
-/* Hand-drawn Arrow zum CTA · animiert wackelnd · zeigt AUF den Button */
-.scribble-wrap{position:absolute;width:180px;height:100px;pointer-events:none;z-index:3}
-.scribble-wrap.right{right:-110px;top:-52px}
-.scribble-wrap.left{left:-110px;top:-52px}
+/* Hand-drawn Arrow zum CTA · sanfte clean curve, zeigt klar AUF den Button */
+.scribble-wrap{position:absolute;width:155px;height:88px;pointer-events:none;z-index:3}
+.scribble-wrap.right{right:-95px;top:-46px}
+.scribble-wrap.left{left:-95px;top:-46px}
 .scribble-wrap svg{
   width:100%;height:100%;color:var(--accent);
-  animation:wiggle 2.4s ease-in-out infinite;
+  animation:wiggle 3.2s ease-in-out infinite;
 }
-.scribble-wrap.left svg{transform:scaleX(-1);animation:wiggle-left 2.4s ease-in-out infinite}
+.scribble-wrap.left svg{transform:scaleX(-1);animation:wiggle-left 3.2s ease-in-out infinite}
 .scribble-wrap .label{
-  position:absolute;top:2px;
+  position:absolute;top:0;
   font-family:var(--display);font-weight:700;font-size:13px;
   color:#0a0a0a;background:#FDE047;
   padding:3px 10px;border-radius:3px;
@@ -522,17 +522,15 @@ section.dark .btn-secondary:hover{color:#fff}
   box-shadow:2px 2px 0 0 #0a0a0a;
   z-index:2;
 }
-.scribble-wrap.right .label{right:8px;left:auto;transform:rotate(-6deg)}
-.scribble-wrap.left .label{left:8px;right:auto;transform:rotate(6deg)}
+.scribble-wrap.right .label{right:6px;left:auto;transform:rotate(-5deg)}
+.scribble-wrap.left .label{left:6px;right:auto;transform:rotate(5deg)}
 @keyframes wiggle{
   0%,100%{transform:rotate(0)}
-  25%{transform:rotate(-2deg) translateY(-1px)}
-  75%{transform:rotate(2deg) translateY(1px)}
+  50%{transform:rotate(1.5deg) translateY(-1px)}
 }
 @keyframes wiggle-left{
   0%,100%{transform:scaleX(-1) rotate(0)}
-  25%{transform:scaleX(-1) rotate(-2deg) translateY(-1px)}
-  75%{transform:scaleX(-1) rotate(2deg) translateY(1px)}
+  50%{transform:scaleX(-1) rotate(1.5deg) translateY(-1px)}
 }
 @media (max-width:980px){.scribble-wrap{display:none}}
 
@@ -707,9 +705,9 @@ h1.page-h1 .hl{
         </a>
         <span class="scribble-wrap right" aria-hidden="true">
           <span class="label">hier klicken</span>
-          <svg viewBox="0 0 180 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 150 28 C 145 18, 100 10, 60 16 C 40 20, 28 50, 22 78"/>
-            <path d="M 38 64 L 22 78 L 38 92"/>
+          <svg viewBox="0 0 155 88" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 128 22 C 92 28, 50 38, 18 66"/>
+            <path d="M 28 50 L 18 66 L 36 70"/>
           </svg>
         </span>
       </span>
@@ -1049,9 +1047,9 @@ h1.page-h1 .hl{
         </a>
         <span class="scribble-wrap left" aria-hidden="true">
           <span class="label">nur 3–4 Slots Q2</span>
-          <svg viewBox="0 0 180 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 150 28 C 145 18, 100 10, 60 16 C 40 20, 28 50, 22 78"/>
-            <path d="M 38 64 L 22 78 L 38 92"/>
+          <svg viewBox="0 0 155 88" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 128 22 C 92 28, 50 38, 18 66"/>
+            <path d="M 28 50 L 18 66 L 36 70"/>
           </svg>
         </span>
       </span>
