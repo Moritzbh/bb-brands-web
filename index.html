@@ -858,20 +858,32 @@ h2 em{color:var(--blue);font-style:normal}
   .bs-step h3 .char{opacity:1;transform:none}
 }
 
-/* ========== "WAS WIR MACHEN" Video-Intro Section · kompakt ========== */
-section#was{padding:64px 0 56px}
+/* ========== "WAS WIR MACHEN" Video-Intro Section · kompakt · pure white ========== */
+section#was,
+section#was:nth-of-type(even){
+  padding:64px 0 56px;
+  background:#fff !important;
+  border-top:none !important;
+  border-bottom:none !important;
+}
 section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
 section#was .section-sub{margin-bottom:32px;font-size:16px}
 
-/* ========== "PHASEN-DETAIL" Sticky-Rail-Stage · eigene Section ========== */
-section#bausteine{padding:56px 0 96px}
+/* ========== "PHASEN-DETAIL" Sticky-Rail-Stage · pure white, kein Trenn-Strich ========== */
+section#bausteine,
+section#bausteine:nth-of-type(even){
+  padding:24px 0 96px;
+  background:#fff !important;
+  border-top:none !important;
+  border-bottom:none !important;
+}
 section#bausteine h2{font-size:38px;margin-bottom:12px;line-height:1.05}
 section#bausteine .section-sub{margin-bottom:32px;font-size:16px}
 
 @media (max-width:780px){
   section#was{padding:48px 0 36px}
   section#was h2{font-size:28px}
-  section#bausteine{padding:36px 0 72px}
+  section#bausteine{padding:16px 0 72px}
   section#bausteine h2{font-size:28px}
 }
 
