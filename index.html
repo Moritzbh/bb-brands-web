@@ -886,8 +886,8 @@ section.stats-banner:nth-of-type(even){
 .vid-feed-wrap{position:relative;margin-top:4px}
 .vid-swiper{
   position:relative;
-  /* Negative margin damit Side-Cards über die wrap-Breite rausragen können */
-  margin:0 calc(50% - 50vw);
+  /* Begrenzt auf exakt 3-Card-Layout: 3×320 + 2×24 = 1008 px sichtbar */
+  max-width:1056px;margin:0 auto;
   padding:36px 0 56px;
   overflow:hidden;
 }
@@ -2434,19 +2434,37 @@ window.addEventListener('load', function(){
   var el = document.getElementById('vidFeed');
   if(!el) return;
 
+  // Slides programmatisch 3× duplizieren damit Swiper-Loop genug Material hat
+  // (Swiper braucht mind. 2× slidesPerView für Loop-Cloning, mit nur 4 Brands sonst Warning)
+  var wrapper = el.querySelector('.swiper-wrapper');
+  var originals = wrapper.querySelectorAll('.swiper-slide');
+  var origCount = originals.length;
+  for(var pass=0; pass<2; pass++){
+    for(var i=0; i<origCount; i++){
+      var clone = originals[i].cloneNode(true);
+      clone.setAttribute('data-clone-pass', pass+1);
+      wrapper.appendChild(clone);
+    }
+  }
+
   var swiper = new Swiper(el, {
     centeredSlides: true,
     slidesPerView: 'auto',
-    loop: false,
-    rewind: true,
-    initialSlide: 1,
+    loop: true,
+    loopAdditionalSlides: 2,
+    initialSlide: 0,
     grabCursor: true,
     speed: 550,
     spaceBetween: 24,
     watchSlidesProgress: true,
     pagination: {
       el: '.vid-swiper .swiper-pagination',
-      clickable: true
+      clickable: true,
+      renderBullet: function(index, className){
+        // Pagination zeigt nur 4 Bullets (1 pro unique Brand, nicht für Klone)
+        if(index >= origCount) return '';
+        return '<button class="' + className + '" type="button" aria-label="Case '+(index+1)+'"></button>';
+      }
     },
     navigation: {
       nextEl: '.vid-swiper .swiper-button-next',
