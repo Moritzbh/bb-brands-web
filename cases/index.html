@@ -503,37 +503,36 @@ section.dark .btn-secondary:hover{color:#fff}
 }
 @media (max-width:780px){.ba-arrow{transform:rotate(90deg);font-size:32px;padding:8px 0}}
 
-/* Hand-drawn Arrow zum CTA · animiert wackelnd */
-.scribble-wrap{position:absolute;width:140px;height:100px;pointer-events:none}
-.scribble-wrap.right{right:-130px;top:-12px}
-.scribble-wrap.left{left:-130px;top:-12px}
+/* Hand-drawn Arrow zum CTA · animiert wackelnd · zeigt AUF den Button */
+.scribble-wrap{position:absolute;width:180px;height:100px;pointer-events:none;z-index:3}
+.scribble-wrap.right{right:-110px;top:-52px}
+.scribble-wrap.left{left:-110px;top:-52px}
 .scribble-wrap svg{
   width:100%;height:100%;color:var(--accent);
   animation:wiggle 2.4s ease-in-out infinite;
 }
-.scribble-wrap.left svg{transform:scaleX(-1)}
+.scribble-wrap.left svg{transform:scaleX(-1);animation:wiggle-left 2.4s ease-in-out infinite}
 .scribble-wrap .label{
-  position:absolute;top:-8px;
+  position:absolute;top:2px;
   font-family:var(--display);font-weight:700;font-size:13px;
   color:#0a0a0a;background:#FDE047;
   padding:3px 10px;border-radius:3px;
   white-space:nowrap;
   border:2px solid #0a0a0a;
   box-shadow:2px 2px 0 0 #0a0a0a;
-  transform:rotate(-6deg);
+  z-index:2;
 }
-.scribble-wrap.right .label{left:6px}
-.scribble-wrap.left .label{right:6px;transform:rotate(6deg)}
+.scribble-wrap.right .label{right:8px;left:auto;transform:rotate(-6deg)}
+.scribble-wrap.left .label{left:8px;right:auto;transform:rotate(6deg)}
 @keyframes wiggle{
   0%,100%{transform:rotate(0)}
-  25%{transform:rotate(-3deg) translateY(-2px)}
-  75%{transform:rotate(3deg) translateY(2px)}
+  25%{transform:rotate(-2deg) translateY(-1px)}
+  75%{transform:rotate(2deg) translateY(1px)}
 }
-.scribble-wrap.left svg{animation:wiggle-left 2.4s ease-in-out infinite}
 @keyframes wiggle-left{
   0%,100%{transform:scaleX(-1) rotate(0)}
-  25%{transform:scaleX(-1) rotate(-3deg) translateY(-2px)}
-  75%{transform:scaleX(-1) rotate(3deg) translateY(2px)}
+  25%{transform:scaleX(-1) rotate(-2deg) translateY(-1px)}
+  75%{transform:scaleX(-1) rotate(2deg) translateY(1px)}
 }
 @media (max-width:980px){.scribble-wrap{display:none}}
 
@@ -708,9 +707,9 @@ h1.page-h1 .hl{
         </a>
         <span class="scribble-wrap right" aria-hidden="true">
           <span class="label">hier klicken</span>
-          <svg viewBox="0 0 140 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 70 C 30 40, 55 22, 95 30 C 110 33, 120 40, 128 48"/>
-            <path d="M115 36 L 130 48 L 118 62"/>
+          <svg viewBox="0 0 180 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 150 28 C 145 18, 100 10, 60 16 C 40 20, 28 50, 22 78"/>
+            <path d="M 38 64 L 22 78 L 38 92"/>
           </svg>
         </span>
       </span>
@@ -1050,9 +1049,9 @@ h1.page-h1 .hl{
         </a>
         <span class="scribble-wrap left" aria-hidden="true">
           <span class="label">nur 3–4 Slots Q2</span>
-          <svg viewBox="0 0 140 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 70 C 30 40, 55 22, 95 30 C 110 33, 120 40, 128 48"/>
-            <path d="M115 36 L 130 48 L 118 62"/>
+          <svg viewBox="0 0 180 100" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 150 28 C 145 18, 100 10, 60 16 C 40 20, 28 50, 22 78"/>
+            <path d="M 38 64 L 22 78 L 38 92"/>
           </svg>
         </span>
       </span>
