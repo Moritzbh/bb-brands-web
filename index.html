@@ -878,49 +878,106 @@ section#was:nth-of-type(even){
 section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
 section#was .section-sub{margin-bottom:32px;font-size:16px}
 
-/* ========== Phasen-Collapsible (klein per default, expandable) ========== */
-.bs-collapsible{margin-top:12px}
+/* ========== Phasen-Collapsible · premium reading-callout ========== */
+.bs-collapsible{margin-top:14px}
 .bs-collapsible-toggle{
   list-style:none;cursor:pointer;
-  display:flex;align-items:center;gap:18px;
-  padding:18px 24px;
-  background:var(--bg);border:1px solid var(--line);border-radius:12px;
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:20px;align-items:center;
+  padding:20px 26px 20px 24px;
+  background:#fff;
+  border:1px solid var(--line);border-radius:14px;
   max-width:880px;margin:0 auto;
-  transition:border-color .2s ease, background .2s ease;
+  box-shadow:0 8px 22px -12px rgba(3,5,198,.10), 0 2px 6px rgba(0,0,0,.03);
+  position:relative;overflow:hidden;
+  transition:transform .25s cubic-bezier(.4,0,.2,1),
+             box-shadow .25s ease,
+             border-color .2s ease,
+             background .25s ease;
 }
 .bs-collapsible-toggle::-webkit-details-marker{display:none}
-.bs-collapsible-toggle:hover{border-color:var(--blue);background:var(--blue-tint)}
+/* Linke Akzent-Linie · wächst on hover */
+.bs-collapsible-toggle::before{
+  content:"";position:absolute;
+  left:0;top:22%;bottom:22%;
+  width:3px;background:var(--blue);border-radius:0 3px 3px 0;
+  transition:top .35s cubic-bezier(.4,0,.2,1), bottom .35s cubic-bezier(.4,0,.2,1), background .25s ease;
+}
+.bs-collapsible-toggle:hover{
+  transform:translateY(-2px);
+  border-color:rgba(3,5,198,.25);
+  box-shadow:0 14px 36px -10px rgba(3,5,198,.20), 0 4px 10px rgba(0,0,0,.05);
+}
+.bs-collapsible-toggle:hover::before{top:8%;bottom:8%}
+
+/* Book-/Chapter-Icon links */
+.bs-toggle-prefix{
+  width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue-tint) 0%,#fff 100%);
+  border:1px solid rgba(3,5,198,.12);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.bs-toggle-prefix svg{width:22px;height:22px;color:var(--blue)}
+
 .bs-toggle-text-wrap{
-  display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;
+  display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;
 }
 .bs-toggle-text{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:16px;font-weight:700;letter-spacing:-.005em;
-  color:var(--text);
+  font-size:19px;font-weight:700;letter-spacing:-.01em;
+  color:var(--text);line-height:1.1;
 }
 .bs-toggle-meta{
-  font-size:12.5px;color:var(--text-3);letter-spacing:.02em;
+  font-size:13px;color:var(--text-3);letter-spacing:.01em;line-height:1.3;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
 }
+.bs-toggle-meta .meta-chip{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-tint);
+  padding:3px 9px;border-radius:99px;
+  border:1px solid rgba(3,5,198,.12);
+}
+
 .bs-toggle-icon{
-  width:36px;height:36px;border-radius:50%;
-  background:var(--blue);color:#fff;
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);
+  color:#fff;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
-  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 18px -4px rgba(3,5,198,.40), inset 0 -2px 0 rgba(0,0,0,.12);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),
+             box-shadow .25s ease;
 }
-.bs-toggle-icon svg{width:16px;height:16px}
-.bs-collapsible[open] .bs-toggle-icon{transform:rotate(180deg)}
+.bs-toggle-icon svg{width:18px;height:18px}
+.bs-collapsible[open] .bs-toggle-icon{
+  transform:rotate(180deg);
+  box-shadow:0 4px 12px -2px rgba(3,5,198,.30), inset 0 -2px 0 rgba(0,0,0,.12);
+}
 .bs-collapsible[open] .bs-collapsible-toggle{
-  border-color:var(--blue);background:var(--blue-tint);
+  border-color:rgba(3,5,198,.3);
+  background:linear-gradient(180deg,#fff 0%,var(--blue-tint) 100%);
   margin-bottom:32px;
+}
+.bs-collapsible[open] .bs-collapsible-toggle::before{
+  top:8%;bottom:8%;
+  background:linear-gradient(180deg,var(--blue) 0%,var(--accent) 100%);
 }
 
 @media (max-width:780px){
   section#was{padding:48px 0 36px}
   section#was h2{font-size:28px}
-  .bs-collapsible-toggle{padding:14px 18px;gap:14px}
-  .bs-toggle-text{font-size:14.5px}
-  .bs-toggle-meta{font-size:11.5px}
+  .bs-collapsible-toggle{
+    padding:16px 18px 16px 16px;gap:14px;
+  }
+  .bs-toggle-prefix{width:38px;height:38px;border-radius:10px}
+  .bs-toggle-prefix svg{width:18px;height:18px}
+  .bs-toggle-text{font-size:16px}
+  .bs-toggle-meta{font-size:11.5px;gap:6px}
+  .bs-toggle-icon{width:36px;height:36px}
+  .bs-toggle-icon svg{width:14px;height:14px}
 }
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
@@ -2518,9 +2575,18 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <!-- Phasen-Detail: kollabiert by default, optional auf Klick öffnen -->
     <details class="bs-collapsible" id="bsCollapsible">
       <summary class="bs-collapsible-toggle">
+        <span class="bs-toggle-prefix" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+          </svg>
+        </span>
         <span class="bs-toggle-text-wrap">
           <span class="bs-toggle-text">Phasen im Detail nachlesen</span>
-          <span class="bs-toggle-meta">4 Phasen · was du in jeder bekommst</span>
+          <span class="bs-toggle-meta">
+            <span class="meta-chip">I–IV</span>
+            <span>4 Phasen · was du in jeder bekommst</span>
+          </span>
         </span>
         <span class="bs-toggle-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
