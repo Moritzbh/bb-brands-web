@@ -2,6 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/founder-os",
+      "destination": "https://founder-os.bb-brands.de",
+      "permanent": true
+    },
+    {
+      "source": "/founder-os/:path*",
+      "destination": "https://founder-os.bb-brands.de/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

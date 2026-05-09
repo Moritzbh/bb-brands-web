@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<script src="/assets/js/consent.js" defer></script>
 <style>
 /* ============= HIDE Default-Header (shared.css) — wir bauen eigenen ============= */
 .top-bar,header.site-header,.mobile-menu{display:none !important}
@@ -361,7 +363,7 @@ footer .footer-links a:hover{color:var(--accent)}
       <a href="/">Startseite</a>
       <a href="/cases/">Cases</a>
       <a href="/wissen/" class="active">Wissen</a>
-      <a href="/founder-os/">Founder OS</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
     </nav>
     <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
     <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
@@ -372,7 +374,7 @@ footer .footer-links a:hover{color:var(--accent)}
     <a href="/">Startseite</a>
     <a href="/cases/">Cases</a>
     <a href="/wissen/">Wissen</a>
-    <a href="/founder-os/">Founder OS</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
     <a href="/audit/" class="cta">Strategy Audit buchen</a>
   </div>
 </header>
@@ -583,7 +585,7 @@ footer .footer-links a:hover{color:var(--accent)}
     <h2>Schon entschieden? Lass uns reden.</h2>
     <p>Wenn du lieber direkt einsteigst statt vorher zu lesen — der Strategy Audit ist der Eintritt für Brands ab Umsatz. Kein Pitch-Deck, kein Smalltalk. 30 Minuten, geradeaus.</p>
     <a href="/audit/" class="bb-cta large">Strategy Audit buchen</a>
-    <a href="/founder-os/" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
+    <a href="https://founder-os.bb-brands.de" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
   </div>
 </section>
 
@@ -596,6 +598,7 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="footer-links">
       <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
       <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
       <a href="/impressum/">Impressum</a>
       <a href="/datenschutz/">Datenschutz</a>
     </div>
