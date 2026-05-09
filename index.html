@@ -918,10 +918,16 @@ section.compare-hero:nth-of-type(even){
   position:relative;
   overflow:hidden;
 }
-/* Video-Container · Background-Layer */
+/* Video-Container · Background-Layer · Scroll-Linked Curtain-Reveal */
 .compare-hero-bg{
   position:absolute;inset:0;z-index:0;
   overflow:hidden;
+  will-change:clip-path;
+  /* Default: voll sichtbar — JS setzt initial clip-path zur Reveal-Logic */
+}
+/* Reduced-Motion: keine Reveal-Animation */
+@media (prefers-reduced-motion: reduce){
+  .compare-hero-bg{clip-path:inset(0) !important}
 }
 .compare-hero-bg video{
   position:absolute;inset:0;
@@ -3350,6 +3356,53 @@ window.addEventListener('load', function(){
   window.addEventListener('load', function(){ setTimeout(init, 120); });
   window.addEventListener('resize', function(){ moveIndicator(current); });
   setTimeout(init, 250);
+})();
+</script>
+
+<script>
+/* === COMPARE-SECTION · Scroll-Linked Curtain-Reveal des Video-BG ===
+   Section startet "leer" (clip-path versteckt das Video), beim Scrollen
+   wird der BG progressiv von oben nach unten enthüllt — synchron zur
+   Scroll-Position. */
+(function(){
+  var section = document.querySelector('section.compare-hero');
+  if(!section) return;
+  var bg = section.querySelector('.compare-hero-bg');
+  if(!bg) return;
+
+  // Reduced-Motion: keine Animation, Video direkt sichtbar
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    bg.style.clipPath = 'inset(0)';
+    return;
+  }
+
+  // Initial: komplett versteckt
+  bg.style.clipPath = 'inset(0 0 100% 0)';
+
+  var ticking = false;
+  function update(){
+    var rect = section.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    // progress 0 wenn Top der Section am Bottom des Viewports
+    // progress 1 wenn Top der Section am Top des Viewports angekommen
+    var progress = 1 - (rect.top / vh);
+    if(progress < 0) progress = 0;
+    if(progress > 1) progress = 1;
+    // Easing: ease-out-quad — schnellerer Reveal-Start, sanfter Endlauf
+    var eased = 1 - Math.pow(1 - progress, 2);
+    var hidden = (1 - eased) * 100;
+    bg.style.clipPath = 'inset(0 0 ' + hidden.toFixed(2) + '% 0)';
+    ticking = false;
+  }
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive: true});
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 </script>
 
