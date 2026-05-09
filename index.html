@@ -481,31 +481,19 @@ header.site-header .wrap{
 }
 .hero-specs .spec strong{color:var(--text);font-weight:700}
 
-/* Shopify-Partner-Badge unter Specs (Bag-only mit Caption) */
+/* Shopify-Partner-Badge unter Specs (offizielles Asset) */
 .hero-shopify{
-  display:inline-flex;align-items:center;gap:14px;
+  display:inline-block;
   margin-top:24px;
-  text-decoration:none;
-  opacity:.9;transition:opacity .2s ease;
+  opacity:.92;transition:opacity .2s ease;
 }
 .hero-shopify:hover{opacity:1;text-decoration:none}
-.hero-shopify .shop-bag{
-  width:54px;height:60px;flex-shrink:0;
-  filter:drop-shadow(0 6px 14px rgba(149,191,71,.25));
+.hero-shopify img{
+  display:block;width:auto;height:90px;max-width:100%;
+  margin-left:-20px; /* Asset hat ~10% Whitespace links — visuell ausgleichen */
 }
-.hero-shopify .shop-bag svg{width:100%;height:100%;display:block}
-.hero-shopify .shop-caption{
-  display:inline-flex;flex-direction:column;gap:3px;
-  font-family:'Saira Condensed',Manrope,sans-serif;
-  line-height:1.05;
-}
-.hero-shopify .shop-cap-top{
-  font-size:10.5px;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--text-3);
-}
-.hero-shopify .shop-cap-main{
-  font-size:18px;font-weight:700;letter-spacing:-.005em;
-  color:#0a0a0a;
+@media (max-width:780px){
+  .hero-shopify img{height:70px;margin-left:-15px}
 }
 
 @media (max-width:980px){
@@ -2281,22 +2269,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           </div>
         </div>
 
-        <!-- Shopify Partner Badge -->
+        <!-- Shopify Partner Badge (offizielles Asset) -->
         <a class="hero-shopify" href="https://www.shopify.com/partners" target="_blank" rel="noopener" aria-label="Offizieller Shopify Partner">
-          <span class="shop-bag" aria-hidden="true">
-            <svg viewBox="0 0 32 36" xmlns="http://www.w3.org/2000/svg">
-              <!-- Shopify-Bag Hauptkörper -->
-              <path d="M27.6 7.1c-.1-.1-.2-.2-.4-.2-.2 0-3.5-.3-3.5-.3s-2.3-2.3-2.6-2.5c-.3-.2-.8-.2-.9-.1-.1 0-.7.2-1.7.5-1-2.8-2.7-4-4.2-4-2 0-3.6 2-4.4 4-1.4.4-2.4.7-2.5.7-1 .3-1.1.3-1.2 1.2C6 7.1 4.5 23 4.5 23l16 3.1L29 23.7s-1.4-15.6-1.4-16.6zM18.7 5.2c-.6.2-1.3.4-2 .6 0-1.1-.2-2.6-.7-3.7 1.5.2 2.3 1.9 2.7 3.1zm-3.4-2.9c.5 1.1.8 2.6.7 3.8-.9.3-1.9.6-2.9.9.6-2 1.6-3.7 2.2-4.7zm-2-.3c-.5.9-1.4 2.7-2 4.6-.8.2-1.6.5-2.3.7C9.6 5 11.5 2.4 13.3 2z" fill="#95BF47"/>
-              <!-- Bag rechte (dunklere) Seite -->
-              <path d="M27.2 6.9c-.2 0-3.5-.3-3.5-.3s-2.3-2.3-2.6-2.5c-.1-.1-.2-.1-.4-.2v22.2L29 23.7s-1.4-15.6-1.4-16.6c-.1-.1-.2-.2-.4-.2z" fill="#5E8E3E"/>
-              <!-- "S"-Letter -->
-              <path d="M19.7 11l-1 3.7s-1.1-.5-2.4-.4c-1.9.1-1.9 1.3-1.9 1.6.1 1.6 4.3 2 4.6 5.8.2 3-1.5 5-4.1 5.2-3.1.2-4.8-1.6-4.8-1.6l.7-2.8s1.7 1.3 3.1 1.2c.9-.1 1.2-.8 1.2-1.3-.1-2.1-3.5-2-3.8-5.5-.2-2.9 1.7-5.9 5.9-6.1 1.6-.1 2.5.2 2.5.2z" fill="#fff"/>
-            </svg>
-          </span>
-          <span class="shop-caption">
-            <span class="shop-cap-top">Offizieller</span>
-            <span class="shop-cap-main">Shopify Partner</span>
-          </span>
+          <img src="/assets/images/logos/shopify-partner-edited.png" alt="Offizieller Shopify Partner" loading="lazy" decoding="async">
         </a>
       </div>
 
