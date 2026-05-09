@@ -2007,6 +2007,14 @@ section.team-section .wrap{position:relative;z-index:2}
              opacity .4s ease,
              box-shadow .4s ease;
   transform-origin:center bottom;
+  /* Crisp-Edges gegen Subpixel-Blur bei rotierten Cards */
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  will-change:transform;
+}
+.sdr-stack-photo{
+  image-rendering:-webkit-optimize-contrast;
+  transform:translateZ(0);
 }
 .sdr-stack-card.front{
   z-index:2;
