@@ -1858,6 +1858,23 @@ body section.team-section .light-overlay{display:none !important}
 .team-banner-stage .sdr-stack{
   max-width:480px;justify-self:end;width:100%;
 }
+/* REVERSE-Variante (founder-section): Text LINKS, Card RECHTS · 4:3 · gerade */
+.team-banner-stage.reverse{
+  grid-template-columns:1.15fr 1fr;
+}
+.team-banner-stage.reverse .sdr-stack{
+  max-width:520px;width:100%;
+  height:auto;aspect-ratio:4/3;
+  justify-self:start;
+}
+.team-banner-stage.reverse .sdr-stack-card{
+  position:relative;
+  inset:auto;
+  border-radius:14px;
+}
+.team-banner-stage.reverse .sdr-stack-card.front{
+  transform:none; /* keine Rotation */
+}
 .team-banner-text{min-width:0}
 .team-banner-text h2{
   font-family:'Inter Tight','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
@@ -3290,8 +3307,18 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   <div class="light-overlay"></div>
   <div class="wrap">
 
-    <div class="team-banner-stage" id="founderBanner">
-      <!-- LEFT: Founder-Card (single) -->
+    <div class="team-banner-stage reverse" id="founderBanner">
+      <!-- LEFT: Headline + Sub + CTA -->
+      <div class="team-banner-text">
+        <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
+        <p class="banner-body">Mit 14 Jahren mein erster Shopify-Store. Seitdem Brand, Shop und Operations als ein System gedacht — keine Silos, keine Übergaben. Wenn das Discovery passt, übernehme ich persönlich. Vom Strategy Audit über den Build bis zum Hypercare nach Launch.</p>
+        <a href="#apply" class="btn-primary banner-cta">
+          Jetzt Termin vereinbaren
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <!-- RIGHT: Founder-Card (single, 4:3, gerade) -->
       <div class="sdr-stack">
         <article class="sdr-stack-card front" tabindex="0" aria-label="Moritz Bohmbach · Founder">
           <div class="sdr-stack-photo"></div>
@@ -3302,16 +3329,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
           <div class="sdr-stack-meta">Founder · Moritz</div>
         </article>
-      </div>
-
-      <!-- RIGHT: Headline + Sub + CTA -->
-      <div class="team-banner-text">
-        <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
-        <p class="banner-body">Mit 14 Jahren mein erster Shopify-Store. Seitdem Brand, Shop und Operations als ein System gedacht — keine Silos, keine Übergaben. Wenn das Discovery passt, übernehme ich persönlich. Vom Strategy Audit über den Build bis zum Hypercare nach Launch.</p>
-        <a href="#apply" class="btn-primary banner-cta">
-          Jetzt Termin vereinbaren
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
       </div>
     </div>
 
