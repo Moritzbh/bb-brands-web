@@ -1379,58 +1379,129 @@ section.team-section:nth-of-type(even){background:#fff !important}
   color:var(--accent);font-weight:800;
 }
 
-/* SDR Cards Row */
-.sdr-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:24px;
-  margin-bottom:36px;
+/* SDR Card-Stack · 2 Cards übereinander, switchable */
+.sdr-stack-wrap{
+  display:grid;grid-template-columns:auto 1fr;gap:48px;
+  align-items:center;margin-bottom:36px;max-width:880px;margin-left:auto;margin-right:auto;
 }
-.sdr-card{
-  background:var(--bg);border:1px solid var(--line);
-  border-radius:16px;
-  padding:28px;
-  display:flex;align-items:center;gap:24px;
-  transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+.sdr-stack{
+  position:relative;width:300px;height:380px;flex-shrink:0;
+  perspective:1200px;
 }
-.sdr-card:hover{
-  border-color:var(--line-strong);
-  box-shadow:0 12px 32px rgba(0,0,0,.06);
-  transform:translateY(-2px);
+.sdr-stack-card{
+  position:absolute;inset:0;
+  border-radius:18px;overflow:hidden;
+  background:#0a0a0a;
+  border:6px solid #0a0a0a;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  cursor:pointer;
+  transition:transform .55s cubic-bezier(.4,0,.2,1),
+             opacity .4s ease,
+             box-shadow .4s ease;
+  transform-origin:center bottom;
 }
-.sdr-photo{
-  width:96px;height:96px;border-radius:50%;
-  background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 100%);
-  flex-shrink:0;position:relative;overflow:hidden;
-  border:1px solid var(--line);
+.sdr-stack-card.front{
+  z-index:2;
+  transform:rotate(-1.5deg);
+  opacity:1;
 }
-.sdr-photo::after{
+.sdr-stack-card.back{
+  z-index:1;
+  transform:rotate(3deg) translate(28px, 18px);
+  opacity:.92;
+}
+.sdr-stack-card.back:hover{
+  transform:rotate(3deg) translate(32px, 14px);
+}
+.sdr-stack-photo{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 60%, #15151a 100%);
+}
+.sdr-stack-photo::after{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(circle at 40% 30%, rgba(3,5,198,.2) 0%, transparent 55%),
-    radial-gradient(circle at 70% 80%, rgba(255,107,61,.14) 0%, transparent 55%);
+    radial-gradient(ellipse at 35% 25%, rgba(3,5,198,.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,107,61,.14) 0%, transparent 55%);
 }
-.sdr-photo svg{
-  position:absolute;top:50%;left:50%;
+.sdr-stack-silhouette{
+  position:absolute;top:52%;left:50%;
   transform:translate(-50%,-50%);
-  width:40px;height:40px;color:rgba(245,245,240,.35);
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(245,245,240,.04);
+  border:1px solid rgba(245,245,240,.08);
+  display:flex;align-items:center;justify-content:center;
   z-index:1;
 }
-.sdr-info{min-width:0;flex:1}
+.sdr-stack-silhouette svg{
+  width:48px;height:48px;color:rgba(245,245,240,.32);
+}
+.sdr-stack-corner{
+  position:absolute;z-index:2;
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-weight:700;font-size:22px;letter-spacing:-.02em;
+  color:rgba(255,255,255,.95);line-height:1;
+  display:inline-flex;align-items:baseline;
+}
+.sdr-stack-corner .mirror{display:inline-block;transform:scaleX(-1)}
+.sdr-stack-corner.tl{top:14px;left:14px}
+.sdr-stack-corner.br{bottom:14px;right:14px}
+.sdr-stack-meta{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:14px 18px;
+  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.7) 100%);
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);font-weight:600;
+}
+
+/* Info-Block neben dem Stack — wechselt mit aktiver Card */
+.sdr-info-stack{position:relative;min-width:0}
+.sdr-info-item{
+  opacity:0;visibility:hidden;
+  transform:translateY(10px);
+  transition:opacity .35s ease, transform .35s ease, visibility 0s linear .35s;
+  position:absolute;inset:0;
+}
+.sdr-info-item.active{
+  opacity:1;visibility:visible;transform:none;
+  position:relative;
+  transition:opacity .35s ease, transform .35s ease;
+}
 .sdr-role{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:4px;
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:6px;
 }
 .sdr-name{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:24px;font-weight:700;letter-spacing:-.012em;
-  color:var(--text);margin-bottom:6px;line-height:1.1;
+  font-size:32px;font-weight:700;letter-spacing:-.015em;line-height:1.05;
+  color:var(--text);margin-bottom:10px;
 }
 .sdr-name .pending{
-  font-size:13px;color:var(--text-3);font-weight:500;
-  letter-spacing:0;text-transform:none;
+  display:block;font-size:13px;color:var(--text-3);font-weight:500;
+  letter-spacing:.02em;text-transform:none;margin-top:4px;
 }
 .sdr-quote{
-  font-size:14px;color:var(--text-2);line-height:1.5;
+  font-size:16px;color:var(--text-2);line-height:1.55;
+  font-style:italic;border-left:2px solid var(--accent);padding-left:14px;
+  margin-bottom:18px;
+}
+
+/* Toggle-Buttons unter Stack */
+.sdr-stack-toggle{
+  display:flex;gap:8px;margin-top:14px;
+}
+.sdr-stack-toggle button{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 16px;border-radius:99px;
+  background:var(--bg);border:1px solid var(--line);color:var(--text-2);
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.sdr-stack-toggle button:hover{border-color:var(--line-strong);color:var(--text)}
+.sdr-stack-toggle button.active{
+  background:var(--accent);border-color:var(--accent);color:#fff;
 }
 
 /* Hand-off Arrow */
@@ -1516,15 +1587,16 @@ section.team-section:nth-of-type(even){background:#fff !important}
 }
 .founder-points li strong{color:#fff;font-weight:600}
 
-@media (max-width:900px){
-  .sdr-row{grid-template-columns:1fr;gap:16px}
-  .sdr-card{padding:22px}
-  .sdr-photo{width:80px;height:80px}
-  .founder-card-new{grid-template-columns:1fr;gap:24px;padding:30px 26px}
-  .founder-photo-new{width:120px;height:120px}
-  .founder-photo-new svg{width:46px;height:46px}
+@media (max-width:780px){
+  .sdr-stack-wrap{grid-template-columns:1fr;gap:32px;justify-items:center;text-align:center}
+  .sdr-stack{width:260px;height:330px;margin:0 auto}
+  .sdr-info-item{text-align:left}
+  .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
+  .sdr-stack-toggle{justify-content:center}
+  .founder-card-new{grid-template-columns:1fr;gap:24px;padding:30px 26px;text-align:center}
+  .founder-photo-new{margin:0 auto}
   .founder-name-new{font-size:30px}
-  .founder-points{grid-template-columns:1fr}
+  .founder-points{grid-template-columns:1fr;text-align:left}
 }
 
 /* ========== HAND-DRAWN ARROW ========== */
@@ -2267,28 +2339,50 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <span><span class="num">01</span> · Discovery</span>
       </div>
 
-      <div class="sdr-row">
-        <article class="sdr-card">
-          <div class="sdr-photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <div class="sdr-info">
-            <div class="sdr-role">Sales · Discovery</div>
-            <div class="sdr-name">Sales-Lead 01<br><span class="pending">Name folgt</span></div>
-            <p class="sdr-quote">„Ich höre dir zu, frage nach Zahlen, sage dir ehrlich ob's passt."</p>
-          </div>
-        </article>
+      <div class="sdr-stack-wrap" id="sdrStack">
+        <!-- Card-Stack — 2 Photo-Cards übereinander, Click swaps -->
+        <div class="sdr-stack">
+          <article class="sdr-stack-card front" data-sdr="0" tabindex="0" aria-label="Sales-Lead 01">
+            <div class="sdr-stack-photo"></div>
+            <div class="sdr-stack-silhouette">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
+            <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
+            <div class="sdr-stack-meta">Sales · 01</div>
+          </article>
+          <article class="sdr-stack-card back" data-sdr="1" tabindex="0" aria-label="Sales-Lead 02">
+            <div class="sdr-stack-photo"></div>
+            <div class="sdr-stack-silhouette">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
+            <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
+            <div class="sdr-stack-meta">Sales · 02</div>
+          </article>
+        </div>
 
-        <article class="sdr-card">
-          <div class="sdr-photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <div class="sdr-info">
+        <!-- Info wechselt mit aktivem Stack-Card -->
+        <div class="sdr-info-stack">
+          <div class="sdr-info-item active" data-sdr="0">
             <div class="sdr-role">Sales · Discovery</div>
-            <div class="sdr-name">Sales-Lead 02<br><span class="pending">Name folgt</span></div>
-            <p class="sdr-quote">„Kein Pitch im ersten Call. Erst verstehen, dann entscheiden."</p>
+            <div class="sdr-name">Sales-Lead 01<span class="pending">Name folgt</span></div>
+            <p class="sdr-quote">„Ich höre dir zu, frage nach Zahlen, sage dir ehrlich ob's passt."</p>
+            <div class="sdr-stack-toggle">
+              <button type="button" data-sdr="0" class="active" aria-label="Sales-Lead 01">01</button>
+              <button type="button" data-sdr="1" aria-label="Sales-Lead 02">02</button>
+            </div>
           </div>
-        </article>
+          <div class="sdr-info-item" data-sdr="1">
+            <div class="sdr-role">Sales · Discovery</div>
+            <div class="sdr-name">Sales-Lead 02<span class="pending">Name folgt</span></div>
+            <p class="sdr-quote">„Kein Pitch im ersten Call. Erst verstehen, dann entscheiden."</p>
+            <div class="sdr-stack-toggle">
+              <button type="button" data-sdr="0" aria-label="Sales-Lead 01">01</button>
+              <button type="button" data-sdr="1" class="active" aria-label="Sales-Lead 02">02</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Hand-off Arrow -->
@@ -2559,6 +2653,47 @@ window.addEventListener('load', function(){
     });
   });
 });
+</script>
+
+<script>
+/* === SDR Card-Stack: 2 Photo-Cards übereinander, click swaps === */
+(function(){
+  var wrap = document.getElementById('sdrStack');
+  if(!wrap) return;
+  var cards = wrap.querySelectorAll('.sdr-stack-card');
+  var infos = wrap.querySelectorAll('.sdr-info-item');
+  var toggles = wrap.querySelectorAll('.sdr-stack-toggle button');
+  var current = 0;
+
+  function setActive(idx){
+    if(idx === current) return;
+    current = idx;
+    cards.forEach(function(c){
+      var i = parseInt(c.dataset.sdr, 10);
+      c.classList.toggle('front', i === idx);
+      c.classList.toggle('back', i !== idx);
+    });
+    infos.forEach(function(info){
+      info.classList.toggle('active', parseInt(info.dataset.sdr, 10) === idx);
+    });
+    toggles.forEach(function(btn){
+      btn.classList.toggle('active', parseInt(btn.dataset.sdr, 10) === idx);
+    });
+  }
+
+  cards.forEach(function(c){
+    c.addEventListener('click', function(){ setActive(parseInt(c.dataset.sdr, 10)); });
+    c.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        setActive(parseInt(c.dataset.sdr, 10));
+      }
+    });
+  });
+  toggles.forEach(function(btn){
+    btn.addEventListener('click', function(){ setActive(parseInt(btn.dataset.sdr, 10)); });
+  });
+})();
 </script>
 
 <script>
