@@ -9,8 +9,13 @@
       "permanent": true
     },
     {
-      "source": "/founder-os/:path*",
-      "destination": "https://founder-os.bb-brands.de/:path*",
+      "source": "/founder-os/",
+      "destination": "https://founder-os.bb-brands.de",
+      "permanent": true
+    },
+    {
+      "source": "/founder-os/:path+",
+      "destination": "https://founder-os.bb-brands.de/:path+",
       "permanent": true
     }
   ],
