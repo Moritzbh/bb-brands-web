@@ -1521,71 +1521,104 @@ section.team-section:nth-of-type(even){background:#fff !important}
   width:18px;height:18px;color:var(--accent);
 }
 
-/* Founder Card — die große, betonte Karte */
-.founder-card-new{
+/* ===== FOUNDER SECTION · Dark · Photo-Left + Text-Right ===== */
+section.founder-section{
   background:#0a0a0a;color:#fff;
-  border-radius:18px;
-  padding:40px 44px;
-  display:grid;grid-template-columns:auto 1fr;gap:36px;
-  align-items:start;
+  padding:120px 0;
   position:relative;overflow:hidden;
-  box-shadow:0 24px 60px rgba(0,0,0,.18);
+  border-top:none;
 }
-.founder-card-new::before{
+section.founder-section::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 80% 20%, rgba(3,5,198,.28) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 90%, rgba(255,107,61,.18) 0%, transparent 60%);
+    radial-gradient(ellipse at 18% 25%, rgba(3,5,198,.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(255,107,61,.14) 0%, transparent 55%);
   pointer-events:none;
 }
-.founder-photo-new{
-  width:160px;height:160px;border-radius:50%;
-  background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 100%);
-  position:relative;overflow:hidden;flex-shrink:0;
-  border:2px solid rgba(255,107,61,.4);
-  box-shadow:0 0 0 6px rgba(255,107,61,.08);
-  z-index:1;
+.founder-section .wrap{position:relative;z-index:1}
+
+.founder-stage{
+  display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;
 }
-.founder-photo-new::after{
+
+/* Portrait Card — gleiche Optik wie SDR-Stack-Card */
+.founder-portrait{
+  position:relative;
+  aspect-ratio:4/5;
+  max-width:480px;
+  border-radius:20px;
+  overflow:hidden;
+  background:linear-gradient(135deg, #1a1a18 0%, #0a0a0a 100%);
+  border:6px solid #0a0a0a;
+  box-shadow:0 32px 70px rgba(0,0,0,.45);
+}
+.founder-portrait::after{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(circle at 40% 30%, rgba(3,5,198,.32) 0%, transparent 55%),
-    radial-gradient(circle at 70% 80%, rgba(255,107,61,.22) 0%, transparent 55%);
+    radial-gradient(ellipse at 35% 25%, rgba(3,5,198,.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,107,61,.18) 0%, transparent 55%);
 }
-.founder-photo-new svg{
+.founder-portrait-silhouette{
   position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%);
-  width:60px;height:60px;color:rgba(245,245,240,.4);
+  width:140px;height:140px;border-radius:50%;
+  background:rgba(245,245,240,.04);
+  border:1px solid rgba(245,245,240,.1);
+  display:flex;align-items:center;justify-content:center;
   z-index:1;
 }
-.founder-info-new{position:relative;z-index:1;min-width:0}
-.founder-role-new{
+.founder-portrait-silhouette svg{
+  width:60px;height:60px;color:rgba(245,245,240,.4);
+}
+.founder-portrait .corner{
+  position:absolute;z-index:2;
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:#ff8a63;margin-bottom:6px;
+  font-weight:700;font-size:28px;letter-spacing:-.02em;
+  color:rgba(255,255,255,.95);line-height:1;
+  display:inline-flex;align-items:baseline;
 }
-.founder-name-new{
+.founder-portrait .corner .mirror{display:inline-block;transform:scaleX(-1)}
+.founder-portrait .corner.tl{top:20px;left:20px}
+.founder-portrait .corner.br{bottom:20px;right:20px}
+
+.founder-text{min-width:0}
+.founder-eyebrow{
   font-family:'Saira Condensed',Manrope,sans-serif;
-  font-size:38px;font-weight:700;letter-spacing:-.018em;line-height:1;
-  color:#fff;margin-bottom:14px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:#ff8a63;margin-bottom:20px;
 }
-.founder-tagline-new{
-  font-size:17px;line-height:1.5;color:rgba(255,255,255,.85);
-  margin-bottom:24px;max-width:520px;
+.founder-text h2{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(38px, 5vw, 60px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.02;
+  color:#fff;margin-bottom:26px;
 }
-.founder-tagline-new em{font-style:italic;color:#ff8a63;font-weight:500}
-.founder-points{
-  list-style:none;padding:0;margin:0;
-  display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;
+.founder-text h2 em{font-style:italic;font-weight:500;color:#fff}
+.founder-bio{
+  font-size:16px;line-height:1.75;color:rgba(255,255,255,.8);
+  margin-bottom:30px;max-width:560px;
 }
-.founder-points li{
-  font-size:14px;color:rgba(255,255,255,.78);line-height:1.5;
-  display:flex;gap:10px;align-items:flex-start;
+.founder-signature{
+  margin-bottom:44px;
+  font-family:'Caveat',cursive;font-size:34px;
+  color:rgba(255,255,255,.78);font-weight:500;
+  display:inline-block;line-height:1;
+  letter-spacing:.005em;
 }
-.founder-points li::before{
-  content:"→";color:#ff6b3d;flex-shrink:0;font-weight:700;
+
+.founder-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:36px;
+  max-width:520px;
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.1);
 }
-.founder-points li strong{color:#fff;font-weight:600}
+.founder-stat-num{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:44px;font-weight:700;letter-spacing:-.02em;
+  color:#ff6b3d;line-height:1;margin-bottom:12px;
+}
+.founder-stat-label{
+  font-size:14px;color:rgba(255,255,255,.7);line-height:1.5;
+}
 
 @media (max-width:780px){
   .sdr-stack-wrap{grid-template-columns:1fr;gap:32px;justify-items:center;text-align:center}
@@ -1593,10 +1626,14 @@ section.team-section:nth-of-type(even){background:#fff !important}
   .sdr-info-item{text-align:left}
   .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
   .sdr-stack-toggle{justify-content:center}
-  .founder-card-new{grid-template-columns:1fr;gap:24px;padding:30px 26px;text-align:center}
-  .founder-photo-new{margin:0 auto}
-  .founder-name-new{font-size:30px}
-  .founder-points{grid-template-columns:1fr;text-align:left}
+  /* Founder Section Mobile */
+  section.founder-section{padding:80px 0}
+  .founder-stage{grid-template-columns:1fr;gap:48px}
+  .founder-portrait{max-width:300px;margin:0 auto}
+  .founder-text h2{font-size:32px}
+  .founder-stats{gap:24px}
+  .founder-stat-num{font-size:34px}
+  .founder-signature{font-size:28px;margin-bottom:32px}
 }
 
 /* ========== HAND-DRAWN ARROW ========== */
@@ -2385,36 +2422,45 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </div>
       </div>
 
-      <!-- Hand-off Arrow -->
+      <!-- Hand-off → leitet auf nächste Section über -->
       <div class="team-handoff">
         <span>Wenn's passt</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        <span>Hand-off</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg>
+        <span>Übernehme ich</span>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- STEP 02 — Founder builds -->
-      <div class="team-stage-label">
-        <span><span class="num">02</span> · Build &amp; Launch</span>
-      </div>
-
-      <article class="founder-card-new">
-        <div class="founder-photo-new">
+<!-- ============= 7 · FOUNDER · Dark Section · Photo + Text + Stats ============= -->
+<section class="founder-section">
+  <div class="wrap">
+    <div class="founder-stage">
+      <div class="founder-portrait">
+        <div class="founder-portrait-silhouette">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
         </div>
-        <div class="founder-info-new">
-          <div class="founder-role-new">Founder · Builder · Single Point</div>
-          <div class="founder-name-new">Moritz Bohmbach</div>
-          <p class="founder-tagline-new">Onboarding, Strategie, Build, Launch — alles ich. <em>Wie ein Freelancer im Projekt</em>, nur mit Festpreis-Garantie und A-Player-Netzwerk im Rücken.</p>
-          <ul class="founder-points">
-            <li><strong>Onboarding direkt</strong> mit mir, kein Hand-off-Bruch</li>
-            <li><strong>Ich baue alles selbst</strong> — Strategie bis Code</li>
-            <li><strong>Einziger Ansprechpartner</strong> bis Launch + 30 Tage Hypercare</li>
-            <li><strong>Max 2–3 Kunden</strong> pro Quartal — kein Skalierungs-Hype</li>
-            <li><strong>Immer erreichbar</strong> — Slack/Loom/Mail, nicht im Helpdesk</li>
-            <li><strong>Festpreis &amp; Festtermin</strong> — schriftlich, Geld-zurück bei Verzug</li>
-          </ul>
+        <span class="corner tl"><span class="mirror">B</span>B</span>
+        <span class="corner br"><span class="mirror">B</span>B</span>
+      </div>
+
+      <div class="founder-text">
+        <div class="founder-eyebrow">Operativer Wachstumspartner · Direct-Founder</div>
+        <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
+        <p class="founder-bio">Ich mache das Onboarding, ich baue alles selbst, ich bin der einzige Ansprechpartner bis Launch — wie ein Freelancer mitten im Projekt, nur mit Festpreis-Garantie und einem A-Player-Netzwerk im Rücken. Slack, Loom, Mail. Kein Helpdesk dazwischen.</p>
+        <div class="founder-signature">— Moritz</div>
+
+        <div class="founder-stats">
+          <div class="founder-stat">
+            <div class="founder-stat-num">5+</div>
+            <div class="founder-stat-label">DTC-Brands transformed — Hearo, Bachgold, Wake Performance, Face Evolution, RDY4TAKEOFF</div>
+          </div>
+          <div class="founder-stat">
+            <div class="founder-stat-num">2–3</div>
+            <div class="founder-stat-label">Slots pro Quartal — bewusst klein gehalten, damit jedes Projekt direkt von mir gebaut wird</div>
+          </div>
         </div>
-      </article>
+      </div>
     </div>
   </div>
 </section>
