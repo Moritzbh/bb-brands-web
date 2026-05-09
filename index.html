@@ -1553,14 +1553,29 @@ section.team-section .wrap{position:relative;z-index:1}
   .step-bridge-arrow{animation:none}
 }
 
-/* ===== FOUNDER SECTION · White · Text-Left + Photo-Right · Cream-Anchor ===== */
+/* ===== FOUNDER SECTION · Premium Cream-BG mit Brand-DNA ===== */
+/* Layer-Stack:
+   1. Cream-Base mit warmer Mitte
+   2. Organische Wellen (SVG turbulence + displacement, blau-getönt)
+   3. ::before · "02"-Outline-Watermark
+   4. .light-overlay · Asymmetrische Brand-Light-Sources (Orange + Blue)
+   5. ::after · Feines Grain
+   6. .wrap (z:2) · Content darüber */
 section.founder-section{
-  background:#fff !important;color:var(--text);
+  background:#f4f0e7 !important;color:var(--text);
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='d' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='55'/%3E%3CfeGaussianBlur stdDeviation='1.2'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23d)' stroke='%2302038F' stroke-width='0.6' fill='none' opacity='0.18'%3E%3Cline x1='-100' y1='30' x2='1700' y2='28'/%3E%3Cline x1='-100' y1='60' x2='1700' y2='62'/%3E%3Cline x1='-100' y1='95' x2='1700' y2='90'/%3E%3Cline x1='-100' y1='130' x2='1700' y2='135'/%3E%3Cline x1='-100' y1='170' x2='1700' y2='165'/%3E%3Cline x1='-100' y1='210' x2='1700' y2='215'/%3E%3Cline x1='-100' y1='250' x2='1700' y2='248'/%3E%3Cline x1='-100' y1='290' x2='1700' y2='292'/%3E%3Cline x1='-100' y1='330' x2='1700' y2='328'/%3E%3Cline x1='-100' y1='370' x2='1700' y2='375'/%3E%3Cline x1='-100' y1='410' x2='1700' y2='405'/%3E%3Cline x1='-100' y1='450' x2='1700' y2='455'/%3E%3Cline x1='-100' y1='490' x2='1700' y2='488'/%3E%3Cline x1='-100' y1='530' x2='1700' y2='532'/%3E%3Cline x1='-100' y1='570' x2='1700' y2='568'/%3E%3Cline x1='-100' y1='610' x2='1700' y2='615'/%3E%3Cline x1='-100' y1='650' x2='1700' y2='645'/%3E%3Cline x1='-100' y1='690' x2='1700' y2='692'/%3E%3Cline x1='-100' y1='730' x2='1700' y2='728'/%3E%3Cline x1='-100' y1='770' x2='1700' y2='775'/%3E%3Cline x1='-100' y1='810' x2='1700' y2='805'/%3E%3Cline x1='-100' y1='850' x2='1700' y2='852'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse 90% 75% at 55% 45%, #f8f4eb 0%, #ece7d9 100%);
+  background-blend-mode:multiply, normal;
+  background-size:cover, auto;
+  background-position:center, center;
+  background-repeat:no-repeat, no-repeat;
+  box-shadow:inset 0 0 120px rgba(3,5,198,.06);
   padding:96px 0 128px;
   position:relative;overflow:hidden;
   border-top:none;
 }
-/* Big "02"-Outline-Watermark als Brand-Anchor */
+/* "02"-Outline-Watermark (z:0, layer above bg) */
 section.founder-section::before{
   content:"02";
   position:absolute;top:-60px;left:-30px;z-index:0;
@@ -1571,7 +1586,30 @@ section.founder-section::before{
   color:transparent;opacity:.06;
   pointer-events:none;user-select:none;
 }
-.founder-section .wrap{position:relative;z-index:1}
+/* Asymmetrische Brand-Light-Sources */
+.founder-section .light-overlay{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    /* 1 · Hot-Spot oben-rechts · Signal Orange */
+    radial-gradient(ellipse 50% 38% at 72% 18%, rgba(255,107,61,.14) 0%, transparent 60%),
+    /* 2 · White-Light eingebettet im Hot-Spot */
+    radial-gradient(ellipse 32% 25% at 73% 20%, rgba(255,255,255,.40) 0%, transparent 65%),
+    /* 3 · Secondary · Bold Blue links-mitte */
+    radial-gradient(ellipse 38% 32% at 18% 58%, rgba(3,5,198,.08) 0%, transparent 65%),
+    /* 4 · Tertiary · Orange-Whisper unten-rechts */
+    radial-gradient(ellipse 32% 26% at 85% 80%, rgba(255,107,61,.06) 0%, transparent 65%),
+    /* 5 · Subtle Blue-Vignette */
+    radial-gradient(ellipse 100% 90% at 50% 50%, transparent 55%, rgba(3,5,198,.06) 95%, rgba(3,5,198,.10) 100%);
+}
+/* Grain-Layer · feinkörnig, multiply */
+section.founder-section::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.13 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:300px 300px;
+  opacity:.55;
+  mix-blend-mode:multiply;
+}
+.founder-section .wrap{position:relative;z-index:2}
 
 .founder-stage{
   display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center;
@@ -2482,8 +2520,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ============= 7 · FOUNDER · White Section · Text-Left + Photo-Right · Cream-Anchor ============= -->
+<!-- ============= 7 · FOUNDER · Premium Cream-BG mit Brand-DNA · Text-Left + Photo-Right ============= -->
 <section class="founder-section">
+  <div class="light-overlay"></div>
   <div class="wrap">
     <div class="founder-stage">
       <div class="founder-text">
