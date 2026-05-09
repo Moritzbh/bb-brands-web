@@ -1035,7 +1035,8 @@ section.compare-hero:nth-of-type(even){
 @media (prefers-reduced-motion: reduce){
   .compare-hero-bg{clip-path:inset(0) !important}
 }
-.compare-hero-bg video{
+.compare-hero-bg video,
+.compare-hero-bg img{
   position:absolute;inset:0;
   width:100%;height:100%;
   object-fit:cover;
@@ -3006,9 +3007,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 4 · VERGLEICH (Hero-Comparison) ============= -->
 <section class="compare-hero">
   <div class="compare-hero-bg">
-    <video autoplay muted loop playsinline preload="metadata" poster="/assets/images/comparison-workspace.jpg" aria-hidden="true">
-      <source src="/assets/videos/comparison-workspace.mp4" type="video/mp4">
-    </video>
+    <img src="/assets/images/vergleich-bg.jpg" alt="" aria-hidden="true" loading="lazy">
   </div>
   <div class="wrap">
     <div class="headline-col">
