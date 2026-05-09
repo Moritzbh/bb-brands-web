@@ -107,10 +107,18 @@ footer{
   background:#000 !important;
   border-top:1px solid rgba(255,255,255,.08) !important;
   padding:32px 0 !important;
+  color:rgba(255,255,255,.5) !important;
 }
 footer .footer-brand{color:rgba(255,255,255,.5) !important;font-size:12px}
-footer .footer-links a{color:rgba(255,255,255,.5) !important;font-size:12px}
-footer .footer-links a:hover{color:#fff !important;text-decoration:none}
+footer .footer-links a,
+footer .footer-links .bb-cookie-link{
+  color:rgba(255,255,255,.5) !important;
+  font-size:12px !important;
+  background:none !important;border:none !important;padding:0 !important;
+  font-family:inherit;cursor:pointer;text-decoration:none;
+}
+footer .footer-links a:hover,
+footer .footer-links .bb-cookie-link:hover{color:#fff !important;text-decoration:none}
 </style>
 </head>
 <body>
