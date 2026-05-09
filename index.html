@@ -72,7 +72,13 @@
   --body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  /* Mobile-Lock: kein horizontaler Scroll, kein iOS-Auto-Resize */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  overflow-x:hidden;
+}
 body{
   background:var(--bg);
   color:var(--text);
@@ -80,6 +86,16 @@ body{
   font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
+  /* Body-Lock: viewport-bound, niemals horizontal scrollbar */
+  overflow-x:hidden;
+  width:100%;
+  position:relative;
+}
+/* Tap-Highlight neutralisieren auf iOS */
+a,button{-webkit-tap-highlight-color:rgba(3,5,198,.15)}
+/* Inputs auf iOS größer als 16px für no-zoom-on-focus */
+@media (max-width:780px){
+  input,select,textarea{font-size:16px !important}
 }
 
 /* ========== AKZENT-SCHRIFT ==========
@@ -842,13 +858,21 @@ h2 em{color:var(--blue);font-style:normal}
   .bs-step h3 .char{opacity:1;transform:none}
 }
 
-/* ========== "WAS WIR MACHEN" Section · gestrafft ========== */
-section#was{padding:64px 0 80px}
+/* ========== "WAS WIR MACHEN" Video-Intro Section · kompakt ========== */
+section#was{padding:64px 0 56px}
 section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
 section#was .section-sub{margin-bottom:32px;font-size:16px}
+
+/* ========== "PHASEN-DETAIL" Sticky-Rail-Stage · eigene Section ========== */
+section#bausteine{padding:56px 0 96px}
+section#bausteine h2{font-size:38px;margin-bottom:12px;line-height:1.05}
+section#bausteine .section-sub{margin-bottom:32px;font-size:16px}
+
 @media (max-width:780px){
-  section#was{padding:48px 0 60px}
+  section#was{padding:48px 0 36px}
   section#was h2{font-size:28px}
+  section#bausteine{padding:36px 0 72px}
+  section#bausteine h2{font-size:28px}
 }
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
@@ -2184,6 +2208,119 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   footer .wrap{flex-direction:column;align-items:flex-start;text-align:left}
 }
 
+/* ============================================================
+   MOBILE FRAMEWORK · konsolidiert
+   ============================================================
+   Adresses:
+   1. Body-Lock & no horizontal scroll (oben in body{} gesetzt)
+   2. Hero-CTAs: full-width Stacking + Touch-Target ≥44px
+   3. Bausteine-Sticky → Mobile: tab-based statt sticky-stack
+   4. Compare-Hero: Badges schmaler, grid simpler
+   5. Apply / Calendly: inline-widget passen
+   6. Founder + Team Premium-BG: attachment:scroll bestätigt
+   7. Touch-Targets: alle Buttons ≥44px
+   ============================================================ */
+
+@media (max-width:780px){
+  /* Globale wraps: kleinere Padding für mehr Content-Platz */
+  .wrap{padding:0 18px}
+
+  /* Hero-CTAs: full-width stack, größere Touch-Targets */
+  .hero .cta-row{flex-direction:column;align-items:stretch;gap:10px;width:100%}
+  .btn-primary{
+    width:100%;justify-content:center;
+    padding:18px 22px;font-size:15px;
+    min-height:52px;
+  }
+  .btn-ghost{justify-content:center;padding:14px 0;min-height:44px}
+  .hero-specs{gap:14px;margin-top:24px;padding-top:18px}
+  .hero-specs .spec{font-size:12.5px}
+  .hero-specs .spec strong{font-weight:700}
+
+  /* Hero h1: kleinerer max-width damit Long-Words umbrechen */
+  .hero h1{word-break:break-word;hyphens:auto}
+
+  /* Section padding leicht runter */
+  section{padding:64px 0}
+  h2{word-break:break-word;hyphens:auto}
+
+  /* Top-Bar: ist via display:none schon weg auf <780, OK */
+
+  /* Bausteine: tap-driven (existing pill-strip) — extra polish */
+  .bs-strip{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 18px 14px;margin:0 -18px}
+  .bs-pill{flex-shrink:0;min-width:auto;padding:10px 14px}
+  .bs-pill-meta{display:none}
+  .bs-drawer{padding:24px 20px}
+
+  /* Compare-Hero: Tabelle kompakter, Sub-Text-Span ohne nowrap */
+  .compare-hero{padding:64px 0}
+  .compare-hero h2{font-size:28px}
+  .compare-hero .section-sub{font-size:14.5px}
+  .compare-table-new .row{grid-template-columns:1fr 44px 44px;gap:8px;padding:14px 0}
+  .compare-table-new .row .row-label{font-size:13px;line-height:1.35}
+  .compare-table-new .badge{width:28px;height:28px}
+  .compare-table-new .badge.yes svg,.compare-table-new .badge.no svg{width:11px;height:11px}
+  .compare-table-new .col-header{font-size:9px;letter-spacing:.14em}
+
+  /* Trust-Strip Marquee: kleinerer Logo-Höhe, smoother Loop */
+  .trust{padding:48px 0}
+  .trust-track img{height:34px;margin:0 22px}
+
+  /* Cases: Browser-Mockups passen sich an */
+  .case-card{margin:0}
+
+  /* Apply / Calendly: full-width Container, kein overflow */
+  .apply-section{padding:48px 0}
+  .apply-block{padding:24px 18px;border-radius:12px;max-width:100%;margin:0 -2px}
+  .apply-block h2{font-size:28px}
+  .calendly-shell{margin:0 -8px;border-radius:8px;min-height:720px}
+  .calendly-inline-widget{height:720px}
+
+  /* FAQ: schon kompakt, Text-Sizes nachziehen */
+  #faq{padding:48px 0}
+
+  /* Founder + Team: Premium-BG attachment:fixed → scroll auf Mobile (Performance) */
+  section.founder-section,
+  section.team-section,
+  section.team-section:nth-of-type(even){
+    background-attachment:scroll !important;
+    padding:64px 0;
+  }
+  .founder-stage{grid-template-columns:1fr;gap:32px}
+  .founder-portrait-wrap{max-width:280px;margin:0 auto;justify-self:center}
+  .founder-text h2{font-size:32px}
+  .founder-bio{font-size:15px}
+
+  /* Footer: clean stack, gleichmäßiger gap */
+  footer{padding:32px 0 24px}
+  .footer-links{flex-wrap:wrap;gap:14px 18px;font-size:12.5px}
+
+  /* Step-Bridge: kleiner */
+  .step-bridge{margin:32px auto 0}
+
+  /* Compare Pill (war entfernt im HTML aber CSS noch da) — egal */
+
+  /* Sub-cta-buttons schon im hero-row covered */
+
+  /* Achtung: Tap-targets für FAQ-Items (summary) */
+  .faq-q{min-height:44px}
+
+  /* Process-Numbers größer touch-area */
+  .process-step{align-items:center}
+}
+
+/* Sehr schmaler Mobile (≤480) · extra reduzierte Pad/Sizes */
+@media (max-width:480px){
+  .wrap{padding:0 16px}
+  .hero h1{font-size:34px}
+  .hero .sub{font-size:16.5px}
+  h2{font-size:26px}
+  .compare-hero h2{font-size:24px}
+  .compare-table-new .row{grid-template-columns:1fr 38px 38px;gap:6px}
+  .compare-table-new .row .row-label{font-size:12.5px}
+  .founder-text h2{font-size:28px}
+  .apply-block h2{font-size:24px}
+}
 </style>
 </head>
 <body class="home">
@@ -2329,6 +2466,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="svc-video-meta">Aufnahme diese Woche · Embed folgt</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============= 3b · PHASEN-DETAIL (Sticky-Rail-Stage) ============= -->
+<section id="bausteine">
+  <div class="wrap">
+    <div class="eyebrow">Wie wir liefern</div>
+    <h2>Phase für Phase erklärt.</h2>
+    <p class="section-sub">Jede Phase steht für sich. Du buchst, was zu deinem Reifegrad passt — wir verzahnen es.</p>
 
     <div class="bs-stage" id="bsStage">
       <div class="bs-rail">
