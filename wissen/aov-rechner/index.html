@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AOV-Uplift Simulator — Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 5–25% hebst? Mit den 4 schnellsten AOV-Hebeln im D2C.">
+<title>AOV-Uplift Simulator · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<link rel="stylesheet" href="/assets/css/wissen-rechner.css">
+<script src="/assets/js/consent.js" defer></script>
+<script src="/assets/js/attribution.js" defer></script>
+<script src="/assets/js/premium-reveal.js" defer></script>
+<style>
+.uplift-slider{margin:18px 0 4px}
+.uplift-slider input[type="range"]{
+  width:100%;height:6px;background:var(--bg-line);
+  border-radius:3px;-webkit-appearance:none;appearance:none;outline:none;cursor:pointer;
+}
+.uplift-slider input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--bg-amber);cursor:pointer;
+  box-shadow:0 2px 8px rgba(255,107,61,.4);
+}
+.uplift-slider input[type="range"]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--bg-amber);cursor:pointer;border:none;
+  box-shadow:0 2px 8px rgba(255,107,61,.4);
+}
+.uplift-live{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:36px;color:var(--bg-amber);letter-spacing:-.02em;
+  text-align:center;margin:8px 0 2px;
+}
+.uplift-scale{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--bg-text-muted);font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin:18px 0;
+}
+.compare-cell{
+  padding:14px;background:#fff;border:1px solid var(--bg-line);
+  text-align:center;
+}
+.compare-cell.new{background:#000;color:#fff;border-color:#000}
+.compare-cell .lbl{
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bg-text-muted);margin-bottom:4px;
+}
+.compare-cell.new .lbl{color:rgba(255,255,255,.7)}
+.compare-cell .v{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:18px;color:#000;letter-spacing:-.01em;
+}
+.compare-cell.new .v{color:var(--bg-amber)}
+</style>
+</head>
+<body>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a><a href="/cases/">Cases</a><a href="/wissen/">Wissen</a><a href="https://founder-os.bb-brands.de">Founder OS</a><a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<section class="bb-section bb-section-95 rechner-hero">
+  <div class="wrap">
+    <div class="rechner-hero-eyebrow"><strong>AOV-UPLIFT SIMULATOR</strong></div>
+    <h1 data-reveal>Was bringen <em>+5 € AOV</em> wirklich?</h1>
+    <p class="rechner-hero-sub" data-reveal>AOV ist der unterschätzteste Hebel im D2C: jeder zusätzliche Euro im Warenkorb verteilt sich auf <strong>fixe Kosten</strong> (Versand, Payment, Acquisition) und multipliziert deinen Jahres-Profit.</p>
+    <div class="rechner-meta" data-reveal>
+      <span>Live-Slider</span>
+      <span>Inkl. 4 Hebel-Liste</span>
+      <span>Kostenlos</span>
+    </div>
+
+    <article class="calc-card" data-reveal>
+      <div class="calc-input">
+        <h3>Dein aktueller Status</h3>
+
+        <div class="calc-row"><label for="a-orders">Bestellungen pro Monat</label><div class="calc-input-wrap"><input type="number" id="a-orders" min="0" step="10" value="500"><span class="unit">Best.</span></div></div>
+        <div class="calc-row"><label for="a-aov">Aktueller AOV (Brutto)</label><div class="calc-input-wrap"><input type="number" id="a-aov" min="0" step="0.5" value="62.00"><span class="unit">€</span></div></div>
+        <div class="calc-row"><label for="a-margin">Marge auf Brutto-Umsatz <small>Aus dem Marge-Rechner</small></label><div class="calc-input-wrap"><input type="number" id="a-margin" min="0" max="100" step="0.5" value="22"><span class="unit">%</span></div></div>
+
+        <div class="calc-row" style="margin-top:24px">
+          <label for="a-uplift">AOV-Uplift simulieren</label>
+          <div class="uplift-live" id="a-uplift-live">+10 %</div>
+          <div class="uplift-slider"><input type="range" id="a-uplift" min="0" max="50" step="1" value="10"></div>
+          <div class="uplift-scale"><span>0 %</span><span>+25 %</span><span>+50 %</span></div>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <h3>Was das jährlich bringt</h3>
+
+        <div class="calc-result-row hero-row">
+          <span class="calc-result-label">Zusätzlicher Profit pro Jahr<small>bei <span id="a-uplift-text">10 %</span> AOV-Uplift</small></span>
+          <span class="calc-result-value" id="a-profit-year">— €</span>
+        </div>
+
+        <div style="margin-top:8px">
+          <div class="compare-grid">
+            <div class="compare-cell"><div class="lbl">AOV jetzt</div><div class="v" id="a-aov-old">—</div></div>
+            <div class="compare-cell new"><div class="lbl">AOV neu</div><div class="v" id="a-aov-new">—</div></div>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-cell"><div class="lbl">Umsatz/Mon. jetzt</div><div class="v" id="a-rev-old">—</div></div>
+            <div class="compare-cell new"><div class="lbl">Umsatz/Mon. neu</div><div class="v" id="a-rev-new">—</div></div>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-cell"><div class="lbl">Profit/Mon. jetzt</div><div class="v" id="a-profit-old">—</div></div>
+            <div class="compare-cell new"><div class="lbl">Profit/Mon. neu</div><div class="v" id="a-profit-new">—</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="calc-explainer" data-reveal>
+      <h2>Warum AOV der unterschätzteste Hebel im D2C ist</h2>
+      <p>CAC steigt, Marge sinkt, Wiederkäufe sind hart erkämpft. Aber AOV? Der lässt sich oft mit ein paar Theme-Änderungen um 10–20 % heben — <strong>ohne mehr Traffic, ohne mehr Acquisition-Spend</strong>.</p>
+      <p>Bei 500 Bestellungen / Monat und +10 € AOV: das sind <strong>+5.000 € Brutto-Umsatz / Monat</strong>. Bei 22 % Marge: <strong>+1.100 € reiner Profit / Monat</strong>. Das ist <strong>+13.200 € pro Jahr</strong> — durch eine einzige Setup-Änderung.</p>
+    </div>
+
+    <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:30px;text-align:center;margin:64px 0 8px;color:#000">Die 4 schnellsten AOV-Hebel</h2>
+    <p style="text-align:center;color:var(--bg-text-body);margin-bottom:32px">Reihenfolge nach Aufwand-Ratio: das Beste zuerst.</p>
+
+    <div class="hebel-list" data-reveal>
+      <div class="hebel-item">
+        <div class="hebel-item-num">01</div>
+        <h4>Bundles &amp; Sets</h4>
+        <p>2er-/3er-Pack mit Mengenrabatt. Statt „Ein Produkt für 39 €" → „3er-Set für 99 € (sparst 18 €)". Direkter +50–80 % AOV-Lift bei Käufer:innen, die Bundles wählen.</p>
+      </div>
+      <div class="hebel-item">
+        <div class="hebel-item-num">02</div>
+        <h4>Versandkostenfreigrenze</h4>
+        <p>„Versandkostenfrei ab 50 €" — bei AOV von 38 € erhöht das sofort den Schnitt. Empirisch: 70 % der Käufer schieben das letzte Produkt rein, um die Schwelle zu knacken.</p>
+      </div>
+      <div class="hebel-item">
+        <div class="hebel-item-num">03</div>
+        <h4>Cross-Sell auf der Cart-Page</h4>
+        <p>„Diese Kunden kauften auch …" — kleine Add-Ons (Pflegemittel, Zubehör, Refills) unter 15 €. Conversion-Rate von Cart-Page-Recommendations: ~12 %.</p>
+      </div>
+      <div class="hebel-item">
+        <div class="hebel-item-num">04</div>
+        <h4>Premium-Variante prominent</h4>
+        <p>Wenn 3 Größen / Mengen verfügbar: nicht die kleinste vorauswählen. Default auf die mittlere oder große. Anchor-Effekt: ~30 % wechseln zur Premium-Option, wenn sie sichtbar als Default steht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-bottom">
+  <div class="wrap">
+    <h2>Welcher AOV-Hebel <em>passt zu deinem Shop?</em></h2>
+    <p>Im Audit gehen wir deine Conversion-Funnel-Daten gemeinsam durch und identifizieren die 1–2 AOV-Hebel mit dem höchsten Impact-pro-Aufwand bei deinem Setup.</p>
+    <a href="/audit/" class="calc-bottom-cta">Strategy Audit buchen</a>
+    <a href="/wissen/" class="calc-bottom-link">← <strong>Zurück zum Wissens-Hub</strong></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ids = ['a-orders','a-aov','a-margin','a-uplift'];
+  var inp = {};
+  ids.forEach(function(id){ inp[id] = document.getElementById(id); });
+  var out = {
+    profitYear: document.getElementById('a-profit-year'),
+    upliftLive: document.getElementById('a-uplift-live'),
+    upliftText: document.getElementById('a-uplift-text'),
+    aovOld: document.getElementById('a-aov-old'),
+    aovNew: document.getElementById('a-aov-new'),
+    revOld: document.getElementById('a-rev-old'),
+    revNew: document.getElementById('a-rev-new'),
+    profitOld: document.getElementById('a-profit-old'),
+    profitNew: document.getElementById('a-profit-new')
+  };
+  function fmtEUR(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}).format(Math.round(n))+' €'; }
+  function fmtEUR2(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+' €'; }
+  function calc(){
+    var orders = parseFloat(inp['a-orders'].value)||0;
+    var aov = parseFloat(inp['a-aov'].value)||0;
+    var margin = parseFloat(inp['a-margin'].value)||0;
+    var uplift = parseFloat(inp['a-uplift'].value)||0;
+    var aovNew = aov*(1+uplift/100);
+    var revOld = orders*aov;
+    var revNew = orders*aovNew;
+    var profitOld = revOld*(margin/100);
+    var profitNew = revNew*(margin/100);
+    var profitDeltaYear = (profitNew-profitOld)*12;
+    out.upliftLive.textContent = '+'+uplift+' %';
+    out.upliftText.textContent = uplift+' %';
+    out.aovOld.textContent = fmtEUR2(aov);
+    out.aovNew.textContent = fmtEUR2(aovNew);
+    out.revOld.textContent = fmtEUR(revOld);
+    out.revNew.textContent = fmtEUR(revNew);
+    out.profitOld.textContent = fmtEUR(profitOld);
+    out.profitNew.textContent = fmtEUR(profitNew);
+    out.profitYear.textContent = (profitDeltaYear >= 0 ? '+' : '')+fmtEUR(profitDeltaYear);
+  }
+  ids.forEach(function(id){ inp[id].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+
+</body>
+</html>

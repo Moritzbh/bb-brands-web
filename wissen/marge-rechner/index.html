@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Profit-Marge Rechner — Was bleibt wirklich übrig nach COGS, Versand, Shopify, Payment-Fees und Retouren. Wasserfall-Ansicht, kostenlos.">
+<title>Profit-Marge Rechner · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<link rel="stylesheet" href="/assets/css/wissen-rechner.css">
+<script src="/assets/js/consent.js" defer></script>
+<script src="/assets/js/attribution.js" defer></script>
+<script src="/assets/js/premium-reveal.js" defer></script>
+<style>
+.waterfall{
+  margin:24px 0;display:flex;flex-direction:column;gap:8px;
+}
+.waterfall-row{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 14px;background:#fff;border:1px solid var(--bg-line);
+  font-family:'Inter',sans-serif;font-size:13px;
+}
+.waterfall-row .label{flex:1;color:var(--bg-text-body);font-weight:600}
+.waterfall-row .val{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;color:#000;font-variant-numeric:tabular-nums;
+}
+.waterfall-row.minus .val{color:#dc2626}
+.waterfall-row.minus .val::before{content:"− "}
+.waterfall-row.plus .val::before{content:"+ "}
+.waterfall-row.final{
+  background:#000;color:#fff;border-color:#000;
+  padding:18px 18px;
+}
+.waterfall-row.final .label{color:rgba(255,255,255,.85);font-size:14px}
+.waterfall-row.final .val{color:var(--bg-amber);font-size:24px}
+</style>
+</head>
+<body>
+
+<!-- BAULIG-STYLE TOP-NAV -->
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a><a href="/cases/">Cases</a><a href="/wissen/">Wissen</a><a href="https://founder-os.bb-brands.de">Founder OS</a><a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<section class="bb-section bb-section-95 rechner-hero">
+  <div class="wrap">
+    <div class="rechner-hero-eyebrow"><strong>PROFIT-MARGE RECHNER</strong></div>
+    <h1 data-reveal>Was bleibt <em>wirklich übrig?</em></h1>
+    <p class="rechner-hero-sub" data-reveal>Vom Brutto-Preis zur echten Marge — mit jedem Kostenblock einzeln rausgerechnet. Wasserfall-Ansicht: du siehst, wo dein Geld hingeht, <strong>bevor</strong> Marketing überhaupt angefasst wird.</p>
+    <div class="rechner-meta" data-reveal>
+      <span>Live-Wasserfall</span>
+      <span>Pro Bestellung</span>
+      <span>Kostenlos</span>
+    </div>
+
+    <article class="calc-card" data-reveal>
+      <div class="calc-input">
+        <h3>Deine Zahlen</h3>
+
+        <div class="calc-row"><label for="m-price">Verkaufspreis (brutto) <small>Inkl. MwSt.</small></label><div class="calc-input-wrap"><input type="number" id="m-price" min="0" step="0.01" value="59.00"><span class="unit">€</span></div></div>
+        <div class="calc-row"><label for="m-vat">MwSt.</label><div class="calc-input-wrap"><input type="number" id="m-vat" min="0" max="30" step="0.1" value="19"><span class="unit">%</span></div></div>
+        <div class="calc-row"><label for="m-cogs">COGS pro Stück</label><div class="calc-input-wrap"><input type="number" id="m-cogs" min="0" step="0.01" value="14.00"><span class="unit">€</span></div></div>
+        <div class="calc-row"><label for="m-ship">Versand pro Bestellung</label><div class="calc-input-wrap"><input type="number" id="m-ship" min="0" step="0.01" value="4.20"><span class="unit">€</span></div></div>
+        <div class="calc-row"><label for="m-pack">Verpackung</label><div class="calc-input-wrap"><input type="number" id="m-pack" min="0" step="0.01" value="0.80"><span class="unit">€</span></div></div>
+        <div class="calc-row"><label for="m-payfee">Payment-Provider-Fee</label><div class="calc-input-wrap"><input type="number" id="m-payfee" min="0" max="10" step="0.1" value="2.5"><span class="unit">%</span></div></div>
+        <div class="calc-row"><label for="m-shopify">Shopify-Fee <small>0,5–2 % je nach Plan</small></label><div class="calc-input-wrap"><input type="number" id="m-shopify" min="0" max="5" step="0.1" value="1.0"><span class="unit">%</span></div></div>
+        <div class="calc-row"><label for="m-return">Retourenquote</label><div class="calc-input-wrap"><input type="number" id="m-return" min="0" max="100" step="0.5" value="8"><span class="unit">%</span></div></div>
+      </div>
+
+      <div class="calc-result">
+        <h3>Dein Wasserfall</h3>
+
+        <div class="calc-result-row hero-row">
+          <span class="calc-result-label">Marge auf Brutto-Preis</span>
+          <span class="calc-result-value" id="m-pct">— %</span>
+        </div>
+
+        <div class="waterfall">
+          <div class="waterfall-row plus"><span class="label">Brutto-Umsatz</span><span class="val" id="m-brutto">59,00 €</span></div>
+          <div class="waterfall-row minus"><span class="label">MwSt.</span><span class="val" id="m-vat-eur">9,42 €</span></div>
+          <div class="waterfall-row minus"><span class="label">COGS</span><span class="val" id="m-cogs-eur">14,00 €</span></div>
+          <div class="waterfall-row minus"><span class="label">Versand &amp; Verpackung</span><span class="val" id="m-ship-eur">5,00 €</span></div>
+          <div class="waterfall-row minus"><span class="label">Shopify + Payment-Fees</span><span class="val" id="m-fees-eur">2,07 €</span></div>
+          <div class="waterfall-row minus"><span class="label">Retouren-Verlust</span><span class="val" id="m-ret-eur">1,46 €</span></div>
+          <div class="waterfall-row final"><span class="label">Deckungsbeitrag (vor Marketing)</span><span class="val" id="m-cb-eur">— €</span></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="calc-explainer" data-reveal>
+      <h2>Warum die meisten ihre Marge falsch rechnen</h2>
+      <p>Der häufigste Fehler: <strong>"Mein Produkt kostet 14 € im Einkauf und ich verkaufe für 59 € — das sind doch ~45 € Marge."</strong> Falsch. Da fehlen MwSt. (~9,40 €), Versand+Verpackung (~5 €), Shopify+Payment (~2 €) und Retouren-Verlust (~1,50 € bei 8 % Quote).</p>
+      <p>Echter Deckungsbeitrag pro Bestellung: <strong>~27 €</strong>. Das ist das Geld, das du <strong>fürs Marketing ausgeben darfst</strong>, bevor du anfängst Geld zu verlieren. Bei einem ROAS von 3 musst du 9 € Werbekosten unter dem CB halten — und dann hast du erst <strong>18 €</strong> echten Profit pro Bestellung.</p>
+
+      <h3>Die 5 schnellsten Marge-Hebel</h3>
+      <ul>
+        <li><strong>AOV erhöhen</strong> → fixe Kosten (Versand, Payment-Fee) verteilen sich auf mehr Umsatz. <a href="/wissen/aov-rechner/">→ AOV-Rechner</a>.</li>
+        <li><strong>Retouren senken</strong> → bessere PDPs, Größentabellen, Materialinfos. Halbe Quote = ~3% mehr Marge.</li>
+        <li><strong>Versand-Pricing</strong> → Versandkostenfreigrenze + Material-Verhandlung mit DHL/DPD.</li>
+        <li><strong>Payment-Mix</strong> → Klarna/PayPal sind teuer. Apple Pay + SEPA-Direkt drücken den Schnitt.</li>
+        <li><strong>COGS</strong> → langfristiger Hebel: Mengenstaffeln, Eigenmarken, Direct-Sourcing.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="calc-bottom">
+  <div class="wrap">
+    <h2>Marge zu dünn? <em>Wir finden den Hebel.</em></h2>
+    <p>Im Audit gehen wir deine Unit-Economics gemeinsam durch — COGS, Versand, AOV, Retouren — und identifizieren den schnellsten Weg zu profitablem Wachstum.</p>
+    <a href="/audit/" class="calc-bottom-cta">Strategy Audit buchen</a>
+    <a href="/wissen/" class="calc-bottom-link">← <strong>Zurück zum Wissens-Hub</strong></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ids = ['m-price','m-vat','m-cogs','m-ship','m-pack','m-payfee','m-shopify','m-return'];
+  var inp = {};
+  ids.forEach(function(id){ inp[id] = document.getElementById(id); });
+  var out = {
+    pct: document.getElementById('m-pct'),
+    brutto: document.getElementById('m-brutto'),
+    vat: document.getElementById('m-vat-eur'),
+    cogs: document.getElementById('m-cogs-eur'),
+    ship: document.getElementById('m-ship-eur'),
+    fees: document.getElementById('m-fees-eur'),
+    ret: document.getElementById('m-ret-eur'),
+    cb: document.getElementById('m-cb-eur')
+  };
+  function fmtEUR(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+' €'; }
+  function fmtPct(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1}).format(n); }
+  function calc(){
+    var price = parseFloat(inp['m-price'].value)||0;
+    var vatPct = parseFloat(inp['m-vat'].value)||0;
+    var cogs = parseFloat(inp['m-cogs'].value)||0;
+    var ship = parseFloat(inp['m-ship'].value)||0;
+    var pack = parseFloat(inp['m-pack'].value)||0;
+    var payfee = parseFloat(inp['m-payfee'].value)||0;
+    var shopify = parseFloat(inp['m-shopify'].value)||0;
+    var ret = parseFloat(inp['m-return'].value)||0;
+    if(price <= 0) return;
+    var net = price/(1+vatPct/100);
+    var vatEUR = price-net;
+    var fees = price*((payfee+shopify)/100);
+    var shipPack = ship+pack;
+    var retLoss = (ret/100)*(ship*2+cogs*0.3+pack);
+    var cb = net-cogs-shipPack-fees-retLoss;
+    var marginPct = price > 0 ? (cb/price)*100 : 0;
+    out.pct.textContent = fmtPct(marginPct)+' %';
+    out.pct.className = marginPct < 15 ? 'calc-result-value danger' : (marginPct < 30 ? 'calc-result-value warn' : 'calc-result-value good');
+    out.brutto.textContent = fmtEUR(price);
+    out.vat.textContent = fmtEUR(vatEUR);
+    out.cogs.textContent = fmtEUR(cogs);
+    out.ship.textContent = fmtEUR(shipPack);
+    out.fees.textContent = fmtEUR(fees);
+    out.ret.textContent = fmtEUR(retLoss);
+    out.cb.textContent = fmtEUR(cb);
+  }
+  ids.forEach(function(id){ inp[id].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+
+</body>
+</html>

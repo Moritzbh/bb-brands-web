@@ -44,6 +44,18 @@
   transition:all .2s;text-decoration:none;white-space:nowrap;
 }
 .bb-topnav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+.bb-topnav-login{
+  display:inline-flex;align-items:center;gap:7px;
+  color:rgba(255,255,255,.65);text-decoration:none;
+  font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;
+  padding:8px 12px;border-radius:4px;
+  transition:all .15s;
+}
+.bb-topnav-login:hover{color:#fff;background:rgba(255,255,255,.06);text-decoration:none}
+.bb-topnav-login svg{width:13px;height:13px;opacity:.8}
+@media (max-width:1100px){.bb-topnav-login span{display:none}}
+@media (max-width:980px){.bb-topnav-login{display:none}}
+
 .bb-topnav-mobile{display:none;width:40px;height:40px;background:transparent;border:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
 .bb-topnav-mobile span{display:block;width:22px;height:2px;background:#fff;border-radius:1px}
 .bb-topnav-mobile-menu{display:none;background:#000;border-top:1px solid rgba(255,255,255,.1);padding:24px 32px;flex-direction:column;gap:18px}
@@ -277,6 +289,10 @@ footer .footer-links a:hover{color:var(--accent)}
       <a href="/wissen/">Wissen</a>
       <a href="https://founder-os.bb-brands.de">Founder OS</a>
     </nav>
+      <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <span>Kunden-Login</span>
+      </a>
     <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
     <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
       <span></span><span></span><span></span>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Break-Even ROAS Rechner — Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees, Retouren. Live-Tool, kostenlos.">
+<title>Break-Even ROAS Rechner · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<link rel="stylesheet" href="/assets/css/wissen-rechner.css">
+<script src="/assets/js/consent.js" defer></script>
+<script src="/assets/js/attribution.js" defer></script>
+<script src="/assets/js/premium-reveal.js" defer></script>
+</head>
+<body>
+
+<!-- BAULIG-STYLE TOP-NAV -->
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<section class="bb-section bb-section-95 rechner-hero">
+  <div class="wrap">
+    <div class="rechner-hero-eyebrow"><strong>BREAK-EVEN ROAS RECHNER</strong></div>
+    <h1 data-reveal>Welchen ROAS brauchst du <em>wirklich?</em></h1>
+    <p class="rechner-hero-sub" data-reveal>Die meisten Founder werben auf einen ROAS hin, der nicht profitabel ist — weil MwSt., Payment-Fees und Retouren <strong>nicht eingerechnet</strong> sind. Hier siehst du in 30 Sekunden deine echte Schwelle.</p>
+    <div class="rechner-meta" data-reveal>
+      <span>Live · Browser</span>
+      <span>Kein Login</span>
+      <span>Kein Download</span>
+    </div>
+
+    <article class="calc-card" data-reveal>
+      <div class="calc-input">
+        <h3>Deine Zahlen</h3>
+
+        <div class="calc-row">
+          <label for="r-price">Verkaufspreis (brutto) <small>Inkl. MwSt., wie auf der PDP</small></label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-price" min="0" step="0.01" value="49.00">
+            <span class="unit">€</span>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label for="r-vat">MwSt.</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-vat" min="0" max="30" step="0.1" value="19">
+            <span class="unit">%</span>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label for="r-cogs">COGS (Wareneinkauf pro Stück)</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-cogs" min="0" step="0.01" value="14.00">
+            <span class="unit">€</span>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label for="r-shipping">Versand &amp; Verpackung pro Bestellung</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-shipping" min="0" step="0.01" value="4.50">
+            <span class="unit">€</span>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label for="r-fee">Payment-Provider-Fee</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-fee" min="0" max="10" step="0.1" value="2.5">
+            <span class="unit">%</span>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label for="r-return">Retourenquote</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="r-return" min="0" max="100" step="0.5" value="8">
+            <span class="unit">%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <h3>Dein Break-Even &amp; Ziel</h3>
+
+        <div class="calc-result-row hero-row">
+          <span class="calc-result-label">Break-Even ROAS<small>Damit Marketing 0 € Gewinn macht</small></span>
+          <span class="calc-result-value" id="r-be">2,76</span>
+        </div>
+
+        <div class="calc-result-row">
+          <span class="calc-result-label">Ziel-ROAS (1,5x Break-Even)<small>Empfohlene Schwelle für gesundes Wachstum</small></span>
+          <span class="calc-result-value" id="r-target">4,14x</span>
+        </div>
+
+        <div class="calc-result-row">
+          <span class="calc-result-label">Deckungsbeitrag pro Bestellung<small>Was übrig bleibt, bevor Marketing</small></span>
+          <span class="calc-result-value" id="r-cb">14,93 €</span>
+        </div>
+
+        <div class="calc-result-row">
+          <span class="calc-result-label">Marge auf Netto-Umsatz</span>
+          <span class="calc-result-value" id="r-margin">36,3 %</span>
+        </div>
+
+        <div class="calc-result-row">
+          <span class="calc-result-label">Netto-Umsatz pro Bestellung<small>Brutto minus MwSt.</small></span>
+          <span class="calc-result-value" id="r-net">41,18 €</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="calc-explainer" data-reveal>
+      <h2>Was diese Zahl wirklich bedeutet</h2>
+      <p>Der <strong>Break-Even ROAS</strong> ist die magische Schwelle, an der dein Marketing-Spend einmal exakt durch den Deckungsbeitrag gedeckt ist. <strong>Drüber:</strong> du verdienst Geld. <strong>Drunter:</strong> du verbrennst es.</p>
+      <p>Die meisten Founder optimieren auf einen ROAS, der ihnen "gut" vorkommt (z.&nbsp;B. 3x), ohne MwSt. und Payment-Fees rauszurechnen. Resultat: Brutto-Umsatz wächst, Konto schrumpft.</p>
+
+      <h3>Warum 1,5x Break-Even als Ziel?</h3>
+      <p>Reines Break-Even-Werben heißt: 0 € Gewinn pro neuer Bestellung. Das funktioniert nur, wenn du <strong>massiv Wiederkäufe</strong> oder ein <strong>extrem hohes LTV</strong> hast. Realistischer: 1,5x als Schwelle, ab der jeder Klick bares Geld in die Kasse legt — auch ohne Wiederkäufer.</p>
+
+      <h3>Wo deine Hebel liegen</h3>
+      <ul>
+        <li><strong>COGS senken</strong> → größter Hebel, aber langsam (Lieferanten neu verhandeln, Bundles, Eigenmarken).</li>
+        <li><strong>AOV hoch</strong> → schnellster Hebel: jeder zusätzliche Euro im Warenkorb senkt deinen Break-Even sofort. <a href="/wissen/aov-rechner/">→ AOV-Rechner</a>.</li>
+        <li><strong>Retouren runter</strong> → bessere PDPs, Größentabellen, Materialinfos. Halbe Retourenquote = +30% Deckungsbeitrag.</li>
+        <li><strong>Payment-Mix</strong> → Klarna/PayPal sind teuer (3 %+). Apple Pay + SEPA-Direkt drücken den Schnitt.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="calc-bottom">
+  <div class="wrap">
+    <h2>Deine Zahl <em>schockt</em> dich? Lass uns reden.</h2>
+    <p>60-Min-Audit mit Founder. Wir gehen deine Unit-Economics gemeinsam durch und zeigen dir, welcher Hebel bei dir am schnellsten greift.</p>
+    <a href="/audit/" class="calc-bottom-cta">Strategy Audit buchen</a>
+    <a href="/wissen/" class="calc-bottom-link">← <strong>Zurück zum Wissens-Hub</strong></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ids = ['r-price','r-vat','r-cogs','r-shipping','r-fee','r-return'];
+  var inputs = {};
+  ids.forEach(function(id){ inputs[id] = document.getElementById(id); });
+  var out = {
+    be: document.getElementById('r-be'),
+    target: document.getElementById('r-target'),
+    cb: document.getElementById('r-cb'),
+    margin: document.getElementById('r-margin'),
+    net: document.getElementById('r-net')
+  };
+  function fmtEUR(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+' €'; }
+  function fmtX(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n); }
+  function fmtPct(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1}).format(n)+' %'; }
+  function calc(){
+    var price = parseFloat(inputs['r-price'].value)||0;
+    var vat = parseFloat(inputs['r-vat'].value)||0;
+    var cogs = parseFloat(inputs['r-cogs'].value)||0;
+    var shipping = parseFloat(inputs['r-shipping'].value)||0;
+    var fee = parseFloat(inputs['r-fee'].value)||0;
+    var ret = parseFloat(inputs['r-return'].value)||0;
+    if(price <= 0) return;
+    var net = price/(1+vat/100);
+    var paymentFee = price*(fee/100);
+    var effectiveNet = net*(1-ret/100);
+    var variableCosts = cogs+shipping+paymentFee;
+    var cb = effectiveNet-variableCosts;
+    var breakEven = cb > 0 ? price/cb : 0;
+    var target = breakEven*1.5;
+    var marginPct = effectiveNet > 0 ? (cb/effectiveNet)*100 : 0;
+    if(cb <= 0){
+      out.be.textContent = '∞';
+      out.target.textContent = '∞';
+      out.target.className = 'calc-result-value danger';
+    } else {
+      out.be.textContent = fmtX(breakEven);
+      out.target.textContent = fmtX(target)+'x';
+      out.target.className = 'calc-result-value';
+    }
+    out.cb.textContent = fmtEUR(cb);
+    out.cb.className = cb < 0 ? 'calc-result-value danger' : 'calc-result-value good';
+    out.margin.textContent = fmtPct(marginPct);
+    out.margin.className = marginPct < 20 ? 'calc-result-value warn' : 'calc-result-value good';
+    out.net.textContent = fmtEUR(net);
+  }
+  ids.forEach(function(id){ inputs[id].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+
+</body>
+</html>
