@@ -282,11 +282,15 @@
     return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
   }
 
-  // ---------- Logout ----------
+  // ---------- Logout (mit Confirm-Modal) ----------
   document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('btn-logout');
+    const modal = document.getElementById('logout-modal');
+    const cancelBtn = document.getElementById('logout-cancel');
+    const confirmBtn = document.getElementById('logout-confirm');
     if (!btn) return;
-    btn.addEventListener('click', () => {
+
+    function doLogout() {
       fetch('/api/preview-auth', {
         method: 'POST',
         credentials: 'include',
@@ -294,9 +298,28 @@
         body: JSON.stringify({ action: 'logout' }),
       }).finally(() => {
         try { localStorage.removeItem('bb-preview-brand'); } catch (e) {}
-        location.href = '/preview/login';
+        location.href = '/kunden/';
       });
-    });
+    }
+
+    if (modal && cancelBtn && confirmBtn) {
+      btn.addEventListener('click', () => {
+        modal.classList.add('open');
+      });
+      cancelBtn.addEventListener('click', () => modal.classList.remove('open'));
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('open');
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          modal.classList.remove('open');
+        }
+      });
+      confirmBtn.addEventListener('click', doLogout);
+    } else {
+      // Fallback ohne Modal
+      btn.addEventListener('click', doLogout);
+    }
   });
 
   // ---------- Helpers ----------

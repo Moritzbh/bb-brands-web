@@ -7,32 +7,36 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #FAFAFB;
+  /* ===== Brand V1 Tokens (Baulig-Style) ===== */
+  --bg: #fafaf7;
   --bg-card: #FFFFFF;
-  --bg-soft: #F4F4F7;
-  --primary: #0305C6;
-  --primary-soft: rgba(3, 5, 198, 0.08);
-  --accent: #FF21A6;
-  --text: #0A0A0A;
-  --text-muted: #6B7280;
+  --bg-soft: #f5f1e8;
+  --primary: #0305C6;            /* Brand Blue */
+  --primary-soft: rgba(3,5,198,.08);
+  --accent: #FF6B3D;             /* Brand Orange */
+  --accent-hover: #E85A2C;
+  --text: #0a0a0a;
+  --text-muted: #666;
   --text-light: #9CA3AF;
-  --border: rgba(10, 10, 10, 0.08);
-  --green: #10B981;
-  --green-soft: rgba(16, 185, 129, 0.10);
-  --orange: #F59E0B;
-  --orange-soft: rgba(245, 158, 11, 0.10);
-  --red: #EF4444;
-  --red-soft: rgba(239, 68, 68, 0.10);
-  --blue: #3B82F6;
-  --blue-soft: rgba(59, 130, 246, 0.10);
+  --border: #e5e5e5;
+  --border-strong: #D0D0CB;
+  --green: #16a34a;
+  --green-soft: rgba(22,163,74,.10);
+  --orange: #f59e0b;
+  --orange-soft: rgba(245,158,11,.10);
+  --red: #dc2626;
+  --red-soft: rgba(220,38,38,.10);
+  --blue: #0305C6;
+  --blue-soft: rgba(3,5,198,.10);
   --gold: #C9A14A;
-  --gold-soft: rgba(201, 161, 74, 0.12);
+  --gold-soft: rgba(201,161,74,.12);
   --purple: #8B5CF6;
-  --purple-soft: rgba(139, 92, 246, 0.10);
-  --radius: 14px;
-  --radius-sm: 10px;
-  --radius-pill: 100px;
-  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --purple-soft: rgba(139,92,246,.10);
+  --radius: 0;                   /* Baulig: keine Rundungen */
+  --radius-sm: 0;
+  --radius-pill: 0;
+  --font: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Saira Condensed', 'Inter Tight', -apple-system, sans-serif;
 }
 
 html { -webkit-font-smoothing: antialiased; }
@@ -54,45 +58,118 @@ body {
 .app { display: none; }
 .app.is-active { display: block; }
 
-/* ===== Topbar ===== */
+/* ===== Topbar — Baulig-Style schwarz ===== */
 .topbar {
-  position: sticky; top: 0; z-index: 10;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 28px;
+  position: sticky; top: 0; z-index: 60;
+  background: #000; color: #fff;
+  border-bottom: none;
+  padding: 0;
 }
 .topbar-inner {
-  max-width: 1180px; margin: 0 auto;
+  max-width: 1340px; margin: 0 auto;
+  padding: 0 32px;
   display: flex; align-items: center; justify-content: space-between;
-  gap: 16px;
+  gap: 16px; height: 90px;
 }
 .topbar-brand {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 15px; font-weight: 700; color: var(--primary);
-  text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 0;
+  color: #fff; text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 300; font-size: 36px; line-height: 1;
+  letter-spacing: -.01em; white-space: nowrap;
+  transition: opacity .15s ease;
 }
+.topbar-brand:hover { opacity: .9; color: #fff; text-decoration: none; }
+.topbar-brand > span:not(.topbar-brand-mark):not(.topbar-brand-sub) { display: none; }
 .topbar-brand-mark {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: var(--primary); color: #fff;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800;
+  display: inline-block;
+  width: auto; height: auto; border-radius: 0;
+  background: transparent; color: #fff;
+  font-size: 36px; font-weight: 300;
+  font-family: var(--font-display);
+  transform: scaleX(-1); margin-right: -1px;
+}
+.topbar-brand-mark::after { content: ''; }
+.topbar-brand-sub {
+  display: inline; font-size: inherit;
+  color: inherit; font-weight: inherit;
 }
 .topbar-actions { display: flex; gap: 10px; align-items: center; }
 .topbar-actions a, .btn-logout {
-  font-size: 12px; color: var(--text-muted);
+  font-size: 13px; color: rgba(255,255,255,.85);
   text-decoration: none; font-weight: 600;
-  padding: 8px 14px; border-radius: 999px;
+  padding: 10px 18px; border-radius: 0;
   border: 1px solid transparent;
   background: transparent;
-  font-family: inherit;
-  cursor: pointer;
+  font-family: var(--font);
+  cursor: pointer; letter-spacing: .02em;
   transition: all .15s ease;
 }
-.topbar-actions a:hover { background: var(--bg-soft); color: var(--text); }
-.btn-logout { border: 1px solid var(--border); }
-.btn-logout:hover { border-color: var(--text-muted); color: var(--text); }
+.topbar-actions a:hover { color: var(--accent); }
+.btn-logout { border: 1px solid rgba(255,255,255,.5); }
+.btn-logout:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (max-width: 780px) {
+  .topbar-inner { padding: 0 20px; height: 64px; }
+  .topbar-brand { font-size: 28px; }
+}
+
+/* ===== Logout-Confirm Modal ===== */
+.logout-modal-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,.7);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; transition: opacity .25s;
+}
+.logout-modal-overlay.open { display: flex; opacity: 1; }
+.logout-modal {
+  max-width: 420px; width: 100%; background: #fff;
+  padding: 36px 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.logout-modal h3 {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 24px; line-height: 1.15;
+  color: var(--text); margin-bottom: 12px;
+}
+.logout-modal p {
+  font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;
+}
+.logout-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.logout-modal-btn {
+  padding: 12px 22px;
+  font-family: var(--font);
+  font-size: 13px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-strong); background: #fff;
+  color: var(--text); cursor: pointer;
+  transition: all .15s ease;
+}
+.logout-modal-btn:hover { border-color: var(--text); }
+.logout-modal-btn.danger {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.logout-modal-btn.danger:hover {
+  background: var(--accent-hover); border-color: var(--accent-hover);
+}
+
+/* ===== WhatsApp-Quick-Button (fixed bottom-right) ===== */
+.wa-quick {
+  position: fixed; bottom: 24px; right: 24px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366; color: #fff;
+  padding: 14px 22px;
+  font-family: var(--font); font-size: 14px; font-weight: 700;
+  letter-spacing: .02em; text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37,211,102,.4);
+  transition: all .2s ease;
+}
+.wa-quick:hover { background: #1FB257; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,.5); color: #fff; text-decoration: none; }
+.wa-quick svg { width: 18px; height: 18px; flex-shrink: 0; }
+@media (max-width: 780px) {
+  .wa-quick { bottom: 16px; right: 16px; padding: 12px 18px; font-size: 13px; }
+  .wa-quick span { display: none; }
+}
 
 /* ===== Hero ===== */
 .hero { max-width: 1180px; margin: 0 auto; padding: 48px 28px 12px; }

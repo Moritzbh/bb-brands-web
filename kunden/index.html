@@ -36,19 +36,19 @@
 }
 .kunden-card{
   max-width:460px;width:100%;background:#fff;
-  border:1px solid var(--line);
   padding:48px 40px;
-  box-shadow:0 20px 60px rgba(3,5,198,.08);
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  border:none;
 }
 .kunden-eyebrow{
-  font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
+  font-family:'Inter Tight',sans-serif;font-size:11px;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
   margin-bottom:12px;
 }
 .kunden-card h1{
-  font-family:'Saira Condensed',sans-serif;font-weight:700;
-  font-size:36px;line-height:1.05;letter-spacing:-.02em;
-  color:var(--blue);margin-bottom:14px;
+  font-family:'Inter Tight',sans-serif;font-weight:700;
+  font-size:32px;line-height:1.1;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:14px;
 }
 .kunden-card p.intro{font-size:14.5px;line-height:1.6;color:var(--text-2);margin-bottom:24px}
 .kunden-card form{display:flex;flex-direction:column;gap:14px}
@@ -60,22 +60,22 @@
   width:100%;padding:13px 16px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
   border:1.5px solid var(--line);background:var(--bg);
   color:var(--text);outline:none;transition:all .15s ease;
-  border-radius:8px;
+  border-radius:0;
 }
 .kunden-card input:focus{
-  background:#fff;border-color:var(--blue);
-  box-shadow:0 0 0 4px rgba(3,5,198,.08);
+  background:#fff;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,107,61,.12);
 }
 .kunden-submit{
-  width:100%;padding:14px;margin-top:8px;
-  background:var(--blue);color:#fff;
-  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+  width:100%;padding:16px;margin-top:8px;
+  background:var(--accent);color:#fff;
+  font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:700;
   letter-spacing:.04em;text-transform:uppercase;
-  border:none;border-radius:8px;cursor:pointer;
-  box-shadow:0 4px 14px rgba(3,5,198,.22);
+  border:none;border-radius:0;cursor:pointer;
+  box-shadow:1px 1px 20px rgba(0,0,0,.18);
   transition:all .2s ease;
 }
-.kunden-submit:hover{background:var(--blue-deep);transform:translateY(-1px);box-shadow:0 8px 22px rgba(3,5,198,.32)}
+.kunden-submit:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:1px 1px 24px rgba(0,0,0,.25)}
 .kunden-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .kunden-error{
   font-size:13px;color:#dc2626;margin-top:10px;font-weight:600;min-height:18px;
@@ -84,8 +84,8 @@
   text-align:center;margin-top:24px;
   font-size:13px;color:var(--text-3);
 }
-.kunden-foot a{color:var(--blue);font-weight:600;text-decoration:none}
-.kunden-foot a:hover{color:var(--accent)}
+.kunden-foot a{color:var(--accent);font-weight:600;text-decoration:none}
+.kunden-foot a:hover{color:var(--accent-hover);text-decoration:underline}
 .kunden-back{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:28px;font-size:12px;color:var(--text-3);text-decoration:none;
