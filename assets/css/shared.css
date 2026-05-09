@@ -86,12 +86,10 @@ h1 em,h2 em{font-weight:500}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* ========== TOP BAR · entfernt für konsistente Nav-Position über alle Pages ==========
-   Top-Bar-Inhalte (E-Mail, LinkedIn, Quartal-Info) sind im Footer dupliziert.
-   Mit ausgeblendeter Top-Bar haben alle Pages identische 90px Header-Höhe → Nav-Items
-   bleiben pixel-genau an derselben Y-Position beim Page-Wechsel.                       */
-.top-bar{display:none !important}
-.top-bar-legacy{
+/* ========== TOP BAR (Ankündigungsleiste — auf JEDER Page) ==========
+   38px schwarz, sticky-relative (scrollt mit weg, Header bleibt sticky drunter).
+   Auf allen Pages identische Höhe → Nav-Items bleiben pixel-genau an derselben Y-Position. */
+.top-bar{
   background:#0a0a0a;color:rgba(255,255,255,.9);
   font-size:12.5px;position:relative;z-index:51;
 }
