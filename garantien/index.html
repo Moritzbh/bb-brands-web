@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Vier schriftliche Garantien von BB Brands — Truth First, Go-Live, Efficiency, E-Mail-ROI. Wir kippen das Risiko vom Käufer auf uns.">
+<title>Garantien · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css">
+<script src="/assets/js/consent.js" defer></script>
+<style>
+/* ============= HIDE Default-Header (shared.css) — wir bauen eigenen ============= */
+.top-bar,header.site-header,.mobile-menu{display:none !important}
+
+/* ============= BAULIG-STYLE TOP-NAV (schwarz, full-width) ============= */
+.bb-topnav{background:#000;color:#fff;position:sticky;top:0;z-index:60;font-family:'Montserrat',sans-serif}
+.bb-topnav .wrap{
+  max-width:1340px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:90px;gap:32px;
+}
+.bb-topnav-brand{
+  display:inline-flex;align-items:baseline;
+  color:#fff;text-decoration:none;
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-weight:300;font-size:36px;line-height:1;
+  letter-spacing:-.01em;white-space:nowrap;
+}
+.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.9}
+.bb-topnav-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px}
+.bb-topnav-items{display:flex;gap:36px;font-size:14px;font-weight:600;letter-spacing:.02em}
+.bb-topnav-items a{color:rgba(255,255,255,.85);transition:color .15s;text-decoration:none}
+.bb-topnav-items a:hover{color:var(--accent);text-decoration:none}
+.bb-topnav-items a.active{color:var(--accent)}
+.bb-topnav-cta{
+  background:transparent;color:#fff;border:1px solid #fff;
+  padding:14px 28px;font-family:'Montserrat',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.02em;
+  transition:all .2s;text-decoration:none;white-space:nowrap;
+}
+.bb-topnav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+.bb-topnav-mobile{display:none;width:40px;height:40px;background:transparent;border:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.bb-topnav-mobile span{display:block;width:22px;height:2px;background:#fff;border-radius:1px}
+.bb-topnav-mobile-menu{display:none;background:#000;border-top:1px solid rgba(255,255,255,.1);padding:24px 32px;flex-direction:column;gap:18px}
+.bb-topnav-mobile-menu.open{display:flex}
+.bb-topnav-mobile-menu a{color:#fff;font-size:16px;font-weight:600;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+.bb-topnav-mobile-menu a:last-child{border-bottom:none}
+.bb-topnav-mobile-menu a.cta{background:var(--accent);text-align:center;border:none;padding:14px;margin-top:8px}
+@media (max-width:980px){.bb-topnav-items,.bb-topnav-cta{display:none}.bb-topnav-mobile{display:flex}}
+@media (max-width:780px){.bb-topnav .wrap{height:64px;padding:0 20px}.bb-topnav-brand{font-size:28px}}
+
+/* ============= BAULIG-DNA · PAGE TOKENS ============= */
+:root{
+  --bg-amber:#FFAC3B;
+  --bg-amber-hover:#FF9518;
+  --bg-green-up:#16a34a;
+  --bg-text-body:#333;
+  --bg-text-muted:#666;
+  --bg-line:#e5e5e5;
+  --bg-founder-1:url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-2:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-3:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70');
+}
+
+.bb-page{font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.7;font-weight:400;color:#000}
+.bb-page .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.bb-page .wrap{padding:0 20px}}
+
+.bb-section{
+  padding:80px 0;background-color:#fff;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  background-attachment:fixed;position:relative;
+}
+.bb-section-80{background-image:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),var(--bg-founder-1)}
+.bb-section-90{background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-2)}
+.bb-section-95{background-image:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),var(--bg-founder-1)}
+.bb-section-50{background-image:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),var(--bg-founder-3)}
+@media (max-width:780px){.bb-section{background-attachment:scroll}}
+
+/* ============= HERO ============= */
+.bb-hero{padding:64px 0 64px;text-align:center}
+.bb-hero-eyebrow{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.05em;color:var(--bg-text-body);margin-bottom:24px;
+}
+.bb-hero-eyebrow strong{color:#000}
+.bb-hero h1{
+  font-family:'Montserrat',sans-serif;font-size:46px;font-weight:700;
+  line-height:1.12;color:#000;
+  max-width:980px;margin:0 auto 24px;
+}
+.bb-hero h1 .hl-blue{color:var(--blue)}
+.bb-hero h1 em{font-style:normal;color:var(--bg-amber)}
+.bb-hero-sub{
+  font-size:18px;font-weight:600;line-height:1.5;color:#000;
+  max-width:780px;margin:0 auto 40px;
+}
+
+.bb-hero-meta{
+  display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;
+  margin-top:40px;font-size:13px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.bb-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
+.bb-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-green-up)}
+.bb-hero-meta .item strong{color:#000}
+
+/* ============= SECTION-HEAD ============= */
+.bb-head{text-align:center;margin-bottom:48px}
+.bb-head-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-amber);margin-bottom:18px;
+}
+.bb-head h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#000;
+  max-width:900px;margin:0 auto 18px;
+}
+.bb-head h2 em{font-style:normal;color:var(--bg-amber)}
+.bb-head p{font-size:17px;color:var(--bg-text-body);max-width:680px;margin:0 auto;line-height:1.65}
+
+/* ============= GARANTIE-BLOCK (lang-form, weiß auf Foto-Overlay) ============= */
+.guar-block{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  display:grid;grid-template-columns:auto 1fr;gap:0;
+  margin:36px 0;overflow:hidden;
+  position:relative;
+}
+.guar-block.reverse{grid-template-columns:1fr auto}
+.guar-block.reverse .guar-side{order:2}
+.guar-block.reverse .guar-body{order:1}
+@media (max-width:880px){
+  .guar-block,.guar-block.reverse{grid-template-columns:1fr}
+  .guar-block.reverse .guar-side{order:0}
+}
+
+/* Sticker rotated -6deg, oben-links */
+.guar-sticker{
+  position:absolute;top:-22px;left:32px;z-index:5;
+  background:var(--bg-amber);color:#fff;
+  padding:16px 26px;
+  text-align:center;font-family:'Montserrat',sans-serif;
+  transform:rotate(-6deg);
+  box-shadow:2px 2px 12px rgba(0,0,0,.2);
+  display:flex;flex-direction:column;line-height:1;
+}
+.guar-sticker .top{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:5px}
+.guar-sticker .mid{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.guar-sticker .bot{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.guar-sticker.dark{background:#000}
+
+/* Side (linke Spalte mit Nummer + Headline) */
+.guar-side{
+  width:280px;padding:64px 36px 48px;
+  background:linear-gradient(180deg,#fafaf7 0%,#fff 100%);
+  display:flex;flex-direction:column;justify-content:flex-start;gap:18px;
+  border-right:1px solid var(--bg-line);
+}
+.guar-side .num{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:72px;line-height:1;color:var(--bg-amber);letter-spacing:-.04em;
+}
+.guar-side .label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bg-text-muted);
+}
+.guar-side h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:30px;line-height:1.05;color:#000;
+}
+.guar-block.reverse .guar-side{border-right:none;border-left:1px solid var(--bg-line)}
+@media (max-width:880px){
+  .guar-side{width:100%;padding:48px 32px 24px;border-right:none !important;border-left:none !important;border-bottom:1px solid var(--bg-line)}
+  .guar-side .num{font-size:54px}
+  .guar-side h3{font-size:24px}
+}
+
+/* Body (rechte Spalte mit Promise + Bullets + Why) */
+.guar-body{
+  padding:64px 48px 48px;display:flex;flex-direction:column;gap:24px;
+}
+@media (max-width:780px){.guar-body{padding:36px 28px}}
+
+.guar-promise{
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:21px;line-height:1.45;
+  color:#000;margin:0;
+  border-left:3px solid var(--bg-amber);padding:6px 0 6px 22px;
+}
+.guar-promise.dark{border-left-color:#000}
+
+.guar-section-title{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg-amber);
+  margin-bottom:8px;
+}
+.guar-bullets{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px}
+@media (max-width:560px){.guar-bullets{grid-template-columns:1fr}}
+.guar-bullets li{
+  font-size:14.5px;line-height:1.55;color:#000;font-weight:500;
+  padding-left:22px;position:relative;
+}
+.guar-bullets li::before{
+  content:"↑";color:var(--bg-green-up);font-weight:800;
+  position:absolute;left:0;top:0;
+}
+
+.guar-why{
+  font-size:14.5px;color:var(--bg-text-body);line-height:1.65;
+  border-top:1px solid var(--bg-line);padding-top:18px;margin-top:auto;
+}
+.guar-why strong{color:#000;font-weight:700}
+.guar-why .pos{
+  display:block;margin-top:14px;
+  font-family:'Montserrat',sans-serif;font-style:italic;font-size:15px;
+  color:#000;font-weight:600;
+}
+
+/* ============= CTA-BUTTON ============= */
+.bb-cta{
+  display:inline-block;
+  background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.02em;
+  padding:18px 56px;border:none;border-radius:0;
+  box-shadow:1px 1px 20px rgba(0,0,0,.3);
+  transition:all .2s;text-align:center;line-height:1.3;cursor:pointer;text-decoration:none;
+}
+.bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);text-decoration:none;color:#fff}
+.bb-cta.large{font-size:18px;padding:22px 72px}
+
+/* ============= BOTTOM-CTA (dark mit Foto-BG) ============= */
+.bb-bottom{
+  text-align:center;padding:96px 0;
+  background-color:#000;color:#fff;
+  background-image:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),var(--bg-founder-2);
+  background-size:cover;background-position:center;
+}
+.bb-bottom h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#fff;
+  max-width:800px;margin:0 auto 24px;
+}
+.bb-bottom h2 em{font-style:normal;color:var(--bg-amber)}
+.bb-bottom p{font-size:17px;color:rgba(255,255,255,.82);max-width:640px;margin:0 auto 36px;line-height:1.65}
+.bb-bottom-secondary{display:block;margin-top:18px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:underline}
+.bb-bottom-secondary strong{color:var(--bg-amber)}
+
+/* Footer · Kontrast-Override */
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--accent)}
+
+@media (max-width:780px){
+  .bb-hero h1,.bb-head h2,.bb-bottom h2{font-size:28px;line-height:1.25}
+  .bb-section{padding:56px 0}
+  .guar-promise{font-size:17px;padding-left:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- BAULIG-STYLE TOP-NAV -->
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-80 bb-hero">
+  <div class="wrap">
+    <div class="bb-hero-eyebrow"><strong>UNSERE GARANTIEN:</strong></div>
+    <h1>Wahrheit vor Umsatz. <em>Output vor Slogans.</em></h1>
+    <p class="bb-hero-sub">Vier schriftliche Versprechen. Wir kippen das Risiko vom Käufer auf uns — keine ROAS-Märchen, sondern Zusagen, die wir vertraglich festhalten und einhalten.</p>
+
+    <div class="bb-hero-meta">
+      <span class="item">Schriftlich · <strong>im Vertrag</strong></span>
+      <span class="item">Keine Buzzwords · <strong>klare Bedingungen</strong></span>
+      <span class="item"><strong>4</strong> Garantien · 1 Standard</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 01 · TRUTH FIRST ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block">
+      <div class="guar-sticker dark">
+        <span class="top">Garantie</span>
+        <span class="mid">01</span>
+        <span class="bot">Truth First</span>
+      </div>
+      <div class="guar-side">
+        <div class="num">01</div>
+        <div class="label">Truth First</div>
+        <h3>Wahrheit vor Umsatz.</h3>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise dark">Wenn wir nicht glauben, dass sich das Projekt innerhalb von 12 Monaten mehrfach bezahlt macht, arbeiten wir nicht zusammen.</p>
+
+        <div>
+          <div class="guar-section-title">Im Erstgespräch rechnen wir gemeinsam durch:</div>
+          <ul class="guar-bullets">
+            <li>aktuelle Conversion</li>
+            <li>AOV (Average Order Value)</li>
+            <li>Retention</li>
+            <li>E-Mail-Umsatz</li>
+            <li>Creative Output</li>
+            <li>mögliche Hebel</li>
+          </ul>
+        </div>
+
+        <p class="guar-why">Wenn die Zahlen keinen klaren ROI zeigen, sagen wir dir <strong>ehrlich ab</strong>.<span class="pos">Lieber kein Kunde als ein Kunde ohne echten Outcome.</span></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 02 · GO-LIVE ============= -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <article class="guar-block reverse">
+      <div class="guar-sticker">
+        <span class="top">Garantie</span>
+        <span class="mid">02</span>
+        <span class="bot">Go-Live</span>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise">Dein neues Brand-System geht zum vereinbarten Termin live — oder wir arbeiten kostenlos weiter, bis es live ist.</p>
+
+        <div>
+          <div class="guar-section-title">Der Go-Live-Termin wird im Kickoff vertraglich festgehalten. Dazu gehören je nach Scope:</div>
+          <ul class="guar-bullets">
+            <li>Shopify Store</li>
+            <li>Brand Identity</li>
+            <li>E-Mail-Flows</li>
+            <li>Creative-Systeme</li>
+            <li>AI-Workflows</li>
+          </ul>
+        </div>
+
+        <p class="guar-why"><strong>Keine Monate. Kein endloses Agency-Pingpong.</strong><span class="pos">Klare Deadlines. Klare Verantwortung.</span></p>
+      </div>
+      <div class="guar-side">
+        <div class="num">02</div>
+        <div class="label">Go-Live</div>
+        <h3>Termin steht. Punkt.</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 03 · EFFICIENCY ============= -->
+<section class="bb-section bb-section-90">
+  <div class="wrap">
+    <article class="guar-block">
+      <div class="guar-sticker">
+        <span class="top">Garantie</span>
+        <span class="mid">03</span>
+        <span class="bot">Efficiency</span>
+      </div>
+      <div class="guar-side">
+        <div class="num">03</div>
+        <div class="label">Efficiency</div>
+        <h3>AI mit Impact, kein Spielzeug.</h3>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise">Jeder Workflow, den wir bauen, muss messbar Zeit sparen oder Umsatz erzeugen.</p>
+
+        <p class="guar-why">Wenn ein System nach <strong>60 Tagen</strong> keinen klaren operativen Vorteil bringt, optimieren wir es <strong>auf eigene Kosten</strong> weiter.<span class="pos">Denn AI ohne echten Business-Impact ist nur Spielzeug.</span></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 04 · E-MAIL-ROI ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block reverse">
+      <div class="guar-sticker dark">
+        <span class="top">Garantie</span>
+        <span class="mid">04</span>
+        <span class="bot">E-Mail-ROI</span>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise dark">Unser E-Mail-System soll innerhalb von 90 Tagen mehr zusätzlichen Umsatz erzeugen als es kostet.</p>
+
+        <p style="font-size:15px;line-height:1.65;color:var(--bg-text-body);margin:0">Wenn wir dieses Ziel <strong style="color:#000">trotz vollständiger Umsetzung</strong> nicht erreichen, arbeiten wir kostenlos weiter, bis wir es erreichen.</p>
+
+        <div>
+          <div class="guar-section-title">Voraussetzung:</div>
+          <ul class="guar-bullets">
+            <li>vollständige technische Implementierung</li>
+            <li>ausreichender Traffic</li>
+            <li>Zugang zu Daten &amp; Werbekonten</li>
+            <li>aktive Zusammenarbeit</li>
+          </ul>
+        </div>
+
+        <p class="guar-why">Klar definierte Ziele. <strong>Klar definierte Voraussetzungen.</strong><span class="pos">Wir tragen das Risiko — nicht du.</span></p>
+      </div>
+      <div class="guar-side">
+        <div class="num">04</div>
+        <div class="label">E-Mail-ROI</div>
+        <h3>Rechnet sich in 90 Tagen.</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BOTTOM-CTA -->
+<section class="bb-bottom">
+  <div class="wrap">
+    <h2>Bereit, <em>ehrlich</em> durchzurechnen?</h2>
+    <p>60-Min-Audit mit Founder. Wir gehen Conversion, AOV, Retention, E-Mail und Creative gemeinsam durch. Wenn die Zahlen nicht passen, sagen wir dir ehrlich ab.</p>
+    <a href="/audit/" class="bb-cta large">Strategy Audit buchen</a>
+    <a href="https://founder-os.bb-brands.de" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

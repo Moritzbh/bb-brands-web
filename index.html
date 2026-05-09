@@ -1452,9 +1452,9 @@ section.guarantees-dirty{
   max-width:680px;margin:0 auto;line-height:1.65;
 }
 
-/* 3-Spalten-Grid — keine Rotations-Spielereien mehr (Baulig: clean, soft shadow) */
+/* 2x2-Grid für 4 Garantien (Baulig: clean, soft shadow) */
 .guar-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:36px;
   margin-top:48px;max-width:1100px;margin-left:auto;margin-right:auto;
 }
 .guar-card{
@@ -1483,7 +1483,22 @@ section.guarantees-dirty{
 .guar-stamp .top{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:4px}
 .guar-stamp .mid{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
 .guar-stamp .bot{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
-.guar-card:nth-child(2) .guar-stamp{background:#000}
+.guar-card:nth-child(1) .guar-stamp{background:#000}
+
+/* CTA unter den 4 Cards */
+.guar-cta-row{
+  text-align:center;margin-top:48px;
+}
+.guar-cta-row a{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--bg-amber);
+  padding:14px 22px;border:1px solid var(--bg-amber);
+  text-decoration:none;transition:all .2s;
+}
+.guar-cta-row a:hover{background:var(--bg-amber);color:#fff;text-decoration:none}
+.guar-cta-row a::after{content:"→";transition:transform .2s}
+.guar-cta-row a:hover::after{transform:translateX(4px)}
 
 .guar-card h3{
   font-family:'Montserrat',sans-serif;font-weight:800;
@@ -1514,6 +1529,9 @@ section.guarantees-dirty{
 
 @media (max-width:880px){
   .guar-grid{grid-template-columns:1fr;gap:40px}
+}
+@media (max-width:780px){
+  .guar-cta-row a{font-size:12px;padding:12px 18px}
 }
 @media (max-width:780px){
   section.guarantees-dirty{padding:64px 0}
@@ -2583,9 +2601,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <section class="guarantees-dirty">
   <div class="wrap">
     <div class="bb-head">
-      <div class="bb-head-label">Drei Garantien</div>
-      <h2>Wir kippen das Risiko<br>vom Käufer auf <em>uns.</em></h2>
-      <p>Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: Qualität, Output, Geschwindigkeit. Schriftlich.</p>
+      <div class="bb-head-label">Vier Garantien</div>
+      <h2>Wahrheit vor Umsatz.<br>Output vor <em>Slogans.</em></h2>
+      <p>Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: ehrliche Ansage, Termin, Wirkung, Rechnung. Schriftlich.</p>
     </div>
 
     <div class="guar-grid">
@@ -2593,34 +2611,49 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">01</span>
-          <span class="bot">No-Bloat</span>
+          <span class="bot">Truth First</span>
         </div>
-        <h3>No-Bloat</h3>
-        <p class="promise">Keine Übergaben. Keine Juniors. Keine endlosen Loops. Nur direkte Umsetzung durch A-Player.</p>
-        <p class="why">Adressiert den größten Schmerz mit klassischen Agenturen: Qualitätsverlust durch Hierarchien. Du arbeitest direkt mit dem Founder + Spezialisten-Team.</p>
+        <h3>Truth First</h3>
+        <p class="promise">Wenn wir nicht glauben, dass sich das Projekt innerhalb von 12 Monaten mehrfach bezahlt macht, arbeiten wir nicht zusammen.</p>
+        <p class="why">Im Erstgespräch rechnen wir Conversion, AOV, Retention, E-Mail-Umsatz und Hebel gemeinsam durch. Lieber kein Kunde als ein Kunde ohne echten Outcome.</p>
       </div>
 
       <div class="guar-card">
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">02</span>
-          <span class="bot">AI Efficiency</span>
+          <span class="bot">Go-Live</span>
         </div>
-        <h3>AI Efficiency</h3>
-        <p class="promise">Jedes System, das wir bauen, muss messbar Zeit sparen oder Umsatz erhöhen.</p>
-        <p class="why">Wenn ein AI-Workflow nach 4 Wochen weder Stunden spart noch Umsatz hebt — bauen wir um. Auf unsere Kosten.</p>
+        <h3>Go-Live</h3>
+        <p class="promise">Dein neues Brand-System geht zum vereinbarten Termin live — oder wir arbeiten kostenlos weiter, bis es live ist.</p>
+        <p class="why">Der Termin wird im Kickoff vertraglich festgehalten. Keine Monate. Kein endloses Agency-Pingpong. Klare Deadlines, klare Verantwortung.</p>
       </div>
 
       <div class="guar-card">
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">03</span>
-          <span class="bot">Speed-to-Market</span>
+          <span class="bot">Efficiency</span>
         </div>
-        <h3>Speed-to-Market</h3>
-        <p class="promise">Go-live in der zugesagten Frist — oder wir arbeiten kostenlos weiter, bis es steht.</p>
-        <p class="why">Im Proposal steht ein konkretes Launch-Datum. Wenn es an uns liegt, dass es kippt, geht die Mehr-Zeit auf unsere Kappe.</p>
+        <h3>Efficiency</h3>
+        <p class="promise">Jeder Workflow, den wir bauen, muss messbar Zeit sparen oder Umsatz erzeugen.</p>
+        <p class="why">Wenn ein System nach 60 Tagen keinen klaren operativen Vorteil bringt, optimieren wir es auf eigene Kosten weiter. Denn AI ohne echten Business-Impact ist nur Spielzeug.</p>
       </div>
+
+      <div class="guar-card">
+        <div class="guar-stamp">
+          <span class="top">Garantie</span>
+          <span class="mid">04</span>
+          <span class="bot">E-Mail-ROI</span>
+        </div>
+        <h3>E-Mail-ROI</h3>
+        <p class="promise">Unser E-Mail-System soll innerhalb von 90 Tagen mehr zusätzlichen Umsatz erzeugen als es kostet.</p>
+        <p class="why">Wenn wir das Ziel trotz vollständiger Umsetzung verfehlen, arbeiten wir kostenlos weiter, bis wir es erreichen. Voraussetzung: vollständige technische Implementierung, ausreichend Traffic, Datenzugang, aktive Zusammenarbeit.</p>
+      </div>
+    </div>
+
+    <div class="guar-cta-row">
+      <a href="/garantien/">Alle Garantien im Detail</a>
     </div>
   </div>
 </section>
@@ -2803,6 +2836,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <div class="footer-links">
       <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
       <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/garantien/">Garantien</a>
       <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
       <a href="/impressum/">Impressum</a>
       <a href="/datenschutz/">Datenschutz</a>
