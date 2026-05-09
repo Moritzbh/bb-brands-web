@@ -1837,29 +1837,70 @@ section.guarantees-dirty{
   }
 }
 
-/* ========== TEAM-BANNER-STAGE · Photo-Stack LEFT + Headline/Info RIGHT (wie Founder) ========== */
+/* ========== TEAM-BANNER-STAGE · 1:1 Referenz-Pattern · Photo-Stack LEFT + clean Text RIGHT ========== */
+/* Section-BG auf reines Weiß forcieren — höhere Spezifität via body damit's gegen das später kommende Cream-Wave-Rule wint */
+body section.team-section,
+body section.team-section:nth-of-type(even),
+body section.team-section:nth-of-type(odd){
+  background:#fff !important;
+  background-image:none !important;
+  background-color:#fff !important;
+  background-attachment:scroll !important;
+}
+body section.team-section::before,
+body section.team-section::after{display:none !important}
+body section.team-section .light-overlay{display:none !important}
+
 .team-banner-stage{
   display:grid;grid-template-columns:1fr 1.15fr;
   gap:64px;align-items:center;
 }
 .team-banner-stage .sdr-stack{
-  /* Photo-Stack ist max 380×475 (matched founder-portrait-Größe) */
-  max-width:420px;justify-self:end;width:100%;
+  max-width:480px;justify-self:end;width:100%;
 }
 .team-banner-text{min-width:0}
-.team-banner-text .step-eyebrow{margin-bottom:18px}
-.team-banner-text h2{font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:16px}
-.team-banner-text .section-sub{margin-bottom:28px;font-size:16px}
+.team-banner-text h2{
+  font-family:'Saira Condensed',Manrope,sans-serif;
+  font-size:clamp(34px,3.8vw,52px);line-height:1.05;
+  font-weight:700;letter-spacing:-.018em;
+  margin:0 0 22px;color:var(--text);
+}
+.team-banner-text .banner-body{
+  font-size:17px;line-height:1.65;color:var(--text-2);
+  margin:0 0 32px;max-width:520px;
+  font-family:'Inter',sans-serif;font-weight:400;
+}
+.team-banner-text .banner-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:15px;font-weight:600;letter-spacing:-.005em;
+  padding:15px 28px;border-radius:99px;
+  text-decoration:none;
+  box-shadow:0 8px 22px -6px rgba(3,5,198,.40);
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.team-banner-text .banner-cta::after{
+  content:"→";font-size:17px;
+  transition:transform .25s ease;
+}
+.team-banner-text .banner-cta:hover{
+  background:var(--blue-deep);
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px -6px rgba(3,5,198,.55);
+  text-decoration:none;
+}
+.team-banner-text .banner-cta:hover::after{transform:translateX(3px)}
+
 @media (max-width:900px){
   .team-banner-stage{
-    grid-template-columns:1fr;gap:36px;
-    text-align:center;
+    grid-template-columns:1fr;gap:36px;text-align:center;
   }
   .team-banner-stage .sdr-stack{
     margin:0 auto;justify-self:center;max-width:300px;
   }
   .team-banner-text{text-align:left}
-  .team-banner-text .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
+  .team-banner-text .banner-body{margin-left:auto;margin-right:auto}
 }
 
 /* ========== TEAM-FLOW · 2 SDRs → Founder ========== */
@@ -3249,32 +3290,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </article>
       </div>
 
-      <!-- RIGHT: Headline + Sub + aktive SDR-Info -->
+      <!-- RIGHT: Headline + Sub + CTA · 1:1 wie Referenz-Banner -->
       <div class="team-banner-text">
-        <div class="step-eyebrow"><span class="num">01</span> · Discovery</div>
-        <h2>Wer dich <em>zuerst</em> abholt.</h2>
-        <p class="section-sub">Erst sprichst du mit einem unserer beiden Sales-Kollegen. Sie hören zu, qualifizieren ehrlich — passt es, kommt der nächste Schritt zu mir.</p>
-
-        <div class="sdr-info-stack">
-          <div class="sdr-info-item active" data-sdr="0">
-            <div class="sdr-role">Sales · Discovery</div>
-            <div class="sdr-name">Sales-Lead 01<span class="pending">Name folgt</span></div>
-            <p class="sdr-quote">„Ich höre dir zu, frage nach Zahlen, sage dir ehrlich ob's passt."</p>
-            <div class="sdr-stack-toggle">
-              <button type="button" data-sdr="0" class="active" aria-label="Sales-Lead 01">01</button>
-              <button type="button" data-sdr="1" aria-label="Sales-Lead 02">02</button>
-            </div>
-          </div>
-          <div class="sdr-info-item" data-sdr="1">
-            <div class="sdr-role">Sales · Discovery</div>
-            <div class="sdr-name">Sales-Lead 02<span class="pending">Name folgt</span></div>
-            <p class="sdr-quote">„Kein Pitch im ersten Call. Erst verstehen, dann entscheiden."</p>
-            <div class="sdr-stack-toggle">
-              <button type="button" data-sdr="0" aria-label="Sales-Lead 01">01</button>
-              <button type="button" data-sdr="1" class="active" aria-label="Sales-Lead 02">02</button>
-            </div>
-          </div>
-        </div>
+        <h2>Dein kostenfreies Strategiegespräch.</h2>
+        <p class="banner-body">Du sprichst mit einem unserer beiden Sales-Kollegen. Sie hören zu, fragen nach Zahlen und sagen dir ehrlich, ob es passt — oder nicht. Wenn's passt, übernehme ich.</p>
+        <a href="/audit/" class="banner-cta">Jetzt Termin vereinbaren</a>
       </div>
     </div>
 
