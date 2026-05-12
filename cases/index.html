@@ -432,6 +432,21 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-mid{text-align:center;padding:40px 0;margin:48px 0}
 .bb-cta-mid p{font-size:14px;color:var(--bg-text-muted);margin-top:14px;font-style:italic}
 
+/* ============= DISCLAIMER · matched Hero-Background ============= */
+.bb-cases-disclaimer-section{
+  position:relative;
+  background-image:
+    linear-gradient(rgba(255,255,255,.62), rgba(255,255,255,.72)),
+    url("/assets/images/cases-hero-founder.jpg");
+  background-size:cover;
+  background-position:center 30%;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+@media (max-width:780px){
+  .bb-cases-disclaimer-section{background-attachment:scroll}
+}
+
 /* ============= MID-CTA SECTION mit Founder-Hintergrund ============= */
 .bb-mid-cta-section{
   position:relative;
@@ -565,7 +580,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- DISCLAIMER STRIP -->
-<section class="bb-section bb-section-95" style="padding:48px 0">
+<section class="bb-section bb-cases-disclaimer-section" style="padding:48px 0">
   <div class="wrap" style="max-width:780px;text-align:center">
     <p style="font-size:15px;line-height:1.65;color:var(--bg-text-body)">Wir zeigen hier <strong style="color:#000">Build-Outcomes</strong>, keine erfundenen ROAS-Lifts. Was du gleich siehst, ist eine <strong style="color:#000">kuratierte Auswahl</strong> unserer Builds — alle <strong style="color:#000">live</strong>, alle ausgeliefert. Weitere Cases &amp; tiefere Conversion-Daten gibt's im 60-Min-Audit, nicht als Marketing-Häppchen auf der Startseite.</p>
   </div>
