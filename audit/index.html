@@ -148,45 +148,45 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
   .audit-trust-marquee .marquee-label{font-size:10px}
   .audit-trust-marquee .marquee-track-wrap{width:100%;max-width:none;margin-left:0}
 }
-/* Brands-Score Trust-Badge unter der Audit-Logo-Marquee */
+/* Brands-Score · freistehend, ohne Box · unter der Audit-Logo-Marquee */
 .brands-score-wrap{
-  margin-top:22px;
+  margin-top:18px;
   display:flex;justify-content:flex-start;
 }
 .brands-score{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:16px 24px 14px;
-  text-align:center;
-  box-shadow:0 8px 30px -10px rgba(0,0,0,.10);
-  min-width:220px;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+  text-align:left;
+  display:inline-flex;flex-direction:column;gap:4px;
 }
 .brands-score-title{
   font-family:'Inter Tight',-apple-system,sans-serif;
-  font-size:13px;font-weight:700;color:#000;
-  letter-spacing:-.005em;margin-bottom:6px;
+  font-size:11px;font-weight:700;color:var(--text-3);
+  letter-spacing:.14em;text-transform:uppercase;
+  margin:0 0 2px;
 }
 .brands-score-rating{
   display:inline-flex;align-items:center;gap:10px;
-  margin-bottom:4px;
+  margin:0;
 }
 .brands-score-stars{display:inline-flex;gap:2px;color:#22c55e}
 .brands-score-stars svg{width:16px;height:16px}
 .brands-score-num{
   font-family:'Inter Tight',-apple-system,sans-serif;
-  font-size:20px;font-weight:800;color:#000;
+  font-size:18px;font-weight:800;color:#000;
   letter-spacing:-.01em;line-height:1;
 }
-.brands-score-meta{font-size:12px;color:var(--text-3)}
+.brands-score-meta{font-size:12px;color:var(--text-3);margin-top:2px}
 .brands-score-meta a{
   color:var(--accent);text-decoration:underline;
   text-decoration-thickness:1px;text-underline-offset:2px;
 }
 .brands-score-meta a:hover{text-decoration:none}
 @media (max-width:780px){
-  .brands-score-wrap{justify-content:center;margin-top:18px}
-  .brands-score{min-width:200px;padding:14px 20px 12px}
+  .brands-score-wrap{justify-content:flex-start;margin-top:14px}
 }
 .hero-left .anchor-cta{
   display:none;
