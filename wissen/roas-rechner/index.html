@@ -140,22 +140,22 @@
 
         <div class="calc-result-row hero-row">
           <span class="calc-result-label">Break-Even ROAS<small>Damit Marketing 0 € Gewinn macht</small></span>
-          <span class="calc-result-value" id="r-be">2,70</span>
+          <span class="calc-result-value" id="r-be">2,40</span>
         </div>
 
         <div class="calc-result-row">
           <span class="calc-result-label">Ziel-ROAS (1,5x Break-Even)<small>Empfohlene Schwelle für gesundes Wachstum</small></span>
-          <span class="calc-result-value" id="r-target">4,05x</span>
+          <span class="calc-result-value" id="r-target">3,60x</span>
         </div>
 
         <div class="calc-result-row">
           <span class="calc-result-label">Deckungsbeitrag pro Bestellung<small>Was übrig bleibt, bevor Marketing</small></span>
-          <span class="calc-result-value" id="r-cb">18,16 €</span>
+          <span class="calc-result-value" id="r-cb">20,40 €</span>
         </div>
 
         <div class="calc-result-row">
-          <span class="calc-result-label">Marge auf Netto-Umsatz</span>
-          <span class="calc-result-value" id="r-margin">47,9 %</span>
+          <span class="calc-result-label">Marge auf Brutto-Preis<small>Konsistent mit Marge-Rechner</small></span>
+          <span class="calc-result-value" id="r-margin">41,6 %</span>
         </div>
 
         <div class="calc-result-row">
@@ -235,12 +235,14 @@
     if(price <= 0) return;
     var net = price/(1+vat/100);
     var paymentFee = price*(fee/100);
-    var effectiveNet = net*(1-ret/100);
-    var variableCosts = cogs+shipping+paymentFee;
-    var cb = effectiveNet-variableCosts;
+    // Retouren-Verlust präziser, analog Marge-Rechner:
+    // Hin+Rück-Versand bei jeder retournierten Bestellung, ~30 % der COGS = Restocking-/Wertverlust.
+    var retLoss = (ret/100)*(shipping*2 + cogs*0.3);
+    var cb = net - cogs - shipping - paymentFee - retLoss;
     var breakEven = cb > 0 ? price/cb : 0;
     var target = breakEven*1.5;
-    var marginPct = effectiveNet > 0 ? (cb/effectiveNet)*100 : 0;
+    // Marge auf Brutto-Preis · konsistent mit Marge-Rechner
+    var marginPct = price > 0 ? (cb/price)*100 : 0;
     if(cb <= 0){
       out.be.textContent = '∞';
       out.target.textContent = '∞';
