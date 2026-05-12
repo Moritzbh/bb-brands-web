@@ -432,6 +432,22 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-mid{text-align:center;padding:40px 0;margin:48px 0}
 .bb-cta-mid p{font-size:14px;color:var(--bg-text-muted);margin-top:14px;font-style:italic}
 
+/* ============= MID-CTA SECTION mit Founder-Hintergrund ============= */
+.bb-mid-cta-section{
+  position:relative;
+  background-image:
+    linear-gradient(rgba(255,255,255,.62), rgba(255,255,255,.72)),
+    url("/assets/images/cases-mid-cta-bg.jpg");
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+.bb-mid-cta-section .bb-cta-mid p{color:#000}
+@media (max-width:780px){
+  .bb-mid-cta-section{background-attachment:scroll}
+}
+
 /* ============= BOTTOM-CTA (dark mit Foto-BG) ============= */
 .bb-bottom{
   text-align:center;padding:96px 0;
@@ -681,7 +697,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- MID-CTA -->
-<section class="bb-section bb-section-90" style="padding:48px 0">
+<section class="bb-section bb-mid-cta-section" style="padding:80px 0">
   <div class="wrap">
     <div class="bb-cta-mid">
       <a href="/audit/" class="bb-cta">Jetzt unverbindliches Strategy Audit buchen!</a>
