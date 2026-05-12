@@ -219,9 +219,10 @@ footer .footer-links a:hover{color:var(--accent)}
   border:1px solid var(--bg-line);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;
-  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:8px;
+  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:6px 8px;gap:2px;
 }
-.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:4px;text-align:center}
+.bb-trust-tuev svg{width:22px;height:22px;color:#dc2626;display:block}
+.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:2px;text-align:center}
 .bb-trust-reviews{display:flex;flex-direction:column;gap:4px}
 .bb-trust-reviews-name{
   font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#000;
@@ -340,10 +341,21 @@ footer .footer-links a:hover{color:var(--accent)}
   width:88px;
   max-width:88px;
   height:auto;
-  transition:transform .55s cubic-bezier(.16,1,.3,1);
+  opacity:0;
+  transform:scale(0.55) translateY(14px);
+  transition:opacity .7s cubic-bezier(.34,1.56,.64,1), transform .7s cubic-bezier(.34,1.56,.64,1);
+  will-change:transform,opacity;
 }
-.bb-cards.tools .bb-card:hover .bb-card-thumb .tool-icon{
-  transform:scale(1.08) translateY(-2px);
+.bb-cards.tools .bb-card-thumb .tool-icon.is-popped{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.bb-cards.tools .bb-card:nth-child(2) .tool-icon{transition-delay:.14s}
+.bb-cards.tools .bb-card:nth-child(3) .tool-icon{transition-delay:.28s}
+@media (prefers-reduced-motion:reduce){
+  .bb-cards.tools .bb-card-thumb .tool-icon{
+    opacity:1;transform:none;transition:none;
+  }
 }
 .bb-cards.tools .bb-card-tag{
   position:static;
@@ -523,6 +535,47 @@ footer .footer-links a:hover{color:var(--accent)}
       url('/assets/img/wissen-bottomcta-1100.jpg');
   }
 }
+
+/* Bottom-CTA Button · Premium Outline-Style (schwarz mit weißem Border, Hover invertiert) */
+.bb-bottom-wissen .bb-cta.large{
+  background:transparent;
+  color:#fff;
+  border:1.5px solid #fff;
+  box-shadow:none;
+  padding:22px 72px;
+  font-weight:700;
+  letter-spacing:.06em;
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;
+}
+.bb-bottom-wissen .bb-cta.large::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+  z-index:-1;
+}
+.bb-bottom-wissen .bb-cta.large:hover{
+  background:transparent;
+  color:#000;
+  border-color:#fff;
+  transform:none;
+}
+.bb-bottom-wissen .bb-cta.large:hover::before{
+  transform:scaleX(1);
+}
+.bb-bottom-wissen .bb-bottom-secondary{
+  display:inline-block;
+  margin-top:24px;
+  color:rgba(255,255,255,.7);
+  font-size:13px;
+  letter-spacing:.04em;
+}
 </style>
 </head>
 <body>
@@ -613,10 +666,19 @@ footer .footer-links a:hover{color:var(--accent)}
 
     <div class="bb-trust">
       <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/>
+          <circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
         DACH-FOKUS
         <div class="badge">DTC-EXPERTEN</div>
       </div>
       <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 15.5l-1.7-4.5L6 9.3l4.3-1.7L12 3z" fill="currentColor" stroke="none"/>
+          <path d="M18.5 14.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4z" fill="currentColor" stroke="none"/>
+          <path d="M5.5 16l.6 1.6 1.6.6-1.6.6L5.5 20.4 4.9 18.8 3.3 18.2l1.6-.6L5.5 16z" fill="currentColor" stroke="none"/>
+        </svg>
         AI-NATIVE
         <div class="badge">EXPERTEN-TEAM</div>
       </div>
@@ -877,6 +939,25 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
   </div>
 </footer>
+
+<script>
+/* Tool-Icons · Pop-In on scroll-into-view */
+(function(){
+  if (typeof IntersectionObserver === 'undefined') {
+    document.querySelectorAll('.tool-icon').forEach(function(el){ el.classList.add('is-popped'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('is-popped');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.tool-icon').forEach(function(el){ io.observe(el); });
+})();
+</script>
 
 </body>
 </html>
