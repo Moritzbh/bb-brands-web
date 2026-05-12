@@ -208,85 +208,55 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-meta{font-size:13px;font-style:italic;color:var(--bg-text-muted);margin-top:14px}
 .bb-hero-cta{margin-top:28px}
 
-/* ============= TRUST-STRIPE · Verified-Cards ============= */
+/* ============= TRUST-STRIPE · Original-Style + Detail-Erweiterung ============= */
 .bb-trust{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  max-width:1100px;
-  margin:64px auto 0;
+  display:flex;align-items:flex-start;justify-content:center;
+  gap:48px;flex-wrap:wrap;margin-top:64px;
 }
-@media (max-width:880px){
-  .bb-trust{grid-template-columns:repeat(2,1fr);gap:12px}
-}
-@media (max-width:520px){
-  .bb-trust{grid-template-columns:1fr}
-}
-
 .bb-trust-item{
-  background:rgba(255,255,255,0.96);
-  border:1px solid rgba(0,0,0,0.08);
-  padding:24px 22px;
-  text-align:left;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:10px;
-  transition:border-color .2s, transform .2s, box-shadow .2s;
-}
-.bb-trust-item:hover{
-  border-color:rgba(0,0,0,0.18);
-  transform:translateY(-1px);
-  box-shadow:0 8px 24px -12px rgba(0,0,0,0.12);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  text-align:center;max-width:180px;
 }
 
-.bb-trust-icon{
-  width:26px;height:26px;
-  background:var(--bg-amber);
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  box-shadow:0 0 0 4px rgba(255,107,61,0.12);
+.bb-trust-tuev{
+  width:80px;height:80px;background:#fff;
+  border:1px solid var(--bg-line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;
+  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:8px;
 }
-.bb-trust-icon svg{width:14px;height:14px;color:#fff}
+.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:4px;text-align:center}
 
-.bb-trust-label{
+.bb-trust-reviews{display:flex;flex-direction:column;gap:4px;align-items:center}
+.bb-trust-reviews-name{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#000;
+  letter-spacing:.02em;text-transform:uppercase;
+}
+.bb-trust-reviews-rating{
   font-family:'Montserrat',sans-serif;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--bg-amber);
-  margin:0;
+  font-size:38px;font-weight:800;color:#000;line-height:1;margin:2px 0;
+}
+.bb-trust-reviews-label{font-size:11px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em}
+
+.bb-trust-award{
+  width:90px;height:100px;
+  background:linear-gradient(135deg,#FF6B3D 0%,#FF7A00 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.bb-trust-award-text{
+  color:#fff;font-family:'Montserrat',sans-serif;
+  font-weight:800;font-size:9px;letter-spacing:.04em;
+  text-transform:uppercase;text-align:center;line-height:1.3;
 }
 
-.bb-trust-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:17px;
-  font-weight:800;
-  color:#000;
-  line-height:1.2;
-  margin:0;
-  letter-spacing:-.01em;
+/* Detail-Erweiterung unter jedem Trust-Item */
+.bb-trust-item-detail{
+  font-size:12px;line-height:1.5;color:var(--bg-text-body);
+  font-weight:500;max-width:170px;margin-top:2px;
 }
-
-.bb-trust-detail{
-  font-size:13px;
-  line-height:1.55;
-  color:#000;
-  font-weight:500;
-  margin:0;
-}
-.bb-trust-detail a{
-  color:var(--bg-amber);
-  text-decoration:underline;
-  text-underline-offset:2px;
-  font-weight:600;
-}
-.bb-trust-detail strong{font-weight:700}
+.bb-trust-item-detail strong{color:#000;font-weight:700}
+.bb-trust-item-detail a{color:var(--bg-amber);text-decoration:underline;font-weight:600}
 
 /* ============= SECTION-HEAD ============= */
 .bb-head{text-align:center;margin-bottom:64px}
@@ -577,39 +547,47 @@ footer .footer-links a:hover{color:var(--accent)}
 
     <div class="bb-trust">
       <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Compliance</div>
-        <div class="bb-trust-title">DACH-Fokus</div>
-        <div class="bb-trust-detail">DSGVO · BFSG · LUCID — alle DACH-Hebel from day one. Kein US-Tool-Workaround.</div>
+        <div class="bb-trust-tuev">
+          DACH-FOKUS
+          <div class="badge">DTC · D2C</div>
+        </div>
+        <div class="bb-trust-item-detail">
+          <strong>DSGVO · BFSG · LUCID</strong><br>
+          Alle DACH-Hebel from day one.
+        </div>
       </div>
 
       <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Operations</div>
-        <div class="bb-trust-title">AI-Native</div>
-        <div class="bb-trust-detail">1 POC + AI-Operations als operativer Hebel. Kein Junior-Team, kein Account-Manager-Sandwich.</div>
+        <div class="bb-trust-tuev">
+          AI-NATIVE
+          <div class="badge">SOLO + AI</div>
+        </div>
+        <div class="bb-trust-item-detail">
+          <strong>1 POC + AI-Operations</strong><br>
+          Operative Leverage statt Junior-Team.
+        </div>
       </div>
 
       <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Proof</div>
-        <div class="bb-trust-title">Aktive D2C-Brands</div>
-        <div class="bb-trust-detail"><strong>Hearo · Bachgold · Wake · Reerect</strong> — laufende Builds 2024–2026. <a href="/cases/">Cases ansehen</a></div>
+        <div class="bb-trust-reviews">
+          <div class="bb-trust-reviews-name">Aktive Brands</div>
+          <div class="bb-trust-reviews-rating">4</div>
+          <div class="bb-trust-reviews-label">D2C · 2024–2026</div>
+        </div>
+        <div class="bb-trust-item-detail">
+          <strong>Hearo · Bachgold ·<br>Wake · Reerect</strong><br>
+          <a href="/cases/">Cases ansehen →</a>
+        </div>
       </div>
 
       <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Service-Model</div>
-        <div class="bb-trust-title">Founder-Led</div>
-        <div class="bb-trust-detail">Du sprichst direkt mit Moritz. Kein Account-Manager dazwischen, kein Junior-Briefing.</div>
+        <div class="bb-trust-award">
+          <span class="bb-trust-award-text">FOUNDER<br>LED<br>1 POC</span>
+        </div>
+        <div class="bb-trust-item-detail">
+          <strong>Direkt mit Moritz</strong><br>
+          Kein Account-Manager dazwischen.
+        </div>
       </div>
     </div>
   </div>
