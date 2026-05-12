@@ -9,6 +9,8 @@
 <link rel="preload" as="image" href="/assets/img/wissen-hero-founder-2000.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="/assets/img/wissen-marktlogik-2000.jpg" media="(min-width:781px)">
 <link rel="preload" as="image" href="/assets/img/wissen-marktlogik-1100.jpg" media="(max-width:780px)">
+<link rel="preload" as="image" href="/assets/img/wissen-testimonial-2000.jpg" media="(min-width:781px)">
+<link rel="preload" as="image" href="/assets/img/wissen-testimonial-1100.jpg" media="(max-width:780px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -401,6 +403,25 @@ footer .footer-links a:hover{color:var(--accent)}
     background-position:center top;
   }
 }
+
+/* ============= TESTIMONIAL SECTION · weißes 3D-Studio ============= */
+/* Bild bringt eigene Fades oben+unten mit — Overlay nur minimal für Tiefenwirkung */
+.bb-section-testimonial{
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.15) 100%),
+    url('/assets/img/wissen-testimonial-2000.jpg');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-attachment:scroll;
+}
+@media (max-width:780px){
+  .bb-section-testimonial{
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.2) 100%),
+      url('/assets/img/wissen-testimonial-1100.jpg');
+  }
+}
 </style>
 </head>
 <body>
@@ -611,7 +632,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- TESTIMONIAL -->
-<section class="bb-section bb-section-50">
+<section class="bb-section bb-section-50 bb-section-testimonial">
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Real Talk</div>
