@@ -432,6 +432,149 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-mid{text-align:center;padding:40px 0;margin:48px 0}
 .bb-cta-mid p{font-size:14px;color:var(--bg-text-muted);margin-top:14px;font-style:italic}
 
+/* ============= CASE-V2 · Video-First-Layout ============= */
+.bb-case-v2{
+  max-width:1140px;margin:32px auto 0;
+}
+.bb-case-video{
+  position:relative;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#0a0a0a;
+  box-shadow:1px 1px 30px rgba(0,0,0,.16);
+}
+.bb-case-video video,
+.bb-case-video iframe{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;border:none;
+}
+.bb-case-video-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;color:#fff;
+}
+.bb-case-video[data-tint="hearo"] .bb-case-video-placeholder{
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,127,80,.18) 0%, transparent 55%),
+    radial-gradient(circle at 75% 60%, rgba(255,107,61,.10) 0%, transparent 50%),
+    linear-gradient(180deg,#2a1f1a 0%, #0a0a0a 100%);
+}
+.bb-case-video[data-tint="bachgold"] .bb-case-video-placeholder{
+  background:
+    radial-gradient(circle at 70% 30%, rgba(3,5,198,.22) 0%, transparent 55%),
+    linear-gradient(180deg,#0d1430 0%, #050a18 100%);
+}
+.bb-case-video[data-tint="wake"] .bb-case-video-placeholder{
+  background:
+    radial-gradient(circle at 65% 45%, rgba(255,122,0,.22) 0%, transparent 55%),
+    linear-gradient(180deg,#2a1500 0%, #0a0a0a 100%);
+}
+.bb-case-video[data-tint="reerect"] .bb-case-video-placeholder{
+  background:
+    radial-gradient(circle at 30% 35%, rgba(3,5,198,.20) 0%, transparent 55%),
+    radial-gradient(circle at 78% 70%, rgba(245,166,35,.16) 0%, transparent 50%),
+    linear-gradient(180deg,#0a1428 0%, #0a0a0a 100%);
+}
+.bb-case-video-play{
+  width:84px;height:84px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 8px rgba(255,107,61,.18), 0 0 0 22px rgba(255,107,61,.08);
+  cursor:pointer;transition:transform .25s ease;
+}
+.bb-case-video:hover .bb-case-video-play{transform:scale(1.06)}
+.bb-case-video-play svg{width:32px;height:32px;color:#fff;margin-left:4px}
+.bb-case-video-status{
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+}
+.bb-case-video-badge{
+  position:absolute;left:18px;top:18px;
+  background:rgba(0,0,0,.7);color:#fff;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 14px;display:inline-flex;align-items:center;gap:8px;
+  backdrop-filter:blur(6px);
+}
+.bb-case-video-badge.live::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.7);
+}
+.bb-case-video-url{
+  position:absolute;right:18px;top:18px;
+  background:rgba(255,255,255,.95);color:#000;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  padding:8px 14px;
+}
+
+/* Fast-Data Row */
+.bb-case-fastdata{
+  display:grid;grid-template-columns:1.1fr 1fr;
+  gap:48px;align-items:start;
+  background:#fff;
+  padding:32px 36px;
+  box-shadow:1px 1px 30px rgba(0,0,0,.10);
+  border-top:none;
+}
+.bb-case-fastdata-meta{
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-text-muted);margin-bottom:8px;
+}
+.bb-case-fastdata h3{
+  font-family:'Montserrat',sans-serif;
+  font-size:24px;font-weight:700;letter-spacing:-.01em;
+  margin:0 0 6px;color:#000;
+}
+.bb-case-fastdata .tagline{
+  font-size:14.5px;line-height:1.5;color:var(--bg-text-body);
+  margin:0 0 18px;
+}
+.bb-case-fastdata-stats{
+  display:flex;gap:28px;flex-wrap:wrap;
+  margin-top:14px;
+}
+.bb-case-fastdata-stat{display:flex;flex-direction:column;gap:2px}
+.bb-case-fastdata-stat .num{
+  font-family:'Montserrat',sans-serif;
+  font-size:22px;font-weight:800;letter-spacing:-.01em;color:#000;
+  display:inline-flex;align-items:baseline;gap:2px;
+}
+.bb-case-fastdata-stat .num .plus{color:var(--accent);font-size:.7em}
+.bb-case-fastdata-stat .num .arrow{color:var(--bg-green-up);margin-right:3px}
+.bb-case-fastdata-stat .label{
+  font-family:'Montserrat',sans-serif;
+  font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bg-text-muted);
+}
+.bb-case-fastdata-right{display:flex;flex-direction:column;gap:14px;padding-top:4px}
+.bb-case-fastdata-chips{display:flex;flex-wrap:wrap;gap:6px}
+.bb-case-fastdata-chips .bb-chip{
+  background:#f5f3ee;color:#000;
+  border:1px solid var(--line);
+  font-size:11.5px;font-weight:600;
+  padding:5px 11px;border-radius:4px;
+}
+.bb-case-fastdata-link{
+  align-self:flex-start;
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:4px;
+}
+.bb-case-fastdata-link:hover{color:var(--accent);text-decoration:underline}
+.bb-case-fastdata-link::after{content:"→";margin-left:2px}
+
+@media (max-width:880px){
+  .bb-case-fastdata{grid-template-columns:1fr;gap:24px;padding:24px 22px}
+  .bb-case-fastdata-stats{gap:20px}
+  .bb-case-video-play{width:64px;height:64px}
+  .bb-case-video-play svg{width:24px;height:24px}
+}
+
 /* ============= HEARO-SECTION mit Customer-Hintergrund ============= */
 .bb-hearo-section{
   background-image:
@@ -603,51 +746,52 @@ footer .footer-links a:hover{color:var(--accent)}
       <h2>Hearo: Custom-Theme + Multi-Section-Architektur für Premium-Audio.</h2>
     </div>
 
-    <article class="bb-case">
-      <div class="bb-sticker">
-        <span class="top">Build-Time</span>
-        <span class="mid">8 WO</span>
-        <span class="bot">bis Launch</span>
+    <div class="bb-case-v2">
+      <!-- VIDEO -->
+      <div class="bb-case-video" data-tint="hearo" data-brand="hearo" role="button" tabindex="0" aria-label="Hearo Case-Video abspielen">
+        <!-- Sobald Video da: <video src="/assets/videos/cases/hearo.mp4" controls poster="/assets/images/cases/hearo-poster.jpg" preload="metadata"></video> -->
+        <div class="bb-case-video-placeholder">
+          <div class="bb-case-video-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="bb-case-video-status">Case-Video folgt</div>
+        </div>
+        <span class="bb-case-video-badge live">Live</span>
+        <span class="bb-case-video-url">hearo.de</span>
       </div>
 
-      <div class="bb-case-photo t1">
-        <span class="bb-case-tag live">Live</span>
-        <span class="bb-case-url">hearo.de</span>
-<!-- browser-mockup removed: real Hearo image fills the slot -->
-      </div>
-
-      <div class="bb-case-content">
-        <div class="bb-case-meta">Premium-Audio · DTC</div>
-        <h3>Hearo</h3>
-        <div class="bb-case-tagline">Custom-Theme + Multi-Section-Architektur für Premium-Audio.</div>
-
-        <div class="bb-case-quote">"Section-Library, die mit dem Sortiment wächst. Kein Theme-Editor-Frickeln, keine Dev-Loops für jedes neue Produkt."</div>
-
-        <div class="bb-case-stats">
-          <div>
-            <div class="bb-case-stat-num">14<span class="plus">+</span></div>
-            <div class="bb-case-stat-label">Custom Sections</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">100%</div>
-            <div class="bb-case-stat-label">Custom Liquid</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">8</div>
-            <div class="bb-case-stat-label">Wochen<br>bis Launch</div>
+      <!-- FAST DATA -->
+      <div class="bb-case-fastdata">
+        <div class="bb-case-fastdata-left">
+          <div class="bb-case-fastdata-meta">Premium-Audio · DTC</div>
+          <h3>Hearo</h3>
+          <p class="tagline">Custom-Theme + Multi-Section-Architektur. Section-Library, die mit dem Sortiment wächst — kein Dev-Loop für jedes neue Produkt.</p>
+          <div class="bb-case-fastdata-stats">
+            <div class="bb-case-fastdata-stat">
+              <span class="num">8 Wo</span>
+              <span class="label">bis Launch</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">14<span class="plus">+</span></span>
+              <span class="label">Custom Sections</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">100%</span>
+              <span class="label">Custom Liquid</span>
+            </div>
           </div>
         </div>
-
-        <div class="bb-case-chips">
-          <span class="bb-chip">Brand-Doctrine</span>
-          <span class="bb-chip">Voice-Guidelines</span>
-          <span class="bb-chip">PDP-System</span>
-          <span class="bb-chip">Bundle-Konzept</span>
+        <div class="bb-case-fastdata-right">
+          <div class="bb-case-fastdata-chips">
+            <span class="bb-chip">Brand-Doctrine</span>
+            <span class="bb-chip">Voice-Guidelines</span>
+            <span class="bb-chip">PDP-System</span>
+            <span class="bb-chip">Bundle-Konzept</span>
+          </div>
+          <a href="/audit/" class="bb-case-fastdata-link">Tiefer im Audit besprechen</a>
         </div>
-
-        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
       </div>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -659,54 +803,52 @@ footer .footer-links a:hover{color:var(--accent)}
       <h2>Bachgold: 15 Custom-PDPs aus einem idempotenten Generator. <span class="hl-blue">Bundle-Architektur für 7 Bundles.</span></h2>
     </div>
 
-    <article class="bb-case reverse">
-      <div class="bb-sticker dark">
-        <span class="top">Generator</span>
-        <span class="mid">15 PDPs</span>
-        <span class="bot">idempotent</span>
+    <div class="bb-case-v2">
+      <!-- VIDEO -->
+      <div class="bb-case-video" data-tint="bachgold" data-brand="bachgold" role="button" tabindex="0" aria-label="Bachgold Case-Video abspielen">
+        <!-- Sobald Video da: <video src="/assets/videos/cases/bachgold.mp4" controls poster="/assets/images/cases/bachgold-poster.jpg" preload="metadata"></video> -->
+        <div class="bb-case-video-placeholder">
+          <div class="bb-case-video-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="bb-case-video-status">Case-Video folgt</div>
+        </div>
+        <span class="bb-case-video-badge live">Live</span>
+        <span class="bb-case-video-url">bachgold.de</span>
       </div>
 
-      <div class="bb-case-content">
-        <div class="bb-case-meta">Wasserfilter · Re-Launch</div>
-        <h3>Bachgold</h3>
-        <div class="bb-case-tagline">15 Custom-PDPs aus einem idempotenten Generator. Bundle-Architektur für 7 Bundles.</div>
-
-        <div class="bb-case-quote">"Re-Launch ohne Traffic-Verlust. Tausende Produkt-Varianten konsolidiert in eine PDP-Generator-Pipeline, die jedes Mal das gleiche Ergebnis liefert."</div>
-
-        <div class="bb-case-stats">
-          <div>
-            <div class="bb-case-stat-num">15</div>
-            <div class="bb-case-stat-label">Custom PDPs</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">14<span class="plus">+</span></div>
-            <div class="bb-case-stat-label">Reusable Sections</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">7</div>
-            <div class="bb-case-stat-label">Bundles<br>via Generator</div>
+      <!-- FAST DATA -->
+      <div class="bb-case-fastdata">
+        <div class="bb-case-fastdata-left">
+          <div class="bb-case-fastdata-meta">Wasserfilter · Re-Launch</div>
+          <h3>Bachgold</h3>
+          <p class="tagline">15 Custom-PDPs aus einem idempotenten Generator. Re-Launch ohne Traffic-Verlust, 7 Bundles aus einer Pipeline.</p>
+          <div class="bb-case-fastdata-stats">
+            <div class="bb-case-fastdata-stat">
+              <span class="num">15</span>
+              <span class="label">Custom PDPs</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">14<span class="plus">+</span></span>
+              <span class="label">Reusable Sections</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">7</span>
+              <span class="label">Bundles</span>
+            </div>
           </div>
         </div>
-
-        <div class="bb-case-chips">
-          <span class="bb-chip">Idempotenter Generator</span>
-          <span class="bb-chip">Bundle-Master</span>
-          <span class="bb-chip">Section-Library</span>
-          <span class="bb-chip">Repositioning</span>
-        </div>
-
-        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
-      </div>
-
-      <div class="bb-case-photo t2">
-        <span class="bb-case-tag live">Live</span>
-        <span class="bb-case-url">bachgold.de</span>
-        <div class="bb-browser">
-          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">bachgold.de</span></div>
-          <div class="body">Bachgold</div>
+        <div class="bb-case-fastdata-right">
+          <div class="bb-case-fastdata-chips">
+            <span class="bb-chip">Idempotenter Generator</span>
+            <span class="bb-chip">Bundle-Master</span>
+            <span class="bb-chip">Section-Library</span>
+            <span class="bb-chip">Repositioning</span>
+          </div>
+          <a href="/audit/" class="bb-case-fastdata-link">Tiefer im Audit besprechen</a>
         </div>
       </div>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -738,48 +880,52 @@ footer .footer-links a:hover{color:var(--accent)}
       <h2>Wake Performance: Launch-Architektur mit Drop-System für Performance-Apparel.</h2>
     </div>
 
-    <article class="bb-case">
-      <div class="bb-case-photo t3">
-        <span class="bb-case-tag live">Live</span>
-        <span class="bb-case-url">wakeperformance.de</span>
-        <div class="bb-browser">
-          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">wakeperformance.de</span></div>
-          <div class="body">Wake</div>
+    <div class="bb-case-v2">
+      <!-- VIDEO -->
+      <div class="bb-case-video" data-tint="wake" data-brand="wake" role="button" tabindex="0" aria-label="Wake Performance Case-Video abspielen">
+        <!-- Sobald Video da: <video src="/assets/videos/cases/wake.mp4" controls poster="/assets/images/cases/wake-poster.jpg" preload="metadata"></video> -->
+        <div class="bb-case-video-placeholder">
+          <div class="bb-case-video-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="bb-case-video-status">Case-Video folgt</div>
         </div>
+        <span class="bb-case-video-badge live">Live</span>
+        <span class="bb-case-video-url">wakeperformance.de</span>
       </div>
 
-      <div class="bb-case-content">
-        <div class="bb-case-meta">Performance-Apparel · DTC</div>
-        <h3>Wake Performance</h3>
-        <div class="bb-case-tagline">Launch-Architektur mit Drop-System für Performance-Apparel.</div>
-
-        <div class="bb-case-quote">"Launch-Architektur statt Catalog-Theme. Drop-Plan, E-Mail-Setup und Performance-Marketing-Strategie ineinander verzahnt — nicht als isolierte Silos."</div>
-
-        <div class="bb-case-stats">
-          <div>
-            <div class="bb-case-stat-num">v1</div>
-            <div class="bb-case-stat-label">Drop-System<br>live</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">3</div>
-            <div class="bb-case-stat-label">Phasen-Bundle<br>aktiv</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">100%</div>
-            <div class="bb-case-stat-label">ROI<br>Build-rechnet</div>
+      <!-- FAST DATA -->
+      <div class="bb-case-fastdata">
+        <div class="bb-case-fastdata-left">
+          <div class="bb-case-fastdata-meta">Performance-Apparel · DTC</div>
+          <h3>Wake Performance</h3>
+          <p class="tagline">Launch-Architektur statt Catalog-Theme. Drop-Plan, E-Mail-Setup und Performance-Marketing verzahnt — keine isolierten Silos.</p>
+          <div class="bb-case-fastdata-stats">
+            <div class="bb-case-fastdata-stat">
+              <span class="num">v1</span>
+              <span class="label">Drop-System live</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">3</span>
+              <span class="label">Phasen-Bundle</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">100%</span>
+              <span class="label">Build-ROI</span>
+            </div>
           </div>
         </div>
-
-        <div class="bb-case-chips">
-          <span class="bb-chip">Custom-Theme</span>
-          <span class="bb-chip">Drop-System</span>
-          <span class="bb-chip">E-Mail-Setup</span>
-          <span class="bb-chip">Launch-Beratung</span>
+        <div class="bb-case-fastdata-right">
+          <div class="bb-case-fastdata-chips">
+            <span class="bb-chip">Custom-Theme</span>
+            <span class="bb-chip">Drop-System</span>
+            <span class="bb-chip">E-Mail-Setup</span>
+            <span class="bb-chip">Launch-Beratung</span>
+          </div>
+          <a href="/audit/" class="bb-case-fastdata-link">Tiefer im Audit besprechen</a>
         </div>
-
-        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
       </div>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -791,48 +937,52 @@ footer .footer-links a:hover{color:var(--accent)}
       <h2>Reerect: Custom-Theme + Brand-System für skalierungsorientiertes DTC.</h2>
     </div>
 
-    <article class="bb-case reverse">
-      <div class="bb-case-content">
-        <div class="bb-case-meta">DTC · Custom-Build</div>
-        <h3>Reerect</h3>
-        <div class="bb-case-tagline">Custom-Theme + Brand-System für skalierungsorientiertes DTC.</div>
-
-        <div class="bb-case-quote">"Build-First-Mentalität. Brand-Doctrine, Theme und Section-Library so aufgesetzt, dass das Sortiment ohne Dev-Loop wachsen kann."</div>
-
-        <div class="bb-case-stats">
-          <div>
-            <div class="bb-case-stat-num">Custom</div>
-            <div class="bb-case-stat-label">Theme<br>auf Dawn-Basis</div>
+    <div class="bb-case-v2">
+      <!-- VIDEO -->
+      <div class="bb-case-video" data-tint="reerect" data-brand="reerect" role="button" tabindex="0" aria-label="Reerect Case-Video abspielen">
+        <!-- Sobald Video da: <video src="/assets/videos/cases/reerect.mp4" controls poster="/assets/images/cases/reerect-poster.jpg" preload="metadata"></video> -->
+        <div class="bb-case-video-placeholder">
+          <div class="bb-case-video-play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <div>
-            <div class="bb-case-stat-num">Brand</div>
-            <div class="bb-case-stat-label">System<br>komplett</div>
-          </div>
-          <div>
-            <div class="bb-case-stat-num">Live</div>
-            <div class="bb-case-stat-label">Production<br>seit Launch</div>
-          </div>
+          <div class="bb-case-video-status">Case-Video folgt</div>
         </div>
-
-        <div class="bb-case-chips">
-          <span class="bb-chip">Custom-Theme</span>
-          <span class="bb-chip">Brand-Doctrine</span>
-          <span class="bb-chip">Section-Library</span>
-          <span class="bb-chip">Skalierungs-Setup</span>
-        </div>
-
-        <a href="/audit/" class="bb-case-link">Tiefer im Strategy Audit besprechen</a>
+        <span class="bb-case-video-badge live">Live</span>
+        <span class="bb-case-video-url">reerect.com</span>
       </div>
 
-      <div class="bb-case-photo t4">
-        <span class="bb-case-tag live">Live</span>
-        <span class="bb-case-url">reerect.com</span>
-        <div class="bb-browser">
-          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">reerect.com</span></div>
-          <div class="body">Reerect</div>
+      <!-- FAST DATA -->
+      <div class="bb-case-fastdata">
+        <div class="bb-case-fastdata-left">
+          <div class="bb-case-fastdata-meta">DTC · Custom-Build</div>
+          <h3>Reerect</h3>
+          <p class="tagline">Custom-Theme + Brand-System für skalierungsorientiertes DTC. Brand-Doctrine, Theme und Section-Library so aufgesetzt, dass das Sortiment ohne Dev-Loop wachsen kann.</p>
+          <div class="bb-case-fastdata-stats">
+            <div class="bb-case-fastdata-stat">
+              <span class="num">Custom</span>
+              <span class="label">Dawn-Theme</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">Brand</span>
+              <span class="label">System komplett</span>
+            </div>
+            <div class="bb-case-fastdata-stat">
+              <span class="num">Live</span>
+              <span class="label">Production</span>
+            </div>
+          </div>
+        </div>
+        <div class="bb-case-fastdata-right">
+          <div class="bb-case-fastdata-chips">
+            <span class="bb-chip">Custom-Theme</span>
+            <span class="bb-chip">Brand-Doctrine</span>
+            <span class="bb-chip">Section-Library</span>
+            <span class="bb-chip">Skalierungs-Setup</span>
+          </div>
+          <a href="/audit/" class="bb-case-fastdata-link">Tiefer im Audit besprechen</a>
         </div>
       </div>
-    </article>
+    </div>
   </div>
 </section>
 
