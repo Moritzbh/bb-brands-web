@@ -11,6 +11,8 @@
 <link rel="preload" as="image" href="/assets/img/wissen-marktlogik-1100.jpg" media="(max-width:780px)">
 <link rel="preload" as="image" href="/assets/img/wissen-testimonial-2000.jpg" media="(min-width:781px)">
 <link rel="preload" as="image" href="/assets/img/wissen-testimonial-1100.jpg" media="(max-width:780px)">
+<link rel="preload" as="image" href="/assets/img/wissen-bottomcta-2000.jpg" media="(min-width:781px)">
+<link rel="preload" as="image" href="/assets/img/wissen-bottomcta-1100.jpg" media="(max-width:780px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -422,6 +424,26 @@ footer .footer-links a:hover{color:var(--accent)}
       url('/assets/img/wissen-testimonial-1100.jpg');
   }
 }
+
+/* ============= BOTTOM CTA · Founder-Porträt ============= */
+/* Focus oben → Moritz' Kopf voll sichtbar · Dark Fade unten für Text-Lesbarkeit */
+.bb-bottom-wissen{
+  padding:280px 0 96px;
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),
+    url('/assets/img/wissen-bottomcta-2000.jpg');
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+}
+@media (max-width:780px){
+  .bb-bottom-wissen{
+    padding:200px 0 64px;
+    background-image:
+      linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),
+      url('/assets/img/wissen-bottomcta-1100.jpg');
+  }
+}
 </style>
 </head>
 <body>
@@ -721,7 +743,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- BOTTOM-CTA -->
-<section class="bb-bottom">
+<section class="bb-bottom bb-bottom-wissen">
   <div class="wrap">
     <h2>Schon entschieden? Lass uns reden.</h2>
     <p>Wenn du lieber direkt einsteigst statt vorher zu lesen — der Strategy Audit ist der Eintritt für Brands ab Umsatz. Kein Pitch-Deck, kein Smalltalk. 30 Minuten, geradeaus.</p>
