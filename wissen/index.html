@@ -7,6 +7,8 @@
 <title>Wissen · BB Brands</title>
 <link rel="stylesheet" href="/assets/css/shared.css?v=20260509-7">
 <link rel="preload" as="image" href="/assets/img/wissen-hero-founder-2000.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/img/wissen-marktlogik-2000.jpg" media="(min-width:781px)">
+<link rel="preload" as="image" href="/assets/img/wissen-marktlogik-1100.jpg" media="(max-width:780px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -379,6 +381,25 @@ footer .footer-links a:hover{color:var(--accent)}
   .bb-section{padding:56px 0}
   .bb-testimonial-content{padding:32px 28px}
 }
+
+/* ============= MARKTLOGIK SECTION · custom background ============= */
+.bb-section-marktlogik{
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.5) 48%, rgba(255,255,255,0.42) 100%),
+    url('/assets/img/wissen-marktlogik-2000.jpg');
+  background-size:cover;
+  background-position:center 30%;
+  background-repeat:no-repeat;
+  background-attachment:scroll;
+}
+@media (max-width:780px){
+  .bb-section-marktlogik{
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.58) 50%, rgba(255,255,255,0.5) 100%),
+      url('/assets/img/wissen-marktlogik-1100.jpg');
+    background-position:center;
+  }
+}
 </style>
 </head>
 <body>
@@ -492,7 +513,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- MARKTLOGIK · WARUM PROFIT EXPONENTIELL WIRKT -->
-<section class="bb-section bb-section-50">
+<section class="bb-section bb-section-50 bb-section-marktlogik">
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Marktlogik · Warum jetzt</div>
