@@ -444,33 +444,23 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-case-video iframe{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;display:block;border:none;
+  z-index:1;
+}
+/* Wave-Canvas Background (matched Homepage-Hero, audio-reactive ready) */
+.bb-case-video-wave{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:.55;
+  filter:blur(40px) contrast(1.15) saturate(1.3);
+  pointer-events:none;
+  z-index:0;
+}
+@media (prefers-reduced-motion: reduce){
+  .bb-case-video-wave{display:none}
 }
 .bb-case-video-placeholder{
   position:absolute;inset:0;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:18px;color:#fff;
-}
-.bb-case-video[data-tint="hearo"] .bb-case-video-placeholder{
-  background:
-    radial-gradient(circle at 30% 40%, rgba(255,127,80,.18) 0%, transparent 55%),
-    radial-gradient(circle at 75% 60%, rgba(255,107,61,.10) 0%, transparent 50%),
-    linear-gradient(180deg,#2a1f1a 0%, #0a0a0a 100%);
-}
-.bb-case-video[data-tint="bachgold"] .bb-case-video-placeholder{
-  background:
-    radial-gradient(circle at 70% 30%, rgba(3,5,198,.22) 0%, transparent 55%),
-    linear-gradient(180deg,#0d1430 0%, #050a18 100%);
-}
-.bb-case-video[data-tint="wake"] .bb-case-video-placeholder{
-  background:
-    radial-gradient(circle at 65% 45%, rgba(255,122,0,.22) 0%, transparent 55%),
-    linear-gradient(180deg,#2a1500 0%, #0a0a0a 100%);
-}
-.bb-case-video[data-tint="reerect"] .bb-case-video-placeholder{
-  background:
-    radial-gradient(circle at 30% 35%, rgba(3,5,198,.20) 0%, transparent 55%),
-    radial-gradient(circle at 78% 70%, rgba(245,166,35,.16) 0%, transparent 50%),
-    linear-gradient(180deg,#0a1428 0%, #0a0a0a 100%);
+  gap:18px;color:#fff;z-index:2;
 }
 .bb-case-video-play{
   width:84px;height:84px;border-radius:50%;
@@ -739,6 +729,7 @@ footer .footer-links a:hover{color:var(--accent)}
       <!-- VIDEO -->
       <div class="bb-case-video" data-tint="hearo" data-brand="hearo" role="button" tabindex="0" aria-label="Hearo Case-Video abspielen">
         <!-- Sobald Video da: <video src="/assets/videos/cases/hearo.mp4" controls poster="/assets/images/cases/hearo-poster.jpg" preload="metadata"></video> -->
+        <canvas class="bb-case-video-wave" aria-hidden="true"></canvas>
         <div class="bb-case-video-placeholder">
           <div class="bb-case-video-play">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -794,6 +785,7 @@ footer .footer-links a:hover{color:var(--accent)}
       <!-- VIDEO -->
       <div class="bb-case-video" data-tint="bachgold" data-brand="bachgold" role="button" tabindex="0" aria-label="Bachgold Case-Video abspielen">
         <!-- Sobald Video da: <video src="/assets/videos/cases/bachgold.mp4" controls poster="/assets/images/cases/bachgold-poster.jpg" preload="metadata"></video> -->
+        <canvas class="bb-case-video-wave" aria-hidden="true"></canvas>
         <div class="bb-case-video-placeholder">
           <div class="bb-case-video-play">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -869,6 +861,7 @@ footer .footer-links a:hover{color:var(--accent)}
       <!-- VIDEO -->
       <div class="bb-case-video" data-tint="wake" data-brand="wake" role="button" tabindex="0" aria-label="Wake Performance Case-Video abspielen">
         <!-- Sobald Video da: <video src="/assets/videos/cases/wake.mp4" controls poster="/assets/images/cases/wake-poster.jpg" preload="metadata"></video> -->
+        <canvas class="bb-case-video-wave" aria-hidden="true"></canvas>
         <div class="bb-case-video-placeholder">
           <div class="bb-case-video-play">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -924,6 +917,7 @@ footer .footer-links a:hover{color:var(--accent)}
       <!-- VIDEO -->
       <div class="bb-case-video" data-tint="reerect" data-brand="reerect" role="button" tabindex="0" aria-label="Reerect Case-Video abspielen">
         <!-- Sobald Video da: <video src="/assets/videos/cases/reerect.mp4" controls poster="/assets/images/cases/reerect-poster.jpg" preload="metadata"></video> -->
+        <canvas class="bb-case-video-wave" aria-hidden="true"></canvas>
         <div class="bb-case-video-placeholder">
           <div class="bb-case-video-play">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -1022,6 +1016,178 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
   </div>
 </footer>
+
+<script>
+/* === CASE-VIDEO WAVE-CANVAS + AUDIO-REACTOR ===
+   - Per-Instance Wave-Animation (gleiche Logik wie Homepage-Hero, 3 Brand-Waves)
+   - Audio-Reactor: sobald ein <video> Audio liefert, modulieren Bass/Mid/Treble
+     die jeweilige Wellen-Amplitude + Farbsättigung
+   - Ambient-Modus wenn kein Video / Video paused
+   - IntersectionObserver: nur sichtbare Canvases zeichnen → GPU-Schonung
+   - prefers-reduced-motion: komplett aus */
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var COLORS = [
+    { r:   3, g:   5, b: 198, a: 0.55 },  // BB Brands Bold Blue
+    { r: 255, g: 107, b:  61, a: 0.50 },  // Signal Orange
+    { r:  30, g:  58, b: 255, a: 0.40 }   // Soft Indigo
+  ];
+  var WAVE_CONFIGS = [
+    { speed: 0.0008, amplitude: 0.22, frequency: 0.0008, offsetY: 0.70, phase: 0 },
+    { speed: 0.0012, amplitude: 0.18, frequency: 0.0014, offsetY: 0.60, phase: Math.PI / 4 },
+    { speed: 0.0015, amplitude: 0.25, frequency: 0.0010, offsetY: 0.50, phase: Math.PI / 2 }
+  ];
+  var STEP = 25;
+
+  /* AudioReactor — wird pro Video-Element angelegt */
+  function AudioReactor(videoEl){
+    this.video = videoEl;
+    this.ctx = null;
+    this.analyser = null;
+    this.data = null;
+    this.active = false;
+    this.bands = { bass: 0, mid: 0, treble: 0, overall: 0 };
+    var self = this;
+    videoEl.addEventListener('play', function(){ self.start(); });
+    videoEl.addEventListener('pause', function(){ self.active = false; });
+    videoEl.addEventListener('ended', function(){ self.active = false; });
+  }
+  AudioReactor.prototype.start = function(){
+    if(this.active) return;
+    try {
+      if(!this.ctx){
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if(!AC) return;
+        this.ctx = new AC();
+        var source = this.ctx.createMediaElementSource(this.video);
+        this.analyser = this.ctx.createAnalyser();
+        this.analyser.fftSize = 256;
+        this.analyser.smoothingTimeConstant = 0.82;
+        source.connect(this.analyser);
+        this.analyser.connect(this.ctx.destination);
+        this.data = new Uint8Array(this.analyser.frequencyBinCount);
+      }
+      if(this.ctx.state === 'suspended') this.ctx.resume();
+      this.active = true;
+    } catch(e){ /* cross-origin oder andere Restriction → fallback ambient */ }
+  };
+  AudioReactor.prototype.sample = function(){
+    if(!this.active || !this.analyser){
+      this.bands.bass = this.bands.mid = this.bands.treble = this.bands.overall = 0;
+      return this.bands;
+    }
+    this.analyser.getByteFrequencyData(this.data);
+    var n = this.data.length;
+    var bassEnd = Math.floor(n * 0.10);
+    var midEnd  = Math.floor(n * 0.40);
+    var sum = 0, b = 0, m = 0, t = 0;
+    for(var i = 0; i < n; i++){
+      var v = this.data[i] / 255;
+      sum += v;
+      if(i < bassEnd) b += v;
+      else if(i < midEnd) m += v;
+      else t += v;
+    }
+    this.bands.bass    = b / Math.max(1, bassEnd);
+    this.bands.mid     = m / Math.max(1, midEnd - bassEnd);
+    this.bands.treble  = t / Math.max(1, n - midEnd);
+    this.bands.overall = sum / n;
+    return this.bands;
+  };
+
+  /* WaveCanvas — pro .bb-case-video Container */
+  function WaveCanvas(container){
+    this.container = container;
+    this.canvas = container.querySelector('.bb-case-video-wave');
+    if(!this.canvas) return;
+    this.ctx = this.canvas.getContext('2d');
+    if(!this.ctx) return;
+    this.w = 0; this.h = 0; this.waves = []; this.visible = true;
+    var video = container.querySelector('video');
+    this.audio = video ? new AudioReactor(video) : null;
+    var self = this;
+    this.resize();
+    window.addEventListener('resize', function(){ self.resize(); }, { passive: true });
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        self.visible = entries[0].isIntersecting;
+      }, { rootMargin: '80px' }).observe(container);
+    }
+    this.raf = requestAnimationFrame(function tick(t){ self.animate(t); self.raf = requestAnimationFrame(tick); });
+  }
+  WaveCanvas.prototype.initWaves = function(){
+    var self = this;
+    this.waves = WAVE_CONFIGS.map(function(cfg, idx){
+      var pts = [];
+      for(var x = -STEP * 2; x <= self.w + STEP * 2; x += STEP){
+        pts.push({ x: x, y: self.h * cfg.offsetY, baseY: self.h * cfg.offsetY });
+      }
+      return {
+        color: COLORS[idx], speed: cfg.speed, amplitude: cfg.amplitude,
+        frequency: cfg.frequency, offsetY: cfg.offsetY, phase: cfg.phase, points: pts
+      };
+    });
+  };
+  WaveCanvas.prototype.resize = function(){
+    var rect = this.container.getBoundingClientRect();
+    if(rect.width === 0 || rect.height === 0) return;
+    this.w = this.canvas.width  = Math.round(rect.width);
+    this.h = this.canvas.height = Math.round(rect.height);
+    this.initWaves();
+  };
+  WaveCanvas.prototype.animate = function(time){
+    if(!this.visible || this.w === 0) return;
+    var ctx = this.ctx;
+    ctx.clearRect(0, 0, this.w, this.h);
+    var bands = this.audio ? this.audio.sample() : { bass:0, mid:0, treble:0, overall:0 };
+    var audioGains = [bands.bass, bands.mid, bands.treble];
+
+    for(var w = 0; w < this.waves.length; w++){
+      var wave = this.waves[w];
+      var gain = audioGains[w] || 0;
+      var ampMul   = 1 + gain * 1.8;
+      var alphaMul = 1 + gain * 0.5;
+
+      ctx.beginPath();
+      ctx.moveTo(0, this.h);
+      for(var i = 0; i < wave.points.length; i++){
+        var pt = wave.points[i];
+        var waveY = Math.sin(pt.x * wave.frequency + time * wave.speed + wave.phase) * (wave.amplitude * ampMul * this.h);
+        waveY += Math.sin(pt.x * wave.frequency * 3.2 + time * wave.speed * 1.5) * (wave.amplitude * this.h * 0.2);
+
+        var originX = (i - 2) * STEP;
+        pt.x += (originX - pt.x) * 0.08;
+        var targetY = pt.baseY + waveY;
+        pt.y += (targetY - pt.y) * 0.15;
+
+        if(i === 0){
+          ctx.lineTo(pt.x, pt.y);
+        } else {
+          var prev = wave.points[i - 1];
+          var cx = (prev.x + pt.x) / 2;
+          var cy = (prev.y + pt.y) / 2;
+          ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
+        }
+      }
+      ctx.lineTo(this.w, this.h);
+      var alpha = Math.min(1, wave.color.a * alphaMul);
+      ctx.fillStyle = 'rgba(' + wave.color.r + ',' + wave.color.g + ',' + wave.color.b + ',' + alpha + ')';
+      ctx.fill();
+    }
+  };
+
+  /* Init aller .bb-case-video-Container */
+  function init(){
+    document.querySelectorAll('.bb-case-video').forEach(function(c){ new WaveCanvas(c); });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
