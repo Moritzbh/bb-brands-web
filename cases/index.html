@@ -596,9 +596,10 @@ footer .footer-links a:hover{color:var(--accent)}
   .bb-case-video-play svg{width:24px;height:24px}
 }
 
-/* ============= EXTRA SHOWCASE-CASES · weißer Hintergrund, Browser-Mockup mit Live-Screenshot ============= */
+/* ============= EXTRA SHOWCASE-CASES · gleicher Wave+Grid-Hintergrund wie Case-Sections ============= */
 .bb-cases-showcase{
-  background:#fff;
+  background:transparent !important;
+  background-image:none !important;
   padding:96px 0;
 }
 .bb-showcase{
@@ -1128,7 +1129,13 @@ footer .footer-links a:hover{color:var(--accent)}
   </div>
 </section>
 
-<!-- ============= EXTRA SHOWCASE-CASES · 3 weitere Brands mit Browser-Mockup ============= -->
+<!-- ============= EXTRA SHOWCASE-CASES · 3 weitere Brands mit Browser-Mockup · gleicher Wave-Hintergrund ============= -->
+<div class="bb-cases-stage">
+  <div class="bb-cases-stage-wave-wrap" aria-hidden="true">
+    <canvas class="bb-cases-stage-wave"></canvas>
+    <div class="bb-cases-stage-grid"></div>
+  </div>
+
 <section class="bb-section bb-cases-showcase">
   <div class="wrap">
 
@@ -1227,6 +1234,9 @@ footer .footer-links a:hover{color:var(--accent)}
 
   </div>
 </section>
+
+</div>
+<!-- ============= /CASES-STAGE (Showcase) ============= -->
 
 <!-- BOTTOM-CTA (dark mit Foto-BG) -->
 <section class="bb-bottom">
