@@ -1045,6 +1045,23 @@ section.compare-hero:nth-of-type(even){
   position:relative;
   overflow:hidden;
   font-family:'Montserrat',sans-serif;
+  border-top:none;
+}
+/* Folge-Section: Trennlinie weg → Übergang fließend in Weiß */
+section.compare-hero + section{border-top:none}
+/* Bottom-Fade · Mesh-Blobs laufen sanft in #fff aus */
+.compare-fade-bottom{
+  position:absolute;left:0;right:0;bottom:0;
+  height:45%;pointer-events:none;z-index:2;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,.08) 15%,
+    rgba(255,255,255,.22) 30%,
+    rgba(255,255,255,.45) 45%,
+    rgba(255,255,255,.70) 60%,
+    rgba(255,255,255,.88) 75%,
+    rgba(255,255,255,.97) 90%,
+    #ffffff 100%);
 }
 /* Mesh-Blobs · Blue + Orange floating (matched Hero-Section) */
 section.compare-hero::before{
@@ -3076,6 +3093,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </div>
     </div>
   </div>
+  <!-- Bottom-Fade · Mesh-Blobs laufen sanft in Weiß aus -->
+  <div class="compare-fade-bottom" aria-hidden="true"></div>
 </section>
 
 <!-- ============= 6 · CASES (Dirty · Baulig-Pattern) — versteckt zugunsten Video-Coverflow weiter unten ============= -->
