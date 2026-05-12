@@ -257,7 +257,7 @@ footer .footer-links a:hover{color:var(--accent)}
   background-size:cover;background-position:center;min-height:480px;
   position:relative;
 }
-.bb-case-photo.t1{background-image:linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.10)),url("/assets/images/cases/hearo-cover-customer.jpg");background-size:cover;background-position:25% center}
+.bb-case-photo.t1{background:#000}
 .bb-case-photo.t2{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#000 0%,var(--blue) 100%)}
 .bb-case-photo.t3{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#FF7A00 0%,#000 100%)}
 .bb-case-photo.t4{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(135deg,#02038F 0%,var(--bg-amber) 100%)}
@@ -432,6 +432,20 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-mid{text-align:center;padding:40px 0;margin:48px 0}
 .bb-cta-mid p{font-size:14px;color:var(--bg-text-muted);margin-top:14px;font-style:italic}
 
+/* ============= HEARO-SECTION mit Customer-Hintergrund ============= */
+.bb-hearo-section{
+  background-image:
+    linear-gradient(rgba(255,255,255,.62), rgba(255,255,255,.72)),
+    url("/assets/images/cases/hearo-cover-customer.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+@media (max-width:780px){
+  .bb-hearo-section{background-attachment:scroll}
+}
+
 /* ============= DISCLAIMER · gleiches Bild wie Hero, aber Original-Strenge des Overlays ============= */
 .bb-cases-disclaimer-section{
   background-image:
@@ -582,7 +596,7 @@ footer .footer-links a:hover{color:var(--accent)}
 </section>
 
 <!-- CASE 1: HEARO -->
-<section class="bb-section bb-section-90">
+<section class="bb-section bb-hearo-section">
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Case 01 · Premium-Audio · Live</div>
