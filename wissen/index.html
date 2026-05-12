@@ -307,7 +307,7 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-card-link::after{content:"→";transition:transform .2s}
 .bb-card:hover .bb-card-link::after{transform:translateX(4px)}
 
-/* ============= TOOLS-CARDS · Premium-Style (Bild dominanter, Body kompakter) ============= */
+/* ============= TOOLS-CARDS · Premium-Style mit Custom-Icons ============= */
 .bb-cards.tools .bb-card{
   border-radius:6px;
   overflow:hidden;
@@ -325,15 +325,21 @@ footer .footer-links a:hover{color:var(--accent)}
   aspect-ratio:4/3;
   position:relative;
   overflow:hidden;
+  background:linear-gradient(180deg,#FAF7F2 0%,#F2EBE0 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-image:none !important;
 }
-.bb-cards.tools .bb-card-thumb img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .7s cubic-bezier(.16,1,.3,1);
+.bb-cards.tools .bb-card-thumb img{display:none}
+.bb-cards.tools .bb-card-thumb .tool-icon{
+  width:38%;
+  max-width:140px;
+  height:auto;
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
 }
-.bb-cards.tools .bb-card:hover .bb-card-thumb img{
-  transform:scale(1.05);
+.bb-cards.tools .bb-card:hover .bb-card-thumb .tool-icon{
+  transform:scale(1.07) translateY(-2px);
 }
 .bb-cards.tools .bb-card-tag{
   top:14px;left:14px;
@@ -775,9 +781,16 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="bb-cards tools">
 
       <a href="/wissen/roas-rechner/" class="bb-card">
-        <div class="bb-card-thumb t5">
-          <img src="/assets/img/wissen-tool-roas.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <div class="bb-card-thumb">
           <span class="bb-card-tag">Tool · Ads</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- Eingang (kleine Säule) -->
+            <rect x="12" y="58" width="18" height="30" fill="#0a0a0a" rx="1"/>
+            <!-- Multiplikator-Kreuz -->
+            <path d="M40 38 L56 54 M56 38 L40 54" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+            <!-- Ausgang (große orange Säule) -->
+            <rect x="68" y="22" width="18" height="66" fill="#FF6B3D" rx="1"/>
+          </svg>
         </div>
         <div class="bb-card-body">
           <h3>Break-Even ROAS Rechner</h3>
@@ -788,9 +801,15 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/marge-rechner/" class="bb-card">
-        <div class="bb-card-thumb t2">
-          <img src="/assets/img/wissen-tool-marge.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <div class="bb-card-thumb">
           <span class="bb-card-tag">Tool · Profit</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- 4 Bars · Wasserfall absteigend, letzter = orange (Marge) -->
+            <rect x="8"  y="14" width="18" height="74" fill="#0a0a0a" rx="1"/>
+            <rect x="30" y="30" width="18" height="58" fill="#0a0a0a" rx="1"/>
+            <rect x="52" y="50" width="18" height="38" fill="#0a0a0a" rx="1"/>
+            <rect x="74" y="68" width="18" height="20" fill="#FF6B3D" rx="1"/>
+          </svg>
         </div>
         <div class="bb-card-body">
           <h3>Profit-Marge Rechner</h3>
@@ -801,9 +820,16 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/aov-rechner/" class="bb-card">
-        <div class="bb-card-thumb t1">
-          <img src="/assets/img/wissen-tool-aov.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <div class="bb-card-thumb">
           <span class="bb-card-tag">Tool · Wachstum</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- 3 gestapelte Plattformen (unten breit → oben schmal, oberste = orange) -->
+            <rect x="18" y="74" width="64" height="12" fill="#0a0a0a" rx="1"/>
+            <rect x="26" y="56" width="48" height="12" fill="#0a0a0a" rx="1"/>
+            <rect x="34" y="38" width="32" height="12" fill="#FF6B3D" rx="1"/>
+            <!-- Pfeil nach oben -->
+            <path d="M50 30 L50 12 M40 22 L50 12 L60 22" stroke="#FF6B3D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <div class="bb-card-body">
           <h3>AOV-Uplift Simulator</h3>
