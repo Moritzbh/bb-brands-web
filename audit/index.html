@@ -114,7 +114,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 /* ============= AUDIT TRUST MARQUEE · matched Homepage ============= */
 .audit-trust-marquee{
   margin-top:24px;
-  display:flex;align-items:center;gap:20px;
+  display:flex;align-items:center;gap:24px;
   padding-top:24px;border-top:1px solid var(--line);
 }
 .audit-trust-marquee .marquee-label{
@@ -122,15 +122,18 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
   font-family:'Inter Tight',-apple-system,sans-serif;
   font-size:11px;font-weight:600;color:var(--text-3);
   text-transform:uppercase;letter-spacing:.18em;
-  padding-right:16px;border-right:1px solid var(--line);
 }
+/* Track-Wrap · schmaler, nach rechts gepusht, deutlicher Fade-In links → Logos "aus dem Nichts" */
 .audit-trust-marquee .marquee-track-wrap{
-  flex:1;overflow:hidden;position:relative;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  flex:none;
+  width:320px;max-width:60%;
+  margin-left:auto;
+  overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 76%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 76%,transparent 100%);
 }
 .audit-trust-marquee .marquee-track{
-  display:flex;align-items:center;gap:64px;
+  display:flex;align-items:center;gap:56px;
   animation:audit-trust-scroll 22s linear infinite;
   width:max-content;
 }
@@ -144,15 +147,15 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 .audit-trust-marquee .marquee-track img:hover{opacity:.85}
 @keyframes audit-trust-scroll{
   from{transform:translateX(0)}
-  to{transform:translateX(calc(-50% - 32px))}
+  to{transform:translateX(calc(-50% - 28px))}
 }
 @media (prefers-reduced-motion: reduce){
   .audit-trust-marquee .marquee-track{animation:none}
 }
 @media (max-width:780px){
   .audit-trust-marquee{flex-direction:column;align-items:flex-start;gap:14px;padding-top:18px}
-  .audit-trust-marquee .marquee-label{border-right:none;padding-right:0;font-size:10px}
-  .audit-trust-marquee .marquee-track-wrap{width:100%}
+  .audit-trust-marquee .marquee-label{font-size:10px}
+  .audit-trust-marquee .marquee-track-wrap{width:100%;max-width:none;margin-left:0}
 }
 .hero-left .anchor-cta{
   display:none;
