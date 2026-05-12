@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Strategy Audit anfragen — der Eintritt in BB Brands. 2 Wochen Diagnose, dann entscheiden wir gemeinsam.">
+<meta name="description" content="Strategy Audit · Buch dir direkt 30 Minuten Diagnose mit einem DTC-Operator aus dem BB-Brands-Team. Keine Pitch-Decks, kein Push. Ehrliche Diagnose von Profit, Conversion, Retention und Operations — und nur wenn es passt, übernimmt Moritz.">
 <title>Strategy Audit · BB Brands</title>
 <link rel="stylesheet" href="/assets/css/shared.css?v=20260509-7">
-<!-- Akzent-Schrift: Saira Condensed (Fallback bis Dax OT eingebunden) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -14,66 +13,171 @@
 <script src="/assets/js/consent.js?v=20260509-7" defer></script>
 <script src="/assets/js/attribution.js?v=20260509-7" defer></script>
 <script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+
+<!-- Calendly Inline Widget · async loaded -->
+<link rel="preconnect" href="https://assets.calendly.com">
+<script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
+
 <style>
-.stub-section{padding:120px 0 80px;background:var(--bg);min-height:60vh}
-.stub-section h1{
-  font-size:54px;font-weight:800;
-  letter-spacing:-.025em;line-height:1.05;
-  margin-bottom:20px;max-width:780px;
-}
-.stub-section h1 em{color:var(--accent);font-style:normal}
-.stub-section .lede{font-size:19px;color:var(--text-2);max-width:640px;margin-bottom:36px;line-height:1.55}
+/* ============= PAGE BASE ============= */
+.audit-page{padding:0 0 0;background:var(--bg);font-family:'Inter Tight',-apple-system,sans-serif}
 
-.audit-block{
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:18px;padding:48px 48px;max-width:760px;
-  box-shadow:0 4px 28px rgba(0,0,0,.04);margin-top:32px;
+/* ============= HERO ============= */
+.audit-hero{padding:96px 0 56px;position:relative;overflow:hidden}
+.audit-hero .eyebrow{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;display:inline-block;
 }
-.audit-block .eyebrow{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;margin-bottom:18px;display:inline-block}
-.audit-block h2{font-size:32px;font-weight:800;letter-spacing:-.018em;line-height:1.1;margin-bottom:14px}
-.audit-block h2 em{color:var(--accent);font-style:normal}
-.audit-block .audit-sub{font-size:16px;color:var(--text-2);margin-bottom:32px;line-height:1.55}
-
-.audit-includes{margin:24px 0 32px;padding:18px 22px;background:#fff;border:1px solid var(--line);border-radius:10px;border-left:3px solid var(--accent)}
-.audit-includes h3{font-size:13px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
-.audit-includes ul{list-style:none;margin:0;padding:0}
-.audit-includes li{font-size:14px;color:var(--text);padding:5px 0;display:flex;gap:10px;align-items:flex-start}
-.audit-includes li::before{content:"✓";color:var(--accent);font-weight:800;flex-shrink:0}
-
-form .field{margin-bottom:18px}
-form label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--text-3);margin-bottom:6px}
-form input,form select,form textarea{
-  width:100%;background:var(--bg-input);border:1px solid var(--line);
-  border-radius:8px;color:var(--text);font-family:inherit;font-size:15px;
-  padding:13px 14px;transition:all .15s ease;
+.audit-hero h1{
+  font-size:54px;font-weight:800;line-height:1.05;letter-spacing:-.025em;
+  color:var(--text);margin-bottom:22px;max-width:880px;
 }
-form input:focus,form select:focus,form textarea:focus{
-  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,61,.12);
+.audit-hero h1 em{color:var(--accent);font-style:normal}
+.audit-hero h1 .hl-blue{color:var(--blue)}
+.audit-hero .lede{
+  font-size:19px;line-height:1.55;color:var(--text-2);
+  max-width:680px;margin-bottom:36px;font-weight:500;
 }
-form input::placeholder,form textarea::placeholder{color:var(--text-4)}
-form textarea{resize:vertical;min-height:90px}
-form select{
-  appearance:none;-webkit-appearance:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%23787872' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;
+.audit-hero-meta{
+  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
+  font-size:13px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;margin-top:24px;
 }
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.audit-submit{
-  width:100%;background:var(--accent);color:#fff;
-  padding:17px 24px;border-radius:8px;font-weight:700;font-size:15px;
-  border:none;cursor:pointer;font-family:inherit;
-  transition:all .2s ease;margin-top:6px;
-  box-shadow:0 4px 14px rgba(255,107,61,.25);letter-spacing:-.005em;
-}
-.audit-submit:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 22px rgba(255,107,61,.35)}
-.audit-meta{font-size:12.5px;color:var(--text-3);margin-top:18px;text-align:center}
+.audit-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
+.audit-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:#16a34a}
+.audit-hero-meta .item strong{color:var(--text)}
 
 @media (max-width:780px){
-  .stub-section{padding:60px 0 50px}
-  .stub-section h1{font-size:32px}
-  .stub-section .lede{font-size:16px}
-  .audit-block{padding:30px 24px}
-  .field-row{grid-template-columns:1fr}
+  .audit-hero{padding:64px 0 40px}
+  .audit-hero h1{font-size:32px}
+  .audit-hero .lede{font-size:16px}
+  .audit-hero-meta{gap:18px;font-size:11px}
+}
+
+/* ============= DISCOVERY STORY (matched Homepage Team-Flow) ============= */
+.audit-story{padding:56px 0 24px;position:relative}
+.audit-story-grid{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:64px;
+  align-items:start;max-width:1100px;margin:0 auto;
+}
+@media (max-width:980px){
+  .audit-story-grid{grid-template-columns:1fr;gap:40px}
+}
+.audit-story .step-label{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:18px;
+}
+.audit-story .step-label .num{
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-size:18px;font-weight:800;color:var(--blue);letter-spacing:-.02em;
+}
+.audit-story .step-label .line{width:32px;height:1px;background:var(--line)}
+.audit-story h2{
+  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  color:var(--text);margin-bottom:18px;max-width:560px;
+}
+.audit-story h2 em{color:var(--accent);font-style:normal}
+.audit-story p.story-body{
+  font-size:17px;line-height:1.6;color:var(--text-2);
+  margin-bottom:14px;max-width:540px;
+}
+.audit-story p.story-body strong{color:var(--text);font-weight:700}
+.audit-story .story-quote{
+  border-left:3px solid var(--accent);
+  padding:8px 0 8px 22px;margin:24px 0 4px;
+  font-size:18px;font-weight:600;line-height:1.5;color:var(--text);
+  max-width:540px;
+}
+.audit-story .story-quote em{font-style:italic;color:var(--text-2);font-weight:500}
+
+/* ============= INCLUDES PANEL (rechts neben Story) ============= */
+.audit-includes-panel{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:32px 32px 28px;box-shadow:0 4px 28px rgba(0,0,0,.04);
+}
+.audit-includes-panel h3{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:16px;
+}
+.audit-includes-panel ul{list-style:none;margin:0 0 18px;padding:0}
+.audit-includes-panel li{
+  font-size:14.5px;line-height:1.55;color:var(--text);
+  padding:9px 0 9px 28px;position:relative;
+  border-bottom:1px solid var(--line);
+}
+.audit-includes-panel li:last-child{border-bottom:none}
+.audit-includes-panel li::before{
+  content:"✓";color:var(--accent);font-weight:800;
+  position:absolute;left:0;top:9px;
+  font-size:16px;
+}
+.audit-includes-panel .panel-foot{
+  font-size:12.5px;color:var(--text-3);line-height:1.55;
+  border-top:1px solid var(--line);padding-top:16px;margin-top:4px;
+}
+.audit-includes-panel .panel-foot strong{color:var(--text);font-weight:700}
+
+/* ============= CALENDLY (Booking-Section) ============= */
+.audit-booking{padding:56px 0 96px;position:relative;scroll-margin-top:80px}
+.audit-booking .booking-head{text-align:center;margin-bottom:36px;max-width:760px;margin-left:auto;margin-right:auto}
+.audit-booking .booking-eyebrow{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:inline-block;
+}
+.audit-booking h2{
+  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  color:var(--text);margin-bottom:16px;
+}
+.audit-booking h2 em{color:var(--accent);font-style:normal}
+.audit-booking .booking-sub{
+  font-size:17px;line-height:1.55;color:var(--text-2);
+  max-width:600px;margin:0 auto;
+}
+
+.calendly-wrap{
+  max-width:1080px;margin:0 auto;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.05);
+}
+.calendly-inline-widget{min-width:320px;height:760px}
+
+/* ============= FALLBACK · WhatsApp ============= */
+.audit-fallback{
+  text-align:center;margin-top:48px;padding:32px 24px;
+  background:#fafaf7;border:1px solid var(--line);border-radius:12px;
+  max-width:600px;margin-left:auto;margin-right:auto;
+}
+.audit-fallback p.fallback-lede{
+  font-size:13px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:14px;
+}
+.audit-fallback .fallback-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;background:#25D366;color:#fff;
+  border-radius:8px;font-weight:700;font-size:14px;letter-spacing:.01em;
+  text-decoration:none;box-shadow:0 4px 14px rgba(37,211,102,.3);
+  transition:all .2s ease;
+}
+.audit-fallback .fallback-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,211,102,.4);text-decoration:none;color:#fff}
+.audit-fallback .fallback-meta{
+  font-size:12px;color:var(--text-3);margin-top:12px;line-height:1.5;
+}
+
+@media (max-width:780px){
+  .audit-story{padding:32px 0 16px}
+  .audit-story h2{font-size:26px}
+  .audit-story p.story-body{font-size:15px}
+  .audit-story .story-quote{font-size:16px}
+  .audit-includes-panel{padding:24px 22px 22px}
+  .audit-booking{padding:32px 0 64px}
+  .audit-booking h2{font-size:26px}
+  .audit-booking .booking-sub{font-size:15px}
+  .calendly-inline-widget{height:680px}
 }
 </style>
 </head>
@@ -108,15 +212,15 @@ form select{
     <a href="/" class="brand-logo" aria-label="BB Brands Startseite"><span class="brand-mark-mirror">B</span>Brands</a>
     <nav class="main-nav" aria-label="Hauptnavigation">
       <a href="/">Startseite</a>
-      <a href="/cases/" >Cases</a>
-      <a href="/wissen/" >Wissen</a>
-      <a href="https://founder-os.bb-brands.de" >Founder OS</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
     </nav>
     <div class="header-actions">
-      <button class="header-search" aria-label="Suche">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-      </button>
-      <a href="/audit/" class="header-cta">Audit anfragen</a>
+      <a href="/kunden/" class="header-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <span>Kunden-Login</span>
+      </a>
+      <a href="#booking" class="header-cta">Termin buchen</a>
       <button class="mobile-toggle" aria-label="Menü" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
@@ -126,77 +230,85 @@ form select{
 
 <div class="mobile-menu">
   <a href="/">Startseite</a>
-  <a href="/cases/">Cases</a>
   <a href="/wissen/">Wissen</a>
   <a href="https://founder-os.bb-brands.de">Founder OS</a>
-  <a href="/audit/" class="mobile-cta">Strategy Audit anfragen →</a>
+  <a href="#booking" class="mobile-cta">Termin buchen →</a>
 </div>
 
-<section class="stub-section">
-  <div class="wrap">
-    <h1>Strategy <em>Audit</em></h1>
-    <p class="lede">Der Eintritt in BB Brands. Zwei Wochen Diagnose deines Setups. Danach entscheiden wir gemeinsam, ob Bridge-Paket, einzelne Phase oder Full Transformation passt — oder ob es gerade nicht passt.</p>
+<main class="audit-page">
 
-    <div class="audit-block">
-      <div class="eyebrow">Audit anfragen</div>
-      <h2>Bereit für die <em>Transformation?</em></h2>
-      <p class="audit-sub">Wenn dein Setup zu uns passt, melden wir uns innerhalb 1 Werktag.</p>
+  <!-- ============= 1 · HERO ============= -->
+  <section class="audit-hero">
+    <div class="wrap">
+      <div class="eyebrow">Strategy Audit</div>
+      <h1>30 Minuten <em>ehrliche Diagnose.</em><br>Direkt mit einem Experten — nicht mit einem Verkäufer.</h1>
+      <p class="lede">Buch dir direkt einen Slot. Im ersten Call sprichst du mit jemandem aus meinem Team — DTC-Operatoren, die dein Geschäft sofort einordnen. Wenn es passt, übernehme ich persönlich.</p>
 
-      <div class="audit-includes">
-        <h3>Was du im Strategy Audit bekommst</h3>
-        <ul>
-          <li>Brand-, Markt- und Wettbewerbs-Audit (AI-beschleunigt)</li>
-          <li>Conversion-Diagnose deines bestehenden Shops mit priorisierten Hebeln</li>
-          <li>Operative Engpass-Analyse — wo verbrennt das Team Zeit?</li>
-          <li>Transformations-Plan mit konkreter Phasen-Empfehlung</li>
-          <li>Walkthrough-Call zur Übergabe</li>
-        </ul>
+      <div class="audit-hero-meta">
+        <span class="item"><strong>30 Min</strong> · ehrliche Diagnose</span>
+        <span class="item">Kein Pitch · <strong>kein Push</strong></span>
+        <span class="item"><strong>Passt es nicht?</strong> Sagen wir's.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 2 · DISCOVERY STORY (Why this Call?) ============= -->
+  <section class="audit-story">
+    <div class="wrap">
+      <div class="audit-story-grid">
+
+        <div class="story-text">
+          <div class="step-label"><span class="num">01</span><span class="line"></span><span>Discovery</span></div>
+          <h2>Mit Experten reden, <em>nicht mit Verkäufern.</em></h2>
+          <p class="story-body">Im Discovery sprichst du mit jemandem aus meinem Team — DTC-Operatoren, die dein Geschäft sofort einordnen. Keine Pitch-Decks, kein Push.</p>
+          <p class="story-body"><strong>30 Minuten ehrliche Diagnose.</strong> Wir gehen Conversion, AOV, Retention, E-Mail-Umsatz und Creative-Output gemeinsam durch.</p>
+          <p class="story-quote">Passt es nicht, <em>sagen wir's.</em><br>Passt es, <strong>übernehme ich.</strong></p>
+        </div>
+
+        <aside class="audit-includes-panel">
+          <h3>Was im Audit drinsteckt</h3>
+          <ul>
+            <li>Brand-, Markt- und Wettbewerbs-Audit (AI-beschleunigt)</li>
+            <li>Conversion-Diagnose deines bestehenden Shops mit priorisierten Hebeln</li>
+            <li>Operative Engpass-Analyse — wo verbrennt das Team Zeit?</li>
+            <li>Transformations-Plan mit konkreter Phasen-Empfehlung</li>
+            <li>Walkthrough-Call zur Übergabe</li>
+          </ul>
+          <p class="panel-foot">Pre-Launch? Dann ist <a href="https://founder-os.bb-brands.de" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Founder OS</a> dein Weg — nicht der Strategy Audit.<br><strong>Pro Quartal max. 3–4 neue Projekte · DACH-Fokus.</strong></p>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 3 · CALENDLY BOOKING ============= -->
+  <section class="audit-booking" id="booking">
+    <div class="wrap">
+      <div class="booking-head">
+        <div class="booking-eyebrow">Termin buchen</div>
+        <h2>Such dir <em>direkt</em> einen Slot.</h2>
+        <p class="booking-sub">30 Min via Google Meet · komplett kostenlos · bring deinen Shop-Stack und deine Zahlen mit, dann lohnt sich der Call.</p>
       </div>
 
-      <form action="mailto:info@bb-brands.de" method="post" enctype="text/plain">
-        <div class="field-row">
-          <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
-          <div class="field"><label for="email">E-Mail</label><input type="email" id="email" name="email" required></div>
-        </div>
-        <div class="field"><label for="brand">Brand-URL</label><input type="url" id="brand" name="brand" placeholder="https:// — optional"></div>
-        <div class="field">
-          <label for="stage">Brand-Stage</label>
-          <select id="stage" name="stage" required>
-            <option value="">Bitte wählen…</option>
-            <option value="tier-2-low">Unter 500k Jahresumsatz · Tier 2</option>
-            <option value="tier-2-mid">500k – 1 Mio Jahresumsatz · Tier 2</option>
-            <option value="tier-3-low">1 – 5 Mio Jahresumsatz · Tier 3</option>
-            <option value="tier-3-mid">5 – 10 Mio Jahresumsatz · Tier 3</option>
-            <option value="tier-3-high">10 – 20 Mio+ Jahresumsatz · Tier 3</option>
-          </select>
-          <p style="font-size:12px;color:var(--text-3);margin-top:6px;line-height:1.5">Pre-Launch / Idee-Stadium? Dann ist <a href="https://founder-os.bb-brands.de" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Founder OS</a> dein Weg, nicht der Strategy Audit.</p>
-        </div>
-        <div class="field">
-          <label for="timing">Wann willst du starten?</label>
-          <select id="timing" name="timing" required>
-            <option value="">Bitte wählen…</option>
-            <option value="sofort">Sofort</option>
-            <option value="4w">In 4 Wochen</option>
-            <option value="8w-plus">In 8 Wochen+</option>
-            <option value="orientierung">Erst orientieren</option>
-          </select>
-        </div>
-        <div class="field"><label for="pain">Was ist gerade dein größter Engpass?</label><textarea id="pain" name="pain" maxlength="280" placeholder="Max. 280 Zeichen — ein Satz reicht." required></textarea></div>
-        <button type="submit" class="audit-submit">Strategy Audit anfragen →</button>
-        <p class="audit-meta">Antwort innerhalb 1 Werktag · Pro Quartal max. 3–4 neue Projekte</p>
-      </form>
+      <div class="calendly-wrap">
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/moritzbohmbach/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=audit-page&utm_campaign=strategy-audit"
+             aria-label="Calendly Booking-Widget — 30-Minuten Strategy-Audit-Call"></div>
+      </div>
 
-      <div class="audit-alt" style="margin-top:32px;padding-top:32px;border-top:1px solid var(--line);text-align:center">
-        <p style="font-size:13px;color:var(--text-3);margin-bottom:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase">Lieber direkt schreiben?</p>
-        <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20m%C3%B6chte%20%C3%BCber%20einen%20Strategy%20Audit%20sprechen." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:#25D366;color:#fff;border-radius:8px;font-weight:700;font-size:14px;letter-spacing:.01em;text-decoration:none;box-shadow:0 4px 14px rgba(37,211,102,.3);transition:all .2s">
+      <!-- WhatsApp Fallback -->
+      <div class="audit-fallback">
+        <p class="fallback-lede">Kein passender Slot dabei?</p>
+        <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20m%C3%B6chte%20%C3%BCber%20einen%20Strategy%20Audit%20sprechen." target="_blank" rel="noopener" class="fallback-cta">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Direkt per WhatsApp
         </a>
-        <p style="font-size:12px;color:var(--text-3);margin-top:10px;line-height:1.5">Kurze Nachricht, persönliche Antwort — meistens innerhalb 2 Stunden.</p>
+        <p class="fallback-meta">Kurze Nachricht, persönliche Antwort — meistens innerhalb 2 Stunden.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+</main>
 
 <footer>
   <div class="wrap">
