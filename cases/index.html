@@ -451,27 +451,42 @@ footer .footer-links a:hover{color:var(--accent)}
   gap:18px;color:#fff;
 }
 
-/* ============= CASE-SECTION mit Wave-Canvas-Hintergrund (matched Homepage-Hero) ============= */
+/* ============= CASES-STAGE · gemeinsamer Wave-Canvas (sticky, durchläuft alle 4 Cases) ============= */
+.bb-cases-stage{
+  position:relative;
+}
+.bb-cases-stage > .bb-section{position:relative;z-index:1}
+
+/* Case-Sections transparent damit der gemeinsame Stage-Canvas durchscheint */
 .bb-case-section{
-  position:relative;overflow:hidden;
-  background-color:#fff;
+  background-color:transparent !important;
   background-image:none !important;
 }
-.bb-case-section .wrap{position:relative;z-index:1}
-.bb-case-section-wave-wrap{
-  position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+
+/* Wave-Wrap: absolute über stage-höhe, clipt overflow */
+.bb-cases-stage-wave-wrap{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  z-index:0;pointer-events:none;
+  overflow:hidden;
   display:none;
 }
 @media (min-width:768px){
-  .bb-case-section-wave-wrap{display:block}
+  .bb-cases-stage-wave-wrap{display:block}
 }
-.bb-case-section-wave{
-  position:absolute;inset:0;width:100%;height:100%;
+
+/* Canvas sticky am Viewport-Top, scrollt durch ganze Stage */
+.bb-cases-stage-wave{
+  position:sticky;
+  top:0;
+  display:block;
+  width:100%;
+  height:100vh;
   opacity:.40;
   filter:blur(70px) contrast(1.15) saturate(1.3);
   pointer-events:none;
 }
-.bb-case-section-grid{
+.bb-cases-stage-grid{
   position:absolute;inset:0;pointer-events:none;
   background-image:
     linear-gradient(to right, rgba(15,23,42,.02) 1px, transparent 1px),
@@ -479,7 +494,7 @@ footer .footer-links a:hover{color:var(--accent)}
   background-size:80px 80px;
 }
 @media (prefers-reduced-motion: reduce){
-  .bb-case-section-wave{display:none}
+  .bb-cases-stage-wave{display:none}
 }
 .bb-case-video-play{
   width:84px;height:84px;border-radius:50%;
@@ -579,6 +594,116 @@ footer .footer-links a:hover{color:var(--accent)}
   .bb-case-fastdata-stats{gap:14px}
   .bb-case-video-play{width:64px;height:64px}
   .bb-case-video-play svg{width:24px;height:24px}
+}
+
+/* ============= EXTRA SHOWCASE-CASES · gleicher Wave+Grid-Hintergrund wie Case-Sections ============= */
+.bb-cases-showcase{
+  background:transparent !important;
+  background-image:none !important;
+  padding:96px 0;
+}
+.bb-showcase{
+  position:relative;
+  margin-bottom:88px;
+  max-width:1080px;margin-left:auto;margin-right:auto;
+}
+.bb-showcase:last-child{margin-bottom:0}
+
+.bb-showcase-num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:120px;line-height:1;
+  letter-spacing:-.02em;
+  color:rgba(0,0,0,.10);
+  margin-bottom:32px;
+  user-select:none;
+}
+
+.bb-showcase-head{
+  display:grid;grid-template-columns:1fr auto;
+  gap:32px;align-items:end;
+  margin-bottom:32px;
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(0,0,0,.10);
+}
+.bb-showcase-info h3{
+  font-family:'Montserrat',sans-serif;
+  font-size:26px;font-weight:700;letter-spacing:-.01em;
+  margin:0 0 6px;color:#000;
+}
+.bb-showcase-info p{
+  font-size:14.5px;line-height:1.5;
+  color:var(--bg-text-muted);margin:0;
+}
+.bb-showcase-live{
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.02em;
+  color:var(--bg-text-body);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  white-space:nowrap;
+  transition:color .15s ease;
+}
+.bb-showcase-live:hover{color:var(--accent);text-decoration:none}
+.bb-showcase-live svg{width:13px;height:13px}
+
+/* Browser-Mockup */
+.bb-showcase-browser{
+  background:#f5f3ee;
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.18);
+}
+.bb-showcase-browser-bar{
+  background:#eae6dc;
+  padding:13px 18px;
+  display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.bb-showcase-dots{display:flex;gap:6px;flex-shrink:0}
+.bb-showcase-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:rgba(0,0,0,.18);
+}
+.bb-showcase-url{
+  flex:1;max-width:520px;margin:0 auto;
+  background:#fff;border-radius:999px;
+  padding:7px 16px;
+  font-family:'Montserrat',sans-serif;
+  font-size:12.5px;color:#555;
+  display:flex;align-items:center;gap:8px;
+  text-align:left;
+}
+.bb-showcase-url-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--bg-green-up);
+  flex-shrink:0;
+}
+.bb-showcase-screenshot{
+  position:relative;
+  aspect-ratio:16/9;
+  background:linear-gradient(135deg,#f3f0e7 0%,#e6e1d4 100%);
+  overflow:hidden;
+}
+.bb-showcase-screenshot img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.bb-showcase-screenshot-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(0,0,0,.28);
+  font-family:'Montserrat',sans-serif;
+  font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+}
+
+@media (max-width:780px){
+  .bb-cases-showcase{padding:56px 0}
+  .bb-showcase{margin-bottom:56px}
+  .bb-showcase-num{font-size:72px;margin-bottom:20px}
+  .bb-showcase-head{grid-template-columns:1fr;gap:14px;align-items:start}
+  .bb-showcase-info h3{font-size:21px}
+  .bb-showcase-url{font-size:11px;max-width:none}
+  .bb-showcase-browser-bar{gap:8px;padding:10px 14px}
+  .bb-showcase-browser{border-radius:12px}
 }
 
 /* ============= DISCLAIMER · gleiches Bild wie Hero, aber Original-Strenge des Overlays ============= */
@@ -726,12 +851,15 @@ footer .footer-links a:hover{color:var(--accent)}
   </div>
 </section>
 
+<!-- ============= CASES-STAGE · gemeinsamer Wave-Canvas läuft durch alle 4 Cases ============= -->
+<div class="bb-cases-stage">
+  <div class="bb-cases-stage-wave-wrap" aria-hidden="true">
+    <canvas class="bb-cases-stage-wave"></canvas>
+    <div class="bb-cases-stage-grid"></div>
+  </div>
+
 <!-- CASE 1: HEARO -->
 <section class="bb-section bb-case-section">
-  <div class="bb-case-section-wave-wrap" aria-hidden="true">
-    <canvas class="bb-case-section-wave"></canvas>
-    <div class="bb-case-section-grid"></div>
-  </div>
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Case 01 · Premium-Audio · Live</div>
@@ -787,10 +915,6 @@ footer .footer-links a:hover{color:var(--accent)}
 
 <!-- CASE 2: BACHGOLD -->
 <section class="bb-section bb-case-section">
-  <div class="bb-case-section-wave-wrap" aria-hidden="true">
-    <canvas class="bb-case-section-wave"></canvas>
-    <div class="bb-case-section-grid"></div>
-  </div>
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Case 02 · Wasserfilter · Live</div>
@@ -866,10 +990,6 @@ footer .footer-links a:hover{color:var(--accent)}
 
 <!-- CASE 3: WAKE PERFORMANCE -->
 <section class="bb-section bb-case-section">
-  <div class="bb-case-section-wave-wrap" aria-hidden="true">
-    <canvas class="bb-case-section-wave"></canvas>
-    <div class="bb-case-section-grid"></div>
-  </div>
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Case 03 · Performance-Apparel · Live</div>
@@ -925,10 +1045,6 @@ footer .footer-links a:hover{color:var(--accent)}
 
 <!-- CASE 4: REERECT -->
 <section class="bb-section bb-case-section">
-  <div class="bb-case-section-wave-wrap" aria-hidden="true">
-    <canvas class="bb-case-section-wave"></canvas>
-    <div class="bb-case-section-grid"></div>
-  </div>
   <div class="wrap">
     <div class="bb-head">
       <div class="bb-head-label">Case 04 · DTC · Custom-Build · Live</div>
@@ -982,6 +1098,9 @@ footer .footer-links a:hover{color:var(--accent)}
   </div>
 </section>
 
+</div>
+<!-- ============= /CASES-STAGE ============= -->
+
 <!-- METHODIK 3-PILLAR -->
 <section class="bb-section bb-section-95">
   <div class="wrap">
@@ -1009,6 +1128,115 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
   </div>
 </section>
+
+<!-- ============= EXTRA SHOWCASE-CASES · 3 weitere Brands mit Browser-Mockup · gleicher Wave-Hintergrund ============= -->
+<div class="bb-cases-stage">
+  <div class="bb-cases-stage-wave-wrap" aria-hidden="true">
+    <canvas class="bb-cases-stage-wave"></canvas>
+    <div class="bb-cases-stage-grid"></div>
+  </div>
+
+<section class="bb-section bb-cases-showcase">
+  <div class="wrap">
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">01</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 01</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-01.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-01.jpg" alt="Brand 01 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">02</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 02</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-02.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-02.jpg" alt="Brand 02 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">03</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 03</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-03.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-03.jpg" alt="Brand 03 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+</div>
+<!-- ============= /CASES-STAGE (Showcase) ============= -->
 
 <!-- BOTTOM-CTA (dark mit Foto-BG) -->
 <section class="bb-bottom">
@@ -1117,18 +1345,33 @@ footer .footer-links a:hover{color:var(--accent)}
     return this.bands;
   };
 
-  /* WaveCanvas — pro .bb-case-section (Section-Background) */
+  /* StageAudioReactor — managed alle Videos in einer Stage, schaltet auf zuletzt-gespieltes */
+  function StageAudioReactor(stage){
+    this.reactors = [];
+    this.active = null;
+    var self = this;
+    stage.querySelectorAll('video').forEach(function(v){
+      var r = new AudioReactor(v);
+      v.addEventListener('play', function(){ self.active = r; });
+      self.reactors.push(r);
+    });
+  }
+  StageAudioReactor.prototype.sample = function(){
+    return this.active ? this.active.sample() : { bass:0, mid:0, treble:0, overall:0 };
+  };
+
+  /* WaveCanvas — pro .bb-cases-stage (eine gemeinsame Animation für mehrere Cases) */
   function WaveCanvas(container){
     this.container = container;
-    this.canvas = container.querySelector('.bb-case-section-wave');
+    this.canvas = container.querySelector('.bb-cases-stage-wave');
     if(!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
     if(!this.ctx) return;
     this.w = 0; this.h = 0; this.waves = []; this.visible = true;
     // Mobile-Skip: Canvas auf < 768px nicht zeichnen (matched Homepage-Hero)
     if(window.innerWidth < 768) return;
-    var video = container.querySelector('video');
-    this.audio = video ? new AudioReactor(video) : null;
+    // Multi-Video Audio-Reactor (statt single video)
+    this.audio = new StageAudioReactor(container);
     var self = this;
     this.resize();
     window.addEventListener('resize', function(){ self.resize(); }, { passive: true });
@@ -1153,10 +1396,14 @@ footer .footer-links a:hover{color:var(--accent)}
     });
   };
   WaveCanvas.prototype.resize = function(){
-    var rect = this.container.getBoundingClientRect();
-    if(rect.width === 0 || rect.height === 0) return;
-    this.w = this.canvas.width  = Math.round(rect.width);
-    this.h = this.canvas.height = Math.round(rect.height);
+    // Canvas-Pixel-Größe = sein eigenes gerendertes Bounding (nicht Container!)
+    // Wichtig für sticky-Canvases, deren CSS-Höhe von Container-Höhe abweicht
+    var rect = this.canvas.getBoundingClientRect();
+    var w = Math.round(rect.width)  || this.canvas.clientWidth;
+    var h = Math.round(rect.height) || this.canvas.clientHeight;
+    if(w === 0 || h === 0) return;
+    this.w = this.canvas.width  = w;
+    this.h = this.canvas.height = h;
     this.initWaves();
   };
   WaveCanvas.prototype.animate = function(time){
@@ -1200,9 +1447,9 @@ footer .footer-links a:hover{color:var(--accent)}
     }
   };
 
-  /* Init aller .bb-case-section-Container */
+  /* Init aller .bb-cases-stage-Container (eine gemeinsame Canvas pro Stage) */
   function init(){
-    document.querySelectorAll('.bb-case-section').forEach(function(c){ new WaveCanvas(c); });
+    document.querySelectorAll('.bb-cases-stage').forEach(function(c){ new WaveCanvas(c); });
   }
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
