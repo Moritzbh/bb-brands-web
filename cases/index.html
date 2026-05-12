@@ -716,6 +716,55 @@ footer .footer-links a:hover{color:var(--accent)}
   background-repeat:no-repeat;
 }
 
+/* ============= MINI-CTA · freistehend zwischen Methodik und Showcase ============= */
+.bb-mini-cta{
+  padding:72px 0;
+  background:transparent !important;
+  background-image:none !important;
+  text-align:center;
+}
+.bb-mini-cta-inner{
+  max-width:680px;margin:0 auto;
+}
+.bb-mini-cta h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:28px;font-weight:700;letter-spacing:-.01em;
+  line-height:1.2;color:#000;
+  margin:0 0 22px;
+}
+.bb-mini-cta .bb-cta{
+  display:inline-block;
+  background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;
+  font-size:13.5px;font-weight:700;letter-spacing:.04em;
+  padding:14px 26px;text-decoration:none;
+  transition:background .15s ease, transform .15s ease;
+  border-radius:6px;
+}
+.bb-mini-cta .bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px)}
+.bb-trust-row{
+  display:flex;flex-wrap:wrap;gap:18px 26px;
+  justify-content:center;
+  margin-top:26px;
+}
+.bb-trust-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Montserrat',sans-serif;
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bg-text-muted);font-weight:600;
+}
+.bb-trust-pill::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--bg-green-up);
+}
+.bb-trust-pill strong{color:#000;font-weight:700}
+@media (max-width:780px){
+  .bb-mini-cta{padding:48px 0}
+  .bb-mini-cta h2{font-size:22px}
+  .bb-trust-row{gap:12px 18px;margin-top:20px}
+  .bb-trust-pill{font-size:10.5px}
+}
+
 /* ============= MID-CTA SECTION mit Founder-Hintergrund ============= */
 .bb-mid-cta-section{
   position:relative;
@@ -1124,6 +1173,21 @@ footer .footer-links a:hover{color:var(--accent)}
         <div class="bb-methodik-num">03</div>
         <h3>Idempotente Generatoren</h3>
         <p>Bei 15+ ähnlichen PDPs schreiben wir Generatoren statt Copy-Paste. Bachgold-Pattern: Eine Source-of-Truth, ein Generator, 15 PDPs raus, jedes Mal identisch. Re-Launch-fähig ohne Excel-Hölle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= MINI-CTA · freistehend, klein, mit 3 Trust-Pills ============= -->
+<section class="bb-section bb-mini-cta">
+  <div class="wrap">
+    <div class="bb-mini-cta-inner">
+      <h2>Wirst du der nächste Build?</h2>
+      <a href="/audit/" class="bb-cta">Strategy Audit buchen</a>
+      <div class="bb-trust-row">
+        <span class="bb-trust-pill">Founder-Direct · <strong>0</strong> Junior-Layer</span>
+        <span class="bb-trust-pill"><strong>3–4</strong> Slots / Quartal</span>
+        <span class="bb-trust-pill">Range <strong>1–20 Mio €</strong></span>
       </div>
     </div>
   </div>
