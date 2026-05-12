@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Lifecycle Loops · Schicht 3 vom BB Brands Profit Stack. E-Mail- und SMS-Flows, die nicht nur laufen — sondern Customer Value maximieren.">
+<title>Lifecycle Loops · Schicht 3 · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260509-7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+<style>
+  .fw-hero{padding:80px 0 96px;text-align:left;max-width:980px;margin:0 auto}
+  .fw-hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--bg-text-body);margin-bottom:20px}
+  .fw-hero-eyebrow strong{color:#000}
+  .fw-hero h1{font-family:'Montserrat',sans-serif;font-size:44px;font-weight:700;line-height:1.15;color:#000;margin:0 0 24px}
+  .fw-hero-sub{font-size:19px;line-height:1.6;color:#000;font-weight:500;max-width:780px}
+  .fw-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--bg-text-muted);text-transform:uppercase}
+  .fw-meta span{display:flex;align-items:center;gap:6px}
+  .fw-meta span::before{content:"";width:6px;height:6px;background:var(--bg-green-up);border-radius:50%}
+
+  .fw-block{max-width:880px;margin:0 auto;padding:56px 0}
+  .fw-block h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.2;color:#000;margin:0 0 20px;max-width:760px}
+  .fw-block h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;color:#000;margin:32px 0 12px}
+  .fw-block p{font-size:17px;line-height:1.7;color:#000;margin:0 0 18px;max-width:760px}
+  .fw-block ul{padding-left:22px;margin:18px 0 24px;max-width:760px}
+  .fw-block ul li{font-size:16px;line-height:1.7;color:#000;margin-bottom:12px;font-weight:500}
+  .fw-block ul li::marker{color:var(--bg-green-up)}
+  .fw-block strong{font-weight:700;color:#000}
+
+  .fw-layers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:32px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-layers{grid-template-columns:1fr}}
+  .fw-layer{background:#fff;border:1px solid var(--bg-line);padding:32px;box-shadow:1px 1px 20px rgba(0,0,0,.05)}
+  .fw-layer-tag{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.08em;font-weight:700;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-layer h3{margin:0 0 12px;font-size:20px}
+  .fw-layer p{font-size:15px;line-height:1.6;margin:0}
+
+  .fw-callout{background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)),var(--bg-founder-2);background-size:cover;border:1px solid var(--bg-line);padding:40px;margin:32px 0;max-width:880px}
+  .fw-callout-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-callout h3{margin:0 0 12px;font-size:22px}
+  .fw-callout p{margin:0}
+
+  .fw-flow{margin:32px 0;max-width:880px;border-left:3px solid var(--bg-amber);padding-left:28px}
+  .fw-flow-step{margin-bottom:24px}
+  .fw-flow-tag{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:6px}
+  .fw-flow-step h4{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#000;margin:0 0 8px}
+  .fw-flow-step p{font-size:15px;line-height:1.6;color:#000;margin:0}
+
+  .fw-bottom{background:#000;color:#fff;padding:80px 0;text-align:center}
+  .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
+  .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
+  .fw-bottom-cta{display:inline-block;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;padding:20px 64px;box-shadow:1px 1px 20px rgba(0,0,0,.4);transition:all .2s;text-decoration:none}
+  .fw-bottom-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+  .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
+  .fw-bottom-back:hover{color:#fff}
+  .fw-bottom-back strong{color:#fff;font-weight:600}
+
+  @media(max-width:780px){
+    .fw-hero{padding:48px 0 64px}
+    .fw-hero h1{font-size:32px;line-height:1.2}
+    .fw-block{padding:40px 0}
+    .fw-block h2{font-size:26px}
+    .fw-callout{padding:28px}
+    .fw-bottom{padding:56px 0}
+    .fw-bottom h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="wrap">
+    <div class="top-bar-left">
+      <a href="mailto:info@bb-brands.de" class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        info@bb-brands.de
+      </a>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
+        Pro Quartal max. 3–4 neue Projekte
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-socials">
+        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-hero">
+      <div class="fw-hero-eyebrow"><strong>SCHICHT 3 · DER PROFIT STACK</strong></div>
+      <h1 data-reveal>Lifecycle Loops. Aus Traffic Revenue holen.</h1>
+      <p class="fw-hero-sub" data-reveal>E-Mail- und SMS-Flows, die nicht nur laufen — sondern Customer Value maximieren. Vier Loop-Typen, gebaut auf bestehende Daten, ohne dass du einen Euro mehr Ad-Spend brauchst.</p>
+      <div class="fw-meta" data-reveal>
+        <span>6 Min. Read</span>
+        <span>Klaviyo-Setup</span>
+        <span>Komplett offen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Flows laufen — aber sie maximieren keinen Customer Value.</h2>
+      <p>Die meisten DTC-Brands haben Klaviyo eingerichtet. Welcome-Flow, Cart-Abandonment, Post-Purchase. Vorlagen kopiert, Bilder ausgetauscht, fertig. Und dann läuft das Ding zwei Jahre lang unverändert weiter — während Open-Rates langsam sterben und LTV stagniert.</p>
+      <p>Das ist kein E-Mail-Problem. Das ist ein <strong>Loop-Problem</strong>. Single-Shot-Flows sind Display-Marketing. Loops sind Lernsysteme: Sie segmentieren, sie messen, sie bauen Customer Profile auf — und füttern jeden nächsten Touchpoint smarter.</p>
+      <p>Eine <strong>Lifecycle-Loop-Architektur</strong> dreht die E-Mail-Schicht von einem Send-Channel zu einem <strong>Customer-Intelligence-Layer</strong>. Aus jedem Klick, jedem Open, jeder Browse-Session entsteht ein Daten-Signal, das den nächsten Send präziser macht.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIE 4 LOOP-TYPEN -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Loop-Typen. Eine Customer Journey.</h2>
+      <p>Jeder Loop deckt eine Phase der Customer Journey ab — gemeinsam decken sie 100% der Lifecycle-Touchpoints. Keine Lücken, keine Doppelungen.</p>
+
+      <div class="fw-layers">
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Loop 1 · Acquisition</div>
+          <h3>Welcome &amp; Pre-Sold</h3>
+          <p>Vom Erstkontakt zur ersten Bestellung. Nicht ein generischer „10 % Rabatt"-Mail-Mob, sondern ein 5–7-Schritt-Flow, der die Brand erzählt, das Produkt einordnet und Pre-Sold-Mechanismen aufbaut. Conversion zur Erstbestellung deutlich höher als bei Pop-Up-Discount-Drops.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Loop 2 · Recovery</div>
+          <h3>Browse &amp; Cart Recovery</h3>
+          <p>Browsed ohne zu kaufen. In den Warenkorb gelegt und weggegangen. Diese Signale sind das wertvollste E-Mail-Trigger-Set. Drei-Schritt-Recovery mit zunehmender Reibungs-Reduzierung — nicht Discount-only, sondern Trust-Boost / Bundle-Hinweis / Discount als Last-Resort.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Loop 3 · Activation</div>
+          <h3>Post-Purchase Value</h3>
+          <p>Die ersten 30 Tage nach der Erstbestellung entscheiden über LTV. Anwendungs-Hilfe, Cross-Sell-Trigger, Review-Anfrage, UGC-Prompt. Wenn du diese Phase ungenutzt lässt, ist Retention nur Glück.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Loop 4 · Reactivation</div>
+          <h3>Win-Back &amp; Reactivation</h3>
+          <p>Inaktive Subscriber sind kein Mailing-Müll. Sie sind warme Cohorten, die einen anderen Trigger brauchen. Win-Back-Flows mit segmentierten Hooks (Produkt-Kategorie, letzter Touchpoint, Saison) reaktivieren typischerweise 8–15 % einer schlafenden Liste.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME-FLOW BEISPIEL -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wie ein Loop konkret aussieht: Welcome.</h2>
+      <p>Auszug aus einem Welcome-Loop, den wir aktuell für eine DACH-Brand betreuen. Sieben Touchpoints über 14 Tage. Jeder Send hat eine eigene Funktion — kein „Send when no reply"-Geballer.</p>
+
+      <div class="fw-flow">
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 0 · Sofort</div>
+          <h4>Soft Welcome + Brand Story</h4>
+          <p>Keine Aktion. Nur „Schön, dass du da bist" plus 90-Sek-Brand-Story. Ziel: Inbox-Trust aufbauen, Sender Reputation positiv anstoßen.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 2 · Education</div>
+          <h4>Founder-Insight</h4>
+          <p>Eine Mail vom Founder. Warum die Brand existiert, was sie anders macht. Kein Sell. Nutzt aufgebauten Trust für Authority-Build.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 5 · Pre-Sold</div>
+          <h4>Product Reveal</h4>
+          <p>Erst hier kommt das Produkt — eingerahmt in die Story vom Tag 0. Soft-CTA zur Hero-PDP, nicht zur Kategorie.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 7 · Proof</div>
+          <h4>Social Proof Block</h4>
+          <p>Reviews, Testimonials, Reels — Proof-Stack als ein Send. Adressiert die „Lohnt sich das?"-Frage explizit.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 10 · Offer</div>
+          <h4>Soft Incentive (10 %)</h4>
+          <p>Wenn bis hier keine Bestellung erfolgt ist: erstmaliger Discount-Drop. 10 %, zeitlich begrenzt, exklusiv für Welcome-Segment.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 12 · Friction-Removal</div>
+          <h4>FAQ + Garantie</h4>
+          <p>Die drei häufigsten Pre-Sale-Fragen — aus echten Support-Tickets gezogen. Plus Geld-Zurück-Garantie sichtbar.</p>
+        </div>
+        <div class="fw-flow-step">
+          <div class="fw-flow-tag">Tag 14 · Hard Close</div>
+          <h4>Last Chance + Story-Rückbezug</h4>
+          <p>Letzte Mail in der Welcome-Phase. Rückbezug zum Founder-Insight von Tag 2. Wenn jetzt keine Bestellung, geht der Lead in „Slow Nurture" über.</p>
+        </div>
+      </div>
+
+      <div class="fw-callout">
+        <div class="fw-callout-label">Was diesen Loop von Standard-Vorlagen unterscheidet</div>
+        <p>Keine Send-Wiederholung. Jeder Touchpoint hat eine eigene Funktion: Trust → Authority → Reveal → Proof → Offer → Friction-Removal → Close. Standard-Welcome-Flows aus Vorlagen wiederholen meist nur Send 1 mit anderen Bildern. Loops bauen Cohorten-Intelligenz auf — wer bei Send 3 öffnet, kriegt Send 6 anders als wer bei Send 1 nicht öffnet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEBEL ZUM MITNEHMEN -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Hebel, die du diese Woche umsetzen kannst.</h2>
+      <ul>
+        <li><strong>Audit deinen aktuellen Welcome-Flow.</strong> Liste jeden Send mit seiner expliziten Funktion. Wenn zwei Sends dieselbe Funktion haben, hast du Redundanz. Wenn eine Funktion fehlt, hast du eine Lücke.</li>
+        <li><strong>Segmentiere nach Engagement-Level, nicht nach Tag-Listen.</strong> Statt „alle Subscriber von Q1" → „alle, die in den letzten 30 Tagen 2+ Sends geöffnet haben". Engagement-Segmente liefern messbar bessere Open-/Click-Raten.</li>
+        <li><strong>Schreib einen Founder-Insight für Tag 2.</strong> Egal welche Brand du bist — die Mail vom Founder am Tag 2 öffnet typischerweise besser als jede „Special Offer". Authentizität schlägt Mechanik.</li>
+        <li><strong>Reaktiviere deine schlafenden 6+ Monate-Cohorten.</strong> Bau einen Win-Back-Loop mit 3 Sends: neuer Hook → konkreter Anreiz → Last Chance. Eine Liste, die du seit 6 Monaten nicht angesprochen hast, ist Geld auf dem Tisch.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BOTTOM CTA -->
+<section class="fw-bottom">
+  <div class="wrap">
+    <h2>Du willst aus bestehendem Traffic mehr Revenue holen?</h2>
+    <p>Im Strategy Audit gehen wir deine aktuelle E-Mail-/SMS-Architektur durch und identifizieren die zwei Loops, die bei dir am schnellsten ROI liefern. Konkret, mit Implementation-Pfad.</p>
+    <a href="/audit/" class="fw-bottom-cta">Strategy Audit buchen</a>
+    <br>
+    <a href="/wissen/" class="fw-bottom-back">← <strong>Zurück zum Profit Stack</strong></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
