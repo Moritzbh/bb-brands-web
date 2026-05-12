@@ -307,6 +307,72 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-card-link::after{content:"→";transition:transform .2s}
 .bb-card:hover .bb-card-link::after{transform:translateX(4px)}
 
+/* ============= TOOLS-CARDS · Premium-Style (Bild dominanter, Body kompakter) ============= */
+.bb-cards.tools .bb-card{
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 6px 28px -10px rgba(0,0,0,.14);
+  border:1px solid rgba(0,0,0,0.04);
+  background:#fff;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.bb-cards.tools .bb-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 56px -16px rgba(0,0,0,.22);
+  border-color:rgba(0,0,0,0.08);
+}
+.bb-cards.tools .bb-card-thumb{
+  aspect-ratio:4/3;
+  position:relative;
+  overflow:hidden;
+}
+.bb-cards.tools .bb-card-thumb img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
+}
+.bb-cards.tools .bb-card:hover .bb-card-thumb img{
+  transform:scale(1.05);
+}
+.bb-cards.tools .bb-card-tag{
+  top:14px;left:14px;
+  padding:6px 12px;
+  font-size:10px;
+  letter-spacing:.14em;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(8px);
+  border-radius:3px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  z-index:2;
+}
+.bb-cards.tools .bb-card-body{
+  padding:22px 24px 20px;
+}
+.bb-cards.tools .bb-card-body h3{
+  font-size:19px;
+  margin-bottom:10px;
+  letter-spacing:-.01em;
+  line-height:1.25;
+}
+.bb-cards.tools .bb-card-body p{
+  font-size:14px;
+  line-height:1.55;
+  margin-bottom:18px;
+  color:var(--bg-text-body);
+}
+.bb-cards.tools .bb-card-meta{
+  font-size:10px;
+  letter-spacing:.08em;
+  padding-top:14px;
+  margin-bottom:12px;
+  color:var(--bg-text-muted);
+}
+.bb-cards.tools .bb-card-link{
+  font-size:13px;
+  letter-spacing:.06em;
+}
+
 /* ============= TESTIMONIAL-BLOCK ============= */
 .bb-testimonial{
   background:#fff;
@@ -709,7 +775,10 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="bb-cards tools">
 
       <a href="/wissen/roas-rechner/" class="bb-card">
-        <div class="bb-card-thumb t5"><span class="bb-card-tag">Tool · Ads</span></div>
+        <div class="bb-card-thumb t5">
+          <img src="/assets/img/wissen-tool-roas.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="bb-card-tag">Tool · Ads</span>
+        </div>
         <div class="bb-card-body">
           <h3>Break-Even ROAS Rechner</h3>
           <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren.</p>
@@ -719,7 +788,10 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/marge-rechner/" class="bb-card">
-        <div class="bb-card-thumb t2"><span class="bb-card-tag">Tool · Profit</span></div>
+        <div class="bb-card-thumb t2">
+          <img src="/assets/img/wissen-tool-marge.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="bb-card-tag">Tool · Profit</span>
+        </div>
         <div class="bb-card-body">
           <h3>Profit-Marge Rechner</h3>
           <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht.</p>
@@ -729,7 +801,10 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/aov-rechner/" class="bb-card">
-        <div class="bb-card-thumb t1"><span class="bb-card-tag">Tool · Wachstum</span></div>
+        <div class="bb-card-thumb t1">
+          <img src="/assets/img/wissen-tool-aov.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="bb-card-tag">Tool · Wachstum</span>
+        </div>
         <div class="bb-card-body">
           <h3>AOV-Uplift Simulator</h3>
           <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber + 4 Hebel-Liste.</p>
