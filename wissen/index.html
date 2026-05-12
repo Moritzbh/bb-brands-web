@@ -394,8 +394,39 @@ footer .footer-links a:hover{color:var(--accent)}
   color:var(--bg-text-muted);
 }
 .bb-cards.tools .bb-card-link{
-  font-size:13px;
-  letter-spacing:.08em;
+  display:inline-block;
+  background:#000;
+  color:#fff;
+  border:1.5px solid #fff;
+  padding:14px 36px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease, box-shadow .25s ease;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.08);
+}
+.bb-cards.tools .bb-card-link::after{content:none;display:none}
+.bb-cards.tools .bb-card-link::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+  z-index:-1;
+}
+.bb-cards.tools .bb-card:hover .bb-card-link{
+  color:#000;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.12);
+}
+.bb-cards.tools .bb-card:hover .bb-card-link::before{
+  transform:scaleX(1);
 }
 
 /* ============= TESTIMONIAL-BLOCK ============= */
