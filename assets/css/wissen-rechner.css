@@ -73,7 +73,7 @@ header.site-header,.mobile-menu{display:none !important}
   --bg-text-body:#333;
   --bg-text-muted:#666;
   --bg-line:#e5e5e5;
-  --bg-founder-1:url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1600&q=70');
+  --bg-founder-1:url('/assets/img/wissen-hero-founder-2000.jpg');
 }
 
 .bb-page{font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.7;font-weight:400;color:#000}
