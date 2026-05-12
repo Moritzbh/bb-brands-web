@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Brand System · Schicht 1 vom BB Brands Profit Stack. Wie Tokens, Voice und Visual System eine Brand tragen — Ads, Web und Verpackung aus einer Quelle.">
+<title>Brand System · Schicht 1 · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260509-7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+<style>
+  /* Framework-Page Styles · Baulig-DNA · scoped */
+  .fw-hero{padding:80px 0 96px;text-align:left;max-width:980px;margin:0 auto}
+  .fw-hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--bg-text-body);margin-bottom:20px}
+  .fw-hero-eyebrow strong{color:#000}
+  .fw-hero h1{font-family:'Montserrat',sans-serif;font-size:44px;font-weight:700;line-height:1.15;color:#000;margin:0 0 24px}
+  .fw-hero-sub{font-size:19px;line-height:1.6;color:#000;font-weight:500;max-width:780px}
+  .fw-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--bg-text-muted);text-transform:uppercase}
+  .fw-meta span{display:flex;align-items:center;gap:6px}
+  .fw-meta span::before{content:"";width:6px;height:6px;background:var(--bg-green-up);border-radius:50%}
+
+  .fw-block{max-width:880px;margin:0 auto;padding:56px 0}
+  .fw-block h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.2;color:#000;margin:0 0 20px;max-width:760px}
+  .fw-block h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;color:#000;margin:32px 0 12px}
+  .fw-block p{font-size:17px;line-height:1.7;color:#000;margin:0 0 18px;max-width:760px}
+  .fw-block ul{padding-left:22px;margin:18px 0 24px;max-width:760px}
+  .fw-block ul li{font-size:16px;line-height:1.7;color:#000;margin-bottom:12px;font-weight:500}
+  .fw-block ul li::marker{color:var(--bg-green-up)}
+  .fw-block strong{font-weight:700;color:#000}
+
+  .fw-layers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:32px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-layers{grid-template-columns:1fr}}
+  .fw-layer{background:#fff;border:1px solid var(--bg-line);padding:32px;box-shadow:1px 1px 20px rgba(0,0,0,.05)}
+  .fw-layer-tag{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.08em;font-weight:700;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-layer h3{margin:0 0 12px;font-size:20px}
+  .fw-layer p{font-size:15px;line-height:1.6;margin:0}
+
+  .fw-code{background:#0a0a0a;color:#e8e8e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.65;padding:24px 28px;border-radius:0;margin:24px 0;overflow-x:auto;max-width:880px}
+  .fw-code .c-tk{color:#ffc46b}
+  .fw-code .c-vl{color:#a8e6a8}
+  .fw-code .c-cm{color:#6b7280;font-style:italic}
+
+  .fw-callout{background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)),var(--bg-founder-2);background-size:cover;border:1px solid var(--bg-line);padding:40px;margin:32px 0;max-width:880px}
+  .fw-callout-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-callout h3{margin:0 0 12px;font-size:22px}
+  .fw-callout p{margin:0}
+
+  .fw-bottom{background:#000;color:#fff;padding:80px 0;text-align:center}
+  .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
+  .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
+  .fw-bottom-cta{display:inline-block;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;padding:20px 64px;box-shadow:1px 1px 20px rgba(0,0,0,.4);transition:all .2s;text-decoration:none}
+  .fw-bottom-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+  .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
+  .fw-bottom-back:hover{color:#fff}
+  .fw-bottom-back strong{color:#fff;font-weight:600}
+
+  @media(max-width:780px){
+    .fw-hero{padding:48px 0 64px}
+    .fw-hero h1{font-size:32px;line-height:1.2}
+    .fw-block{padding:40px 0}
+    .fw-block h2{font-size:26px}
+    .fw-callout{padding:28px}
+    .fw-bottom{padding:56px 0}
+    .fw-bottom h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= TOP-BAR ============= -->
+<div class="top-bar">
+  <div class="wrap">
+    <div class="top-bar-left">
+      <a href="mailto:info@bb-brands.de" class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        info@bb-brands.de
+      </a>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
+        Pro Quartal max. 3–4 neue Projekte
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-socials">
+        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Strategy Audit buchen</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Strategy Audit buchen</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-hero">
+      <div class="fw-hero-eyebrow"><strong>SCHICHT 1 · DER PROFIT STACK</strong></div>
+      <h1 data-reveal>Brand System. Die Schicht, die alles trägt.</h1>
+      <p class="fw-hero-sub" data-reveal>Vier Layer, eine Quelle. Kein PDF-Styleguide, der in der Schublade landet — sondern ein System aus Tokens, Voice und Visual Rules, das Ads, Web und Verpackung konsistent hält. Live im Code, nicht in Adobe.</p>
+      <div class="fw-meta" data-reveal>
+        <span>7 Min. Read</span>
+        <span>Mit Live-Beispiel</span>
+        <span>Komplett offen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>PDF-Styleguides bremsen. Sie tragen nicht.</h2>
+      <p>Die meisten Brand Guidelines sind 60 Seiten Adobe-PDF. Schön gelayoutet, einmal vom Designer abgenommen — und danach <strong>operative Deko</strong>. Wer die Brand baut (Performance-Team, Theme-Dev, Verpackungs-Druckerei) öffnet die Datei einmal, sucht den Hex-Code und denkt sich den Rest selbst aus.</p>
+      <p>Resultat: Ads sehen anders aus als die Website. Die Website anders als der Karton. Der Karton anders als der Newsletter. Und jeder im Team verteidigt seine Version mit „so steht's auf Seite 47".</p>
+      <p>Ein <strong>Brand System</strong> macht das Gegenteil: Es ist Code, kein Dokument. Es lässt sich nicht „interpretieren". Und es zwingt jedes Asset in dieselbe Sprache — visuell wie verbal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIE 4 LAYER -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Layer. Eine Quelle.</h2>
+      <p>So bauen wir das System bei jeder Brand auf. Jeder Layer ist eigenständig nutzbar — zusammen tragen sie die ganze Brand.</p>
+
+      <div class="fw-layers">
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Layer 1 · Tokens</div>
+          <h3>Tokens als Code</h3>
+          <p>Farbe, Typo, Spacing, Motion — als CSS-Variablen, Figma-Variables und Tailwind-Theme. Eine Quelle, drei Systeme. Wenn das Primary-Blau wechselt, wechselt es überall — in 30 Sekunden.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Layer 2 · Voice</div>
+          <h3>Voice mit Beispielen</h3>
+          <p>Drei Tonlagen (Hero / Body / Functional) plus expliziter „Was wir nie sagen"-Block. Mit konkreten Vorher/Nachher-Beispielen statt Adjektiven wie „freundlich" oder „professionell" — die niemand operationalisieren kann.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Layer 3 · Visual</div>
+          <h3>Visual System</h3>
+          <p>Photography-Rules (was ist on-brand, was nicht), Icon-Set, Pattern-Library, Motion-Rules. Inklusive Negativ-Beispiele — weil Founder lernen schneller aus „so nicht" als aus „so".</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Layer 4 · Application</div>
+          <h3>Application Layer</h3>
+          <p>Wie die Tokens in Shopify-Theme, Meta-Ads-Templates und Verpackungs-Druckdateien landen — automatisiert, nicht manuell. Wenn der Designer den Brand-Token ändert, ist die Ad fünf Minuten später aktualisiert.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS — CODE-BEISPIEL -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>So sieht ein Token-Layer in echt aus.</h2>
+      <p>Auszug aus dem Brand-System einer 7-stelligen DTC-Brand, die wir betreuen. Diese 30 Zeilen ersetzen 60 PDF-Seiten — und sie sind <strong>maschinenlesbar</strong>. Theme, Ad-Templates und Newsletter ziehen sich Werte hier raus.</p>
+
+<pre class="fw-code"><span class="c-cm">/* brand.tokens.css · single source of truth */</span>
+:root {
+  <span class="c-cm">/* Color · primary palette */</span>
+  <span class="c-tk">--brand-primary</span>:        <span class="c-vl">#0A0E2E</span>;
+  <span class="c-tk">--brand-primary-soft</span>:   <span class="c-vl">#1A1F4A</span>;
+  <span class="c-tk">--brand-accent</span>:         <span class="c-vl">#E8C547</span>;
+  <span class="c-tk">--brand-cream</span>:          <span class="c-vl">#F5EFE6</span>;
+
+  <span class="c-cm">/* Typography · scale */</span>
+  <span class="c-tk">--type-display</span>:         <span class="c-vl">'Inter Tight', sans-serif</span>;
+  <span class="c-tk">--type-body</span>:            <span class="c-vl">'Inter Tight', sans-serif</span>;
+  <span class="c-tk">--type-scale-h1</span>:        <span class="c-vl">clamp(40px, 6vw, 72px)</span>;
+  <span class="c-tk">--type-scale-h2</span>:        <span class="c-vl">clamp(28px, 4vw, 48px)</span>;
+  <span class="c-tk">--type-scale-body</span>:      <span class="c-vl">17px</span>;
+
+  <span class="c-cm">/* Spacing · 8pt grid */</span>
+  <span class="c-tk">--space-1</span>:              <span class="c-vl">8px</span>;
+  <span class="c-tk">--space-2</span>:              <span class="c-vl">16px</span>;
+  <span class="c-tk">--space-3</span>:              <span class="c-vl">24px</span>;
+  <span class="c-tk">--space-4</span>:              <span class="c-vl">32px</span>;
+  <span class="c-tk">--space-8</span>:              <span class="c-vl">64px</span>;
+
+  <span class="c-cm">/* Motion · curves & timing */</span>
+  <span class="c-tk">--ease-out-soft</span>:        <span class="c-vl">cubic-bezier(.16,1,.3,1)</span>;
+  <span class="c-tk">--duration-fast</span>:        <span class="c-vl">.18s</span>;
+  <span class="c-tk">--duration-base</span>:        <span class="c-vl">.32s</span>;
+}</pre>
+
+      <p>Die gleiche Datei landet — automatisiert — als Tailwind-Theme im Marketing-Repo und als Figma-Variables-File im Design-System. Drei Targets, eine Quelle. <strong>Inkonsistenz ist nicht mehr möglich.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE BEISPIEL -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-callout" data-reveal>
+      <div class="fw-callout-label">Live · Hearo Brand System</div>
+      <h3>Wie wir das bei Hearo gebaut haben.</h3>
+      <p>Hearo (HNO-Health-Brand, USA) hatte ein PDF-Brand-Book und drei Agenturen, die alle „on-brand" gearbeitet haben — visuell aber stark divergent. Wir haben das System auf vier Code-Files reduziert: <code>tokens.css · voice.md · visual.md · application.json</code>. Jede neue Ad, jede neue PDP-Section, jede Verpackungs-Adaption zieht jetzt aus diesen vier Files. Result: <strong>30+ Touchpoints in identischem System.</strong> Kein „bitte das Logo etwas größer"-Feedback mehr.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HEBEL ZUM MITNEHMEN -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Hebel, die du heute umsetzen kannst.</h2>
+      <ul>
+        <li><strong>Migriere dein Brand-Book in Tokens.</strong> Egal ob du Designer oder Founder bist — verwandle dein PDF in eine <code>tokens.css</code>-Datei. 30 Minuten. Sofort hat dein Theme eine Single-Source-of-Truth.</li>
+        <li><strong>Schreib eine Voice-Doc mit Beispielen statt Adjektiven.</strong> Statt „freundlich, modern, professionell" → 3 echte Texte pro Tonlage plus 3 Beispiele für „so nicht". Performance-Team, AI-Copy-Tools und neue Hires verstehen das in Minuten.</li>
+        <li><strong>Mach „so nicht"-Visuals zu deinem stärksten Doc.</strong> Liste 10 Beispiele auf, die <em>fast</em> wie deine Brand aussehen, aber nicht sind. Negativbeispiele klären schneller als 50 positive.</li>
+        <li><strong>Verbinde Tokens mit deinem Theme.</strong> Shopify-Themes können CSS-Variablen direkt referenzieren. Heißt: wenn der Designer den Token ändert, ändert sich der Store live — kein Theme-Editor-Klick.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BOTTOM CTA -->
+<section class="fw-bottom">
+  <div class="wrap">
+    <h2>Du willst dein Brand-System auf Token-Level bringen?</h2>
+    <p>Im Strategy Audit gehen wir dein bestehendes Brand-Setup durch und zeigen dir, welche Layer du als nächstes ziehen solltest — Token-Migration, Voice-Doc oder Application-Layer.</p>
+    <a href="/audit/" class="fw-bottom-cta">Strategy Audit buchen</a>
+    <br>
+    <a href="/wissen/" class="fw-bottom-back">← <strong>Zurück zum Profit Stack</strong></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
