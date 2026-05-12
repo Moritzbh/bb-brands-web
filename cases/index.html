@@ -596,6 +596,115 @@ footer .footer-links a:hover{color:var(--accent)}
   .bb-case-video-play svg{width:24px;height:24px}
 }
 
+/* ============= EXTRA SHOWCASE-CASES · weißer Hintergrund, Browser-Mockup mit Live-Screenshot ============= */
+.bb-cases-showcase{
+  background:#fff;
+  padding:96px 0;
+}
+.bb-showcase{
+  position:relative;
+  margin-bottom:88px;
+  max-width:1080px;margin-left:auto;margin-right:auto;
+}
+.bb-showcase:last-child{margin-bottom:0}
+
+.bb-showcase-num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:120px;line-height:1;
+  letter-spacing:-.02em;
+  color:rgba(0,0,0,.10);
+  margin-bottom:32px;
+  user-select:none;
+}
+
+.bb-showcase-head{
+  display:grid;grid-template-columns:1fr auto;
+  gap:32px;align-items:end;
+  margin-bottom:32px;
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(0,0,0,.10);
+}
+.bb-showcase-info h3{
+  font-family:'Montserrat',sans-serif;
+  font-size:26px;font-weight:700;letter-spacing:-.01em;
+  margin:0 0 6px;color:#000;
+}
+.bb-showcase-info p{
+  font-size:14.5px;line-height:1.5;
+  color:var(--bg-text-muted);margin:0;
+}
+.bb-showcase-live{
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.02em;
+  color:var(--bg-text-body);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  white-space:nowrap;
+  transition:color .15s ease;
+}
+.bb-showcase-live:hover{color:var(--accent);text-decoration:none}
+.bb-showcase-live svg{width:13px;height:13px}
+
+/* Browser-Mockup */
+.bb-showcase-browser{
+  background:#f5f3ee;
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.18);
+}
+.bb-showcase-browser-bar{
+  background:#eae6dc;
+  padding:13px 18px;
+  display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.bb-showcase-dots{display:flex;gap:6px;flex-shrink:0}
+.bb-showcase-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:rgba(0,0,0,.18);
+}
+.bb-showcase-url{
+  flex:1;max-width:520px;margin:0 auto;
+  background:#fff;border-radius:999px;
+  padding:7px 16px;
+  font-family:'Montserrat',sans-serif;
+  font-size:12.5px;color:#555;
+  display:flex;align-items:center;gap:8px;
+  text-align:left;
+}
+.bb-showcase-url-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--bg-green-up);
+  flex-shrink:0;
+}
+.bb-showcase-screenshot{
+  position:relative;
+  aspect-ratio:16/9;
+  background:linear-gradient(135deg,#f3f0e7 0%,#e6e1d4 100%);
+  overflow:hidden;
+}
+.bb-showcase-screenshot img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.bb-showcase-screenshot-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(0,0,0,.28);
+  font-family:'Montserrat',sans-serif;
+  font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+}
+
+@media (max-width:780px){
+  .bb-cases-showcase{padding:56px 0}
+  .bb-showcase{margin-bottom:56px}
+  .bb-showcase-num{font-size:72px;margin-bottom:20px}
+  .bb-showcase-head{grid-template-columns:1fr;gap:14px;align-items:start}
+  .bb-showcase-info h3{font-size:21px}
+  .bb-showcase-url{font-size:11px;max-width:none}
+  .bb-showcase-browser-bar{gap:8px;padding:10px 14px}
+  .bb-showcase-browser{border-radius:12px}
+}
+
 /* ============= DISCLAIMER · gleiches Bild wie Hero, aber Original-Strenge des Overlays ============= */
 .bb-cases-disclaimer-section{
   background-image:
@@ -1016,6 +1125,106 @@ footer .footer-links a:hover{color:var(--accent)}
         <p>Bei 15+ ähnlichen PDPs schreiben wir Generatoren statt Copy-Paste. Bachgold-Pattern: Eine Source-of-Truth, ein Generator, 15 PDPs raus, jedes Mal identisch. Re-Launch-fähig ohne Excel-Hölle.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============= EXTRA SHOWCASE-CASES · 3 weitere Brands mit Browser-Mockup ============= -->
+<section class="bb-section bb-cases-showcase">
+  <div class="wrap">
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">01</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 01</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-01.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-01.jpg" alt="Brand 01 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">02</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 02</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-02.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-02.jpg" alt="Brand 02 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bb-showcase">
+      <div class="bb-showcase-num">03</div>
+      <div class="bb-showcase-head">
+        <div class="bb-showcase-info">
+          <h3>Brand · Showcase 03</h3>
+          <p>Kurze Beschreibung der Brand und des Builds.</p>
+        </div>
+        <a href="#" class="bb-showcase-live" target="_blank" rel="noopener">
+          Live ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="bb-showcase-browser">
+        <div class="bb-showcase-browser-bar">
+          <div class="bb-showcase-dots">
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+            <span class="bb-showcase-dot"></span>
+          </div>
+          <div class="bb-showcase-url">
+            <span class="bb-showcase-url-dot"></span>
+            <span>https://brand-03.example</span>
+          </div>
+        </div>
+        <div class="bb-showcase-screenshot">
+          <!-- Sobald da: <img src="/assets/images/cases/showcase-03.jpg" alt="Brand 03 Screenshot"> -->
+          <div class="bb-showcase-screenshot-placeholder">Screenshot folgt</div>
+        </div>
+      </div>
+    </article>
+
   </div>
 </section>
 
