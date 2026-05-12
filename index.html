@@ -645,6 +645,42 @@ h2 em{color:var(--blue);font-style:normal}
   from{transform:translateX(0)}
   to{transform:translateX(calc(-50% - 55px))}
 }
+/* Brands-Score Badge unter der Logo-Marquee */
+.brands-score-wrap{
+  margin-top:36px;
+  display:flex;justify-content:center;
+}
+.brands-score{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:18px 28px 16px;
+  text-align:center;
+  box-shadow:0 8px 30px -10px rgba(0,0,0,.10);
+  min-width:240px;
+}
+.brands-score-title{
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-size:14px;font-weight:700;color:#000;
+  letter-spacing:-.005em;margin-bottom:8px;
+}
+.brands-score-rating{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:6px;
+}
+.brands-score-stars{display:inline-flex;gap:2px;color:#22c55e}
+.brands-score-stars svg{width:18px;height:18px}
+.brands-score-num{
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-size:22px;font-weight:800;color:#000;
+  letter-spacing:-.01em;line-height:1;
+}
+.brands-score-meta{font-size:12.5px;color:var(--text-3)}
+.brands-score-meta a{
+  color:var(--accent);text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:2px;
+}
+.brands-score-meta a:hover{text-decoration:none}
 @media (max-width:780px){
   .trust{padding:44px 0}
   .trust .wrap{flex-direction:column;align-items:flex-start;gap:22px}
@@ -655,6 +691,8 @@ h2 em{color:var(--blue);font-style:normal}
   .trust-marquee{width:100%}
   .trust-track{gap:64px;animation-duration:16s}
   .trust-track img{height:24px}
+  .brands-score-wrap{margin-top:24px}
+  .brands-score{min-width:220px;padding:16px 22px 14px}
 }
 
 /* ========== SERVICES — STICKY-RAIL STAGE (kinetic, Brand-V1) ========== */
@@ -2919,6 +2957,24 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true" loading="lazy">
         <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true" loading="lazy">
         <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Brands-Score Trust-Badge -->
+    <div class="brands-score-wrap">
+      <div class="brands-score">
+        <div class="brands-score-title">Brands-Score</div>
+        <div class="brands-score-rating">
+          <span class="brands-score-stars" aria-label="5 von 5 Sternen">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+          </span>
+          <span class="brands-score-num">5,0</span>
+        </div>
+        <div class="brands-score-meta">5+ DTC-Brands · <a href="/cases/">Cases ansehen</a></div>
       </div>
     </div>
   </div>
