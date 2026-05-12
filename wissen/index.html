@@ -208,85 +208,43 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-cta-meta{font-size:13px;font-style:italic;color:var(--bg-text-muted);margin-top:14px}
 .bb-hero-cta{margin-top:28px}
 
-/* ============= TRUST-STRIPE · Verified-Cards ============= */
+/* ============= TRUST-STRIPE ============= */
 .bb-trust{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  max-width:1100px;
-  margin:64px auto 0;
+  display:flex;align-items:center;justify-content:center;
+  gap:48px;flex-wrap:wrap;margin-top:64px;
 }
-@media (max-width:880px){
-  .bb-trust{grid-template-columns:repeat(2,1fr);gap:12px}
+.bb-trust-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.bb-trust-tuev{
+  width:80px;height:80px;background:#fff;
+  border:1px solid var(--bg-line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;
+  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:6px 8px;gap:2px;
 }
-@media (max-width:520px){
-  .bb-trust{grid-template-columns:1fr}
+.bb-trust-tuev svg{width:22px;height:22px;color:#dc2626;display:block}
+.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:2px;text-align:center}
+.bb-trust-reviews{display:flex;flex-direction:column;gap:4px}
+.bb-trust-reviews-name{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#000;
 }
-
-.bb-trust-item{
-  background:rgba(255,255,255,0.96);
-  border:1px solid rgba(0,0,0,0.08);
-  padding:24px 22px;
-  text-align:left;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:10px;
-  transition:border-color .2s, transform .2s, box-shadow .2s;
+.bb-trust-reviews-rating{
+  display:flex;align-items:center;gap:8px;
+  font-size:32px;font-weight:800;color:#000;
 }
-.bb-trust-item:hover{
-  border-color:rgba(0,0,0,0.18);
-  transform:translateY(-1px);
-  box-shadow:0 8px 24px -12px rgba(0,0,0,0.12);
+.bb-trust-reviews-rating .stars{color:#22c55e;font-size:24px;letter-spacing:1px}
+.bb-trust-reviews-label{font-size:11px;color:var(--bg-text-muted);font-weight:600}
+.bb-trust-reviews-label a{color:var(--bg-amber);text-decoration:underline}
+.bb-trust-award{
+  width:90px;height:100px;
+  background:linear-gradient(135deg,#FF6B3D 0%,#FF7A00 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
 }
-
-.bb-trust-icon{
-  width:26px;height:26px;
-  background:var(--bg-amber);
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  box-shadow:0 0 0 4px rgba(255,107,61,0.12);
+.bb-trust-award-text{
+  color:#fff;font-family:'Montserrat',sans-serif;
+  font-weight:800;font-size:9px;letter-spacing:.04em;
+  text-transform:uppercase;text-align:center;line-height:1.3;
 }
-.bb-trust-icon svg{width:14px;height:14px;color:#fff}
-
-.bb-trust-label{
-  font-family:'Montserrat',sans-serif;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--bg-amber);
-  margin:0;
-}
-
-.bb-trust-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:17px;
-  font-weight:800;
-  color:#000;
-  line-height:1.2;
-  margin:0;
-  letter-spacing:-.01em;
-}
-
-.bb-trust-detail{
-  font-size:13px;
-  line-height:1.55;
-  color:#000;
-  font-weight:500;
-  margin:0;
-}
-.bb-trust-detail a{
-  color:var(--bg-amber);
-  text-decoration:underline;
-  text-underline-offset:2px;
-  font-weight:600;
-}
-.bb-trust-detail strong{font-weight:700}
 
 /* ============= SECTION-HEAD ============= */
 .bb-head{text-align:center;margin-bottom:64px}
@@ -349,6 +307,127 @@ footer .footer-links a:hover{color:var(--accent)}
 }
 .bb-card-link::after{content:"→";transition:transform .2s}
 .bb-card:hover .bb-card-link::after{transform:translateX(4px)}
+
+/* ============= TOOLS-CARDS · Free-standing (kein Box-Treatment, Icon direkt auf Section-BG) ============= */
+.bb-cards.tools .bb-card{
+  background:transparent;
+  box-shadow:none;
+  border:none;
+  border-radius:0;
+  padding:32px 24px;
+  transition:background .25s ease, transform .25s ease;
+}
+.bb-cards.tools .bb-card:hover{
+  background:rgba(255,255,255,0.5);
+  transform:translateY(-3px);
+  box-shadow:none;
+  text-decoration:none;
+}
+.bb-cards.tools .bb-card-thumb{
+  background:transparent;
+  background-image:none !important;
+  aspect-ratio:auto;
+  height:auto;
+  overflow:visible;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:20px;
+  padding:0;
+  margin-bottom:24px;
+}
+.bb-cards.tools .bb-card-thumb img{display:none}
+.bb-cards.tools .bb-card-thumb .tool-icon{
+  width:88px;
+  max-width:88px;
+  height:auto;
+  opacity:0;
+  transform:scale(0.55) translateY(14px);
+  transition:opacity .7s cubic-bezier(.34,1.56,.64,1), transform .7s cubic-bezier(.34,1.56,.64,1);
+  will-change:transform,opacity;
+}
+.bb-cards.tools .bb-card-thumb .tool-icon.is-popped{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.bb-cards.tools .bb-card:nth-child(2) .tool-icon{transition-delay:.14s}
+.bb-cards.tools .bb-card:nth-child(3) .tool-icon{transition-delay:.28s}
+@media (prefers-reduced-motion:reduce){
+  .bb-cards.tools .bb-card-thumb .tool-icon{
+    opacity:1;transform:none;transition:none;
+  }
+}
+.bb-cards.tools .bb-card-tag{
+  position:static;
+  background:transparent;
+  color:var(--bg-amber);
+  padding:0;
+  font-size:11px;
+  letter-spacing:.16em;
+  font-weight:700;
+  text-transform:uppercase;
+  box-shadow:none;
+  backdrop-filter:none;
+  border-radius:0;
+}
+.bb-cards.tools .bb-card-body{
+  padding:0;
+}
+.bb-cards.tools .bb-card-body h3{
+  font-size:21px;
+  margin-bottom:12px;
+  letter-spacing:-.01em;
+  line-height:1.25;
+}
+.bb-cards.tools .bb-card-body p{
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:20px;
+  color:var(--bg-text-body);
+}
+.bb-cards.tools .bb-card-meta{
+  font-size:10px;
+  letter-spacing:.1em;
+  padding-top:16px;
+  margin-bottom:14px;
+  border-top:1px solid rgba(0,0,0,0.08);
+  color:var(--bg-text-muted);
+}
+.bb-cards.tools .bb-card-link{
+  display:inline-block;
+  background:#000;
+  color:#fff;
+  border:1.5px solid #fff;
+  padding:14px 36px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease, box-shadow .25s ease;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.08);
+}
+.bb-cards.tools .bb-card-link::after{content:none;display:none}
+.bb-cards.tools .bb-card-link::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+  z-index:-1;
+}
+.bb-cards.tools .bb-card:hover .bb-card-link{
+  color:#000;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.12);
+}
+.bb-cards.tools .bb-card:hover .bb-card-link::before{
+  transform:scaleX(1);
+}
 
 /* ============= TESTIMONIAL-BLOCK ============= */
 .bb-testimonial{
@@ -487,6 +566,47 @@ footer .footer-links a:hover{color:var(--accent)}
       url('/assets/img/wissen-bottomcta-1100.jpg');
   }
 }
+
+/* Bottom-CTA Button · Premium Outline-Style (schwarz mit weißem Border, Hover invertiert) */
+.bb-bottom-wissen .bb-cta.large{
+  background:transparent;
+  color:#fff;
+  border:1.5px solid #fff;
+  box-shadow:none;
+  padding:22px 72px;
+  font-weight:700;
+  letter-spacing:.06em;
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;
+}
+.bb-bottom-wissen .bb-cta.large::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+  z-index:-1;
+}
+.bb-bottom-wissen .bb-cta.large:hover{
+  background:transparent;
+  color:#000;
+  border-color:#fff;
+  transform:none;
+}
+.bb-bottom-wissen .bb-cta.large:hover::before{
+  transform:scaleX(1);
+}
+.bb-bottom-wissen .bb-bottom-secondary{
+  display:inline-block;
+  margin-top:24px;
+  color:rgba(255,255,255,.7);
+  font-size:13px;
+  letter-spacing:.04em;
+}
 </style>
 </head>
 <body>
@@ -576,40 +696,32 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
 
     <div class="bb-trust">
-      <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Compliance</div>
-        <div class="bb-trust-title">DACH-Fokus</div>
-        <div class="bb-trust-detail">DSGVO · BFSG · LUCID — alle DACH-Hebel from day one. Kein US-Tool-Workaround.</div>
+      <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/>
+          <circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+        DACH-FOKUS
       </div>
-
-      <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Operations</div>
-        <div class="bb-trust-title">AI-Native</div>
-        <div class="bb-trust-detail">1 POC + AI-Operations als operativer Hebel. Kein Junior-Team, kein Account-Manager-Sandwich.</div>
+      <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 15.5l-1.7-4.5L6 9.3l4.3-1.7L12 3z" fill="currentColor" stroke="none"/>
+          <path d="M18.5 14.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4z" fill="currentColor" stroke="none"/>
+          <path d="M5.5 16l.6 1.6 1.6.6-1.6.6L5.5 20.4 4.9 18.8 3.3 18.2l1.6-.6L5.5 16z" fill="currentColor" stroke="none"/>
+        </svg>
+        AI-NATIVE
+        <div class="badge">+4 JAHRE ERFAHRUNG</div>
       </div>
-
-      <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Proof</div>
-        <div class="bb-trust-title">Aktive D2C-Brands</div>
-        <div class="bb-trust-detail"><strong>Hearo · Bachgold · Wake · Reerect</strong> — laufende Builds 2024–2026. <a href="/cases/">Cases ansehen</a></div>
+      <div class="bb-trust-reviews">
+        <div class="bb-trust-reviews-name">Brands-Score</div>
+        <div class="bb-trust-reviews-rating">
+          <span class="stars">★★★★★</span>
+          <span>5,0</span>
+        </div>
+        <div class="bb-trust-reviews-label">5+ DTC-Brands · <a href="/cases/">Cases ansehen</a></div>
       </div>
-
-      <div class="bb-trust-item">
-        <span class="bb-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="bb-trust-label">Service-Model</div>
-        <div class="bb-trust-title">Founder-Led</div>
-        <div class="bb-trust-detail">Du sprichst direkt mit Moritz. Kein Account-Manager dazwischen, kein Junior-Briefing.</div>
+      <div class="bb-trust-award">
+        <span class="bb-trust-award-text">FOUNDER<br>LED<br>2026</span>
       </div>
     </div>
   </div>
@@ -768,7 +880,17 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="bb-cards tools">
 
       <a href="/wissen/roas-rechner/" class="bb-card">
-        <div class="bb-card-thumb t5"><span class="bb-card-tag">Tool · Ads</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Tool · Ads</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- Eingang (kleine Säule) -->
+            <rect x="12" y="58" width="18" height="30" fill="#0a0a0a" rx="1"/>
+            <!-- Multiplikator-Kreuz -->
+            <path d="M40 38 L56 54 M56 38 L40 54" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+            <!-- Ausgang (große orange Säule) -->
+            <rect x="68" y="22" width="18" height="66" fill="#FF6B3D" rx="1"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>Break-Even ROAS Rechner</h3>
           <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren.</p>
@@ -778,7 +900,16 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/marge-rechner/" class="bb-card">
-        <div class="bb-card-thumb t2"><span class="bb-card-tag">Tool · Profit</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Tool · Profit</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- 4 Bars · Wasserfall absteigend, letzter = orange (Marge) -->
+            <rect x="8"  y="14" width="18" height="74" fill="#0a0a0a" rx="1"/>
+            <rect x="30" y="30" width="18" height="58" fill="#0a0a0a" rx="1"/>
+            <rect x="52" y="50" width="18" height="38" fill="#0a0a0a" rx="1"/>
+            <rect x="74" y="68" width="18" height="20" fill="#FF6B3D" rx="1"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>Profit-Marge Rechner</h3>
           <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht.</p>
@@ -788,7 +919,17 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/aov-rechner/" class="bb-card">
-        <div class="bb-card-thumb t1"><span class="bb-card-tag">Tool · Wachstum</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Tool · Wachstum</span>
+          <svg class="tool-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <!-- 3 gestapelte Plattformen (unten breit → oben schmal, oberste = orange) -->
+            <rect x="18" y="74" width="64" height="12" fill="#0a0a0a" rx="1"/>
+            <rect x="26" y="56" width="48" height="12" fill="#0a0a0a" rx="1"/>
+            <rect x="34" y="38" width="32" height="12" fill="#FF6B3D" rx="1"/>
+            <!-- Pfeil nach oben -->
+            <path d="M50 30 L50 12 M40 22 L50 12 L60 22" stroke="#FF6B3D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>AOV-Uplift Simulator</h3>
           <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber + 4 Hebel-Liste.</p>
@@ -828,6 +969,25 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
   </div>
 </footer>
+
+<script>
+/* Tool-Icons · Pop-In on scroll-into-view */
+(function(){
+  if (typeof IntersectionObserver === 'undefined') {
+    document.querySelectorAll('.tool-icon').forEach(function(el){ el.classList.add('is-popped'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('is-popped');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.tool-icon').forEach(function(el){ io.observe(el); });
+})();
+</script>
 
 </body>
 </html>
