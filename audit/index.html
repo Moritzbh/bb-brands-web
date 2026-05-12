@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/css/shared.css?v=20260509-7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
 <script src="/assets/js/consent.js?v=20260509-7" defer></script>
 <script src="/assets/js/attribution.js?v=20260509-7" defer></script>
@@ -20,109 +20,286 @@
 
 <style>
 /* ============= PAGE BASE ============= */
-.audit-page{padding:0 0 0;background:var(--bg);font-family:'Inter Tight',-apple-system,sans-serif}
+.audit-page{background:var(--bg);font-family:'Inter Tight',-apple-system,sans-serif}
 
-/* ============= HERO ============= */
-.audit-hero{padding:96px 0 56px;position:relative;overflow:hidden}
+/* ============= 1 · HERO (centered, schlank · Baulig-Pattern) ============= */
+.audit-hero{
+  padding:96px 0 64px;position:relative;overflow:hidden;
+  text-align:center;background:var(--bg);
+}
+/* Subtle Mesh-Blobs als dekorativer Anker (matched Homepage Hero) */
+.audit-hero::before{
+  content:"";position:absolute;
+  top:-10vw;left:-10vw;
+  width:50vw;height:50vw;max-width:700px;max-height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--blue) 0%, transparent 70%);
+  pointer-events:none;filter:blur(120px);opacity:.14;
+  z-index:0;
+}
+.audit-hero::after{
+  content:"";position:absolute;
+  bottom:-8vw;right:-8vw;
+  width:42vw;height:42vw;max-width:620px;max-height:620px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  pointer-events:none;filter:blur(110px);opacity:.16;
+  z-index:0;
+}
+.audit-hero .wrap{position:relative;z-index:1}
 .audit-hero .eyebrow{
   font-family:'Saira Condensed',-apple-system,sans-serif;
   font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);margin-bottom:18px;display:inline-block;
 }
 .audit-hero h1{
-  font-size:54px;font-weight:800;line-height:1.05;letter-spacing:-.025em;
-  color:var(--text);margin-bottom:22px;max-width:880px;
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-.025em;
+  color:var(--text);margin:0 auto 22px;max-width:820px;
 }
 .audit-hero h1 em{color:var(--accent);font-style:normal}
 .audit-hero h1 .hl-blue{color:var(--blue)}
 .audit-hero .lede{
   font-size:19px;line-height:1.55;color:var(--text-2);
-  max-width:680px;margin-bottom:36px;font-weight:500;
+  max-width:640px;margin:0 auto 32px;font-weight:500;
 }
 .audit-hero-meta{
-  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
-  font-size:13px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
-  text-transform:uppercase;margin-top:24px;
+  display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;
 }
 .audit-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
 .audit-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:#16a34a}
 .audit-hero-meta .item strong{color:var(--text)}
+.audit-hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:36px;padding:18px 36px;
+  background:var(--accent);color:#fff;
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.01em;
+  border-radius:8px;text-decoration:none;
+  box-shadow:0 8px 24px rgba(255,107,61,.30);
+  transition:all .2s ease;
+}
+.audit-hero-cta:hover{
+  background:var(--accent-hover);transform:translateY(-1px);
+  box-shadow:0 12px 30px rgba(255,107,61,.40);text-decoration:none;color:#fff;
+}
+.audit-hero-cta svg{width:16px;height:16px}
 
 @media (max-width:780px){
-  .audit-hero{padding:64px 0 40px}
+  .audit-hero{padding:64px 0 48px}
   .audit-hero h1{font-size:32px}
   .audit-hero .lede{font-size:16px}
-  .audit-hero-meta{gap:18px;font-size:11px}
+  .audit-hero-meta{gap:14px;font-size:11px}
 }
 
-/* ============= DISCOVERY STORY (matched Homepage Team-Flow) ============= */
-.audit-story{padding:56px 0 24px;position:relative}
-.audit-story-grid{
-  display:grid;grid-template-columns:1.05fr 1fr;gap:64px;
-  align-items:start;max-width:1100px;margin:0 auto;
+/* ============= 2 · 3-SCHRITTE-PROZESS (Baulig-Pattern · Card-Stack) ============= */
+.audit-process{
+  padding:80px 0 72px;background:#fafaf7;
+  position:relative;font-family:'Montserrat',sans-serif;
+}
+.audit-process .bb-head{text-align:center;margin-bottom:56px}
+.audit-process .bb-head-label{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.audit-process .bb-head h2{
+  font-size:39px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  color:var(--text);max-width:780px;margin:0 auto 16px;
+}
+.audit-process .bb-head h2 em{color:var(--accent);font-style:normal}
+.audit-process .bb-head p{
+  font-size:17px;color:var(--text-2);max-width:600px;margin:0 auto;line-height:1.6;
+}
+
+.audit-steps{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:1140px;margin:0 auto;
+}
+@media (max-width:880px){.audit-steps{grid-template-columns:1fr;max-width:520px;gap:36px}}
+
+.audit-step{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.10);
+  padding:48px 32px 36px;
+  position:relative;
+  display:flex;flex-direction:column;
+  transition:all .25s ease;
+}
+.audit-step:hover{box-shadow:1px 1px 40px rgba(0,0,0,.18);transform:translateY(-3px)}
+
+/* Sticker rotated -6deg · Baulig-Pattern */
+.audit-step-stamp{
+  position:absolute;top:-18px;left:24px;z-index:5;
+  background:var(--accent);color:#fff;
+  padding:12px 20px;
+  text-align:center;
+  transform:rotate(-6deg);
+  box-shadow:2px 2px 12px rgba(0,0,0,.20);
+  display:flex;flex-direction:column;line-height:1;
+  font-family:'Montserrat',sans-serif;
+}
+.audit-step-stamp .top{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:4px}
+.audit-step-stamp .mid{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
+.audit-step-stamp .bot{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.audit-step:nth-child(1) .audit-step-stamp{background:#000}
+.audit-step:nth-child(2) .audit-step-stamp{background:var(--blue)}
+
+.audit-step h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:21px;line-height:1.18;color:var(--text);
+  margin:6px 0 14px;
+}
+.audit-step p{
+  font-family:'Montserrat',sans-serif;font-size:14.5px;
+  color:var(--text-2);line-height:1.6;margin:0 0 12px;
+}
+.audit-step p strong{color:var(--text);font-weight:700}
+.audit-step .step-foot{
+  margin-top:auto;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.audit-step .step-foot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+@media (max-width:780px){
+  .audit-process{padding:56px 0}
+  .audit-process .bb-head h2{font-size:28px;line-height:1.2}
+  .audit-step{padding:40px 24px 28px}
+}
+
+/* ============= 3 · WER RUFT AN? · Founder/Team-Block ============= */
+.audit-who{padding:96px 0 80px;background:var(--bg);position:relative}
+.audit-who-grid{
+  display:grid;grid-template-columns:1fr 1.05fr;gap:64px;
+  align-items:center;max-width:1100px;margin:0 auto;
 }
 @media (max-width:980px){
-  .audit-story-grid{grid-template-columns:1fr;gap:40px}
+  .audit-who-grid{grid-template-columns:1fr;gap:40px}
 }
-.audit-story .step-label{
-  display:inline-flex;align-items:center;gap:14px;
-  font-family:'Saira Condensed',-apple-system,sans-serif;
-  font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--text-3);margin-bottom:18px;
-}
-.audit-story .step-label .num{
-  font-family:'Inter Tight',-apple-system,sans-serif;
-  font-size:18px;font-weight:800;color:var(--blue);letter-spacing:-.02em;
-}
-.audit-story .step-label .line{width:32px;height:1px;background:var(--line)}
-.audit-story h2{
-  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
-  color:var(--text);margin-bottom:18px;max-width:560px;
-}
-.audit-story h2 em{color:var(--accent);font-style:normal}
-.audit-story p.story-body{
-  font-size:17px;line-height:1.6;color:var(--text-2);
-  margin-bottom:14px;max-width:540px;
-}
-.audit-story p.story-body strong{color:var(--text);font-weight:700}
-.audit-story .story-quote{
-  border-left:3px solid var(--accent);
-  padding:8px 0 8px 22px;margin:24px 0 4px;
-  font-size:18px;font-weight:600;line-height:1.5;color:var(--text);
-  max-width:540px;
-}
-.audit-story .story-quote em{font-style:italic;color:var(--text-2);font-weight:500}
 
-/* ============= INCLUDES PANEL (rechts neben Story) ============= */
-.audit-includes-panel{
+.audit-who-card{
   background:#fff;border:1px solid var(--line);border-radius:14px;
-  padding:32px 32px 28px;box-shadow:0 4px 28px rgba(0,0,0,.04);
+  padding:36px 36px 32px;box-shadow:0 4px 28px rgba(0,0,0,.05);
+  position:relative;
 }
-.audit-includes-panel h3{
+.audit-who-card .card-eyebrow{
   font-family:'Saira Condensed',-apple-system,sans-serif;
-  font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--text-3);margin-bottom:16px;
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:18px;display:inline-block;
 }
-.audit-includes-panel ul{list-style:none;margin:0 0 18px;padding:0}
-.audit-includes-panel li{
-  font-size:14.5px;line-height:1.55;color:var(--text);
-  padding:9px 0 9px 28px;position:relative;
-  border-bottom:1px solid var(--line);
+.audit-who-card .card-name{
+  font-size:28px;font-weight:800;letter-spacing:-.015em;color:var(--text);
+  margin-bottom:6px;
 }
-.audit-includes-panel li:last-child{border-bottom:none}
-.audit-includes-panel li::before{
-  content:"✓";color:var(--accent);font-weight:800;
-  position:absolute;left:0;top:9px;
-  font-size:16px;
+.audit-who-card .card-role{
+  font-size:14px;color:var(--accent);font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px;
 }
-.audit-includes-panel .panel-foot{
-  font-size:12.5px;color:var(--text-3);line-height:1.55;
-  border-top:1px solid var(--line);padding-top:16px;margin-top:4px;
+.audit-who-card .card-bio{
+  font-size:15px;line-height:1.6;color:var(--text-2);margin-bottom:18px;
 }
-.audit-includes-panel .panel-foot strong{color:var(--text);font-weight:700}
+.audit-who-card .card-bio strong{color:var(--text);font-weight:700}
+.audit-who-card .card-meta{
+  display:flex;gap:24px;flex-wrap:wrap;
+  padding-top:18px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.audit-who-card .card-meta strong{color:var(--text)}
 
-/* ============= CALENDLY (Booking-Section) ============= */
-.audit-booking{padding:56px 0 96px;position:relative;scroll-margin-top:80px}
+.audit-who-text{padding:8px 0}
+.audit-who-text .eyebrow{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:inline-block;
+}
+.audit-who-text h2{
+  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  color:var(--text);margin-bottom:18px;max-width:520px;
+}
+.audit-who-text h2 em{color:var(--accent);font-style:normal}
+.audit-who-text p{
+  font-size:17px;color:var(--text-2);line-height:1.6;margin-bottom:14px;max-width:520px;
+}
+.audit-who-text p strong{color:var(--text);font-weight:700}
+.audit-who-text .quote{
+  border-left:3px solid var(--accent);padding:8px 0 8px 22px;
+  margin:24px 0 0;font-size:17px;font-weight:600;line-height:1.5;
+  color:var(--text);max-width:520px;
+}
+.audit-who-text .quote em{font-style:italic;color:var(--text-2);font-weight:500}
+
+@media (max-width:780px){
+  .audit-who{padding:56px 0}
+  .audit-who-text h2{font-size:26px}
+  .audit-who-text p{font-size:15px}
+  .audit-who-card{padding:28px 24px 24px}
+  .audit-who-card .card-name{font-size:22px}
+}
+
+/* ============= 4 · WAS DU BEKOMMST · 5 Bullets als Card-Grid ============= */
+.audit-deliver{
+  padding:80px 0 80px;
+  background:linear-gradient(180deg,#fafaf7 0%,#fff 100%);
+  position:relative;font-family:'Montserrat',sans-serif;
+}
+.audit-deliver .bb-head{text-align:center;margin-bottom:48px}
+.audit-deliver .bb-head-label{
+  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.audit-deliver .bb-head h2{
+  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  color:var(--text);max-width:760px;margin:0 auto 14px;
+}
+.audit-deliver .bb-head h2 em{color:var(--accent);font-style:normal}
+.audit-deliver .bb-head p{
+  font-size:16px;color:var(--text-2);max-width:600px;margin:0 auto;line-height:1.55;
+}
+
+.deliver-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:18px;
+  max-width:1180px;margin:0 auto;
+}
+@media (max-width:1080px){.deliver-grid{grid-template-columns:repeat(2,1fr);max-width:840px}}
+@media (max-width:540px){.deliver-grid{grid-template-columns:1fr;max-width:420px}}
+
+.deliver-card{
+  background:#fff;border:1px solid var(--line);
+  padding:24px 22px 22px;
+  display:flex;flex-direction:column;
+  transition:all .2s ease;
+}
+.deliver-card:hover{border-color:var(--accent);box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.deliver-card .icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,107,61,.10);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter Tight',sans-serif;font-weight:800;font-size:14px;
+  margin-bottom:16px;letter-spacing:-.02em;
+}
+.deliver-card h3{
+  font-size:15px;font-weight:700;line-height:1.3;
+  color:var(--text);margin-bottom:8px;
+}
+.deliver-card p{
+  font-size:13.5px;line-height:1.5;color:var(--text-2);margin:0;
+}
+
+@media (max-width:780px){
+  .audit-deliver{padding:56px 0}
+  .audit-deliver .bb-head h2{font-size:26px}
+}
+
+/* ============= 5 · CALENDLY BOOKING ============= */
+.audit-booking{
+  padding:80px 0 80px;background:var(--bg);
+  position:relative;scroll-margin-top:80px;
+}
 .audit-booking .booking-head{text-align:center;margin-bottom:36px;max-width:760px;margin-left:auto;margin-right:auto}
 .audit-booking .booking-eyebrow{
   font-family:'Saira Condensed',-apple-system,sans-serif;
@@ -130,7 +307,7 @@
   color:var(--accent);margin-bottom:14px;display:inline-block;
 }
 .audit-booking h2{
-  font-size:36px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
+  font-size:39px;font-weight:800;line-height:1.08;letter-spacing:-.018em;
   color:var(--text);margin-bottom:16px;
 }
 .audit-booking h2 em{color:var(--accent);font-style:normal}
@@ -142,15 +319,15 @@
 .calendly-wrap{
   max-width:1080px;margin:0 auto;
   background:#fff;border:1px solid var(--line);border-radius:14px;
-  overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.05);
+  overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06);
 }
 .calendly-inline-widget{min-width:320px;height:760px}
 
-/* ============= FALLBACK · WhatsApp ============= */
+/* ============= 6 · FALLBACK · WhatsApp ============= */
 .audit-fallback{
-  text-align:center;margin-top:48px;padding:32px 24px;
+  text-align:center;margin:48px auto 0;padding:32px 24px;
   background:#fafaf7;border:1px solid var(--line);border-radius:12px;
-  max-width:600px;margin-left:auto;margin-right:auto;
+  max-width:600px;
 }
 .audit-fallback p.fallback-lede{
   font-size:13px;color:var(--text-3);font-weight:600;letter-spacing:.04em;
@@ -169,13 +346,8 @@
 }
 
 @media (max-width:780px){
-  .audit-story{padding:32px 0 16px}
-  .audit-story h2{font-size:26px}
-  .audit-story p.story-body{font-size:15px}
-  .audit-story .story-quote{font-size:16px}
-  .audit-includes-panel{padding:24px 22px 22px}
-  .audit-booking{padding:32px 0 64px}
-  .audit-booking h2{font-size:26px}
+  .audit-booking{padding:56px 0}
+  .audit-booking h2{font-size:28px}
   .audit-booking .booking-sub{font-size:15px}
   .calendly-inline-widget{height:680px}
 }
@@ -237,51 +409,152 @@
 
 <main class="audit-page">
 
-  <!-- ============= 1 · HERO ============= -->
+  <!-- ============= 1 · HERO (centered) ============= -->
   <section class="audit-hero">
     <div class="wrap">
       <div class="eyebrow">Strategy Audit</div>
-      <h1>30 Minuten <em>ehrliche Diagnose.</em><br>Direkt mit einem Experten — nicht mit einem Verkäufer.</h1>
-      <p class="lede">Buch dir direkt einen Slot. Im ersten Call sprichst du mit jemandem aus meinem Team — DTC-Operatoren, die dein Geschäft sofort einordnen. Wenn es passt, übernehme ich persönlich.</p>
+      <h1>Kostenlose <em>30-Minuten-Diagnose.</em></h1>
+      <p class="lede">Sprich direkt mit einem DTC-Operator aus dem BB-Brands-Team. Keine Pitch-Decks, keine Verkäufer — nur ehrliche Diagnose deiner Profit-Hebel.</p>
+
+      <a href="#booking" class="audit-hero-cta">
+        Termin buchen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
 
       <div class="audit-hero-meta">
-        <span class="item"><strong>30 Min</strong> · ehrliche Diagnose</span>
+        <span class="item"><strong>30 Min</strong> · Google Meet</span>
         <span class="item">Kein Pitch · <strong>kein Push</strong></span>
-        <span class="item"><strong>Passt es nicht?</strong> Sagen wir's.</span>
+        <span class="item"><strong>Pro Quartal</strong> max. 3–4 Projekte</span>
       </div>
     </div>
   </section>
 
-  <!-- ============= 2 · DISCOVERY STORY (Why this Call?) ============= -->
-  <section class="audit-story">
+  <!-- ============= 2 · 3-SCHRITTE-PROZESS ============= -->
+  <section class="audit-process">
     <div class="wrap">
-      <div class="audit-story-grid">
+      <div class="bb-head">
+        <div class="bb-head-label">Wie läuft das ab?</div>
+        <h2>Drei Schritte zum <em>Strategy Audit.</em></h2>
+        <p>Klar strukturiert, kein Verkaufs-Funnel. Du buchst, wir bereiten vor, wir reden — und du entscheidest.</p>
+      </div>
 
-        <div class="story-text">
-          <div class="step-label"><span class="num">01</span><span class="line"></span><span>Discovery</span></div>
-          <h2>Mit Experten reden, <em>nicht mit Verkäufern.</em></h2>
-          <p class="story-body">Im Discovery sprichst du mit jemandem aus meinem Team — DTC-Operatoren, die dein Geschäft sofort einordnen. Keine Pitch-Decks, kein Push.</p>
-          <p class="story-body"><strong>30 Minuten ehrliche Diagnose.</strong> Wir gehen Conversion, AOV, Retention, E-Mail-Umsatz und Creative-Output gemeinsam durch.</p>
-          <p class="story-quote">Passt es nicht, <em>sagen wir's.</em><br>Passt es, <strong>übernehme ich.</strong></p>
-        </div>
+      <div class="audit-steps">
 
-        <aside class="audit-includes-panel">
-          <h3>Was im Audit drinsteckt</h3>
-          <ul>
-            <li>Brand-, Markt- und Wettbewerbs-Audit (AI-beschleunigt)</li>
-            <li>Conversion-Diagnose deines bestehenden Shops mit priorisierten Hebeln</li>
-            <li>Operative Engpass-Analyse — wo verbrennt das Team Zeit?</li>
-            <li>Transformations-Plan mit konkreter Phasen-Empfehlung</li>
-            <li>Walkthrough-Call zur Übergabe</li>
-          </ul>
-          <p class="panel-foot">Pre-Launch? Dann ist <a href="https://founder-os.bb-brands.de" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Founder OS</a> dein Weg — nicht der Strategy Audit.<br><strong>Pro Quartal max. 3–4 neue Projekte · DACH-Fokus.</strong></p>
+        <article class="audit-step">
+          <div class="audit-step-stamp">
+            <span class="top">Schritt</span>
+            <span class="mid">01</span>
+            <span class="bot">Termin</span>
+          </div>
+          <h3>Slot buchen.</h3>
+          <p>Im Calendly weiter unten suchst du dir einen 30-Min-Slot, der dir passt. Kontaktdaten eingeben, fertig.</p>
+          <p>Du bekommst <strong>direkt eine Bestätigung</strong> mit Google-Meet-Link.</p>
+          <div class="step-foot">Dauert 60 Sekunden</div>
+        </article>
+
+        <article class="audit-step">
+          <div class="audit-step-stamp">
+            <span class="top">Schritt</span>
+            <span class="mid">02</span>
+            <span class="bot">Vorbereitung</span>
+          </div>
+          <h3>Kurze Notiz vorab.</h3>
+          <p>Du bekommst per Mail eine kurze Checkliste, was wir vorab wissen wollen: Conversion, AOV, Retention, E-Mail, Creative-Output.</p>
+          <p>Damit <strong>verlieren wir keine Zeit</strong> im Call.</p>
+          <div class="step-foot">5 Min Vorbereitung</div>
+        </article>
+
+        <article class="audit-step">
+          <div class="audit-step-stamp">
+            <span class="top">Schritt</span>
+            <span class="mid">03</span>
+            <span class="bot">Diagnose-Call</span>
+          </div>
+          <h3>30 Min mit einem Experten.</h3>
+          <p>Du sprichst mit einem DTC-Operator aus meinem Team. Wir gehen deine Zahlen durch und priorisieren die größten Profit-Hebel.</p>
+          <p>Passt es nicht, sagen wir's. <strong>Passt es, übernehme ich.</strong></p>
+          <div class="step-foot">Kostenlos · ohne Verpflichtung</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 3 · WER RUFT AN? ============= -->
+  <section class="audit-who">
+    <div class="wrap">
+      <div class="audit-who-grid">
+
+        <aside class="audit-who-card">
+          <div class="card-eyebrow">Lead Founder · BB Brands</div>
+          <div class="card-name">Moritz Bohmbach</div>
+          <div class="card-role">Operator · DTC-Architekt</div>
+          <p class="card-bio">Mit 14 erster Shopify-Store. Heute Founder von BB Brands — wir bauen Brand-, Shop- und AI-Operations-Systeme für wachsende DTC-Brands wie <strong>Hearo</strong>, <strong>Bachgold</strong> und <strong>Wake Performance</strong>.</p>
+          <p class="card-bio">Wenn der erste Call passt, übernehme ich die operative Führung deines Projekts.</p>
+          <div class="card-meta">
+            <span><strong>4+ Jahre</strong> · DTC &amp; E-Com</span>
+            <span><strong>DACH</strong> · 1–20 Mio €</span>
+          </div>
         </aside>
 
+        <div class="audit-who-text">
+          <div class="eyebrow">Wer ruft an?</div>
+          <h2>Mit Experten reden, <em>nicht mit Verkäufern.</em></h2>
+          <p>Im Discovery sprichst du mit jemandem aus meinem Team — <strong>DTC-Operatoren, die dein Geschäft sofort einordnen.</strong> Keine Setter, keine Junior-SDRs, keine Pitch-Decks.</p>
+          <p>30 Minuten ehrliche Diagnose. Wir gehen Conversion, AOV, Retention, E-Mail-Umsatz und Creative-Output gemeinsam durch — auf Margen-Ebene, nicht auf Vanity-Ebene.</p>
+          <p class="quote">Passt es nicht, <em>sagen wir's.</em><br>Passt es, <strong>übernehme ich.</strong></p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============= 3 · CALENDLY BOOKING ============= -->
+  <!-- ============= 4 · WAS DU BEKOMMST ============= -->
+  <section class="audit-deliver">
+    <div class="wrap">
+      <div class="bb-head">
+        <div class="bb-head-label">Was im Audit drinsteckt</div>
+        <h2>Konkret: Was bekommst du in den <em>30 Minuten?</em></h2>
+        <p>Kein Beratungs-Lipservice. Fünf Bausteine, alle priorisiert auf Profit-Hebel.</p>
+      </div>
+
+      <div class="deliver-grid">
+        <article class="deliver-card">
+          <div class="icon">01</div>
+          <h3>Brand- &amp; Markt-Check</h3>
+          <p>Positionierung, Wettbewerb, USP-Schärfe — AI-beschleunigt.</p>
+        </article>
+
+        <article class="deliver-card">
+          <div class="icon">02</div>
+          <h3>Conversion-Diagnose</h3>
+          <p>Wir schauen auf deinen Shop und priorisieren die größten Hebel.</p>
+        </article>
+
+        <article class="deliver-card">
+          <div class="icon">03</div>
+          <h3>Operative Engpässe</h3>
+          <p>Wo verbrennt dein Team Zeit? Wo lohnen sich AI-Workflows?</p>
+        </article>
+
+        <article class="deliver-card">
+          <div class="icon">04</div>
+          <h3>Phasen-Empfehlung</h3>
+          <p>Konkreter Transformations-Plan: Brand, Shop, Lifecycle, AI.</p>
+        </article>
+
+        <article class="deliver-card">
+          <div class="icon">05</div>
+          <h3>Walkthrough-Call</h3>
+          <p>Sauberer Hand-off, klare nächste Schritte — oder ehrliches Nein.</p>
+        </article>
+      </div>
+
+      <p style="text-align:center;margin-top:32px;font-size:14px;color:var(--text-3);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55">Pre-Launch / nur Idee? Dann ist <a href="https://founder-os.bb-brands.de" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:none">Founder OS</a> dein Weg — nicht der Strategy Audit.</p>
+    </div>
+  </section>
+
+  <!-- ============= 5 · CALENDLY BOOKING ============= -->
   <section class="audit-booking" id="booking">
     <div class="wrap">
       <div class="booking-head">
