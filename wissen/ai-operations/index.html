@@ -39,6 +39,23 @@
   .fw-layer h3{margin:0 0 12px;font-size:20px}
   .fw-layer p{font-size:15px;line-height:1.6;margin:0}
 
+  .fw-stack-table{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-stack-head{display:grid;grid-template-columns:1.4fr 1.2fr 1.6fr 1.2fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-stack-head > div{padding:14px 16px;border-right:1px solid var(--bg-line)}
+  .fw-stack-head > div:last-child{border-right:none}
+  .fw-stack-row{display:grid;grid-template-columns:1.4fr 1.2fr 1.6fr 1.2fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:13.5px;line-height:1.5}
+  .fw-stack-row:last-child{border-bottom:none}
+  .fw-stack-row > div{padding:14px 16px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-stack-row > div:last-child{border-right:none}
+  .fw-stack-row strong{font-weight:700;display:block;margin-bottom:4px}
+  .fw-stack-row .fw-stack-uc{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px}
+  @media(max-width:780px){
+    .fw-stack-head{display:none}
+    .fw-stack-row{grid-template-columns:1fr;padding:8px 0}
+    .fw-stack-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:10px 18px}
+    .fw-stack-row > div:last-child{border-bottom:none}
+  }
+
   .fw-compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:32px 0;max-width:880px;border:1px solid var(--bg-line)}
   @media(max-width:780px){.fw-compare{grid-template-columns:1fr}}
   .fw-compare-col{padding:32px;background:#fff}
@@ -218,13 +235,60 @@
   </div>
 </section>
 
-<!-- LIVE BEISPIEL · ADFLOW -->
+<!-- TOOL-STACK PRO USE-CASE -->
 <section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>So sieht der Tool-Stack pro Use-Case in echt aus.</h2>
+      <p>Kein Hexenwerk, keine 6-Monats-AI-Migration. Die 4 Use-Cases lassen sich mit Standard-Tools bauen — Claude/GPT als Engine, Zapier oder Make als Glue, Google Sheets oder Airtable als Datenlayer. <strong>Kein Custom-Dev nötig, um den Wert zu beweisen.</strong></p>
+
+      <div class="fw-stack-table">
+        <div class="fw-stack-head">
+          <div>Use-Case</div>
+          <div>AI-Engine</div>
+          <div>Glue / Workflow</div>
+          <div>Daten-Layer</div>
+        </div>
+        <div class="fw-stack-row">
+          <div><span class="fw-stack-uc">UC 1</span><strong>Ad-Briefing-Pipeline</strong></div>
+          <div>Claude 3.5 Sonnet</div>
+          <div>Custom-Prompt-Lib + Notion-Template + Voice-Doc</div>
+          <div>Notion / Airtable</div>
+        </div>
+        <div class="fw-stack-row">
+          <div><span class="fw-stack-uc">UC 2</span><strong>Product-Description-Generator</strong></div>
+          <div>GPT-4 oder Claude</div>
+          <div>Make.com / Zapier · Brand-Voice-Prompt</div>
+          <div>Google Sheets → Shopify CSV-Import</div>
+        </div>
+        <div class="fw-stack-row">
+          <div><span class="fw-stack-uc">UC 3</span><strong>Auto-Tagging &amp; Categorization</strong></div>
+          <div>Claude (Vision)</div>
+          <div>Shopify-Webhook → Worker → Tag-Update</div>
+          <div>Shopify Metafields</div>
+        </div>
+        <div class="fw-stack-row">
+          <div><span class="fw-stack-uc">UC 4</span><strong>FAQ &amp; Pre-Sale-Bot</strong></div>
+          <div>Claude oder GPT mit RAG</div>
+          <div>Vector-DB (Supabase / Pinecone) · Slack-Fallback</div>
+          <div>Support-Ticket-Export + FAQ-Doc</div>
+        </div>
+      </div>
+
+      <p>Wer denkt, AI-Operations braucht ein „AI-Team" — hat Operating noch nicht verstanden. Das hier baut ein einzelner technisch versierter Marketer in <strong>1–2 Wochen Setup</strong> auf, pro Use-Case.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE BEISPIEL · ADFLOW -->
+<section class="bb-section bb-section-95">
   <div class="wrap">
     <div class="fw-callout" data-reveal>
       <div class="fw-callout-label">Live · BB Brands AdFlow</div>
       <h3>Wie wir das intern lösen.</h3>
-      <p>AdFlow ist unser internes AI-Operations-Tool, das Creative-Briefings für Performance-Kampagnen erzeugt. Input: Produkt, Zielgruppe, Funnel-Stage, Brand-Tokens. Output: Briefing mit Hook-Vorschlägen, Visual-Direction, Copy-Varianten, CTA-Logik — fertig zum Übergeben an Designer/Editor. <strong>Briefing-Erstellung von 45 Min auf unter 5 Min reduziert.</strong> Plus: Briefings sind jetzt konsistent über alle Brands hinweg — niemand baut „seinen Stil" rein.</p>
+      <p><strong>Setup vor AdFlow:</strong> Pro neuer Performance-Kampagne ~45 Min Briefing-Erstellung. Marketer schrieb Hook-Ideen, sammelte USPs, beschrieb Visual-Direction, listete Copy-Varianten — manuell, mit eigenem Stil. Resultat: jeder Briefing-Autor baute seinen Stil rein, Designer mussten dauernd nachfragen.</p>
+      <p><strong>Was wir gebaut haben:</strong> AdFlow nimmt Input (Produkt-URL, Zielgruppe, Funnel-Stage, Brand-Tokens) und gibt fertiges Briefing aus — Hook-Vorschläge, Visual-Direction, Copy-Varianten, CTA-Logik, alle auf Brand-Voice trainiert. Designer/Editor bekommt einen einheitlichen Briefing-Output, nicht 5 Stile.</p>
+      <p><strong>Resultat:</strong> Briefing-Erstellung von 45 Min auf unter 5 Min. Plus: 100 % konsistent über alle BB-Brands-Kunden. <em>Niemand baut „seinen Stil" mehr rein, weil der Stil im Tool encodiert ist.</em></p>
     </div>
   </div>
 </section>
