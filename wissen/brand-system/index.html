@@ -44,6 +44,37 @@
 
   .fw-code{background:#0a0a0a;color:#e8e8e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.65;padding:24px 28px;border-radius:0;margin:24px 0;overflow-x:auto;max-width:880px}
 
+  /* Anti-Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack-Connection (Cross-Links zu anderen Frameworks) */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
   .fw-voice-table{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
   .fw-voice-row{display:grid;grid-template-columns:180px 1fr;gap:0;border-bottom:1px solid var(--bg-line)}
   .fw-voice-row:last-child{border-bottom:none}
@@ -290,17 +321,135 @@
   </div>
 </section>
 
-<!-- HEBEL ZUM MITNEHMEN -->
+<!-- ANTI-PATTERNS -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Anti-Patterns, die jedes Brand-System killen.</h2>
+      <p>In fast jedem Brand-Book-Audit sehen wir die gleichen vier Fehler. Sie wirken klein, aber sie kosten dich konsistente Marke über alle Touchpoints. Wer diese vermeidet, hat 80 % des Stack-Werts schon.</p>
+
+      <div class="fw-anti-grid">
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>PDF wird zur Bibel</h3>
+          <p>Brand-Book als 60-Seiten-PDF, das niemand öffnet. Jeder im Team „interpretiert" es. Resultat: keine Konsistenz, nur Versionsstreit. Fix: Tokens als Code, Voice als Markdown, beides versioniert.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Adjektive statt Beispiele</h3>
+          <p>„Wir sind freundlich, modern, professionell." Niemand kann das operationalisieren. KI-Tools verstehen es nicht. Neue Hires schreiben weiterhin „Lassen Sie uns gemeinsam wachsen". Fix: echte Vorher/Nachher-Beispiele pro Tonlage.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Tokens leben nur in Figma</h3>
+          <p>Design-Team hat Tokens, Marketing/Dev nutzen sie nicht. Theme hardcoded Hex-Werte, Ads kopieren-und-pasten. Fix: Tokens als Single-Source-of-Truth, von Figma ins CSS exportiert, dort von Theme + Ad-Templates konsumiert.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Application-Layer fehlt komplett</h3>
+          <p>Tokens sind perfekt definiert — aber kein Workflow zum Theme, kein Pipeline zu Ad-Templates, kein Hand-off zur Verpackung. Brand bleibt im Design-System gefangen. Fix: Application-Layer explizit als 4. Schicht bauen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIY · 5 STEPS -->
 <section class="bb-section bb-section-95">
   <div class="wrap">
     <div class="fw-block" data-reveal>
-      <h2>Vier Hebel, die du heute umsetzen kannst.</h2>
-      <ul>
-        <li><strong>Migriere dein Brand-Book in Tokens.</strong> Egal ob du Designer oder Brand-Owner bist — verwandle dein PDF in eine <code>tokens.css</code>-Datei. 30 Minuten. Sofort hat dein Theme eine Single-Source-of-Truth.</li>
-        <li><strong>Schreib eine Voice-Doc mit Beispielen statt Adjektiven.</strong> Statt „freundlich, modern, professionell" → 3 echte Texte pro Tonlage plus 3 Beispiele für „so nicht". Performance-Team, AI-Copy-Tools und neue Hires verstehen das in Minuten.</li>
-        <li><strong>Mach „so nicht"-Visuals zu deinem stärksten Doc.</strong> Liste 10 Beispiele auf, die <em>fast</em> wie deine Brand aussehen, aber nicht sind. Negativbeispiele klären schneller als 50 positive.</li>
-        <li><strong>Verbinde Tokens mit deinem Theme.</strong> Shopify-Themes können CSS-Variablen direkt referenzieren. Heißt: wenn der Designer den Token ändert, ändert sich der Store live — kein Theme-Editor-Klick.</li>
-      </ul>
+      <h2>Vom PDF zum Code in 5 Schritten.</h2>
+      <p>Konkrete Bau-Reihenfolge — funktioniert für Brands ab Tag 1, läuft aber auch als Retrofit für bestehende Brand-Books. Jeder Step liefert einen klaren Output, den du danach im Repo committen kannst.</p>
+
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-num">01</div>
+          <div class="fw-step-body">
+            <h3>Audit deines aktuellen Brand-Books</h3>
+            <p>Liste, was du heute hast: PDF-Styleguide? Figma-File? Notion-Doc? Verstreute Hex-Codes in Slack? Markiere pro Element: <strong>vollständig · veraltet · fehlt</strong>.</p>
+            <p>Fokus: Colors, Typo, Spacing, Voice, Photography-Rules, Icon-Set, Pattern-Lib. Wo Lücken sind, kommt Step 2–5 dran.</p>
+            <div class="fw-step-output">Output: <strong>Brand-Audit-Doc (1-Pager)</strong> mit Status pro Element.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">02</div>
+          <div class="fw-step-body">
+            <h3>Tokens als Code migrieren</h3>
+            <p>Verwandle dein Brand-Book in eine <code>tokens.css</code> (oder <code>tokens.json</code> für Multi-Target). Color, Typo, Spacing, Motion. Tool-Optionen je nach Setup:</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Style Dictionary</span>
+              <span class="fw-step-tool">Figma Tokens Studio</span>
+              <span class="fw-step-tool">Tailwind Theme</span>
+              <span class="fw-step-tool">CSS-Vars (Minimal)</span>
+            </div>
+            <p>Für 90 % der Brands reicht eine reine <code>tokens.css</code>-Datei. Wer Multi-Target (Web + iOS + Email) braucht, nutzt Style Dictionary als Compiler.</p>
+            <div class="fw-step-output">Output: <strong>tokens.css im Repo</strong> · von Theme + Marketing-Templates referenziert.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">03</div>
+          <div class="fw-step-body">
+            <h3>Voice-Doc schreiben — Beispiele statt Adjektive</h3>
+            <p>Drei Tonlagen (Hero · Body · Functional) plus expliziter „Nie"-Block. Pro Tonlage 3–5 echte Beispiele, keine Adjektive. Plus 5–10 „so nicht"-Sätze als hartes No-Go-Pattern.</p>
+            <p>Template-Struktur: <code>/voice/hero.md · /voice/body.md · /voice/functional.md · /voice/_nie.md</code>. Versioniert. AI-Tools (Claude, ChatGPT) bekommen die Files als System-Prompt — Output bleibt on-voice.</p>
+            <div class="fw-step-output">Output: <strong>voice.md (3+1 Files)</strong> · trainiert AI + Hires in Minuten.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">04</div>
+          <div class="fw-step-body">
+            <h3>Visual System mit Negativ-Beispielen</h3>
+            <p>Photography-Rules (Licht · Komposition · Mood), Icon-Grid, Pattern-Library, Motion-Rules. Wichtiger als jede positive Liste: <strong>10 konkrete Beispiele für „so nicht"</strong>. Negativ-Beispiele klären schneller als 50 On-Brand-Referenzen.</p>
+            <p>Tipp: Bilder, die fast wie deine Brand aussehen, aber bewusst eine Regel brechen (z.B. zu warm gelitet, zu zentriert komponiert) sind die schärfsten Lernsignale.</p>
+            <div class="fw-step-output">Output: <strong>visual.md + ein Pinterest/Notion-Board</strong> mit On-/Off-Brand-Beispielen.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">05</div>
+          <div class="fw-step-body">
+            <h3>Application-Pipeline aufsetzen</h3>
+            <p>Tokens → Theme → Ad-Templates → Pack-Druck. Pro Target ein klarer Hand-off-Path. Beispiel-Pipeline:</p>
+            <p><code>tokens.css</code> → wird vom Shopify-Theme via CSS-Variablen referenziert. Plus: Tailwind-Config zieht Werte aus <code>tokens.json</code>. Plus: Ad-Templates in Figma laden Tokens via Figma-Tokens-Studio. Plus: Verpackungs-Druck zieht Hex-Werte aus dem gleichen <code>tokens.json</code>.</p>
+            <p>Wenn der Designer einen Token ändert: 5 Minuten später ist die Ad und der Shop on-brand aktualisiert. Ohne Slack-Ping, ohne Race-Condition.</p>
+            <div class="fw-step-output">Output: <strong>application.json + Pipeline-Doc</strong> · alle Targets ziehen aus einer Quelle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK-CONNECTION -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wo Brand System die anderen Schichten trifft.</h2>
+      <p>Eine Schicht allein bringt wenig. Die Multiplikation entsteht im Stack: Brand System ist die Quelle, aus der die drei anderen Schichten ziehen.</p>
+
+      <div class="fw-stack-connect">
+        <a href="/wissen/conversion-engine/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 2</div>
+          <h4>Conversion Engine</h4>
+          <p>Theme-Sections referenzieren Tokens via CSS-Variablen. Jede neue PDP, jedes Bundle bleibt automatisch on-brand. Kein „bitte das Logo etwas größer"-Feedback mehr.</p>
+        </a>
+        <a href="/wissen/lifecycle-loops/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 3</div>
+          <h4>Lifecycle Loops</h4>
+          <p>Welcome-Mails, Win-Back-Sequenzen und AI-generierte Subject-Lines werden auf das Voice-Doc trainiert. Kein generischer ChatGPT-Output mehr — alles in Brand-Tonlage.</p>
+        </a>
+        <a href="/wissen/ai-operations/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 4</div>
+          <h4>AI Operations</h4>
+          <p>Brand-Tokens + Voice-Doc werden als System-Prompt für jedes AI-Tool genutzt. Ad-Briefings, PDP-Texte, Auto-Tagging — alles in einer Stimme, allen Outputs trainiert auf eine Quelle.</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>
