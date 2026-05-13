@@ -44,6 +44,23 @@
   .fw-callout h3{margin:0 0 12px;font-size:22px}
   .fw-callout p{margin:0}
 
+  .fw-trigger-map{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-trigger-head{display:grid;grid-template-columns:1.6fr 1.2fr 1fr 1.4fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-trigger-head > div{padding:14px 18px;border-right:1px solid var(--bg-line)}
+  .fw-trigger-head > div:last-child{border-right:none}
+  .fw-trigger-row{display:grid;grid-template-columns:1.6fr 1.2fr 1fr 1.4fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-trigger-row:last-child{border-bottom:none}
+  .fw-trigger-row > div{padding:14px 18px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-trigger-row > div:last-child{border-right:none}
+  .fw-trigger-row strong{font-weight:700}
+  .fw-trigger-loop{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  @media(max-width:780px){
+    .fw-trigger-head{display:none}
+    .fw-trigger-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-trigger-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-trigger-row > div:last-child{border-bottom:none}
+  }
+
   .fw-flow{margin:32px 0;max-width:880px;border-left:3px solid var(--bg-amber);padding-left:28px}
   .fw-flow-step{margin-bottom:24px}
   .fw-flow-tag{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:6px}
@@ -190,8 +207,65 @@
   </div>
 </section>
 
-<!-- WELCOME-FLOW BEISPIEL -->
+<!-- KLAVIYO TRIGGER-MAP -->
 <section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Die Klaviyo-Trigger-Map.</h2>
+      <p>Welcher Trigger feuert welchen Loop, wie lange wartet er, welches Segment greift? Das ist der operative Layer unter der Loop-Logik — und der Punkt, an dem die meisten Setups undokumentiert sind und mit der Zeit driften.</p>
+
+      <div class="fw-trigger-map">
+        <div class="fw-trigger-head">
+          <div>Trigger</div>
+          <div>Flow</div>
+          <div>Wartezeit</div>
+          <div>Segment-Filter</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Newsletter-Signup</strong></div>
+          <div class="fw-trigger-loop">Loop 1 · Welcome</div>
+          <div>0 Min</div>
+          <div>Nicht in „Customers"</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Viewed Product (3×)</strong></div>
+          <div class="fw-trigger-loop">Loop 2 · Browse Recovery</div>
+          <div>2 h</div>
+          <div>Kein Active Cart · Engagement ≥ 2</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Added to Cart</strong></div>
+          <div class="fw-trigger-loop">Loop 2 · Cart Recovery</div>
+          <div>45 Min / 22 h / 48 h</div>
+          <div>Cart > 25 € · kein Checkout-Complete</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Placed Order (1.)</strong></div>
+          <div class="fw-trigger-loop">Loop 3 · Post-Purchase</div>
+          <div>1 d / 7 d / 14 d / 30 d</div>
+          <div>Erstkunde · Order-Value &gt; 0</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>No Open in 90 days</strong></div>
+          <div class="fw-trigger-loop">Loop 4 · Win-Back</div>
+          <div>Tag 90 / 100 / 120</div>
+          <div>Letzte Bestellung ≥ 90 Tage</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Birthday (Geburtstag)</strong></div>
+          <div class="fw-trigger-loop">Add-on</div>
+          <div>7 Tage vor + am Tag</div>
+          <div>Profile hat Geburtstags-Feld</div>
+        </div>
+      </div>
+
+      <p>Diese Tabelle gehört in jede E-Commerce-Brand — entweder in Notion, im Klaviyo-Naming oder als <code>flows.md</code> im Repo. Wer den Setup nicht dokumentiert, hat in 6 Monaten einen Klaviyo-Friedhof mit 23 halb-aktiven Flows, die niemand mehr erklären kann.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME-FLOW BEISPIEL -->
+<section class="bb-section bb-section-50">
   <div class="wrap">
     <div class="fw-block" data-reveal>
       <h2>Wie ein Loop konkret aussieht: Welcome.</h2>
