@@ -308,6 +308,25 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-card-link::after{content:"→";transition:transform .2s}
 .bb-card:hover .bb-card-link::after{transform:translateX(4px)}
 
+/* ============= PROFIT-STACK-CARDS · Cream-Gradient + Custom-SVG-Icons (statt bunte Boxen) ============= */
+.bb-cards:not(.tools) .bb-card-thumb{
+  background-image:linear-gradient(135deg,#FAF7F2 0%,#F2EBE0 100%);
+  background-color:#FAF7F2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+.bb-cards:not(.tools) .bb-card-thumb .fw-icon{
+  width:52%;
+  max-width:160px;
+  height:auto;
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+.bb-cards:not(.tools) .bb-card:hover .bb-card-thumb .fw-icon{
+  transform:scale(1.06) translateY(-2px);
+}
+
 /* ============= TOOLS-CARDS · Free-standing (kein Box-Treatment, Icon direkt auf Section-BG) ============= */
 .bb-cards.tools .bb-card{
   background:transparent;
@@ -781,7 +800,16 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="bb-cards">
 
       <a href="/wissen/brand-system/" class="bb-card">
-        <div class="bb-card-thumb t3"><span class="bb-card-tag">Schicht 1 · Brand</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Schicht 1 · Brand</span>
+          <svg class="fw-icon" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <!-- 4 gestapelte Layer · oberste = orange Brand-Token -->
+            <rect x="20" y="22" width="80" height="14" fill="#FF6B3D" rx="2"/>
+            <rect x="20" y="44" width="80" height="14" fill="#0a0a0a" rx="2"/>
+            <rect x="20" y="66" width="80" height="14" fill="#0a0a0a" rx="2"/>
+            <rect x="20" y="88" width="80" height="14" fill="#0a0a0a" rx="2"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>Brand System</h3>
           <p>Die visuelle und narrative Schicht, die Ads, Web und Verpackung trägt — kein PDF-Styleguide, sondern Tokens, die jedes Asset konsistent halten. Vier Layer, ein Live-Beispiel.</p>
@@ -791,7 +819,21 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/conversion-engine/" class="bb-card">
-        <div class="bb-card-thumb t1"><span class="bb-card-tag">Schicht 2 · Conversion</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Schicht 2 · Conversion</span>
+          <svg class="fw-icon" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <!-- 3x3 Modular-Grid · zentraler Block = orange Conversion-Hebel -->
+            <rect x="20" y="20" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="50" y="20" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="80" y="20" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="20" y="50" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="50" y="50" width="26" height="26" fill="#FF6B3D" rx="2"/>
+            <rect x="80" y="50" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="20" y="80" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="50" y="80" width="26" height="26" fill="#0a0a0a" rx="2"/>
+            <rect x="80" y="80" width="26" height="26" fill="#0a0a0a" rx="2"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>Conversion Engine</h3>
           <p>Custom Shopify Themes auf Dawn-Basis. Stores, die in Tagen testen statt in Wochen — mit Section-Library, PDP-Patterns und Generator-Workflows, die mit deiner Brand wachsen.</p>
@@ -801,7 +843,15 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/lifecycle-loops/" class="bb-card">
-        <div class="bb-card-thumb t5"><span class="bb-card-tag">Schicht 3 · Lifecycle</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Schicht 3 · Lifecycle</span>
+          <svg class="fw-icon" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <!-- 3/4 Loop-Pfeil · orange Endpunkt = neuer Cycle-Start -->
+            <path d="M 60 20 A 40 40 0 1 1 20 60" stroke="#0a0a0a" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path d="M 28 50 L 20 60 L 32 66" stroke="#0a0a0a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="60" cy="20" r="9" fill="#FF6B3D"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>Lifecycle Loops</h3>
           <p>E-Mail- und SMS-Flows, die nicht nur laufen — sondern Customer Value maximieren. Aus bestehendem Traffic mehr Revenue holen, ohne dass du einen Euro mehr Ad-Spend zahlst.</p>
@@ -811,7 +861,21 @@ footer .footer-links a:hover{color:var(--accent)}
       </a>
 
       <a href="/wissen/ai-operations/" class="bb-card">
-        <div class="bb-card-thumb t2"><span class="bb-card-tag">Schicht 4 · AI</span></div>
+        <div class="bb-card-thumb">
+          <span class="bb-card-tag">Schicht 4 · AI</span>
+          <svg class="fw-icon" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <!-- Netzwerk · 4 Outer-Nodes verbunden mit zentralem orange Node -->
+            <line x1="35" y1="35" x2="60" y2="60" stroke="#0a0a0a" stroke-width="3.5"/>
+            <line x1="85" y1="35" x2="60" y2="60" stroke="#0a0a0a" stroke-width="3.5"/>
+            <line x1="35" y1="85" x2="60" y2="60" stroke="#0a0a0a" stroke-width="3.5"/>
+            <line x1="85" y1="85" x2="60" y2="60" stroke="#0a0a0a" stroke-width="3.5"/>
+            <circle cx="35" cy="35" r="9" fill="#0a0a0a"/>
+            <circle cx="85" cy="35" r="9" fill="#0a0a0a"/>
+            <circle cx="35" cy="85" r="9" fill="#0a0a0a"/>
+            <circle cx="85" cy="85" r="9" fill="#0a0a0a"/>
+            <circle cx="60" cy="60" r="13" fill="#FF6B3D"/>
+          </svg>
+        </div>
         <div class="bb-card-body">
           <h3>AI Operations</h3>
           <p>Repetitive Prozesse ersetzen — Ad-Briefings, Auto-Tagging, Content-Pipelines. Damit dein Team schneller entscheidet und besser skaliert, ohne mehr Köpfe einzustellen.</p>
