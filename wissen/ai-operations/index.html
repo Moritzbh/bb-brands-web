@@ -58,6 +58,37 @@
     .fw-stack-row > div:last-child{border-bottom:none}
   }
 
+  /* Anti-Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack-Connection (Cross-Links zu anderen Frameworks) */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
   .fw-compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:32px 0;max-width:880px;border:1px solid var(--bg-line)}
   @media(max-width:780px){.fw-compare{grid-template-columns:1fr}}
   .fw-compare-col{padding:32px;background:#fff}
@@ -295,17 +326,153 @@
   </div>
 </section>
 
-<!-- HEBEL ZUM MITNEHMEN -->
+<!-- ANTI-PATTERNS -->
 <section class="bb-section bb-section-95">
   <div class="wrap">
     <div class="fw-block" data-reveal>
-      <h2>Vier Hebel, die du diese Woche pilotieren kannst.</h2>
-      <ul>
-        <li><strong>Identifiziere deinen teuersten Repetitiv-Prozess.</strong> Was macht dein Team 5+× pro Woche identisch? Briefings? PDP-Texte? Tag-Pflege? Genau das ist dein erster Automation-Kandidat — höchste Hebel-Wirkung.</li>
-        <li><strong>Baue ein „Brand-Voice-Prompt-Doc" für AI-Outputs.</strong> Egal welches Tool du nutzt — wenn du jeden Output mit demselben Voice-Doc primst, sind alle Outputs konsistent. 30 Min Setup, jeder weitere Output ist ein Copy-Paste.</li>
-        <li><strong>Pilotiere einen Use-Case ohne Tool-Investment.</strong> Claude oder ChatGPT + Zapier/Make + Google Sheets reichen für 80 % der Anwendungsfälle. Du brauchst keinen Custom-Stack, um den Wert zu beweisen.</li>
-        <li><strong>Definiere klar, was AI ersetzen darf — und was nicht.</strong> Briefings: ja. Strategie-Entscheidungen: nein. Schreib die Grenzen explizit auf. Sonst eskaliert das Tooling-Vertrauen ins Falsche.</li>
-      </ul>
+      <h2>Vier Anti-Patterns, die AI zum Gimmick degradieren.</h2>
+      <p>„Wir nutzen AI" ist 2026 keine Differenzierung mehr. Aber die meisten Brands nutzen AI <strong>neben</strong> dem Workflow — nicht <strong>in</strong> dem Workflow. Daraus entsteht keine operative Leverage. Die häufigsten vier Fehler:</p>
+
+      <div class="fw-anti-grid">
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>AI als Chatbot auf der PDP</h3>
+          <p>Ein generischer Bot, der „Wie kann ich helfen?" fragt. Conversion-Rate sinkt durch Distraction, Support-Tickets bleiben gleich. Fix: AI im Backend (Auto-Tagging, Subject-Line-Pipelines, FAQ-Bot in der Inbox), nicht als Feature-Sticker.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Marketer fragt ChatGPT</h3>
+          <p>Jeder Marketer schreibt eigene Prompts, kopiert in Klaviyo/Notion, wiederholt es täglich. Nichts wird wiederverwendbar, Output bleibt generisch. Fix: Pipelines bauen — Input + Prompt-Template + Brand-Voice-Doc + Auto-Output.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>AI entscheidet Strategie</h3>
+          <p>„Was sollten wir nächstes Quartal launchen?" → ChatGPT-Antwort wird im Meeting zitiert. AI ohne klare Grenzen eskaliert ins Falsche. Fix: Grenzen explizit dokumentieren — AI macht Drafts, nie Strategie-Calls.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Kein Brand-Context im Prompt</h3>
+          <p>Generischer ChatGPT-Output ohne Brand-Voice-Input. Resultat: jeder Subject-Line liest sich wie aus dem GPT-Template-Pool. Fix: Voice-Doc + Brand-Tokens als System-Prompt für jeden Output. Pflicht, nicht optional.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIY · 5 STEPS -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Von „wir nutzen ChatGPT" zur AI-Operations-Maschine in 5 Schritten.</h2>
+      <p>Reihenfolge entscheidet: erst der teuerste Prozess, dann Brand-Context, dann Pilot, dann Workflow, dann Grenzen. Wer mit Pilot ohne Voice-Context startet, baut auf generischen Sand.</p>
+
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-num">01</div>
+          <div class="fw-step-body">
+            <h3>Teuersten Repetitiv-Prozess identifizieren</h3>
+            <p>Liste auf, was dein Team <strong>5+ Mal pro Woche identisch</strong> macht: Ad-Briefings? PDP-Texte? Subject-Line-Brainstorming? Tag-Pflege? Pro Prozess: Aufwand (Min/Woche) × Frequenz × Anzahl Personen = Total-Zeit-Investment.</p>
+            <p>Der teuerste mit der klarsten Output-Struktur ist dein erster Automation-Kandidat. Höchste Hebel-Wirkung, klarster ROI.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Notion · Process-Audit</span>
+              <span class="fw-step-tool">Team-Interviews</span>
+              <span class="fw-step-tool">Zeit-Tracking 1 Woche</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>Top-3-Automation-Kandidaten</strong> · gerankt nach Zeit-Investment × Output-Klarheit.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">02</div>
+          <div class="fw-step-body">
+            <h3>Brand-Voice-Prompt-Doc bauen</h3>
+            <p>Bevor du irgendein AI-Tool baust: Voice-Doc als System-Prompt zentralisieren. Drei Tonlagen (Hero/Body/Functional) + „Nie"-Block + Brand-Tokens (Farben, Typo, Audience-Profile).</p>
+            <p>Wird zum Pflicht-Header für jeden AI-Workflow. Egal welches Tool: Output startet immer mit dem Voice-Context. Keine generischen Outputs mehr.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">brand-prompt.md</span>
+              <span class="fw-step-tool">Voice-Doc (aus Brand System)</span>
+              <span class="fw-step-tool">Claude/GPT System-Prompt</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>brand-prompt.md</strong> · Pflicht-Input für jeden AI-Workflow.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">03</div>
+          <div class="fw-step-body">
+            <h3>Use-Case 1 pilotieren · ohne Tool-Investment</h3>
+            <p>Start mit dem teuersten Prozess (aus Step 1) + Brand-Voice-Prompt (Step 2). Tool-Stack: Claude oder GPT-4 + Google Sheets als Input + Notion als Output. Kein Custom-Build, kein Make/Zapier — erst beweisen, dann automatisieren.</p>
+            <p>Pilot-Dauer: 2 Wochen. Output-Qualität messen: wer reviewed wie viel manuell nach? Wenn 80 % direkt verwendbar = Pipeline lohnt. Wenn unter 50 % = Prompt verbessern oder anderen Use-Case wählen.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Claude 3.5 / GPT-4</span>
+              <span class="fw-step-tool">Google Sheets</span>
+              <span class="fw-step-tool">Notion · Output-Log</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>Pilot-Report</strong> · Quality-Score + Decision Go/No-Go für Workflow-Build.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">04</div>
+          <div class="fw-step-body">
+            <h3>Workflow automatisieren · Make.com / Zapier</h3>
+            <p>Wenn Pilot funktioniert: Workflow als No-Code-Automation bauen. Trigger (z.B. neuer Sheet-Row, neue Shopify-SKU) → AI-Call mit System-Prompt → Output in Ziel-System (Klaviyo, Notion, Shopify-Metafield).</p>
+            <p>Wichtig: <strong>Human-in-the-Loop</strong> einbauen. AI-Output landet erst in „Review"-Queue, Mensch genehmigt mit einem Klick, dann geht's live. Eskaliert keine Fehler unkontrolliert.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Make.com / Zapier</span>
+              <span class="fw-step-tool">Webhook-Trigger</span>
+              <span class="fw-step-tool">Review-Queue</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>Live-Workflow + Review-Queue</strong> · pro Pipeline ein klarer Owner.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">05</div>
+          <div class="fw-step-body">
+            <h3>AI-Grenzen explizit definieren</h3>
+            <p>Was AI darf, was nicht — schriftlich. Beispiel: <strong>Darf</strong> Drafts schreiben, Tag-Vorschläge machen, Briefings strukturieren, Subject-Lines generieren. <strong>Darf nicht</strong> Strategie-Entscheidungen treffen, finale Headlines ohne Review live nehmen, Kundenkommunikation autonom verschicken.</p>
+            <p>Doc im Repo committen (<code>ai-policy.md</code>). Pro Use-Case ein Owner: wer reviewed Outputs, wer entscheidet bei Edge-Cases? Sonst eskaliert das Tool-Vertrauen ins Falsche.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">ai-policy.md</span>
+              <span class="fw-step-tool">Owner pro Workflow</span>
+              <span class="fw-step-tool">Review-SLA</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>ai-policy.md im Repo</strong> · klare Verantwortlichkeit pro Pipeline.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK-CONNECTION -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wo AI Operations die anderen Schichten trifft.</h2>
+      <p>AI ohne Brand-, Conversion- und Lifecycle-Kontext bleibt generisch. Erst im Stack entsteht echte Leverage:</p>
+
+      <div class="fw-stack-connect">
+        <a href="/wissen/brand-system/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 1</div>
+          <h4>Brand System</h4>
+          <p>Voice-Doc + Tokens werden als System-Prompt für jeden AI-Workflow genutzt. Jeder Output ist on-brand by default — kein generisches ChatGPT-Output mehr.</p>
+        </a>
+        <a href="/wissen/conversion-engine/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 2</div>
+          <h4>Conversion Engine</h4>
+          <p>AI-generierte PDP-Texte werden über den CSV-Generator ins Shopify-Theme geschrieben. SKU-Onboarding von Wochen auf Stunden — bei voller Brand-Konsistenz.</p>
+        </a>
+        <a href="/wissen/lifecycle-loops/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 3</div>
+          <h4>Lifecycle Loops</h4>
+          <p>Subject-Line-Pipeline scored Varianten gegen historische Open-Rates. Klaviyo bekommt 3 Vorschläge pro Send, lernt mit jedem Cycle. Konsistent, reproduzierbar, kein Brainstorming-Meeting mehr nötig.</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>
