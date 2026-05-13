@@ -41,6 +41,23 @@
 
   .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;max-width:880px}
   @media(max-width:680px){.fw-stats{grid-template-columns:1fr}}
+
+  .fw-section-list{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-section-list-head{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-section-list-head > div{padding:14px 22px;border-right:1px solid var(--bg-line)}
+  .fw-section-list-head > div:last-child{border-right:none}
+  .fw-section-list-row{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-section-list-row:last-child{border-bottom:none}
+  .fw-section-list-row > div{padding:14px 22px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-section-list-row > div:last-child{border-right:none}
+  .fw-section-list-row strong{font-weight:700}
+  .fw-section-list-row .fw-section-reuse{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber)}
+  @media(max-width:680px){
+    .fw-section-list-head{display:none}
+    .fw-section-list-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-section-list-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-section-list-row > div:last-child{border-bottom:none}
+  }
   .fw-stat{background:#fff;border:1px solid var(--bg-line);padding:28px;text-align:center}
   .fw-stat-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:48px;line-height:1;color:#000;display:block;margin-bottom:8px}
   .fw-stat-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--bg-text-muted);text-transform:uppercase}
@@ -50,11 +67,17 @@
   .fw-callout h3{margin:0 0 12px;font-size:22px}
   .fw-callout p{margin:0}
 
-  .fw-bottom{background:#000;color:#fff;padding:80px 0;text-align:center}
+  .fw-bottom{
+    background:#000;color:#fff;padding:280px 0 96px;text-align:center;
+    background-image:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-2000.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
   .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
   .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
-  .fw-bottom-cta{display:inline-block;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;padding:20px 64px;box-shadow:1px 1px 20px rgba(0,0,0,.4);transition:all .2s;text-decoration:none}
-  .fw-bottom-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+  .fw-bottom-cta{display:inline-block;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:22px 64px;border:1.5px solid #fff;box-shadow:none;position:relative;z-index:1;overflow:hidden;transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;text-decoration:none}
+  .fw-bottom-cta::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left center;transition:transform .4s cubic-bezier(.65,0,.35,1);z-index:-1}
+  .fw-bottom-cta:hover{background:transparent;color:#000;border-color:#fff;transform:none;text-decoration:none}
+  .fw-bottom-cta:hover::before{transform:scaleX(1)}
   .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
   .fw-bottom-back:hover{color:#fff}
   .fw-bottom-back strong{color:#fff;font-weight:600}
@@ -65,7 +88,7 @@
     .fw-block{padding:40px 0}
     .fw-block h2{font-size:26px}
     .fw-callout{padding:28px}
-    .fw-bottom{padding:56px 0}
+    .fw-bottom{padding:200px 0 64px;background-image:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-1000.jpg')}
     .fw-bottom h2{font-size:26px}
   }
 </style>
@@ -147,7 +170,7 @@
       <h2>Standard-Themes lernen nicht. Sie sind statisch.</h2>
       <p>Du hast wahrscheinlich ein Premium-Theme gekauft. Dawn-Fork, Impulse, Prestige, was auch immer. Es sah im Demo gut aus. Heute willst du eine neue PDP-Variante testen — und dein Theme-Dev sagt: <em>„Drei Tage."</em> Eine neue Bundle-Logik? <em>„Eine Woche."</em> Ein neues Section-Layout für eine Aktion? <em>„Ist nicht eingeplant."</em></p>
       <p>Das ist kein Theme-Problem. Das ist ein <strong>Architektur-Problem</strong>. Standard-Themes sind als Display-Layer gebaut, nicht als Lern-Maschine. Jede neue Section ist Custom-Code, jede Variation hartcodiert, jeder Test eine Sonderlocke.</p>
-      <p>Eine <strong>Conversion Engine</strong> dreht das um: Der Store besteht aus 80–100 modularen Sections, jede konfigurierbar via Shopify-Schema. Founder oder Marketer können neue PDP-Varianten in Minuten zusammenstecken — ohne Dev.</p>
+      <p>Eine <strong>Conversion Engine</strong> dreht das um: Der Store besteht aus 80–100 modularen Sections, jede konfigurierbar via Shopify-Schema. Brand-Owner oder Marketer können neue PDP-Varianten in Minuten zusammenstecken — ohne Dev.</p>
     </div>
   </div>
 </section>
@@ -181,6 +204,56 @@
           <p>Jede Section liest Color-Schemes und Typo aus Brand-Tokens (Schicht 1). Wenn der Designer den Primary-Token ändert, sind alle 82 Sections eine Pageload später aktualisiert. Ohne Code-Touch.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION-LIBRARY · BEISPIEL -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>So sieht eine Section-Library in echt aus.</h2>
+      <p>Auszug aus der aktuellen Bachgold-Library. Jede Section ist <strong>einmal gebaut, mehrfach genutzt</strong>. Spalte „Wiederverwendet" zeigt: derselbe Code trägt 6–15 verschiedene Seiten. Time-Save bei Edits ist multiplikativ.</p>
+
+      <div class="fw-section-list">
+        <div class="fw-section-list-head">
+          <div>Section</div>
+          <div>Wiederverwendet</div>
+          <div>Was sie macht</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>PDP Hero</strong></div>
+          <div class="fw-section-reuse">15× PDPs</div>
+          <div>Produkt-Hero mit Image, Bullets, Bundle-Hook, Trust-Bar</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Bundle-Master</strong></div>
+          <div class="fw-section-reuse">7× Bundles</div>
+          <div>Konfigurierbares Bundle-Modul mit Mengen-Logik + AOV-Hint</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Trust-Strip</strong></div>
+          <div class="fw-section-reuse">12× Seiten</div>
+          <div>Press-Logos + Garantie-Pills · Cross-Page Trust-Anker</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>FAQ-Block</strong></div>
+          <div class="fw-section-reuse">11× Seiten</div>
+          <div>Accordion mit Schema-Markup (rich-results-ready)</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Brand-Story-Block</strong></div>
+          <div class="fw-section-reuse">6× Seiten</div>
+          <div>Image + Story-Text · Founder-Reason in PDP-Flow</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Anwendungs-Visualisierung</strong></div>
+          <div class="fw-section-reuse">8× PDPs</div>
+          <div>Schritt-für-Schritt Use-Case · reduziert Pre-Sale-Fragen</div>
+        </div>
+      </div>
+
+      <p>Wenn der Designer eine Hero-Pattern-Änderung will: ein Edit, 15 PDPs aktualisiert. <strong>Iterations-Speed steigt mit jeder neuen Section in der Library.</strong></p>
     </div>
   </div>
 </section>
@@ -220,7 +293,7 @@
     </div>
 
     <div class="fw-callout" data-reveal>
-      <div class="fw-callout-label">Founder-Quote · Bachgold</div>
+      <div class="fw-callout-label">Quote · Bachgold</div>
       <p>"Was Standard-Agenturen 6 Monate kosten würde, lief bei uns in 8 Wochen — ohne dass wir am Setup leiden."</p>
     </div>
   </div>
@@ -234,7 +307,7 @@
       <ul>
         <li><strong>Audit deinen App-Stack.</strong> Liste alle aktiven Shopify-Apps. Welche tragen direkt zu Revenue bei, welche sind Legacy? Jede entfernte App = schnellerer Store + weniger Subscriptions.</li>
         <li><strong>Erkenne dein Theme-Lock-In.</strong> Kannst du eine neue Section innerhalb 30 Minuten ohne Dev launchen? Wenn nicht, bist du gelockt. Migration auf Dawn-Basis lohnt sich in fast jedem Fall.</li>
-        <li><strong>Baue deine ersten 3 wiederverwendbaren Sections.</strong> Identifiziere Patterns, die du auf 5+ Seiten brauchst (Trust-Strip, FAQ-Block, Founder-Block). Mach sie zu eigenen Sections mit Shopify-Schema.</li>
+        <li><strong>Baue deine ersten 3 wiederverwendbaren Sections.</strong> Identifiziere Patterns, die du auf 5+ Seiten brauchst (Trust-Strip, FAQ-Block, Brand-Story-Block). Mach sie zu eigenen Sections mit Shopify-Schema.</li>
         <li><strong>Migriere Produkt-Content in eine CSV.</strong> Wenn dein Produkt-Content noch in der Shopify-Admin-UI liegt, ist jede Massen-Änderung eine Strafe. CSV + Generator = bulk-bearbeitbar.</li>
       </ul>
     </div>

@@ -44,17 +44,40 @@
   .fw-callout h3{margin:0 0 12px;font-size:22px}
   .fw-callout p{margin:0}
 
+  .fw-trigger-map{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-trigger-head{display:grid;grid-template-columns:1.6fr 1.2fr 1fr 1.4fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-trigger-head > div{padding:14px 18px;border-right:1px solid var(--bg-line)}
+  .fw-trigger-head > div:last-child{border-right:none}
+  .fw-trigger-row{display:grid;grid-template-columns:1.6fr 1.2fr 1fr 1.4fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-trigger-row:last-child{border-bottom:none}
+  .fw-trigger-row > div{padding:14px 18px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-trigger-row > div:last-child{border-right:none}
+  .fw-trigger-row strong{font-weight:700}
+  .fw-trigger-loop{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  @media(max-width:780px){
+    .fw-trigger-head{display:none}
+    .fw-trigger-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-trigger-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-trigger-row > div:last-child{border-bottom:none}
+  }
+
   .fw-flow{margin:32px 0;max-width:880px;border-left:3px solid var(--bg-amber);padding-left:28px}
   .fw-flow-step{margin-bottom:24px}
   .fw-flow-tag{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:6px}
   .fw-flow-step h4{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#000;margin:0 0 8px}
   .fw-flow-step p{font-size:15px;line-height:1.6;color:#000;margin:0}
 
-  .fw-bottom{background:#000;color:#fff;padding:80px 0;text-align:center}
+  .fw-bottom{
+    background:#000;color:#fff;padding:280px 0 96px;text-align:center;
+    background-image:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-2000.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
   .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
   .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
-  .fw-bottom-cta{display:inline-block;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;padding:20px 64px;box-shadow:1px 1px 20px rgba(0,0,0,.4);transition:all .2s;text-decoration:none}
-  .fw-bottom-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+  .fw-bottom-cta{display:inline-block;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:22px 64px;border:1.5px solid #fff;box-shadow:none;position:relative;z-index:1;overflow:hidden;transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;text-decoration:none}
+  .fw-bottom-cta::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left center;transition:transform .4s cubic-bezier(.65,0,.35,1);z-index:-1}
+  .fw-bottom-cta:hover{background:transparent;color:#000;border-color:#fff;transform:none;text-decoration:none}
+  .fw-bottom-cta:hover::before{transform:scaleX(1)}
   .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
   .fw-bottom-back:hover{color:#fff}
   .fw-bottom-back strong{color:#fff;font-weight:600}
@@ -65,7 +88,7 @@
     .fw-block{padding:40px 0}
     .fw-block h2{font-size:26px}
     .fw-callout{padding:28px}
-    .fw-bottom{padding:56px 0}
+    .fw-bottom{padding:200px 0 64px;background-image:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-1000.jpg')}
     .fw-bottom h2{font-size:26px}
   }
 </style>
@@ -184,8 +207,65 @@
   </div>
 </section>
 
-<!-- WELCOME-FLOW BEISPIEL -->
+<!-- KLAVIYO TRIGGER-MAP -->
 <section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Die Klaviyo-Trigger-Map.</h2>
+      <p>Welcher Trigger feuert welchen Loop, wie lange wartet er, welches Segment greift? Das ist der operative Layer unter der Loop-Logik — und der Punkt, an dem die meisten Setups undokumentiert sind und mit der Zeit driften.</p>
+
+      <div class="fw-trigger-map">
+        <div class="fw-trigger-head">
+          <div>Trigger</div>
+          <div>Flow</div>
+          <div>Wartezeit</div>
+          <div>Segment-Filter</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Newsletter-Signup</strong></div>
+          <div class="fw-trigger-loop">Loop 1 · Welcome</div>
+          <div>0 Min</div>
+          <div>Nicht in „Customers"</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Viewed Product (3×)</strong></div>
+          <div class="fw-trigger-loop">Loop 2 · Browse Recovery</div>
+          <div>2 h</div>
+          <div>Kein Active Cart · Engagement ≥ 2</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Added to Cart</strong></div>
+          <div class="fw-trigger-loop">Loop 2 · Cart Recovery</div>
+          <div>45 Min / 22 h / 48 h</div>
+          <div>Cart > 25 € · kein Checkout-Complete</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Placed Order (1.)</strong></div>
+          <div class="fw-trigger-loop">Loop 3 · Post-Purchase</div>
+          <div>1 d / 7 d / 14 d / 30 d</div>
+          <div>Erstkunde · Order-Value &gt; 0</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>No Open in 90 days</strong></div>
+          <div class="fw-trigger-loop">Loop 4 · Win-Back</div>
+          <div>Tag 90 / 100 / 120</div>
+          <div>Letzte Bestellung ≥ 90 Tage</div>
+        </div>
+        <div class="fw-trigger-row">
+          <div><strong>Birthday (Geburtstag)</strong></div>
+          <div class="fw-trigger-loop">Add-on</div>
+          <div>7 Tage vor + am Tag</div>
+          <div>Profile hat Geburtstags-Feld</div>
+        </div>
+      </div>
+
+      <p>Diese Tabelle gehört in jede E-Commerce-Brand — entweder in Notion, im Klaviyo-Naming oder als <code>flows.md</code> im Repo. Wer den Setup nicht dokumentiert, hat in 6 Monaten einen Klaviyo-Friedhof mit 23 halb-aktiven Flows, die niemand mehr erklären kann.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME-FLOW BEISPIEL -->
+<section class="bb-section bb-section-50">
   <div class="wrap">
     <div class="fw-block" data-reveal>
       <h2>Wie ein Loop konkret aussieht: Welcome.</h2>
