@@ -63,6 +63,37 @@
     .fw-trigger-row > div:last-child{border-bottom:none}
   }
 
+  /* Anti-Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack-Connection */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
   .fw-flow{margin:32px 0;max-width:880px;border-left:3px solid var(--bg-amber);padding-left:28px}
   .fw-flow-step{margin-bottom:24px}
   .fw-flow-tag{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:6px}
@@ -319,17 +350,154 @@
   </div>
 </section>
 
-<!-- HEBEL ZUM MITNEHMEN -->
+<!-- ANTI-PATTERNS -->
 <section class="bb-section bb-section-50">
   <div class="wrap">
     <div class="fw-block" data-reveal>
-      <h2>Vier Hebel, die du diese Woche umsetzen kannst.</h2>
-      <ul>
-        <li><strong>Audit deinen aktuellen Welcome-Flow.</strong> Liste jeden Send mit seiner expliziten Funktion. Wenn zwei Sends dieselbe Funktion haben, hast du Redundanz. Wenn eine Funktion fehlt, hast du eine Lücke.</li>
-        <li><strong>Segmentiere nach Engagement-Level, nicht nach Tag-Listen.</strong> Statt „alle Subscriber von Q1" → „alle, die in den letzten 30 Tagen 2+ Sends geöffnet haben". Engagement-Segmente liefern messbar bessere Open-/Click-Raten.</li>
-        <li><strong>Schreib einen Founder-Insight für Tag 2.</strong> Egal welche Brand du bist — die Mail vom Founder am Tag 2 öffnet typischerweise besser als jede „Special Offer". Authentizität schlägt Mechanik.</li>
-        <li><strong>Reaktiviere deine schlafenden 6+ Monate-Cohorten.</strong> Bau einen Win-Back-Loop mit 3 Sends: neuer Hook → konkreter Anreiz → Last Chance. Eine Liste, die du seit 6 Monaten nicht angesprochen hast, ist Geld auf dem Tisch.</li>
-      </ul>
+      <h2>Vier Anti-Patterns, die Lifecycle-Loops killen.</h2>
+      <p>Die meisten Klaviyo-Setups starten gut und sterben langsam. Das passiert nicht durch eine große Entscheidung — sondern durch vier kleine, sich verstärkende Fehler:</p>
+
+      <div class="fw-anti-grid">
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Klaviyo-Templates kopieren</h3>
+          <p>Welcome-Flow aus dem Default-Template, Cart-Recovery aus Klaviyo-Library. Resultat: jede DTC-Brand sieht gleich aus. Differenzierung über generische Vorlagen ist unmöglich. Fix: eigene Loop-Logik mit klarer Funktion pro Send.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Send-Wiederholung statt Funktion</h3>
+          <p>Send 2 sagt dasselbe wie Send 1, nur mit anderem Bild. „Reminder", „Last Chance", „Letzte Chance!!!". Open-Rate von Send 3 stirbt. Fix: jeder Touchpoint hat eine eigene Funktion — Trust, Authority, Reveal, Proof, Offer, Friction-Removal, Close.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Tag-Listen statt Engagement-Segmente</h3>
+          <p>„Alle Subscriber aus Q1" → 40 % nicht-Engaged drinnen, killen Deliverability. Fix: Segmentation auf Engagement-Score (öffnet/klickt in den letzten 30/60/90 Tagen). Inaktive in separates Re-Engagement-Segment.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Klaviyo-Friedhof</h3>
+          <p>23 halb-aktive Flows nach 18 Monaten. „Welcome v1" läuft noch parallel zu „Welcome v2" und „Welcome-Test-2024-07-fixed-final". Fix: jeder Flow versioniert (<code>L1-welcome-v2</code>), alte deaktiviert + dokumentiert, warum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIY · 5 STEPS -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vom Klaviyo-Friedhof zur Lifecycle-Maschine in 5 Schritten.</h2>
+      <p>Reihenfolge ist nicht zufällig: erst aufräumen, dann segmentieren, dann Loops bauen. Wer Schritt 1–2 überspringt, baut neue Komplexität auf alte Sünden.</p>
+
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-num">01</div>
+          <div class="fw-step-body">
+            <h3>Flow-Audit + Friedhof aufräumen</h3>
+            <p>Liste alle aktiven Klaviyo-Flows. Pro Flow: Trigger · Funktion · Letzte Edit · Empfänger-Volumen · Performance. Markiere: <strong>laufen + funktionieren · laufen + tot · können weg</strong>.</p>
+            <p>Inaktive Flows nicht löschen, sondern deaktivieren + in <code>flows.md</code> dokumentieren, warum.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Klaviyo Flows Library</span>
+              <span class="fw-step-tool">Notion · flows.md</span>
+              <span class="fw-step-tool">Performance-Tab pro Flow</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>flows.md im Repo</strong> · Single Source of Truth für jeden Flow.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">02</div>
+          <div class="fw-step-body">
+            <h3>Engagement-Segmentation aufsetzen</h3>
+            <p>Statt Tag-Listen ein 3–5-Bucket-System nach Engagement-Score:</p>
+            <p><strong>Hot</strong> (öffnet/klickt in 30 Tagen) · <strong>Warm</strong> (30–60 d) · <strong>Cool</strong> (60–90 d) · <strong>Cold</strong> (90+ d) · <strong>Customer</strong> (1+ Bestellung). Sendings nur an Hot+Warm, Cool kriegt Re-Engagement, Cold geht in Win-Back oder Suppress.</p>
+            <p>Deliverability profitiert sofort — Senderqualität bleibt hoch, Open-Rate stabilisiert.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Klaviyo Segments</span>
+              <span class="fw-step-tool">Engagement-Score</span>
+              <span class="fw-step-tool">Suppression-Rule</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>5 Engagement-Segmente</strong> · Basis für alle künftigen Sendings.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">03</div>
+          <div class="fw-step-body">
+            <h3>Welcome-Loop auf 7-Beat-Pattern</h3>
+            <p>Tag 0–14, sieben Touchpoints mit eigenen Funktionen: <strong>Trust → Authority → Reveal → Proof → Offer → Friction-Removal → Close</strong>. Kein Send-Slot ohne klare Funktion.</p>
+            <p>Tag 2: Founder-Insight (Mail vom Brand-CEO). Tag 10: 10 %-Soft-Incentive. Tag 14: Hard Close mit Story-Rückbezug. Wer dann nicht bestellt, geht in „Slow Nurture".</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Klaviyo Welcome-Flow</span>
+              <span class="fw-step-tool">Voice-Doc (aus Brand System)</span>
+              <span class="fw-step-tool">Conditional Splits</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>L1-welcome-v2 Flow</strong> · 7 Sends mit klarer Funktion pro Send.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">04</div>
+          <div class="fw-step-body">
+            <h3>Cart- und Browse-Recovery aktivieren</h3>
+            <p>Zwei wichtigste Trigger-basierte Loops. <strong>Cart Recovery</strong>: 45 Min → 22 h → 48 h, mit zunehmender Reibungs-Reduzierung (Trust-Boost → Bundle-Hinweis → 10 % als Last-Resort). <strong>Browse Recovery</strong>: 2 h Wait nach 3+ Views ohne Cart.</p>
+            <p>Wichtig: Wartezeiten nicht zu kurz (wirkt aggressiv) und nicht zu lang (Lead ist weg). Filter: nur Subscriber, kein doppeltes Mailing pro Tag.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Klaviyo Flow-Trigger</span>
+              <span class="fw-step-tool">Shopify Cart-Event</span>
+              <span class="fw-step-tool">Frequency-Cap</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>L2-cart-recovery + L2-browse-recovery</strong> · Trigger-Map dokumentiert.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">05</div>
+          <div class="fw-step-body">
+            <h3>Win-Back für 90 d+-Inaktive</h3>
+            <p>Drei-Schritt-Loop: <strong>Hook</strong> (neue Story, neuer Produkt-Drop, nicht „wir vermissen dich") · <strong>Konkreter Anreiz</strong> (15 % oder Exklusiv-Bundle) · <strong>Last Chance</strong> (vor Suppress).</p>
+            <p>Wer nicht reagiert: in „Cold Suppress" verschieben. Sender-Reputation bleibt sauber. Schlafende Listen reaktivieren typischerweise 8–15 % der Empfänger zurück — Conversion auf Win-Back-Käufer ist überdurchschnittlich.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Klaviyo Win-Back-Flow</span>
+              <span class="fw-step-tool">Suppression-Logic</span>
+              <span class="fw-step-tool">Cohort-Tracking</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>L4-winback-v1</strong> · plus Suppress-Regel für Non-Responders.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK-CONNECTION -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wo Lifecycle Loops die anderen Schichten trifft.</h2>
+      <p>Loops, die isoliert laufen, sind Send-Mechanik. Erst im Stack werden sie zur Customer-Intelligenz:</p>
+
+      <div class="fw-stack-connect">
+        <a href="/wissen/brand-system/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 1</div>
+          <h4>Brand System</h4>
+          <p>Subject-Lines, Body-Texte und CTAs ziehen aus dem Voice-Doc. AI-Generierung bleibt on-brand. Keine generischen ChatGPT-Mails mehr.</p>
+        </a>
+        <a href="/wissen/conversion-engine/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 2</div>
+          <h4>Conversion Engine</h4>
+          <p>Shopify-Events (Cart, Browse, Order) feuern Klaviyo-Flows nativ. Kein Drittanbieter-Pixel, kein verlorenes Tracking — Theme + Flows reden direkt miteinander.</p>
+        </a>
+        <a href="/wissen/ai-operations/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 4</div>
+          <h4>AI Operations</h4>
+          <p>Subject-Line-Generator nutzt Voice-Doc + historische Top-Performer als Input. Pro Campaign 10 Varianten, scored gegen Open-Rate. Konsistent, reproduzierbar, lernt mit jedem Send.</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>
