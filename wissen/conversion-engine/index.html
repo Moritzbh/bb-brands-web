@@ -41,6 +41,37 @@
   .fw-layer h3{margin:0 0 12px;font-size:20px}
   .fw-layer p{font-size:15px;line-height:1.6;margin:0}
 
+  /* Anti-Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack-Connection */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
   .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;max-width:880px}
   @media(max-width:680px){.fw-stats{grid-template-columns:1fr}}
 
@@ -301,17 +332,152 @@
   </div>
 </section>
 
-<!-- HEBEL ZUM MITNEHMEN -->
+<!-- ANTI-PATTERNS -->
 <section class="bb-section bb-section-50">
   <div class="wrap">
     <div class="fw-block" data-reveal>
-      <h2>Vier Hebel, die du heute prüfen kannst.</h2>
-      <ul>
-        <li><strong>Audit deinen App-Stack.</strong> Liste alle aktiven Shopify-Apps. Welche tragen direkt zu Revenue bei, welche sind Legacy? Jede entfernte App = schnellerer Store + weniger Subscriptions.</li>
-        <li><strong>Erkenne dein Theme-Lock-In.</strong> Kannst du eine neue Section innerhalb 30 Minuten ohne Dev launchen? Wenn nicht, bist du gelockt. Migration auf Dawn-Basis lohnt sich in fast jedem Fall.</li>
-        <li><strong>Baue deine ersten 3 wiederverwendbaren Sections.</strong> Identifiziere Patterns, die du auf 5+ Seiten brauchst (Trust-Strip, FAQ-Block, Brand-Story-Block). Mach sie zu eigenen Sections mit Shopify-Schema.</li>
-        <li><strong>Migriere Produkt-Content in eine CSV.</strong> Wenn dein Produkt-Content noch in der Shopify-Admin-UI liegt, ist jede Massen-Änderung eine Strafe. CSV + Generator = bulk-bearbeitbar.</li>
-      </ul>
+      <h2>Vier Anti-Patterns, die jede Conversion Engine ausbremsen.</h2>
+      <p>Wenn der Store nicht iteriert, liegt es selten am Theme alleine — meist an strukturellen Setup-Fehlern. Die häufigsten vier:</p>
+
+      <div class="fw-anti-grid">
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>Premium-Theme als Lösung</h3>
+          <p>„Wir haben ein 300-€-Theme gekauft." Resultat: starre Templates, harte Updates, fremde Component-Logik. Jede Anpassung ist Custom-Code gegen den Theme-Autor. Fix: Dawn als Basis, alles darüber ist deins.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>App-Sprawl statt System</h3>
+          <p>Eine App für Bundles, eine für Reviews, eine für Quiz, eine für Upsell. 11 Apps × 19 €/Monat × Theme-Konflikt. Fix: modulare Sections im Theme, eine Bundle-Logik, App-Stack auf 3–4 essentielle reduziert.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>PDPs hardcoded statt generiert</h3>
+          <p>Jede der 15 PDPs einzeln im Shopify-Admin gepflegt. Content-Update für „neue Bullets bei allen Produkten" = 15× manuell. Fix: CSV als Master + Generator-Script, das idempotent alle PDPs neu schreibt.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">×</div>
+          <h3>A/B-Tests in Drittanbieter-Apps</h3>
+          <p>Optimizely / VWO / Google Optimize laden externe JS-Scripts, flackern beim Render, brechen Theme-Logik. Fix: A/B-Tests via Shopify Markets oder URL-Parameter + nativem Theme-Code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIY · 5 STEPS -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Von Theme-Lock-In zur Iteration-Maschine in 5 Schritten.</h2>
+      <p>Konkrete Reihenfolge — kann sequenziell als 8-Wochen-Migration laufen oder parallel als Greenfield-Build. Jeder Step liefert ein klares Artefakt, das du danach im Repo committen kannst.</p>
+
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-num">01</div>
+          <div class="fw-step-body">
+            <h3>App- und Theme-Audit</h3>
+            <p>Liste alle aktiven Shopify-Apps mit Monatskosten + Funktion. Markiere: <strong>tragen Revenue · sind Legacy · überlappen sich</strong>. Plus: Theme-Lock-In-Check — wie lange dauert eine neue Section ohne externen Dev?</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Shopify Admin → Apps</span>
+              <span class="fw-step-tool">Theme-Inspector</span>
+              <span class="fw-step-tool">Performance-Tab (Lighthouse)</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>Stack-Audit-Doc</strong> mit Kill-Liste (Apps weg) + Migration-Targets.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">02</div>
+          <div class="fw-step-body">
+            <h3>Migration-Plan auf Dawn-Basis</h3>
+            <p>Dawn als Basis-Fork klonen. Pro Section/Feature: bleibt im neuen Theme · wird durch native Logik ersetzt · entfällt komplett. Wichtig: <strong>alte URL-Struktur 1:1 mappen</strong> (sonst SEO-Bruch beim Cutover).</p>
+            <p>Live-Switch via Shopify-Theme-Preview, dann Publish in einem Klick. Cutover ohne Downtime ist Standard bei sauberer Migration.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Dawn Fork</span>
+              <span class="fw-step-tool">Shopify CLI</span>
+              <span class="fw-step-tool">Git (theme-as-code)</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>theme/ Repo</strong> + Migration-Plan mit App-für-App-Mapping.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">03</div>
+          <div class="fw-step-body">
+            <h3>Erste 3 wiederverwendbare Sections bauen</h3>
+            <p>Patterns identifizieren, die du auf 5+ Seiten brauchst. Klassiker für DTC:</p>
+            <p><code>Trust-Strip</code> (Press-Logos + Garantie) · <code>FAQ-Block</code> (Accordion mit Schema-Markup, SEO-friendly) · <code>Brand-Story-Block</code> (Image + Story in PDP-Flow). Jede Section mit Shopify-Schema-Settings, damit Marketing sie selbst konfiguriert.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Liquid + Schema-JSON</span>
+              <span class="fw-step-tool">Section-Settings</span>
+              <span class="fw-step-tool">Brand-Tokens (CSS-Vars)</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>3 wiederverwendbare .liquid-Sections</strong> · Start der Section-Library.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">04</div>
+          <div class="fw-step-body">
+            <h3>Generator-Workflow für PDPs</h3>
+            <p>Produkt-Content in CSV-Master strukturieren — Name, USPs, Bullets, FAQ-Block, Bundle-Verknüpfung. Generator-Script (Node.js oder Python) liest CSV und schreibt pro Produkt eine <code>templates/product.{handle}.json</code>.</p>
+            <p>Idempotent: 100× laufen = identischer Output. Re-Runs sind sicher. Massen-Updates (z.B. „Trust-Bar bei allen Produkten") = eine CSV-Änderung + Re-Run.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Node.js / Python</span>
+              <span class="fw-step-tool">Google Sheets / Airtable</span>
+              <span class="fw-step-tool">Shopify Admin API</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>generate-pdps.js + master.csv</strong> · 15 PDPs in einem Re-Run.</div>
+          </div>
+        </div>
+
+        <div class="fw-step">
+          <div class="fw-step-num">05</div>
+          <div class="fw-step-body">
+            <h3>A/B-Setup ohne Drittanbieter</h3>
+            <p>Native A/B-Optionen in Shopify: <strong>Markets</strong> (verschiedene Theme-Versionen pro Region/Segment) oder URL-Parameter (<code>?variant=hero-b</code> → Liquid-Check + alternative Section). Keine externe JS-Library, kein Flicker, sauberes Tracking via Shopify-Pixel + GA4-Events.</p>
+            <p>Plus: Iterations-Cycle definieren — Test-Length 14 Tage, Mindest-Stichprobe per Test, Decision-Doc nach jeder Iteration.</p>
+            <div class="fw-step-tools">
+              <span class="fw-step-tool">Shopify Markets</span>
+              <span class="fw-step-tool">URL-Params + Liquid</span>
+              <span class="fw-step-tool">GA4 Custom-Events</span>
+            </div>
+            <div class="fw-step-output">Output: <strong>ab-tests.md im Repo</strong> · jede Variation versioniert.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK-CONNECTION -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wo Conversion Engine die anderen Schichten trifft.</h2>
+      <p>Eine Iteration-Maschine ohne Brand, Lifecycle und AI bleibt mechanisch. Im Stack entsteht Profit-Hebelwirkung:</p>
+
+      <div class="fw-stack-connect">
+        <a href="/wissen/brand-system/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 1</div>
+          <h4>Brand System</h4>
+          <p>Jede Section zieht Tokens via CSS-Variablen. Theme bleibt automatisch on-brand bei jedem Brand-Update — ohne manuellen Section-Refactor.</p>
+        </a>
+        <a href="/wissen/lifecycle-loops/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 3</div>
+          <h4>Lifecycle Loops</h4>
+          <p>Theme-Events (View Product, Add to Cart, Checkout) triggern Klaviyo-Flows. Browse- und Cart-Recovery werden vom Theme befeuert — kein Drittanbieter-Pixel nötig.</p>
+        </a>
+        <a href="/wissen/ai-operations/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Schicht 4</div>
+          <h4>AI Operations</h4>
+          <p>PDP-Texte werden vom AI-Generator on-brand produziert und über den CSV-Generator (Step 4) in den Store geschrieben. SKU-Onboarding von Wochen auf Stunden.</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>
