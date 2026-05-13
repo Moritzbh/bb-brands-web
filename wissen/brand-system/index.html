@@ -41,6 +41,19 @@
   .fw-layer p{font-size:15px;line-height:1.6;margin:0}
 
   .fw-code{background:#0a0a0a;color:#e8e8e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.65;padding:24px 28px;border-radius:0;margin:24px 0;overflow-x:auto;max-width:880px}
+
+  .fw-voice-table{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-voice-row{display:grid;grid-template-columns:180px 1fr;gap:0;border-bottom:1px solid var(--bg-line)}
+  .fw-voice-row:last-child{border-bottom:none}
+  .fw-voice-label{padding:18px 22px;background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;border-right:1px solid var(--bg-line);display:flex;align-items:center}
+  .fw-voice-text{padding:18px 26px;font-size:15px;line-height:1.55;color:#000;font-weight:500}
+  .fw-voice-no .fw-voice-label{background:#fff5f0;color:#c44}
+  .fw-voice-no .fw-voice-text{color:var(--bg-text-body);font-style:italic}
+  @media(max-width:680px){
+    .fw-voice-row{grid-template-columns:1fr}
+    .fw-voice-label{border-right:none;border-bottom:1px solid var(--bg-line);padding:12px 22px}
+    .fw-voice-text{padding:14px 22px 18px}
+  }
   .fw-code .c-tk{color:#ffc46b}
   .fw-code .c-vl{color:#a8e6a8}
   .fw-code .c-cm{color:#6b7280;font-style:italic}
@@ -191,8 +204,39 @@
   </div>
 </section>
 
-<!-- TOKENS — CODE-BEISPIEL -->
+<!-- VOICE — BEISPIEL -->
 <section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>So sieht ein Voice-Layer in echt aus.</h2>
+      <p>Auszug aus dem Voice-Layer einer DTC-Brand. Drei Tonlagen plus expliziter „Nie"-Block. Wer eine neue Mail schreibt, klickt nicht durch ein PDF — sondern kopiert eine Tonlage, adaptiert. <strong>Konsistenz ist kein Disziplin-Problem mehr.</strong></p>
+
+      <div class="fw-voice-table">
+        <div class="fw-voice-row">
+          <div class="fw-voice-label">Hero · 1 Punchline</div>
+          <div class="fw-voice-text">„Profit-System statt Traffic-Pitch."</div>
+        </div>
+        <div class="fw-voice-row">
+          <div class="fw-voice-label">Body · Erklärung</div>
+          <div class="fw-voice-text">„Du hast Traffic. Du hast Flows. Trotzdem bleibt zu wenig Profit übrig. Dein Shop sieht gut aus — aber er lernt nicht."</div>
+        </div>
+        <div class="fw-voice-row">
+          <div class="fw-voice-label">Functional · UX-Copy</div>
+          <div class="fw-voice-text">„Kostenloser Versand ab 50 € · 30 Tage Rückgabe · Bestellt vor 16 Uhr — morgen da."</div>
+        </div>
+        <div class="fw-voice-row fw-voice-no">
+          <div class="fw-voice-label">Nie · „So nicht"</div>
+          <div class="fw-voice-text">„Innovative Lösungen für Ihr Business" · „Lassen Sie uns gemeinsam wachsen" · „Wir freuen uns auf Ihre Anfrage" — Corporate-Phrasen, die nichts sagen.</div>
+        </div>
+      </div>
+
+      <p>Diese vier Zeilen ersetzen 8 PDF-Seiten. Plus: das File ist <strong>maschinenlesbar</strong> — ChatGPT, Claude und Klaviyo-Subject-Line-Tools ziehen die Voice direkt rein, keine Briefings mehr nötig.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS — CODE-BEISPIEL -->
+<section class="bb-section bb-section-50">
   <div class="wrap">
     <div class="fw-block" data-reveal>
       <h2>So sieht ein Token-Layer in echt aus.</h2>
@@ -232,12 +276,14 @@
 </section>
 
 <!-- LIVE BEISPIEL -->
-<section class="bb-section bb-section-50">
+<section class="bb-section bb-section-95">
   <div class="wrap">
     <div class="fw-callout" data-reveal>
       <div class="fw-callout-label">Live · Hearo Brand System</div>
       <h3>Wie wir das bei Hearo gebaut haben.</h3>
-      <p>Hearo (HNO-Health-Brand, USA) hatte ein PDF-Brand-Book und drei Agenturen, die alle „on-brand" gearbeitet haben — visuell aber stark divergent. Wir haben das System auf vier Code-Files reduziert: <code>tokens.css · voice.md · visual.md · application.json</code>. Jede neue Ad, jede neue PDP-Section, jede Verpackungs-Adaption zieht jetzt aus diesen vier Files. Result: <strong>30+ Touchpoints in identischem System.</strong> Kein „bitte das Logo etwas größer"-Feedback mehr.</p>
+      <p><strong>Setup vor BB Brands:</strong> Hearo (HNO-Health-Brand, USA) hatte ein 60-Seiten-PDF-Brand-Book und drei separate Agenturen — Performance, Web und Verpackung, jede mit eigener Interpretation. Ads sahen anders aus als der Shop. Shop anders als der Karton. Karton anders als der Newsletter. Brand-Erinnerung fragmentiert über jeden Touchpoint.</p>
+      <p><strong>Was wir gebaut haben:</strong> Vier Code-Files als Single Source of Truth — <code>tokens.css · voice.md · visual.md · application.json</code>. Jede neue Ad, jede PDP-Section, jede Verpackungs-Adaption zieht aus diesen Files. Onboarding einer neuen Agency: aus „4 Wochen Brand-Briefing" wird „2 Stunden Repo-Walkthrough".</p>
+      <p><strong>Resultat:</strong> 30+ Touchpoints (Ads, Web, Email, Packaging) in identischem System. Kein „bitte das Logo etwas größer"-Feedback mehr — weil das Logo nicht mehr verhandelbar ist.</p>
     </div>
   </div>
 </section>
