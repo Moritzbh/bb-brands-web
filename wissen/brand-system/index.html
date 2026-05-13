@@ -50,11 +50,17 @@
   .fw-callout h3{margin:0 0 12px;font-size:22px}
   .fw-callout p{margin:0}
 
-  .fw-bottom{background:#000;color:#fff;padding:80px 0;text-align:center}
+  .fw-bottom{
+    background:#000;color:#fff;padding:280px 0 96px;text-align:center;
+    background-image:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-2000.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
   .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
   .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
-  .fw-bottom-cta{display:inline-block;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;padding:20px 64px;box-shadow:1px 1px 20px rgba(0,0,0,.4);transition:all .2s;text-decoration:none}
-  .fw-bottom-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+  .fw-bottom-cta{display:inline-block;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:22px 64px;border:1.5px solid #fff;box-shadow:none;position:relative;z-index:1;overflow:hidden;transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;text-decoration:none}
+  .fw-bottom-cta::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left center;transition:transform .4s cubic-bezier(.65,0,.35,1);z-index:-1}
+  .fw-bottom-cta:hover{background:transparent;color:#000;border-color:#fff;transform:none;text-decoration:none}
+  .fw-bottom-cta:hover::before{transform:scaleX(1)}
   .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
   .fw-bottom-back:hover{color:#fff}
   .fw-bottom-back strong{color:#fff;font-weight:600}
@@ -65,7 +71,7 @@
     .fw-block{padding:40px 0}
     .fw-block h2{font-size:26px}
     .fw-callout{padding:28px}
-    .fw-bottom{padding:56px 0}
+    .fw-bottom{padding:200px 0 64px;background-image:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-1000.jpg')}
     .fw-bottom h2{font-size:26px}
   }
 </style>
@@ -173,7 +179,7 @@
         <div class="fw-layer">
           <div class="fw-layer-tag">Layer 3 · Visual</div>
           <h3>Visual System</h3>
-          <p>Photography-Rules (was ist on-brand, was nicht), Icon-Set, Pattern-Library, Motion-Rules. Inklusive Negativ-Beispiele — weil Founder lernen schneller aus „so nicht" als aus „so".</p>
+          <p>Photography-Rules (was ist on-brand, was nicht), Icon-Set, Pattern-Library, Motion-Rules. Inklusive Negativ-Beispiele — weil Teams schneller aus „so nicht" lernen als aus „so".</p>
         </div>
         <div class="fw-layer">
           <div class="fw-layer-tag">Layer 4 · Application</div>
@@ -242,7 +248,7 @@
     <div class="fw-block" data-reveal>
       <h2>Vier Hebel, die du heute umsetzen kannst.</h2>
       <ul>
-        <li><strong>Migriere dein Brand-Book in Tokens.</strong> Egal ob du Designer oder Founder bist — verwandle dein PDF in eine <code>tokens.css</code>-Datei. 30 Minuten. Sofort hat dein Theme eine Single-Source-of-Truth.</li>
+        <li><strong>Migriere dein Brand-Book in Tokens.</strong> Egal ob du Designer oder Brand-Owner bist — verwandle dein PDF in eine <code>tokens.css</code>-Datei. 30 Minuten. Sofort hat dein Theme eine Single-Source-of-Truth.</li>
         <li><strong>Schreib eine Voice-Doc mit Beispielen statt Adjektiven.</strong> Statt „freundlich, modern, professionell" → 3 echte Texte pro Tonlage plus 3 Beispiele für „so nicht". Performance-Team, AI-Copy-Tools und neue Hires verstehen das in Minuten.</li>
         <li><strong>Mach „so nicht"-Visuals zu deinem stärksten Doc.</strong> Liste 10 Beispiele auf, die <em>fast</em> wie deine Brand aussehen, aber nicht sind. Negativbeispiele klären schneller als 50 positive.</li>
         <li><strong>Verbinde Tokens mit deinem Theme.</strong> Shopify-Themes können CSS-Variablen direkt referenzieren. Heißt: wenn der Designer den Token ändert, ändert sich der Store live — kein Theme-Editor-Klick.</li>
