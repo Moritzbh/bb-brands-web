@@ -41,6 +41,23 @@
 
   .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;max-width:880px}
   @media(max-width:680px){.fw-stats{grid-template-columns:1fr}}
+
+  .fw-section-list{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-section-list-head{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-section-list-head > div{padding:14px 22px;border-right:1px solid var(--bg-line)}
+  .fw-section-list-head > div:last-child{border-right:none}
+  .fw-section-list-row{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-section-list-row:last-child{border-bottom:none}
+  .fw-section-list-row > div{padding:14px 22px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-section-list-row > div:last-child{border-right:none}
+  .fw-section-list-row strong{font-weight:700}
+  .fw-section-list-row .fw-section-reuse{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber)}
+  @media(max-width:680px){
+    .fw-section-list-head{display:none}
+    .fw-section-list-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-section-list-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-section-list-row > div:last-child{border-bottom:none}
+  }
   .fw-stat{background:#fff;border:1px solid var(--bg-line);padding:28px;text-align:center}
   .fw-stat-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:48px;line-height:1;color:#000;display:block;margin-bottom:8px}
   .fw-stat-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--bg-text-muted);text-transform:uppercase}
@@ -187,6 +204,56 @@
           <p>Jede Section liest Color-Schemes und Typo aus Brand-Tokens (Schicht 1). Wenn der Designer den Primary-Token ändert, sind alle 82 Sections eine Pageload später aktualisiert. Ohne Code-Touch.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION-LIBRARY · BEISPIEL -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>So sieht eine Section-Library in echt aus.</h2>
+      <p>Auszug aus der aktuellen Bachgold-Library. Jede Section ist <strong>einmal gebaut, mehrfach genutzt</strong>. Spalte „Wiederverwendet" zeigt: derselbe Code trägt 6–15 verschiedene Seiten. Time-Save bei Edits ist multiplikativ.</p>
+
+      <div class="fw-section-list">
+        <div class="fw-section-list-head">
+          <div>Section</div>
+          <div>Wiederverwendet</div>
+          <div>Was sie macht</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>PDP Hero</strong></div>
+          <div class="fw-section-reuse">15× PDPs</div>
+          <div>Produkt-Hero mit Image, Bullets, Bundle-Hook, Trust-Bar</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Bundle-Master</strong></div>
+          <div class="fw-section-reuse">7× Bundles</div>
+          <div>Konfigurierbares Bundle-Modul mit Mengen-Logik + AOV-Hint</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Trust-Strip</strong></div>
+          <div class="fw-section-reuse">12× Seiten</div>
+          <div>Press-Logos + Garantie-Pills · Cross-Page Trust-Anker</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>FAQ-Block</strong></div>
+          <div class="fw-section-reuse">11× Seiten</div>
+          <div>Accordion mit Schema-Markup (rich-results-ready)</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Brand-Story-Block</strong></div>
+          <div class="fw-section-reuse">6× Seiten</div>
+          <div>Image + Story-Text · Founder-Reason in PDP-Flow</div>
+        </div>
+        <div class="fw-section-list-row">
+          <div><strong>Anwendungs-Visualisierung</strong></div>
+          <div class="fw-section-reuse">8× PDPs</div>
+          <div>Schritt-für-Schritt Use-Case · reduziert Pre-Sale-Fragen</div>
+        </div>
+      </div>
+
+      <p>Wenn der Designer eine Hero-Pattern-Änderung will: ein Edit, 15 PDPs aktualisiert. <strong>Iterations-Speed steigt mit jeder neuen Section in der Library.</strong></p>
     </div>
   </div>
 </section>
