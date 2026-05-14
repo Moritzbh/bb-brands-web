@@ -2859,10 +2859,21 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 /* V2 · HERO */
 .v2-hero{
-  position:relative;padding:200px 0 88px;text-align:center;overflow:hidden;
+  position:relative;padding:200px 0 240px;text-align:center;overflow:hidden;
   background-color:var(--v2-bg);background-position:center;background-size:cover;background-repeat:no-repeat;
   background-image:linear-gradient(rgba(10,10,10,.78),rgba(10,10,10,.82)),var(--v2-bg-founder);
   color:var(--v2-text);
+}
+/* V2 · Wave-Divider · Cutout am Hero-Boden, fließt in #was-Section */
+.v2-hero-divider{
+  position:absolute;left:0;right:0;bottom:-1px;
+  width:100%;height:140px;display:block;z-index:2;
+  pointer-events:none;
+}
+.v2-hero-divider svg{width:100%;height:100%;display:block}
+@media (max-width:780px){
+  .v2-hero{padding:128px 0 180px}
+  .v2-hero-divider{height:90px}
 }
 .v2-hero .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
 .v2-hero-h1{
@@ -3034,7 +3045,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <a href="#was" class="v2-btn-ghost">Was wir machen ↓</a>
     </div>
 
-    <!-- Logo Marquee (Infinity Scroll · Fade-In/Out) -->
+    <!-- Logo Marquee (Infinity Scroll · Fade-In/Out) · Position vor Wave-Divider -->
     <div class="v2-hero-logos" aria-label="Partner, die uns vertrauen">
       <div class="v2-hero-logos-label">Partner, die uns vertrauen</div>
       <div class="v2-hero-logos-marquee">
@@ -3057,6 +3068,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Wave-Divider · weißer Cutout am Hero-Boden, fließt sanft in #was-Section -->
+  <div class="v2-hero-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+      <path d="M0,60 C180,140 360,10 540,50 C720,90 900,30 1080,60 C1260,90 1380,40 1440,70 L1440,140 L0,140 Z" fill="#ffffff"/>
+    </svg>
   </div>
 </section>
 
