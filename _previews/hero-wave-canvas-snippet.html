@@ -1,0 +1,238 @@
+<!--
+============================================================
+HERO WAVE-CANVAS · BB Brands · Snippet
+============================================================
+
+So fügst du den Kinetic-Wave-Effekt wieder zum Hero hinzu:
+
+1. HTML in den Hero einfügen (innerhalb <section class="v2-hero" id="top">,
+   direkt nach dem öffnenden <section>-Tag und VOR dem <div class="wrap">):
+
+   <div class="hero-wave-wrap" aria-hidden="true">
+     <canvas class="hero-wave-canvas"></canvas>
+     <div class="hero-wave-grid"></div>
+     <div class="hero-wave-fade"></div>
+   </div>
+
+2. CSS in das <style>-Tag (idealerweise direkt nach den ":root"
+   Variablen oder im V2-Block einsortiert):
+
+   /* Wave Canvas Wrapper · desktop only, behind content */
+   .hero-wave-wrap{
+     position:absolute;inset:0;z-index:0;
+     overflow:hidden;pointer-events:none;
+     display:none;
+   }
+   @media (min-width:768px){
+     .hero-wave-wrap{display:block}
+   }
+   .hero-wave-canvas{
+     position:absolute;inset:0;width:100%;height:100%;
+     opacity:.4;
+     filter:blur(60px) contrast(1.15) saturate(1.3);
+     pointer-events:none;
+   }
+   .hero-wave-grid{
+     position:absolute;inset:0;pointer-events:none;
+     background-image:
+       linear-gradient(to right, rgba(15,23,42,.02) 1px, transparent 1px),
+       linear-gradient(to bottom, rgba(15,23,42,.02) 1px, transparent 1px);
+     background-size:80px 80px;
+   }
+   .hero-wave-fade{
+     position:absolute;left:0;right:0;bottom:0;height:55%;pointer-events:none;
+     background:linear-gradient(to bottom,
+       transparent 0%,
+       rgba(255,255,255,.05) 15%,
+       rgba(255,255,255,.15) 30%,
+       rgba(255,255,255,.35) 45%,
+       rgba(255,255,255,.6) 60%,
+       rgba(255,255,255,.82) 75%,
+       rgba(255,255,255,.95) 88%,
+       #ffffff 100%);
+   }
+   @media (prefers-reduced-motion: reduce){
+     .hero-wave-canvas{display:none}
+   }
+
+3. JavaScript ans Ende vom <body> einfügen (vor </body>):
+
+<script>
+/* === KINETIC WAVE CANVAS · Hero Background · 3 Brand-Waves · Mouse-reactive Swirl
+   Adapted from 02-zovany-saas/src/components/landing/kinetic-wave-canvas.tsx (React → Vanilla) */
+(function(){
+  var canvas = document.querySelector('.hero-wave-canvas');
+  var wrap   = document.querySelector('.hero-wave-wrap');
+  if(!canvas || !wrap) return;
+
+  // Reduced-Motion: ganz aus
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ctx = canvas.getContext('2d');
+  if(!ctx) return;
+
+  // BB Brands Brand-Colors (reduced from 4 → 3)
+  var COLORS = [
+    { r:   3, g:   5, b: 198, a: 0.55 },  // --blue · Brand Bold Blue
+    { r: 255, g: 107, b:  61, a: 0.50 },  // --accent · Signal Orange
+    { r:  30, g:  58, b: 255, a: 0.40 }   // --blue-soft · Soft Indigo
+  ];
+  /* Wave-Position: offsetY 0=oben, 1=unten
+     Aktuelle Werte (1.00/0.92/0.85) = Waves konzentriert am Hero-Boden
+     Für "im ganzen Hero verteilt" zurück auf 0.70/0.60/0.50 */
+  var WAVE_CONFIGS = [
+    { speed: 0.0008, amplitude: 0.22, frequency: 0.0008, offsetY: 1.00, phase: 0 },
+    { speed: 0.0012, amplitude: 0.18, frequency: 0.0014, offsetY: 0.92, phase: Math.PI / 4 },
+    { speed: 0.0015, amplitude: 0.25, frequency: 0.0010, offsetY: 0.85, phase: Math.PI / 2 }
+  ];
+  var STEP = 25;
+
+  var state = {
+    w: 0, h: 0,
+    mouseActive: false,
+    targetMX: 0, targetMY: 0,
+    currentMX: 0, currentMY: 0,
+    inactivityTimer: null,
+    raf: 0,
+    waves: []
+  };
+
+  function initWaves(){
+    state.waves = WAVE_CONFIGS.map(function(cfg, idx){
+      var pts = [];
+      for(var x = -STEP * 2; x <= state.w + STEP * 2; x += STEP){
+        pts.push({ x: x, y: state.h * cfg.offsetY, baseY: state.h * cfg.offsetY });
+      }
+      return {
+        color: COLORS[idx],
+        speed: cfg.speed, amplitude: cfg.amplitude, frequency: cfg.frequency,
+        offsetY: cfg.offsetY, phase: cfg.phase,
+        points: pts
+      };
+    });
+  }
+
+  function resize(){
+    var rect = wrap.getBoundingClientRect();
+    state.w = canvas.width  = rect.width;
+    state.h = canvas.height = rect.height;
+    initWaves();
+  }
+
+  function animate(time){
+    state.raf = requestAnimationFrame(animate);
+
+    // Mobile-Skip
+    if(window.innerWidth < 768) return;
+
+    ctx.clearRect(0, 0, state.w, state.h);
+
+    // Smooth mouse interpolation (lerp 0.12)
+    state.currentMX += (state.targetMX - state.currentMX) * 0.12;
+    state.currentMY += (state.targetMY - state.currentMY) * 0.12;
+
+    for(var w = 0; w < state.waves.length; w++){
+      var wave = state.waves[w];
+      ctx.beginPath();
+      ctx.moveTo(0, state.h);
+
+      for(var i = 0; i < wave.points.length; i++){
+        var pt = wave.points[i];
+
+        // Main sine + harmonic
+        var waveY = Math.sin(pt.x * wave.frequency + time * wave.speed + wave.phase) * (wave.amplitude * state.h);
+        waveY += Math.sin(pt.x * wave.frequency * 3.2 + time * wave.speed * 1.5) * (wave.amplitude * state.h * 0.2);
+
+        // Mouse swirl
+        if(state.mouseActive){
+          var dx = pt.x - state.currentMX;
+          var dy = pt.y - state.currentMY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var maxDist = state.w * 0.5;
+          if(dist < maxDist && dist > 0){
+            var force = Math.pow(1 - dist / maxDist, 2.5) * 4.5;
+            var swirl = force * 15;
+            pt.x  += (dy / dist) * swirl * (i % 2 === 0 ? 1 : -1);
+            waveY -= (state.currentMY - pt.baseY) * force * 0.8;
+          }
+        }
+
+        // Spring back to origin x (0.08 force)
+        var originX = (i - 2) * STEP;
+        pt.x += (originX - pt.x) * 0.08;
+
+        // Smooth y interpolation (0.15)
+        var targetY = pt.baseY + waveY;
+        pt.y += (targetY - pt.y) * 0.15;
+
+        if(i === 0){
+          ctx.lineTo(pt.x, pt.y);
+        } else {
+          var prev = wave.points[i - 1];
+          var cx = (prev.x + pt.x) / 2;
+          var cy = (prev.y + pt.y) / 2;
+          ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
+        }
+      }
+
+      ctx.lineTo(state.w, state.h);
+      ctx.fillStyle = 'rgba(' + wave.color.r + ',' + wave.color.g + ',' + wave.color.b + ',' + wave.color.a + ')';
+      ctx.fill();
+    }
+  }
+
+  function onMouseMove(e){
+    if(window.innerWidth < 768) return;
+    if(!state.mouseActive){
+      state.mouseActive = true;
+      state.currentMX = e.clientX;
+      state.currentMY = e.clientY;
+    }
+    state.targetMX = e.clientX;
+    state.targetMY = e.clientY;
+    if(state.inactivityTimer) clearTimeout(state.inactivityTimer);
+    state.inactivityTimer = setTimeout(function(){ state.mouseActive = false; }, 4000);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', onMouseMove, { passive: true });
+  state.raf = requestAnimationFrame(animate);
+})();
+</script>
+
+============================================================
+PARAMETER-CHEATSHEET
+============================================================
+
+COLORS (Alpha 0-1):
+- Wave 1 (Blue):   rgba(3,5,198, 0.55)   · BB Brands Bold Blue
+- Wave 2 (Orange): rgba(255,107,61, 0.50) · Signal Orange
+- Wave 3 (Indigo): rgba(30,58,255, 0.40)  · Soft Indigo
+
+WAVE_CONFIGS pro Welle:
+- speed: 0.0008-0.0015 · höher = schneller
+- amplitude: 0.18-0.25 · höher = größere Schwingung (% der Hero-Höhe)
+- frequency: 0.0008-0.0014 · höher = mehr Wellenberge pro Breite
+- offsetY: 0-1 · Position im Hero (0=oben, 1=unten)
+- phase: Versatz der Sinuswelle
+
+CSS-Filter (Look anpassen):
+- opacity: 0.4 (default) · 0.1-0.6 sinnvoll
+- filter: blur(60px) · 40-100px sinnvoll (höher = weicher)
+- contrast(1.15) saturate(1.3) · für satte Farben
+
+Performance:
+- Mobile (<768px) komplett ausgeschaltet
+- prefers-reduced-motion: ausgeschaltet
+- Throttling über requestAnimationFrame
+
+============================================================
+HISTORIE
+============================================================
+
+- Initialer Build: adaptiert aus 02-zovany-saas/.../kinetic-wave-canvas.tsx
+- 2026-05: BB Brands Brand-Colors, 4→3 Waves, opacity .4, blur 60px
+- 2026-05-14: Waves nach unten verlagert (offsetY 1.00/0.92/0.85)
+- 2026-05-14: Aus Live-Homepage entfernt, Snippet hier archiviert
+-->
