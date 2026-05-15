@@ -2467,16 +2467,31 @@ section.founder-section::after{
   .sdr-info-item{text-align:left}
   .sdr-quote{max-width:380px;margin-left:auto;margin-right:auto}
   .sdr-stack-toggle{justify-content:center}
-  /* Founder Section Mobile */
-  section.founder-section{padding:64px 0 96px}
-  section.founder-section::before{font-size:clamp(220px, 50vw, 320px);top:-30px;left:-20px}
-  .founder-stage{grid-template-columns:1fr;gap:56px}
-  .founder-portrait-wrap{max-width:340px;margin:0 auto;justify-self:center}
-  .founder-portrait-wrap::before{top:24px;right:-20px;left:24px;bottom:-24px}
-  .founder-text h2{font-size:36px}
-  .founder-stats{grid-template-columns:1fr;gap:20px}
-  .founder-stat-num{font-size:36px;margin-bottom:6px}
-  .founder-signature{font-size:30px;margin-bottom:32px}
+  /* ===== Founder Section Mobile · korrekt gezielt (echte Klassen) ===== */
+  section.founder-section{padding:52px 0 64px}
+  /* "02"-Watermark dezent statt Kollision mit Headline */
+  section.founder-section::before{
+    font-size:clamp(110px,32vw,170px) !important;
+    top:-4px !important;left:-10px !important;
+    opacity:.045 !important;
+  }
+  /* reverse-Grid kollabiert jetzt wirklich (gleiche Spezifität, später im Source) */
+  .team-banner-stage.reverse{
+    grid-template-columns:1fr;gap:30px;text-align:left;align-items:start;
+  }
+  /* Foto-Card zuerst, mittig, sauberes Format */
+  .team-banner-stage.reverse .sdr-stack{
+    order:-1;justify-self:center;
+    max-width:330px;width:100%;margin:0 auto;
+    aspect-ratio:4/3;height:auto;
+  }
+  .team-banner-text{text-align:left;min-width:0}
+  .team-banner-text h2{font-size:29px;line-height:1.12;margin:0 0 16px}
+  .founder-bio{font-size:15px;line-height:1.62;margin-bottom:22px;max-width:none}
+  .founder-signature{font-size:28px;margin-bottom:26px}
+  .founder-stats{grid-template-columns:1fr;gap:18px;padding-top:20px}
+  .founder-stat-num{font-size:32px;margin-bottom:6px}
+  .founder-stat-label{font-size:13.5px}
   /* Team-Section "01" Watermark Mobile */
   section.team-section::before{font-size:clamp(220px, 50vw, 320px);top:-30px;right:-20px}
 }
