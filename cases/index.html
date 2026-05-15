@@ -213,6 +213,14 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
 .bb-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-green-up)}
 .bb-hero-meta .item strong{color:#000}
+@media (max-width:560px){
+  .bb-hero-meta{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;
+    margin-top:28px;font-size:11px;justify-items:start;max-width:340px;
+    margin-left:auto;margin-right:auto;
+  }
+  .bb-hero-meta .item{gap:6px;line-height:1.25}
+}
 
 @media (max-width:780px){
   .bb-hero{background-attachment:scroll;padding:64px 0 56px}
