@@ -2853,13 +2853,21 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 .v2-topnav-brand .v2-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px;font-weight:700}
 .v2-brand-col{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
 .v2-brand-tagline{
+  display:block;
   font-family:var(--accent-font);font-weight:700;font-size:13.5px;
-  text-transform:uppercase;letter-spacing:.15em;line-height:1;
+  text-transform:uppercase;letter-spacing:.15em;line-height:1.05;
   color:var(--accent);white-space:nowrap;
   padding:4px 0 0;border-top:2px solid var(--accent);align-self:stretch;
   text-shadow:0 1px 8px rgba(255,107,61,.35);
 }
-@media (max-width:780px){.v2-brand-tagline{font-size:10.5px;letter-spacing:.12em}}
+.v2-brand-tagline-sub{
+  display:block;font-size:10px;font-weight:700;letter-spacing:.18em;
+  line-height:1;margin-top:3px;opacity:.92;
+}
+@media (max-width:780px){
+  .v2-brand-tagline{font-size:10.5px;letter-spacing:.12em}
+  .v2-brand-tagline-sub{font-size:8px;letter-spacing:.14em}
+}
 .v2-topnav-items{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   display:flex;gap:42px;font-family:'Inter',-apple-system,sans-serif;font-size:16px;font-weight:600;letter-spacing:.02em;
@@ -3039,7 +3047,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 .v2-hero-logos-track img{height:32px;width:auto;filter:brightness(0) invert(1);opacity:.50;transition:opacity .25s ease;flex-shrink:0}
 .v2-hero-logos-track img:hover{opacity:1}
 .v2-hero-logos-track img.v2-logo-shopify{height:40px;align-self:center}
-.v2-hero-logos-track img.v2-logo-zovany{height:56px;align-self:center}
 .v2-hero-logos-track .v2-wordmark{
   font-family:'Inter Tight',sans-serif;
   font-weight:700;font-size:24px;letter-spacing:-.02em;
@@ -3069,7 +3076,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   .v2-hero-logos{margin-top:44px;padding-top:28px;max-width:none}
   .v2-hero-logos-label{text-align:left;font-size:10.5px;letter-spacing:.18em}
   .v2-hero-logos-track img.v2-logo-shopify{height:30px}
-  .v2-hero-logos-track img.v2-logo-zovany{height:44px}
   .v2-hero-logos-track .v2-wordmark{font-size:18px}
 }
 </style>
@@ -3191,7 +3197,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance">
           <span class="v2-wordmark v2-wm-gorgias" aria-label="Gorgias Partner">gorgias</span>
           <img src="/assets/images/logos/reerect.png" alt="Reerect">
-          <img src="/assets/images/logos/zovany.png" alt="Zovany" class="v2-logo-zovany">
           <!-- Duplikate für seamless loop -->
           <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true">
           <img src="/assets/images/logos/shopify-partner-v2.png" alt="" aria-hidden="true" class="v2-logo-shopify">
@@ -3200,7 +3205,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true">
           <span class="v2-wordmark v2-wm-gorgias" aria-hidden="true">gorgias</span>
           <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true">
-          <img src="/assets/images/logos/zovany.png" alt="" aria-hidden="true" class="v2-logo-zovany">
         </div>
       </div>
     </div>
