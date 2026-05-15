@@ -998,22 +998,26 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
     radial-gradient(circle at 75% 60%, rgba(255,107,61,.08) 0%, transparent 50%),
     linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
 }
-/* Dynamischer Wave-Farbeffekt als Hintergrund der WAS-WIR-MACHEN-Section
-   · faded oben + unten sauber aus → kein harter Cut zur Vergleichs-Section */
-section#was{position:relative;overflow:hidden}
-section#was > .wrap{position:relative;z-index:1}
+/* STAGE · WAS-WIR-MACHEN + VERGLEICH teilen EINEN durchgehenden Wave-Hintergrund
+   → wirkt wie eine große Section, kein Cut dazwischen */
+.was-cmp-stage{position:relative;background:#fff;overflow:hidden}
+.was-cmp-stage > section{position:relative;z-index:1;background:transparent !important}
+.was-cmp-stage > section#was{overflow:visible}
+.was-cmp-stage .wrap{position:relative;z-index:1}
 .was-wave-wrap{
   position:absolute;inset:0;z-index:0;
   overflow:hidden;pointer-events:none;
 }
 .was-wave-canvas{
   position:absolute;inset:0;width:100%;height:100%;
-  opacity:.30;
+  opacity:.32;
   filter:blur(80px) contrast(1.15) saturate(1.35);
   pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 16%, #000 60%, transparent 100%);
-  mask-image:linear-gradient(to bottom, transparent 0%, #000 16%, #000 60%, transparent 100%);
 }
+/* compare-hero eigene Mesh-Blobs + Bottom-Fade aus → nur der gemeinsame Canvas ist BG */
+.was-cmp-stage section.compare-hero::before,
+.was-cmp-stage section.compare-hero::after{display:none !important}
+.was-cmp-stage .compare-fade-bottom{display:none !important}
 @media (prefers-reduced-motion: reduce){
   .was-wave-canvas{display:none}
 }
@@ -3210,9 +3214,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
+<!-- ============= STAGE · WAS WIR MACHEN + VERGLEICH (ein durchgehender Hintergrund) ============= -->
+<div class="was-cmp-stage">
+  <div class="was-wave-wrap" aria-hidden="true"><canvas class="was-wave-canvas"></canvas></div>
+
 <!-- ============= 3 · WAS WIR MACHEN ============= -->
 <section id="was">
-  <div class="was-wave-wrap" aria-hidden="true"><canvas class="was-wave-canvas"></canvas></div>
   <div class="wrap">
     <div class="eyebrow">Was wir machen</div>
     <h2>Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
@@ -3389,6 +3396,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   <!-- Bottom-Fade · Mesh-Blobs laufen sanft in Weiß aus -->
   <div class="compare-fade-bottom" aria-hidden="true"></div>
 </section>
+</div>
+<!-- ============= /STAGE ============= -->
 
 <!-- ============= 4.6 · DON'T-LISTE (Fokus-Schärfung · Klartext) ============= -->
 <section class="bb-dont" style="background:var(--bg-alt,#F5F1E8);padding:72px 0">
