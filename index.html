@@ -2483,6 +2483,13 @@ section#faq{padding:72px 0;background:#fff !important}
   [data-reveal]{opacity:1;transform:none;transition:none}
   .hero::before,.hero::after{animation:none}
 }
+/* Mobile: Scroll-Reveal komplett aus. Der IntersectionObserver triggert auf
+   Phones unzuverlässig → ganze Sektionen (z.B. FAQ) blieben unsichtbar.
+   Auf Mobile zählt durchgehender, geführter Flow > Reveal-Spielerei. */
+@media (max-width:780px){
+  [data-reveal],
+  [data-reveal].is-visible{opacity:1 !important;transform:none !important;transition:none !important}
+}
 
 /* ========== FOOTER ========== */
 footer{
@@ -3579,6 +3586,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   <div class="wrap">
     <div class="apply-grid">
       <div class="apply-col-left">
+        <div class="minimal-step"><span class="num">03</span><span class="line"></span><span>Start</span></div>
         <h2 class="apply-h2">Lass uns was bauen,<br>das <em>Profit liefert.</em></h2>
         <p class="apply-lede"><span class="apply-hl">Starte deinen Build mit einem Founder, der Brand, Shop und Operations als ein Profit-System denkt — kein Account-Manager dazwischen, keine endlosen Loops, kein Vanity-Reporting.</span></p>
         <ul class="apply-bullets">
@@ -3591,7 +3599,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <!-- Calendly Inline-Widget Beginn -->
         <div class="calendly-inline-widget"
              data-url="https://calendly.com/moritzbohmbach/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=0305C6&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=apply-section&utm_campaign=discovery-call"
-             style="min-width:320px;height:700px;"></div>
+             style="min-width:0;width:100%;max-width:100%;height:700px;"></div>
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         <!-- Calendly Inline-Widget Ende -->
       </div>
