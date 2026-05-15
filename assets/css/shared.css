@@ -265,3 +265,16 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 @media (max-width:780px){
   footer .wrap{flex-direction:column;align-items:flex-start;text-align:left}
 }
+
+/* ============================================================
+   MOBILE-NAV · Burger ganz links, Logo direkt daneben
+   Gilt für alle .bb-topnav-Seiten (Cases, Wissen + Subpages,
+   Impressum, Datenschutz, Garantien). !important schlägt die
+   inline margin-left:auto / justify-content:space-between der
+   einzelnen Seiten. Homepage (.v2-topnav) ist separat gelöst.
+   ============================================================ */
+@media (max-width:980px){
+  .bb-topnav .wrap{justify-content:flex-start !important;gap:14px !important}
+  .bb-topnav-mobile{order:-1 !important;margin-left:0 !important}
+  .bb-topnav-brand{order:0 !important}
+}
