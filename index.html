@@ -998,12 +998,12 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
     radial-gradient(circle at 75% 60%, rgba(255,107,61,.08) 0%, transparent 50%),
     linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
 }
-/* Dynamischer Wave-Farbeffekt als Hintergrund der gesamten WAS-WIR-MACHEN-Section
-   · bleedet nach unten in die Vergleichs-Section (kein Cut, fließender Übergang) */
-section#was{position:relative;z-index:2;overflow-x:clip;overflow-y:visible}
+/* Dynamischer Wave-Farbeffekt als Hintergrund der WAS-WIR-MACHEN-Section
+   · faded oben + unten sauber aus → kein harter Cut zur Vergleichs-Section */
+section#was{position:relative;overflow:hidden}
 section#was > .wrap{position:relative;z-index:1}
 .was-wave-wrap{
-  position:absolute;left:0;right:0;top:0;bottom:-260px;z-index:0;
+  position:absolute;inset:0;z-index:0;
   overflow:hidden;pointer-events:none;
 }
 .was-wave-canvas{
@@ -1011,6 +1011,8 @@ section#was > .wrap{position:relative;z-index:1}
   opacity:.30;
   filter:blur(80px) contrast(1.15) saturate(1.35);
   pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 16%, #000 60%, transparent 100%);
+  mask-image:linear-gradient(to bottom, transparent 0%, #000 16%, #000 60%, transparent 100%);
 }
 @media (prefers-reduced-motion: reduce){
   .was-wave-canvas{display:none}
@@ -1064,7 +1066,6 @@ section.compare-hero:nth-of-type(even){
   color:#000;
   padding:120px 0;
   position:relative;
-  z-index:1;
   overflow:hidden;
   font-family:'Montserrat',sans-serif;
   border-top:none;
@@ -2846,6 +2847,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   font-family:'Inter Tight',sans-serif;font-weight:300;font-size:44px;line-height:1;letter-spacing:-.01em;white-space:nowrap;
 }
 .v2-topnav-brand .v2-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px;font-weight:700}
+.v2-brand-col{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.v2-brand-tagline{
+  font-family:var(--accent-font);font-weight:700;font-size:13.5px;
+  text-transform:uppercase;letter-spacing:.15em;line-height:1;
+  color:var(--accent);white-space:nowrap;
+  padding:4px 0 0;border-top:2px solid var(--accent);align-self:stretch;
+  text-shadow:0 1px 8px rgba(255,107,61,.35);
+}
+@media (max-width:780px){.v2-brand-tagline{font-size:10.5px;letter-spacing:.12em}}
 .v2-topnav-items{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   display:flex;gap:42px;font-family:'Inter',-apple-system,sans-serif;font-size:16px;font-weight:600;letter-spacing:.02em;
@@ -3086,7 +3096,10 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= V2 · TOP-NAV (freistehend, hamburger mobile) ============= -->
 <header class="v2-topnav" id="v2Topnav">
   <div class="wrap">
-    <a href="/" class="v2-topnav-brand" aria-label="BB Brands"><span class="v2-mark">B</span>Brands</a>
+    <div class="v2-brand-col">
+      <a href="/" class="v2-topnav-brand" aria-label="BB Brands"><span class="v2-mark">B</span>Brands</a>
+      <span class="v2-brand-tagline">Profitables Wachstum auf höchstem Niveau</span>
+    </div>
     <nav class="v2-topnav-items" aria-label="Hauptnavigation">
       <a href="/" class="active">Startseite</a>
       <a href="/cases/">Cases</a>
@@ -3138,7 +3151,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- Hero-Wave-Canvas-Effekt entfernt · Snippet in _previews/hero-wave-canvas-snippet.html -->
 <section class="v2-hero" id="top">
   <div class="wrap">
-    <p class="v2-hero-kicker" style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:700;color:var(--accent);margin:0 0 18px">Profitables Wachstum auf höchstem Niveau</p>
     <h1 class="v2-hero-h1">
       Wir machen wachsende DTC-Brands <em>profitabler.</em>
       <span class="v2-hero-h1-tail">Damit sie morgen Marktführer sind.</span>
@@ -3572,7 +3584,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   <div class="wrap" style="max-width:920px">
     <div style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.18em;font-size:13px;font-weight:700;color:#fff;opacity:.7;margin-bottom:22px">Unser Glaubenssatz</div>
     <p style="font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.18;letter-spacing:-.02em;margin:0 0 22px">Wir glauben, dass <em style="font-style:normal;color:var(--accent)">Profitabilität</em> vor Skalierung kommt.</p>
-    <p style="font-size:17px;line-height:1.6;opacity:.82;max-width:680px;margin:0 auto">Wer morgen Marktführer sein will, kann nicht über Reichweite wachsen — er muss pro Besucher mehr verdienen. Das ist kein Marketing-Hebel, das ist eine Infrastruktur-Frage. Genau diese Infrastruktur bauen wir. Erst das Profit-Fundament, dann skalieren.</p>
+    <p style="font-size:17px;line-height:1.6;opacity:.82;max-width:680px;margin:0 auto">Wer morgen Marktführer sein will, kann nicht über Reichweite wachsen — er muss pro Besucher mehr verdienen, um sich mehr Marktanteile einkaufen zu können als jede Konkurrenz. Das ist kein Marketing-Hebel, das ist eine Infrastruktur-Frage. Genau diese Infrastruktur bauen wir. Erst das Profit-Fundament, dann skalieren.</p>
   </div>
 </section>
 
