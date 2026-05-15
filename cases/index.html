@@ -223,7 +223,22 @@ footer .footer-links a:hover{color:var(--accent)}
 }
 
 @media (max-width:780px){
-  .bb-hero{background-attachment:scroll;padding:64px 0 56px}
+  /* Foto deutlich zurücknehmen → Text sauber lesbar, ruhiger Hero */
+  .bb-hero{
+    background-attachment:scroll;padding:56px 0 48px;
+    background-image:
+      linear-gradient(rgba(255,255,255,.93), rgba(255,255,255,.97)),
+      url("/assets/images/cases-hero-founder.jpg");
+    background-position:center top;
+  }
+  .bb-hero-eyebrow{font-size:12px;margin-bottom:16px}
+  .bb-hero h1{font-size:27px;line-height:1.22;margin-bottom:18px;padding:0 4px}
+  .bb-hero-sub{font-size:16px;margin-bottom:28px}
+  .bb-hero-bullets{margin-bottom:28px}
+  .bb-hero-bullets li{font-size:14.5px;margin-bottom:14px}
+}
+@media (max-width:480px){
+  .bb-hero h1{font-size:24px;line-height:1.24}
 }
 
 /* ============= CASE-BLOCK (2-Spalten, Baulig-Pattern) ============= */
