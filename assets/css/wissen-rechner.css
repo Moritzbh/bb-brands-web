@@ -285,3 +285,60 @@ footer .footer-links a:hover{color:var(--accent)}
   .calc-bottom h2{font-size:24px}
   .bb-section{padding:48px 0}
 }
+
+/* ============================================
+   MOBILE DEEP-REDESIGN · echte Phone-Stufe
+   Gilt für alle 3 Rechner (aov/marge/roas)
+   ============================================ */
+@media (max-width:560px){
+  /* Hero: kompakter, schneller zum Rechner */
+  .rechner-hero{padding:32px 0 8px}
+  .rechner-hero-eyebrow{font-size:12px;margin-bottom:14px}
+  .rechner-hero h1{font-size:25px;line-height:1.18;margin-bottom:14px}
+  .rechner-hero-sub{font-size:14.5px;line-height:1.5;margin-bottom:18px}
+  .rechner-meta{gap:8px 14px;font-size:10.5px}
+
+  /* Calculator-Card: dichter, Result als klarer Payoff */
+  .calc-card{margin:22px auto;box-shadow:0 1px 20px rgba(0,0,0,.12)}
+  .calc-input,.calc-result{padding:22px 18px}
+  .calc-input h3,.calc-result h3{font-size:16px;margin-bottom:16px}
+  .calc-row{margin-bottom:13px}
+  .calc-row label{font-size:10.5px;letter-spacing:.1em}
+
+  /* iOS-Zoom-Fix: Inputs >=16px + größere Touch-Fläche */
+  .calc-input-wrap input{
+    font-size:16px;padding:14px 42px 14px 14px;
+  }
+  .calc-input-wrap .unit{font-size:13px}
+
+  /* Result lesbar + Payoff-Zeile prominent */
+  .calc-result-row{padding:12px 0}
+  .calc-result-label{font-size:12.5px}
+  .calc-result-value{font-size:20px}
+  .calc-result-row.hero-row{
+    flex-direction:column;align-items:flex-start;gap:6px;
+    padding:18px 16px;margin:10px 0;
+  }
+  .calc-result-row.hero-row .calc-result-value{font-size:30px;line-height:1.05}
+
+  /* (Slider + Vergleichs-Zellen sind page-inline → in der jeweiligen Seite gemoved) */
+
+  /* Explainer + Hebel */
+  .calc-explainer{margin-top:40px}
+  .calc-explainer h2{font-size:21px;margin-bottom:16px}
+  .calc-explainer p{font-size:14.5px}
+  .hebel-list{gap:12px;margin-top:28px}
+  .hebel-item{padding:20px 18px}
+  .hebel-item-num{font-size:30px;margin-bottom:6px}
+  .hebel-item h4{font-size:16px}
+
+  /* Bottom-CTA: 200px Top-Padding war auf dem Phone absurd */
+  .calc-bottom{padding:110px 0 56px}
+  .calc-bottom h2{font-size:22px;margin-bottom:14px}
+  .calc-bottom p{font-size:15px;margin-bottom:24px}
+  .calc-bottom-cta{
+    display:block;width:100%;padding:18px 20px;font-size:14px;letter-spacing:.04em;
+  }
+
+  .bb-section{padding:36px 0}
+}
