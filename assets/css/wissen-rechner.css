@@ -119,7 +119,16 @@ header.site-header,.mobile-menu{display:none !important}
   box-shadow:1px 1px 30px rgba(0,0,0,.12);
   display:grid;grid-template-columns:1fr 1.05fr;gap:0;overflow:hidden;
   position:relative;
+  /* Card ist ein Formular → linksbündig, NICHT den zentrierten Hero erben */
+  text-align:left;
 }
+.calc-card h3,
+.calc-card .calc-result-label,
+.calc-card .calc-result-label small,
+.calc-card .calc-row label,
+.calc-card .calc-row label small{text-align:left}
+/* Explainer-Fließtext ebenfalls linksbündig (erbt sonst Hero-center) */
+.calc-explainer{text-align:left}
 @media (max-width:880px){.calc-card{grid-template-columns:1fr}}
 
 .calc-input{
