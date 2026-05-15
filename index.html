@@ -2840,21 +2840,80 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 .v2-topnav-burger.is-open span:nth-child(2){opacity:0}
 .v2-topnav-burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* V2 · MOBILE DRAWER */
+/* V2 · MOBILE TOP-SHEET (ESN-Struktur, dark, drag-to-close) */
+.v2-sheet-scrim{
+  position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.v2-sheet-scrim.is-open{opacity:1;pointer-events:auto}
+
 .v2-mobile-drawer{
-  display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:54;
-  background:rgba(10,10,10,.96);backdrop-filter:blur(24px);
-  flex-direction:column;justify-content:center;align-items:center;gap:28px;padding:40px 24px;
+  position:fixed;top:0;left:0;right:0;z-index:61;
+  max-height:75vh;display:flex;flex-direction:column;
+  background:rgba(12,12,14,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-radius:0 0 22px 22px;box-shadow:0 24px 60px -12px rgba(0,0,0,.6);
+  transform:translateY(-102%);transition:transform .34s cubic-bezier(.32,.72,0,1);
+  overflow:hidden;will-change:transform;
 }
-.v2-mobile-drawer.is-open{display:flex}
-.v2-mobile-drawer a{
-  color:var(--v2-text);font-family:'Montserrat',sans-serif;font-size:24px;font-weight:600;letter-spacing:-.01em;
-  text-decoration:none;transition:color .15s;
+.v2-mobile-drawer.is-open{transform:translateY(0)}
+.v2-mobile-drawer.is-dragging{transition:none}
+
+.v2-sheet-head{display:flex;align-items:center;justify-content:flex-end;padding:18px 20px 4px;flex-shrink:0}
+.v2-sheet-close{
+  width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;
 }
-.v2-mobile-drawer a:hover{color:var(--v2-blue)}
-.v2-mobile-drawer-cta{
-  margin-top:18px;background:var(--v2-blue);color:#fff !important;
-  padding:18px 40px !important;font-size:15px;font-weight:700;
+.v2-sheet-close svg{width:18px;height:18px}
+
+.v2-sheet-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px 24px;flex:1}
+
+.v2-sheet-promo{
+  display:block;text-decoration:none;
+  background:linear-gradient(135deg,var(--v2-blue),#0305C6);
+  border-radius:16px;padding:22px 24px;margin:4px 0 22px;
+}
+.v2-sheet-promo-eyebrow{
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:8px;
+}
+.v2-sheet-promo-title{
+  font-family:'Inter Tight',sans-serif;font-size:21px;font-weight:800;
+  color:#fff;line-height:1.18;margin-bottom:16px;letter-spacing:-.01em;
+}
+.v2-sheet-promo-btn{
+  display:inline-block;background:#fff;color:var(--v2-blue);
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;
+  padding:11px 22px;border-radius:999px;
+}
+
+.v2-sheet-nav{display:flex;flex-direction:column}
+.v2-sheet-nav a{
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:'Inter Tight',sans-serif;font-size:19px;font-weight:600;color:#fff;
+  text-decoration:none;padding:18px 2px;border-bottom:1px solid rgba(255,255,255,.08);transition:color .15s;
+}
+.v2-sheet-nav a:first-child{border-top:1px solid rgba(255,255,255,.08)}
+.v2-sheet-nav a:hover,.v2-sheet-nav a.active{color:var(--v2-blue)}
+.v2-sheet-nav a .chev{opacity:.4;font-size:17px}
+
+.v2-sheet-foot{
+  display:flex;flex-direction:column;padding:10px 20px 22px;flex-shrink:0;
+  border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);
+}
+.v2-sheet-foot a{
+  display:flex;align-items:center;gap:14px;
+  font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;
+  color:rgba(255,255,255,.85);text-decoration:none;padding:13px 2px;
+}
+.v2-sheet-foot a svg{width:19px;height:19px;opacity:.7;flex-shrink:0}
+.v2-sheet-foot a:hover{color:#fff}
+
+.v2-sheet-handle{
+  flex-shrink:0;height:20px;display:flex;align-items:center;justify-content:center;
+  cursor:grab;touch-action:none;
+}
+.v2-sheet-handle::before{
+  content:"";width:44px;height:4px;border-radius:999px;background:rgba(255,255,255,.22);
 }
 
 /* V2 · HERO */
@@ -3010,13 +3069,38 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </header>
 
-<!-- V2 · MOBILE DRAWER -->
-<div class="v2-mobile-drawer" id="v2MobileDrawer">
-  <a href="/" class="active">Startseite</a>
-  <a href="/cases/">Cases</a>
-  <a href="/wissen/">Wissen</a>
-  <a href="https://founder-os.bb-brands.de">Founder OS</a>
-  <a href="/audit/" class="v2-mobile-drawer-cta">Strategy Audit buchen</a>
+<!-- V2 · MOBILE TOP-SHEET (ESN-Struktur, dark, drag-to-close) -->
+<div class="v2-sheet-scrim" id="v2SheetScrim"></div>
+<div class="v2-mobile-drawer" id="v2MobileDrawer" role="dialog" aria-modal="true" aria-label="Menü">
+  <div class="v2-sheet-head">
+    <button class="v2-sheet-close" id="v2SheetClose" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="v2-sheet-body">
+    <a href="/audit/" class="v2-sheet-promo">
+      <div class="v2-sheet-promo-eyebrow">Kostenlos · unverbindlich</div>
+      <div class="v2-sheet-promo-title">Strategy Audit — wo dein Profit-Loch sitzt.</div>
+      <span class="v2-sheet-promo-btn">Jetzt buchen →</span>
+    </a>
+    <nav class="v2-sheet-nav" aria-label="Hauptnavigation">
+      <a href="/" class="active">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS <span class="chev">↗</span></a>
+    </nav>
+  </div>
+  <div class="v2-sheet-foot">
+    <a href="mailto:info@bb-brands.de">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      info@bb-brands.de
+    </a>
+    <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+  <div class="v2-sheet-handle" id="v2SheetHandle" aria-hidden="true"></div>
 </div>
 
 <!-- ============= V2 · 1 · HERO (dark, image bg, logos inside marquee) ============= -->
@@ -4185,16 +4269,56 @@ window.addEventListener('load', function(){
   }
   var burger = document.getElementById('v2TopnavBurger');
   var drawer = document.getElementById('v2MobileDrawer');
+  var scrim  = document.getElementById('v2SheetScrim');
+  var sheetClose = document.getElementById('v2SheetClose');
   if(burger && drawer){
-    function toggle(){
-      burger.classList.toggle('is-open');
-      drawer.classList.toggle('is-open');
-      document.body.style.overflow = drawer.classList.contains('is-open') ? 'hidden' : '';
+    function openSheet(){
+      burger.classList.add('is-open');
+      drawer.classList.add('is-open');
+      if(scrim) scrim.classList.add('is-open');
+      document.body.style.overflow='hidden';
     }
+    function closeSheet(){
+      burger.classList.remove('is-open');
+      drawer.classList.remove('is-open');
+      if(scrim) scrim.classList.remove('is-open');
+      document.body.style.overflow='';
+      drawer.style.transform='';
+    }
+    function toggle(){ drawer.classList.contains('is-open') ? closeSheet() : openSheet(); }
     burger.addEventListener('click', toggle);
+    if(scrim) scrim.addEventListener('click', closeSheet);
+    if(sheetClose) sheetClose.addEventListener('click', closeSheet);
     drawer.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ if(drawer.classList.contains('is-open')) toggle(); });
+      a.addEventListener('click', function(){ if(drawer.classList.contains('is-open')) closeSheet(); });
     });
+
+    /* Drag-to-close: Sheet nach oben wegziehen schließt es */
+    var startY=null, deltaY=0, dragging=false;
+    var sBody = drawer.querySelector('.v2-sheet-body');
+    function pStart(e){
+      if(sBody && sBody.scrollTop>0) return;        // nicht hijacken wenn Liste gescrollt
+      startY=(e.touches?e.touches[0].clientY:e.clientY);
+      dragging=true; deltaY=0;
+      drawer.classList.add('is-dragging');
+    }
+    function pMove(e){
+      if(!dragging||startY===null) return;
+      var y=(e.touches?e.touches[0].clientY:e.clientY);
+      var d=y-startY;
+      if(d<0){ deltaY=d; drawer.style.transform='translateY('+d+'px)'; }   // nur nach oben
+    }
+    function pEnd(){
+      if(!dragging) return;
+      dragging=false; drawer.classList.remove('is-dragging');
+      if(deltaY < -90){ closeSheet(); }
+      else { drawer.style.transform='translateY(0)'; }
+      startY=null; deltaY=0;
+    }
+    drawer.addEventListener('touchstart',pStart,{passive:true});
+    drawer.addEventListener('touchmove',pMove,{passive:true});
+    drawer.addEventListener('touchend',pEnd);
+    window.addEventListener('keydown',function(e){ if(e.key==='Escape' && drawer.classList.contains('is-open')) closeSheet(); });
   }
 })();
 </script>
