@@ -1504,17 +1504,20 @@ section.guarantees-dirty{
 .guar-card.is-core .guar-btn{background:var(--bg-amber)}
 .guar-card.is-core .guar-btn:hover{background:var(--bg-amber-hover)}
 
-.guar-cta-row{text-align:center;margin-top:44px}
-.guar-cta-row a{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;
-  letter-spacing:.04em;text-transform:uppercase;color:var(--bg-amber);
-  padding:13px 22px;border:1px solid var(--bg-amber);
-  text-decoration:none;transition:all .2s;
+.guar-cta-row{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.guar-cta-main{
+  display:inline-block;background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:18px 44px;text-decoration:none;transition:background .2s ease;
 }
-.guar-cta-row a:hover{background:var(--bg-amber);color:#fff;text-decoration:none}
-.guar-cta-row a::after{content:"→";transition:transform .2s}
-.guar-cta-row a:hover::after{transform:translateX(4px)}
+.guar-cta-main:hover{background:var(--bg-amber-hover);color:#fff;text-decoration:none}
+.guar-cta-detail{
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--bg-text-muted);
+  text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+}
+.guar-cta-detail:hover{color:var(--bg-amber);border-color:var(--bg-amber);text-decoration:none}
 
 /* Tablet + Mobile bleibt 2x2 (nie 1-spaltig) */
 @media (max-width:1080px){
@@ -1525,7 +1528,7 @@ section.guarantees-dirty{
   .guarantees-dirty .bb-head h2{font-size:24px;line-height:1.25}
   .guar-card{padding:26px 22px 24px}
   .guar-card h3{font-size:18px}
-  .guar-cta-row a{font-size:12px;padding:12px 18px}
+  .guar-cta-main{font-size:12px;padding:15px 28px;letter-spacing:.08em}
 }
 @media (max-width:560px){
   .guar-grid{gap:12px;max-width:440px}
@@ -2778,7 +2781,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 /* V2 · HERO */
 .v2-hero{
-  position:relative;padding:200px 0 240px;text-align:center;overflow:hidden;
+  position:relative;padding:200px 0 450px;text-align:center;overflow:hidden;
   background-color:var(--v2-bg);background-position:center;background-size:cover;background-repeat:no-repeat;
   background-image:linear-gradient(rgba(10,10,10,.78),rgba(10,10,10,.82)),var(--v2-bg-founder);
   color:var(--v2-text);
@@ -2791,9 +2794,57 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 }
 .v2-hero-divider svg{width:100%;height:100%;display:block}
 @media (max-width:780px){
-  .v2-hero{padding:128px 0 180px}
+  .v2-hero{padding:128px 0 300px}
   .v2-hero-divider{height:90px}
 }
+/* V2 · Hero-Video · sitzt mittig AUF der Wellenlinie (Naht Hero ↔ #was) */
+.v2-hero-video-rail{
+  position:relative;height:0;z-index:6;
+  pointer-events:none;
+}
+.v2-hero-video{
+  position:absolute;left:50%;top:0;
+  transform:translate(-50%,calc(-50% - 60px));
+  width:min(1000px,92vw);aspect-ratio:16/9;
+  border-radius:22px;overflow:hidden;
+  background:#0b0b0b;
+  box-shadow:0 50px 120px -30px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.07);
+  pointer-events:auto;
+}
+.v2-hero-video::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 45%,rgba(255,255,255,.05),transparent 70%);
+}
+.v2-hero-video-ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:18px;
+  color:rgba(255,255,255,.62);
+}
+.v2-hero-video-ph .play{
+  width:74px;height:74px;border-radius:50%;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.v2-hero-video-ph .play svg{width:26px;height:26px;color:#fff;margin-left:3px}
+.v2-hero-video-ph span{
+  font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.22em;
+}
+/* Weißraum unter der Welle: #was bekommt mehr Top-Padding, damit die
+   untere Video-Hälfte frei steht und nicht in "Was wir machen" läuft */
+.was-cmp-stage > section#was{padding-top:clamp(260px,30vw,400px)}
+@media (max-width:980px){
+  .v2-hero-video{width:min(760px,92vw);border-radius:18px}
+}
+@media (max-width:780px){
+  .v2-hero-video{width:90vw;border-radius:16px;transform:translate(-50%,calc(-50% - 38px))}
+  .v2-hero-video-ph .play{width:58px;height:58px}
+  .v2-hero-video-ph .play svg{width:20px;height:20px}
+  .v2-hero-video-ph span{font-size:10.5px;letter-spacing:.18em}
+  .was-cmp-stage > section#was{padding-top:clamp(170px,40vw,260px)}
+}
+
 .v2-hero .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
 .v2-hero-h1{
   font-family:'Montserrat',sans-serif;font-weight:700;
@@ -2871,7 +2922,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 @media (max-width:780px){
   .v2-topnav .wrap{height:72px;padding:0 20px}
   .v2-topnav-brand{font-size:30px}
-  .v2-hero{padding:128px 0 168px;text-align:left}
+  .v2-hero{padding:128px 0 300px;text-align:left}
   .v2-hero-h1{font-size:46px;line-height:1.02;letter-spacing:-.025em;max-width:none;margin:0 0 20px;text-align:left}
   .v2-hero-h1-tail{font-size:22px;line-height:1.3;margin-top:18px;text-align:left}
   .v2-hero-sub{font-size:11px;letter-spacing:.18em;text-align:left;margin:0 0 32px;max-width:none}
@@ -3017,6 +3068,18 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     </svg>
   </div>
 </section>
+
+<!-- Hero-Video · liegt mittig AUF der Wellenlinie (Platzhalter) -->
+<div class="v2-hero-video-rail">
+  <div class="v2-hero-video" role="img" aria-label="Video-Platzhalter — folgt">
+    <div class="v2-hero-video-ph">
+      <span class="play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+      <span>Video folgt</span>
+    </div>
+  </div>
+</div>
 
 <!-- ============= STAGE · WAS WIR MACHEN + VERGLEICH (ein durchgehender Hintergrund) ============= -->
 <div class="was-cmp-stage">
@@ -3388,7 +3451,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <h3>Refinanzierungs-Garantie</h3>
         <p class="promise">Refinanziert sich das System nicht in <strong>90 Tagen</strong> über zusätzlichen, sauber attribuierten Umsatz — arbeiten wir <strong>kostenlos weiter</strong>, bis es das tut.</p>
         <p class="why">Verankert an Lifecycle · Baseline gemeinsam fixiert · Downside null</p>
-        <a href="/audit/" class="guar-btn">Gratis Profit-Gap →</a>
       </div>
 
       <div class="guar-card">
@@ -3396,7 +3458,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <h3>No-Bloat</h3>
         <p class="promise">Keine Übergaben, keine Juniors, keine endlosen Loops. Du arbeitest <strong>direkt mit dem, der baut</strong>.</p>
         <p class="why">A-Player · Founder-Zugang ab Tag 1</p>
-        <a href="/audit/" class="guar-btn">Gratis Profit-Gap →</a>
       </div>
 
       <div class="guar-card">
@@ -3404,7 +3465,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <h3>Speed-to-Market</h3>
         <p class="promise">Das Kern-System geht zum <strong>fixen Termin</strong> live — oder wir arbeiten kostenlos weiter, bis es steht.</p>
         <p class="why">Termin im Kickoff vertraglich fixiert</p>
-        <a href="/audit/" class="guar-btn">Gratis Profit-Gap →</a>
       </div>
 
       <div class="guar-card">
@@ -3412,12 +3472,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <h3>Fit</h3>
         <p class="promise">Rechtfertigt deine Lücke das Paket nicht — <strong>sagen wir's. Du kaufst nicht.</strong></p>
         <p class="why">Anti-Sale aus Stärke · qualifikations-gated</p>
-        <a href="/audit/" class="guar-btn">Gratis Profit-Gap →</a>
       </div>
     </div>
 
     <div class="guar-cta-row">
-      <a href="/garantien/">Alle Garantien im Detail</a>
+      <a href="/audit/" class="guar-cta-main">Gratis Profit-Gap-Analyse →</a>
+      <a href="/garantien/" class="guar-cta-detail">Alle Garantien im Detail</a>
     </div>
   </div>
 </section>
