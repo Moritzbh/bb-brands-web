@@ -215,11 +215,12 @@ footer .footer-links a:hover{color:var(--accent)}
 .bb-hero-meta .item strong{color:#000}
 @media (max-width:560px){
   .bb-hero-meta{
-    display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;
-    margin-top:28px;font-size:11px;justify-items:start;max-width:340px;
+    display:flex;flex-direction:column;align-items:center;gap:11px;
+    margin-top:28px;font-size:12px;width:fit-content;
     margin-left:auto;margin-right:auto;
   }
-  .bb-hero-meta .item{gap:6px;line-height:1.25}
+  .bb-hero-meta .item{gap:9px;line-height:1.3;text-align:left}
+  .bb-hero-meta .item::before{flex-shrink:0}
 }
 
 @media (max-width:780px){
