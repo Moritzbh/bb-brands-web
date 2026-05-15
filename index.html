@@ -998,15 +998,20 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
     radial-gradient(circle at 75% 60%, rgba(255,107,61,.08) 0%, transparent 50%),
     linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
 }
-/* Dynamischer Wave-Farbeffekt im Video-Platzhalter (matched Hero-Wave-Snippet) */
-.svc-wave-canvas{
+/* Dynamischer Wave-Farbeffekt als Hintergrund der gesamten WAS-WIR-MACHEN-Section */
+section#was{position:relative;overflow:hidden}
+section#was > .wrap{position:relative;z-index:1}
+.was-wave-wrap{
+  position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+}
+.was-wave-canvas{
   position:absolute;inset:0;width:100%;height:100%;
-  opacity:.55;
-  filter:blur(45px) contrast(1.15) saturate(1.35);
-  pointer-events:none;z-index:0;
+  opacity:.30;
+  filter:blur(80px) contrast(1.15) saturate(1.35);
+  pointer-events:none;
 }
 @media (prefers-reduced-motion: reduce){
-  .svc-wave-canvas{display:none}
+  .was-wave-canvas{display:none}
 }
 .svc-video-inner{
   position:absolute;inset:0;z-index:2;
@@ -3165,6 +3170,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance">
           <span class="v2-wordmark v2-wm-gorgias" aria-label="Gorgias Partner">gorgias</span>
           <img src="/assets/images/logos/reerect.png" alt="Reerect">
+          <img src="/assets/images/logos/zovany.png" alt="Zovany">
           <!-- Duplikate für seamless loop -->
           <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true">
           <img src="/assets/images/logos/shopify-partner-v2.png" alt="" aria-hidden="true" class="v2-logo-shopify">
@@ -3173,6 +3179,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true">
           <span class="v2-wordmark v2-wm-gorgias" aria-hidden="true">gorgias</span>
           <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true">
+          <img src="/assets/images/logos/zovany.png" alt="" aria-hidden="true">
         </div>
       </div>
     </div>
@@ -3188,6 +3195,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 <!-- ============= 3 · WAS WIR MACHEN ============= -->
 <section id="was">
+  <div class="was-wave-wrap" aria-hidden="true"><canvas class="was-wave-canvas"></canvas></div>
   <div class="wrap">
     <div class="eyebrow">Was wir machen</div>
     <h2>Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
@@ -3203,7 +3211,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <div class="svc-video" role="button" tabindex="0" aria-label="Founder-Video Platzhalter — Aufnahme folgt">
       <span class="svc-video-tag">Coming Soon</span>
       <div class="svc-video-bg"></div>
-      <canvas class="svc-wave-canvas" aria-hidden="true"></canvas>
       <div class="svc-video-inner">
         <div class="svc-video-play">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -4381,11 +4388,11 @@ window.addEventListener('load', function(){
 </script>
 
 <script>
-/* === SVC-VIDEO WAVE-CANVAS · dynamischer Farbeffekt im "Was wir machen"-Video-Platzhalter
-   (gleiche Kinetic-Wave-Logik wie das Hero-Snippet, scoped auf .svc-video) */
+/* === WAS-WIR-MACHEN WAVE-CANVAS · dynamischer Farbeffekt im Hintergrund der gesamten Section
+   (gleiche Kinetic-Wave-Logik wie das Hero-Snippet, scoped auf section#was) */
 (function(){
-  var canvas = document.querySelector('.svc-wave-canvas');
-  var wrap   = document.querySelector('.svc-video');
+  var canvas = document.querySelector('.was-wave-canvas');
+  var wrap   = document.querySelector('.was-wave-wrap');
   if(!canvas || !wrap) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var ctx = canvas.getContext('2d');
@@ -4397,11 +4404,11 @@ window.addEventListener('load', function(){
     { r:  30, g:  58, b: 255, a: 0.40 }   // Soft Indigo
   ];
   var WAVE_CONFIGS = [
-    { speed: 0.0008, amplitude: 0.26, frequency: 0.0016, offsetY: 0.68, phase: 0 },
-    { speed: 0.0012, amplitude: 0.22, frequency: 0.0022, offsetY: 0.56, phase: Math.PI / 4 },
-    { speed: 0.0015, amplitude: 0.28, frequency: 0.0018, offsetY: 0.46, phase: Math.PI / 2 }
+    { speed: 0.0008, amplitude: 0.22, frequency: 0.0008, offsetY: 0.78, phase: 0 },
+    { speed: 0.0012, amplitude: 0.18, frequency: 0.0014, offsetY: 0.62, phase: Math.PI / 4 },
+    { speed: 0.0015, amplitude: 0.25, frequency: 0.0010, offsetY: 0.48, phase: Math.PI / 2 }
   ];
-  var STEP = 22;
+  var STEP = 25;
   var state = { w:0, h:0, raf:0, visible:true, waves:[] };
 
   function initWaves(){
