@@ -925,43 +925,6 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
 /* Word-Wrapper: verhindert Wort-Bruch ("Ma|rge") trotz Char-Split-Reveal */
 .bs-step h3 .word{display:inline-block;white-space:nowrap}
 
-/* ===== Profit-System · No-Brainer Offer Band ===== */
-.ps-offer{
-  margin:44px auto 0;max-width:900px;text-align:center;
-  background:linear-gradient(180deg,#fff,var(--blue-tint,#EEF1FF));
-  border:1px solid #e4e0d4;border-radius:20px;padding:42px 38px;
-}
-.ps-offer-eyebrow{
-  font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;
-}
-.ps-offer-h{
-  font-family:'Inter Tight',sans-serif;font-size:clamp(26px,3.4vw,40px);
-  font-weight:800;line-height:1.1;letter-spacing:-.5px;color:var(--text);margin:0 0 28px;
-}
-.ps-offer-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px;text-align:left}
-@media(max-width:720px){.ps-offer-steps{grid-template-columns:1fr}}
-.ps-offer-step{background:#fff;border:1px solid #e4e0d4;border-radius:12px;padding:18px 20px}
-.ps-offer-step .n{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:12px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-.ps-offer-step .st{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:17px;color:var(--text);margin-bottom:5px}
-.ps-offer-step p{font-size:13.5px;color:var(--text-2);margin:0;line-height:1.55}
-.ps-offer-guarantee{
-  background:var(--accent-bg,#FFF4EE);border:1px solid #ffd6c2;border-radius:12px;
-  padding:18px 24px;margin:0 0 26px;
-  font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(16px,2vw,21px);
-  color:var(--text);line-height:1.4;
-}
-.ps-offer-guarantee strong{color:var(--accent-hover,#E85A2C)}
-.ps-offer-cta{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--blue);color:#fff !important;text-decoration:none;
-  font-family:'Montserrat','Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:.02em;
-  padding:17px 38px;transition:all .2s;box-shadow:0 14px 36px -12px rgba(3,5,198,.45);
-}
-.ps-offer-cta:hover{background:var(--blue-deep,#02038F);transform:translateY(-1px);text-decoration:none}
-.ps-offer-fine{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--text-3,#787872);margin:14px 0 0;letter-spacing:.02em}
-@media(max-width:720px){.ps-offer{padding:28px 20px;margin-top:32px}}
-
 /* ========== Phasen-Collapsible · editorial / extreme-subtile ========== */
 .bs-collapsible{
   margin:18px auto 0;
@@ -3369,6 +3332,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <span class="bs-tab-name">AI Operations</span>
           </span>
         </button>
+        <button class="bs-tab" data-step="5" type="button">
+          <span class="bs-dot"></span>
+          <span class="bs-tab-text">
+            <span class="bs-tab-phase">Baustein 05</span>
+            <span class="bs-tab-name">Das Angebot</span>
+          </span>
+        </button>
       </div>
 
       <div class="bs-content-area">
@@ -3420,37 +3390,21 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
             <span class="bs-chip">Schulung &amp; Übergabe</span>
           </div>
         </div>
+
+        <div class="bs-step" data-step="5">
+          <span class="bs-day-tag">Baustein 05 · Das Angebot</span>
+          <h3>Das Risiko liegt auf unserer Seite.</h3>
+          <p>Erst die Gratis-Profit-Gap-Analyse auf deinen echten Shopify- &amp; Klaviyo-Zahlen — dann das System zum Festpreis, keine Provision, kein Umsatz-Anteil. Und: refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, arbeiten wir kostenlos weiter, bis es das tut.</p>
+          <div class="bs-chips">
+            <span class="bs-chip">Gratis-Profit-Gap-Analyse</span>
+            <span class="bs-chip">Festpreis · keine Provision</span>
+            <span class="bs-chip">Refinanziert in 90 Tagen — oder gratis weiter</span>
+            <span class="bs-chip">Nur DTC · Shopify · 1–10 Mio €</span>
+          </div>
+        </div>
       </div>
     </div>
     </details>
-
-    <!-- Profit-System · No-Brainer Offer Band -->
-    <div class="ps-offer">
-      <div class="ps-offer-eyebrow">Das Angebot</div>
-      <h3 class="ps-offer-h">Das Risiko liegt auf unserer Seite. Nicht auf deiner.</h3>
-      <div class="ps-offer-steps">
-        <div class="ps-offer-step">
-          <div class="n">01 · Gratis</div>
-          <div class="st">Profit-Gap-Analyse</div>
-          <p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du gerade liegen lässt. Kostenlos, keine Verpflichtung.</p>
-        </div>
-        <div class="ps-offer-step">
-          <div class="n">02 · Festpreis</div>
-          <div class="st">Ein fester Betrag</div>
-          <p>Das System, das die Lücke schließt — zum Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p>
-        </div>
-        <div class="ps-offer-step">
-          <div class="n">03 · Garantie</div>
-          <div class="st">Refinanzierung in 90 Tagen</div>
-          <p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p>
-        </div>
-      </div>
-      <div class="ps-offer-guarantee">
-        „Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"
-      </div>
-      <a href="/audit/" class="ps-offer-cta">Profit-Gap-Analyse anfragen →</a>
-      <p class="ps-offer-fine">Qualifikations-gated · nur DTC auf Shopify · <strong>Profitables Wachstum auf höchstem Niveau</strong></p>
-    </div>
   </div>
 </section>
 
