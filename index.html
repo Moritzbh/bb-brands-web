@@ -656,350 +656,96 @@ h2 em{color:var(--blue);font-style:normal}
   .brands-score{min-width:220px;padding:16px 22px 14px}
 }
 
-/* ========== SERVICES — STICKY-RAIL STAGE (kinetic, Brand-V1) ========== */
-.bs-stage{
-  margin-top:8px;
-  display:grid;grid-template-columns:240px 1fr;gap:64px;
-  align-items:start;position:relative;min-height:440px;
-  perspective:1600px;
-}
-.bs-rail{
-  position:sticky;top:120px;
-  display:flex;flex-direction:column;gap:28px;
-  padding-left:18px;
-}
-.bs-rail::before{
-  content:'';position:absolute;
-  left:7px;top:6px;bottom:6px;
-  width:2px;background:var(--line);border-radius:2px;
-}
-.bs-rail-indicator{
-  position:absolute;left:5px;top:0;
-  width:6px;height:22px;
-  background:var(--blue);border-radius:6px;
-  transition:transform .85s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 0 14px rgba(3,5,198,.4);
-}
-.bs-rail-indicator::before{
-  content:'';position:absolute;inset:-4px;
-  border-radius:10px;background:var(--blue);
-  filter:blur(8px);opacity:.45;z-index:-1;
-}
-.bs-tab{
-  display:flex;align-items:center;gap:18px;
-  background:none;border:none;padding:0;
-  cursor:pointer;text-align:left;
-  font-family:inherit;position:relative;
-}
-.bs-dot{
-  width:16px;height:16px;border-radius:50%;
-  border:2px solid var(--blue);background:#fff;
-  flex-shrink:0;margin-left:-11px;position:relative;
-  transition:all .5s cubic-bezier(.16,1,.3,1);
-}
-@keyframes bsBreathe{
-  0%,100%{box-shadow:0 0 0 0 rgba(3,5,198,.35);transform:scale(1)}
-  50%{box-shadow:0 0 0 8px rgba(3,5,198,0);transform:scale(1.18)}
-}
-.bs-tab.active .bs-dot{
-  background:var(--blue);
-  animation:bsBreathe 2.4s infinite ease-in-out;
-}
-.bs-tab-text{
-  display:flex;flex-direction:column;gap:2px;
-  transition:transform .4s cubic-bezier(.16,1,.3,1);
-}
-.bs-tab:hover .bs-tab-text{transform:translateX(3px)}
-.bs-tab-phase{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:10px;font-weight:800;letter-spacing:1.8px;
-  text-transform:uppercase;color:var(--text-3);
-  transition:color .4s ease;
-}
-.bs-tab-name{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:15px;font-weight:600;color:var(--text-3);
-  transition:color .4s ease;letter-spacing:-.005em;
-}
-.bs-tab.active .bs-tab-phase,
-.bs-tab.active .bs-tab-name{color:var(--blue)}
-.bs-tab.active .bs-tab-name{font-weight:700}
+/* ========== "WAS WIR MACHEN" · Profit-System Timeline (clean) ========== */
+section#was{position:relative;background:#fff!important;padding:clamp(72px,9vw,128px) 0;overflow:hidden;border-top:none!important;border-bottom:none!important}
+section#was::before{content:"";position:absolute;left:50%;top:6%;width:min(1100px,92%);height:72%;transform:translateX(-50%);pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 28%,rgba(3,5,198,.045),transparent 70%)}
+section#was::after{content:"";position:absolute;left:50%;bottom:0;width:min(900px,82%);height:46%;transform:translateX(-50%);pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 50% at 50% 80%,rgba(255,107,61,.038),transparent 72%)}
+section#was>.wrap{position:relative;z-index:1}
 
-/* Auto-progress ring around active dot */
-.bs-progress-ring{
-  position:absolute;width:32px;height:32px;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%) rotate(-90deg);
-  pointer-events:none;opacity:0;
-  transition:opacity .5s ease;overflow:visible;
-}
-.bs-tab.active .bs-progress-ring{opacity:1}
-.bs-progress-ring circle{
-  fill:none;stroke:var(--blue);
-  stroke-width:1.5;stroke-linecap:round;
-  stroke-dasharray:87.96;stroke-dashoffset:87.96;
-  opacity:.55;
-}
-.bs-progress-ring.running circle{
-  transition:stroke-dashoffset 5.5s linear;
-  stroke-dashoffset:0;
-}
+.tlw-head{text-align:center;max-width:880px;margin:0 auto clamp(54px,7vw,84px)}
+section#was .tlw-head .eyebrow{display:inline-block;margin:0 0 18px}
+.tlw-h{font-family:'Inter Tight',-apple-system,sans-serif;font-weight:800;font-size:clamp(38px,5.4vw,66px);line-height:1.03;letter-spacing:-2px;color:var(--text);margin:0 0 24px;opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.tlw-h.in{opacity:1;transform:none}
+.tlw-h em{font-style:italic;font-weight:500;color:var(--blue)}
+section#was .tlw-head .bb-facts{margin-top:4px}
 
-.bs-content-area{
-  position:relative;min-height:480px;
-  transform-style:preserve-3d;
-}
-.bs-bg-num{
-  position:absolute;top:-90px;left:-40px;
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:clamp(280px,32vw,460px);
-  font-weight:900;line-height:1;letter-spacing:-.04em;
-  -webkit-text-stroke:2px var(--blue);
-  color:transparent;opacity:.06;
-  pointer-events:none;user-select:none;z-index:0;
-  transition:transform .55s cubic-bezier(.4,0,.2,1),opacity .5s ease;
-  will-change:transform,opacity;
-  backface-visibility:hidden;
-  transform-origin:50% 55%;
-}
-.bs-bg-num.swapping{opacity:0;transform:translateY(40px) scale(.92) rotate(-2deg)}
+.tlw-track{position:relative;max-width:1080px;margin:0 auto;padding:6px 0}
+.tlw-track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:var(--line)}
+.tlw-progress{position:absolute;left:50%;top:0;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,var(--blue),var(--accent));height:0;transition:height .12s linear;z-index:1}
+@media(max-width:860px){.tlw-track::before,.tlw-progress{left:22px}}
 
-.bs-step{
-  position:absolute;top:0;left:0;width:100%;
-  opacity:0;visibility:hidden;
-  transform:translateY(28px) scale(.985);
-  filter:blur(10px);
-  transition:opacity .8s cubic-bezier(.16,1,.3,1),
-             transform .8s cubic-bezier(.16,1,.3,1),
-             filter .8s cubic-bezier(.16,1,.3,1);
-  padding-top:24px;z-index:1;
-}
-.bs-step.active{
-  position:relative;
-  opacity:1;visibility:visible;
-  transform:translateY(0) scale(1);filter:blur(0);
-}
-.bs-step::before{
-  content:'';position:absolute;
-  top:-60px;left:-100px;right:-60px;bottom:-60px;
-  background:radial-gradient(ellipse at 22% 45%,
-    rgba(3,5,198,.05) 0%,
-    rgba(3,5,198,0) 55%);
-  pointer-events:none;z-index:-1;opacity:0;
-  transition:opacity 1.2s ease;
-}
-.bs-step.active::before{opacity:1}
+.tlw-item{position:relative;display:grid;grid-template-columns:1fr 88px 1fr;align-items:center;margin:0 0 clamp(46px,6vw,72px)}
+.tlw-item:last-child{margin-bottom:0}
+@media(max-width:860px){.tlw-item{grid-template-columns:46px 1fr;align-items:start;margin-bottom:40px}}
 
-.bs-day-tag{
-  display:inline-block;
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:11px;font-weight:800;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:18px;
-}
-.bs-step h3{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:clamp(36px,4.4vw,56px);font-weight:700;
-  color:var(--text);line-height:1.05;
-  letter-spacing:-1.2px;margin:0 0 24px;
-}
-.bs-step h3 em{
-  font-style:italic;font-weight:500;color:var(--blue);
-}
-/* Char-by-char headline reveal */
-.bs-step h3 .char{
-  display:inline-block;opacity:0;
-  transform:translateY(.45em) rotateX(-65deg);
-  transform-origin:50% 100%;
-  transition:opacity .7s cubic-bezier(.16,1,.3,1),
-             transform .7s cubic-bezier(.16,1,.3,1);
-  transition-delay:0s;will-change:opacity,transform;
-}
-.bs-step h3 .char.space{width:.28em}
-.bs-step.active h3 .char{
-  opacity:1;transform:translateY(0) rotateX(0);
-  transition-delay:calc(var(--i,0) * 22ms + 200ms);
-}
+.tlw-node{grid-column:2;justify-self:center;width:52px;height:52px;border-radius:14px;background:#fff;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;position:relative;z-index:3;color:var(--blue);transition:transform .6s cubic-bezier(.34,1.56,.64,1),background .5s,color .5s,box-shadow .5s}
+.tlw-node svg{width:21px;height:21px}
+@media(max-width:860px){.tlw-node{grid-column:1;width:42px;height:42px;border-radius:12px}.tlw-node svg{width:17px;height:17px}}
+.tlw-item.in .tlw-node{transform:scale(1.06);background:var(--blue);color:#fff;box-shadow:0 0 0 6px rgba(3,5,198,.10),0 14px 32px -12px rgba(3,5,198,.45)}
+.tlw-item--offer .tlw-node{border-color:var(--accent);color:var(--accent)}
+.tlw-item--offer.in .tlw-node{background:var(--accent);color:#fff;box-shadow:0 0 0 6px rgba(255,107,61,.12),0 14px 32px -12px rgba(255,107,61,.5)}
 
-.bs-step p{
-  font-size:17px;font-weight:400;
-  color:var(--text-2);line-height:1.7;
-  max-width:580px;margin:0 0 32px;
-}
+.tlw-slot{position:relative}
+.tlw-item.r .tlw-slot{grid-column:3;padding-left:20px}
+.tlw-item.l .tlw-slot{grid-column:1;padding-right:20px;text-align:left}
+@media(max-width:860px){.tlw-item.r .tlw-slot,.tlw-item.l .tlw-slot{grid-column:2;padding:0 0 0 18px;text-align:left}}
 
-.bs-chips{display:flex;flex-wrap:wrap;gap:10px}
-.bs-chip{
-  font-family:'Inter',sans-serif;
-  font-size:12px;font-weight:700;
-  color:var(--blue);
-  padding:10px 18px;border-radius:99px;
-  background:rgba(255,255,255,.65);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(3,5,198,.15);
-  box-shadow:0 6px 24px -8px rgba(3,5,198,.12);
-  opacity:0;transform:translateY(14px) scale(.85);
-  transition:opacity .6s cubic-bezier(.34,1.56,.64,1),
-             transform .6s cubic-bezier(.34,1.56,.64,1),
-             background .25s ease,
-             border-color .25s ease,
-             color .25s ease;
-  will-change:transform;
-}
-.bs-chip:hover{
-  background:rgba(255,107,61,.08);
-  border-color:rgba(255,107,61,.35);
-  color:var(--accent);
-}
-.bs-step.active .bs-chip{opacity:1;transform:translateY(0) scale(1)}
-.bs-step.active .bs-chip:nth-child(1){transition-delay:.42s,.42s,0s,0s,0s}
-.bs-step.active .bs-chip:nth-child(2){transition-delay:.52s,.52s,0s,0s,0s}
-.bs-step.active .bs-chip:nth-child(3){transition-delay:.62s,.62s,0s,0s,0s}
-.bs-step.active .bs-chip:nth-child(4){transition-delay:.72s,.72s,0s,0s,0s}
-.bs-step.active .bs-chip:nth-child(5){transition-delay:.82s,.82s,0s,0s,0s}
+.tlw-bgnum{position:absolute;top:-58px;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(150px,17vw,280px);line-height:1;letter-spacing:-.04em;-webkit-text-stroke:2px var(--blue);color:transparent;opacity:0;pointer-events:none;user-select:none;z-index:0;transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.tlw-item.r .tlw-bgnum{right:-16px;transform:translateY(34px) scale(.9) rotate(-2deg)}
+.tlw-item.l .tlw-bgnum{left:-16px;transform:translateY(34px) scale(.9) rotate(2deg)}
+.tlw-item.in .tlw-bgnum{opacity:.06;transform:none}
+.tlw-item--offer .tlw-bgnum{-webkit-text-stroke-color:var(--accent)}
+.tlw-item--offer.in .tlw-bgnum{opacity:.08}
+@media(max-width:860px){.tlw-bgnum{font-size:118px;top:-38px}.tlw-item.l .tlw-bgnum,.tlw-item.r .tlw-bgnum{left:auto;right:-8px}}
 
-/* Ambient blob behind active content */
-.bs-ambient{
-  position:absolute;top:50%;left:50%;
-  width:760px;height:760px;
-  margin-top:-380px;margin-left:-380px;
-  background:radial-gradient(circle at center,
-    rgba(3,5,198,.16) 0%,
-    rgba(3,5,198,.08) 28%,
-    rgba(3,5,198,0) 62%);
-  filter:blur(40px);
-  pointer-events:none;opacity:0;z-index:0;
-  will-change:transform,opacity;
-  transition:transform 1.6s cubic-bezier(.16,1,.3,1),
-             opacity 1.4s ease;
-}
-.bs-ambient.visible{opacity:1}
+.tlw-glow{position:absolute;inset:-46% -34%;background:radial-gradient(circle at 32% 42%,rgba(3,5,198,.10),transparent 60%);opacity:0;z-index:0;pointer-events:none;transition:opacity 1.4s ease}
+.tlw-item.in .tlw-glow{opacity:1;animation:tlwBreathe 7.5s ease-in-out infinite}
+.tlw-item--offer .tlw-glow{background:radial-gradient(circle at 32% 42%,rgba(255,107,61,.12),transparent 60%)}
+@keyframes tlwBreathe{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,3%) scale(1.09)}}
 
-@media (max-width:980px){
-  .bs-stage{grid-template-columns:1fr;gap:30px;min-height:0}
-  .bs-rail{
-    position:static;flex-direction:row;
-    overflow-x:auto;gap:14px;padding:4px 20px 14px;
-    margin:0 -20px;scrollbar-width:none;
-  }
-  .bs-rail::-webkit-scrollbar{display:none}
-  .bs-rail::before,.bs-rail-indicator{display:none}
-  .bs-tab{
-    flex-shrink:0;padding:10px 14px;gap:12px;
-    border:1px solid var(--line);border-radius:10px;
-    background:#fff;
-  }
-  .bs-tab.active{border-color:var(--blue);background:var(--blue-tint)}
-  .bs-dot{display:none}
-  .bs-content-area{min-height:0}
-  .bs-bg-num{top:-50px;left:-10px;font-size:clamp(180px,40vw,280px)}
-  .bs-step{padding-top:8px}
-  .bs-step h3{font-size:34px;margin-bottom:18px;letter-spacing:-.5px}
-  .bs-step p{font-size:15px;margin-bottom:24px}
-}
-@media (prefers-reduced-motion: reduce){
-  .bs-step,.bs-chip,.bs-bg-num,.bs-rail-indicator,
-  .bs-ambient,.bs-progress-ring circle,.bs-step h3 .char{
-    transition:none !important;
-  }
-  .bs-tab.active .bs-dot{animation:none}
-  .bs-step h3 .char{opacity:1;transform:none}
-}
+.tlw-card{position:relative;z-index:1;opacity:0;filter:blur(10px)}
+.tlw-card::before{content:"";position:absolute;inset:-46px -36px -36px -58px;background:radial-gradient(ellipse at 24% 45%,rgba(3,5,198,.045),transparent 55%);opacity:0;z-index:-1;pointer-events:none;transition:opacity 1.2s ease}
+.tlw-item--offer .tlw-card::before{background:radial-gradient(ellipse at 24% 45%,rgba(255,107,61,.055),transparent 55%)}
+.tlw-item.in .tlw-card::before{opacity:1}
+.tlw-item.r .tlw-card{transform:translate(42px,28px) scale(.985)}
+.tlw-item.l .tlw-card{transform:translate(-42px,28px) scale(.985)}
+@media(max-width:860px){.tlw-item.r .tlw-card,.tlw-item.l .tlw-card{transform:translate(0,26px) scale(.985)}}
+.tlw-item.in .tlw-card{opacity:1;filter:blur(0);transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
 
-/* ========== "WAS WIR MACHEN" Video-Intro Section · kompakt · pure white ========== */
-section#was,
-section#was:nth-of-type(even){
-  padding:64px 0 56px;
-  background:#fff !important;
-  border-top:none !important;
-  border-bottom:none !important;
-}
-section#was h2{font-size:38px;margin-bottom:12px;line-height:1.05}
-section#was .section-sub{margin-bottom:32px;font-size:16px}
-/* Desktop: Heading-Block zentriert */
-section#was .wrap{text-align:center}
-section#was .eyebrow{display:inline-block;margin-left:auto;margin-right:auto}
-section#was h2{margin-left:auto;margin-right:auto}
-section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
+.tlw-tag,.tlw-h2,.tlw-p,.tlw-chips,.tlw-pillars,.tlw-guar,.tlw-cta,.tlw-fine{position:relative;z-index:1}
+.tlw-tag{display:inline-block;font-family:'Inter Tight',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.tlw-h2{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(24px,3vw,38px);letter-spacing:-1px;color:var(--text);margin:0 0 18px;line-height:1.06}
+.tlw-h2 .char{display:inline-block;opacity:0;transform:translateY(.45em) rotateX(-55deg);transform-origin:50% 100%;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.tlw-h2 .char.space{width:.26em}
+.tlw-item.in .tlw-h2 .char{opacity:1;transform:none;transition-delay:calc(var(--i,0)*20ms + 260ms)}
+.tlw-p{font-size:16px;color:var(--text-2);line-height:1.7;margin:0 0 24px;max-width:560px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .42s,transform .7s cubic-bezier(.16,1,.3,1) .42s}
+.tlw-item.l .tlw-p{margin-left:auto}
+.tlw-item.in .tlw-p{opacity:1;transform:none}
+.tlw-chips{display:flex;flex-wrap:wrap;gap:10px}
+.tlw-chip{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--blue);padding:10px 18px;border-radius:99px;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(3,5,198,.15);box-shadow:0 6px 24px -8px rgba(3,5,198,.12);opacity:0;transform:translateY(14px) scale(.85);transition:opacity .6s cubic-bezier(.34,1.56,.64,1),transform .6s cubic-bezier(.34,1.56,.64,1),background .25s,border-color .25s,color .25s}
+.tlw-chip:hover{background:rgba(255,107,61,.08);border-color:rgba(255,107,61,.35);color:var(--accent)}
+.tlw-item.in .tlw-chip{opacity:1;transform:none}
+.tlw-item.in .tlw-chip:nth-child(1){transition-delay:.56s,.56s,0s,0s,0s}
+.tlw-item.in .tlw-chip:nth-child(2){transition-delay:.64s,.64s,0s,0s,0s}
+.tlw-item.in .tlw-chip:nth-child(3){transition-delay:.72s,.72s,0s,0s,0s}
+.tlw-item.in .tlw-chip:nth-child(4){transition-delay:.80s,.80s,0s,0s,0s}
 
-/* Word-Wrapper: verhindert Wort-Bruch ("Ma|rge") trotz Char-Split-Reveal */
-.bs-step h3 .word{display:inline-block;white-space:nowrap}
-
-/* ===== Baustein 05 · Angebot — bricht bewusst aus dem Step-Muster aus ===== */
-.bs-offer{max-width:640px;margin:6px 0 0}
-.bs-offer-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 18px}
-@media(max-width:760px){.bs-offer-steps{grid-template-columns:1fr}}
-.bs-offer-step{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(3,5,198,.14);border-radius:12px;padding:16px 18px}
-.bs-offer-step .n{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:11px;color:var(--accent);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
-.bs-offer-step .st{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:16px;color:var(--text);margin-bottom:5px;letter-spacing:-.01em}
-.bs-offer-step p{font-size:13px;color:var(--text-2);margin:0;line-height:1.5}
-.bs-offer-guarantee{background:var(--accent-bg,#FFF4EE);border:1px solid rgba(255,107,61,.3);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:0 0 20px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(15px,1.7vw,19px);color:var(--text);line-height:1.4}
-.bs-offer-guarantee strong{color:var(--accent-hover,#E85A2C)}
-.bs-offer-cta{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;text-decoration:none;font-family:'Inter Tight',sans-serif;font-size:15px;font-weight:700;letter-spacing:.01em;padding:15px 32px;transition:background .15s,transform .15s}
-.bs-offer-cta:hover{background:var(--blue-deep,#02038F);transform:translateY(-1px);text-decoration:none}
-.bs-offer-fine{font-family:'Inter',sans-serif;font-size:12px;color:var(--text-3);margin:14px 0 0;letter-spacing:.02em}
-.bs-offer-fine strong{color:var(--text-2)}
-/* Reveal nach dem Char-Reveal der Headline — wie der Chip-Stagger der anderen Steps */
-.bs-step[data-step="5"] .bs-offer{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .38s,transform .6s cubic-bezier(.16,1,.3,1) .38s}
-.bs-step[data-step="5"].active .bs-offer{opacity:1;transform:none}
-
-/* ========== Phasen-Collapsible · editorial / extreme-subtile ========== */
-.bs-collapsible{
-  margin:18px auto 0;
-  max-width:880px;
-}
-.bs-collapsible-toggle{
-  list-style:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:24px;
-  padding:18px 2px;
-  background:transparent;border:none;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  transition:border-color .35s ease;
-}
-.bs-collapsible-toggle::-webkit-details-marker{display:none}
-.bs-collapsible-toggle:hover{
-  border-top-color:var(--text-3);
-  border-bottom-color:var(--text-3);
-}
-
-.bs-toggle-text-wrap{
-  display:flex;align-items:baseline;gap:14px;flex:1;min-width:0;
-}
-.bs-toggle-text{
-  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--text);
-}
-.bs-toggle-meta{
-  font-size:12.5px;color:var(--text-3);letter-spacing:.01em;
-  font-style:italic;
-}
-
-.bs-toggle-icon{
-  width:18px;height:18px;
-  color:var(--text-3);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  transition:transform .4s cubic-bezier(.4,0,.2,1), color .25s ease;
-}
-.bs-toggle-icon svg{width:14px;height:14px;stroke-width:1.5}
-.bs-collapsible-toggle:hover .bs-toggle-icon{color:var(--text)}
-.bs-collapsible[open] .bs-toggle-icon{transform:rotate(180deg);color:var(--text)}
-.bs-collapsible[open] .bs-collapsible-toggle{
-  border-bottom-color:transparent;
-  margin-bottom:24px;
-}
-
-@media (max-width:780px){
-  section#was{padding:48px 0 36px}
-  section#was h2{font-size:28px}
-  .bs-collapsible-toggle{padding:14px 2px;gap:14px}
-  .bs-toggle-text-wrap{flex-direction:column;align-items:flex-start;gap:3px}
-  .bs-toggle-text{font-size:11.5px}
-  .bs-toggle-meta{font-size:11.5px}
-}
+.tlw-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 22px;margin:0 0 20px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .42s,transform .7s cubic-bezier(.16,1,.3,1) .42s}
+.tlw-item.in .tlw-pillars{opacity:1;transform:none}
+@media(max-width:560px){.tlw-pillars{grid-template-columns:1fr}}
+.tlw-pillar{border-left:2px solid rgba(255,107,61,.35);padding:2px 0 2px 16px}
+.tlw-pillar .n{font-family:'JetBrains Mono','Inter Tight',monospace;font-weight:700;font-size:10px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.tlw-pillar .t{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;color:var(--text);margin-bottom:4px}
+.tlw-pillar p{font-size:12.5px;color:var(--text-2);margin:0;line-height:1.5}
+.tlw-guar{border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:0 0 20px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(15px,1.7vw,19px);color:var(--text);line-height:1.4;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .54s,transform .7s cubic-bezier(.16,1,.3,1) .54s}
+.tlw-item.in .tlw-guar{opacity:1;transform:none}
+.tlw-guar strong{color:var(--accent-hover,#E85A2C)}
+.tlw-cta{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff!important;text-decoration:none;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;padding:15px 32px;border-radius:10px;transition:background .15s,transform .15s}
+.tlw-cta:hover{background:var(--blue-deep,#02038F);transform:translateY(-1px);text-decoration:none}
+.tlw-fine{font-family:'JetBrains Mono','Inter Tight',monospace;font-size:11px;color:var(--text-3);margin:14px 0 0;letter-spacing:.02em}
+.tlw-fine strong{color:var(--text-2)}
+@media(max-width:860px){.tlw-p,.tlw-chips,.tlw-pillars,.tlw-guar{max-width:none}.tlw-item.l .tlw-p{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.tlw-item.in .tlw-glow{animation:none}.tlw-h,.tlw-card,.tlw-p,.tlw-chip,.tlw-pillars,.tlw-guar,.tlw-h2 .char{transition:none!important}}
 
 /* ========== FOUNDER-VIDEO (Anker) ========== */
 .svc-video{
@@ -3338,158 +3084,93 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= 3 · WAS WIR MACHEN ============= -->
 <section id="was">
   <div class="wrap">
-    <div class="eyebrow">Was wir machen</div>
-    <h2>Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
 
-    <!-- Eckdaten · ruhige Meta-Zeile (aus dem Hero hierher verlagert) -->
-    <div class="bb-facts">
-      <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Re-Brand · Re-Launch · Skalierung</span>
-      <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Direkter Founder-Zugang</span>
-      <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>DACH · 1–10 Mio €</span>
-      <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Kein klarer ROI = kein Auftrag</span>
-    </div>
-
-    <!-- Founder-Video · Platzhalter (Bild + Play, Embed folgt) -->
-    <div class="svc-video" role="button" tabindex="0" aria-label="Video abspielen">
-      <div class="svc-video-bg"></div>
-      <div class="svc-video-inner">
-        <div class="svc-video-play">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+    <div class="tlw-head">
+      <div class="eyebrow">Was wir machen</div>
+      <h2 class="tlw-h">Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
+      <div class="bb-facts">
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Re-Brand · Re-Launch · Skalierung</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Direkter Founder-Zugang</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>DACH · 1–10 Mio €</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Kein klarer ROI = kein Auftrag</span>
       </div>
     </div>
 
-    <!-- Phasen-Detail: kollabiert by default, optional auf Klick öffnen -->
-    <details class="bs-collapsible" id="bsCollapsible">
-      <summary class="bs-collapsible-toggle">
-        <span class="bs-toggle-text-wrap">
-          <span class="bs-toggle-text">Im Detail nachlesen</span>
-          <span class="bs-toggle-meta">vier Bausteine — ein Profit-System</span>
-        </span>
-        <span class="bs-toggle-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </span>
-      </summary>
+    <div class="tlw-track" id="tlwTrack">
+      <div class="tlw-progress" id="tlwProgress"></div>
 
-    <div class="bs-stage" id="bsStage">
-      <div class="bs-rail">
-        <div class="bs-rail-indicator" id="bsRailIndicator"></div>
-        <button class="bs-tab active" data-step="1" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 01</span>
-            <span class="bs-tab-name">Brand</span>
-          </span>
-        </button>
-        <button class="bs-tab" data-step="2" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 02</span>
-            <span class="bs-tab-name">Shopify-Store</span>
-          </span>
-        </button>
-        <button class="bs-tab" data-step="3" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 03</span>
-            <span class="bs-tab-name">Conversion &amp; E-Mail</span>
-          </span>
-        </button>
-        <button class="bs-tab" data-step="4" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 04</span>
-            <span class="bs-tab-name">AI Operations</span>
-          </span>
-        </button>
-        <button class="bs-tab" data-step="5" type="button">
-          <span class="bs-dot"></span>
-          <span class="bs-tab-text">
-            <span class="bs-tab-phase">Baustein 05</span>
-            <span class="bs-tab-name">Das Angebot</span>
-          </span>
-        </button>
+      <div class="tlw-item r">
+        <div class="tlw-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></div>
+        <div class="tlw-slot">
+          <div class="tlw-bgnum">01</div><div class="tlw-glow"></div>
+          <div class="tlw-card">
+            <span class="tlw-tag">Baustein 01 · Fundament</span>
+            <h3 class="tlw-h2">Positioning &amp; Voice.</h3>
+            <p class="tlw-p">Markenstrategie als operatives Framework — kein Pitch-Deck. Die Spine, auf der Store, Conversion und Lifecycle überhaupt erst profitabel werden. Bei Hearo Basis für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
+            <div class="tlw-chips"><span class="tlw-chip">Brand-Doctrine</span><span class="tlw-chip">Voice-Guidelines</span><span class="tlw-chip">Messaging-Framework</span></div>
+          </div>
+        </div>
       </div>
 
-      <div class="bs-content-area">
-        <div class="bs-bg-num" id="bsBgNum">01</div>
-
-        <div class="bs-step active" data-step="1">
-          <span class="bs-day-tag">Baustein 01 · Fundament</span>
-          <h3>Positioning &amp; Voice.</h3>
-          <p>Markenstrategie als operatives Framework — kein Pitch-Deck. Die Spine, auf der Store, Conversion und Lifecycle überhaupt erst profitabel werden. Bei Hearo Basis für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
-          <div class="bs-chips">
-            <span class="bs-chip">Brand-Doctrine</span>
-            <span class="bs-chip">Voice-Guidelines</span>
-            <span class="bs-chip">Messaging-Framework</span>
+      <div class="tlw-item l">
+        <div class="tlw-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div class="tlw-slot">
+          <div class="tlw-bgnum">02</div><div class="tlw-glow"></div>
+          <div class="tlw-card">
+            <span class="tlw-tag">Baustein 02 · Profit-Hebel AOV</span>
+            <h3 class="tlw-h2">Custom-Store, der Marge bringt.</h3>
+            <p class="tlw-p">Hochkonvertierender Custom-Shop auf Dawn-Basis — und die Bundle-/AOV-Architektur als messbarer Profit-Hebel, sauber dem Euro zurechenbar. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
+            <div class="tlw-chips"><span class="tlw-chip">Custom-Liquid</span><span class="tlw-chip">Section-Library</span><span class="tlw-chip">Bundle-/AOV-Hebel</span><span class="tlw-chip">PageSpeed 85+</span></div>
           </div>
         </div>
+      </div>
 
-        <div class="bs-step" data-step="2">
-          <span class="bs-day-tag">Baustein 02 · Profit-Hebel AOV</span>
-          <h3>Custom-Store, der Marge bringt.</h3>
-          <p>Hochkonvertierender Custom-Shop auf Dawn-Basis — und die Bundle-/AOV-Architektur als messbarer Profit-Hebel, sauber dem Euro zurechenbar. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
-          <div class="bs-chips">
-            <span class="bs-chip">Custom-Liquid</span>
-            <span class="bs-chip">Section-Library</span>
-            <span class="bs-chip">Bundle-/AOV-Hebel</span>
-            <span class="bs-chip">PageSpeed 85+</span>
+      <div class="tlw-item r">
+        <div class="tlw-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+        <div class="tlw-slot">
+          <div class="tlw-bgnum">03</div><div class="tlw-glow"></div>
+          <div class="tlw-card">
+            <span class="tlw-tag">Baustein 03 · Profit-Maschine</span>
+            <h3 class="tlw-h2">Profit pro Visitor.</h3>
+            <p class="tlw-p">Klaviyo-Lifecycle als Profit-Maschine: Welcome-Flow bis Win-Back, sauber attribuiert gegen eine eingefrorene Baseline. Per-Order-Math statt ROAS-Theater — jeder zusätzliche Euro steht in deinem eigenen Klaviyo schwarz auf weiß.</p>
+            <div class="tlw-chips"><span class="tlw-chip">Klaviyo-Lifecycle</span><span class="tlw-chip">Eingefrorene Baseline</span><span class="tlw-chip">Per-Order-Math</span><span class="tlw-chip">Welcome → Win-Back</span></div>
           </div>
         </div>
+      </div>
 
-        <div class="bs-step" data-step="3">
-          <span class="bs-day-tag">Baustein 03 · Profit-Maschine</span>
-          <h3>Profit pro Visitor.</h3>
-          <p>Klaviyo-Lifecycle als Profit-Maschine: Welcome-Flow bis Win-Back, sauber attribuiert gegen eine eingefrorene Baseline. Per-Order-Math statt ROAS-Theater — jeder zusätzliche Euro steht in deinem eigenen Klaviyo schwarz auf weiß.</p>
-          <div class="bs-chips">
-            <span class="bs-chip">Klaviyo-Lifecycle</span>
-            <span class="bs-chip">Eingefrorene Baseline</span>
-            <span class="bs-chip">Per-Order-Math</span>
-            <span class="bs-chip">Welcome → Win-Back</span>
+      <div class="tlw-item l">
+        <div class="tlw-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></div>
+        <div class="tlw-slot">
+          <div class="tlw-bgnum">04</div><div class="tlw-glow"></div>
+          <div class="tlw-card">
+            <span class="tlw-tag">Baustein 04 · Effizienz-Verstärker</span>
+            <h3 class="tlw-h2">AI Operations live.</h3>
+            <p class="tlw-p">Operative Reibung raus — KI-Workflows, die messbar Zeit sparen und das Profit-System verstärken. Value-Add, kein Vanity. Drei Stufen — Light (Prompts + Workshop), Medium (n8n-Workflows), Heavy (Custom-Agents + Dashboards) — im Discovery gewählt.</p>
+            <div class="tlw-chips"><span class="tlw-chip">Custom-Prompts</span><span class="tlw-chip">No-Code-Workflows</span><span class="tlw-chip">AI-Agents</span><span class="tlw-chip">Schulung &amp; Übergabe</span></div>
           </div>
         </div>
+      </div>
 
-        <div class="bs-step" data-step="4">
-          <span class="bs-day-tag">Baustein 04 · Effizienz-Verstärker</span>
-          <h3>AI Operations live.</h3>
-          <p>Operative Reibung raus — KI-Workflows, die messbar Zeit sparen und das Profit-System verstärken. Value-Add, kein Vanity. Drei Stufen — Light (Prompts + Workshop), Medium (n8n-Workflows), Heavy (Custom-Agents + Dashboards) — im Discovery gewählt.</p>
-          <div class="bs-chips">
-            <span class="bs-chip">Custom-Prompts</span>
-            <span class="bs-chip">No-Code-Workflows</span>
-            <span class="bs-chip">AI-Agents</span>
-            <span class="bs-chip">Schulung &amp; Übergabe</span>
-          </div>
-        </div>
-
-        <div class="bs-step" data-step="5">
-          <span class="bs-day-tag">Baustein 05 · Das Angebot</span>
-          <h3>Das Risiko liegt auf unserer Seite.</h3>
-          <div class="bs-offer">
-            <div class="bs-offer-steps">
-              <div class="bs-offer-step">
-                <div class="n">01 · Gratis</div>
-                <div class="st">Profit-Gap-Analyse</div>
-                <p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du gerade liegen lässt. Kostenlos, keine Verpflichtung.</p>
-              </div>
-              <div class="bs-offer-step">
-                <div class="n">02 · Festpreis</div>
-                <div class="st">Ein fester Betrag</div>
-                <p>Das System, das die Lücke schließt — zum Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p>
-              </div>
-              <div class="bs-offer-step">
-                <div class="n">03 · Garantie</div>
-                <div class="st">Refinanzierung in 90 Tagen</div>
-                <p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p>
-              </div>
+      <div class="tlw-item r tlw-item--offer">
+        <div class="tlw-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="tlw-slot">
+          <div class="tlw-bgnum">05</div><div class="tlw-glow"></div>
+          <div class="tlw-card">
+            <span class="tlw-tag">Baustein 05 · Das Angebot</span>
+            <h3 class="tlw-h2">Das Risiko liegt auf unserer Seite.</h3>
+            <div class="tlw-pillars">
+              <div class="tlw-pillar"><div class="n">01 · Gratis</div><div class="t">Profit-Gap-Analyse</div><p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du gerade liegen lässt. Kostenlos, keine Verpflichtung.</p></div>
+              <div class="tlw-pillar"><div class="n">02 · Festpreis</div><div class="t">Ein fester Betrag</div><p>Das System, das die Lücke schließt — zum Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p></div>
+              <div class="tlw-pillar"><div class="n">03 · Garantie</div><div class="t">Refinanzierung in 90 Tagen</div><p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p></div>
             </div>
-            <div class="bs-offer-guarantee">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
-            <a href="/audit/" class="bs-offer-cta">Profit-Gap-Analyse anfragen →</a>
-            <p class="bs-offer-fine">Qualifikations-gated · nur DTC auf Shopify · <strong>Profitables Wachstum auf höchstem Niveau</strong></p>
+            <div class="tlw-guar">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
+            <a href="/audit/" class="tlw-cta">Profit-Gap-Analyse anfragen →</a>
+            <p class="tlw-fine">Qualifikations-gated · nur DTC auf Shopify · <strong>Profitables Wachstum auf höchstem Niveau</strong></p>
           </div>
         </div>
       </div>
+
     </div>
-    </details>
   </div>
 </section>
 
@@ -4178,281 +3859,58 @@ window.addEventListener('load', function(){
 </script>
 
 <script>
-/* === BAUSTEINE STAGE · Apple-Grade · Char-Reveal · BG-Number-Swap · Auto-Advance · Mag-Chips === */
+/* === WAS WIR MACHEN · Profit-System Timeline · Scroll-Reveal (lean) === */
 (function(){
-  var stage = document.getElementById('bsStage');
-  if(!stage) return;
-  var tabs = stage.querySelectorAll('.bs-tab');
-  var steps = stage.querySelectorAll('.bs-step');
-  var indicator = document.getElementById('bsRailIndicator');
-  var bgNum = document.getElementById('bsBgNum');
-  var contentArea = stage.querySelector('.bs-content-area');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var track = document.getElementById('tlwTrack');
+  if(!track) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  var TOTAL_STEPS = steps.length;
-  var AUTO_INTERVAL = 5500;
-  var RING_DASH = 87.96;
-  var RING_DURATION = 5.5;
-
-  var current = 1;
-  var autoTimer = null;
-  var isHovered = false;
-  var bgSwapping = false;
-
-  // 1) Headlines char-by-char splitten
-  steps.forEach(function(step){
-    var h3 = step.querySelector('h3');
-    if(!h3 || h3.dataset.split) return;
-    var text = h3.textContent;
-    h3.textContent = '';
-    var i = 0;
-    var __tok = text.split(/(\s+)/);
-    __tok.forEach(function(ch){
-      if(ch===''){return;}
-      if(/^\s+$/.test(ch)){
-        var sp=document.createElement('span');
-        sp.className='char space';sp.textContent=' ';
-        sp.style.setProperty('--i', i++);
-        h3.appendChild(sp);return;
-      }
-      var word=document.createElement('span');word.className='word';
-      Array.from(ch).forEach(function(c){
-        var cs=document.createElement('span');
-        cs.className='char';cs.textContent=c;
-        cs.style.setProperty('--i', i++);
-        word.appendChild(cs);
-      });
-      h3.appendChild(word);return;
-    });
-    h3.dataset.split = 'true';
-  });
-
-  // 2) Ambient-Blob hinter aktivem Content
-  var ambient = document.createElement('div');
-  ambient.className = 'bs-ambient';
-  contentArea.insertBefore(ambient, contentArea.firstChild);
-  var ambientPositions = [
-    { x: -22, y: -18 },
-    { x:  28, y: -22 },
-    { x:   2, y:  18 },
-    { x: -28, y:  22 }
-  ];
-  function updateAmbient(stepNum){
-    var p = ambientPositions[stepNum - 1] || { x: 0, y: 0 };
-    ambient.style.transform = 'translate('+p.x+'%, '+p.y+'%)';
-    if(!ambient.classList.contains('visible')){
-      requestAnimationFrame(function(){ ambient.classList.add('visible'); });
-    }
-  }
-
-  // 3) Progress-Ring um aktivem Dot
-  var ringHTML = '<svg class="bs-progress-ring" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/></svg>';
-  tabs.forEach(function(tab){
-    var dot = tab.querySelector('.bs-dot');
-    if(dot && !dot.dataset.ringInit){
-      dot.insertAdjacentHTML('beforeend', ringHTML);
-      dot.dataset.ringInit = 'true';
-    }
-  });
-  function resetAllRings(){
-    stage.querySelectorAll('.bs-progress-ring').forEach(function(r){
-      r.classList.remove('running');
-      var c = r.querySelector('circle');
-      if(c){
-        c.style.transition = 'none';
-        c.style.strokeDashoffset = RING_DASH;
-      }
-    });
-  }
-  function startRing(stepNum){
-    resetAllRings();
-    if(reduceMotion || isHovered) return;
-    var ring = stage.querySelector('.bs-tab[data-step="'+stepNum+'"] .bs-progress-ring');
-    if(!ring) return;
-    var c = ring.querySelector('circle');
-    if(!c) return;
-    void c.offsetWidth;
-    c.style.transition = 'stroke-dashoffset '+RING_DURATION+'s linear';
-    requestAnimationFrame(function(){
-      ring.classList.add('running');
-      c.style.strokeDashoffset = '0';
-    });
-  }
-  function pauseRing(){
-    var ring = stage.querySelector('.bs-tab.active .bs-progress-ring');
-    if(!ring) return;
-    var c = ring.querySelector('circle');
-    if(!c) return;
-    var cs = getComputedStyle(c).strokeDashoffset;
-    c.style.transition = 'none';
-    c.style.strokeDashoffset = cs;
-  }
-  function resumeRing(){
-    var ring = stage.querySelector('.bs-tab.active .bs-progress-ring');
-    if(!ring) return;
-    var c = ring.querySelector('circle');
-    if(!c) return;
-    var remaining = parseFloat(getComputedStyle(c).strokeDashoffset) || 0;
-    if(remaining <= 0.5) return;
-    var remainingSec = (remaining / RING_DASH) * RING_DURATION;
-    void c.offsetWidth;
-    c.style.transition = 'stroke-dashoffset '+remainingSec+'s linear';
-    requestAnimationFrame(function(){ c.style.strokeDashoffset = '0'; });
-  }
-
-  // 4) BG-Number 3D-Mouse-Tilt
-  var tiltRAF = null;
-  var targetRX = 0, targetRY = 0;
-  var curRX = 0, curRY = 0;
-  function applyBgTransform(){
-    if(!bgNum || bgSwapping) return;
-    bgNum.style.transform = 'translate3d(0,0,0) rotateX('+curRX.toFixed(2)+'deg) rotateY('+curRY.toFixed(2)+'deg)';
-  }
-  function tiltLoop(){
-    curRX += (targetRX - curRX) * 0.09;
-    curRY += (targetRY - curRY) * 0.09;
-    applyBgTransform();
-    if(Math.abs(targetRX - curRX) > 0.02 || Math.abs(targetRY - curRY) > 0.02){
-      tiltRAF = requestAnimationFrame(tiltLoop);
-    } else {
-      curRX = targetRX; curRY = targetRY;
-      applyBgTransform();
-      tiltRAF = null;
-    }
-  }
-  if(!reduceMotion){
-    contentArea.addEventListener('mousemove', function(e){
-      var r = contentArea.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      targetRY = px * 9;
-      targetRX = -py * 6;
-      if(!tiltRAF) tiltRAF = requestAnimationFrame(tiltLoop);
-    });
-    contentArea.addEventListener('mouseleave', function(){
-      targetRX = 0; targetRY = 0;
-      if(!tiltRAF) tiltRAF = requestAnimationFrame(tiltLoop);
-    });
-  }
-
-  // 5) Magnetic Chips
-  if(!reduceMotion){
-    stage.querySelectorAll('.bs-chip').forEach(function(chip){
-      chip.addEventListener('mousemove', function(e){
-        var r = chip.getBoundingClientRect();
-        var dx = (e.clientX - r.left - r.width / 2) * 0.25;
-        var dy = (e.clientY - r.top - r.height / 2) * 0.35;
-        chip.style.transform = 'translate('+dx+'px, '+dy+'px) scale(1.04)';
-      });
-      chip.addEventListener('mouseleave', function(){
-        chip.style.transform = '';
-      });
-    });
-  }
-
-  // 6) Indikator
-  function moveIndicator(stepNumber){
-    if(!indicator) return;
-    var target = stage.querySelector('.bs-tab[data-step="'+stepNumber+'"]');
-    if(!target) return;
-    var railRect = target.parentElement.getBoundingClientRect();
-    var tabRect = target.getBoundingClientRect();
-    var offset = tabRect.top - railRect.top + (tabRect.height / 2) - 11;
-    indicator.style.transform = 'translateY('+offset+'px)';
-  }
-
-  // 7) Step-Switch
-  function switchStep(stepNumber, fromAuto){
-    if(stepNumber === current) return;
-    current = stepNumber;
-    tabs.forEach(function(t){ t.classList.toggle('active', parseInt(t.dataset.step) === stepNumber); });
-    steps.forEach(function(s){ s.classList.toggle('active', parseInt(s.dataset.step) === stepNumber); });
-    if(bgNum){
-      bgSwapping = true;
-      bgNum.classList.add('swapping');
-      bgNum.style.transform = 'translateY(20px) scale(0.92) rotateX(45deg) rotateY('+curRY.toFixed(2)+'deg)';
-      setTimeout(function(){
-        bgNum.textContent = String(stepNumber).padStart(2, '0');
-        bgSwapping = false;
-        bgNum.classList.remove('swapping');
-        applyBgTransform();
-      }, 380);
-    }
-    moveIndicator(stepNumber);
-    updateAmbient(stepNumber);
-    startRing(stepNumber);
-    if(!fromAuto) restartAutoTimer();
-  }
-
-  // 8) Auto-Advance
-  function startAutoTimer(){
-    if(reduceMotion || isHovered) return;
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(function(){
-      var next = current >= TOTAL_STEPS ? 1 : current + 1;
-      switchStep(next, true);
-    }, AUTO_INTERVAL);
-  }
-  function restartAutoTimer(){ clearTimeout(autoTimer); startAutoTimer(); }
-  function stopAutoTimer(){ clearTimeout(autoTimer); autoTimer = null; }
-
-  stage.addEventListener('mouseenter', function(){
-    isHovered = true;
-    stopAutoTimer();
-    pauseRing();
-  });
-  stage.addEventListener('mouseleave', function(){
-    isHovered = false;
-    resumeRing();
-    startAutoTimer();
-  });
-
-  // 9) Tab-Clicks
-  tabs.forEach(function(tab){
-    tab.addEventListener('click', function(){ switchStep(parseInt(tab.dataset.step)); });
-  });
-
-  // 10) Init
-  function init(){
-    moveIndicator(1);
-    updateAmbient(1);
-    var firstStep = stage.querySelector('.bs-step[data-step="1"]');
-    if(firstStep){
-      firstStep.classList.remove('active');
-      void firstStep.offsetWidth;
-      firstStep.classList.add('active');
-    }
-    startRing(1);
-    startAutoTimer();
-  }
-
-  window.addEventListener('load', function(){ setTimeout(init, 120); });
-  window.addEventListener('resize', function(){ moveIndicator(current); });
-  setTimeout(init, 250);
-
-  // Re-init wenn das Collapsible aufklappt (Indicator/Char-Reveal brauchen Layout)
-  var collapsible = document.getElementById('bsCollapsible');
-  if(collapsible){
-    collapsible.addEventListener('toggle', function(){
-      if(collapsible.open){
-        setTimeout(function(){
-          moveIndicator(current);
-          // Re-trigger char-reveal auf aktivem step
-          var activeStep = stage.querySelector('.bs-step.active');
-          if(activeStep){
-            activeStep.classList.remove('active');
-            void activeStep.offsetWidth;
-            activeStep.classList.add('active');
-          }
-          startRing(current);
-          startAutoTimer();
-        }, 60);
+  // Char-Reveal (wort-bewusst, kein Wort-Bruch) auf Card-Headlines
+  function split(el){
+    if(!el || el.dataset.s) return; el.dataset.s = 1;
+    var text = el.textContent, i = 0; el.textContent = '';
+    text.split(/(\s+)/).forEach(function(tok){
+      if(tok === '') return;
+      if(/^\s+$/.test(tok)){
+        var sp = document.createElement('span');
+        sp.className = 'char space'; sp.textContent = ' ';
+        sp.style.setProperty('--i', i++); el.appendChild(sp);
       } else {
-        stopAutoTimer();
+        var w = document.createElement('span');
+        w.style.display = 'inline-block'; w.style.whiteSpace = 'nowrap';
+        Array.prototype.forEach.call(tok, function(c){
+          var s = document.createElement('span');
+          s.className = 'char'; s.textContent = c;
+          s.style.setProperty('--i', i++); w.appendChild(s);
+        });
+        el.appendChild(w);
       }
     });
-    // Auto-Timer pausieren solange noch geschlossen
-    if(!collapsible.open) stopAutoTimer();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tlw-h2'), split);
+
+  // Section-Headline + Items per IntersectionObserver enthüllen (einmalig)
+  var hIO = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); hIO.unobserve(e.target); } });
+  }, { threshold: .4 });
+  var h = document.querySelector('.tlw-h'); if(h) hIO.observe(h);
+
+  var iIO = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); iIO.unobserve(e.target); } });
+  }, { threshold: .22, rootMargin: '0px 0px -6% 0px' });
+  Array.prototype.forEach.call(document.querySelectorAll('.tlw-item'), function(it){ iIO.observe(it); });
+
+  // Zentrale Linie füllt sich beim Scrollen
+  var prog = document.getElementById('tlwProgress');
+  function onScroll(){
+    var r = track.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    var total = r.height, seen = Math.min(Math.max(vh * 0.55 - r.top, 0), total);
+    prog.style.height = (total > 0 ? (seen / total * 100) : 0) + '%';
+  }
+  if(prog){
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
   }
 })();
 </script>
