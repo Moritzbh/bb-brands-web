@@ -925,6 +925,24 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
 /* Word-Wrapper: verhindert Wort-Bruch ("Ma|rge") trotz Char-Split-Reveal */
 .bs-step h3 .word{display:inline-block;white-space:nowrap}
 
+/* ===== Baustein 05 · Angebot — bricht bewusst aus dem Step-Muster aus ===== */
+.bs-offer{max-width:640px;margin:6px 0 0}
+.bs-offer-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 18px}
+@media(max-width:760px){.bs-offer-steps{grid-template-columns:1fr}}
+.bs-offer-step{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(3,5,198,.14);border-radius:12px;padding:16px 18px}
+.bs-offer-step .n{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:11px;color:var(--accent);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
+.bs-offer-step .st{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:16px;color:var(--text);margin-bottom:5px;letter-spacing:-.01em}
+.bs-offer-step p{font-size:13px;color:var(--text-2);margin:0;line-height:1.5}
+.bs-offer-guarantee{background:var(--accent-bg,#FFF4EE);border:1px solid rgba(255,107,61,.3);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:0 0 20px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(15px,1.7vw,19px);color:var(--text);line-height:1.4}
+.bs-offer-guarantee strong{color:var(--accent-hover,#E85A2C)}
+.bs-offer-cta{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;text-decoration:none;font-family:'Inter Tight',sans-serif;font-size:15px;font-weight:700;letter-spacing:.01em;padding:15px 32px;transition:background .15s,transform .15s}
+.bs-offer-cta:hover{background:var(--blue-deep,#02038F);transform:translateY(-1px);text-decoration:none}
+.bs-offer-fine{font-family:'Inter',sans-serif;font-size:12px;color:var(--text-3);margin:14px 0 0;letter-spacing:.02em}
+.bs-offer-fine strong{color:var(--text-2)}
+/* Reveal nach dem Char-Reveal der Headline — wie der Chip-Stagger der anderen Steps */
+.bs-step[data-step="5"] .bs-offer{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .38s,transform .6s cubic-bezier(.16,1,.3,1) .38s}
+.bs-step[data-step="5"].active .bs-offer{opacity:1;transform:none}
+
 /* ========== Phasen-Collapsible · editorial / extreme-subtile ========== */
 .bs-collapsible{
   margin:18px auto 0;
@@ -3394,12 +3412,27 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="bs-step" data-step="5">
           <span class="bs-day-tag">Baustein 05 · Das Angebot</span>
           <h3>Das Risiko liegt auf unserer Seite.</h3>
-          <p>Erst die Gratis-Profit-Gap-Analyse auf deinen echten Shopify- &amp; Klaviyo-Zahlen — dann das System zum Festpreis, keine Provision, kein Umsatz-Anteil. Und: refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, arbeiten wir kostenlos weiter, bis es das tut.</p>
-          <div class="bs-chips">
-            <span class="bs-chip">Gratis-Profit-Gap-Analyse</span>
-            <span class="bs-chip">Festpreis · keine Provision</span>
-            <span class="bs-chip">Refinanziert in 90 Tagen — oder gratis weiter</span>
-            <span class="bs-chip">Nur DTC · Shopify · 1–10 Mio €</span>
+          <div class="bs-offer">
+            <div class="bs-offer-steps">
+              <div class="bs-offer-step">
+                <div class="n">01 · Gratis</div>
+                <div class="st">Profit-Gap-Analyse</div>
+                <p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du gerade liegen lässt. Kostenlos, keine Verpflichtung.</p>
+              </div>
+              <div class="bs-offer-step">
+                <div class="n">02 · Festpreis</div>
+                <div class="st">Ein fester Betrag</div>
+                <p>Das System, das die Lücke schließt — zum Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p>
+              </div>
+              <div class="bs-offer-step">
+                <div class="n">03 · Garantie</div>
+                <div class="st">Refinanzierung in 90 Tagen</div>
+                <p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p>
+              </div>
+            </div>
+            <div class="bs-offer-guarantee">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
+            <a href="/audit/" class="bs-offer-cta">Profit-Gap-Analyse anfragen →</a>
+            <p class="bs-offer-fine">Qualifikations-gated · nur DTC auf Shopify · <strong>Profitables Wachstum auf höchstem Niveau</strong></p>
           </div>
         </div>
       </div>
