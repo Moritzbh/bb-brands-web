@@ -1002,7 +1002,9 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
    → wirkt wie eine große Section, kein Cut dazwischen */
 .was-cmp-stage{position:relative;background:#fff;overflow:hidden}
 .was-cmp-stage > section{position:relative;z-index:1;background:transparent !important}
-.was-cmp-stage > section#was{overflow:visible}
+/* #was hat eigenes background:#fff !important mit ID-Spezifität → stärker überschreiben */
+.was-cmp-stage > section#was,
+.was-cmp-stage > section#was:nth-of-type(even){background:transparent !important;overflow:visible}
 .was-cmp-stage .wrap{position:relative;z-index:1}
 .was-wave-wrap{
   position:absolute;inset:0;z-index:0;
