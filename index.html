@@ -1749,7 +1749,43 @@ section.guarantees-dirty{
 .guar-stamp .bot{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
 .guar-card:nth-child(1) .guar-stamp{background:#000}
 
-/* CTA unter den 4 Cards */
+/* Featured: Refinanzierungs-Garantie · der No-Brainer-Kern (full-width) */
+.guar-feature{
+  position:relative;margin-top:56px;
+  background:#000;color:#fff;
+  padding:44px 48px;
+  box-shadow:1px 1px 30px rgba(0,0,0,.22);
+  border-left:5px solid var(--bg-amber);
+  display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;
+}
+.guar-feature .guar-feature-badge{
+  font-family:'Montserrat',sans-serif;text-align:center;line-height:1;
+  border:1px solid rgba(255,255,255,.25);padding:18px 22px;white-space:nowrap;
+}
+.guar-feature .guar-feature-badge .n{display:block;font-size:34px;font-weight:800;color:var(--bg-amber);letter-spacing:-.02em}
+.guar-feature .guar-feature-badge .l{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:6px}
+.guar-feature h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;
+  line-height:1.2;margin:0 0 10px;color:#fff;
+}
+.guar-feature .promise{
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;
+  line-height:1.5;color:#fff;margin:0 0 12px;
+}
+.guar-feature .promise em{font-style:normal;color:var(--bg-amber)}
+.guar-feature .why{
+  font-family:'Montserrat',sans-serif;font-weight:400;font-size:13.5px;
+  line-height:1.55;color:rgba(255,255,255,.7);margin:0;
+}
+@media (max-width:880px){
+  .guar-feature{grid-template-columns:1fr;gap:20px;padding:32px 24px;margin-top:44px}
+  .guar-feature .guar-feature-badge{justify-self:start;padding:14px 18px}
+  .guar-feature .guar-feature-badge .n{font-size:28px}
+  .guar-feature h3{font-size:20px}
+  .guar-feature .promise{font-size:15px}
+}
+
+/* CTA unter den Cards */
 .guar-cta-row{
   text-align:center;margin-top:48px;
 }
@@ -2805,11 +2841,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   .compare-hero{padding:64px 0}
   .compare-hero h2{font-size:28px}
   .compare-hero .section-sub{font-size:14.5px}
-  .compare-table-new .row{grid-template-columns:1fr 44px 44px;gap:8px;padding:14px 0}
+  .compare-table-new .row{grid-template-columns:1fr 58px 58px;gap:8px;padding:14px 0}
   .compare-table-new .row .row-label{font-size:13px;line-height:1.35}
   .compare-table-new .badge{width:28px;height:28px}
   .compare-table-new .badge.yes svg,.compare-table-new .badge.no svg{width:11px;height:11px}
-  .compare-table-new .col-header{font-size:9px;letter-spacing:.14em}
+  .compare-table-new .col-header{font-size:8.5px;letter-spacing:.03em;line-height:1.15;white-space:nowrap}
 
   /* Trust-Strip Marquee: kleinerer Logo-Höhe, smoother Loop */
   .trust{padding:48px 0}
@@ -2865,8 +2901,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   .hero .sub{font-size:16.5px}
   h2{font-size:26px}
   .compare-hero h2{font-size:24px}
-  .compare-table-new .row{grid-template-columns:1fr 38px 38px;gap:6px}
+  .compare-table-new .row{grid-template-columns:1fr 54px 54px;gap:6px}
   .compare-table-new .row .row-label{font-size:12.5px}
+  .compare-table-new .col-header{font-size:8px;letter-spacing:.02em}
   .founder-text h2{font-size:28px}
   .apply-block h2{font-size:24px}
 }
@@ -3703,9 +3740,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <section class="guarantees-dirty">
   <div class="wrap">
     <div class="bb-head">
-      <div class="bb-head-label">Vier Garantien · der Beweis für den Glaubenssatz</div>
+      <div class="bb-head-label">Fünf Garantien · der Beweis für den Glaubenssatz</div>
       <h2>Wahrheit vor Umsatz.<br>Output vor <em>Slogans.</em></h2>
-      <p>Profitabilität vor Skalierung ist keine Behauptung — hier ist sie schriftlich. Keine ROAS-Versprechen (zu viele externe Faktoren). Was wir garantieren: ehrliche Ansage, Termin, Wirkung, Rechnung.</p>
+      <p>Profitabilität vor Skalierung ist keine Behauptung — hier ist sie schriftlich. Vier Garantien sichern Lieferung &amp; Qualität. Die fünfte ist der No-Brainer-Kern: refinanziert sich das System nicht, arbeiten wir gratis weiter.</p>
     </div>
 
     <div class="guar-grid">
@@ -3713,44 +3750,56 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">01</span>
-          <span class="bot">Truth First</span>
+          <span class="bot">No-Bloat</span>
         </div>
-        <h3>Truth First</h3>
-        <p class="promise">Wenn wir nicht glauben, dass sich das Projekt innerhalb von 12 Monaten mehrfach bezahlt macht, arbeiten wir nicht zusammen.</p>
-        <p class="why">Im Erstgespräch rechnen wir Conversion, AOV, Retention, E-Mail-Umsatz und Hebel gemeinsam durch. Lieber kein Kunde als ein Kunde ohne echten Outcome.</p>
+        <h3>No-Bloat</h3>
+        <p class="promise">Keine Übergaben, keine Juniors, keine endlosen Loops. Du arbeitest direkt mit dem, der baut.</p>
+        <p class="why">A-Player + Founder-Zugang ab Tag 1. Die größte Agentur-Krankheit — Senior pitcht, Junior liefert — gibt es bei uns nicht.</p>
       </div>
 
       <div class="guar-card">
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">02</span>
-          <span class="bot">Go-Live</span>
+          <span class="bot">Speed-to-Market</span>
         </div>
-        <h3>Go-Live</h3>
-        <p class="promise">Dein neues Brand-System geht zum vereinbarten Termin live — oder du bekommst dein Geld zurück.</p>
-        <p class="why">Der Termin wird im Kickoff vertraglich festgehalten. Keine Monate. Kein endloses Agency-Pingpong. Klare Deadlines, klare Verantwortung — und volle Refund-Klausel, wenn wir den Termin reißen.</p>
+        <h3>Speed-to-Market</h3>
+        <p class="promise">Das Kern-System geht zum fixen Termin live — oder wir arbeiten kostenlos weiter, bis es steht.</p>
+        <p class="why">Der Termin wird im Kickoff vertraglich fixiert. Keine Monate, kein endloses Agency-Pingpong.</p>
       </div>
 
       <div class="guar-card">
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">03</span>
-          <span class="bot">Efficiency</span>
+          <span class="bot">Fertigstellung</span>
         </div>
-        <h3>Efficiency</h3>
-        <p class="promise">Jeder Workflow, den wir bauen, muss messbar Zeit sparen oder Profit erzeugen.</p>
-        <p class="why">Wenn ein System nach 60 Tagen keinen klaren operativen Vorteil bringt, optimieren wir es auf eigene Kosten weiter. Denn AI ohne echten Business-Impact ist nur Spielzeug.</p>
+        <h3>Fertigstellung</h3>
+        <p class="promise">Jeder Scope-Punkt zur fixierten Spec — wir hören nicht auf, bis alles steht. Der Fixpreis bleibt fix.</p>
+        <p class="why">Deliverables werden vor dem Preis fixiert und gegengezeichnet. Kein Scope-Creep, kein Nachschlag.</p>
       </div>
 
       <div class="guar-card">
         <div class="guar-stamp">
           <span class="top">Garantie</span>
           <span class="mid">04</span>
-          <span class="bot">E-Mail-ROI</span>
+          <span class="bot">Fit</span>
         </div>
-        <h3>E-Mail-ROI</h3>
-        <p class="promise">Unser E-Mail-System soll innerhalb von 90 Tagen mehr zusätzlichen Umsatz erzeugen als es kostet.</p>
-        <p class="why">Wenn wir das Ziel trotz vollständiger Umsetzung verfehlen, arbeiten wir kostenlos weiter, bis wir es erreichen. Voraussetzung: vollständige technische Implementierung, ausreichend Traffic, Datenzugang, aktive Zusammenarbeit.</p>
+        <h3>Fit</h3>
+        <p class="promise">Zeigt die Gratis-Analyse, dass deine Lücke das Paket nicht rechtfertigt — sagen wir's. Du kaufst nicht.</p>
+        <p class="why">Anti-Sale aus Stärke. Wir nehmen nur Brands, bei denen die Zahlen sich tragen — gut für dich, gut für uns.</p>
+      </div>
+    </div>
+
+    <div class="guar-feature">
+      <div class="guar-feature-badge">
+        <span class="n">05</span>
+        <span class="l">Refinanzierung</span>
+      </div>
+      <div>
+        <h3>Refinanzierungs-Garantie <span style="color:var(--bg-amber)">— der No-Brainer-Kern</span></h3>
+        <p class="promise">Refinanziert sich das System nicht binnen <em>90 Tagen</em> über zusätzlichen, sauber attribuierten Umsatz — arbeiten wir <em>kostenlos weiter</em>, bis es das tut.</p>
+        <p class="why">Verankert an Lifecycle/E-Mail (sauberste Klaviyo-Attribution), gemessen gegen eine eingefrorene, gemeinsam fixierte Baseline. Dein Downside: strukturell null.</p>
       </div>
     </div>
 
