@@ -698,15 +698,15 @@ section#was .tlw-head .bb-facts{margin-top:4px}
 .tlw-item--offer.in .tlw-bgnum{opacity:.08}
 @media(max-width:860px){.tlw-bgnum{font-size:118px;top:-38px}.tlw-item.l .tlw-bgnum,.tlw-item.r .tlw-bgnum{left:auto;right:-8px}}
 
-.tlw-glow{position:absolute;inset:-46% -34%;background:radial-gradient(circle at 32% 42%,rgba(3,5,198,.10),transparent 60%);opacity:0;z-index:0;pointer-events:none;transition:opacity 1.4s ease}
-.tlw-item.in .tlw-glow{opacity:1;animation:tlwBreathe 7.5s ease-in-out infinite}
-.tlw-item--offer .tlw-glow{background:radial-gradient(circle at 32% 42%,rgba(255,107,61,.12),transparent 60%)}
+/* Per-Item-Hintergrund-Blobs entfernt -> durchgehender, nahtloser
+   Wave-Canvas-Verlauf statt sichtbarer Box-Kanten pro Baustein */
+.tlw-glow{display:none}
+.tlw-item.in .tlw-glow{display:none}
+.tlw-item--offer .tlw-glow{display:none}
 @keyframes tlwBreathe{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,3%) scale(1.09)}}
 
 .tlw-card{position:relative;z-index:1;opacity:0;filter:blur(10px)}
-.tlw-card::before{content:"";position:absolute;inset:-46px -36px -36px -58px;background:radial-gradient(ellipse at 24% 45%,rgba(3,5,198,.045),transparent 55%);opacity:0;z-index:-1;pointer-events:none;transition:opacity 1.2s ease}
-.tlw-item--offer .tlw-card::before{background:radial-gradient(ellipse at 24% 45%,rgba(255,107,61,.055),transparent 55%)}
-.tlw-item.in .tlw-card::before{opacity:1}
+.tlw-card::before{content:none}
 .tlw-item.r .tlw-card{transform:translate(42px,28px) scale(.985)}
 .tlw-item.l .tlw-card{transform:translate(-42px,28px) scale(.985)}
 @media(max-width:860px){.tlw-item.r .tlw-card,.tlw-item.l .tlw-card{transform:translate(0,26px) scale(.985)}}
@@ -1437,23 +1437,15 @@ section.guarantees-dirty{
 
 .guarantees-dirty .wrap{position:relative;z-index:1}
 
-.guarantees-dirty .bb-head{text-align:center;margin-bottom:32px}
-.guarantees-dirty .bb-head-label{
+.guarantees-dirty .bb-head{text-align:center;margin-bottom:40px}
+/* Überschrift im Hero-Style (mirror .v2-hero-h1) */
+.guarantees-dirty .guar-head-title{
   font-family:'Montserrat',sans-serif;font-weight:700;
-  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--bg-amber);margin-bottom:12px;
+  font-size:clamp(40px,5.6vw,66px);line-height:1.05;letter-spacing:-.025em;
+  color:#0A0A0F;max-width:880px;margin:0 auto;
 }
-.guarantees-dirty .bb-head h2{
-  font-family:'Montserrat',sans-serif;font-weight:700;
-  font-size:30px;line-height:1.2;letter-spacing:-.01em;
-  color:#000;max-width:760px;margin:0 auto 12px;
-}
-.guarantees-dirty .bb-head h2 em{
-  font-style:normal;color:var(--blue);
-}
-.guarantees-dirty .bb-head p{
-  font-size:15px;color:var(--bg-text-body);
-  max-width:620px;margin:0 auto;line-height:1.6;
+.guarantees-dirty .guar-head-title em{
+  font-style:normal;color:var(--blue);font-weight:800;
 }
 
 /* 4-spaltiges Grid für 4 Garantien (Desktop) — 2x2 → 1-spaltig im responsive */
@@ -1525,7 +1517,8 @@ section.guarantees-dirty{
 }
 @media (max-width:780px){
   section.guarantees-dirty{padding:44px 0}
-  .guarantees-dirty .bb-head h2{font-size:24px;line-height:1.25}
+  .guarantees-dirty .guar-head-title{font-size:34px;line-height:1.1}
+  .guarantees-dirty .bb-head{margin-bottom:30px}
   .guar-card{padding:26px 22px 24px}
   .guar-card h3{font-size:18px}
   .guar-cta-main{font-size:12px;padding:15px 28px;letter-spacing:.08em}
@@ -3447,9 +3440,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <section class="guarantees-dirty">
   <div class="wrap">
     <div class="bb-head">
-      <div class="bb-head-label">Vier Garantien · der Beweis für den Glaubenssatz</div>
-      <h2>Wahrheit vor Umsatz.<br>Output vor <em>Slogans.</em></h2>
-      <p>Profitabilität vor Skalierung ist keine Behauptung — hier ist sie schriftlich. Drei Garantien sichern Lieferung &amp; Qualität. Die vierte ist der No-Brainer-Kern: refinanziert sich die Profit-Schicht nicht, arbeiten wir gratis weiter — Infrastruktur erst danach.</p>
+      <h2 class="guar-head-title">Unser <em>Angebot.</em></h2>
     </div>
 
     <div class="guar-grid">
