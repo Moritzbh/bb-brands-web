@@ -1442,10 +1442,18 @@ section.guarantees-dirty{
 .guarantees-dirty .guar-head-title{
   font-family:'Montserrat',sans-serif;font-weight:700;
   font-size:clamp(40px,5.6vw,66px);line-height:1.05;letter-spacing:-.025em;
-  color:#0A0A0F;max-width:880px;margin:0 auto;
+  color:#0A0A0F;max-width:880px;margin:0 auto 14px;
 }
 .guarantees-dirty .guar-head-title em{
   font-style:normal;color:var(--blue);font-weight:800;
+}
+.guarantees-dirty .guar-head-sub{
+  font-family:'Montserrat',sans-serif;font-weight:500;
+  font-size:clamp(18px,2vw,24px);line-height:1.35;letter-spacing:-.005em;
+  color:var(--bg-text-muted);max-width:620px;margin:0 auto;
+}
+.guarantees-dirty .guar-head-sub em{
+  font-style:normal;font-weight:700;color:#0A0A0F;
 }
 
 /* 4-spaltiges Grid für 4 Garantien (Desktop) — 2x2 → 1-spaltig im responsive */
@@ -3423,7 +3431,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <section class="guarantees-dirty">
   <div class="wrap">
     <div class="bb-head">
-      <h2 class="guar-head-title">Unser <em>Angebot.</em></h2>
+      <h2 class="guar-head-title">Unser <em>No-Brainer</em>-Angebot.</h2>
+      <p class="guar-head-sub">Das kann sich gar nicht <em>nicht</em> lohnen.</p>
     </div>
 
     <div class="guar-grid">
