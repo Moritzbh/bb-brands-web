@@ -2848,10 +2848,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 .v2-sheet-scrim.is-open{opacity:1;pointer-events:auto}
 
 .v2-mobile-drawer{
-  position:fixed;top:0;left:0;right:0;z-index:61;
+  position:fixed;top:0;left:0;right:auto;z-index:61;
+  width:85%;max-width:400px;
   height:auto;display:flex;flex-direction:column;
   background:rgba(12,12,14,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-radius:0 0 22px 22px;box-shadow:0 24px 60px -12px rgba(0,0,0,.6);
+  border-radius:0 0 20px 0;box-shadow:0 24px 60px -12px rgba(0,0,0,.55);
   transform:translateY(-102%);transition:transform .34s cubic-bezier(.32,.72,0,1);
   overflow:hidden;will-change:transform;
 }
