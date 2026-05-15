@@ -1334,7 +1334,7 @@ section.cases-section .section-sub{margin-left:auto;margin-right:auto;max-width:
 .vid-swiper .swiper-slide-active .vid-card-inner{
   transform:scale(1);
   opacity:1;
-  box-shadow:0 32px 72px rgba(0,0,0,.30), 0 12px 32px rgba(3,5,198,.14);
+  box-shadow:0 16px 38px rgba(0,0,0,.20), 0 5px 14px rgba(3,5,198,.09);
 }
 .vid-swiper .swiper-slide-active{z-index:2}
 /* Transitions erst aktiv nach Swiper-Init (verhindert Loop bei Layout-Updates) */
@@ -1412,8 +1412,23 @@ section.cases-section .section-sub{margin-left:auto;margin-right:auto;max-width:
 .vid-play svg{width:20px;height:20px;color:#fff;margin-left:3px}
 .vid-card:hover .vid-play{transform:translate(-50%,-50%) scale(1.06)}
 
+.cases-all-link{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:30px;
+  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:15px;font-weight:600;letter-spacing:-.01em;
+  color:var(--blue);
+  text-decoration:none;
+  border-bottom:1px solid rgba(3,5,198,.22);
+  padding-bottom:3px;
+  transition:color .2s ease, border-color .2s ease, gap .2s ease;
+}
+.cases-all-link svg{width:16px;height:16px;transition:transform .2s ease}
+.cases-all-link:hover{color:var(--accent);border-color:rgba(255,107,61,.4);gap:12px}
+.cases-all-link:hover svg{transform:translateX(3px)}
+
 .cases-disclaimer{
-  margin-top:24px;text-align:center;
+  margin-top:16px;text-align:center;
   font-size:13px;color:var(--text-3);font-style:italic;
 }
 
@@ -3680,6 +3695,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="swiper-pagination"></div>
       </div>
 
+      <div style="text-align:center">
+        <a class="cases-all-link" href="/cases">Alle Cases ansehen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
       <p class="cases-disclaimer">Wir nehmen pro Quartal max. 3–4 neue Projekte. Kein Skalierungs-Hype.</p>
     </div>
   </div>
