@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Wir machen wachsende DTC-Brands profitabler — damit sie morgen Marktführer sind. Brand Systems. Conversion Infrastructure. Operational Scale.">
-<title>BB Brands · AI-native Growth Infrastructure für DTC-Brands</title>
+<meta name="description" content="Profitables Wachstum auf höchstem Niveau. Wir machen wachsende DTC-Brands profitabler — erst das Profitabilitäts-Fundament, dann skalieren. Brand Systems. Conversion Infrastructure. Operational Scale.">
+<title>BB Brands · Profitables Wachstum auf höchstem Niveau</title>
 
 <!-- Akzent-Schrift: Inter Tight -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -998,8 +998,18 @@ section#was .section-sub{margin-left:auto;margin-right:auto;max-width:680px}
     radial-gradient(circle at 75% 60%, rgba(255,107,61,.08) 0%, transparent 50%),
     linear-gradient(180deg, #1a1a18 0%, #0a0a0a 100%);
 }
+/* Dynamischer Wave-Farbeffekt im Video-Platzhalter (matched Hero-Wave-Snippet) */
+.svc-wave-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:.55;
+  filter:blur(45px) contrast(1.15) saturate(1.35);
+  pointer-events:none;z-index:0;
+}
+@media (prefers-reduced-motion: reduce){
+  .svc-wave-canvas{display:none}
+}
 .svc-video-inner{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;color:#f5f5f0;gap:14px;padding:24px;
 }
@@ -3120,6 +3130,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- Hero-Wave-Canvas-Effekt entfernt · Snippet in _previews/hero-wave-canvas-snippet.html -->
 <section class="v2-hero" id="top">
   <div class="wrap">
+    <p class="v2-hero-kicker" style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:700;color:var(--accent);margin:0 0 18px">Profitables Wachstum auf höchstem Niveau</p>
     <h1 class="v2-hero-h1">
       Wir machen wachsende DTC-Brands <em>profitabler.</em>
       <span class="v2-hero-h1-tail">Damit sie morgen Marktführer sind.</span>
@@ -3143,8 +3154,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     </div>
 
     <!-- Logo Marquee (Infinity Scroll · Fade-In/Out) · Position vor Wave-Divider -->
-    <div class="v2-hero-logos" aria-label="Partner, die uns vertrauen">
-      <div class="v2-hero-logos-label">Partner, die uns vertrauen</div>
+    <div class="v2-hero-logos" aria-label="Brands, die wir gebaut haben, und unsere Plattform-Partner">
+      <div class="v2-hero-logos-label">Gebaut für — &amp; Plattform-Partner</div>
       <div class="v2-hero-logos-marquee">
         <div class="v2-hero-logos-track">
           <img src="/assets/images/logos/hearo.png" alt="Hearo">
@@ -3182,10 +3193,17 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <h2>Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
     <p class="section-sub">Keine Phasen-Pakete, keine Pflicht-Bundles. Du buchst, was du brauchst — wir verzahnen es zu einem Profit-System.</p>
 
+    <!-- Empfohlener Default-Pfad · "die Mitte" -->
+    <div class="bb-default-path" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin:0 0 36px;padding:18px 24px;border:1.5px solid var(--blue);border-radius:14px;background:var(--blue-tint)">
+      <span style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue);border-radius:99px;padding:5px 12px">Empfohlen</span>
+      <span style="font-size:15.5px;color:var(--text-1,#1a1a18);font-weight:500">Der Profit-Fundament-Pfad: <strong>Strategy Audit → Brand → Shopify-Store → Conversion &amp; E-Mail.</strong> Erst das Fundament, dann skalieren — wenn du nicht selbst zusammenstellen willst, ist das der Weg, den wir empfehlen.</span>
+    </div>
+
     <!-- Founder-Video · Anker (Platzhalter bis Aufnahme) -->
     <div class="svc-video" role="button" tabindex="0" aria-label="Founder-Video Platzhalter — Aufnahme folgt">
       <span class="svc-video-tag">Coming Soon</span>
       <div class="svc-video-bg"></div>
+      <canvas class="svc-wave-canvas" aria-hidden="true"></canvas>
       <div class="svc-video-inner">
         <div class="svc-video-play">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -3346,6 +3364,23 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
   <!-- Bottom-Fade · Mesh-Blobs laufen sanft in Weiß aus -->
   <div class="compare-fade-bottom" aria-hidden="true"></div>
+</section>
+
+<!-- ============= 4.6 · DON'T-LISTE (Fokus-Schärfung · Klartext) ============= -->
+<section class="bb-dont" style="background:var(--bg-alt,#F5F1E8);padding:72px 0">
+  <div class="wrap" style="max-width:980px">
+    <div class="eyebrow" style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:14px">Klartext</div>
+    <h2 style="font-size:clamp(26px,3.8vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0 0 10px">Was wir <em style="font-style:normal;color:var(--accent)">nicht</em> machen.</h2>
+    <p style="font-size:16px;color:var(--text-2,#3D3D3A);max-width:620px;margin:0 0 30px">Fokus macht spitz, nicht klein. Damit klar ist, ob wir zusammenpassen — bevor du einen Call buchst:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Keine fremden Shop-Systeme</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Kein WooCommerce, Shopware, Magento. Shopify, fertig.</span></div>
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Kein B2B / SaaS / Service</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Nur DTC. Wo wir das Profit-System verstehen.</span></div>
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Kein reines Logo-Mandat</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Brand ohne Conversion-System ist Kosmetik.</span></div>
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Kein Standalone-Ad-Management</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Ads nur als Layer auf einem System, das steht.</span></div>
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Kein klarer ROI = kein Auftrag</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Rechnet sich das Projekt nicht mehrfach, sagen wir's.</span></div>
+      <div style="background:#fff;border:1px solid var(--line,#e4e0d4);border-radius:12px;padding:18px 20px"><strong style="display:block;margin-bottom:4px">Max. 3–4 Projekte / Quartal</strong><span style="font-size:14.5px;color:var(--text-2,#3D3D3A)">Capacity ist Qualitäts-Signal, kein Engpass.</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============= 6 · CASES (Dirty · Baulig-Pattern) — versteckt zugunsten Video-Coverflow weiter unten ============= -->
@@ -3522,13 +3557,22 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
+<!-- ============= 4.5 · MANIFEST-BAND (Glaubenssatz, über Truth First) ============= -->
+<section class="bb-manifest" style="background:var(--blue);color:#fff;padding:88px 0;text-align:center">
+  <div class="wrap" style="max-width:920px">
+    <div style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.18em;font-size:13px;font-weight:700;color:#fff;opacity:.7;margin-bottom:22px">Unser Glaubenssatz</div>
+    <p style="font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.18;letter-spacing:-.02em;margin:0 0 22px">Wir glauben, dass <em style="font-style:normal;color:var(--accent)">Profitabilität</em> vor Skalierung kommt.</p>
+    <p style="font-size:17px;line-height:1.6;opacity:.82;max-width:680px;margin:0 auto">Wer morgen Marktführer sein will, kann nicht über Reichweite wachsen — er muss pro Besucher mehr verdienen. Das ist kein Marketing-Hebel, das ist eine Infrastruktur-Frage. Genau diese Infrastruktur bauen wir. Erst das Profit-Fundament, dann skalieren.</p>
+  </div>
+</section>
+
 <!-- ============= 5 · GARANTIEN · BAULIG-DNA ============= -->
 <section class="guarantees-dirty">
   <div class="wrap">
     <div class="bb-head">
-      <div class="bb-head-label">Vier Garantien</div>
+      <div class="bb-head-label">Vier Garantien · der Beweis für den Glaubenssatz</div>
       <h2>Wahrheit vor Umsatz.<br>Output vor <em>Slogans.</em></h2>
-      <p>Keine ROAS-Versprechen — zu viele externe Faktoren. Was wir garantieren: ehrliche Ansage, Termin, Wirkung, Rechnung. Schriftlich.</p>
+      <p>Profitabilität vor Skalierung ist keine Behauptung — hier ist sie schriftlich. Keine ROAS-Versprechen (zu viele externe Faktoren). Was wir garantieren: ehrliche Ansage, Termin, Wirkung, Rechnung.</p>
     </div>
 
     <div class="guar-grid">
@@ -3636,13 +3680,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <div class="team-banner-text">
         <div class="minimal-step"><span class="num">02</span><span class="line"></span><span>Build &amp; Launch</span></div>
         <h2>Ich bin Moritz <em>Bohmbach.</em></h2>
-        <p class="founder-bio">Mit 14 Jahren hatte ich meinen ersten Shopify-Store. Seitdem habe ich immer nach neuen Wegen gesucht, Dinge anders und besser zu machen. Besonders begeistert mich die stetige Innovation im gesamten E-Commerce-Bereich — zu sehen, wie sich Marken, Technologien und das Verhalten von Kunden verändern, hat meinen Blick auf Unternehmertum geprägt. Deshalb habe ich es mir zur Aufgabe gemacht, Experte für KI zu werden und ein Pionier der nächsten Generation von D2C-Brands zu sein.</p>
+        <p class="founder-bio">Ich baue DTC-Brands als Profit-Systeme — Brand, Store, Conversion und Operations aus einer Hand, ohne Fremdteam-Übergabe. Für <strong>Hearo</strong> ein Custom-Shopify-Theme von Grund auf mit Brand-Doctrine und Multi-Section-PDP-Architektur. Für <strong>Bachgold</strong> einen Re-Launch ohne Traffic-Verlust: 15 Custom-PDPs generator-driven, Bundle-System, Tech-Stack-Konsolidierung. Dazu <strong>Wake Performance</strong> und <strong>Reerect</strong>. Mein Fokus: nicht „noch eine Agentur", sondern das Profitabilitäts-Fundament, auf dem eine Brand zur Marktführerin skaliert.</p>
         <div class="founder-signature">— Moritz</div>
 
         <div class="founder-stats">
           <div class="founder-stat">
-            <div class="founder-stat-num">4+ Jahre</div>
-            <div class="founder-stat-label">Erfahrung im Bereich E-commerce und Software</div>
+            <div class="founder-stat-num">4 Brands</div>
+            <div class="founder-stat-label">Custom gebaut · Hearo · Bachgold · Wake · Reerect</div>
           </div>
         </div>
       </div>
@@ -3738,7 +3782,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <!-- ============= FOOTER ============= -->
 <footer>
   <div class="wrap">
-    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach · Profitables Wachstum auf höchstem Niveau</div>
     <div class="footer-links">
       <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
       <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
@@ -4333,6 +4377,80 @@ window.addEventListener('load', function(){
     drawer.addEventListener('touchend',pEnd);
     window.addEventListener('keydown',function(e){ if(e.key==='Escape' && drawer.classList.contains('is-open')) closeSheet(); });
   }
+})();
+</script>
+
+<script>
+/* === SVC-VIDEO WAVE-CANVAS · dynamischer Farbeffekt im "Was wir machen"-Video-Platzhalter
+   (gleiche Kinetic-Wave-Logik wie das Hero-Snippet, scoped auf .svc-video) */
+(function(){
+  var canvas = document.querySelector('.svc-wave-canvas');
+  var wrap   = document.querySelector('.svc-video');
+  if(!canvas || !wrap) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx = canvas.getContext('2d');
+  if(!ctx) return;
+
+  var COLORS = [
+    { r:   3, g:   5, b: 198, a: 0.55 },  // BB Brands Bold Blue
+    { r: 255, g: 107, b:  61, a: 0.50 },  // Signal Orange
+    { r:  30, g:  58, b: 255, a: 0.40 }   // Soft Indigo
+  ];
+  var WAVE_CONFIGS = [
+    { speed: 0.0008, amplitude: 0.26, frequency: 0.0016, offsetY: 0.68, phase: 0 },
+    { speed: 0.0012, amplitude: 0.22, frequency: 0.0022, offsetY: 0.56, phase: Math.PI / 4 },
+    { speed: 0.0015, amplitude: 0.28, frequency: 0.0018, offsetY: 0.46, phase: Math.PI / 2 }
+  ];
+  var STEP = 22;
+  var state = { w:0, h:0, raf:0, visible:true, waves:[] };
+
+  function initWaves(){
+    state.waves = WAVE_CONFIGS.map(function(cfg, idx){
+      var pts = [];
+      for(var x = -STEP*2; x <= state.w + STEP*2; x += STEP){
+        pts.push({ x:x, y:state.h*cfg.offsetY, baseY:state.h*cfg.offsetY });
+      }
+      return { color:COLORS[idx], speed:cfg.speed, amplitude:cfg.amplitude,
+               frequency:cfg.frequency, offsetY:cfg.offsetY, phase:cfg.phase, points:pts };
+    });
+  }
+  function resize(){
+    var rect = wrap.getBoundingClientRect();
+    state.w = canvas.width  = Math.max(1, Math.round(rect.width));
+    state.h = canvas.height = Math.max(1, Math.round(rect.height));
+    initWaves();
+  }
+  function animate(time){
+    state.raf = requestAnimationFrame(animate);
+    if(!state.visible || state.w === 0) return;
+    ctx.clearRect(0, 0, state.w, state.h);
+    for(var w = 0; w < state.waves.length; w++){
+      var wave = state.waves[w];
+      ctx.beginPath();
+      ctx.moveTo(0, state.h);
+      for(var i = 0; i < wave.points.length; i++){
+        var pt = wave.points[i];
+        var waveY = Math.sin(pt.x * wave.frequency + time * wave.speed + wave.phase) * (wave.amplitude * state.h);
+        waveY += Math.sin(pt.x * wave.frequency * 3.2 + time * wave.speed * 1.5) * (wave.amplitude * state.h * 0.2);
+        var originX = (i - 2) * STEP;
+        pt.x += (originX - pt.x) * 0.08;
+        pt.y += (pt.baseY + waveY - pt.y) * 0.15;
+        if(i === 0) ctx.lineTo(pt.x, pt.y);
+        else { var prev = wave.points[i-1]; ctx.quadraticCurveTo(prev.x, prev.y, (prev.x+pt.x)/2, (prev.y+pt.y)/2); }
+      }
+      ctx.lineTo(state.w, state.h);
+      ctx.fillStyle = 'rgba(' + wave.color.r + ',' + wave.color.g + ',' + wave.color.b + ',' + wave.color.a + ')';
+      ctx.fill();
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive:true });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      state.visible = entries[0].isIntersecting;
+    }, { rootMargin:'120px' }).observe(wrap);
+  }
+  state.raf = requestAnimationFrame(animate);
 })();
 </script>
 
