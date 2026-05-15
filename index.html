@@ -2136,11 +2136,16 @@ section.team-section .wrap{position:relative;z-index:2}
 .sdr-stack-corner.br{bottom:14px;right:14px}
 .sdr-stack-meta{
   position:absolute;left:0;right:0;bottom:0;z-index:2;
-  padding:14px 18px;
-  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.7) 100%);
+  padding:16px 18px;
+  background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.78) 100%);
   font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(255,255,255,.65);font-weight:600;
+}
+.sdr-stack-meta .sdr-name{
+  display:block;
+  font-size:16px;font-weight:700;letter-spacing:-.01em;text-transform:none;
+  color:#fff;margin-bottom:3px;line-height:1.2;
 }
 
 /* Info-Block neben dem Stack — wechselt mit aktiver Card */
@@ -3225,20 +3230,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <p class="section-sub">Keine Phasen-Pakete, keine Pflicht-Bundles. Du buchst, was du brauchst — wir verzahnen es zu einem Profit-System.</p>
 
     <!-- Eckdaten · ruhige Meta-Zeile (aus dem Hero hierher verlagert) -->
-    <div class="bb-facts" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin:0 0 34px;font-size:13.5px;color:var(--text-3,#787872);letter-spacing:.01em">
-      <span>Re-Brand · Re-Launch · Skalierung</span>
-      <span aria-hidden="true" style="opacity:.4">·</span>
-      <span>Direkter Founder-Zugang</span>
-      <span aria-hidden="true" style="opacity:.4">·</span>
-      <span>DACH · 1–10 Mio €</span>
-      <span aria-hidden="true" style="opacity:.4">·</span>
-      <span>Kein klarer ROI = kein Auftrag</span>
-    </div>
-
-    <!-- Empfohlener Default-Pfad · "die Mitte" -->
-    <div class="bb-default-path" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin:0 0 36px;padding:18px 24px;border:1.5px solid var(--blue);border-radius:14px;background:var(--blue-tint)">
-      <span style="font-family:var(--accent-font);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue);border-radius:99px;padding:5px 12px">Empfohlen</span>
-      <span style="font-size:15.5px;color:var(--text-1,#1a1a18);font-weight:500">Der Profit-Fundament-Pfad: <strong>Strategy Audit → Brand → Shopify-Store → Conversion &amp; E-Mail.</strong> Erst das Fundament, dann skalieren — wenn du nicht selbst zusammenstellen willst, ist das der Weg, den wir empfehlen.</span>
+    <div class="bb-facts" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 24px;margin:0 0 38px;font-size:13.5px;color:var(--text-3,#787872);letter-spacing:.01em">
+      <span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.65;flex-shrink:0"><path d="M5 13l4 4L19 7"/></svg>Re-Brand · Re-Launch · Skalierung</span>
+      <span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.65;flex-shrink:0"><path d="M5 13l4 4L19 7"/></svg>Direkter Founder-Zugang</span>
+      <span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.65;flex-shrink:0"><path d="M5 13l4 4L19 7"/></svg>DACH · 1–10 Mio €</span>
+      <span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.65;flex-shrink:0"><path d="M5 13l4 4L19 7"/></svg>Kein klarer ROI = kein Auftrag</span>
     </div>
 
     <!-- Founder-Video · Anker (Platzhalter bis Aufnahme) -->
@@ -3678,14 +3674,14 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <div class="team-banner-stage" id="sdrStack">
       <!-- LEFT: 2 Photo-Cards übereinander gestackt -->
       <div class="sdr-stack">
-        <article class="sdr-stack-card front" data-sdr="0" tabindex="0" aria-label="Sales-Lead 01">
+        <article class="sdr-stack-card front" data-sdr="0" tabindex="0" aria-label="Nevio Mastrogiorgio · Sales-Lead 01">
           <div class="sdr-stack-photo"></div>
           <div class="sdr-stack-silhouette">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
           </div>
           <span class="sdr-stack-corner tl"><span class="mirror">B</span>B</span>
           <span class="sdr-stack-corner br"><span class="mirror">B</span>B</span>
-          <div class="sdr-stack-meta">Sales · 01</div>
+          <div class="sdr-stack-meta"><span class="sdr-name">Nevio Mastrogiorgio</span>Sales · 01</div>
         </article>
         <article class="sdr-stack-card back" data-sdr="1" tabindex="0" aria-label="Sales-Lead 02">
           <div class="sdr-stack-photo"></div>
