@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AOV-/Bundle-Architektur · Framework im Conversion-Pillar. Bundles, Volumen-Stufen, Gifting-Schwellen als messbarer Profit-Hebel — sauber dem Euro zurechenbar. Methodik + Bachgold-Setup, komplett offen.">
+<title>AOV-/Bundle-Architektur · Conversion · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260514-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<link rel="stylesheet" href="/assets/css/wissen-rechner.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+<style>
+  :root{--bg-founder-1:url("/assets/img/wissen-detail-bg-2000.jpg")}
+  .fw-hero{padding:80px 0 96px;text-align:left;max-width:980px;margin:0 auto}
+  .fw-hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--bg-text-body);margin-bottom:20px}
+  .fw-hero-eyebrow strong{color:#000}
+  .fw-hero h1{font-family:'Montserrat',sans-serif;font-size:44px;font-weight:700;line-height:1.15;color:#000;margin:0 0 24px}
+  .fw-hero-sub{font-size:19px;line-height:1.6;color:#000;font-weight:500;max-width:780px}
+  .fw-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--bg-text-muted);text-transform:uppercase}
+  .fw-meta span{display:flex;align-items:center;gap:6px}
+  .fw-meta span::before{content:"";width:6px;height:6px;background:var(--bg-green-up);border-radius:50%}
+
+  .fw-block{max-width:880px;margin:0 auto;padding:56px 0}
+  .fw-block h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.2;color:#000;margin:0 0 20px;max-width:760px}
+  .fw-block h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;color:#000;margin:32px 0 12px}
+  .fw-block p{font-size:17px;line-height:1.7;color:#000;margin:0 0 18px;max-width:760px}
+  .fw-block ul{padding-left:22px;margin:18px 0 24px;max-width:760px}
+  .fw-block ul li{font-size:16px;line-height:1.7;color:#000;margin-bottom:12px;font-weight:500}
+  .fw-block ul li::marker{color:var(--bg-green-up)}
+  .fw-block strong{font-weight:700;color:#000}
+
+  .fw-layers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:32px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-layers{grid-template-columns:1fr}}
+  .fw-layer{background:#fff;border:1px solid var(--bg-line);padding:32px;box-shadow:1px 1px 20px rgba(0,0,0,.05)}
+  .fw-layer-tag{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.08em;font-weight:700;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-layer h3{margin:0 0 12px;font-size:20px}
+  .fw-layer p{font-size:15px;line-height:1.6;margin:0}
+
+  /* Anti Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack Connection */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;max-width:880px}
+  @media(max-width:680px){.fw-stats{grid-template-columns:1fr}}
+
+  .fw-section-list{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-section-list-head{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-section-list-head > div{padding:14px 22px;border-right:1px solid var(--bg-line)}
+  .fw-section-list-head > div:last-child{border-right:none}
+  .fw-section-list-row{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-section-list-row:last-child{border-bottom:none}
+  .fw-section-list-row > div{padding:14px 22px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-section-list-row > div:last-child{border-right:none}
+  .fw-section-list-row strong{font-weight:700}
+  .fw-section-list-row .fw-section-reuse{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber)}
+  @media(max-width:680px){
+    .fw-section-list-head{display:none}
+    .fw-section-list-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-section-list-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-section-list-row > div:last-child{border-bottom:none}
+  }
+  .fw-stat{background:#fff;border:1px solid var(--bg-line);padding:28px;text-align:center}
+  .fw-stat-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:48px;line-height:1;color:#000;display:block;margin-bottom:8px}
+  .fw-stat-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--bg-text-muted);text-transform:uppercase}
+
+  .fw-callout{background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)),var(--bg-founder-2);background-size:cover;border:1px solid var(--bg-line);padding:40px;margin:32px 0;max-width:880px}
+  .fw-callout-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-callout h3{margin:0 0 12px;font-size:22px}
+  .fw-callout p{margin:0}
+
+  .fw-bottom{
+    background:#000;color:#fff;padding:280px 0 96px;text-align:center;
+    background-image:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-2000.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
+  .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
+  .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
+  .fw-bottom-cta{display:inline-block;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:22px 64px;border:1.5px solid #fff;box-shadow:none;position:relative;z-index:1;overflow:hidden;transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;text-decoration:none}
+  .fw-bottom-cta::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left center;transition:transform .4s cubic-bezier(.65,0,.35,1);z-index:-1}
+  .fw-bottom-cta:hover{background:transparent;color:#000;border-color:#fff;transform:none;text-decoration:none}
+  .fw-bottom-cta:hover::before{transform:scaleX(1)}
+  .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
+  .fw-bottom-back:hover{color:#fff}
+  .fw-bottom-back strong{color:#fff;font-weight:600}
+
+  @media(max-width:780px){
+    .fw-hero{padding:48px 0 64px}
+    .fw-hero h1{font-size:32px;line-height:1.2}
+    .fw-block{padding:40px 0}
+    .fw-block h2{font-size:26px}
+    .fw-callout{padding:28px}
+    .fw-bottom{padding:200px 0 64px;background-image:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-1000.jpg')}
+    .fw-bottom h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP-BAR -->
+<div class="top-bar">
+  <div class="wrap">
+    <div class="top-bar-left">
+      <a href="mailto:info@bb-brands.de" class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        info@bb-brands.de
+      </a>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
+        Pro Quartal max. 3–4 neue Projekte
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-socials">
+        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Gratis Profit-Gap</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Gratis Profit-Gap</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-hero">
+      <div class="fw-hero-eyebrow"><strong>FRAMEWORK · PILLAR CONVERSION</strong></div>
+      <h1 data-reveal>AOV-Architektur. Der Hebel, der jedes Payback-Fenster verkürzt.</h1>
+      <p class="fw-hero-sub" data-reveal>Bundles, Volumen-Stufen und Gifting-Schwellen sind kein Merchandising-Gimmick — sie sind der direkt dem Euro zurechenbare Profit-Hebel, der jeden Erstkauf wertvoller macht und damit deinen ganzen CLTV-Stack trägt. Hier die komplette Architektur, plus wie wir sie bei Bachgold aufgesetzt haben.</p>
+      <div class="fw-meta" data-reveal>
+        <span>8 Min. Read</span>
+        <span>Mit Bachgold-Setup</span>
+        <span>Komplett offen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Warum AOV der unterschätzteste Profit-Hebel ist.</h2>
+      <p>Die meisten Brands jagen Conversion-Rate. Aber CR zu heben ist teuer, langsam und stößt an eine Decke. Den <strong>durchschnittlichen Bestellwert</strong> zu heben wirkt sofort, kostet keinen zusätzlichen Ad-Spend und fließt zu fast vollem Deckungsbeitrag durch — weil die teuren Fixkosten der Akquise bereits bezahlt sind.</p>
+      <p>Konkret: Ein höherer Erstbestellwert <strong>verkürzt das Payback-Fenster direkt</strong>. Derselbe CAC, früher im Plus, aggressiver skalierbar. Deshalb steht AOV nicht für sich — es ist ein CLTV-Hebel. Wer AOV ohne den CLTV-Kontext optimiert, baut Rabatt-Schlachten. Wer ihn im Kontext baut, kauft sich Akquise-Spielraum.</p>
+      <p>Der Fehler fast überall: Bundles werden als einzelne Produkte „irgendwie" angelegt — manuell, inkonsistent, ohne saubere Stückliste, ohne Margen-Logik, nicht reproduzierbar. Eine <strong>AOV-Architektur</strong> macht daraus ein System: definierte Hebel, sauber attribuiert, idempotent generiert.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Hebel. Eine Architektur.</h2>
+      <p>Nicht „mehr Bundles", sondern vier definierte Mechaniken — jede mit eigener Psychologie und eigener Margen-Logik.</p>
+      <div class="fw-layers">
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Hebel 1</div>
+          <h3>Bundles (kuratiert)</h3>
+          <p>Sinnvoll kombinierte Sets, die ein <em>Problem</em> lösen, kein Rabatt-Paket. Der wahrgenommene Wert liegt in der Kuration, nicht im Nachlass — so bleibt die Marge erhalten.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Hebel 2</div>
+          <h3>Volumen-Stufen</h3>
+          <p>Staffel-Logik (1 / 3 / 6), die den nächsthöheren Schritt zur naheliegenden Wahl macht. Der mittlere Tier ist der Anker, nicht der günstigste.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Hebel 3</div>
+          <h3>Gifting-/Free-Schwellen</h3>
+          <p>„Noch X € bis zum Geschenk / Gratisversand." Hebt den Warenkorb gezielt über eine Marge-positive Schwelle — ohne Prozent-Rabatt auf den ganzen Korb.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Hebel 4</div>
+          <h3>Stückliste &amp; Margen-Logik</h3>
+          <p>Jedes Bundle hat eine saubere Komponenten-Stückliste und einen kalkulierten DB1. Kein Bundle geht live, dessen Deckungsbeitrag nicht definiert ist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Live: Wie wir das bei Bachgold aufgesetzt haben.</h2>
+      <h3>Was gebaut wurde</h3>
+      <p>Etablierte Wasserfilter-Brand, solider Traffic, aber kein Bundle-System — Vorteilspacks manuell, inkonsistent, nicht reproduzierbar. Wir haben eine <strong>7-Bundle-Architektur</strong> aufgesetzt: kuratierte Sets, Volumen-Stufen, definierte Stücklisten — und einen <strong>idempotenten Bundle-Generator</strong>, der jedes Bundle reproduzierbar erzeugt, statt es von Hand zusammenzuklicken.</p>
+      <h3>Was sich operativ geändert hat</h3>
+      <ul>
+        <li><strong>Idempotenz:</strong> derselbe Generator-Lauf erzeugt immer denselben sauberen Zustand — kein Variant-Wildwuchs, kein „doppeltes Bundle" mehr.</li>
+        <li><strong>Attribution:</strong> jeder Bundle-Hebel ist als eigener Mechanismus messbar — Profit dem Euro zurechenbar, nicht im Gesamtumsatz versteckt.</li>
+        <li><strong>Reproduzierbarkeit:</strong> neue Bundles entstehen in Minuten aus der Stückliste statt in Tagen manueller Pflege.</li>
+      </ul>
+      <div class="fw-callout">
+        <div class="fw-callout-label">Ehrlich zur Datenlage</div>
+        <h3>Den gemessenen AOV-Uplift gibt's hier erst, wenn er gemessen ist.</h3>
+        <p>Die Bundle-Architektur ist live, die Baseline gemeinsam eingefroren. Die erste belastbare Vorher-/Nachher-Zahl erheben wir sauber zum Stichtag T+30 — eingesetzt wird sie hier erst dann. Methodik schlägt geschönte Zahlen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Anti-Patterns, die AOV in Margen-Vernichtung drehen.</h2>
+      <div class="fw-anti-grid">
+        <div class="fw-anti"><div class="fw-anti-num">01</div><h3>Prozent-Rabatt auf alles</h3><p>„10&nbsp;% ab 100&nbsp;€" hebt den Korb und senkt den Deckungsbeitrag jeder Position gleichzeitig. Schwellen-Geschenke statt Prozent-Nachlass.</p></div>
+        <div class="fw-anti"><div class="fw-anti-num">02</div><h3>Bundles ohne Stückliste</h3><p>Wenn niemand den DB1 eines Bundles kennt, verkaufst du womöglich Volumen in den Verlust. Kein Bundle ohne kalkulierte Marge.</p></div>
+        <div class="fw-anti"><div class="fw-anti-num">03</div><h3>Manuell statt idempotent</h3><p>Von Hand angelegte Bundles driften auseinander, doppeln sich, brechen bei Sortimentswechsel. Generator statt Klick-Arbeit.</p></div>
+        <div class="fw-anti"><div class="fw-anti-num">04</div><h3>AOV ohne CLTV-Kontext</h3><p>AOV isoliert maximiert führt zu Einmal-Käufern mit hohem Korb. Der Hebel zählt nur, wenn er das Payback-Fenster verkürzt.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Eine AOV-Architektur selbst aufsetzen — in 5 Schritten.</h2>
+      <div class="fw-steps">
+        <div class="fw-step"><div class="fw-step-num">01</div><div class="fw-step-body"><h3>DB1 pro SKU bestimmen</h3><p>Bevor irgendein Bundle entsteht: Deckungsbeitrag jeder Einzel-SKU. Das ist die Grundlage jeder Bundle-Kalkulation.</p><div class="fw-step-tools"><span class="fw-step-tool">DB1-Sheet</span></div><div class="fw-step-output"><strong>Ergebnis:</strong> Margen-Basis pro Komponente.</div></div></div>
+        <div class="fw-step"><div class="fw-step-num">02</div><div class="fw-step-body"><h3>Hebel wählen, nicht raten</h3><p>Pro Sortiment entscheiden: kuratiertes Set, Volumen-Staffel oder Gifting-Schwelle? Jeder Hebel passt zu anderer Produktlogik.</p><div class="fw-step-tools"><span class="fw-step-tool">Hebel-Matrix</span></div><div class="fw-step-output"><strong>Ergebnis:</strong> 2–3 gezielte Hebel statt zwanzig Zufalls-Bundles.</div></div></div>
+        <div class="fw-step"><div class="fw-step-num">03</div><div class="fw-step-body"><h3>Stücklisten + Bundle-DB1</h3><p>Jedes geplante Bundle bekommt eine Komponenten-Stückliste und einen kalkulierten Deckungsbeitrag. Negativ-Marge = kommt nicht live.</p><div class="fw-step-tools"><span class="fw-step-tool">Stückliste</span><span class="fw-step-tool">Bundle-DB1</span></div><div class="fw-step-output"><strong>Ergebnis:</strong> jedes Bundle ist profitabel by design.</div></div></div>
+        <div class="fw-step"><div class="fw-step-num">04</div><div class="fw-step-body"><h3>Idempotent generieren</h3><p>Bundles aus der Stückliste reproduzierbar erzeugen (App- oder Generator-gestützt), statt manuell Varianten anzulegen.</p><div class="fw-step-tools"><span class="fw-step-tool">Bundle-Generator</span><span class="fw-step-tool">Idempotenz</span></div><div class="fw-step-output"><strong>Ergebnis:</strong> sauberer, wiederholbarer Store-Zustand.</div></div></div>
+        <div class="fw-step"><div class="fw-step-num">05</div><div class="fw-step-body"><h3>Baseline einfrieren + messen</h3><p>AOV-Baseline vor Launch festhalten, Bundle-Hebel als eigene Mechanismen attribuieren, T+30 sauber vergleichen — gegen Deckungsbeitrag, nicht Umsatz.</p><div class="fw-step-tools"><span class="fw-step-tool">Baseline-Freeze</span><span class="fw-step-tool">Attribution</span></div><div class="fw-step-output"><strong>Ergebnis:</strong> AOV-Hebel dem Euro zurechenbar.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Wo AOV-Architektur den Rest des Stacks trifft.</h2>
+      <div class="fw-stack-connect">
+        <a href="/wissen/customer-lifetime-value/" class="fw-stack-link"><span class="fw-stack-arrow">→</span><div class="fw-stack-tag">Eckpfeiler</div><h4>Customer Lifetime Value</h4><p>Höherer Erstbestellwert verkürzt das Payback-Fenster direkt. AOV ist ein CLTV-Hebel — hier wird klar, warum er zählt.</p></a>
+        <a href="/wissen/conversion-engine/" class="fw-stack-link"><span class="fw-stack-arrow">→</span><div class="fw-stack-tag">Pillar Conversion</div><h4>Conversion Engine</h4><p>Bundle-Hebel brauchen Sections, die in Tagen testbar sind. Die Iteration-Maschine ist das Verteilungssystem der AOV-Architektur.</p></a>
+        <a href="/wissen/lifecycle-loops/" class="fw-stack-link"><span class="fw-stack-arrow">→</span><div class="fw-stack-tag">Pillar Lifecycle</div><h4>Lifecycle Loops</h4><p>Post-Purchase-Flows tragen Volumen- und Replenishment-Hebel in Bestellung 2, 3, 7 — AOV wird zur Repeat-Mechanik.</p></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BOTTOM CTA -->
+<section class="fw-bottom">
+  <div class="wrap">
+    <h2>Wie viel Profit lässt dein Setup gerade liegen?</h2>
+    <p>Gratis Profit-Gap-Analyse: Wir zeigen dir auf deinen echten Shopify-/Klaviyo-Zahlen, wie viel Profit du jeden Monat liegen lässt. Ist die Lücke klein, sagen wir's — kein Pitch. Ist sie groß, schließt sie ein Fixpreis-System. Refinanziert sich die Profit-Schicht nicht in 120 Tagen, arbeiten wir kostenlos weiter, bis euer zusätzlicher Profit unsere Kosten gedeckt hat.</p>
+    <a href="/audit/" class="fw-bottom-cta">Gratis Profit-Gap-Analyse</a>
+    <br>
+    <a href="/wissen/" class="fw-bottom-back">← <strong>Zurück zum Profit Stack</strong></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
