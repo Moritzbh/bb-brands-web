@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Customer Lifetime Value · der Eckpfeiler des BB Brands Profit Stack. Kohorten-Math, CAC:LTV, Payback-Fenster. Die Zahl, die entscheidet, wer das Akquise-Bidding gewinnt. Methodik, komplett offen.">
+<title>Customer Lifetime Value · Eckpfeiler · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260514-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<link rel="stylesheet" href="/assets/css/wissen-rechner.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+<style>
+  :root{--bg-founder-1:url("/assets/img/wissen-detail-bg-2000.jpg")}
+  .fw-hero{padding:80px 0 96px;text-align:left;max-width:980px;margin:0 auto}
+  .fw-hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--bg-text-body);margin-bottom:20px}
+  .fw-hero-eyebrow strong{color:#000}
+  .fw-hero h1{font-family:'Montserrat',sans-serif;font-size:44px;font-weight:700;line-height:1.15;color:#000;margin:0 0 24px}
+  .fw-hero-sub{font-size:19px;line-height:1.6;color:#000;font-weight:500;max-width:780px}
+  .fw-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--bg-text-muted);text-transform:uppercase}
+  .fw-meta span{display:flex;align-items:center;gap:6px}
+  .fw-meta span::before{content:"";width:6px;height:6px;background:var(--bg-green-up);border-radius:50%}
+
+  .fw-block{max-width:880px;margin:0 auto;padding:56px 0}
+  .fw-block h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.2;color:#000;margin:0 0 20px;max-width:760px}
+  .fw-block h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;color:#000;margin:32px 0 12px}
+  .fw-block p{font-size:17px;line-height:1.7;color:#000;margin:0 0 18px;max-width:760px}
+  .fw-block ul{padding-left:22px;margin:18px 0 24px;max-width:760px}
+  .fw-block ul li{font-size:16px;line-height:1.7;color:#000;margin-bottom:12px;font-weight:500}
+  .fw-block ul li::marker{color:var(--bg-green-up)}
+  .fw-block strong{font-weight:700;color:#000}
+
+  .fw-layers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:32px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-layers{grid-template-columns:1fr}}
+  .fw-layer{background:#fff;border:1px solid var(--bg-line);padding:32px;box-shadow:1px 1px 20px rgba(0,0,0,.05)}
+  .fw-layer-tag{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.08em;font-weight:700;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-layer h3{margin:0 0 12px;font-size:20px}
+  .fw-layer p{font-size:15px;line-height:1.6;margin:0}
+
+  /* Anti Patterns Grid */
+  .fw-anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 0;max-width:880px}
+  @media(max-width:780px){.fw-anti-grid{grid-template-columns:1fr}}
+  .fw-anti{background:#fff;border:1px solid var(--bg-line);padding:24px 22px;position:relative}
+  .fw-anti-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;line-height:1;color:#c44;margin-bottom:12px}
+  .fw-anti h3{margin:0 0 8px;font-size:16px;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-anti p{font-size:13.5px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  /* DIY Steps */
+  .fw-steps{margin:32px 0 0;max-width:880px;display:flex;flex-direction:column;gap:18px}
+  .fw-step{background:#fff;border:1px solid var(--bg-line);padding:28px 28px 24px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start}
+  @media(max-width:680px){.fw-step{grid-template-columns:1fr;gap:8px;padding:24px 22px}}
+  .fw-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--bg-amber);letter-spacing:-.02em}
+  .fw-step-body h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em;font-family:'Montserrat',sans-serif;font-weight:700}
+  .fw-step-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#000}
+  .fw-step-body p:last-child{margin-bottom:0}
+  .fw-step-tools{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px}
+  .fw-step-tool{background:#FAF7F2;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;text-transform:uppercase;color:#000;border:1px solid var(--bg-line)}
+  .fw-step-output{margin-top:12px;padding-top:12px;border-top:1px solid var(--bg-line);font-size:13px;color:var(--bg-text-muted)}
+  .fw-step-output strong{color:var(--bg-amber);font-weight:700}
+
+  /* Stack Connection */
+  .fw-stack-connect{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:880px}
+  @media(max-width:880px){.fw-stack-connect{grid-template-columns:1fr}}
+  .fw-stack-link{display:block;background:#fff;border:1px solid var(--bg-line);padding:24px 22px 20px;text-decoration:none;color:#000;transition:border-color .2s, transform .2s;position:relative}
+  .fw-stack-link:hover{border-color:rgba(0,0,0,0.2);transform:translateY(-2px);text-decoration:none;color:#000}
+  .fw-stack-arrow{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:var(--bg-amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .fw-stack-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:10px}
+  .fw-stack-link h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;margin:0 0 8px;letter-spacing:-.01em}
+  .fw-stack-link p{font-size:13px;line-height:1.55;margin:0;color:var(--bg-text-body)}
+
+  .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;max-width:880px}
+  @media(max-width:680px){.fw-stats{grid-template-columns:1fr}}
+
+  .fw-section-list{margin:24px 0 32px;max-width:880px;border:1px solid var(--bg-line);background:#fff}
+  .fw-section-list-head{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;background:#FAF7F2;border-bottom:1px solid var(--bg-line);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+  .fw-section-list-head > div{padding:14px 22px;border-right:1px solid var(--bg-line)}
+  .fw-section-list-head > div:last-child{border-right:none}
+  .fw-section-list-row{display:grid;grid-template-columns:2.5fr 1fr 2fr;gap:0;border-bottom:1px solid var(--bg-line);font-size:14px;line-height:1.5}
+  .fw-section-list-row:last-child{border-bottom:none}
+  .fw-section-list-row > div{padding:14px 22px;border-right:1px solid var(--bg-line);color:#000}
+  .fw-section-list-row > div:last-child{border-right:none}
+  .fw-section-list-row strong{font-weight:700}
+  .fw-section-list-row .fw-section-reuse{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--bg-amber)}
+  @media(max-width:680px){
+    .fw-section-list-head{display:none}
+    .fw-section-list-row{grid-template-columns:1fr;padding:6px 0}
+    .fw-section-list-row > div{border-right:none;border-bottom:1px dashed var(--bg-line);padding:8px 18px}
+    .fw-section-list-row > div:last-child{border-bottom:none}
+  }
+  .fw-stat{background:#fff;border:1px solid var(--bg-line);padding:28px;text-align:center}
+  .fw-stat-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:48px;line-height:1;color:#000;display:block;margin-bottom:8px}
+  .fw-stat-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--bg-text-muted);text-transform:uppercase}
+
+  .fw-callout{background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)),var(--bg-founder-2);background-size:cover;border:1px solid var(--bg-line);padding:40px;margin:32px 0;max-width:880px}
+  .fw-callout-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bg-amber);text-transform:uppercase;margin-bottom:14px}
+  .fw-callout h3{margin:0 0 12px;font-size:22px}
+  .fw-callout p{margin:0}
+
+  .fw-bottom{
+    background:#000;color:#fff;padding:280px 0 96px;text-align:center;
+    background-image:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-2000.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
+  .fw-bottom h2{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:700;line-height:1.25;color:#fff;margin:0 auto 18px;max-width:720px}
+  .fw-bottom p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:640px;margin:0 auto 36px}
+  .fw-bottom-cta{display:inline-block;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:22px 64px;border:1.5px solid #fff;box-shadow:none;position:relative;z-index:1;overflow:hidden;transition:color .35s cubic-bezier(.65,0,.35,1), border-color .35s ease;text-decoration:none}
+  .fw-bottom-cta::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left center;transition:transform .4s cubic-bezier(.65,0,.35,1);z-index:-1}
+  .fw-bottom-cta:hover{background:transparent;color:#000;border-color:#fff;transform:none;text-decoration:none}
+  .fw-bottom-cta:hover::before{transform:scaleX(1)}
+  .fw-bottom-back{display:inline-block;margin-top:28px;color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.04em;text-decoration:none;font-family:'Montserrat',sans-serif}
+  .fw-bottom-back:hover{color:#fff}
+  .fw-bottom-back strong{color:#fff;font-weight:600}
+
+  @media(max-width:780px){
+    .fw-hero{padding:48px 0 64px}
+    .fw-hero h1{font-size:32px;line-height:1.2}
+    .fw-block{padding:40px 0}
+    .fw-block h2{font-size:26px}
+    .fw-callout{padding:28px}
+    .fw-bottom{padding:200px 0 64px;background-image:linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.92) 100%),url('/assets/img/wissen-hero-founder-1000.jpg')}
+    .fw-bottom h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP-BAR -->
+<div class="top-bar">
+  <div class="wrap">
+    <div class="top-bar-left">
+      <a href="mailto:info@bb-brands.de" class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        info@bb-brands.de
+      </a>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
+        Pro Quartal max. 3–4 neue Projekte
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-socials">
+        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/" class="active">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+    <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      <span>Kunden-Login</span>
+    </a>
+    <a href="/audit/" class="bb-topnav-cta">Gratis Profit-Gap</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Gratis Profit-Gap</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-hero">
+      <div class="fw-hero-eyebrow"><strong>ECKPFEILER · DER PROFIT STACK</strong></div>
+      <h1 data-reveal>Customer Lifetime Value. Die Zahl, die entscheidet, wer das Akquise-Bidding gewinnt.</h1>
+      <p class="fw-hero-sub" data-reveal>Nicht AOV. Nicht ROAS. CLTV ist die Linse, durch die jede andere Schicht erst Sinn ergibt — warum AOV zählt, warum Lifecycle zählt, warum Preis-Architektur zählt. Hier ist die komplette Methodik. Kohorten-Logik, CAC:LTV, Payback-Fenster. Ohne geschönte Zahlen, ohne Pitch.</p>
+      <div class="fw-meta" data-reveal>
+        <span>9 Min. Read</span>
+        <span>Reine Methodik</span>
+        <span>Komplett offen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Warum CLTV das Long Game entscheidet.</h2>
+      <p>Zwei Brands verkaufen das gleiche Produkt. Beide zahlen 40&nbsp;€, um einen Kunden zu gewinnen. Brand&nbsp;A denkt in der ersten Bestellung: 60&nbsp;€ Umsatz, sieht gut aus. Brand&nbsp;B weiß, dass derselbe Kunde über 12 Monate dreimal kauft.</p>
+      <p>Brand&nbsp;B kann jetzt <strong>60&nbsp;€ pro Akquise bieten</strong>, wo Brand&nbsp;A bei 40&nbsp;€ aussteigt — und kauft sich Reichweite, die Brand&nbsp;A sich nicht mehr leisten kann. Nicht weil B bessere Ads hat. Sondern weil B weiß, was Bestellung 2, 3 und 7 wert sind.</p>
+      <p>Das ist der ganze Punkt: <strong>Wer keinen Customer Lifetime Value ausbaut, verliert das Akquise-Bidding gegen jeden, der ihn ausbaut</strong> — egal wie gut die erste Bestellung aussieht. Profitabilität kommt vor Skalierung, weil sie die Skalierung überhaupt erst bezahlbar macht.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIE 4 BAUSTEINE -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Bausteine. Eine belastbare CLTV-Sicht.</h2>
+      <p>„LTV" als eine Zahl auf einem Dashboard ist wertlos. Eine entscheidungsfähige CLTV-Sicht besteht aus vier Teilen — jeder einzeln nachbaubar, im Zusammenspiel die Grundlage jeder Akquise-Entscheidung.</p>
+
+      <div class="fw-layers">
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Baustein 1</div>
+          <h3>Kohorten-Logik</h3>
+          <p>Kunden nach Monat der <em>ersten</em> Bestellung gruppieren — nicht nach Kalendermonat. Nur so siehst du, wie sich eine Kundengruppe über die Zeit wirklich verhält, statt neue und alte Kunden zu einem Durchschnitts-Brei zu vermischen.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Baustein 2</div>
+          <h3>Repeat-Kurve</h3>
+          <p>Pro Kohorte: kumulierter Umsatz pro Erstkunde über Monat 1, 3, 6, 12. Diese Kurve — nicht ein Endwert — ist dein eigentlicher CLTV. Sie zeigt <em>wann</em> der Wert entsteht, nicht nur <em>ob</em>.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Baustein 3</div>
+          <h3>CAC : LTV-Verhältnis</h3>
+          <p>Nicht „LTV &gt; CAC" (trivial), sondern: Bei welchem CAC ist eine Kohorte nach <em>deinem</em> akzeptablen Payback-Fenster im Plus? Das ist deine Gebots-Obergrenze in der Akquise — die Zahl, die Brand&nbsp;B kennt und Brand&nbsp;A nicht.</p>
+        </div>
+        <div class="fw-layer">
+          <div class="fw-layer-tag">Baustein 4</div>
+          <h3>Payback-Fenster</h3>
+          <p>Nach wie vielen Tagen hat eine Kohorte ihren eigenen CAC zurückverdient — auf <strong>Deckungsbeitrag</strong>, nicht Umsatz. Das Payback-Fenster bestimmt, wie aggressiv du skalieren kannst, ohne dass dir die Liquidität ausgeht.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIE RECHNUNG -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Die Rechnung — in der Reihenfolge, in der sie zählt.</h2>
+      <p>Bewusst mit Platzhaltern statt Schaufenster-Zahlen. Setz deine eigenen ein, dann ist es belastbar:</p>
+      <ul>
+        <li><strong>1 · DB1 pro Bestellung</strong> = Bestellwert − Wareneinsatz − Payment-Fees − variabler Versand − Retouren-/Rabatt-Last. Niemals mit Umsatz rechnen — Umsatz lügt über Profit.</li>
+        <li><strong>2 · Repeat-Kurve pro Kohorte</strong> = Σ DB1 pro Erstkunde, kumuliert über Monat 1 → 12. Das ist dein realer CLTV-Verlauf.</li>
+        <li><strong>3 · Payback-Tag</strong> = der Tag, an dem die kumulierte DB1-Kurve den CAC schneidet. Vorher arbeitest du für die Plattform, danach für dich.</li>
+        <li><strong>4 · CAC-Ceiling</strong> = maximaler CAC, bei dem Schritt 3 noch innerhalb deines Liquiditäts-Fensters liegt. <em>Das</em> ist die Zahl, mit der du in die Auktion gehst.</li>
+      </ul>
+      <div class="fw-callout">
+        <div class="fw-callout-label">Der Denkfehler, der die meisten kostet</div>
+        <h3>„Blended LTV" ist keine Entscheidungszahl.</h3>
+        <p>Ein gemittelter LTV über alle Kunden, alle Quellen, alle Zeiträume sieht beruhigend aus und steuert nichts. Entscheidungen fallen auf Kohorten-Ebene — pro Akquisekanal, pro Eintrittsmonat. Alles andere ist ein Vanity-Dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANTI PATTERNS -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Vier Anti-Patterns, die deinen CLTV unbrauchbar machen.</h2>
+      <div class="fw-anti-grid">
+        <div class="fw-anti">
+          <div class="fw-anti-num">01</div>
+          <h3>Umsatz statt Deckungsbeitrag</h3>
+          <p>CLTV auf Revenue gerechnet überschätzt jeden Kunden systematisch. Akquise-Gebote auf dieser Basis brennen Cash, der nie da war. Immer DB1.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">02</div>
+          <h3>Blended über alle Kanäle</h3>
+          <p>Meta-Kunden, organische Kunden und Bestandskunden in einen LTV gemittelt — und dann ein Akquise-Budget darauf gesetzt. Das steuert nichts, es beruhigt nur.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">03</div>
+          <h3>Endwert statt Kurve</h3>
+          <p>„Unser LTV ist X." Wann X entsteht — Monat 1 oder Monat 14 — entscheidet, ob du skalieren kannst. Ohne Payback-Fenster ist der Endwert eine Fantasie.</p>
+        </div>
+        <div class="fw-anti">
+          <div class="fw-anti-num">04</div>
+          <h3>Kein Cohort-Refresh</h3>
+          <p>Einmal gerechnet, nie wieder. Kohorten altern, Produktmix ändert sich, die Kurve verschiebt sich. Eine CLTV-Sicht, die nicht monatlich nachläuft, ist nach einem Quartal Fiktion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIY STEPS -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Eine belastbare CLTV-Sicht selbst bauen — in 5 Schritten.</h2>
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-num">01</div>
+          <div class="fw-step-body">
+            <h3>Bestell-Export ziehen</h3>
+            <p>Aus Shopify alle Bestellungen mit Kunden-ID, Datum, Bestellwert und — wenn möglich — Akquisekanal des Erstkaufs. Roh, ohne App-Zwischenschicht.</p>
+            <div class="fw-step-tools"><span class="fw-step-tool">Shopify Export</span><span class="fw-step-tool">CSV</span></div>
+            <div class="fw-step-output"><strong>Ergebnis:</strong> eine Zeile pro Bestellung, eindeutig einem Erstkunden zuordenbar.</div>
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-num">02</div>
+          <div class="fw-step-body">
+            <h3>DB1 pro Bestellung berechnen</h3>
+            <p>Bestellwert minus Wareneinsatz, Payment-Fees, variabler Versand, Retouren-/Rabatt-Last. Eine zusätzliche Spalte. Ab hier rechnest du nur noch mit dieser.</p>
+            <div class="fw-step-tools"><span class="fw-step-tool">Tabellenkalkulation</span><span class="fw-step-tool">DB1-Formel</span></div>
+            <div class="fw-step-output"><strong>Ergebnis:</strong> Profit-Sicht statt Umsatz-Sicht.</div>
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-num">03</div>
+          <div class="fw-step-body">
+            <h3>Nach Erstkauf-Monat in Kohorten gruppieren</h3>
+            <p>Jeder Kunde gehört zur Kohorte seines ersten Kaufmonats — für immer. Folgebestellungen laufen in dieselbe Kohorte, nur in spätere Monats-Buckets.</p>
+            <div class="fw-step-tools"><span class="fw-step-tool">Pivot</span><span class="fw-step-tool">Kohorten-Matrix</span></div>
+            <div class="fw-step-output"><strong>Ergebnis:</strong> Matrix Kohorte × Monat-seit-Erstkauf.</div>
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-num">04</div>
+          <div class="fw-step-body">
+            <h3>Kumulierte DB1-Kurve pro Erstkunde</h3>
+            <p>Pro Kohorte: kumulierte DB1 geteilt durch Anzahl Erstkunden, über Monat 1, 3, 6, 12. Das ist dein realer CLTV-Verlauf — nicht ein Punkt, eine Kurve.</p>
+            <div class="fw-step-tools"><span class="fw-step-tool">Kurve / Chart</span></div>
+            <div class="fw-step-output"><strong>Ergebnis:</strong> sichtbar, wann Wert entsteht — nicht nur ob.</div>
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-num">05</div>
+          <div class="fw-step-body">
+            <h3>Payback-Tag &amp; CAC-Ceiling ableiten</h3>
+            <p>Lege dein akzeptables Liquiditäts-Fenster fest (z.&nbsp;B. „CAC muss in X Tagen zurück sein"). Lies aus der Kurve den maximalen CAC ab, bei dem das hält. Mit dieser Zahl gehst du in die Auktion.</p>
+            <div class="fw-step-tools"><span class="fw-step-tool">Payback-Logik</span><span class="fw-step-tool">CAC-Ceiling</span></div>
+            <div class="fw-step-output"><strong>Ergebnis:</strong> eine Gebots-Obergrenze, die auf Profit beruht — nicht auf Hoffnung.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK CONNECT -->
+<section class="bb-section bb-section-50">
+  <div class="wrap">
+    <div class="fw-block" data-reveal>
+      <h2>Warum CLTV die anderen Schichten erst sinnvoll macht.</h2>
+      <p>CLTV ist kein Framework neben anderen — es ist der Maßstab, an dem sich jede andere Schicht misst:</p>
+      <div class="fw-stack-connect">
+        <a href="/wissen/conversion-engine/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Conversion</div>
+          <h4>AOV-/Bundle-Architektur</h4>
+          <p>Höherer Erstbestellwert verkürzt das Payback-Fenster direkt — derselbe CAC, früher im Plus. AOV ist ein CLTV-Hebel, kein Selbstzweck.</p>
+        </a>
+        <a href="/wissen/lifecycle-loops/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Lifecycle</div>
+          <h4>Lifecycle Loops</h4>
+          <p>Die Repeat-Kurve ist nicht gegeben — sie wird gebaut. Flows von Welcome bis Win-Back sind der Mechanismus, der Monat 3, 6, 12 überhaupt füllt.</p>
+        </a>
+        <a href="/wissen/conversion-engine/" class="fw-stack-link">
+          <span class="fw-stack-arrow">→</span>
+          <div class="fw-stack-tag">Conversion</div>
+          <h4>Conversion Engine</h4>
+          <p>Mehr profitable Erstkunden zum gleichen CAC = mehr Kohorten-Volumen, auf das die ganze CLTV-Mechanik wirkt. Iteration ist der Mengen-Hebel.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BOTTOM CTA -->
+<section class="fw-bottom">
+  <div class="wrap">
+    <h2>Wie viel Profit lässt dein Setup gerade liegen?</h2>
+    <p>Gratis Profit-Gap-Analyse: Wir zeigen dir auf deinen echten Shopify-/Klaviyo-Zahlen, wie viel Profit du jeden Monat liegen lässt. Ist die Lücke klein, sagen wir's — kein Pitch. Ist sie groß, schließt sie ein Fixpreis-System. Refinanziert sich die Profit-Schicht nicht in 120 Tagen, arbeiten wir kostenlos weiter, bis euer zusätzlicher Profit unsere Kosten gedeckt hat.</p>
+    <a href="/audit/" class="fw-bottom-cta">Gratis Profit-Gap-Analyse</a>
+    <br>
+    <a href="/wissen/" class="fw-bottom-back">← <strong>Zurück zum Profit Stack</strong></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
