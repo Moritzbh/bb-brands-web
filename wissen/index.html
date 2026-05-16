@@ -346,6 +346,30 @@ html,body{overflow-x:clip;max-width:100%}
   transform:scale(1.06) translateY(-2px);
 }
 
+/* ============= PROFIT-STACK · MOBILE 2-up kompakt (statt 1-spaltig) ============= */
+@media (max-width:880px){
+  .bb-cards.bb-cards--stack{grid-template-columns:repeat(2,1fr);gap:14px;max-width:none}
+  .bb-cards--stack .bb-card-tag{font-size:8.5px;letter-spacing:.08em;padding:5px 9px;top:12px;left:12px}
+  .bb-cards.bb-cards--stack .bb-card-thumb{padding:18px}
+  .bb-cards.bb-cards--stack .bb-card-thumb .fw-icon{width:52%;max-width:88px}
+  .bb-cards--stack .bb-card-body{padding:18px 15px 16px}
+  .bb-cards--stack .bb-card-body h3{font-size:16px;line-height:1.25;margin-bottom:8px}
+  .bb-cards--stack .bb-card-body p{font-size:12px;line-height:1.5;margin-bottom:14px}
+  .bb-cards--stack .bb-card-meta{font-size:9.5px;letter-spacing:.02em;padding-top:12px;margin-bottom:12px}
+  .bb-cards--stack .bb-card-link{font-size:11px;gap:6px}
+}
+@media (max-width:520px){
+  .bb-cards.bb-cards--stack{gap:10px}
+  .bb-cards--stack .bb-card-tag{font-size:7px;letter-spacing:.05em;padding:4px 7px;top:8px;left:8px}
+  .bb-cards.bb-cards--stack .bb-card-thumb{padding:12px}
+  .bb-cards.bb-cards--stack .bb-card-thumb .fw-icon{width:50%;max-width:62px}
+  .bb-cards--stack .bb-card-body{padding:13px 11px 13px}
+  .bb-cards--stack .bb-card-body h3{font-size:13.5px;margin-bottom:6px}
+  .bb-cards--stack .bb-card-body p{font-size:10.5px;line-height:1.45;margin-bottom:10px}
+  .bb-cards--stack .bb-card-meta{font-size:8px;padding-top:9px;margin-bottom:9px}
+  .bb-cards--stack .bb-card-link{font-size:9.5px}
+}
+
 /* ============= TOOLS-CARDS · Free-standing (kein Box Treatment, Icon direkt auf Section-BG) ============= */
 .bb-cards.tools .bb-card{
   background:transparent;
@@ -572,7 +596,7 @@ html,body{overflow-x:clip;max-width:100%}
     linear-gradient(180deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.4) 100%),
     url('/assets/team/Gemini_Generated_Image_z53s8xz53s8xz53s.png');
   background-size:cover;
-  background-position:center 18%;
+  background-position:center 4%;
   background-repeat:no-repeat;
   background-attachment:scroll;
 }
@@ -581,7 +605,7 @@ html,body{overflow-x:clip;max-width:100%}
     background-image:
       linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.52) 100%),
       url('/assets/team/Gemini_Generated_Image_z53s8xz53s8xz53s.png');
-    background-position:center 22%;
+    background-position:center 8%;
   }
 }
 
@@ -835,7 +859,7 @@ html,body{overflow-x:clip;max-width:100%}
       <p>Kein einzelnes Framework macht eine Brand profitabel. Erst der Stack tut das. Jede Schicht ist 1:1 nachbaubar. einzeln umsetzbar, im Zusammenspiel multiplikativ.</p>
     </div>
 
-    <div class="bb-cards">
+    <div class="bb-cards bb-cards--stack">
 
       <a href="/wissen/brand-system/" class="bb-card">
         <div class="bb-card-thumb">
