@@ -129,6 +129,14 @@ footer .footer-links a:hover{color:var(--accent)}
   --bg-founder-3:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70');
 }
 
+/* Viewport-Riegel: nichts darf horizontal aus dem Bild schieben/wischen.
+   overflow-x:clip (NICHT hidden) — clip erzeugt keinen Scroll-Container,
+   sticky-Nav bleibt dadurch funktionsfähig. */
+html,body{overflow-x:clip;max-width:100%}
+.bb-page{overflow-x:clip;width:100%;max-width:100%}
+.bb-page section,
+.bb-page .wrap{max-width:100%;min-width:0}
+
 .bb-page{
   font-family:'Montserrat',sans-serif;
   font-size:15px;line-height:1.7;font-weight:400;color:#000;
