@@ -491,6 +491,30 @@ html,body{overflow-x:clip;max-width:100%}
   transform:scaleX(1);
 }
 
+/* ============= TOOLS/RECHNER · MOBILE 2-up kompakt (statt 1-spaltig) ============= */
+@media (max-width:720px){
+  .bb-cards.tools{grid-template-columns:repeat(2,1fr);gap:8px}
+  .bb-cards.tools .bb-card{padding:18px 14px}
+  .bb-cards.tools .bb-card-thumb{gap:12px;margin-bottom:16px}
+  .bb-cards.tools .bb-card-thumb .tool-icon{width:54px;max-width:54px}
+  .bb-cards.tools .bb-card-tag{font-size:8.5px;letter-spacing:.1em}
+  .bb-cards.tools .bb-card-body h3{font-size:15px;line-height:1.25;margin-bottom:8px}
+  .bb-cards.tools .bb-card-body p{font-size:11.5px;line-height:1.5;margin-bottom:14px}
+  .bb-cards.tools .bb-card-meta{font-size:8.5px;letter-spacing:.05em;padding-top:12px;margin-bottom:12px}
+  .bb-cards.tools .bb-card-link{display:block;text-align:center;padding:10px 14px;font-size:9.5px;letter-spacing:.08em}
+}
+@media (max-width:520px){
+  .bb-cards.tools{gap:7px}
+  .bb-cards.tools .bb-card{padding:13px 10px}
+  .bb-cards.tools .bb-card-thumb{gap:9px;margin-bottom:12px}
+  .bb-cards.tools .bb-card-thumb .tool-icon{width:44px;max-width:44px}
+  .bb-cards.tools .bb-card-tag{font-size:7px;letter-spacing:.06em}
+  .bb-cards.tools .bb-card-body h3{font-size:13px;margin-bottom:6px}
+  .bb-cards.tools .bb-card-body p{font-size:10px;line-height:1.45;margin-bottom:10px}
+  .bb-cards.tools .bb-card-meta{font-size:7.5px;padding-top:9px;margin-bottom:9px}
+  .bb-cards.tools .bb-card-link{padding:9px 10px;font-size:8.5px;letter-spacing:.05em}
+}
+
 /* ============= TESTIMONIAL-BLOCK ============= */
 .bb-testimonial{
   background:#fff;
