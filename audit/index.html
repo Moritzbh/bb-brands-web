@@ -21,8 +21,10 @@
 /* ============= PAGE BASE ============= */
 .audit-page{background:var(--bg);font-family:'Inter Tight',-apple-system,sans-serif;color:var(--text)}
 
-/* Viewport-Riegel: nichts darf horizontal aus dem Bild schieben */
-html,body{overflow-x:hidden;max-width:100%}
+/* Viewport-Riegel: nichts darf horizontal aus dem Bild schieben.
+   overflow-x:clip (NICHT hidden) — clip erzeugt keinen Scroll-Container,
+   sticky Header bleibt dadurch funktionsfähig. */
+html,body{overflow-x:clip;max-width:100%}
 .audit-page{overflow-x:clip;width:100%;max-width:100%}
 .audit-page section,
 .audit-page .wrap{max-width:100%;min-width:0}
