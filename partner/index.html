@@ -297,6 +297,30 @@ footer .footer-links a:hover{color:var(--accent)}
 .pn-steps li::before{content:counter(pn);position:absolute;left:22px;top:20px;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
 .pn-steps li strong{color:#000}
 @media (max-width:780px){.pn-grid{grid-template-columns:1fr;gap:14px}.pn-card{padding:22px 20px}.pn-steps li{padding:20px 18px 20px 62px}}
+/* ===== TRUST-/PROOF-BLOCK (1:1 aus wissen) ===== */
+.bb-trust{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:8px}
+.bb-trust-tuev{
+  width:80px;height:80px;background:#fff;border:1px solid var(--bg-line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;
+  letter-spacing:.04em;color:#dc2626;line-height:1.2;padding:6px 8px;gap:2px;
+}
+.bb-trust-tuev svg{width:22px;height:22px;color:#dc2626;display:block}
+.bb-trust-tuev .badge{font-size:7px;color:#666;font-weight:600;margin-top:2px;text-align:center}
+.bb-trust-reviews{display:flex;flex-direction:column;gap:4px}
+.bb-trust-reviews-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#000}
+.bb-trust-reviews-rating{display:flex;align-items:center;gap:8px;font-size:32px;font-weight:800;color:#000}
+.bb-trust-reviews-rating .stars{color:#22c55e;font-size:24px;letter-spacing:1px}
+.bb-trust-reviews-label{font-size:11px;color:var(--bg-text-muted);font-weight:600}
+.bb-trust-reviews-label a{color:var(--bg-amber);text-decoration:underline}
+.bb-trust-award{
+  width:90px;height:100px;
+  background:linear-gradient(135deg,#FF6B3D 0%,#FF7A00 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.bb-trust-award-text{color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;letter-spacing:.04em;text-transform:uppercase;text-align:center;line-height:1.3}
+@media (max-width:780px){.bb-trust{gap:28px;margin-top:4px}}
 </style>
 </head>
 <body>
@@ -333,7 +357,6 @@ footer .footer-links a:hover{color:var(--accent)}
       <a href="/">Startseite</a>
       <a href="/cases/">Cases</a>
       <a href="/wissen/">Wissen</a>
-      <a href="/partner/" class="active">Partner</a>
       <a href="https://founder-os.bb-brands.de">Founder OS</a>
     </nav>
       <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
@@ -349,7 +372,6 @@ footer .footer-links a:hover{color:var(--accent)}
     <a href="/">Startseite</a>
     <a href="/cases/">Cases</a>
     <a href="/wissen/">Wissen</a>
-    <a href="/partner/">Partner</a>
     <a href="https://founder-os.bb-brands.de">Founder OS</a>
     <a href="/audit/" class="cta">Strategy Audit buchen</a>
   </div>
@@ -410,6 +432,36 @@ footer .footer-links a:hover{color:var(--accent)}
       <div class="bb-head-label">Proof</div>
       <h2>Keine ROAS-Märchen. <em>Echte Builds.</em></h2>
       <p><strong>Bachgold</strong> — Re-Launch ohne Traffic-Verlust, live. <strong>Hearo</strong> — Custom-Architektur statt Theme-Adaption. Detail im Call, nicht in einer PowerPoint.</p>
+    </div>
+
+    <div class="bb-trust">
+      <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/>
+          <circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+        DACH-FOKUS
+      </div>
+      <div class="bb-trust-tuev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 15.5l-1.7-4.5L6 9.3l4.3-1.7L12 3z" fill="currentColor" stroke="none"/>
+          <path d="M18.5 14.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4z" fill="currentColor" stroke="none"/>
+          <path d="M5.5 16l.6 1.6 1.6.6-1.6.6L5.5 20.4 4.9 18.8 3.3 18.2l1.6-.6L5.5 16z" fill="currentColor" stroke="none"/>
+        </svg>
+        AI-NATIVE
+        <div class="badge">+4 JAHRE ERFAHRUNG</div>
+      </div>
+      <div class="bb-trust-reviews">
+        <div class="bb-trust-reviews-name">Brands-Score</div>
+        <div class="bb-trust-reviews-rating">
+          <span class="stars">★★★★★</span>
+          <span>5,0</span>
+        </div>
+        <div class="bb-trust-reviews-label">5+ DTC Brands · <a href="/cases/">Cases ansehen</a></div>
+      </div>
+      <div class="bb-trust-award">
+        <span class="bb-trust-award-text">FOUNDER<br>LED<br>2026</span>
+      </div>
     </div>
   </div>
 </section>
