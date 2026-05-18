@@ -3385,6 +3385,47 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
+<!-- ============= 4.7 · PROFIT-GAP-VIDEO (So arbeiten wir) ============= -->
+<style>
+  section.bb-gapvid{background:#fff;padding:90px 0;font-family:'Montserrat',sans-serif}
+  .bb-gapvid .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .bb-gapvid-head{text-align:center;margin-bottom:40px}
+  .bb-gapvid-ey{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .bb-gapvid-head h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(32px,4.6vw,52px);line-height:1.07;letter-spacing:-.025em;color:#0A0A0F;margin:0 auto 14px;max-width:760px}
+  .bb-gapvid-head h2 em{font-style:normal;color:var(--blue);font-weight:800}
+  .bb-gapvid-head p{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(16px,1.8vw,19px);line-height:1.5;color:#5a5852;max-width:600px;margin:0 auto}
+  .bb-gapvid-frame{position:relative;max-width:1080px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--bg-line,#e7e2d6);box-shadow:0 40px 90px -50px rgba(0,0,0,.4)}
+  .bb-gapvid-el{display:block;width:100%;height:auto;background:#0A0A0F}
+  @media(max-width:640px){section.bb-gapvid{padding:56px 0}.bb-gapvid .wrap{padding:0 20px}.bb-gapvid-frame{border-radius:12px}}
+</style>
+<section class="bb-gapvid">
+  <div class="wrap">
+    <div class="bb-gapvid-head">
+      <div class="bb-gapvid-ey">So arbeiten wir</div>
+      <h2>Wie wir die <em>Profit-Lücke</em> schließen.</h2>
+      <p>Von heute zu maximal profitabel — und warum sich daraus unsere Garantie trägt.</p>
+    </div>
+    <div class="bb-gapvid-frame">
+      <video class="bb-gapvid-el" muted loop playsinline preload="metadata"
+        poster="/assets/img/bb-profit-gap-poster.jpg" aria-label="Profit-Gap Erklaervideo BB Brands">
+        <source src="/assets/video/bb-profit-gap.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var v=document.querySelector('.bb-gapvid-el');if(!v)return;
+  var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(rm)return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}
+    else{v.pause();}
+  });},{threshold:.45});
+  io.observe(v);
+})();
+</script>
+
 <!-- ============= 5 · GARANTIEN · BAULIG-DNA ============= -->
 <section class="guarantees-dirty">
   <div class="wrap">
