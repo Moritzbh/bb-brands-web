@@ -410,6 +410,37 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
               <div class="brands-score-meta">5+ DTC-Brands · <a href="/cases/">Cases ansehen</a></div>
             </div>
           </div>
+<!-- ProvenExpert ProSeal · BB Brands -->
+<style>.bb-pe-wrap{display:flex;justify-content:center;margin:32px auto 0;max-width:560px;width:100%}.bb-pe-wrap #proSealWidget{width:100%}.bb-pe-wrap .pe-pro-seal-more-infos{font-family:'Montserrat',sans-serif;font-size:12px;color:var(--text-2);text-decoration:underline}</style>
+<div class="bb-pe-wrap">
+  <div id="proSealWidget"></div>
+  <noscript><a href="https://www.provenexpert.com/bb-brands/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=1cecfce2-e3d0-410c-a013-66548c3b1775" target="_blank" rel="noopener" title="Kundenbewertungen für BB Brands" class="pe-pro-seal-more-infos">Bewertungen ansehen</a></noscript>
+</div>
+<script defer nowprocket id="proSeal">
+  window.loadProSeal = function () {
+    window.provenExpert.proSeal({
+      widgetId: "1cecfce2-e3d0-410c-a013-66548c3b1775",
+      language: "de-DE",
+      usePageLanguage: false,
+      bannerColor: "#0305C6",
+      textColor: "#FFFFFF",
+      showBackPage: true,
+      showReviews: true,
+      hideDate: true,
+      hideName: false,
+      googleStars: true,
+      displayReviewerLastName: true,
+      embeddedSelector: "#proSealWidget"
+    });
+  };
+  window.addEventListener("load", function () {
+    var s = document.createElement("script");
+    s.src = "https://s.provenexpert.net/seals/proseal-v2.js";
+    s.onload = loadProSeal;
+    document.head.appendChild(s);
+  }, false);
+</script>
+<!-- /ProvenExpert -->
 
           <!-- Mobile-Only Anchor (Desktop hat Calendly direkt rechts) -->
           <a href="#book" class="anchor-cta">
