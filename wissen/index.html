@@ -712,6 +712,16 @@ html,body{overflow-x:clip;max-width:100%}
   font-size:13px;
   letter-spacing:.04em;
 }
+
+.bb-pe-tile{display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bg-line,#e7e2d6);border-radius:14px;padding:14px 20px;text-decoration:none;color:#0A0A0F;box-shadow:0 18px 40px -28px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease}
+.bb-pe-tile:hover{transform:translateY(-2px);box-shadow:0 22px 48px -26px rgba(0,0,0,.28);text-decoration:none;color:#0A0A0F}
+.bb-pe-tile-mark{flex:none;width:36px;height:36px;border-radius:50%;background:#C9A24B;color:#fff;display:flex;align-items:center;justify-content:center}
+.bb-pe-tile-mark svg{width:22px;height:22px}
+.bb-pe-tile-body{display:flex;flex-direction:column;gap:1px;line-height:1.15}
+.bb-pe-tile-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;color:#0A0A0F}
+.bb-pe-tile-stars{font-size:14px;color:#C9A24B;letter-spacing:1px}
+.bb-pe-tile-meta{font-family:'Inter Tight',sans-serif;font-size:11px;color:#7a786f;letter-spacing:.02em}
+@media(max-width:720px){.bb-pe-tile{padding:10px 14px;gap:10px}.bb-pe-tile-mark{width:30px;height:30px}.bb-pe-tile-name{font-size:12px}}
 </style>
 </head>
 <body>
@@ -825,6 +835,16 @@ html,body{overflow-x:clip;max-width:100%}
         </div>
         <div class="bb-trust-reviews-label">5+ DTC Brands · <a href="/cases/">Cases ansehen</a></div>
       </div>
+      <a class="bb-pe-tile" href="https://www.provenexpert.com/bb-brands/" target="_blank" rel="noopener" aria-label="ProvenExpert Bewertungen für BB Brands">
+  <span class="bb-pe-tile-mark" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+  </span>
+  <span class="bb-pe-tile-body">
+    <span class="bb-pe-tile-name">ProvenExpert</span>
+    <span class="bb-pe-tile-stars" aria-label="Sehr gut · 5 von 5 Sternen">★★★★★</span>
+    <span class="bb-pe-tile-meta">Sehr gut · geprüft</span>
+  </span>
+</a>
       <div class="bb-trust-award">
         <span class="bb-trust-award-text">FOUNDER<br>LED<br>2026</span>
       </div>
