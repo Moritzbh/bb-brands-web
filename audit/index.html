@@ -346,6 +346,18 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 }
 .audit-footer-min .links button:hover{color:var(--accent)}
 @media (max-width:600px){.audit-footer-min .wrap{flex-direction:column;text-align:center}}
+
+.bb-pe-tile{display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bg-line,#e7e2d6);border-radius:14px;padding:14px 20px;text-decoration:none;color:#0A0A0F;box-shadow:0 18px 40px -28px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease}
+.bb-pe-tile:hover{transform:translateY(-2px);box-shadow:0 22px 48px -26px rgba(0,0,0,.28);text-decoration:none;color:#0A0A0F}
+.bb-pe-tile-mark{flex:none;width:36px;height:36px;border-radius:50%;background:#C9A24B;color:#fff;display:flex;align-items:center;justify-content:center}
+.bb-pe-tile-mark svg{width:22px;height:22px}
+.bb-pe-tile-body{display:flex;flex-direction:column;gap:1px;line-height:1.15}
+.bb-pe-tile-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;color:#0A0A0F}
+.bb-pe-tile-stars{font-size:14px;color:#C9A24B;letter-spacing:1px}
+.bb-pe-tile-meta{font-family:'Inter Tight',sans-serif;font-size:11px;color:#7a786f;letter-spacing:.02em}
+@media(max-width:720px){.bb-pe-tile{padding:10px 14px;gap:10px}.bb-pe-tile-mark{width:30px;height:30px}.bb-pe-tile-name{font-size:12px}}
+
+.brands-score-wrap{display:flex !important;flex-wrap:wrap;align-items:center;gap:18px}
 </style>
 </head>
 <body>
@@ -409,39 +421,17 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
               </div>
               <div class="brands-score-meta">5+ DTC-Brands · <a href="/cases/">Cases ansehen</a></div>
             </div>
+            <a class="bb-pe-tile" href="https://www.provenexpert.com/bb-brands/" target="_blank" rel="noopener" aria-label="ProvenExpert Bewertungen für BB Brands">
+              <span class="bb-pe-tile-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+              </span>
+              <span class="bb-pe-tile-body">
+                <span class="bb-pe-tile-name">ProvenExpert</span>
+                <span class="bb-pe-tile-stars" aria-label="Sehr gut · 5 von 5 Sternen">★★★★★</span>
+                <span class="bb-pe-tile-meta">Sehr gut · geprüft</span>
+              </span>
+            </a>
           </div>
-<!-- ProvenExpert ProSeal · BB Brands -->
-<style>.bb-pe-wrap{display:flex;justify-content:center;margin:32px auto 0;max-width:560px;width:100%}.bb-pe-wrap #proSealWidget{width:100%}.bb-pe-wrap .pe-pro-seal-more-infos{font-family:'Montserrat',sans-serif;font-size:12px;color:var(--text-2);text-decoration:underline}</style>
-<div class="bb-pe-wrap">
-  <div id="proSealWidget"></div>
-  <noscript><a href="https://www.provenexpert.com/bb-brands/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=1cecfce2-e3d0-410c-a013-66548c3b1775" target="_blank" rel="noopener" title="Kundenbewertungen für BB Brands" class="pe-pro-seal-more-infos">Bewertungen ansehen</a></noscript>
-</div>
-<script defer nowprocket id="proSeal">
-  window.loadProSeal = function () {
-    window.provenExpert.proSeal({
-      widgetId: "1cecfce2-e3d0-410c-a013-66548c3b1775",
-      language: "de-DE",
-      usePageLanguage: false,
-      bannerColor: "#0305C6",
-      textColor: "#FFFFFF",
-      showBackPage: true,
-      showReviews: true,
-      hideDate: true,
-      hideName: false,
-      googleStars: true,
-      displayReviewerLastName: true,
-      embeddedSelector: "#proSealWidget"
-    });
-  };
-  window.addEventListener("load", function () {
-    var s = document.createElement("script");
-    s.src = "https://s.provenexpert.net/seals/proseal-v2.js";
-    s.onload = loadProSeal;
-    document.head.appendChild(s);
-  }, false);
-</script>
-<!-- /ProvenExpert -->
-
           <!-- Mobile-Only Anchor (Desktop hat Calendly direkt rechts) -->
           <a href="#book" class="anchor-cta">
             Termin wählen
