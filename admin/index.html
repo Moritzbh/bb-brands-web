@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Leads · BB Brands Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1850;--orange:#ff6b3d;--ink:#1b1b22;--muted:#6b7280;--line:#e7e9f0;--bg:#f5f6fb;--green:#16a34a;--red:#dc2626;--amber:#d9870a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--navy)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+
+/* Login */
+#login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 32px;max-width:380px;width:100%;box-shadow:0 12px 40px rgba(10,24,80,.08);text-align:center}
+.login-card h1{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.login-card p{font-size:14px;color:var(--muted);margin-bottom:22px}
+.login-card input{width:100%;font-size:15px;padding:14px 16px;border:1.5px solid var(--line);border-radius:11px;margin-bottom:14px;font-family:inherit}
+.login-card input:focus{outline:none;border-color:var(--orange)}
+.login-card button{width:100%;background:var(--orange);color:#fff;border:none;border-radius:11px;padding:14px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
+.login-card .err{color:var(--red);font-size:13px;margin-top:10px;min-height:18px}
+
+/* App */
+#app{display:none;padding:24px 0 60px}
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+.topbar h1{font-size:22px;font-weight:800;color:var(--navy)}
+.topbar h1 b{color:var(--orange)}
+.count{font-size:13px;color:var(--muted);font-weight:600}
+.tb-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);font-family:inherit}
+.btn:hover{border-color:var(--orange);color:var(--orange)}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--muted)}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filters select,.filters input{font-size:13px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;font-family:inherit;background:#fff;color:var(--ink)}
+.filters input{min-width:220px}
+
+.table-wrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto;box-shadow:0 6px 24px rgba(10,24,80,.05)}
+table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
+th{text-align:left;padding:13px 14px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafbff}
+.email{font-weight:600;color:var(--ink)}
+.email a{text-decoration:none}
+.sub{font-size:11.5px;color:var(--muted)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.seg-red{color:#b91c1c;background:#fde8e8}.seg-yellow{color:#a16207;background:#fef3c7}.seg-green{color:#15803d;background:#dcfce7}.seg-tier1{color:#6b21a8;background:#f3e8ff}.seg-na{color:var(--muted);background:#f1f2f6}
+.q-hot{color:#b91c1c;background:#fde8e8}.q-warm{color:#a16207;background:#fef3c7}.q-diy{color:#1d4ed8;background:#e0e7ff}.q-none{color:var(--muted);background:#f1f2f6}
+.score{font-family:ui-monospace,monospace;font-weight:600}
+select.status{font-size:12px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;font-weight:600;font-family:inherit;cursor:pointer;background:#fff}
+.st-new{color:var(--orange)}.st-won{color:var(--green)}.st-lost{color:var(--red)}
+.del{background:none;border:none;color:#c3c8d6;cursor:pointer;font-size:16px;padding:4px 8px;line-height:1}
+.del:hover{color:var(--red)}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.src{font-size:11.5px;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:680px){th:nth-child(4),td:nth-child(4),th:nth-child(7),td:nth-child(7){display:none}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-card">
+    <h1>BB Brands · Leads</h1>
+    <p>Admin-Token eingeben</p>
+    <input type="password" id="token" placeholder="ADMIN_TOKEN" autocomplete="off">
+    <button id="loginBtn">Einloggen</button>
+    <div class="err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>BB <b>Leads</b></h1>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="tb-actions">
+        <button class="btn" id="refreshBtn">↻ Aktualisieren</button>
+        <button class="btn" id="exportBtn">⤓ CSV-Export</button>
+        <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <input type="search" id="search" placeholder="E-Mail / Name / Marke suchen …">
+      <select id="fMagnet"><option value="">Alle Quellen</option></select>
+      <select id="fSegment">
+        <option value="">Alle Segmente</option>
+        <option value="red">🔴 Profit erodiert</option>
+        <option value="yellow">🟡 Wachstum stoppt</option>
+        <option value="green">🟢 Sauber</option>
+        <option value="tier1">⚪ Pre-Revenue</option>
+      </select>
+      <select id="fStatus">
+        <option value="">Alle Status</option>
+        <option value="new">Neu</option>
+        <option value="contacted">Kontaktiert</option>
+        <option value="call-booked">Call gebucht</option>
+        <option value="proposal">Angebot</option>
+        <option value="won">Gewonnen</option>
+        <option value="lost">Verloren</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Datum</th><th>Kontakt</th><th>Quelle</th><th>Segment / Tier</th><th>Scores</th><th>Bereitschaft</th><th>Herkunft</th><th>Status</th><th></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none">Keine Leads.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var TOKEN_KEY='bb_admin_token';
+  var token=localStorage.getItem(TOKEN_KEY)||'';
+  var leads=[];
+
+  var SEG={tier1:['⚪ Pre-Revenue','seg-tier1'],red:['🔴 Profit erodiert','seg-red'],yellow:['🟡 Wachstum stoppt','seg-yellow'],green:['🟢 Sauber','seg-green']};
+  var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
+  var STATUSES=[['new','Neu'],['contacted','Kontaktiert'],['call-booked','Call gebucht'],['proposal','Angebot'],['won','Gewonnen'],['lost','Verloren'],['in-progress','In Arbeit'],['delivered','Geliefert']];
+  var MAGNET={'quiz-diagnose':'Profit-Quiz','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check'};
+
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  // ---- Auth ----
+  function showLogin(msg){ $('login').style.display='flex'; $('app').style.display='none'; if(msg)$('loginErr').textContent=msg; $('token').focus(); }
+  function showApp(){ $('login').style.display='none'; $('app').style.display='block'; }
+
+  async function api(method,body){
+    var opts={method:method,headers:{'Authorization':'Bearer '+token}};
+    if(body){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(body);}
+    var r=await fetch('/api/leads',opts);
+    if(r.status===401){localStorage.removeItem(TOKEN_KEY);token='';showLogin('Token ungültig.');throw new Error('401');}
+    return r.json();
+  }
+
+  async function load(){
+    try{
+      var data=await api('GET');
+      leads=(data&&data.leads)||[];
+      buildMagnetFilter();
+      render();
+    }catch(e){ if(e.message!=='401') $('count').textContent='Fehler beim Laden.'; }
+  }
+
+  function buildMagnetFilter(){
+    var sel=$('fMagnet'); var cur=sel.value;
+    var types=[...new Set(leads.map(function(l){return l.magnet||'?';}))];
+    sel.innerHTML='<option value="">Alle Quellen</option>'+types.map(function(t){return '<option value="'+esc(t)+'">'+esc(MAGNET[t]||t)+'</option>';}).join('');
+    sel.value=cur;
+  }
+
+  function filtered(){
+    var q=$('search').value.trim().toLowerCase();
+    var fm=$('fMagnet').value, fs=$('fSegment').value, fst=$('fStatus').value;
+    return leads.filter(function(l){
+      if(fm&&l.magnet!==fm)return false;
+      if(fs&&l.segment!==fs)return false;
+      if(fst&&(l.status||'new')!==fst)return false;
+      if(q){var hay=((l.email||'')+' '+(l.name||'')+' '+(l.brand||'')+' '+(l.company||'')).toLowerCase();if(hay.indexOf(q)<0)return false;}
+      return true;
+    });
+  }
+
+  function fmtDate(s){ if(!s)return '—'; var d=new Date(s); return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}); }
+  function source(l){ if(l.utmSource)return l.utmSource+(l.utmCampaign?' · '+l.utmCampaign:''); if(l.attribution)return l.attribution; if(l.referrerDomain)return l.referrerDomain; return 'Direct'; }
+
+  function render(){
+    var list=filtered();
+    $('count').textContent=list.length+' von '+leads.length+' Leads';
+    $('empty').style.display=list.length?'none':'block';
+    $('rows').innerHTML=list.map(function(l){
+      var seg=SEG[l.segment]; var qual=QUAL[l.qualification];
+      var contact=l.email?('<a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>'):'';
+      var nameLine=(l.name||l.brand||l.company)?('<div class="sub">'+esc(l.name||l.brand||l.company)+'</div>'):'';
+      var segCell=seg?('<span class="badge '+seg[1]+'">'+seg[0]+'</span>'+(l.tier?' <span class="sub">T'+l.tier+'</span>':'')):'<span class="sub">—</span>';
+      var scores=(l.profitScore!=null||l.growthScore!=null)?('<span class="score">P'+(l.profitScore!=null?l.profitScore:'?')+' · G'+(l.growthScore!=null?l.growthScore:'?')+'</span>'):'<span class="sub">—</span>';
+      var qCell=qual?('<span class="badge '+qual[1]+'">'+qual[0]+'</span>'):'<span class="sub">—</span>';
+      var st=l.status||'new';
+      var stOpts=STATUSES.map(function(s){return '<option value="'+s[0]+'"'+(s[0]===st?' selected':'')+'>'+s[1]+'</option>';}).join('');
+      var stClass=st==='won'?'st-won':st==='lost'?'st-lost':st==='new'?'st-new':'';
+      return '<tr data-id="'+esc(l.id)+'">'+
+        '<td class="sub">'+fmtDate(l.createdAt)+'</td>'+
+        '<td class="email">'+contact+nameLine+'</td>'+
+        '<td class="sub">'+esc(MAGNET[l.magnet]||l.magnet||'?')+'</td>'+
+        '<td>'+segCell+'</td>'+
+        '<td>'+scores+'</td>'+
+        '<td>'+qCell+'</td>'+
+        '<td class="src">'+esc(source(l))+'</td>'+
+        '<td><select class="status '+stClass+'" data-id="'+esc(l.id)+'">'+stOpts+'</select></td>'+
+        '<td><button class="del" data-id="'+esc(l.id)+'" title="Löschen">✕</button></td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  // ---- Events ----
+  document.addEventListener('change',function(e){
+    if(e.target.classList.contains('status')){
+      var id=e.target.getAttribute('data-id'),status=e.target.value;
+      api('PATCH',{id:id,status:status}).then(function(){var l=leads.find(function(x){return x.id===id;});if(l)l.status=status;render();}).catch(function(){});
+    }
+  });
+  document.addEventListener('click',function(e){
+    if(e.target.classList.contains('del')){
+      var id=e.target.getAttribute('data-id');
+      if(!confirm('Diesen Lead wirklich löschen?'))return;
+      api('DELETE',{id:id}).then(function(){leads=leads.filter(function(x){return x.id!==id;});render();}).catch(function(){});
+    }
+  });
+  ['search','fMagnet','fSegment','fStatus'].forEach(function(id){$(id).addEventListener('input',render);$(id).addEventListener('change',render);});
+  $('refreshBtn').onclick=load;
+  $('logoutBtn').onclick=function(){localStorage.removeItem(TOKEN_KEY);token='';showLogin('');};
+  $('exportBtn').onclick=function(){
+    var cols=['createdAt','email','name','brand','magnet','segment','tier','profitScore','growthScore','qualification','bias','status','utmSource','utmCampaign','referrerDomain'];
+    var rows=[cols.join(',')].concat(filtered().map(function(l){return cols.map(function(c){var v=l[c]==null?'':String(l[c]).replace(/"/g,'""');return '"'+v+'"';}).join(',');}));
+    var blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bb-leads-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  };
+  function doLogin(){var t=$('token').value.trim();if(!t)return;token=t;localStorage.setItem(TOKEN_KEY,t);$('loginErr').textContent='';showApp();load();}
+  $('loginBtn').onclick=doLogin;
+  $('token').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+
+  // ---- Init ----
+  if(token){showApp();load();}else{showLogin('');}
+})();
+</script>
+
+</body>
+</html>

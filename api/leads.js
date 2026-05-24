@@ -43,6 +43,10 @@ const NTFY_TOPIC = NTFY_TOPIC_RAW
   .replace(/^\/+/, '');               // strip leading slashes
 const NTFY_SERVER = (process.env.NTFY_SERVER || 'https://ntfy.sh').trim().replace(/\/+$/, '');
 
+// Klaviyo (optional — Email-Marketing; läuft nur wenn beide Env-Vars gesetzt sind)
+const KLAVIYO_API_KEY = process.env.KLAVIYO_API_KEY || '';
+const KLAVIYO_LIST_ID = process.env.KLAVIYO_LIST_ID || '';
+
 const HASH_KEY = 'bb:leads';
 
 const PAIN_LABELS = {
@@ -73,6 +77,12 @@ const TIMELINE_PUSH_LABELS = {
   '1-monat': '~1 Monat',
   '2-3-monate': '2–3 Monate',
   'explorativ': 'Explorativ',
+};
+const QUAL_PUSH_LABELS = {
+  hot: 'Budget bereit',
+  warm: 'Bereit, wenn Plan passt',
+  diy: 'Will selbst machen',
+  none: 'Kein Budget',
 };
 
 // Erstgespräch-Form enums (aus website/erstgespraech.html)
@@ -199,6 +209,74 @@ module.exports = async function handler(req, res) {
       const magnet = str(body.magnet, 40) || 'style-guide';
       const isWhatsAppFunnel = magnet === 'whatsapp-chat';
       const isErstgespraech = magnet === 'erstgespraech';
+      const isQuizDiagnose = magnet === 'quiz-diagnose';
+
+      // ========== QUIZ-DIAGNOSE (Per-Order-Math-Funnel /diagnose) ==========
+      if (isQuizDiagnose) {
+        const SEGMENTS = ['tier1', 'red', 'yellow', 'green'];
+        // answers: [{q, label}, ...] — defensiv parsen + kürzen
+        let answers = [];
+        if (Array.isArray(body.answers)) {
+          answers = body.answers.slice(0, 12).map((a) => ({
+            q: str(a && a.q, 40),
+            label: str(a && a.label, 200),
+          }));
+        }
+
+        const lead = {
+          magnet: 'quiz-diagnose',
+          email: str(body.email, 200),
+          tier: [1, 2, 3].includes(Number(body.tier)) ? Number(body.tier) : null,
+          segment: SEGMENTS.includes(body.segment) ? body.segment : '',
+          profitScore: Number.isFinite(Number(body.profit_score)) ? Number(body.profit_score) : null,
+          growthScore: Number.isFinite(Number(body.growth_score)) ? Number(body.growth_score) : null,
+          bias: str(body.bias, 20),
+          qualification: ['hot', 'warm', 'diy', 'none'].includes(body.qualification) ? body.qualification : '',
+          answers,
+          consentNewsletter:
+            body.consentNewsletter === true ||
+            body.consentNewsletter === 'true' ||
+            body.consentNewsletter === 'on',
+          ...extractAttribution(body),
+        };
+
+        const errors = {};
+        if (!lead.email || !isEmail(lead.email)) errors.email = 'E-Mail ungültig';
+        if (!lead.consentNewsletter) errors.consentNewsletter = 'Einwilligung erforderlich';
+        if (!lead.segment) errors.segment = 'Segment fehlt';
+        if (Object.keys(errors).length) {
+          return jsonResponse(res, 400, { ok: false, errors });
+        }
+
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const now = new Date().toISOString();
+        const record = {
+          id,
+          ...lead,
+          status: 'new',
+          createdAt: now,
+          deliveredAt: null,
+          consentNewsletterAt: lead.consentNewsletter ? now : null,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
+          userAgent: str(req.headers['user-agent'] || '', 300),
+        };
+
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+
+        // Email-Marketing: Lead in Klaviyo-Liste (nur bei Newsletter-Consent)
+        if (record.consentNewsletter) {
+          await sendToKlaviyo(record).catch((err) =>
+            console.error('[/api/leads] klaviyo failed:', err)
+          );
+        }
+
+        // Await: siehe Kommentar oben — Push ist sonst race-condition-anfällig
+        await sendPushNotification(record).catch((err) =>
+          console.error('[/api/leads] push notify failed:', err)
+        );
+
+        return jsonResponse(res, 200, { ok: true, id });
+      }
 
       // ========== ERSTGESPRÄCH FORMULAR ==========
       if (isErstgespraech) {
@@ -397,7 +475,7 @@ module.exports = async function handler(req, res) {
       }
       const body = req.body || (await readJsonBody(req));
       const id = str(body.id, 80);
-      const status = ['new', 'in-progress', 'delivered'].includes(body.status)
+      const status = ['new', 'in-progress', 'delivered', 'contacted', 'call-booked', 'proposal', 'won', 'lost'].includes(body.status)
         ? body.status
         : null;
       if (!id || !status) {
@@ -501,6 +579,61 @@ async function sendWhatsAppLeadEmail(record) {
     const errText = await resp.text();
     throw new Error(`Resend ${resp.status}: ${errText}`);
   }
+}
+
+// ----- Klaviyo subscribe (Email-Marketing, optional) -------
+// Legt/aktualisiert ein Profil an + abonniert die Liste MIT Consent (Double-Opt-in
+// via Klaviyo-Flow möglich). Custom-Properties (Segment/Tier/Scores/Qualifikation)
+// landen als Profil-Properties für Segmentierung. Läuft nur wenn Env-Vars gesetzt.
+async function sendToKlaviyo(record) {
+  if (!KLAVIYO_API_KEY || !KLAVIYO_LIST_ID) {
+    console.log('[klaviyo] skipped — KLAVIYO_API_KEY / KLAVIYO_LIST_ID nicht gesetzt');
+    return;
+  }
+  const props = {
+    bb_segment: record.segment || '',
+    bb_tier: record.tier != null ? record.tier : '',
+    bb_profit_score: record.profitScore != null ? record.profitScore : '',
+    bb_growth_score: record.growthScore != null ? record.growthScore : '',
+    bb_qualification: record.qualification || '',
+    bb_magnet: record.magnet || '',
+    bb_source: record.utmSource || record.referrerDomain || 'direct',
+    bb_utm_campaign: record.utmCampaign || '',
+    bb_lead_id: record.id || '',
+  };
+  const payload = {
+    data: {
+      type: 'profile-subscription-bulk-create-job',
+      attributes: {
+        profiles: {
+          data: [{
+            type: 'profile',
+            attributes: {
+              email: record.email,
+              properties: props,
+              subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } },
+            },
+          }],
+        },
+      },
+      relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } },
+    },
+  };
+  const resp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+    method: 'POST',
+    headers: {
+      Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+      revision: '2024-10-15',
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!resp.ok) {
+    const errText = await resp.text();
+    throw new Error(`Klaviyo ${resp.status}: ${errText}`);
+  }
+  console.log(`[klaviyo] subscribe ok — ${record.email} → list ${KLAVIYO_LIST_ID}`);
 }
 
 // ----- ntfy.sh push notifier (optional) --------------------
@@ -613,6 +746,38 @@ function buildPushPayload(record) {
       message: lines.join('\n'),
       priority: isHighValue ? 'high' : 'default',
       tags: isHighValue ? 'fire,moneybag' : 'mailbox_with_mail',
+      clickUrl: ADMIN_URL,
+      actions: actionsHeader,
+    };
+  }
+
+  // === QUIZ-DIAGNOSE (Per-Order-Math-Funnel) ===
+  if (record.magnet === 'quiz-diagnose') {
+    const SEG_LABELS = {
+      tier1: '⚪ Tier 1 · Noch nicht ready',
+      red: '🔴 RED · Profit erodiert',
+      yellow: '🟡 YELLOW · Wachstum stoppt',
+      green: '🟢 GREEN · Sauber aufgestellt',
+    };
+    const TIER_LABELS = { 1: 'Pre-Revenue', 2: 'Tier 2', 3: 'Tier 3 · Premium' };
+    // Qualifiziert = Tier 2/3 mit Engpass (RED/YELLOW) → das sind die Audit-Kandidaten
+    const isQualified = (record.tier === 2 || record.tier === 3) &&
+      (record.segment === 'red' || record.segment === 'yellow');
+    const prefix = isQualified ? '🔥 QUIZ-LEAD · ' : 'Quiz · ';
+    const title = `${prefix}${SEG_LABELS[record.segment] || record.segment}`;
+    const lines = [
+      record.email ? `✉️ ${record.email}` : null,
+      record.tier ? `📊 ${TIER_LABELS[record.tier] || 'Tier ' + record.tier}` : null,
+      `🩺 Profit-Score: ${record.profitScore != null ? record.profitScore : '?'}/9 · Growth-Score: ${record.growthScore != null ? record.growthScore : '?'}/6`,
+      record.qualification ? `💸 Bereitschaft: ${QUAL_PUSH_LABELS[record.qualification] || record.qualification}` : null,
+      `\n${sourceLine}`,
+      time ? `🕐 ${time} Uhr` : null,
+    ].filter(Boolean);
+    return {
+      title,
+      message: lines.join('\n'),
+      priority: isQualified ? 'high' : 'default',
+      tags: isQualified ? 'fire,stethoscope' : 'stethoscope',
       clickUrl: ADMIN_URL,
       actions: actionsHeader,
     };
