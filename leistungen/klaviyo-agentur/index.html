@@ -310,6 +310,19 @@ footer .footer-links a:hover{color:var(--accent)}
   .bb-section{padding:56px 0}
   .guar-promise{font-size:17px;padding-left:16px}
 }
+
+/* Hero Trust-Badges (Shopify Partner · Klaviyo · ProvenExpert) */
+.hero-trust-badges{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin:30px auto 0;padding-top:26px;border-top:1px solid rgba(0,0,0,.09);max-width:720px}
+.hero-trust-badges img.htb-shopify{height:30px;width:auto;opacity:.9}
+.hero-trust-badges .htb-div{width:1px;height:26px;background:rgba(0,0,0,.12)}
+.hero-trust-badges .htb-klaviyo{font-weight:700;font-size:19px;font-style:italic;letter-spacing:-.01em;color:#0a0a0a;display:inline-flex;align-items:baseline;gap:6px}
+.hero-trust-badges .htb-klaviyo small{font-style:normal;font-size:11px;font-weight:600;color:#6b6b6b;letter-spacing:.05em;text-transform:uppercase}
+.hero-trust-badges .htb-pe{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+.hero-trust-badges .htb-pe-stars{color:var(--accent,#FF6B3D);font-size:17px;letter-spacing:1.5px;line-height:1}
+.hero-trust-badges .htb-pe-text{font-size:13px;color:#3a3a3a;line-height:1.2}
+.hero-trust-badges .htb-pe-text strong{color:#0a0a0a;font-weight:700}
+.hero-trust-badges .htb-pe:hover .htb-pe-text strong{color:var(--blue,#0305C6)}
+@media(max-width:560px){.hero-trust-badges{gap:14px}.hero-trust-badges .htb-div{display:none}}
 </style>
 </head>
 <body>
@@ -379,6 +392,16 @@ footer .footer-links a:hover{color:var(--accent)}
       <span class="item">Bachgold · <strong>+125 % AOV</strong></span>
       <span class="item"><strong>Welcome → Win-Back</strong> · voll attribuiert</span>
       <span class="item"><strong>120 Tage</strong> Profit-refinanziert · sonst gratis</span>
+    </div>
+    <div class="hero-trust-badges" aria-label="Zertifizierungen und Bewertungen">
+      <img src="/assets/images/logos/shopify-partner-v2.png" alt="Shopify Partner" class="htb-shopify" loading="lazy">
+      <span class="htb-div" aria-hidden="true"></span>
+      <span class="htb-klaviyo">klaviyo<small>Partner</small></span>
+      <span class="htb-div" aria-hidden="true"></span>
+      <a class="htb-pe" href="https://www.provenexpert.com/bb-brands/" target="_blank" rel="noopener" aria-label="ProvenExpert: Sehr gut, 5 von 5 Sternen">
+        <span class="htb-pe-stars" aria-hidden="true">★★★★★</span>
+        <span class="htb-pe-text">ProvenExpert &middot; <strong>Sehr gut</strong></span>
+      </a>
     </div>
   </div>
 </section>
