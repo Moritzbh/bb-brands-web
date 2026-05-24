@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Gratis Profit-Analyse · 90 Sekunden. Finde heraus, wo dein Profit zwischen Ads, COGS und Retention verloren geht. Kein Call, kein Pitch.">
+<meta name="robots" content="noindex,nofollow">
+<title>Gratis Profit-Analyse · 90 Sekunden · BB Brands</title>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260514-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<style>
+/* ============================================================
+   /funnel/diagnose · Gratis Profit-Analyse · Quiz-LP
+   Stil: Wissen-Hub / Baulig-DNA (Montserrat · schwarze Topnav ·
+   Parallax-Founder-Sections · scharfkantige Amber-CTAs).
+   QUIZ-STAGE = Custom-Section: Engine + UX 1:1 behalten, nur
+   Typo (Montserrat) + Amber sauber an den Look angeglichen.
+   ============================================================ */
+header.site-header,.mobile-menu,.top-bar{display:none !important}
+body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;color:#000;background:#fff}
+
+/* ===== Quiz-Tokens (damit die Custom-Quiz-CSS unverändert greift) ===== */
+:root{
+  --bg-amber:#FF6B3D;--bg-amber-hover:#E85A2C;--bg-green-up:#16a34a;
+  --bg-text-body:#333;--bg-text-muted:#666;--bg-line:#e5e5e5;
+  --bg-founder-1:url('/assets/img/wissen-hero-founder-2000.jpg');
+  --bg-founder-2:url('/assets/img/wissen-marktlogik-2000.jpg');
+  --bg-founder-3:url('/assets/img/wissen-bottomcta-2000.jpg');
+  --accent:#ff6b3d;--accent-2:#e85a2c;--accent-bg:#fff4ee;--accent-soft:#ffd9c7;
+  --ink:#1b1b22;--muted:#6f7480;--faint:#a6aab3;
+  --cream:#faf7f2;--line-2:#e4ded3;--bg-input:#faf9f6;
+  --shadow-cta:0 12px 26px rgba(255,107,61,.34),0 2px 6px rgba(255,107,61,.20);
+  --body:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+/* ===== BAULIG TOPNAV (schwarz · conversion-fokussiert) ===== */
+.bb-topnav{background:#000;color:#fff;position:sticky;top:0;z-index:60;font-family:'Montserrat',sans-serif}
+.bb-topnav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:1340px;margin:0 auto;padding:0 32px;height:78px;gap:14px}
+.bb-topnav-brand{display:inline-flex;align-items:baseline;color:#fff;text-decoration:none;font-family:'Inter Tight',-apple-system,sans-serif;font-weight:300;font-size:32px;line-height:1;letter-spacing:-.01em;white-space:nowrap}
+.bb-topnav-brand:hover{opacity:.9}
+.bb-topnav-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px}
+.bb-topnav-cta{background:transparent;color:#fff;border:1px solid #fff;padding:13px 26px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;transition:all .2s;text-decoration:none;white-space:nowrap;cursor:pointer;display:inline-flex;align-items:center;gap:9px}
+.bb-topnav-cta svg{width:15px;height:15px}
+.bb-topnav-cta:hover{background:var(--bg-amber);border-color:var(--bg-amber);color:#fff}
+body.is-quiz .bb-topnav-cta{display:none}
+@media (max-width:780px){.bb-topnav .wrap{height:62px;padding:0 20px}.bb-topnav-brand{font-size:26px}.bb-topnav-cta{padding:11px 18px;font-size:12px}.bb-topnav-cta span{display:none}}
+
+/* ===== PAGE BASE ===== */
+html,body{overflow-x:clip;max-width:100%}
+.bb-page{overflow-x:clip;width:100%;max-width:100%;font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.7;font-weight:400;color:#000}
+.bb-page section,.bb-page .wrap{max-width:100%;min-width:0}
+.bb-page .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.bb-page .wrap{padding:0 20px}}
+
+.bb-section{padding:80px 0;background-color:#fff;background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;position:relative}
+.bb-section-80{background-image:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),var(--bg-founder-1)}
+.bb-section-90{background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-2)}
+.bb-section-95{background-image:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),var(--bg-founder-1)}
+.bb-section-50{background-image:linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.62)),var(--bg-founder-3)}
+@media (max-width:780px){.bb-section{background-attachment:scroll;padding:54px 0}}
+
+/* ===== HEAD ===== */
+.bb-head{text-align:center;margin-bottom:48px}
+.bb-head-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bg-amber);margin-bottom:16px}
+.bb-head h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);line-height:1.25;color:#000;max-width:860px;margin:0 auto 16px}
+.bb-head p{font-size:17px;color:var(--bg-text-body);max-width:680px;margin:0 auto;line-height:1.65}
+.bb-mark{background:linear-gradient(transparent 58%,rgba(255,107,61,.28) 58%);color:#000;font-weight:700;padding:0 1px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* ===== CTA ===== */
+.bb-cta{display:inline-flex;align-items:center;gap:10px;background:var(--bg-amber);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em;padding:18px 48px;border:none;border-radius:0;box-shadow:1px 1px 20px rgba(0,0,0,.3);transition:all .2s;text-align:center;line-height:1.3;cursor:pointer;text-decoration:none}
+.bb-cta svg{width:18px;height:18px}
+.bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);color:#fff;text-decoration:none}
+.bb-cta.large{font-size:18px;padding:22px 64px}
+.bb-cta-meta{font-size:13px;font-style:italic;color:var(--bg-text-muted);margin-top:14px}
+
+/* ===== HERO ===== */
+.bb-hero{padding-top:60px;text-align:center}
+.bb-hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;color:var(--bg-text-body);margin-bottom:22px}
+.bb-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(30px,5vw,46px);font-weight:700;line-height:1.12;color:#000;max-width:880px;margin:0 auto 20px}
+.bb-hero-sub{font-size:18px;font-weight:600;line-height:1.5;color:#000;max-width:680px;margin:0 auto 36px}
+.bb-hero-sub b{font-weight:800}
+
+/* ===== VIDEO ===== */
+.bb-video{max-width:740px;margin:0 auto 30px;background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.15);position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.34)),var(--bg-founder-1);background-size:cover;background-position:center;overflow:hidden}
+.bb-video-play{width:80px;height:80px;border-radius:50%;background:var(--bg-amber);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(255,107,61,.5);cursor:pointer;position:relative;border:none}
+.bb-video-play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.4);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+.bb-video-play svg{width:30px;height:30px;color:#fff;margin-left:4px}
+.bb-video-time{position:absolute;top:14px;right:14px;font-size:12px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);padding:4px 9px}
+.bb-video-cap{position:absolute;left:18px;bottom:16px;right:18px;color:rgba(255,255,255,.94);font-size:13px;font-weight:600}
+
+/* ===== HERO TRUST + LOGOS ===== */
+.hero-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 18px;margin-top:22px;font-size:14px;color:var(--bg-text-body);font-weight:600}
+.hero-trust .stars{color:var(--bg-amber);letter-spacing:1px}
+.hero-trust b{color:#000}
+.hero-trust .sep{color:var(--bg-line)}
+.hero-trust img{height:20px;width:auto;vertical-align:middle}
+.logos{margin-top:40px;border-top:1px solid var(--bg-line);padding-top:28px}
+.logos-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bg-text-muted);margin-bottom:18px;text-align:center}
+.marq{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marq-track{display:flex;align-items:center;gap:56px;width:max-content;animation:scroll 30s linear infinite}
+.marq-track:hover{animation-play-state:paused}
+.marq-track img{height:26px;width:auto;opacity:.45;filter:grayscale(1);flex-shrink:0}
+.marq-track .wm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#bbb;flex-shrink:0;white-space:nowrap}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 28px))}}
+@media(prefers-reduced-motion:reduce){.marq-track{animation:none}}
+
+/* ===== VALUE-CHECKS ===== */
+.val-checks{list-style:none;max-width:600px;margin:0 auto;display:grid;gap:14px;padding:0}
+.val-checks li{display:flex;gap:13px;align-items:flex-start;font-size:16px;color:#000;font-weight:600;line-height:1.45;background:#fff;box-shadow:1px 1px 20px rgba(0,0,0,.08);padding:16px 20px}
+.val-checks .ic{flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--bg-green-up)}
+.val-checks .ic svg{width:18px;height:18px}
+
+/* ===== CASE-Block ===== */
+.case{background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.12);display:grid;grid-template-columns:1fr 1fr;max-width:980px;margin:48px auto 0;overflow:hidden}
+@media(max-width:780px){.case{grid-template-columns:1fr}}
+.case-shot{position:relative;background:#f2ece2;min-height:300px}
+.case-shot img{width:100%;height:100%;object-fit:cover}
+.case-badge{position:absolute;top:16px;left:16px;background:#000;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px}
+.case-body{padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
+.case-brand{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#000;margin-bottom:20px}
+.case-brand span{color:var(--bg-text-muted);font-weight:600;font-size:14px}
+.case-metrics{display:flex;gap:34px;margin-bottom:20px}
+.cm-label{font-size:11px;color:var(--bg-text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.cm-val{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;color:var(--bg-green-up);line-height:1.1}
+.cm-sub{font-size:12.5px;color:var(--bg-text-muted);margin-top:2px}
+.cm-sub b{color:#000}
+.case-refi{display:flex;gap:11px;align-items:flex-start;background:#ecfdf5;padding:13px 15px;font-size:13.5px;color:var(--bg-text-body);line-height:1.5}
+.case-refi svg{width:18px;height:18px;color:var(--bg-green-up);flex-shrink:0;margin-top:1px}
+.case-refi b{color:#000}
+.case-ctx{font-size:13px;color:var(--bg-text-muted);margin-top:14px;line-height:1.5}
+
+/* ===== GOOGLE-REVIEW-Quote ===== */
+.case-quote-intro{text-align:center;font-family:'Montserrat',sans-serif;font-weight:600;color:#000;margin:48px 0 16px}
+.case-quote{display:block;max-width:620px;margin:0 auto;background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.1);padding:32px 34px;text-decoration:none;text-align:center}
+.case-quote:hover{box-shadow:1px 1px 40px rgba(0,0,0,.16);text-decoration:none}
+.cq-stars{color:var(--bg-amber);font-size:18px;letter-spacing:2px;margin-bottom:14px}
+.cq-text{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:600;line-height:1.5;color:#000;margin-bottom:16px}
+.cq-who{font-size:14px;color:var(--bg-text-muted)}
+.cq-who b{color:#000}
+.cq-google{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--bg-amber)}
+.cq-google svg{width:15px;height:15px}
+
+/* ===== FOUNDER ===== */
+.founder-card{display:grid;grid-template-columns:.85fr 1.15fr;background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.12);max-width:980px;margin:0 auto;overflow:hidden}
+@media(max-width:780px){.founder-card{grid-template-columns:1fr}}
+.founder-photo{background:#f2ece2;min-height:300px}
+.founder-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.founder-msg{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.founder-tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bg-amber);margin-bottom:14px}
+.founder-usp{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(24px,3vw,30px);line-height:1.18;color:#000;margin-bottom:14px}
+.founder-usp u{text-decoration-color:var(--bg-amber);text-decoration-thickness:2px;text-underline-offset:4px}
+.founder-line{font-size:15px;color:var(--bg-text-body);line-height:1.6;margin-bottom:22px}
+.founder-chips{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+.founder-chips span{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#000}
+.founder-chips svg{width:15px;height:15px;color:var(--bg-green-up);flex-shrink:0}
+.founder-name{font-size:14px;color:var(--bg-text-muted)}
+.founder-name b{color:#000}
+
+/* ===== STICKY BOTTOM ===== */
+.stickybar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#000;box-shadow:0 -8px 28px rgba(0,0,0,.18);transform:translateY(120%);transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.stickybar.show{transform:translateY(0)}
+.stickybar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1140px;margin:0 auto;padding:12px 32px}
+.sb-text{font-family:'Montserrat',sans-serif;font-weight:700;color:#fff;font-size:15px}
+.sb-text span{display:block;font-weight:500;color:rgba(255,255,255,.7);font-size:12.5px}
+@media(max-width:620px){.sb-text{display:none}.stickybar .wrap{justify-content:center;padding:12px 20px}.stickybar .bb-cta{width:100%;justify-content:center}}
+
+/* Footer overrides (shared.css <footer>) */
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--accent)}
+
+/* ============ QUIZ-STAGE · Custom-Section (Engine 1:1 · Typo+Amber angeglichen) ============ */
+.dx-screen{display:none}
+.dx-screen.is-active{display:block;animation:dxIn .34s cubic-bezier(.22,.61,.36,1)}
+@keyframes dxIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.dx-screen{animation:none}}
+.dx-stage{min-height:calc(100dvh - 78px);display:flex;align-items:center;justify-content:center;padding:42px 24px 60px}
+.dx-panel{width:100%;max-width:660px}
+.dx-progress{margin-bottom:28px}
+.dx-progress-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.dx-step-label{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dx-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
+.dx-back:hover{color:var(--accent);background:var(--accent-bg)}
+.dx-back svg{width:14px;height:14px}
+.dx-back[hidden]{display:none}
+.dx-bar{height:6px;background:var(--accent-bg);border-radius:99px;overflow:hidden}
+.dx-bar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),#ff8c5f);transition:width .42s cubic-bezier(.22,.61,.36,1)}
+.dx-q{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(23px,4vw,31px);line-height:1.16;letter-spacing:-.01em;color:var(--ink);margin-bottom:8px}
+.dx-q-hint{font-size:14px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:7px}
+.dx-q-hint[hidden]{display:none}
+.dx-q-hint svg{width:15px;height:15px;flex-shrink:0;opacity:.8}
+.dx-q-hint--gap{margin-bottom:24px}
+.dx-options{display:grid;gap:12px}
+.dx-options.grid2{grid-template-columns:1fr 1fr}
+@media(max-width:560px){.dx-options.grid2{grid-template-columns:1fr}}
+.dx-opt{position:relative;text-align:left;cursor:pointer;background:#fff;border:1.5px solid var(--line-2);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:15px;font-family:var(--body);transition:border-color .16s,background .16s,transform .12s,box-shadow .16s}
+.dx-opt:hover{border-color:var(--accent-soft);background:var(--accent-bg);transform:translateY(-1px)}
+.dx-opt:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg)}
+.dx-opt.is-selected{border-color:var(--accent);background:var(--accent-bg);box-shadow:0 0 0 3px rgba(255,107,61,.12)}
+.dx-opt-key{flex-shrink:0;width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--line-2);font-weight:700;font-size:14px;color:var(--muted);transition:all .16s}
+.dx-opt:hover .dx-opt-key,.dx-opt.is-selected .dx-opt-key{background:var(--accent);border-color:var(--accent);color:#fff}
+.dx-opt-body{flex:1;min-width:0}
+.dx-opt-label{display:block;font-size:16px;font-weight:600;color:var(--ink);line-height:1.3}
+.dx-opt-sub{display:block;font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.dx-opt-check{flex-shrink:0;width:20px;height:20px;opacity:0;transform:scale(.6);color:var(--accent);transition:all .18s}
+.dx-opt.is-selected .dx-opt-check{opacity:1;transform:scale(1)}
+.dx-gate-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--accent-bg);border:1px solid var(--accent-soft);margin-bottom:20px}
+.dx-gate-icon svg{width:26px;height:26px;color:var(--accent)}
+.dx-field{margin-top:6px}
+.dx-input{width:100%;font-family:var(--body);font-size:17px;color:var(--ink);background:var(--bg-input);border:1.5px solid var(--line-2);border-radius:11px;padding:16px 18px;transition:border-color .16s,box-shadow .16s}
+.dx-input::placeholder{color:var(--faint)}
+.dx-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg)}
+.dx-input.is-error{border-color:#dc2626;box-shadow:0 0 0 4px #fee2e2}
+.dx-err{display:none;color:#dc2626;font-size:13px;margin-top:8px;font-weight:500}
+.dx-err.show{display:block}
+.dx-consent{display:flex;gap:11px;align-items:flex-start;margin:18px 0 4px;cursor:pointer}
+.dx-consent input{margin-top:2px;width:18px;height:18px;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
+.dx-consent span{font-size:13px;color:var(--muted);line-height:1.5}
+.dx-consent a{color:var(--accent);text-decoration:underline}
+.dx-submit{width:100%;margin-top:20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;letter-spacing:.01em;padding:18px 24px;border:none;border-radius:0;cursor:pointer;box-shadow:1px 1px 20px rgba(0,0,0,.3);transition:background .2s,transform .18s}
+.dx-submit:hover{background:var(--accent-2);transform:translateY(-1px)}
+.dx-submit svg{width:18px;height:18px}
+.dx-submit[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+.dx-privacy-note{margin-top:14px;font-size:12.5px;color:var(--faint);line-height:1.5}
+.dx-loading{text-align:center;padding:40px 0}
+.dx-spinner{width:42px;height:42px;margin:0 auto 22px;border:3.5px solid var(--accent-bg);border-top-color:var(--accent);border-radius:50%;animation:dxSpin .8s linear infinite}
+@keyframes dxSpin{to{transform:rotate(360deg)}}
+.dx-loading-text{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:var(--ink)}
+.dx-loading-sub{font-size:14px;color:var(--muted);margin-top:8px}
+
+@media(max-width:600px){
+  .dx-stage{min-height:auto;align-items:flex-start;padding:22px 18px 72px}
+  .dx-panel{max-width:none}
+  .dx-progress{margin-bottom:24px}
+  .dx-q{font-size:clamp(22px,6.2vw,28px);line-height:1.2}
+  .dx-q-hint{margin-bottom:20px}
+  .dx-options.grid2{grid-template-columns:1fr}
+  .dx-opt{padding:15px 16px;border-radius:13px;gap:13px}
+  .dx-opt-key{width:28px;height:28px;font-size:13px}
+  .dx-opt-label{font-size:15.5px}
+  .dx-opt-sub{font-size:13px}
+  .dx-gate-icon{width:48px;height:48px;margin-bottom:16px}
+  .dx-input{font-size:16px}
+  .dx-submit{padding:17px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BAULIG TOPNAV ===== -->
+<header class="bb-topnav" id="navbar">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <button class="bb-topnav-cta" type="button" data-action="start">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span>Gratis Profit-Analyse</span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ LANDING (Intro · dx-screen) ============ -->
+<div class="dx-screen lp bb-page is-active" data-screen="intro">
+
+  <!-- HERO -->
+  <section class="bb-section bb-section-80 bb-hero">
+    <div class="wrap">
+      <div class="bb-hero-eyebrow">FÜR DTC-BRANDS AB 10K €/MONAT · SHOPIFY</div>
+      <h1>Dein Umsatz wächst — warum bleibt <span class="bb-mark">weniger übrig</span>?</h1>
+      <p class="bb-hero-sub">Die <b>Gratis Profit-Analyse</b> zeigt dir in 90 Sekunden, wo dein Gewinn zwischen Ads, COGS &amp; Retention verloren geht. Kein Call. Kein Pitch.</p>
+
+      <div class="bb-video">
+        <button class="bb-video-play" type="button" aria-label="Video startet in Kürze">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="bb-video-time">1:30</span>
+        <span class="bb-video-cap">90 Sek: warum Umsatz steigt — und Gewinn nicht.</span>
+      </div>
+
+      <button class="bb-cta" type="button" data-action="start">Gratis Profit-Analyse starten
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="bb-cta-meta">90 Sekunden · kostenlos · kein Call</p>
+
+      <div class="hero-trust">
+        <span><span class="stars">★★★★★</span> <b>5,0</b> auf Google</span>
+        <span class="sep">·</span>
+        <span><img src="/assets/images/logos/shopify-partner-v2.png" alt="Shopify Partner"></span>
+        <span class="sep">·</span>
+        <span>Festpreis, kein Retainer-Zwang</span>
+      </div>
+
+      <div class="logos">
+        <div class="logos-label">Gebaut für — &amp; Plattform-Partner</div>
+        <div class="marq" aria-label="Brands und Plattform-Partner">
+          <div class="marq-track">
+            <img src="/assets/images/logos/hearo.png" alt="Hearo">
+            <img src="/assets/images/logos/shopify-partner-v2.png" alt="Shopify Partner">
+            <img src="/assets/images/logos/bachgold.png" alt="Bachgold">
+            <span class="wm">klaviyo</span>
+            <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance">
+            <span class="wm">gorgias</span>
+            <img src="/assets/images/logos/reerect.png" alt="Reerect">
+            <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true">
+            <img src="/assets/images/logos/shopify-partner-v2.png" alt="" aria-hidden="true">
+            <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true">
+            <span class="wm" aria-hidden="true">klaviyo</span>
+            <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true">
+            <span class="wm" aria-hidden="true">gorgias</span>
+            <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE + PROOF -->
+  <section class="bb-section">
+    <div class="wrap">
+      <div class="bb-head">
+        <div class="bb-head-label">Was die Analyse dir zeigt</div>
+        <h2>In 90 Sekunden weißt du, <span class="bb-mark">wo dein Geld bleibt</span>.</h2>
+      </div>
+      <ul class="val-checks">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Wo dein Profit verloren geht — konkret benannt.</li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Dein größter Hebel — was du zuerst anpackst.</li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Ehrliche Einordnung — auch wenn du uns nicht brauchst.</li>
+      </ul>
+
+      <div class="case">
+        <div class="case-shot">
+          <img src="/assets/images/cases/showcase-bachgold-outdoor.jpg" alt="Bachgold — Shop von BB Brands gebaut">
+          <span class="case-badge">Unser letzter Build</span>
+        </div>
+        <div class="case-body">
+          <div class="case-brand">Bachgold <span>· Selfpress Wasserfilter</span></div>
+          <div class="case-metrics">
+            <div class="cm">
+              <div class="cm-label">Conversion-Rate</div>
+              <div class="cm-val">6,0 %</div>
+              <div class="cm-sub">von 1,4 % · <b>+333 %</b></div>
+            </div>
+            <div class="cm">
+              <div class="cm-label">Ø Warenkorb</div>
+              <div class="cm-val">+125 %</div>
+              <div class="cm-sub">nach Re-Launch</div>
+            </div>
+          </div>
+          <div class="case-refi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/></svg>
+            <span><b>In 90 Tagen komplett refinanziert</b> — der Re-Launch hat sich aus dem Mehr-Umsatz selbst bezahlt.</span>
+          </div>
+          <p class="case-ctx">Re-Launch auf ein profitables Fundament — erst das System, dann das Budget.</p>
+        </div>
+      </div>
+
+      <p class="case-quote-intro">Und das sagt der Gründer von Bachgold:</p>
+      <a class="case-quote" href="https://share.google/WbotkZKPEmRQzy3LE" target="_blank" rel="noopener" aria-label="Echte Google-Bewertung von Laurenz Elbers ansehen">
+        <div class="cq-stars">★★★★★</div>
+        <p class="cq-text">„Von Konzept zu Launch in Rekordzeit. Moritz versteht, was funktioniert — und setzt es zügig um. Klare Empfehlung."</p>
+        <div class="cq-who"><b>Laurenz Elbers</b> · Co-Founder, Bachgold AG</div>
+        <span class="cq-google"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Echte Google-Bewertung ansehen →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="bb-section bb-section-95">
+    <div class="wrap">
+      <div class="founder-card">
+        <div class="founder-photo">
+          <img src="/assets/images/founder-moritz-portrait.jpg" alt="Moritz Bohmbach, Founder von BB Brands" loading="lazy">
+        </div>
+        <div class="founder-msg">
+          <span class="founder-tag">Dein Vorteil in der Zusammenarbeit</span>
+          <p class="founder-usp">Alles wird <u>vom Gründer geführt</u>.</p>
+          <p class="founder-line">Kein Account-Manager, kein Junior — der, der baut, redet mit dir. Vom ersten Call bis zum Launch.</p>
+          <div class="founder-chips">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Direkter Draht</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entscheidungen ohne Umwege</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Volle Verantwortung</span>
+          </div>
+          <div class="founder-name"><b>Moritz Bohmbach</b> · Founder, BB Brands</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="bb-section bb-section-80">
+    <div class="wrap">
+      <div class="bb-head" style="margin-bottom:36px">
+        <div class="bb-head-label">Bereit?</div>
+        <h2>Sieh in 90 Sekunden, wo dein <span class="bb-mark">Profit</span> verloren geht.</h2>
+      </div>
+      <div style="text-align:center">
+        <button class="bb-cta large" type="button" data-action="start">Gratis Profit-Analyse starten
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="bb-cta-meta">90 Sekunden · kostenlos · kein Call</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+      <div class="footer-links">
+        <a href="/">Startseite</a>
+        <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+        <a href="/garantien/">Garantien</a>
+        <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ QUIZ-STAGE (Custom-Section · Engine unverändert) ============ -->
+<main class="dx-stage" style="display:none">
+  <div class="dx-panel">
+    <section class="dx-screen" data-screen="question" aria-label="Frage">
+      <div class="dx-progress">
+        <div class="dx-progress-top">
+          <span class="dx-step-label" id="dxStepLabel">Frage 1 / 7</span>
+          <button class="dx-back" type="button" data-action="back" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Zurück
+          </button>
+        </div>
+        <div class="dx-bar"><div class="dx-bar-fill" id="dxBarFill"></div></div>
+      </div>
+      <h2 class="dx-q" id="dxQuestion"></h2>
+      <p class="dx-q-hint" id="dxHint" hidden></p>
+      <div class="dx-options" id="dxOptions" role="radiogroup" aria-labelledby="dxQuestion"></div>
+    </section>
+
+    <section class="dx-screen" data-screen="gate" aria-label="Ergebnis freischalten">
+      <div class="dx-progress">
+        <div class="dx-progress-top">
+          <span class="dx-step-label">Fast fertig</span>
+          <button class="dx-back" type="button" data-action="back-to-quiz">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Zurück
+          </button>
+        </div>
+        <div class="dx-bar"><div class="dx-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="dx-gate-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      </div>
+      <h2 class="dx-q">Wohin schicken wir deine Profit-Analyse?</h2>
+      <p class="dx-q-hint dx-q-hint--gap">Dein Ergebnis siehst du sofort auf der nächsten Seite — plus eine Kopie per E-Mail.</p>
+      <form id="dxForm" novalidate>
+        <div class="dx-field">
+          <input class="dx-input" type="email" id="dxEmail" name="email" placeholder="deine@brand.de" autocomplete="email" inputmode="email" required>
+          <p class="dx-err" id="dxEmailErr">Bitte gib eine gültige E-Mail-Adresse ein.</p>
+        </div>
+        <label class="dx-consent">
+          <input type="checkbox" id="dxConsent" name="consent" required>
+          <span>Schick mir mein Ergebnis und 1× pro Woche, wie DTC-Brands profitabler werden. Abmeldung jederzeit. <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutz</a>.</span>
+        </label>
+        <p class="dx-err" id="dxConsentErr">Bitte bestätige die Einwilligung, um dein Ergebnis zu sehen.</p>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+        <button class="dx-submit" type="submit" id="dxSubmit">
+          Meine Profit-Analyse zeigen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="dx-privacy-note">Kein Spam. Keine Weitergabe. Wir nutzen deine Antworten nur, um dir dein Ergebnis und passende Insights zu schicken.</p>
+      </form>
+    </section>
+
+    <section class="dx-screen" data-screen="loading" aria-label="Ergebnis wird berechnet">
+      <div class="dx-loading">
+        <div class="dx-spinner" aria-hidden="true"></div>
+        <p class="dx-loading-text">Deine Profit-Analyse wird ausgewertet …</p>
+        <p class="dx-loading-sub">Einen Moment — wir bereiten dein Ergebnis vor.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- STICKY BOTTOM -->
+<div class="stickybar" id="stickybar">
+  <div class="wrap">
+    <span class="sb-text">Bereit?<span>90 Sekunden · kostenlos · kein Call</span></span>
+    <button class="bb-cta" type="button" data-action="start">Gratis Profit-Analyse starten
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var QUESTIONS = [
+    {id:'tier',q:'Wo steht deine Brand gerade — grob beim Monatsumsatz?',grid2:true,options:[
+      {label:'Noch vor dem ersten echten Umsatz',sub:'oder unter 10k€/Monat',tier:1},
+      {label:'10 – 50k € / Monat',sub:'Es läuft, aber ruckelt',tier:2},
+      {label:'50 – 150k € / Monat',sub:'Wachstum, aber Profit stockt',tier:2},
+      {label:'150k+ € / Monat',sub:'1,8M+ €/Jahr',tier:3}
+    ]},
+    {id:'marge',q:'Wie hoch ist deine durchschnittliche Marge — nach Abzug von wirklich allem?',hint:'Ads, Wareneinkauf, Versand, Fixkosten — was am Ende übrig bleibt.',options:[
+      {label:'Über 20%',sub:'Läuft sehr gesund',p:0},
+      {label:'10 – 20%',sub:'Solide, aber Luft nach oben',p:1},
+      {label:'Unter 10%',sub:'Wird eng',p:2},
+      {label:'Weiß ich ehrlich gesagt nicht genau',sub:'',p:3}
+    ]},
+    {id:'cac',q:'Wie hat sich dein CAC in den letzten 12 Monaten entwickelt?',hint:'CAC = was dich ein neuer Kunde im Schnitt an Werbung kostet.',options:[
+      {label:'Stabil oder gesunken',sub:'',p:0},
+      {label:'Leicht gestiegen',sub:'',p:1},
+      {label:'Deutlich gestiegen',sub:'',p:2},
+      {label:'Verfolge ich nicht / keine Ahnung',sub:'',p:3}
+    ]},
+    {id:'retention',q:'Wie viel deines Umsatzes kommt aus Email & Wiederkäufern statt aus bezahlten Erst-Käufen?',options:[
+      {label:'Über 30%',sub:'Starke Retention',p:0},
+      {label:'15 – 30%',sub:'',p:1},
+      {label:'Unter 15%',sub:'',p:2},
+      {label:'Email läuft bei mir quasi nicht',sub:'',p:3}
+    ]},
+    {id:'trend',q:'Wie lief dein Umsatz die letzten 3 Monate?',options:[
+      {label:'Wächst stetig',sub:'',g:0},
+      {label:'Schwankt, kein klarer Trend',sub:'',g:1},
+      {label:'Flach / Plateau',sub:'',g:2},
+      {label:'Geht zurück',sub:'',g:3}
+    ]},
+    {id:'scale',q:'Wenn du morgen doppelt so viel Ad-Budget reinkippst — was passiert?',options:[
+      {label:'Skaliert sauber mit',sub:'',g:0},
+      {label:'Wird teurer, lohnt sich grenzwertig',sub:'',g:1},
+      {label:'ROAS bricht ein',sub:'',g:2},
+      {label:'Hab ich Angst auszuprobieren',sub:'',g:3}
+    ]},
+    {id:'bremse',q:'Was bremst dich gerade am meisten?',options:[
+      {label:'Ich verdiene zu wenig pro Bestellung',sub:'',bias:'red'},
+      {label:'Ich komme über ein Umsatz-Plateau nicht hinaus',sub:'',bias:'yellow'},
+      {label:'Ich bin selbst der Engpass',sub:'',bias:'yellow'},
+      {label:'Eigentlich läuft’s rund',sub:'',bias:'green'}
+    ]},
+    {id:'invest',q:'Angenommen, die Analyse zeigt einen klaren Profit-Hebel — wie würdest du vorgehen?',options:[
+      {label:'Umsetzen, sobald der ROI klar ist',sub:'Budget ist da',qual:'hot'},
+      {label:'Bereit zu investieren — wenn der Plan überzeugt',sub:'',qual:'warm'},
+      {label:'Erstmal lieber selbst probieren',sub:'',qual:'diy'},
+      {label:'Aktuell kein Budget dafür',sub:'',qual:'none'}
+    ]}
+  ];
+  var RESULT_ROUTES = {tier1:'/funnel/ergebnis-founderos/',red:'/funnel/ergebnis-profit/',yellow:'/funnel/ergebnis-wachstum/',green:'/funnel/ergebnis-sauber/'};
+  var TOTAL_Q = QUESTIONS.length;
+  var answers = {};
+  var screens = {};
+  document.querySelectorAll('.dx-screen').forEach(function(el){ screens[el.dataset.screen] = el; });
+  var elStepLabel=document.getElementById('dxStepLabel'),elBarFill=document.getElementById('dxBarFill'),elQuestion=document.getElementById('dxQuestion'),elHint=document.getElementById('dxHint'),elOptions=document.getElementById('dxOptions'),elBack=screens.question.querySelector('[data-action="back"]'),stageEl=document.querySelector('.dx-stage');
+
+  function currentStep(){var p=new URLSearchParams(location.search),s=p.get('step');if(s==='email')return 'email';var n=parseInt(s,10);if(isNaN(n)||n<0)return 0;if(n>TOTAL_Q)return TOTAL_Q;return n;}
+  function gotoStep(step,push){var url=new URL(location.href);url.searchParams.set('step',step);if(push){history.pushState({step:step},'',url);}else{history.replaceState({step:step},'',url);}render(step);}
+  function showScreen(name){Object.keys(screens).forEach(function(k){screens[k].classList.toggle('is-active',k===name);});var intro=(name==='intro');if(stageEl)stageEl.style.display=intro?'none':'flex';document.body.classList.toggle('is-quiz',!intro);updSticky();}
+  function render(step){
+    if(step!=='email'&&typeof step==='number'&&step>0){var fu=firstMissing();if(fu<step){step=fu;gotoStep(step,false);return;}}
+    if(step==='email'&&firstMissing()<=TOTAL_Q){step=firstMissing();gotoStep(step,false);return;}
+    if(step===0){showScreen('intro');window.scrollTo(0,0);return;}
+    if(step==='email'){showScreen('gate');window.scrollTo(0,0);focusSoon(document.getElementById('dxEmail'));return;}
+    var qIndex=step-1,q=QUESTIONS[qIndex];
+    showScreen('question');
+    elStepLabel.textContent='Frage '+step+' / '+TOTAL_Q;
+    elBarFill.style.width=Math.round((step/(TOTAL_Q+1))*100)+'%';
+    elBack.hidden=(step<=1);
+    elQuestion.textContent=q.q;
+    if(q.hint){elHint.hidden=false;elHint.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><span></span>';elHint.querySelector('span').textContent=q.hint;}else{elHint.hidden=true;}
+    elOptions.className='dx-options'+(q.grid2?' grid2':'');
+    elOptions.innerHTML='';
+    var keys=['A','B','C','D','E'];
+    q.options.forEach(function(opt,i){
+      var btn=document.createElement('button');btn.type='button';btn.className='dx-opt'+(answers[q.id]===i?' is-selected':'');btn.setAttribute('role','radio');btn.setAttribute('aria-checked',answers[q.id]===i?'true':'false');btn.dataset.index=i;
+      btn.innerHTML='<span class="dx-opt-key">'+keys[i]+'</span><span class="dx-opt-body"><span class="dx-opt-label">'+esc(opt.label)+'</span>'+(opt.sub?'<span class="dx-opt-sub">'+esc(opt.sub)+'</span>':'')+'</span><svg class="dx-opt-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+      btn.addEventListener('click',function(){select(qIndex,i);});elOptions.appendChild(btn);
+    });
+    window.scrollTo(0,0);focusSoon(elOptions.querySelector('.dx-opt'));
+  }
+  function select(qIndex,optIndex){var q=QUESTIONS[qIndex];answers[q.id]=optIndex;elOptions.querySelectorAll('.dx-opt').forEach(function(o,i){o.classList.toggle('is-selected',i===optIndex);o.setAttribute('aria-checked',i===optIndex?'true':'false');});setTimeout(function(){var step=qIndex+1;if(step>=TOTAL_Q){gotoStep('email',true);}else{gotoStep(step+1,true);}},280);}
+  function firstMissing(){for(var i=0;i<TOTAL_Q;i++){if(typeof answers[QUESTIONS[i].id]==='undefined')return i+1;}return TOTAL_Q+1;}
+  function computeResult(){
+    var tier=QUESTIONS[0].options[answers.tier].tier,profitScore=0,growthScore=0,bias='',qual='';
+    QUESTIONS.forEach(function(q){var opt=q.options[answers[q.id]];if(!opt)return;if(typeof opt.p==='number')profitScore+=opt.p;if(typeof opt.g==='number')growthScore+=opt.g;if(opt.bias)bias=opt.bias;if(opt.qual)qual=opt.qual;});
+    var segment;
+    if(tier===1){segment='tier1';}else if(profitScore>=6){segment='red';}else if(growthScore>=4){segment='yellow';}
+    else if(profitScore>=4&&bias==='red'){segment='red';}else if(growthScore>=3&&bias==='yellow'){segment='yellow';}
+    else if(bias==='green'&&profitScore<=3&&growthScore<=2){segment='green';}
+    else if(profitScore>=growthScore&&profitScore>=4){segment='red';}else if(growthScore>=3){segment='yellow';}else{segment='green';}
+    return {tier:tier,profitScore:profitScore,growthScore:growthScore,bias:bias,qual:qual,segment:segment};
+  }
+  var form=document.getElementById('dxForm'),elEmail=document.getElementById('dxEmail'),elConsent=document.getElementById('dxConsent'),elEmailErr=document.getElementById('dxEmailErr'),elConsentErr=document.getElementById('dxConsentErr'),elSubmit=document.getElementById('dxSubmit'),submitting=false;
+  function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();if(submitting)return;
+    var ok=true,email=elEmail.value.trim();
+    if(!validEmail(email)){elEmail.classList.add('is-error');elEmailErr.classList.add('show');ok=false;}else{elEmail.classList.remove('is-error');elEmailErr.classList.remove('show');}
+    if(!elConsent.checked){elConsentErr.classList.add('show');ok=false;}else{elConsentErr.classList.remove('show');}
+    if(!ok)return;
+    if(form.querySelector('[name="_gotcha"]').value){return;}
+    submitting=true;elSubmit.disabled=true;elSubmit.innerHTML='Wird ausgewertet …';
+    var result=computeResult();
+    var answerDump=QUESTIONS.map(function(q){var opt=q.options[answers[q.id]];return {q:q.id,label:opt?opt.label:''};});
+    try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:result.segment,tier:result.tier,profitScore:result.profitScore,growthScore:result.growthScore,qualification:result.qual,email:email,ts:Date.now()}));}catch(_){}
+    var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
+    var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:result.tier,segment:result.segment,profit_score:result.profitScore,growth_score:result.growthScore,bias:result.bias,qualification:result.qual,answers:answerDump,consentNewsletter:true},attr);
+    showScreen('loading');window.scrollTo(0,0);
+    var done=false;function go(){if(done)return;done=true;location.href=RESULT_ROUTES[result.segment]||'/';}
+    fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){}).finally(function(){setTimeout(go,350);});
+    setTimeout(go,2500);
+  });
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function focusSoon(el){if(el){setTimeout(function(){try{el.focus({preventScroll:true});}catch(_){el.focus();}},60);}}
+  document.querySelectorAll('[data-action="start"]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();gotoStep(1,true);});});
+  elBack.addEventListener('click',function(){var step=currentStep();if(typeof step==='number'&&step>1){gotoStep(step-1,true);}});
+  screens.gate.querySelector('[data-action="back-to-quiz"]').addEventListener('click',function(){gotoStep(TOTAL_Q,true);});
+  document.addEventListener('keydown',function(e){if(!screens.question.classList.contains('is-active'))return;var map={'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3},key=e.key.toLowerCase();if(key in map){var opts=elOptions.querySelectorAll('.dx-opt');if(opts[map[key]]){e.preventDefault();opts[map[key]].click();}}});
+  window.addEventListener('popstate',function(){render(currentStep());});
+
+  var nav=document.getElementById('navbar'),bar=document.getElementById('stickybar'),hero=document.querySelector('.bb-hero'),footer=document.querySelector('footer');
+  function updSticky(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(nav)nav.classList.toggle('is-scrolled',y>16);if(bar&&hero){var intro=!document.body.classList.contains('is-quiz');var pastHero=y>(hero.offsetTop+hero.offsetHeight-200);var footerNear=footer?(footer.getBoundingClientRect().top<window.innerHeight-30):false;bar.classList.toggle('show',intro&&pastHero&&!footerNear);}}
+  window.updSticky=updSticky;
+  window.addEventListener('scroll',updSticky,{passive:true});
+  window.addEventListener('resize',updSticky);
+  render(currentStep());updSticky();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Meta-Sales-Funnel · Build-Hub · BB Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1850;--navy-2:#142a7a;--orange:#ff6b3d;--ink:#181b27;--muted:#5c6374;--line:#e8eaf2;--band:#f5f6fb;--green:#16a34a;--amber:#d9870a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--band);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.top{background:linear-gradient(160deg,#0a1850,#142a7a);color:#fff;padding:44px 0 38px}
+.top .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9fb0e8;margin-bottom:12px}
+.top h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.top h1 em{font-style:normal;background:linear-gradient(180deg,transparent 56%,rgba(255,107,61,.55) 56%);padding:0 .06em}
+.top p{margin-top:14px;color:#c8d2f0;max-width:660px;font-size:15px}
+.flow{margin:32px 0 4px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12.5px;color:#c8d2f0}
+.flow b{color:#fff}
+.flow .ar{color:var(--orange);font-weight:700}
+.sect-h{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+.sect-h .ln{flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:680px){.cards{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(10,24,80,.04),0 10px 26px rgba(10,24,80,.05);display:flex;flex-direction:column;gap:9px}
+.card.wide{grid-column:1 / -1}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card h3{font-size:16.5px;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.card .seg{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.seg-red{color:#b91c1c;background:#fde8e8}
+.seg-yellow{color:#a16207;background:#fef3c7}
+.seg-green{color:#15803d;background:#dcfce7}
+.seg-tier1{color:#b91c1c;background:#fde8e8}
+.seg-lp{color:var(--navy);background:#e8edfb}
+.seg-crm{color:#6b21a8;background:#f3e8ff}
+.card p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.endact{font-size:12.5px;font-weight:600;color:var(--navy);background:var(--band);border:1px dashed var(--line);border-radius:7px;padding:6px 10px}
+.endact .ar{color:var(--orange);font-weight:800}
+.route{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted);background:var(--band);border:1px solid var(--line);border-radius:6px;padding:4px 8px;align-self:flex-start}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:6px}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700}
+.status .dot{width:8px;height:8px;border-radius:50%}
+.st-done{color:var(--green)} .st-done .dot{background:var(--green)}
+.st-todo{color:var(--amber)} .st-todo .dot{background:var(--amber)}
+.open{font-size:13px;font-weight:700;color:#fff;background:linear-gradient(180deg,var(--navy-2),var(--navy));text-decoration:none;padding:9px 16px;border-radius:60px;transition:transform .15s}
+.open:hover{transform:translateY(-1px)}
+.open.disabled{background:#c3c8d6;pointer-events:none}
+.note{margin:30px 0 50px;font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:8px;padding:14px 18px;line-height:1.6}
+.note b{color:var(--navy)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="eyebrow">BB Brands · Build-Hub</div>
+    <h1>Meta-Sales-<em>Funnel</em></h1>
+    <p>Alle Seiten an einem Ort, abgebildet nach dem Miro-Flow. Jede Seite einzeln bauen & previewen, am Ende gemeinsam zu Vercel pushen.</p>
+    <div class="flow">
+      <b>Meta Ad</b> <span class="ar">→</span> <b>VSL + Quiz-LP</b> <span class="ar">→</span> <b>Email-Capture</b> <span class="ar">→</span> <b>Score-Reveal (4 Wege)</b> <span class="ar">→</span> <b>Calendly / Founder OS / Newsletter</b> <span class="ar">→</span> <b>Danke-Seite</b>
+    </div>
+    <div class="flow" style="margin-top:8px">
+      <span style="color:#9fb0e8">Parallel:</span> <b>Retargeting</b> (Querschicht) <span class="ar">·</span> <span style="color:#9fb0e8">Backend:</span> <b>E-Mail-Marketing + CRM (mit Label)</b>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="sect-h">1 · Einstieg &amp; Capture <span class="ln"></span></div>
+  <div class="cards">
+    <div class="card wide">
+      <div class="card-top"><h3>Quiz-LP — VSL + 7-Fragen-Quiz + Email-Capture</h3><span class="seg seg-lp">LP · Completion 70–85%</span></div>
+      <p>Front-VSL + Per-Order-Math-Quiz (7 Fragen) → Scoring. <b>Email-Capture VOR dem Score-Reveal</b> — Lead ist gesichert, bevor das Ergebnis kommt. Leitet dann je nach Score auf eine der 4 Seiten.</p>
+      <span class="route">/funnel/diagnose/</span>
+      <div class="card-foot"><span class="status st-done"><span class="dot"></span>Fertig (Quiz + Email-Capture drin)</span><a class="open" href="/funnel/diagnose/" target="_blank">Öffnen</a></div>
+    </div>
+  </div>
+
+  <div class="sect-h">2 · Score-Reveal · 4 Wege <span class="ln"></span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-top"><h3>Profit erodiert</h3><span class="seg seg-red">Rot · Tier 2&amp;3</span></div>
+      <p>Profit-Leck. 2–3-Min Soft-VSL, Calendly direkt unter dem VSL.</p>
+      <span class="endact"><span class="ar">→</span> Soft-VSL → <b>Calendly (Audit-Call)</b></span>
+      <span class="route">/funnel/ergebnis-profit/</span>
+      <div class="card-foot"><span class="status st-done"><span class="dot"></span>Fertig (Score-Reveal + Calendly)</span><a class="open" href="/funnel/ergebnis-profit/" target="_blank">Öffnen</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Bottleneck / Wachstum stoppt</h3><span class="seg seg-yellow">Gelb · Tier 2&amp;3</span></div>
+      <p>Plateau / Founder-Bottleneck. 2–3-Min Soft-VSL → Calendly.</p>
+      <span class="endact"><span class="ar">→</span> Soft-VSL → <b>Calendly (Audit-Call)</b></span>
+      <span class="route">/funnel/ergebnis-wachstum/</span>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Geplant</span><a class="open disabled">Öffnen</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Pre-Revenue</h3><span class="seg seg-tier1">Tier 1 · Exit</span></div>
+      <p>Vor Launch / unter 10k. Kein Call — sanfter Exit zum Kurs.</p>
+      <span class="endact"><span class="ar">→</span> <b>Link auf Founder OS</b></span>
+      <span class="route">/funnel/ergebnis-founderos/</span>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Geplant</span><a class="open disabled">Öffnen</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Sauber aufgestellt</h3><span class="seg seg-green">Grün · braucht uns nicht</span></div>
+      <p>Läuft rund. Kein Call — in den Nurture aufnehmen.</p>
+      <span class="endact"><span class="ar">→</span> <b>Newsletter-Capture</b></span>
+      <span class="route">/funnel/ergebnis-sauber/</span>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Geplant</span><a class="open disabled">Öffnen</a></div>
+    </div>
+  </div>
+
+  <div class="sect-h">3 · Endpunkte · Querschicht · Backend <span class="ln"></span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-top"><h3>Audit-Call-Buchung</h3><span class="seg seg-red">Calendly</span></div>
+      <p>Ziel von Rot + Gelb. Calendly direkt unter dem Soft-VSL eingebettet — das Geld-Ende des Funnels.</p>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Calendly-Link nötig</span><a class="open disabled">—</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Founder OS</h3><span class="seg seg-tier1">extern</span></div>
+      <p>Ziel von Tier 1. Verlinkt auf den Kurs.</p>
+      <span class="route">founder-os.bb-brands.de</span>
+      <div class="card-foot"><span class="status st-done"><span class="dot"></span>existiert</span><a class="open" href="https://founder-os.bb-brands.de" target="_blank">Öffnen</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Newsletter-Capture</h3><span class="seg seg-green">Nurture</span></div>
+      <p>Ziel von Grün. E-Mail in den Wochen-Newsletter (Profitabilitäts-Insights).</p>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Teil der grünen Seite</span><a class="open disabled">—</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Danke-Seite</h3><span class="seg seg-lp">Abschluss</span></div>
+      <p>Bestätigung nach Audit-Call-Buchung (&amp; Newsletter). Termin-Bestätigung, Next-Steps, optional Pre-Call-Loom vom Founder.</p>
+      <span class="route">/funnel/danke/</span>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Geplant</span><a class="open disabled">Öffnen</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>Retargeting</h3><span class="seg seg-crm">Querschicht · Meta</span></div>
+      <p>Parallel über den ganzen Funnel: Re-Targeting der Quiz-Abbrecher &amp; Nicht-Bucher. Audience-Setup in Meta — keine eigene Seite, aber Teil des Funnels.</p>
+      <div class="card-foot"><span class="status st-todo"><span class="dot"></span>Meta-Setup</span><a class="open disabled">—</a></div>
+    </div>
+    <div class="card">
+      <div class="card-top"><h3>E-Mail-Marketing + CRM</h3><span class="seg seg-crm">Backend · mit Label</span></div>
+      <p>Alle Captures (Lead + Newsletter) laufen mit <b>Segment-Label</b> ins CRM. <code>/api/leads</code> taggt schon Segment, Tier, Scores &amp; Attribution.</p>
+      <span class="route">/api/leads → CRM</span>
+      <div class="card-foot"><span class="status st-done"><span class="dot"></span>Endpoint live</span><a class="open disabled">—</a></div>
+    </div>
+  </div>
+
+  <div class="sect-h">Referenz <span class="ln"></span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-top"><h3>MG-Design-Shell</h3><span class="seg seg-lp">Design</span></div>
+      <p>Reine Design-Vorlage (Mehr-Geschäft-Stil, premium + sticky) — Basis für alle Funnel-Seiten.</p>
+      <span class="route">/mg-clone/</span>
+      <div class="card-foot"><span class="status st-done"><span class="dot"></span>Referenz</span><a class="open" href="/mg-clone/" target="_blank">Öffnen</a></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Workflow:</b> Jede Seite lebt als Unterordner in <b>bb-brands-web/funnel/</b> (z. B. <code>/funnel/diagnose/</code>). Lokal previewen über <b>localhost:8789/funnel/…</b> — gemeinsamer Push zu Vercel am Ende. Strategie: <b>1 · E-Com Growth Partner/FUNNEL-STRATEGY.md</b> (kanonischer Funnel) + <b>LP-DESIGN-PLAYBOOK.md</b>.
+  </div>
+
+</div>
+
+</body>
+</html>
