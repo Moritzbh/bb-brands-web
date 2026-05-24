@@ -125,6 +125,11 @@ html,body{overflow-x:clip;max-width:100%}
 .bb-card p b{color:#000;font-weight:700}
 .bb-card .pin{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--bg-green-up);background:#ecfdf5;padding:8px 13px}
 .bb-card .pin svg{width:14px;height:14px}
+/* Hebel-Cards: Icon-Tile + Step-Eyebrow (Baulig) */
+.lever-icon{width:60px;height:60px;background:var(--bg-amber);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:20px;box-shadow:1px 1px 18px rgba(255,107,61,.32)}
+.lever-icon svg{width:30px;height:30px}
+.lever-step{font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg-amber);margin-bottom:8px}
+.lever-step span{color:var(--bg-line);margin:0 7px;font-weight:600}
 
 /* Recognition als geführte Journey (Tagesablauf-Timeline) */
 .rec-journey{max-width:660px;margin:0 auto;position:relative}
@@ -334,18 +339,27 @@ footer .footer-links a:hover{color:var(--accent)}
       </div>
       <div class="bb-cards cols-3">
         <article class="bb-card">
-          <div class="bb-card-no">01</div>
+          <div class="lever-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="lever-step">Hebel 01 <span>·</span> Marge</div>
           <h3>Profit pro Bestellung</h3>
           <p>Wareneinsatz, Pricing, Bundles &amp; Warenkorb-Wert. Mehr Marge aus jeder Order — <b>bevor</b> ein einziger Euro mehr ins Ad-Budget geht. Der Hebel mit der schnellsten Wirkung auf den Gewinn.</p>
         </article>
         <article class="bb-card">
-          <div class="bb-card-no">02</div>
+          <div class="lever-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
+          </div>
+          <div class="lever-step">Hebel 02 <span>·</span> Conversion</div>
           <h3>Conversion statt Reichweite</h3>
           <p>Der Shop verliert Käufer, nicht der Ad-Account. Mehr Profit pro Visitor heißt: aus dem gleichen Traffic mehr rausholen — saubere PDP, klarer Checkout, weniger Reibung.</p>
           <span class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>+333 % Conversion bei Bachgold</span>
         </article>
         <article class="bb-card">
-          <div class="bb-card-no">03</div>
+          <div class="lever-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <div class="lever-step">Hebel 03 <span>·</span> Retention</div>
           <h3>Umsatz ohne Ad-Budget</h3>
           <p>E-Mail, Flows &amp; Wiederkäufer. Der Teil deines Umsatzes, der Marge bringt, ohne dass du dafür CAC bezahlst. Bei den meisten Brands die größte ungenutzte Profit-Quelle.</p>
         </article>
