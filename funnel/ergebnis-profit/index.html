@@ -130,6 +130,39 @@ html,body{overflow-x:clip;max-width:100%}
 .lever-icon svg{width:30px;height:30px}
 .lever-step{font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg-amber);margin-bottom:8px}
 .lever-step span{color:var(--bg-line);margin:0 7px;font-weight:600}
+.lever-chip{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:var(--bg-amber);background:var(--accent-bg);padding:7px 13px}
+/* Reihenfolge-Rail über den Hebeln */
+.lever-rail{display:flex;align-items:center;justify-content:center;margin:0 auto 40px;flex-wrap:wrap;gap:6px}
+.lever-rail .r-step{display:inline-flex;align-items:center;gap:10px}
+.lever-rail .r-num{width:32px;height:32px;border:2px solid var(--bg-amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;color:var(--bg-amber)}
+.lever-rail .r-lbl{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000}
+.lever-rail .r-arrow{margin:0 16px;color:var(--bg-amber);display:flex}
+.lever-rail .r-arrow svg{width:18px;height:18px}
+@media(max-width:560px){.lever-rail{gap:4px}.lever-rail .r-lbl{display:none}.lever-rail .r-arrow{margin:0 10px}}
+/* Reframe-Chips (statt Absatz) */
+.reframe-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:0 auto 30px;max-width:740px}
+.rf-chip{display:inline-flex;align-items:center;gap:10px;background:#fff;box-shadow:1px 1px 18px rgba(0,0,0,.1);padding:13px 19px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#000;text-align:left}
+.rf-chip svg{width:17px;height:17px;color:var(--bg-green-up);flex-shrink:0}
+@media(max-width:560px){.rf-chip{width:100%;justify-content:flex-start}}
+/* Build-Proof (Show don't tell — echter Build + animierte Counter) */
+.build-proof{display:grid;grid-template-columns:1.25fr 1fr;background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.13);max-width:980px;margin:0 auto 40px;overflow:hidden}
+@media(max-width:780px){.build-proof{grid-template-columns:1fr}}
+.build-shot{position:relative;background:#f2ece2;min-height:300px}
+.build-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.build-badge{position:absolute;top:16px;left:16px;background:#000;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px}
+.build-result{padding:36px 34px;display:flex;flex-direction:column;justify-content:center;gap:24px}
+.build-metric{display:flex;flex-direction:column}
+.bm-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(36px,5vw,48px);color:var(--bg-green-up);line-height:1}
+.bm-lbl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#000;margin-top:5px}
+.bm-sub{font-size:13px;color:var(--bg-text-muted);margin-top:2px}
+.build-refi{align-self:flex-start;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--bg-green-up);background:#ecfdf5;padding:10px 14px}
+@media(max-width:780px){.build-result{padding:28px 24px;gap:18px;flex-direction:row;flex-wrap:wrap;align-items:flex-start}.build-refi{flex-basis:100%}}
+/* Book-Trust-Row (vor Calendly) */
+.book-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 18px;margin:0 auto 26px;font-family:'Montserrat',sans-serif;font-size:13.5px;font-weight:600;color:var(--bg-text-body)}
+.book-trust .bt-stars{color:var(--bg-amber);letter-spacing:1px}
+.book-trust b{color:#000}
+.book-trust .bt-sep{color:var(--bg-line)}
+.book-trust img{height:20px;width:auto;vertical-align:middle}
 
 /* Recognition als geführte Journey (Tagesablauf-Timeline) */
 .rec-journey{max-width:660px;margin:0 auto;position:relative}
@@ -286,7 +319,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="rec-card">
             <span class="rec-when">Morgens, vor dem ersten Kaffee</span>
-            <p>Erster Griff zum Handy, die Shopify-App noch vor dem Aufstehen. Gestern Rekordumsatz — und trotzdem dieses Grummeln im Bauch: <span class="bb-mark">Wo ist das Geld eigentlich hin?</span></p>
+            <p>Rekordumsatz gestern — und trotzdem: <span class="bb-mark">Wo ist das Geld hin?</span></p>
           </div>
         </div>
         <div class="rec-step">
@@ -295,7 +328,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="rec-card">
             <span class="rec-when">Im Ads-Manager</span>
-            <p>ROAS heute 1,4, letzte Woche noch 2,1. Kampagnen werden gekillt, die eine wird dupliziert, die läuft — <span class="bb-mark">und keiner kann genau sagen, warum sie läuft.</span></p>
+            <p>ROAS 2,1 → 1,4 in einer Woche. <span class="bb-mark">Keiner weiß, warum.</span></p>
           </div>
         </div>
         <div class="rec-step">
@@ -304,7 +337,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="rec-card">
             <span class="rec-when">Den ganzen Tag</span>
-            <p>Jedes Feuer landet auf deinem Tisch, jede Entscheidung läuft über dich. Die Brand wächst auf deiner Energie — nicht auf Systemen, die auch ohne dich laufen. <span class="bb-mark">Der Engpass bist du selbst.</span></p>
+            <p>Jedes Feuer landet auf deinem Tisch. <span class="bb-mark">Der Engpass bist du selbst.</span></p>
           </div>
         </div>
         <div class="rec-step">
@@ -313,7 +346,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="rec-card">
             <span class="rec-when">Abends im Bett</span>
-            <p>Display an, du rechnest im Kopf durch, ob das Ganze überhaupt noch aufgeht. Liest „warum kein Gewinn trotz Umsatz", schläfst irgendwann ein. <span class="bb-mark">Und keiner nimmt dir die Rechnung ab.</span></p>
+            <p>Nachts googelst du „warum kein Gewinn trotz Umsatz". <span class="bb-mark">Keiner nimmt dir die Rechnung ab.</span></p>
           </div>
         </div>
         <div class="rec-step rec-step--turn">
@@ -322,7 +355,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="rec-card rec-card--turn">
             <span class="rec-when">Und genau hier kommen wir rein</span>
-            <p>Wenn du gerade genickt hast: Das ist <b>kein Zufall</b> — und <b>nicht deine Schuld</b>. Es ist ein Muster, das wir bei Brands wie deiner schon oft gesehen und umgedreht haben — die drei Hebel kommen jetzt.</p>
+            <p><b>Kein Zufall. Nicht deine Schuld.</b> Ein Muster, das wir schon oft umgedreht haben — die drei Hebel kommen jetzt.</p>
           </div>
         </div>
       </div>
@@ -337,6 +370,13 @@ footer .footer-links a:hover{color:var(--accent)}
         <h2>Drei Hebel. In dieser Reihenfolge.</h2>
         <p>Nicht „mehr Reichweite". Erst die Marge gesund machen — dann skalieren. So sieht das bei einer profit-erodierten Brand konkret aus.</p>
       </div>
+      <div class="lever-rail" aria-hidden="true">
+        <span class="r-step"><span class="r-num">1</span><span class="r-lbl">Marge</span></span>
+        <span class="r-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="r-step"><span class="r-num">2</span><span class="r-lbl">Conversion</span></span>
+        <span class="r-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="r-step"><span class="r-num">3</span><span class="r-lbl">Retention</span></span>
+      </div>
       <div class="bb-cards cols-3">
         <article class="bb-card">
           <div class="lever-icon" aria-hidden="true">
@@ -344,7 +384,8 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="lever-step">Hebel 01 <span>·</span> Marge</div>
           <h3>Profit pro Bestellung</h3>
-          <p>Wareneinsatz, Pricing, Bundles &amp; Warenkorb-Wert. Mehr Marge aus jeder Order — <b>bevor</b> ein einziger Euro mehr ins Ad-Budget geht. Der Hebel mit der schnellsten Wirkung auf den Gewinn.</p>
+          <p>Mehr Marge aus jeder Order — <b>bevor</b> mehr Ad-Budget.</p>
+          <span class="lever-chip">Schnellster Hebel auf den Gewinn</span>
         </article>
         <article class="bb-card">
           <div class="lever-icon" aria-hidden="true">
@@ -352,7 +393,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="lever-step">Hebel 02 <span>·</span> Conversion</div>
           <h3>Conversion statt Reichweite</h3>
-          <p>Der Shop verliert Käufer, nicht der Ad-Account. Mehr Profit pro Visitor heißt: aus dem gleichen Traffic mehr rausholen — saubere PDP, klarer Checkout, weniger Reibung.</p>
+          <p>Aus dem gleichen Traffic mehr rausholen — nicht mehr Reichweite.</p>
           <span class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>+333 % Conversion bei Bachgold</span>
         </article>
         <article class="bb-card">
@@ -361,7 +402,8 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="lever-step">Hebel 03 <span>·</span> Retention</div>
           <h3>Umsatz ohne Ad-Budget</h3>
-          <p>E-Mail, Flows &amp; Wiederkäufer. Der Teil deines Umsatzes, der Marge bringt, ohne dass du dafür CAC bezahlst. Bei den meisten Brands die größte ungenutzte Profit-Quelle.</p>
+          <p>Umsatz aus E-Mail &amp; Wiederkäufern — <b>ohne CAC</b>.</p>
+          <span class="lever-chip">Größte ungenutzte Profit-Quelle</span>
         </article>
       </div>
     </div>
@@ -372,7 +414,11 @@ footer .footer-links a:hover{color:var(--accent)}
     <div class="wrap">
       <div class="bb-statement">
         <h2>Erst <em>Profitabilität</em>. Dann Skalierung.</h2>
-        <p>Skalieren auf einem Profit-Leck verbrennt nur schneller Geld. Wir machen zuerst die Marge gesund, dann skalieren wir — <b>wir übernehmen das System, du baust die Brand.</b> Du redest dabei mit dem, der baut. Kein Account-Manager.</p>
+        <div class="reframe-chips">
+          <span class="rf-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Erst die Marge gesund machen</span>
+          <span class="rf-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dann sauber skalieren</span>
+          <span class="rf-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Du redest mit dem, der baut — kein Account-Manager</span>
+        </div>
         <a href="#book" class="bb-cta" data-action="book">Audit-Termin sichern
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -380,31 +426,31 @@ footer .footer-links a:hover{color:var(--accent)}
     </div>
   </section>
 
-  <!-- ===== BOOK / CALENDLY ===== -->
-  <section class="bb-section" id="book">
-    <div class="wrap">
-      <div class="bb-head">
-        <div class="bb-head-label">Dein nächster Schritt</div>
-        <h2>30 Minuten. Wir rechnen dir die Lücke auf <span class="bb-mark">deine Zahlen</span>.</h2>
-        <p>Kostenlos, kein Pitch. Du gehst mit den drei priorisierten Hebeln für dein Setup raus — auch wenn wir nie zusammenarbeiten.</p>
-      </div>
-      <div class="calendly-frame">
-        <div class="calendly-inline-widget"
-             data-url="https://calendly.com/moritzbohmbach/profit-gap-analyse?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=ff6b3d&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=funnel-result&utm_campaign=profit-erodiert"
-             aria-label="Calendly Booking-Widget — Gratis Profit-Audit"></div>
-      </div>
-      <p class="calendly-microcopy"><strong>Google Meet</strong> · 30 Min · kostenlos · <strong>keine Verkaufs-Show</strong></p>
-    </div>
-  </section>
-
-  <!-- ===== PROOF ===== -->
+  <!-- ===== PROOF · Show don't tell (vor Calendly) ===== -->
   <section class="bb-section bb-section-95">
     <div class="wrap">
-      <div class="bb-stat">
-        <div class="s"><span class="n">+333 %</span><span class="l">Conversion</span></div>
-        <div class="sep"></div>
-        <div class="s"><span class="n">+125 %</span><span class="l">Ø Warenkorb</span></div>
-        <span class="tag">bei <b>Bachgold</b> nach dem Re-Launch auf ein profitables Fundament</span>
+      <div class="bb-head">
+        <div class="bb-head-label">Beweis statt Behauptung</div>
+        <h2>So sieht das <span class="bb-mark">gebaut</span> aus.</h2>
+      </div>
+      <div class="build-proof">
+        <div class="build-shot">
+          <img src="/assets/images/cases/showcase-bachgold-outdoor.jpg" alt="Bachgold — von BB Brands gebauter Shopify-Shop" loading="lazy">
+          <span class="build-badge">Unser letzter Build · Bachgold</span>
+        </div>
+        <div class="build-result">
+          <div class="build-metric">
+            <span class="bm-num" data-count="333" data-prefix="+" data-suffix=" %">+333 %</span>
+            <span class="bm-lbl">Conversion-Rate</span>
+            <span class="bm-sub">1,4 % → 6,0 %</span>
+          </div>
+          <div class="build-metric">
+            <span class="bm-num" data-count="125" data-prefix="+" data-suffix=" %">+125 %</span>
+            <span class="bm-lbl">Ø Warenkorb</span>
+            <span class="bm-sub">nach dem Re-Launch</span>
+          </div>
+          <span class="build-refi">In 90 Tagen refinanziert</span>
+        </div>
       </div>
       <div class="bb-testimonial">
         <div class="bb-testimonial-photo"></div>
@@ -416,8 +462,32 @@ footer .footer-links a:hover{color:var(--accent)}
       </div>
       <div class="bb-founder">
         <img src="/assets/images/founder-moritz-v3.jpg" alt="Moritz Bohmbach · Founder BB Brands" loading="lazy">
-        <span>Du redest mit <b>Moritz</b>, der selbst baut — nicht mit einem Account-Manager. Erst Profitabilität, dann Skalierung.</span>
+        <span>Du redest mit <b>Moritz</b>, der selbst baut — kein Account-Manager.</span>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== BOOK / CALENDLY ===== -->
+  <section class="bb-section" id="book">
+    <div class="wrap">
+      <div class="bb-head">
+        <div class="bb-head-label">Dein nächster Schritt</div>
+        <h2>30 Minuten. Wir rechnen dir die Lücke auf <span class="bb-mark">deine Zahlen</span>.</h2>
+        <p>Kostenlos, kein Pitch. Du gehst mit den drei priorisierten Hebeln raus — auch wenn wir nie zusammenarbeiten.</p>
+      </div>
+      <div class="book-trust">
+        <span><span class="bt-stars">★★★★★</span> <b>5,0</b> Google</span>
+        <span class="bt-sep">·</span>
+        <span><img src="/assets/images/logos/shopify-partner-v2.png" alt="Shopify Partner"></span>
+        <span class="bt-sep">·</span>
+        <span>Festpreis · kein Retainer-Zwang</span>
+      </div>
+      <div class="calendly-frame">
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/moritzbohmbach/profit-gap-analyse?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=ff6b3d&text_color=0a0a0a&background_color=ffffff&utm_source=bb-brands-web&utm_medium=funnel-result&utm_campaign=profit-erodiert"
+             aria-label="Calendly Booking-Widget — Gratis Profit-Audit"></div>
+      </div>
+      <p class="calendly-microcopy"><strong>Google Meet</strong> · 30 Min · kostenlos · <strong>keine Verkaufs-Show</strong></p>
     </div>
   </section>
 
@@ -526,6 +596,25 @@ footer .footer-links a:hover{color:var(--accent)}
   window.addEventListener('scroll', upd, { passive: true });
   window.addEventListener('resize', upd);
   upd();
+
+  // ---- Animierte Stat-Counter (Build-Proof) ----
+  var nums = document.querySelectorAll('[data-count]');
+  if (nums.length) {
+    var runCount = function(el){
+      var target = parseFloat(el.getAttribute('data-count')) || 0,
+          pre = el.getAttribute('data-prefix') || '',
+          suf = el.getAttribute('data-suffix') || '',
+          start = null, dur = 1100;
+      function step(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1); var v=Math.round(target*(0.5-Math.cos(p*Math.PI)/2)); el.textContent=pre+v+suf; if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    };
+    if (typeof IntersectionObserver === 'undefined') {
+      nums.forEach(runCount);
+    } else {
+      var cio = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); } }); }, { threshold: 0.4 });
+      nums.forEach(function(el){ cio.observe(el); });
+    }
+  }
 })();
 </script>
 
