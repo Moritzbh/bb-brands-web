@@ -126,10 +126,22 @@ html,body{overflow-x:clip;max-width:100%}
 .bb-card .pin{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--bg-green-up);background:#ecfdf5;padding:8px 13px}
 .bb-card .pin svg{width:14px;height:14px}
 
-/* Recognition: kompakte Moment-Karten */
-.rec-line{font-size:16px;color:var(--bg-text-body);line-height:1.55}
-.rec-bridge{margin:40px auto 0;max-width:680px;text-align:center;font-size:clamp(17px,2vw,19px);color:var(--bg-text-body);line-height:1.6}
-.rec-bridge b{color:#000;font-weight:700}
+/* Recognition als geführte Journey (Tagesablauf-Timeline) */
+.rec-journey{max-width:660px;margin:0 auto;position:relative}
+.rec-step{position:relative;display:grid;grid-template-columns:58px 1fr;gap:20px;padding-bottom:20px}
+.rec-step:last-child{padding-bottom:0}
+.rec-step:not(:last-child)::before{content:"";position:absolute;left:28px;top:60px;bottom:-2px;width:2px;background:linear-gradient(var(--bg-amber),rgba(255,107,61,.25))}
+.rec-node{width:58px;height:58px;border-radius:50%;background:#fff;border:2px solid var(--bg-amber);display:flex;align-items:center;justify-content:center;color:var(--bg-amber);box-shadow:1px 1px 16px rgba(0,0,0,.08);position:relative;z-index:1}
+.rec-node svg{width:24px;height:24px}
+.rec-card{background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.12);padding:20px 24px;transition:transform .2s ease,box-shadow .2s ease;align-self:start}
+.rec-card:hover{transform:translateY(-2px);box-shadow:1px 1px 42px rgba(0,0,0,.18)}
+.rec-when{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg-amber);margin-bottom:8px}
+.rec-card p{font-size:15.5px;color:var(--bg-text-body);line-height:1.55}
+.rec-step--turn .rec-node{background:var(--bg-amber);border-color:var(--bg-amber);color:#fff}
+.rec-card--turn{border-left:3px solid var(--bg-amber)}
+.rec-card--turn p{font-size:16px;color:#000;line-height:1.6}
+.rec-card--turn b{font-weight:700}
+@media(max-width:560px){.rec-step{grid-template-columns:46px 1fr;gap:14px}.rec-node{width:46px;height:46px}.rec-node svg{width:20px;height:20px}.rec-step:not(:last-child)::before{left:22px;top:48px}.rec-card{padding:16px 18px}}
 
 /* ===== REFRAME-Statement ===== */
 .bb-statement{text-align:center;max-width:760px;margin:0 auto}
@@ -262,25 +274,53 @@ footer .footer-links a:hover{color:var(--accent)}
         <div class="bb-head-label">Kennst du das?</div>
         <h2>Wahrscheinlich erkennst du dich in mindestens einem dieser Momente.</h2>
       </div>
-      <div class="bb-cards cols-2">
-        <article class="bb-card">
-          <div class="bb-card-tag">Morgens, vor dem ersten Kaffee</div>
-          <p class="rec-line">Erster Griff zum Handy, die Shopify-App noch vor dem Aufstehen. Gestern Rekordumsatz — und trotzdem dieses Grummeln im Bauch: <span class="bb-mark">Wo ist das Geld eigentlich hin?</span></p>
-        </article>
-        <article class="bb-card">
-          <div class="bb-card-tag">Im Ads-Manager</div>
-          <p class="rec-line">ROAS heute 1,4, letzte Woche noch 2,1. Kampagnen werden gekillt, die eine wird dupliziert, die läuft — <span class="bb-mark">und keiner kann genau sagen, warum sie läuft.</span></p>
-        </article>
-        <article class="bb-card">
-          <div class="bb-card-tag">Den ganzen Tag</div>
-          <p class="rec-line">Jedes Feuer landet auf deinem Tisch, jede Entscheidung läuft über dich. Die Brand wächst auf deiner Energie — nicht auf Systemen, die auch ohne dich laufen. <span class="bb-mark">Der Engpass bist du selbst.</span></p>
-        </article>
-        <article class="bb-card">
-          <div class="bb-card-tag">Abends im Bett</div>
-          <p class="rec-line">Display an, du rechnest im Kopf durch, ob das Ganze überhaupt noch aufgeht. Liest „warum kein Gewinn trotz Umsatz", schläfst irgendwann ein. <span class="bb-mark">Und keiner nimmt dir die Rechnung ab.</span></p>
-        </article>
+      <div class="rec-journey">
+        <div class="rec-step">
+          <div class="rec-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M4.2 10.2 6 12M19.8 10.2 18 12M2 18h20M8 18a4 4 0 0 1 8 0"/></svg>
+          </div>
+          <div class="rec-card">
+            <span class="rec-when">Morgens, vor dem ersten Kaffee</span>
+            <p>Erster Griff zum Handy, die Shopify-App noch vor dem Aufstehen. Gestern Rekordumsatz — und trotzdem dieses Grummeln im Bauch: <span class="bb-mark">Wo ist das Geld eigentlich hin?</span></p>
+          </div>
+        </div>
+        <div class="rec-step">
+          <div class="rec-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="rec-card">
+            <span class="rec-when">Im Ads-Manager</span>
+            <p>ROAS heute 1,4, letzte Woche noch 2,1. Kampagnen werden gekillt, die eine wird dupliziert, die läuft — <span class="bb-mark">und keiner kann genau sagen, warum sie läuft.</span></p>
+          </div>
+        </div>
+        <div class="rec-step">
+          <div class="rec-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div class="rec-card">
+            <span class="rec-when">Den ganzen Tag</span>
+            <p>Jedes Feuer landet auf deinem Tisch, jede Entscheidung läuft über dich. Die Brand wächst auf deiner Energie — nicht auf Systemen, die auch ohne dich laufen. <span class="bb-mark">Der Engpass bist du selbst.</span></p>
+          </div>
+        </div>
+        <div class="rec-step">
+          <div class="rec-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </div>
+          <div class="rec-card">
+            <span class="rec-when">Abends im Bett</span>
+            <p>Display an, du rechnest im Kopf durch, ob das Ganze überhaupt noch aufgeht. Liest „warum kein Gewinn trotz Umsatz", schläfst irgendwann ein. <span class="bb-mark">Und keiner nimmt dir die Rechnung ab.</span></p>
+          </div>
+        </div>
+        <div class="rec-step rec-step--turn">
+          <div class="rec-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+          <div class="rec-card rec-card--turn">
+            <span class="rec-when">Und genau hier kommen wir rein</span>
+            <p>Wenn du gerade genickt hast: Das ist <b>kein Zufall</b> — und <b>nicht deine Schuld</b>. Es ist ein Muster, das wir bei Brands wie deiner schon oft gesehen und umgedreht haben — die drei Hebel kommen jetzt.</p>
+          </div>
+        </div>
       </div>
-      <p class="rec-bridge">Wenn du gerade genickt hast: Das ist <b>kein Zufall</b> — und <b>nicht deine Schuld</b>. Es ist ein Muster, das wir bei Brands wie deiner schon oft gesehen und umgedreht haben. Und genau hier setzen wir an.</p>
     </div>
   </section>
 
