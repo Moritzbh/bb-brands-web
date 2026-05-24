@@ -1,4 +1,37 @@
+# BB Brands · robots.txt
+# Alle klassischen Suchmaschinen: voller Zugriff
 User-agent: *
+Allow: /
+
+# AI-Crawler / Answer Engines explizit erlauben (GEO — in AI-Antworten zitiert werden)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://bb-brands.de/sitemap.xml
