@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Klaviyo-Agentur für DTC-Brands in DACH. Vollständiges Lifecycle-Setup — Welcome, Abandoned, Post-Purchase, Win-Back — plus Bundle-/AOV-Architektur und Per-Order-Math. Festpreis 5–15 k. Bachgold: +125 % AOV.">
+<title>Klaviyo-Agentur für DTC-Brands · Lifecycle &amp; Retention · BB Brands</title>
+<link rel="canonical" href="https://bb-brands.de/leistungen/klaviyo-agentur/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="author" content="Moritz Bohmbach">
+<meta property="og:type" content="website"><meta property="og:site_name" content="BB Brands"><meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://bb-brands.de/leistungen/klaviyo-agentur/">
+<meta property="og:title" content="Klaviyo-Agentur für DTC-Brands · Lifecycle &amp; Retention · BB Brands">
+<meta property="og:description" content="Lifecycle-Setup, das aus bestehendem Traffic mehr Profit holt — Welcome bis Win-Back, sauber attribuiert. Per-Order-Math statt ROAS-Theater. Festpreis 5–15 k.">
+<meta property="og:image" content="https://bb-brands.de/assets/images/hero-workspace.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Klaviyo-Agentur für DTC-Brands · Lifecycle &amp; Retention · BB Brands"><meta name="twitter:image" content="https://bb-brands.de/assets/images/hero-workspace.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Service","@id":"https://bb-brands.de/leistungen/klaviyo-agentur/#service","name":"Klaviyo-Agentur — Lifecycle, Bundles, Retention","serviceType":"E-Mail-Marketing · Klaviyo-Lifecycle · Retention","provider":{"@id":"https://bb-brands.de/#organization"},"areaServed":["DE","AT","CH"],"url":"https://bb-brands.de/leistungen/klaviyo-agentur/","description":"Vollständiges Klaviyo-Lifecycle-Setup (Welcome, Abandoned, Post-Purchase, Win-Back), Bundle-/AOV-Architektur und Retention-Mechanik mit Per-Order-Math für DTC-Brands. Festpreis 5–15 k €.","offers":{"@type":"Offer","priceCurrency":"EUR","price":"5000","description":"Festpreis ab ~5.000 €, typischerweise 5–15 k € je nach Scope"}},
+{"@type":"WebPage","@id":"https://bb-brands.de/leistungen/klaviyo-agentur/#webpage","url":"https://bb-brands.de/leistungen/klaviyo-agentur/","name":"Klaviyo-Agentur für DTC-Brands · BB Brands","inLanguage":"de-DE","isPartOf":{"@id":"https://bb-brands.de/#website"},"about":{"@id":"https://bb-brands.de/leistungen/klaviyo-agentur/#service"}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Was kostet ein Klaviyo-Setup bei euch?","acceptedAnswer":{"@type":"Answer","text":"Der Strategy Audit ist kostenlos. Das Klaviyo-Engagement liegt typischerweise zwischen 5.000 € und 15.000 € Festpreis — abhängig vom Scope (Anzahl Flows, Bundle-Architektur, Segmentierung). Festpreis, kein Performance-Tarif, kein Umsatz-Anteil."}},
+{"@type":"Question","name":"Welche Klaviyo-Flows baut ihr?","acceptedAnswer":{"@type":"Answer","text":"Das vollständige Lifecycle: Welcome-Serie, Abandoned Cart/Checkout, Browse Abandonment, Post-Purchase, Cross-Sell, Win-Back und Sunset. Plus Bundle-/AOV-Architektur und saubere Attribution gegen eine eingefrorene Baseline — jeder zusätzliche Euro steht in deinem eigenen Klaviyo schwarz auf weiß."}},
+{"@type":"Question","name":"Lohnt sich Klaviyo, wenn meine Flows schon laufen?","acceptedAnswer":{"@type":"Answer","text":"Meistens ja. Die häufigste Lücke: Flows existieren, aber niemand weiß, was sie wirklich bringen, der Welcome-Flow hat seit Monaten denselben Bug, und Win-Back ist eine Idee in Notion. Wir bauen den Stack auf Per-Order-Math um — Retention statt nur Acquisition."}}
+]},
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Start","item":"https://bb-brands.de/"},
+{"@type":"ListItem","position":2,"name":"Leistungen","item":"https://bb-brands.de/leistungen/klaviyo-agentur/"},
+{"@type":"ListItem","position":3,"name":"Klaviyo-Agentur","item":"https://bb-brands.de/leistungen/klaviyo-agentur/"}]}]}
+</script>
+<link rel="stylesheet" href="/assets/css/shared.css?v=20260514-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/consent.css?v=20260509-7">
+<script src="/assets/js/consent.js?v=20260509-7" defer></script>
+<script src="/assets/js/attribution.js?v=20260509-7" defer></script>
+<script src="/assets/js/premium-reveal.js?v=20260509-7" defer></script>
+<style>
+/* ============= HIDE Default-Header (shared.css) — wir bauen eigenen ============= */
+header.site-header,.mobile-menu{display:none !important}
+
+/* ============= BAULIG-STYLE TOP-NAV (schwarz, full-width) ============= */
+.bb-topnav{background:#000;color:#fff;position:sticky;top:0;z-index:60;font-family:'Montserrat',sans-serif}
+.bb-topnav .wrap{
+  display:flex;align-items:center;
+  max-width:1340px;margin:0 auto;padding:0 32px;
+  height:90px;gap:14px;
+  position:relative;
+}
+.bb-topnav-items{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+/* Right-Cluster: erstes nicht-absolut Element nach Logo bekommt margin-left:auto */
+.bb-topnav-login,.bb-topnav-cta,.bb-topnav-mobile{margin-left:auto}
+.bb-topnav-login + .bb-topnav-cta,
+.bb-topnav-cta + .bb-topnav-mobile,
+.bb-topnav-login + .bb-topnav-cta + .bb-topnav-mobile{margin-left:0}
+@media (max-width:980px){
+  .bb-topnav-items{position:static;transform:none;left:auto;top:auto}
+}
+.bb-topnav-brand{
+  display:inline-flex;align-items:baseline;
+  color:#fff;text-decoration:none;
+  font-family:'Inter Tight',-apple-system,sans-serif;
+  font-weight:300;font-size:36px;line-height:1;
+  letter-spacing:-.01em;white-space:nowrap;
+}
+.bb-topnav-brand:hover{text-decoration:none;color:#fff;opacity:.9}
+.bb-topnav-mark{display:inline-block;transform:scaleX(-1);margin-right:-1px}
+.bb-topnav-items{display:flex;gap:36px;font-size:14px;font-weight:600;letter-spacing:.02em;font-family:'Inter',-apple-system,sans-serif}
+.bb-topnav-items a{color:rgba(255,255,255,.85);transition:color .15s;text-decoration:none;padding:6px 0}
+.bb-topnav-items a:hover{color:var(--blue);text-decoration:none}
+.bb-topnav-items a.active{color:var(--blue)}
+.bb-topnav-cta{
+  background:transparent;color:#fff;border:1px solid #fff;
+  padding:14px 28px;font-family:'Montserrat',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.02em;
+  transition:all .2s;text-decoration:none;white-space:nowrap;
+}
+.bb-topnav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+.bb-topnav-login{
+  display:inline-flex;align-items:center;gap:7px;
+  color:rgba(255,255,255,.65);text-decoration:none;
+  font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;
+  padding:8px 12px;border-radius:4px;
+  transition:all .15s;
+}
+.bb-topnav-login:hover{color:#fff;background:rgba(255,255,255,.06);text-decoration:none}
+.bb-topnav-login svg{width:13px;height:13px;opacity:.8}
+@media (max-width:1100px){.bb-topnav-login span{display:none}}
+@media (max-width:980px){.bb-topnav-login{display:none}}
+
+.bb-topnav-mobile{display:none;width:40px;height:40px;background:transparent;border:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.bb-topnav-mobile span{display:block;width:22px;height:2px;background:#fff;border-radius:1px}
+.bb-topnav-mobile-menu{display:none;background:#000;border-top:1px solid rgba(255,255,255,.1);padding:24px 32px;flex-direction:column;gap:18px}
+.bb-topnav-mobile-menu.open{display:flex}
+.bb-topnav-mobile-menu a{color:#fff;font-size:16px;font-weight:600;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+.bb-topnav-mobile-menu a:last-child{border-bottom:none}
+.bb-topnav-mobile-menu a.cta{background:var(--accent);text-align:center;border:none;padding:14px;margin-top:8px}
+@media (max-width:980px){.bb-topnav-items,.bb-topnav-cta{display:none}.bb-topnav-mobile{display:flex}}
+@media (max-width:780px){.bb-topnav .wrap{height:64px;padding:0 20px}.bb-topnav-brand{font-size:28px}}
+
+/* ============= BAULIG-DNA · PAGE TOKENS ============= */
+:root{
+  --bg-amber:#FF6B3D;
+  --bg-amber-hover:#E85A2C;
+  --bg-green-up:#16a34a;
+  --bg-text-body:#333;
+  --bg-text-muted:#666;
+  --bg-line:#e5e5e5;
+  --bg-founder-1:url('/assets/img/garantien-bg-2000.jpg');
+  --bg-founder-2:url('/assets/img/garantien-bg-2000.jpg');
+  --bg-founder-3:url('/assets/img/garantien-bg-2000.jpg');
+}
+
+.bb-page{font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.7;font-weight:400;color:#000}
+.bb-page .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+@media (max-width:780px){.bb-page .wrap{padding:0 20px}}
+
+.bb-section{
+  padding:80px 0;background-color:#fff;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  background-attachment:fixed;position:relative;
+}
+.bb-section-80{background-image:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),var(--bg-founder-1)}
+.bb-section-90{background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),var(--bg-founder-2)}
+.bb-section-95{background-image:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),var(--bg-founder-1)}
+.bb-section-50{background-image:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),var(--bg-founder-3)}
+@media (max-width:780px){.bb-section{background-attachment:scroll}}
+
+/* ============= HERO ============= */
+.bb-hero{padding:64px 0 64px;text-align:center}
+.bb-hero-eyebrow{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.05em;color:var(--bg-text-body);margin-bottom:24px;
+}
+.bb-hero-eyebrow strong{color:#000}
+.bb-hero h1{
+  font-family:'Montserrat',sans-serif;font-size:46px;font-weight:700;
+  line-height:1.12;color:#000;
+  max-width:980px;margin:0 auto 24px;
+}
+.bb-hero h1 .hl-blue{color:var(--blue)}
+.bb-hero h1 em{font-style:normal;color:var(--bg-amber)}
+.bb-hero-sub{
+  font-size:18px;font-weight:600;line-height:1.5;color:#000;
+  max-width:780px;margin:0 auto 40px;
+}
+
+.bb-hero-meta{
+  display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;
+  margin-top:40px;font-size:13px;color:var(--bg-text-muted);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.bb-hero-meta .item{display:inline-flex;align-items:center;gap:8px}
+.bb-hero-meta .item::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-green-up)}
+.bb-hero-meta .item strong{color:#000}
+
+/* ============= SECTION-HEAD ============= */
+.bb-head{text-align:center;margin-bottom:48px}
+.bb-head-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg-amber);margin-bottom:18px;
+}
+.bb-head h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#000;
+  max-width:900px;margin:0 auto 18px;
+}
+.bb-head h2 em{font-style:normal;color:var(--bg-amber)}
+.bb-head p{font-size:17px;color:var(--bg-text-body);max-width:680px;margin:0 auto;line-height:1.65}
+
+/* ============= GARANTIE-BLOCK (lang-form, weiß auf Foto-Overlay) ============= */
+.guar-block{
+  background:#fff;
+  box-shadow:1px 1px 30px rgba(0,0,0,.12);
+  display:grid;grid-template-columns:auto 1fr;gap:0;
+  margin:36px 0;overflow:hidden;
+  position:relative;
+}
+.guar-block.reverse{grid-template-columns:1fr auto}
+.guar-block.reverse .guar-side{order:2}
+.guar-block.reverse .guar-body{order:1}
+@media (max-width:880px){
+  .guar-block,.guar-block.reverse{grid-template-columns:1fr}
+  .guar-block.reverse .guar-side{order:0}
+}
+
+/* Sticker rotated -6deg, oben-links */
+.guar-sticker{
+  position:absolute;top:-22px;left:32px;z-index:5;
+  background:var(--bg-amber);color:#fff;
+  padding:16px 26px;
+  text-align:center;font-family:'Montserrat',sans-serif;
+  transform:rotate(-6deg);
+  box-shadow:2px 2px 12px rgba(0,0,0,.2);
+  display:flex;flex-direction:column;line-height:1;
+}
+.guar-sticker .top{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:5px}
+.guar-sticker .mid{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.guar-sticker .bot{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.guar-sticker.dark{background:#000}
+
+/* Side (linke Spalte mit Nummer + Headline) */
+.guar-side{
+  width:280px;padding:64px 36px 48px;
+  background:linear-gradient(180deg,#fafaf7 0%,#fff 100%);
+  display:flex;flex-direction:column;justify-content:flex-start;gap:18px;
+  border-right:1px solid var(--bg-line);
+}
+.guar-side .num{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:72px;line-height:1;color:var(--bg-amber);letter-spacing:-.04em;
+}
+.guar-side .label{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bg-text-muted);
+}
+.guar-side h3{
+  font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:30px;line-height:1.05;color:#000;
+}
+.guar-block.reverse .guar-side{border-right:none;border-left:1px solid var(--bg-line)}
+@media (max-width:880px){
+  .guar-side{width:100%;padding:48px 32px 24px;border-right:none !important;border-left:none !important;border-bottom:1px solid var(--bg-line)}
+  .guar-side .num{font-size:54px}
+  .guar-side h3{font-size:24px}
+}
+
+/* Body (rechte Spalte mit Promise + Bullets + Why) */
+.guar-body{
+  padding:64px 48px 48px;display:flex;flex-direction:column;gap:24px;
+}
+@media (max-width:780px){.guar-body{padding:36px 28px}}
+
+.guar-promise{
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:21px;line-height:1.45;
+  color:#000;margin:0;
+  border-left:3px solid var(--bg-amber);padding:6px 0 6px 22px;
+}
+.guar-promise.dark{border-left-color:#000}
+
+.guar-section-title{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg-amber);
+  margin-bottom:8px;
+}
+.guar-bullets{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px}
+@media (max-width:560px){.guar-bullets{grid-template-columns:1fr}}
+.guar-bullets li{
+  font-size:14.5px;line-height:1.55;color:#000;font-weight:500;
+  padding-left:22px;position:relative;
+}
+.guar-bullets li::before{
+  content:"↑";color:var(--bg-green-up);font-weight:800;
+  position:absolute;left:0;top:0;
+}
+
+.guar-why{
+  font-size:14.5px;color:var(--bg-text-body);line-height:1.65;
+  border-top:1px solid var(--bg-line);padding-top:18px;margin-top:auto;
+}
+.guar-why strong{color:#000;font-weight:700}
+.guar-why .pos{
+  display:block;margin-top:14px;
+  font-family:'Montserrat',sans-serif;font-style:italic;font-size:15px;
+  color:#000;font-weight:600;
+}
+
+/* ============= CTA-BUTTON ============= */
+.bb-cta{
+  display:inline-block;
+  background:var(--bg-amber);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.02em;
+  padding:18px 56px;border:none;border-radius:0;
+  box-shadow:1px 1px 20px rgba(0,0,0,.3);
+  transition:all .2s;text-align:center;line-height:1.3;cursor:pointer;text-decoration:none;
+}
+.bb-cta:hover{background:var(--bg-amber-hover);transform:translateY(-1px);text-decoration:none;color:#fff}
+.bb-cta.large{font-size:18px;padding:22px 72px}
+
+/* ============= BOTTOM-CTA (dark mit Foto-BG) ============= */
+.bb-bottom{
+  text-align:center;padding:96px 0;
+  background-color:#000;color:#fff;
+  background-image:linear-gradient(rgba(0,0,0,.78),rgba(0,0,0,.78)),url('/assets/img/garantien-bottomcta-2000.jpg');
+  background-size:cover;background-position:center 22%;background-repeat:no-repeat;
+}
+.bb-bottom h2{
+  font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:39px;line-height:50px;color:#fff;
+  max-width:800px;margin:0 auto 24px;
+}
+.bb-bottom h2 em{font-style:normal;color:var(--bg-amber)}
+.bb-bottom p{font-size:17px;color:rgba(255,255,255,.82);max-width:640px;margin:0 auto 36px;line-height:1.65}
+.bb-bottom-secondary{display:block;margin-top:18px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:underline}
+.bb-bottom-secondary strong{color:var(--bg-amber)}
+
+/* Footer · Kontrast-Override */
+footer .footer-brand{color:var(--text-2)}
+footer .footer-links a{color:var(--text-2)}
+footer .footer-links a:hover{color:var(--accent)}
+
+@media (max-width:780px){
+  .bb-hero h1,.bb-head h2,.bb-bottom h2{font-size:28px;line-height:1.25}
+  .bb-section{padding:56px 0}
+  .guar-promise{font-size:17px;padding-left:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- BAULIG-STYLE TOP-NAV -->
+
+<!-- ============= TOP-BAR (Ankündigungsleiste) ============= -->
+<div class="top-bar">
+  <div class="wrap">
+    <div class="top-bar-left">
+      <a href="mailto:info@bb-brands.de" class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        info@bb-brands.de
+      </a>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.09 12.97a1 1 0 00.78 1.62h6.13L11 22l8.91-10.97a1 1 0 00-.78-1.62h-6.13L13 2z"/></svg>
+        Pro Quartal max. 3–4 neue Projekte
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-socials">
+        <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="bb-topnav">
+  <div class="wrap">
+    <a href="/" class="bb-topnav-brand" aria-label="BB Brands Startseite"><span class="bb-topnav-mark">B</span>Brands</a>
+    <nav class="bb-topnav-items" aria-label="Hauptnavigation">
+      <a href="/">Startseite</a>
+      <a href="/cases/">Cases</a>
+      <a href="/wissen/">Wissen</a>
+      <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    </nav>
+      <a href="/kunden/" class="bb-topnav-login" aria-label="Kunden-Login" title="Als Kunde einloggen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <span>Kunden-Login</span>
+      </a>
+    <a href="/audit/" class="bb-topnav-cta">Gratis Profit-Analyse</a>
+    <button class="bb-topnav-mobile" aria-label="Menü" onclick="document.querySelector('.bb-topnav-mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="bb-topnav-mobile-menu">
+    <a href="/">Startseite</a>
+    <a href="/cases/">Cases</a>
+    <a href="/wissen/">Wissen</a>
+    <a href="https://founder-os.bb-brands.de">Founder OS</a>
+    <a href="/audit/" class="cta">Gratis Profit-Analyse</a>
+  </div>
+</header>
+
+<main class="bb-page">
+
+<!-- HERO -->
+<section class="bb-section bb-section-80 bb-hero">
+  <div class="wrap">
+    <div class="bb-hero-eyebrow"><strong>KLAVIYO-AGENTUR FÜR DTC-BRANDS:</strong></div>
+    <h1>Dein Traffic ist bezahlt. <em>Holst du ihn auch raus?</em></h1>
+    <p class="bb-hero-sub">Vollständiges Klaviyo-Lifecycle — Welcome bis Win-Back, sauber attribuiert — plus Bundle-/AOV-Architektur, die aus bestehendem Traffic mehr Profit holt. Per-Order-Math statt ROAS-Theater. Festpreis 5–15 k, kein Retainer-Zwang.</p>
+
+    <div class="bb-hero-meta">
+      <span class="item">Bachgold · <strong>+125 % AOV</strong></span>
+      <span class="item"><strong>Welcome → Win-Back</strong> · voll attribuiert</span>
+      <span class="item"><strong>120 Tage</strong> Profit-refinanziert · sonst gratis</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 01 · REFINANZIERUNG (No-Brainer-Kern) ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block">
+      <div class="guar-sticker dark">
+        <span class="top">Das Problem</span>
+        <span class="mid">01</span>
+        <span class="bot">Leaky Retention</span>
+      </div>
+      <div class="guar-side">
+        <div class="num">01</div>
+        <div class="label">Das Problem</div>
+        <h3>Du kaufst Kunden — und verlierst sie wieder.</h3>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise dark">Dein Klaviyo läuft, aber niemand weiß, was es wirklich bringt. Welcome-Flow seit Monaten mit demselben Bug, Win-Back eine Idee in Notion, keine saubere Attribution. Du gibst Geld für Acquisition aus — und lässt die Retention liegen.</p>
+        <div>
+          <div class="guar-section-title">Was wir in fast jedem Klaviyo-Account sehen:</div>
+          <ul class="guar-bullets">
+            <li>Welcome-Serie halb fertig, nie getestet</li>
+            <li>Abandoned-Flows ohne Logik &amp; Timing</li>
+            <li>kein Post-Purchase, kein Cross-Sell</li>
+            <li>Win-Back &amp; Sunset fehlen ganz</li>
+            <li>keine Bundle-/AOV-Mechanik</li>
+            <li>E-Mail-Umsatzanteil unter 20 % — branchenüblich wären 30 %+</li>
+          </ul>
+        </div>
+        <p class="guar-why">Klaviyo ist kein Newsletter-Tool. Es ist deine <strong>Profit-Maschine</strong> — wenn man es so baut.<span class="pos">Retention schlägt Acquisition. Jeden Monat.</span></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 02 · TRUTH FIRST ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block reverse">
+      <div class="guar-sticker">
+        <span class="top">Die Lösung</span>
+        <span class="mid">02</span>
+        <span class="bot">Lifecycle-Stack</span>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise">Wir bauen das vollständige Lifecycle-System — jeden Flow, der einen Euro retten oder vergrößern kann, sauber attribuiert gegen eine eingefrorene Baseline.</p>
+        <div>
+          <div class="guar-section-title">Der komplette Stack — aus einer Hand:</div>
+          <ul class="guar-bullets">
+            <li>Welcome-Serie + Segmentierung ab Tag 1</li>
+            <li>Abandoned Cart, Checkout &amp; Browse</li>
+            <li>Post-Purchase + Cross-Sell + Replenishment</li>
+            <li>Win-Back + Sunset für inaktive Kontakte</li>
+            <li>Bundle-/AOV-Architektur, jedem Euro zurechenbar</li>
+            <li>Per-Order-Math-Reporting gegen eingefrorene Baseline</li>
+          </ul>
+        </div>
+        <p class="guar-why">Jeder zusätzliche Euro steht in deinem eigenen Klaviyo <strong>schwarz auf weiß</strong>.<span class="pos">Per-Order-Math statt ROAS-Theater.</span></p>
+      </div>
+      <div class="guar-side">
+        <div class="num">02</div>
+        <div class="label">Die Lösung</div>
+        <h3>Der komplette Lifecycle-Stack.</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 03 · NO-BLOAT ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block">
+      <div class="guar-sticker">
+        <span class="top">Der Beweis</span>
+        <span class="mid">03</span>
+        <span class="bot">Echte Zahlen</span>
+      </div>
+      <div class="guar-side">
+        <div class="num">03</div>
+        <div class="label">Der Beweis</div>
+        <h3>Echte Builds. Echte Zahlen.</h3>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise">Keine Vanity-Open-Rates. Was Lifecycle + Bundle-Architektur tatsächlich gebracht haben.</p>
+        <div>
+          <div class="guar-section-title">Bachgold · Wasserfilter-Brand:</div>
+          <ul class="guar-bullets">
+            <li>AOV <strong>+125 %</strong> über Bundle-Architektur</li>
+            <li>7 Bundles mit idempotentem Generator</li>
+            <li>Conversion <strong>+333 %</strong> im Gesamt-System (Re-Launch)</li>
+            <li>Lifecycle sauber attribuiert gegen Baseline</li>
+          </ul>
+        </div>
+        <p class="guar-why">Dieselben Hebel — Lifecycle, Bundles, Per-Order-Math — funktionieren bei jeder DTC-Brand zwischen 10 k €/Monat und 10 Mio €/Jahr.<span class="pos">Retention-System, das sich wiederholt — keine Glückstreffer.</span></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= GARANTIE 04 · GO-LIVE ============= -->
+<section class="bb-section bb-section-95">
+  <div class="wrap">
+    <article class="guar-block reverse">
+      <div class="guar-sticker dark">
+        <span class="top">Preis &amp; Risiko</span>
+        <span class="mid">04</span>
+        <span class="bot">Festpreis</span>
+      </div>
+      <div class="guar-body">
+        <p class="guar-promise dark">Festpreis — typischerweise 5.000 € bis 15.000 €, je nach Scope (Anzahl Flows, Bundle-Architektur, Segmentierung). Kein Performance-Tarif, kein Umsatz-Anteil, kein Retainer-Zwang. Der Strategy Audit vorab ist kostenlos: Wir rechnen dir den E-Mail-Profit auf deinen echten Klaviyo-Zahlen vor.</p>
+        <div>
+          <div class="guar-section-title">Was du schriftlich bekommst:</div>
+          <ul class="guar-bullets">
+            <li>Profit-Refinanzierung in 120 Tagen — sonst gratis weiter</li>
+            <li>Go-Live zum fixen Termin — sonst Geld zurück</li>
+            <li>kein Junior auf deinem Account, kein Account-Manager</li>
+            <li>Strategy Audit + Brand-Foundation gratis im Build</li>
+            <li>30 Tage Hypercare nach Launch inklusive</li>
+          </ul>
+        </div>
+        <p class="guar-why">Wenn dein Setup das nicht trägt, <strong>sagen wir es ehrlich ab.</strong><span class="pos">Das Risiko liegt bei uns. Deins ist null.</span></p>
+      </div>
+      <div class="guar-side">
+        <div class="num">04</div>
+        <div class="label">Preis &amp; Risiko</div>
+        <h3>Festpreis. Risiko bei uns.</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BOTTOM-CTA -->
+<section class="bb-bottom">
+  <div class="wrap">
+    <h2>Lass uns dein Klaviyo <em>durchrechnen</em>.</h2>
+    <p>30-Min-Audit mit dem, der baut — kein Verkäufer. Wir zeigen dir, wie viel E-Mail-Profit zwischen Welcome und Win-Back gerade liegen bleibt. Wenn sich's nicht lohnt, sagen wir's ehrlich ab.</p>
+    <a href="/audit/" class="bb-cta large">Gratis Profit-Analyse</a>
+    <a href="https://founder-os.bb-brands.de" class="bb-bottom-secondary">Pre-Launch? → <strong>Founder OS</strong></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">© 2026 BB Brands · Moritz Bohmbach</div>
+    <div class="footer-links">
+      <a href="/">Startseite</a>
+      <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      <a href="https://www.linkedin.com/in/moritz-bohmbach/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20bin%20%C3%BCber%20bb-brands.de%20hergekommen." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/partner/">Partner</a>
+      <a href="/garantien/">Garantien</a>
+      <button type="button" class="bb-cookie-link" onclick="window.bbConsent && window.bbConsent.show()" style="cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:none">Cookie-Einstellungen</button>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
