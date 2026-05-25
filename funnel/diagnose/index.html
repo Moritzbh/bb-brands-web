@@ -609,22 +609,21 @@ footer .footer-links a:hover{color:var(--accent)}
   function select(qIndex,optIndex){var q=QUESTIONS[qIndex];answers[q.id]=optIndex;elOptions.querySelectorAll('.dx-opt').forEach(function(o,i){o.classList.toggle('is-selected',i===optIndex);o.setAttribute('aria-checked',i===optIndex?'true':'false');});setTimeout(function(){var step=qIndex+1;if(step>=TOTAL_Q){gotoStep('email',true);}else{gotoStep(step+1,true);}},280);}
   function firstMissing(){for(var i=0;i<TOTAL_Q;i++){if(typeof answers[QUESTIONS[i].id]==='undefined')return i+1;}return TOTAL_Q+1;}
   function computeResult(){
-    var tier=QUESTIONS[0].options[answers.tier].tier,profitScore=0,growthScore=0,bias='',qual='',emailGap=0;
-    QUESTIONS.forEach(function(q){var opt=q.options[answers[q.id]];if(!opt)return;if(typeof opt.p==='number')profitScore+=opt.p;if(typeof opt.g==='number')growthScore+=opt.g;if(opt.bias)bias=opt.bias;if(opt.qual)qual=opt.qual;if(q.id==='retention'&&typeof opt.p==='number')emailGap=opt.p;});
+    var tier=QUESTIONS[0].options[answers.tier].tier,profitScore=0,growthScore=0,storeGap=0,bias='',qual='',emailGap=0;
+    QUESTIONS.forEach(function(q){var opt=q.options[answers[q.id]];if(!opt)return;if(typeof opt.p==='number')profitScore+=opt.p;if(typeof opt.g==='number')growthScore+=opt.g;if(opt.bias)bias=opt.bias;if(opt.qual)qual=opt.qual;if(q.id==='retention'&&typeof opt.p==='number')emailGap=opt.p;if((q.id==='marge'||q.id==='cac')&&typeof opt.p==='number')storeGap+=opt.p;});
+    // storeGap = Marge+CAC (Store/AOV · Main 1) · growthScore = Trend+Scale (Main 1+Retainer)
+    // emailGap = Retention (Klaviyo · Main 2) · bias = Selbstdiagnose. Kein Signal darf auf grün fallen.
     var segment;
-    // Reihenfolge nach Priorität: harte Profit-/Wachstums-Probleme zuerst,
-    // dann E-Mail-Lücke (Klaviyo-Chance bei sonst gesunder Brand), dann grün.
     if(tier===1){segment='tier1';}
-    else if(profitScore>=6){segment='red';}
+    else if(storeGap>=4){segment='red';}
     else if(growthScore>=4){segment='yellow';}
-    else if(profitScore>=4&&bias==='red'){segment='red';}
-    else if(growthScore>=3&&bias==='yellow'){segment='yellow';}
+    else if(bias==='red'){segment='red';}
+    else if(bias==='yellow'){segment='yellow';}
+    else if(storeGap>=2){segment='red';}
+    else if(growthScore>=2){segment='yellow';}
     else if(emailGap>=2){segment='email';}
-    else if(bias==='green'&&profitScore<=3&&growthScore<=2){segment='green';}
-    else if(profitScore>=growthScore&&profitScore>=4){segment='red';}
-    else if(growthScore>=3){segment='yellow';}
     else{segment='green';}
-    return {tier:tier,profitScore:profitScore,growthScore:growthScore,bias:bias,qual:qual,emailGap:emailGap,segment:segment};
+    return {tier:tier,profitScore:profitScore,growthScore:growthScore,storeGap:storeGap,bias:bias,qual:qual,emailGap:emailGap,segment:segment};
   }
   var form=document.getElementById('dxForm'),elEmail=document.getElementById('dxEmail'),elConsent=document.getElementById('dxConsent'),elEmailErr=document.getElementById('dxEmailErr'),elConsentErr=document.getElementById('dxConsentErr'),elSubmit=document.getElementById('dxSubmit'),submitting=false;
   function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
@@ -638,9 +637,9 @@ footer .footer-links a:hover{color:var(--accent)}
     submitting=true;elSubmit.disabled=true;elSubmit.innerHTML='Wird ausgewertet …';
     var result=computeResult();
     var answerDump=QUESTIONS.map(function(q){var opt=q.options[answers[q.id]];return {q:q.id,label:opt?opt.label:''};});
-    try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:result.segment,tier:result.tier,profitScore:result.profitScore,growthScore:result.growthScore,emailGap:result.emailGap,qualification:result.qual,email:email,ts:Date.now()}));}catch(_){}
+    try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:result.segment,tier:result.tier,profitScore:result.profitScore,growthScore:result.growthScore,storeGap:result.storeGap,emailGap:result.emailGap,qualification:result.qual,email:email,ts:Date.now()}));}catch(_){}
     var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
-    var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:result.tier,segment:result.segment,profit_score:result.profitScore,growth_score:result.growthScore,email_gap:result.emailGap,bias:result.bias,qualification:result.qual,answers:answerDump,consentNewsletter:true},attr);
+    var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:result.tier,segment:result.segment,profit_score:result.profitScore,growth_score:result.growthScore,store_gap:result.storeGap,email_gap:result.emailGap,bias:result.bias,qualification:result.qual,answers:answerDump,consentNewsletter:true},attr);
     try{if(window.fbq)fbq('track','Lead',{content_name:'gratis-profit-analyse',segment:result.segment,tier:result.tier||0});}catch(_){}
     showScreen('loading');window.scrollTo(0,0);
     var done=false;function go(){if(done)return;done=true;location.href=RESULT_ROUTES[result.segment]||'/';}
