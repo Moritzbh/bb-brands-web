@@ -128,6 +128,25 @@ async function redis(...command) {
   return data.result;
 }
 
+// Findet einen bestehenden Lead per Email (für Dedup). → { id, record } | null
+async function findLeadByEmail(email) {
+  const needle = String(email || '').toLowerCase().trim();
+  if (!needle) return null;
+  const all = (await redis('HGETALL', HASH_KEY)) || [];
+  // HGETALL returns [field, value, field, value, ...]
+  for (let i = 0; i < all.length; i += 2) {
+    try {
+      const rec = JSON.parse(all[i + 1]);
+      if (rec && String(rec.email || '').toLowerCase().trim() === needle) {
+        return { id: all[i], record: rec };
+      }
+    } catch {
+      /* kaputten Eintrag überspringen */
+    }
+  }
+  return null;
+}
+
 // ----- Validation helpers -----------------------------------
 function str(v, max = 500) {
   if (typeof v !== 'string') return '';
@@ -248,15 +267,29 @@ module.exports = async function handler(req, res) {
           return jsonResponse(res, 400, { ok: false, errors });
         }
 
-        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        // Dedup: existiert schon ein Lead mit dieser Email? → updaten statt duplizieren
+        const existing = await findLeadByEmail(lead.email);
+        const prev = existing ? existing.record : null;
+        const id = existing ? existing.id : `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
         const now = new Date().toISOString();
+
+        // Status nie zurückstufen: alles außer 'new' bleibt erhalten (z.B. call-booked, won)
+        const status = prev && prev.status && prev.status !== 'new' ? prev.status : 'new';
+        // Consent: einmal gegeben, bleibt gegeben
+        const consentNewsletter = lead.consentNewsletter || !!(prev && prev.consentNewsletter);
+
         const record = {
+          ...(prev || {}),          // bewahrt z.B. callBookedAt, calendlyEvent, name, deliveredAt
           id,
-          ...lead,
-          status: 'new',
-          createdAt: now,
-          deliveredAt: null,
-          consentNewsletterAt: lead.consentNewsletter ? now : null,
+          ...lead,                  // überschreibt mit den aktuellen Quiz-Daten (Segment, Scores, Antworten)
+          status,
+          consentNewsletter,
+          createdAt: (prev && prev.createdAt) || now,
+          updatedAt: now,
+          deliveredAt: prev ? (prev.deliveredAt ?? null) : null,
+          consentNewsletterAt: consentNewsletter
+            ? ((prev && prev.consentNewsletterAt) || now)
+            : null,
           ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
           userAgent: str(req.headers['user-agent'] || '', 300),
         };
