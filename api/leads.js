@@ -601,7 +601,48 @@ async function sendToKlaviyo(record) {
     bb_utm_campaign: record.utmCampaign || '',
     bb_lead_id: record.id || '',
   };
-  const payload = {
+
+  const headers = {
+    Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+    revision: '2024-10-15',
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+
+  // --- Schritt 1: Profil mit Custom-Properties anlegen/aktualisieren ---
+  // Der Bulk-Subscribe-Endpoint akzeptiert KEINE 'properties' am Profil
+  // ("'properties' is not a valid field for the resource 'profile'").
+  // Deshalb hier separat: POST /profiles/ — bei 409 (existiert schon) PATCH.
+  const profileBody = {
+    data: { type: 'profile', attributes: { email: record.email, properties: props } },
+  };
+  let pr = await fetch('https://a.klaviyo.com/api/profiles/', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(profileBody),
+  });
+  if (pr.status === 409) {
+    const dup = await pr.json().catch(() => null);
+    const existingId = dup && dup.errors && dup.errors[0] && dup.errors[0].meta
+      ? dup.errors[0].meta.duplicate_profile_id
+      : null;
+    if (existingId) {
+      pr = await fetch(`https://a.klaviyo.com/api/profiles/${existingId}/`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({
+          data: { type: 'profile', id: existingId, attributes: { properties: props } },
+        }),
+      });
+    }
+  }
+  if (!pr.ok) {
+    const t = await pr.text();
+    throw new Error(`Klaviyo profile-upsert ${pr.status}: ${t}`);
+  }
+
+  // --- Schritt 2: Profil mit Consent in die Liste abonnieren (ohne properties) ---
+  const subBody = {
     data: {
       type: 'profile-subscription-bulk-create-job',
       attributes: {
@@ -610,7 +651,6 @@ async function sendToKlaviyo(record) {
             type: 'profile',
             attributes: {
               email: record.email,
-              properties: props,
               subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } },
             },
           }],
@@ -619,21 +659,16 @@ async function sendToKlaviyo(record) {
       relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } },
     },
   };
-  const resp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+  const sr = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
     method: 'POST',
-    headers: {
-      Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
-      revision: '2024-10-15',
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify(payload),
+    headers,
+    body: JSON.stringify(subBody),
   });
-  if (!resp.ok) {
-    const errText = await resp.text();
-    throw new Error(`Klaviyo ${resp.status}: ${errText}`);
+  if (!sr.ok) {
+    const t = await sr.text();
+    throw new Error(`Klaviyo subscribe ${sr.status}: ${t}`);
   }
-  console.log(`[klaviyo] subscribe ok — ${record.email} → list ${KLAVIYO_LIST_ID}`);
+  console.log(`[klaviyo] ok — ${record.email} → properties gesetzt + list ${KLAVIYO_LIST_ID} subscribed`);
 }
 
 // ----- ntfy.sh push notifier (optional) --------------------
