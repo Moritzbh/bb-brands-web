@@ -501,24 +501,73 @@ module.exports = async function handler(req, res) {
       return jsonResponse(res, 200, { ok: true, leads, count: leads.length });
     }
 
-    // ============ PATCH: update status (admin) ============
+    // ============ PATCH: update lead — Sales-CRM-Felder (admin) ============
     if (req.method === 'PATCH') {
       if (!checkAdmin(req)) {
         return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
       }
       const body = req.body || (await readJsonBody(req));
       const id = str(body.id, 80);
-      const status = ['new', 'in-progress', 'delivered', 'contacted', 'call-booked', 'proposal', 'won', 'lost'].includes(body.status)
-        ? body.status
-        : null;
-      if (!id || !status) {
-        return jsonResponse(res, 400, { ok: false, error: 'invalid input' });
-      }
+      if (!id) return jsonResponse(res, 400, { ok: false, error: 'invalid input' });
       const existing = await redis('HGET', HASH_KEY, id);
       if (!existing) return jsonResponse(res, 404, { ok: false, error: 'not found' });
       const record = JSON.parse(existing);
-      record.status = status;
-      record.deliveredAt = status === 'delivered' ? new Date().toISOString() : null;
+      const now = new Date().toISOString();
+
+      // Pipeline-Stufen (1-Call-Close) + Legacy-Status (Abwärtskompatibilität)
+      const STATUSES = [
+        'new', 'qualified', 'call-booked', 'call-done', 'proposal',
+        'negotiation', 'won', 'lost', 'nurture',
+        'contacted', 'in-progress', 'delivered',
+      ];
+      const DISPOSITIONS = [
+        '', 'connected', 'no-answer', 'showed', 'no-show', 'rescheduled',
+        'interested', 'not-interested', 'proposal-sent', 'closed',
+      ];
+
+      let changed = false;
+      let contactTouch = false; // setzt lastContact (echter Kontakt: Notiz/Disposition)
+
+      if (typeof body.status === 'string' && STATUSES.includes(body.status)) {
+        record.status = body.status;
+        if (body.status === 'delivered' && !record.deliveredAt) record.deliveredAt = now;
+        changed = true;
+      }
+      if (body.dealValue !== undefined) {
+        const v = Number(body.dealValue);
+        record.dealValue = Number.isFinite(v) && v >= 0 ? Math.round(v) : null;
+        changed = true;
+      }
+      if (body.nextAction !== undefined) {
+        record.nextAction = str(body.nextAction, 300);
+        changed = true;
+      }
+      if (body.nextFollowUp !== undefined) {
+        record.nextFollowUp = str(body.nextFollowUp, 40) || null;
+        changed = true;
+      }
+      if (body.disposition !== undefined && DISPOSITIONS.includes(body.disposition)) {
+        record.disposition = body.disposition;
+        changed = true;
+        contactTouch = true;
+      }
+      if (body.lostReason !== undefined) {
+        record.lostReason = str(body.lostReason, 120);
+        changed = true;
+      }
+      if (body.addNote !== undefined) {
+        const text = str(body.addNote, 2000);
+        if (text) {
+          if (!Array.isArray(record.activity)) record.activity = [];
+          record.activity.push({ ts: now, text });
+          changed = true;
+          contactTouch = true;
+        }
+      }
+
+      if (!changed) return jsonResponse(res, 400, { ok: false, error: 'nothing to update' });
+      record.updatedAt = now;
+      if (contactTouch) record.lastContact = now;
       await redis('HSET', HASH_KEY, id, JSON.stringify(record));
       return jsonResponse(res, 200, { ok: true, lead: record });
     }
