@@ -613,14 +613,13 @@ footer .footer-links a:hover{color:var(--accent)}
     QUESTIONS.forEach(function(q){var opt=q.options[answers[q.id]];if(!opt)return;if(typeof opt.p==='number')profitScore+=opt.p;if(typeof opt.g==='number')growthScore+=opt.g;if(opt.bias)bias=opt.bias;if(opt.qual)qual=opt.qual;if(q.id==='retention'&&typeof opt.p==='number')emailGap=opt.p;if((q.id==='marge'||q.id==='cac')&&typeof opt.p==='number')storeGap+=opt.p;});
     // storeGap = Marge+CAC (Store/AOV · Main 1) · growthScore = Trend+Scale (Main 1+Retainer)
     // emailGap = Retention (Klaviyo · Main 2) · bias = Selbstdiagnose. Kein Signal darf auf grün fallen.
+    // PRIORITÄT (Fix 2026-05-26): Per-Order-Math schlägt Wachstum. Jeder mit storeGap>=2
+    // (Marge/CAC-Problem) oder Selbstdiagnose "zu wenig pro Bestellung" geht auf ROT.
+    // Damit ist auf GELB die Aussage "Per-Order-Math ist okay" garantiert wahr (storeGap<2).
     var segment;
     if(tier===1){segment='tier1';}
-    else if(storeGap>=4){segment='red';}
-    else if(growthScore>=4){segment='yellow';}
-    else if(bias==='red'){segment='red';}
-    else if(bias==='yellow'){segment='yellow';}
-    else if(storeGap>=2){segment='red';}
-    else if(growthScore>=2){segment='yellow';}
+    else if(storeGap>=2||bias==='red'){segment='red';}
+    else if(growthScore>=2||bias==='yellow'){segment='yellow';}
     else if(emailGap>=2){segment='email';}
     else{segment='green';}
     return {tier:tier,profitScore:profitScore,growthScore:growthScore,storeGap:storeGap,bias:bias,qual:qual,emailGap:emailGap,segment:segment};
