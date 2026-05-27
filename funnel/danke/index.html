@@ -51,6 +51,12 @@ html,body{overflow-x:clip;max-width:100%}
 .bb-hero p .u{box-shadow:inset 0 -.5em 0 rgba(255,107,61,.18)}
 .bb-hero .note{font-size:14px;color:var(--bg-text-muted);margin-top:18px}
 
+/* Founder-Video (Pre-Call-Loom) */
+.danke-video{position:relative;aspect-ratio:16/9;background:#0d0d10;border:1px solid var(--bg-line);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.dv-play{width:62px;height:62px;border-radius:50%;background:var(--bg-amber);display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+.dv-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#fff}
+.dv-sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px}
+
 .bb-head{margin-bottom:24px}
 .bb-head h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1.25;color:#000;margin:0 0 8px}
 .bb-head p{font-size:16px;color:var(--bg-text-muted);margin:0}
@@ -108,6 +114,17 @@ html,body{overflow-x:clip;max-width:100%}
       <p class="note">Trag dir die 30 Minuten am besten direkt fest ein, dann holen wir gemeinsam das Maximum raus.</p>
     </div>
   </header>
+
+  <!-- Founder-Video · Pre-Call-Loom. Player hier einbetten (Loom/Wistia/Mux), sobald gedreht. -->
+  <section class="bb-section" style="padding-top:0;border-top:none">
+    <div class="wrap">
+      <div class="danke-video">
+        <div class="dv-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="dv-title">Kurze Nachricht von Moritz</div>
+        <div class="dv-sub">60 Sekunden · Video-Platzhalter</div>
+      </div>
+    </div>
+  </section>
 
   <!-- Was im Call passiert -->
   <section class="bb-section">
