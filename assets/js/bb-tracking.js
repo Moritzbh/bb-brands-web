@@ -214,23 +214,24 @@
   // Liest pro Dienst den Consent-Status und schaltet GA4 / Meta-Pixel granular frei.
   function ucApplyConsent() {
     try {
-      var svc = (window.UC_UI && typeof UC_UI.getServicesBaseInfo === 'function')
-        ? UC_UI.getServicesBaseInfo() : null;
-      if (!svc || !svc.length) return;
-      var ga = false, px = false, any = false;
-      svc.forEach(function (s) {
-        var n = (s && s.name ? s.name : '').toLowerCase();
-        var ok = s && s.consent && s.consent.status === true;
-        if (!ok) return;
-        any = true;
-        if (/google analytics|google tag|gtag|ga4|\banalytics\b|statistik/.test(n)) ga = true;
-        if (/facebook|meta|pixel/.test(n)) px = true;
-      });
-      // Falls Dienste nicht eindeutig benannt sind, aber Zustimmung existiert:
-      // konservativ nur das freischalten, was klar erkannt wurde.
-      if (ga || px) grantConsent({ ga4: ga, pixel: px });
-      else if (!any) { /* alles abgelehnt */ revokeConsent(); }
-      log('UC consent angewandt', { ga4: ga, pixel: px });
+      if (!(window.UC_UI && typeof UC_UI.getServicesBaseInfo === 'function')) return;
+      // getServicesBaseInfo() liefert in CMP V3 ein Promise → auflösen.
+      Promise.resolve(UC_UI.getServicesBaseInfo()).then(function (svc) {
+        if (!svc || !svc.length) return;
+        var ga = false, px = false, any = false;
+        svc.forEach(function (s) {
+          var n = (s && s.name ? s.name : '').toLowerCase();
+          var ok = s && s.consent && s.consent.status === true;
+          if (!ok) return;
+          any = true;
+          // GA4 nur bei "Google Analytics" — NICHT bei "Google Tag Manager".
+          if (/google analytics|ga4/.test(n)) ga = true;
+          if (/facebook|meta|pixel/.test(n)) px = true;
+        });
+        if (ga || px) grantConsent({ ga4: ga, pixel: px });
+        else if (!any) revokeConsent();
+        log('UC consent angewandt', { ga4: ga, pixel: px });
+      }).catch(function () {});
     } catch (e) { /* ignore */ }
   }
   // Beim Init (deckt wiederkehrende Besucher mit gespeicherter Zustimmung ab)
