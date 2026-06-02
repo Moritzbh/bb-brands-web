@@ -519,7 +519,7 @@ footer .footer-links a:hover{color:var(--accent)}
   var pct = gap >= 3 ? 90 : 78;
   val.textContent = gap >= 3 ? 'sehr hoch' : 'hoch';
   setTimeout(function(){ fill.style.width = pct + '%'; }, 120);
-  try { if (window.fbq) window.fbq('trackCustom', 'FunnelResultViewed', { segment: 'email', tier: tier || 0 }); } catch(_) {}
+  try { if (window.BBTracking) window.BBTracking.trackCustom('FunnelResultViewed', { segment: 'email', tier: tier || 0 }); } catch(_) {}
 
   function toBook(e){ if(e) e.preventDefault(); var b=document.getElementById('book'); if(b) b.scrollIntoView({ behavior:'smooth', block:'start' }); }
   document.querySelectorAll('[data-action="book"]').forEach(function(b){ b.addEventListener('click', toBook); });

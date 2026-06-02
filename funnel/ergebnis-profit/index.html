@@ -605,7 +605,7 @@ footer .footer-links a:hover{color:var(--accent)}
   else if (pct >= 66) val.textContent = 'hoch';
   else val.textContent = 'erhöht';
   setTimeout(function(){ fill.style.width = pct + '%'; }, 120);
-  try { if (window.fbq) window.fbq('trackCustom', 'FunnelResultViewed', { segment: 'red', tier: tier || 0 }); } catch(_) {}
+  try { if (window.BBTracking) window.BBTracking.trackCustom('FunnelResultViewed', { segment: 'red', tier: tier || 0 }); } catch(_) {}
 
   // ---- Smooth-Scroll zu #book ----
   function toBook(e){ if(e) e.preventDefault(); var b=document.getElementById('book'); if(b) b.scrollIntoView({ behavior:'smooth', block:'start' }); }

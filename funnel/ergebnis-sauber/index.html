@@ -355,7 +355,7 @@ footer .footer-links a:hover{color:var(--accent)}
   var tier = (r && typeof r.tier !== 'undefined') ? r.tier : 0;
   // Profit-Gesundheit: hoch (gesundes Setup)
   setTimeout(function(){ fill.style.width = '88%'; }, 120);
-  try { if (window.fbq) window.fbq('trackCustom', 'FunnelResultViewed', { segment: 'green', tier: tier || 0 }); } catch(_) {}
+  try { if (window.BBTracking) window.BBTracking.trackCustom('FunnelResultViewed', { segment: 'green', tier: tier || 0 }); } catch(_) {}
 
   document.querySelectorAll('[data-action="next"]').forEach(function(b){
     b.addEventListener('click', function(e){ e.preventDefault(); var t=document.getElementById('naechstes'); if(t) t.scrollIntoView({ behavior:'smooth', block:'start' }); });

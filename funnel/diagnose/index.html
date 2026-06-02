@@ -642,7 +642,14 @@ footer .footer-links a:hover{color:var(--accent)}
     try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:result.segment,tier:result.tier,profitScore:result.profitScore,growthScore:result.growthScore,storeGap:result.storeGap,emailGap:result.emailGap,qualification:result.qual,email:email,ts:Date.now()}));}catch(_){}
     var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
     var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:result.tier,segment:result.segment,profit_score:result.profitScore,growth_score:result.growthScore,store_gap:result.storeGap,email_gap:result.emailGap,bias:result.bias,qualification:result.qual,answers:answerDump,consentNewsletter:true},attr);
-    try{if(window.fbq)fbq('track','Lead',{content_name:'gratis-profit-analyse',segment:result.segment,tier:result.tier||0});}catch(_){}
+    // Meta-Tracking: gemeinsame event_id (Browser↔Server-Dedup), Match-Keys (fbp/fbc), Consent-Flag.
+    // bb.track feuert den Pixel nur bei Consent (sonst gepuffert); GA4 unabhängig.
+    var bb=window.BBTracking, eventId=bb?bb.newEventId():null;
+    if(bb){
+      bb.track('Lead',{content_name:'gratis-profit-analyse',segment:result.segment,tier:result.tier||0},{eventId:eventId});
+      bb.attachToLead(payload,{eventId:eventId});   // fbp/fbc/event_id/utms/submit_path
+      payload.tracking_consent=bb.isReady();          // true nur bei Marketing-Opt-in → Server-CAPI feuert
+    }
     showScreen('loading');window.scrollTo(0,0);
     var done=false;function go(){if(done)return;done=true;location.href=RESULT_ROUTES[result.segment]||'/';}
     fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){}).finally(function(){setTimeout(go,350);});
@@ -650,7 +657,7 @@ footer .footer-links a:hover{color:var(--accent)}
   });
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function focusSoon(el){if(el){setTimeout(function(){try{el.focus({preventScroll:true});}catch(_){el.focus();}},60);}}
-  document.querySelectorAll('[data-action="start"]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();try{if(window.fbq)fbq('trackCustom','QuizStart',{funnel:'gratis-profit-analyse'});}catch(_){}gotoStep(1,true);});});
+  document.querySelectorAll('[data-action="start"]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();try{if(window.BBTracking)BBTracking.trackCustom('QuizStart',{funnel:'gratis-profit-analyse'});}catch(_){}gotoStep(1,true);});});
   elBack.addEventListener('click',function(){var step=currentStep();if(typeof step==='number'&&step>1){gotoStep(step-1,true);}});
   screens.gate.querySelector('[data-action="back-to-quiz"]').addEventListener('click',function(){gotoStep(TOTAL_Q,true);});
   document.addEventListener('keydown',function(e){if(!screens.question.classList.contains('is-active'))return;var map={'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3},key=e.key.toLowerCase();if(key in map){var opts=elOptions.querySelectorAll('.dx-opt');if(opts[map[key]]){e.preventDefault();opts[map[key]].click();}}});

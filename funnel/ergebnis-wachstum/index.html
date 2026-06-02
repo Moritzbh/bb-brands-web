@@ -575,7 +575,7 @@ footer .footer-links a:hover{color:var(--accent)}
   else if (pct >= 66) val.textContent = 'hoch';
   else val.textContent = 'erhöht';
   setTimeout(function(){ fill.style.width = pct + '%'; }, 120);
-  try { if (window.fbq) window.fbq('trackCustom', 'FunnelResultViewed', { segment: 'yellow', tier: tier || 0 }); } catch(_) {}
+  try { if (window.BBTracking) window.BBTracking.trackCustom('FunnelResultViewed', { segment: 'yellow', tier: tier || 0 }); } catch(_) {}
 
   function toBook(e){ if(e) e.preventDefault(); var b=document.getElementById('book'); if(b) b.scrollIntoView({ behavior:'smooth', block:'start' }); }
   document.querySelectorAll('[data-action="book"]').forEach(function(b){ b.addEventListener('click', toBook); });

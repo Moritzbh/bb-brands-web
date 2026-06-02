@@ -425,7 +425,7 @@ footer .footer-links a:hover{color:var(--accent)}
   var tier = (r && typeof r.tier !== 'undefined') ? r.tier : 1;
   // Fundament-Phase: ruhiger, niedriger Fortschritt (Aufbau)
   setTimeout(function(){ fill.style.width = '22%'; }, 120);
-  try { if (window.fbq) window.fbq('trackCustom', 'FunnelResultViewed', { segment: 'tier1', tier: tier || 1 }); } catch(_) {}
+  try { if (window.BBTracking) window.BBTracking.trackCustom('FunnelResultViewed', { segment: 'tier1', tier: tier || 1 }); } catch(_) {}
 
   var bar = document.getElementById('stickybar');
   var hero = document.querySelector('.bb-hero');
