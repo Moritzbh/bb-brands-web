@@ -26,7 +26,7 @@
 const crypto = require('crypto');
 
 // Meta Conversions API (optional — läuft nur wenn META_PIXEL_ID + META_CAPI_TOKEN gesetzt)
-const { sendCapiEvent } = require('./_capi');
+const { sendCapiEvent, CAPI_ENABLED } = require('./_capi');
 
 const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
 const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
@@ -175,6 +175,7 @@ module.exports = async function handler(req, res) {
         ok: true,
         service: 'calendly-webhook',
         signatureCheck: CALENDLY_SIGNING_KEY ? 'on' : 'off',
+        capi: CAPI_ENABLED ? 'on' : 'off',
       })
     );
   }
