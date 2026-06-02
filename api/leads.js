@@ -186,6 +186,12 @@ function extractAttribution(body) {
     fbp: str(body.fbp, 120),               // _fbp Cookie (vom Pixel gesetzt)
     fbc: str(body.fbc, 200),               // _fbc Cookie / aus fbclid abgeleitet
     fbEventId: str(body.event_id, 80),     // gleiche ID wie das Browser-fbq-Event
+    // Tracking-Consent (DSGVO): nur wenn true, darf serverseitig an Meta gesendet werden.
+    // Setzt das Frontend (bb-tracking.js attachToLead) erst nach CMP-Opt-in.
+    trackingConsent:
+      body.tracking_consent === true ||
+      body.tracking_consent === 'true' ||
+      body.tracking_consent === 'on',
   };
 }
 
@@ -194,6 +200,11 @@ function extractAttribution(body) {
 // Browsers → Meta dedupliziert Browser-Pixel + dieses Server-Event.
 async function fireLeadCapi(record, req) {
   try {
+    // DSGVO: ohne Tracking-Consent kein serverseitiges Meta-Event.
+    if (!record.trackingConsent) {
+      console.log('[capi] Lead skip — kein Tracking-Consent');
+      return;
+    }
     const submitPath = record.submitPath || record.landingPath || '';
     const eventSourceUrl = submitPath
       ? `https://bb-brands.de${submitPath.startsWith('/') ? '' : '/'}${submitPath}`

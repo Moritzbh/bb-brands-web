@@ -141,6 +141,11 @@ async function sendPush(title, message) {
 // event_id = invitee-UUID → dedupt mit einem optionalen Browser-Schedule auf /funnel/danke.
 async function fireScheduleCapi({ email, name, rec, payload }) {
   try {
+    // DSGVO: nur senden, wenn der zugehörige Lead Tracking-Consent gegeben hat.
+    if (!(rec && rec.trackingConsent)) {
+      console.log('[capi] Schedule skip — kein Tracking-Consent am Lead');
+      return;
+    }
     const inviteeUuid = String(payload.uri || '').split('/').filter(Boolean).pop() || '';
     await sendCapiEvent({
       eventName: 'Schedule',
