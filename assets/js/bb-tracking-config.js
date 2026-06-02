@@ -12,7 +12,9 @@ window.BB_TRACKING = {
   pixelId: '990096973809534',  // ← Meta Pixel-/Datensatz-ID (BB Brands Web)
   ga4Id: 'G-C8SDVBEGPK',  // ← GA4 Mess-ID (BB Brands)
   debug: false,           // true = Konsolen-Logs zum Debuggen
-  // 'auto' = Interim: GA4 lädt sofort, Meta-Pixel wartet auf CMP-Opt-in.
-  // Sobald die CMP (Cookiebot/Usercentrics) steht → auf 'cmp' umstellen.
-  consentMode: 'auto',
+  // 'cmp'  = DSGVO-Endzustand: GA4 + Meta-Pixel laden erst nach Opt-in
+  //          via Usercentrics CMP V3 (Settings-ID unten).
+  // 'auto' = Interim-Fallback (GA4 sofort, Pixel gated) — nur zum Debuggen.
+  consentMode: 'cmp',
+  ucSettingsId: '_b995aKxWuUzu7',   // Usercentrics CMP V3
 };

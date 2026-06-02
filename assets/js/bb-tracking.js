@@ -120,22 +120,28 @@
   }
 
   // ---------- Consent-Steuerung (von der CMP gerufen) ----------
-  function grantConsent() {
-    if (consentGranted) return;
-    consentGranted = true;
-    log('Consent erteilt → Pixel + GA4 laden');
-    loadPixel();
-    loadGA4();
-    // Gepufferte Events: NUR den Pixel nachfeuern (GA4 wurde im auto-Modus
-    // schon beim Original-Aufruf gefeuert → kein Doppelzählen).
-    (pendingEvents || []).forEach(function (e) {
-      if (window.fbq) { try { window.fbq('track', e.name, e.params || {}, { eventID: e.opts.eventId }); } catch (_) {} }
-    });
-    pendingEvents = [];
+  // grantConsent({ga4, pixel}) — granular. Ohne Argument: beides (Abwärtskompat).
+  function grantConsent(opts) {
+    if (opts === undefined) opts = { ga4: true, pixel: true };
+    if (opts.ga4 && !ga4Loaded) { loadGA4(); log('Consent: GA4 geladen'); }
+    if (opts.pixel && !consentGranted) {
+      consentGranted = true;
+      loadPixel();
+      log('Consent: Meta-Pixel geladen');
+      // Gepufferte Events: NUR den Pixel nachfeuern (GA4 wurde ggf. schon
+      // beim Original-Aufruf gefeuert → kein Doppelzählen).
+      (pendingEvents || []).forEach(function (e) {
+        if (window.fbq) { try { window.fbq('track', e.name, e.params || {}, { eventID: e.opts.eventId }); } catch (_) {} }
+      });
+      pendingEvents = [];
+    }
   }
   function revokeConsent() {
+    // Bereits geladene Tags lassen sich im laufenden Page-View nicht entladen;
+    // wir stoppen best-effort weiteres Feuern. Beim nächsten Seitenaufruf greift
+    // die gespeicherte Ablehnung → gar kein Laden.
     consentGranted = false;
-    log('Consent widerrufen');
+    log('Consent widerrufen (kein weiteres Pixel-Feuern)');
   }
 
   // ---------- Event-Tracking ----------
@@ -204,13 +210,53 @@
   };
 
   // ---------- CMP-Auto-Hook ----------
-  // Cookiebot feuert 'CookiebotOnAccept' wenn Marketing erlaubt ist.
+  // (A) Usercentrics CMP V3 (web.cmp.usercentrics.eu/ui/loader.js)
+  // Liest pro Dienst den Consent-Status und schaltet GA4 / Meta-Pixel granular frei.
+  function ucApplyConsent() {
+    try {
+      var svc = (window.UC_UI && typeof UC_UI.getServicesBaseInfo === 'function')
+        ? UC_UI.getServicesBaseInfo() : null;
+      if (!svc || !svc.length) return;
+      var ga = false, px = false, any = false;
+      svc.forEach(function (s) {
+        var n = (s && s.name ? s.name : '').toLowerCase();
+        var ok = s && s.consent && s.consent.status === true;
+        if (!ok) return;
+        any = true;
+        if (/google analytics|google tag|gtag|ga4|\banalytics\b|statistik/.test(n)) ga = true;
+        if (/facebook|meta|pixel/.test(n)) px = true;
+      });
+      // Falls Dienste nicht eindeutig benannt sind, aber Zustimmung existiert:
+      // konservativ nur das freischalten, was klar erkannt wurde.
+      if (ga || px) grantConsent({ ga4: ga, pixel: px });
+      else if (!any) { /* alles abgelehnt */ revokeConsent(); }
+      log('UC consent angewandt', { ga4: ga, pixel: px });
+    } catch (e) { /* ignore */ }
+  }
+  // Beim Init (deckt wiederkehrende Besucher mit gespeicherter Zustimmung ab)
+  window.addEventListener('UC_UI_INITIALIZED', ucApplyConsent);
+  // Bei Nutzer-Aktion (Annehmen/Ablehnen/Speichern)
+  window.addEventListener('UC_UI_CMP_EVENT', function (e) {
+    var t = e && e.detail && e.detail.type;
+    if (t === 'ACCEPT_ALL') {
+      // „Alle akzeptieren" → sicher beides freischalten, auch falls die
+      // Dienst-Erkennung mal nicht greift.
+      grantConsent({ ga4: true, pixel: true });
+    } else if (t === 'DENY_ALL') {
+      revokeConsent();
+    } else if (t === 'SAVE' || t === 'ACCEPT_ONE' || t === 'DENY_ONE') {
+      // Teilauswahl → granular nach Dienst-Status
+      ucApplyConsent();
+    }
+  });
+
+  // (B) Klassisch Cookiebot (falls je gewechselt wird) — Marketing-Consent
   window.addEventListener('CookiebotOnAccept', function () {
     if (window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.marketing) grantConsent();
   });
   window.addEventListener('CookiebotOnDecline', function () { revokeConsent(); });
-  // Usercentrics + Eigen-Gate: einfach window.dispatchEvent(new Event('bb:consent-granted'))
-  window.addEventListener('bb:consent-granted', grantConsent);
+  // (C) Eigen-Gate / manueller Trigger
+  window.addEventListener('bb:consent-granted', function () { grantConsent(); });
   window.addEventListener('bb:consent-revoked', revokeConsent);
 
   // Interim-Modus ('auto'): GA4 sofort laden (Traffic-Übersicht), Meta-Pixel
