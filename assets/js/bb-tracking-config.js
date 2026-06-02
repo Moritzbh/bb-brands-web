@@ -9,7 +9,7 @@
    (kompletter No-Op). Erst ausfüllen, wenn die IDs vorliegen.
    ============================================================ */
 window.BB_TRACKING = {
-  pixelId: '',            // ← Schritt 1: Meta Pixel-/Datensatz-ID (z.B. '1234567890123456')
+  pixelId: '990096973809534',  // ← Meta Pixel-/Datensatz-ID (BB Brands Web)
   ga4Id: '',              // ← Schritt 4: GA4 Mess-ID (z.B. 'G-XXXXXXXXXX')
   debug: false,           // true = Konsolen-Logs zum Debuggen
 };
