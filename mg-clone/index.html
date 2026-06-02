@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>MG-Design-Clone · Premium + Sticky (Schritt 1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MG-DESIGN-CLONE — Premium + Sticky (Schritt 1: nur Design).
+   Texte = Platzhalter → Schritt 2 füllt mit BB-Brands-Inhalt.
+   MG-Struktur & Palette (Navy/Rot/Gelb), Execution premium.
+   ============================================================ */
+:root{
+  --navy:#0a1850;
+  --navy-2:#142a7a;
+  --ink:#181b27;
+  --muted:#5c6374;
+  --line:#ebedf4;
+  --line-2:#e0e3ee;
+  --band:#f4f6fb;
+  --band-2:#f8f9fd;
+  --red:#e11d2a;
+  --mark:#ffe04d;
+  --amber:#ffb400;
+  --green:#16a34a;
+  --green-bg:#eafaf0;
+  --card:#fff;
+  --shadow-card:0 1px 2px rgba(10,24,80,.04),0 10px 30px rgba(10,24,80,.06);
+  --shadow-card-h:0 2px 4px rgba(10,24,80,.06),0 20px 44px rgba(10,24,80,.12);
+  --shadow-cta:0 10px 24px rgba(10,24,80,.28),0 2px 6px rgba(10,24,80,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--ink);background:#fff;line-height:1.55;letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+.center{text-align:center}
+
+h1,h2,h3,h4{color:var(--navy);line-height:1.07;letter-spacing:-.025em;font-weight:800}
+h1{font-size:clamp(33px,5.4vw,56px)}
+h2{font-size:clamp(28px,4.2vw,44px)}
+h3{font-size:clamp(21px,3vw,30px)}
+
+/* Highlights — premiumer Marker (weicher, abgerundet) + Rot-Akzent */
+.hl-red{color:var(--red)}
+.hl-mark{
+  background:linear-gradient(180deg,transparent 54%,var(--mark) 54%,var(--mark) 92%,transparent 92%);
+  padding:0 .08em;border-radius:3px;
+}
+
+/* ============ TOP STRIP ============ */
+.topstrip{height:4px;background:linear-gradient(90deg,var(--red),var(--navy) 60%,var(--navy-2))}
+
+/* ============ STICKY NAVBAR (Glass) ============ */
+.navbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(255,255,255,.72);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s,background .25s;
+}
+.navbar.is-scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(10,24,80,.07);background:rgba(255,255,255,.86)}
+.navbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:21px;color:var(--ink);text-decoration:none;letter-spacing:-.03em}
+.logo .cross{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:linear-gradient(180deg,#f23b46,var(--red));border-radius:8px;color:#fff;font-weight:900;font-size:19px;line-height:1;box-shadow:0 4px 12px rgba(225,29,42,.35)}
+.logo b{color:var(--navy);font-weight:800}
+
+/* ============ CTA ============ */
+.cta{
+  display:inline-flex;align-items:center;gap:11px;
+  background:linear-gradient(180deg,var(--navy-2),var(--navy));color:#fff;
+  font-weight:700;font-size:clamp(16px,1.6vw,19px);letter-spacing:-.01em;
+  padding:19px 42px;border:none;border-radius:60px;cursor:pointer;text-decoration:none;
+  box-shadow:var(--shadow-cta);position:relative;overflow:hidden;
+  transition:transform .2s cubic-bezier(.22,.61,.36,1),box-shadow .2s,filter .2s;
+}
+.cta::before{content:"";position:absolute;inset:0 0 auto 0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent);pointer-events:none}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(10,24,80,.34);filter:saturate(115%)}
+.cta:active{transform:translateY(0)}
+.cta svg{width:20px;height:20px}
+.cta-sm{padding:12px 24px;font-size:15px;box-shadow:0 6px 16px rgba(10,24,80,.22)}
+.cta-note{font-size:13.5px;color:var(--muted);margin-top:14px;font-weight:500}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:64px 0 40px;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:1100px;height:680px;
+  background:radial-gradient(60% 60% at 50% 40%,rgba(20,42,122,.07),transparent 70%),radial-gradient(40% 40% at 72% 30%,rgba(225,29,42,.05),transparent 70%);
+  pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);
+  background:#fdecec;border:1px solid #f8d4d6;padding:8px 16px;border-radius:60px;margin-bottom:22px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.hero h1{max-width:940px;margin:0 auto 22px}
+.hero-sub{font-size:clamp(16px,2vw,19.5px);color:var(--muted);max-width:700px;margin:0 auto 34px;line-height:1.62;font-weight:500}
+.hero-sub b{color:var(--ink);font-weight:700}
+
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center;text-align:left;margin-bottom:22px}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Video premium */
+.video{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;
+  background:
+    radial-gradient(90% 80% at 28% 18%,rgba(120,140,220,.22),transparent 55%),
+    radial-gradient(70% 70% at 85% 90%,rgba(225,29,42,.14),transparent 60%),
+    linear-gradient(155deg,#11131c,#272a39);
+  box-shadow:0 30px 70px rgba(10,24,80,.26),0 4px 14px rgba(10,24,80,.14);
+  border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.video::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45));pointer-events:none}
+.video .play{position:relative;z-index:2;width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.96);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .2s}
+.video .play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.35);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+.video .play:hover{transform:scale(1.07)}
+.video .play svg{width:30px;height:30px;margin-left:4px;color:var(--navy)}
+.video .vlabel{position:absolute;left:18px;bottom:16px;right:18px;z-index:2;color:rgba(255,255,255,.94);font-size:13px;font-weight:600}
+.video .vtime{position:absolute;top:14px;right:15px;z-index:2;font-size:12px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);padding:5px 10px;border-radius:8px}
+
+/* Checklist premium */
+.checks{list-style:none;display:grid;gap:18px}
+.checks li{display:flex;gap:14px;align-items:flex-start}
+.checks .ic{flex-shrink:0;width:28px;height:28px;border-radius:9px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;margin-top:1px;box-shadow:inset 0 0 0 1px #c9efd6}
+.checks .ic svg{width:15px;height:15px;color:var(--green)}
+.checks .t{font-size:16px;font-weight:600;color:var(--ink);line-height:1.45}
+
+/* Trust-Logos premium */
+.logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 24px;margin:20px 0 30px;padding-top:24px;border-top:1px solid var(--line)}
+.logos .lg{width:104px;height:36px;border-radius:8px;background:linear-gradient(180deg,#f7f8fc,#eef0f6);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#a3a9ba}
+.logos .count{font-weight:700;color:var(--navy);font-size:15px}
+
+/* ============ REVIEWS ============ */
+.reviews{padding:36px 0 12px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:780px){.review-grid{grid-template-columns:1fr}}
+.review{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card);transition:transform .2s,box-shadow .2s}
+.review:hover{transform:translateY(-3px);box-shadow:var(--shadow-card-h)}
+.stars{color:var(--amber);font-size:16px;letter-spacing:3px;margin-bottom:12px}
+.review p{font-size:14.5px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.review-who{display:flex;align-items:center;gap:12px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#cfd4e6,#a9b0c9);flex-shrink:0;box-shadow:inset 0 0 0 2px #fff,0 2px 6px rgba(10,24,80,.12)}
+.review-who .nm{font-size:13.5px;font-weight:700;color:var(--navy)}
+.review-who .rl{font-size:12.5px;color:var(--muted)}
+
+/* ============ VALUE BAND ============ */
+.band{background:var(--band);padding:64px 0;text-align:center;margin-top:42px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band h2{max-width:840px;margin:0 auto 22px}
+.band-sub{color:var(--muted);max-width:640px;margin:0 auto 30px;font-size:16.5px;font-weight:500}
+
+/* ============ SOCIAL PROOF ============ */
+.proof{padding:72px 0;text-align:center}
+.proof h2{margin-bottom:10px}
+.proof .lead{color:var(--muted);margin-bottom:42px;font-size:16.5px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;text-align:left}
+@media(max-width:780px){.testi-grid{grid-template-columns:1fr}}
+.testi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 26px;box-shadow:var(--shadow-card);transition:transform .2s,box-shadow .2s}
+.testi:hover{transform:translateY(-3px);box-shadow:var(--shadow-card-h)}
+.testi .who{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+.testi .nm{font-weight:700;color:var(--navy);font-size:15px}
+.testi .rl{font-size:13px;color:var(--muted)}
+.testi p{font-size:14.5px;color:var(--ink);line-height:1.65;margin-bottom:14px}
+.testi a{color:var(--navy);font-weight:700;font-size:13.5px;text-decoration:none;display:inline-flex;gap:5px}
+.testi a:hover{color:var(--red)}
+
+/* ============ FINAL CTA ============ */
+.final{position:relative;background:radial-gradient(80% 120% at 50% 0%,#fff,var(--band-2));padding:78px 0;text-align:center;border-top:1px solid var(--line)}
+.final h2{max-width:780px;margin:0 auto 20px}
+.scarcity{display:inline-flex;align-items:center;gap:8px;background:#fdecec;color:var(--red);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:60px;margin-bottom:26px;border:1px solid #f8d4d6}
+.final-text{color:var(--muted);max-width:600px;margin:0 auto 28px;font-size:16.5px;font-weight:500}
+.sign{font-family:'Caveat',cursive;font-weight:700;font-size:46px;color:var(--navy);line-height:1;margin:34px 0 4px}
+.sign-role{font-size:13px;color:var(--muted);margin-bottom:26px}
+
+/* ============ QUOTE ============ */
+.quote{padding:60px 0;text-align:center}
+.quote p{font-style:italic;font-weight:500;font-size:clamp(19px,2.5vw,25px);color:var(--navy);max-width:740px;margin:0 auto 12px;line-height:1.5;letter-spacing:-.01em}
+.quote .src{font-size:13px;color:var(--muted);font-weight:600}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--line);padding:30px 0 40px;background:#fff}
+.footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer nav{display:flex;gap:24px}
+.footer a{font-size:13.5px;color:var(--muted);text-decoration:none}
+.footer a:hover{color:var(--red)}
+.footer .cp{font-size:13px;color:#a3a9ba}
+
+/* ============ STICKY BOTTOM CTA-BAR ============ */
+.stickybar{
+  position:fixed;left:0;right:0;bottom:0;z-index:55;
+  background:rgba(255,255,255,.82);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);
+  border-top:1px solid var(--line-2);box-shadow:0 -8px 30px rgba(10,24,80,.10);
+  transform:translateY(120%);transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.stickybar.show{transform:translateY(0)}
+.stickybar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 26px}
+.sb-text{font-weight:700;color:var(--navy);font-size:15.5px}
+.sb-text span{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+@media(max-width:620px){
+  .sb-text{display:none}
+  .stickybar .wrap{justify-content:center;padding:11px 18px}
+  .stickybar .cta{width:100%;justify-content:center}
+}
+
+/* Placeholder-Hinweis */
+.ph-note{background:#fff8e1;border-bottom:1px solid #f0e2a8;color:#7a6310;font-size:12.5px;font-weight:600;text-align:center;padding:7px 16px}
+</style>
+</head>
+<body>
+
+<div class="ph-note">DESIGN-SHELL (Schritt 1) · premium + sticky · Texte sind Platzhalter — Schritt 2 füllt mit BB-Brands-Inhalt</div>
+<div class="topstrip"></div>
+
+<!-- STICKY NAVBAR -->
+<div class="navbar" id="navbar">
+  <div class="wrap">
+    <a href="#" class="logo"><span class="cross">+</span>mehr<b>&nbsp;wachstum</b></a>
+    <a href="#" class="cta cta-sm">Jetzt sichern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Für Zielgruppe A, Zielgruppe B &amp; Zielgruppe C</span>
+    <h1>Die <span class="hl-mark">Headline</span> für deine Zielgruppe, die endlich <span class="hl-red">planbar wachsen</span> will.</h1>
+    <p class="hero-sub">Ein bis zwei Sätze Subline, die das Versprechen konkret machen und die größte Sorge der Zielgruppe direkt adressieren. <b>Der starke Kernsatz steht fett.</b></p>
+
+    <div class="hero-grid">
+      <div class="video">
+        <button class="play" type="button" aria-label="Video abspielen">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="vtime">1:30</span>
+        <span class="vlabel">Video-Platzhalter · VSL kommt hier rein (16:9)</span>
+      </div>
+      <ul class="checks">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Klarer Vorteil eins — eine Zeile, die sofort Nutzen zeigt.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Klarer Vorteil zwei — adressiert die nächste Sorge.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Klarer Vorteil drei — macht das Ergebnis greifbar.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Klarer Vorteil vier — nimmt das letzte Zögern.</span></li>
+      </ul>
+    </div>
+
+    <div class="logos">
+      <span class="lg">LOGO</span><span class="lg">LOGO</span><span class="lg">LOGO</span><span class="lg">LOGO</span>
+      <span class="count">500+ zufriedene Kunden</span>
+    </div>
+
+    <a href="#" class="cta">Jetzt kostenlos sichern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="cta-note">Kostenlos · unverbindlich · in 90 Sekunden</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="review-grid">
+      <div class="review"><div class="stars">★★★★★</div><p>Kurzes Platzhalter-Zitat, das Vertrauen aufbaut und ein konkretes Ergebnis benennt.</p><div class="review-who"><span class="avatar"></span><span><span class="nm">Vorname N.</span><br><span class="rl">Rolle / Firma</span></span></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>Zweites Platzhalter-Zitat. Hier steht später eine echte Kundenstimme mit Resultat.</p><div class="review-who"><span class="avatar"></span><span><span class="nm">Vorname N.</span><br><span class="rl">Rolle / Firma</span></span></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>Drittes Platzhalter-Zitat. Kurz, konkret, glaubwürdig — kein Marketing-Sprech.</p><div class="review-who"><span class="avatar"></span><span><span class="nm">Vorname N.</span><br><span class="rl">Rolle / Firma</span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE BAND -->
+<section class="band">
+  <div class="wrap">
+    <h2>Restate des Angebots in einer Zeile — <span class="hl-mark">mit Highlight</span>.</h2>
+    <p class="band-sub">Kurzer Absatz, der den Nutzen wiederholt und Richtung CTA führt. Platzhalter.</p>
+    <a href="#" class="cta">Jetzt kostenlos sichern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="wrap">
+    <h2>Schließe dich <span class="hl-red">hunderten</span> anderen an</h2>
+    <p class="lead">Untertitel-Platzhalter zur Social-Proof-Sektion.</p>
+    <div class="testi-grid">
+      <div class="testi"><div class="who"><span class="avatar"></span><span><span class="nm">Vorname Name</span><br><span class="rl">Firma / Marke</span></span></div><p>Längeres Platzhalter-Testimonial. Beschreibt Ausgangslage, Zusammenarbeit und konkretes Ergebnis in zwei bis drei Sätzen.</p><a href="#">→ zur Website</a></div>
+      <div class="testi"><div class="who"><span class="avatar"></span><span><span class="nm">Vorname Name</span><br><span class="rl">Firma / Marke</span></span></div><p>Zweites längeres Platzhalter-Testimonial. Hier kommt später eine echte, ausführliche Kundenstimme rein.</p><a href="#">→ zur Website</a></div>
+      <div class="testi"><div class="who"><span class="avatar"></span><span><span class="nm">Vorname Name</span><br><span class="rl">Firma / Marke</span></span></div><p>Drittes längeres Platzhalter-Testimonial. Glaubwürdig, konkret, mit Zahl, wenn möglich.</p><a href="#">→ zur Website</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <span class="scarcity">Achtung: begrenzte Plätze pro Woche</span>
+    <h2>Sichere dir jetzt deinen <span class="hl-mark">Platz</span>.</h2>
+    <p class="final-text">Abschließender Absatz, der Dringlichkeit und Nutzen verbindet. Platzhalter-Text, der in Schritt 2 ersetzt wird.</p>
+    <a href="#" class="cta">Jetzt kostenlos sichern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="sign">Dein Name</p>
+    <p class="sign-role">Rolle / Firma</p>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap">
+    <p>„Ein motivierendes Platzhalter-Zitat, das zur Marke passt und die Haltung unterstreicht."</p>
+    <span class="src">— Quelle</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <a href="#" class="logo" style="font-size:18px"><span class="cross" style="width:24px;height:24px;font-size:16px">+</span>mehr<b>&nbsp;wachstum</b></a>
+    <nav>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+    </nav>
+    <span class="cp">© 2026 — Platzhalter</span>
+  </div>
+</footer>
+
+<!-- STICKY BOTTOM CTA-BAR -->
+<div class="stickybar" id="stickybar">
+  <div class="wrap">
+    <span class="sb-text">Bereit?<span>Kostenlos · in 90 Sekunden · unverbindlich</span></span>
+    <a href="#" class="cta cta-sm">Jetzt kostenlos sichern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var nav=document.getElementById('navbar');
+  var bar=document.getElementById('stickybar');
+  var hero=document.querySelector('.hero');
+  var footer=document.querySelector('.footer');
+  function upd(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    if(nav) nav.classList.toggle('is-scrolled', y>16);
+    if(bar&&hero){
+      var pastHero = y > (hero.offsetTop+hero.offsetHeight-240);
+      var footerNear = footer ? (footer.getBoundingClientRect().top < window.innerHeight-30) : false;
+      bar.classList.toggle('show', pastHero && !footerNear);
+    }
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
+</script>
+
+</body>
+</html>

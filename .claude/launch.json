@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bb-brands-web",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "/Users/moritzbohmbach/Documents/claud code/01-agentur/bb-brands-web"],
+      "port": 4173
+    }
+  ]
+}

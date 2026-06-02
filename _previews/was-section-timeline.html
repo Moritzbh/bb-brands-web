@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Preview · „Was wir machen" — Timeline · weiß · volle Animationen · Copy 1:1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0305C6;--blue-tint:#EEF1FF;
+  --accent:#FF6B3D;--accent-bg:#FFF4EE;--accent-hover:#E85A2C;
+  --bg:#ffffff;--text:#0a0a0a;--text-2:#3D3D3A;--text-3:#787872;--line:#e8e8e3;
+  --disp:'Inter Tight',-apple-system,sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:var(--body);background:#f4f2ec;color:var(--text-2);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.note-top{max-width:1100px;margin:0 auto;padding:24px 40px 0;font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.note-top strong{color:var(--text)}
+
+section.tl{background:var(--bg);max-width:1280px;margin:20px auto;border-radius:18px;box-shadow:0 1px 0 var(--line),0 40px 90px -50px rgba(0,0,0,.18);padding:88px 0 100px;overflow:hidden;position:relative}
+.wrap{max-width:1120px;margin:0 auto;padding:0 48px}
+@media(max-width:820px){.wrap{padding:0 22px}section.tl{padding:60px 0 66px}}
+
+.tl-head{text-align:center;max-width:860px;margin:0 auto 80px}
+.eyebrow{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+.tl-h{font-family:var(--disp);font-weight:800;font-size:clamp(38px,5.4vw,64px);line-height:1.03;letter-spacing:-2px;color:var(--text);margin:0 0 26px}
+.tl-h em{font-style:italic;font-weight:500;color:var(--blue)}
+.tl-h .char{display:inline-block;opacity:0;transform:translateY(.45em) rotateX(-60deg);transform-origin:50% 100%;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.tl-h .char.space{width:.28em}
+.tl-h.in .char{opacity:1;transform:none;transition-delay:calc(var(--i,0)*24ms + 100ms)}
+.bb-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 26px;font-size:14.5px;color:var(--text-2);font-weight:500}
+.bb-facts .fact{display:inline-flex;align-items:center;gap:8px}
+.bb-facts .fact svg{width:14px;height:14px;color:var(--blue);opacity:.7;flex-shrink:0}
+
+.tl-track{position:relative;padding:8px 0}
+.tl-track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:var(--line)}
+.tl-progress{position:absolute;left:50%;top:0;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,var(--blue),var(--accent));height:0;transition:height .12s linear;z-index:1}
+@media(max-width:820px){.tl-track::before,.tl-progress{left:24px}}
+
+.tl-item{position:relative;display:grid;grid-template-columns:1fr 92px 1fr;align-items:center;margin:0 0 62px}
+.tl-item:last-child{margin-bottom:0}
+@media(max-width:820px){.tl-item{grid-template-columns:50px 1fr;align-items:start;margin-bottom:34px}}
+
+.tl-node{grid-column:2;justify-self:center;width:52px;height:52px;border-radius:14px;background:#fff;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;position:relative;z-index:3;color:var(--blue);transition:transform .6s cubic-bezier(.34,1.56,.64,1),background .5s,color .5s,box-shadow .5s}
+.tl-node svg{width:21px;height:21px}
+@media(max-width:820px){.tl-node{grid-column:1;width:42px;height:42px;border-radius:12px}.tl-node svg{width:17px;height:17px}}
+.tl-item.in .tl-node{transform:scale(1.06);background:var(--blue);color:#fff;box-shadow:0 0 0 6px rgba(3,5,198,.10),0 14px 32px -12px rgba(3,5,198,.45)}
+
+/* Card-Slot trägt Geister-Nummer + Ambient-Glow im Hintergrund */
+.tl-slot{position:relative}
+.tl-item.r .tl-slot{grid-column:3}
+.tl-item.l .tl-slot{grid-column:1}
+@media(max-width:820px){.tl-item.r .tl-slot,.tl-item.l .tl-slot{grid-column:2}}
+
+/* Geister-Nummer wie .bs-bg-num */
+.tl-bgnum{position:absolute;top:-58px;font-family:var(--disp);font-weight:900;font-size:clamp(170px,19vw,300px);line-height:1;letter-spacing:-.04em;-webkit-text-stroke:2px var(--blue);color:transparent;opacity:0;pointer-events:none;user-select:none;z-index:0;transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.tl-item.r .tl-bgnum{right:-26px;transform:translateY(34px) scale(.9) rotate(-2deg)}
+.tl-item.l .tl-bgnum{left:-26px;transform:translateY(34px) scale(.9) rotate(2deg)}
+.tl-item.in .tl-bgnum{opacity:.06;transform:none}
+.tl-item--offer .tl-bgnum{-webkit-text-stroke-color:var(--accent)}
+.tl-item--offer.in .tl-bgnum{opacity:.08}
+
+/* Animiertes Farbfeld (Ambient) wie .bs-ambient */
+.tl-glow{position:absolute;inset:-46% -34%;background:radial-gradient(circle at 32% 42%,rgba(3,5,198,.11),rgba(3,5,198,0) 60%);opacity:0;z-index:0;pointer-events:none;transition:opacity 1.4s ease}
+.tl-item.in .tl-glow{opacity:1;animation:tlBreathe 7.5s ease-in-out infinite}
+.tl-item--offer .tl-glow{background:radial-gradient(circle at 32% 42%,rgba(255,107,61,.13),rgba(255,107,61,0) 60%)}
+@keyframes tlBreathe{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,3%) scale(1.09)}}
+@media(prefers-reduced-motion:reduce){.tl-item.in .tl-glow{animation:none}}
+
+/* Card — Blur-Reveal wie .bs-step (du siehst sie erst nicht, dann blasst alles hoch) */
+.tl-card{position:relative;z-index:1;background:transparent;border:none;border-radius:0;padding:0;box-shadow:none;opacity:0;filter:blur(10px)}
+.tl-card::before{content:"";position:absolute;inset:-50px -40px -40px -70px;background:radial-gradient(ellipse at 22% 45%,rgba(3,5,198,.05),rgba(3,5,198,0) 55%);opacity:0;z-index:-1;pointer-events:none;transition:opacity 1.2s ease}
+.tl-item--offer .tl-card::before{background:radial-gradient(ellipse at 22% 45%,rgba(255,107,61,.06),rgba(255,107,61,0) 55%)}
+.tl-item.in .tl-card::before{opacity:1}
+@media(max-width:820px){.tl-card{padding:24px 22px}}
+.tl-item.r .tl-card{transform:translate(46px,28px) scale(.985)}
+.tl-item.l .tl-card{transform:translate(-46px,28px) scale(.985)}
+@media(max-width:820px){.tl-item.r .tl-card,.tl-item.l .tl-card{transform:translate(0,28px) scale(.985)}}
+.tl-item.in .tl-card{opacity:1;filter:blur(0);transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
+
+.tl-card-h,.tl-tag,.tl-card-p,.tl-chips,.tl-offer-pillars,.tl-guar,.tl-cta,.tl-fine{position:relative;z-index:1}
+.tl-tag{display:inline-block;font-family:var(--disp);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.tl-card-h{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3vw,38px);letter-spacing:-1px;color:var(--text);margin:0 0 18px;line-height:1.06}
+.tl-card-h .char{display:inline-block;opacity:0;transform:translateY(.45em) rotateX(-55deg);transform-origin:50% 100%;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.tl-card-h .char.space{width:.26em}
+.tl-item.in .tl-card-h .char{opacity:1;transform:none;transition-delay:calc(var(--i,0)*20ms + 260ms)}
+.tl-card-p{font-size:16px;color:var(--text-2);line-height:1.7;margin:0 0 26px;max-width:560px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .42s,transform .7s cubic-bezier(.16,1,.3,1) .42s}
+.tl-item.in .tl-card-p{opacity:1;transform:none}
+.tl-chips{display:flex;flex-wrap:wrap;gap:10px}
+.tl-chip{font-family:var(--body);font-size:12px;font-weight:700;color:var(--blue);padding:10px 18px;border-radius:99px;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(3,5,198,.15);box-shadow:0 6px 24px -8px rgba(3,5,198,.12);opacity:0;transform:translateY(14px) scale(.85);transition:opacity .6s cubic-bezier(.34,1.56,.64,1),transform .6s cubic-bezier(.34,1.56,.64,1),background .25s,border-color .25s,color .25s}
+.tl-chip:hover{background:rgba(255,107,61,.08);border-color:rgba(255,107,61,.35);color:var(--accent)}
+.tl-item.in .tl-chip{opacity:1;transform:none}
+.tl-item.in .tl-chip:nth-child(1){transition-delay:.56s,.56s,0s,0s,0s}
+.tl-item.in .tl-chip:nth-child(2){transition-delay:.64s,.64s,0s,0s,0s}
+.tl-item.in .tl-chip:nth-child(3){transition-delay:.72s,.72s,0s,0s,0s}
+.tl-item.in .tl-chip:nth-child(4){transition-delay:.80s,.80s,0s,0s,0s}
+
+.tl-item--offer .tl-card{background:transparent;border:none;box-shadow:none}
+.tl-offer-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .42s,transform .7s cubic-bezier(.16,1,.3,1) .42s}
+.tl-item.in .tl-offer-pillars{opacity:1;transform:none}
+@media(max-width:560px){.tl-offer-pillars{grid-template-columns:1fr}}
+.tl-pillar{background:transparent;border:none;border-left:2px solid rgba(255,107,61,.35);border-radius:0;padding:2px 0 2px 16px}
+.tl-pillar .n{font-family:var(--mono);font-weight:700;font-size:10px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.tl-pillar .t{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--text);margin-bottom:4px}
+.tl-pillar p{font-size:12px;color:var(--text-2);margin:0;line-height:1.45}
+.tl-guar{background:transparent;border:none;border-left:3px solid var(--accent);border-radius:0;padding:4px 0 4px 20px;margin:0 0 20px;font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.7vw,19px);color:var(--text);line-height:1.4;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .54s,transform .7s cubic-bezier(.16,1,.3,1) .54s}
+.tl-item.in .tl-guar{opacity:1;transform:none}
+.tl-guar strong{color:var(--accent-hover)}
+.tl-cta{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;text-decoration:none;font-family:var(--disp);font-weight:700;font-size:15px;padding:15px 32px;border-radius:10px;transition:background .15s,transform .15s}
+.tl-cta:hover{background:#02038F;transform:translateY(-1px)}
+.tl-fine{font-family:var(--mono);font-size:11px;color:var(--text-3);margin:14px 0 0;letter-spacing:.02em}
+.tl-fine strong{color:var(--text-2)}
+
+.legend{max-width:1100px;margin:30px auto 60px;padding:0 40px;font-size:13.5px;color:#44443f}
+.legend table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e4e0d4;border-radius:10px;overflow:hidden}
+.legend td{padding:10px 15px;border-bottom:1px solid #f1ede2;vertical-align:top}
+.legend tr:last-child td{border-bottom:0}.legend td:first-child{font-weight:700;color:#16161a;width:200px}
+</style>
+</head>
+<body>
+
+<div class="note-top"><strong>PREVIEW · nicht live.</strong> Timeline-Layout · weiß · volle Original-Animationen: Geister-Nummer hinter Card, animiertes Farbfeld, Blur-Reveal (Schrift blasst hoch), Char-Reveal, Chip-Stagger. Copy 1:1.</div>
+
+<section class="tl">
+  <div class="wrap">
+
+    <div class="tl-head">
+      <div class="eyebrow">Was wir machen</div>
+      <h2 class="tl-h" id="tlH" data-raw="Vier Bausteine. Ein Profit-System.">Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
+      <div class="bb-facts">
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Re-Brand · Re-Launch · Skalierung</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Direkter Founder-Zugang</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>DACH · 1–10 Mio €</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Kein klarer ROI = kein Auftrag</span>
+      </div>
+    </div>
+
+    <div class="tl-track" id="tlTrack">
+      <div class="tl-progress" id="tlProgress"></div>
+
+      <div class="tl-item r">
+        <div class="tl-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></div>
+        <div class="tl-slot">
+          <div class="tl-bgnum">01</div><div class="tl-glow"></div>
+          <div class="tl-card">
+            <span class="tl-tag">Baustein 01 · Fundament</span>
+            <h3 class="tl-card-h">Positioning &amp; Voice.</h3>
+            <p class="tl-card-p">Markenstrategie als operatives Framework — kein Pitch-Deck. Die Spine, auf der Store, Conversion und Lifecycle überhaupt erst profitabel werden. Bei Hearo Basis für 14 Custom-PDPs, bei Bachgold Repositioning vor Re-Launch.</p>
+            <div class="tl-chips"><span class="tl-chip">Brand-Doctrine</span><span class="tl-chip">Voice-Guidelines</span><span class="tl-chip">Messaging-Framework</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item l">
+        <div class="tl-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div class="tl-slot">
+          <div class="tl-bgnum">02</div><div class="tl-glow"></div>
+          <div class="tl-card">
+            <span class="tl-tag">Baustein 02 · Profit-Hebel AOV</span>
+            <h3 class="tl-card-h">Custom-Store, der Marge bringt.</h3>
+            <p class="tl-card-p">Hochkonvertierender Custom-Shop auf Dawn-Basis — und die Bundle-/AOV-Architektur als messbarer Profit-Hebel, sauber dem Euro zurechenbar. Hearo: 14+ wiederverwendbare Sections in 8 Wochen. Bachgold: Re-Launch ohne Traffic-Verlust, 7 Bundles mit idempotentem Generator.</p>
+            <div class="tl-chips"><span class="tl-chip">Custom-Liquid</span><span class="tl-chip">Section-Library</span><span class="tl-chip">Bundle-/AOV-Hebel</span><span class="tl-chip">PageSpeed 85+</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item r">
+        <div class="tl-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+        <div class="tl-slot">
+          <div class="tl-bgnum">03</div><div class="tl-glow"></div>
+          <div class="tl-card">
+            <span class="tl-tag">Baustein 03 · Profit-Maschine</span>
+            <h3 class="tl-card-h">Profit pro Visitor.</h3>
+            <p class="tl-card-p">Klaviyo-Lifecycle als Profit-Maschine: Welcome-Flow bis Win-Back, sauber attribuiert gegen eine eingefrorene Baseline. Per-Order-Math statt ROAS-Theater — jeder zusätzliche Euro steht in deinem eigenen Klaviyo schwarz auf weiß.</p>
+            <div class="tl-chips"><span class="tl-chip">Klaviyo-Lifecycle</span><span class="tl-chip">Eingefrorene Baseline</span><span class="tl-chip">Per-Order-Math</span><span class="tl-chip">Welcome → Win-Back</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item l">
+        <div class="tl-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></div>
+        <div class="tl-slot">
+          <div class="tl-bgnum">04</div><div class="tl-glow"></div>
+          <div class="tl-card">
+            <span class="tl-tag">Baustein 04 · Effizienz-Verstärker</span>
+            <h3 class="tl-card-h">AI Operations live.</h3>
+            <p class="tl-card-p">Operative Reibung raus — KI-Workflows, die messbar Zeit sparen und das Profit-System verstärken. Value-Add, kein Vanity. Drei Stufen — Light (Prompts + Workshop), Medium (n8n-Workflows), Heavy (Custom-Agents + Dashboards) — im Discovery gewählt.</p>
+            <div class="tl-chips"><span class="tl-chip">Custom-Prompts</span><span class="tl-chip">No-Code-Workflows</span><span class="tl-chip">AI-Agents</span><span class="tl-chip">Schulung &amp; Übergabe</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item r tl-item--offer">
+        <div class="tl-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="tl-slot">
+          <div class="tl-bgnum">05</div><div class="tl-glow"></div>
+          <div class="tl-card">
+            <span class="tl-tag">Baustein 05 · Das Angebot</span>
+            <h3 class="tl-card-h">Das Risiko liegt auf unserer Seite.</h3>
+            <div class="tl-offer-pillars">
+              <div class="tl-pillar"><div class="n">01 · Gratis</div><div class="t">Profit-Gap-Analyse</div><p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du gerade liegen lässt. Kostenlos, keine Verpflichtung.</p></div>
+              <div class="tl-pillar"><div class="n">02 · Festpreis</div><div class="t">Ein fester Betrag</div><p>Das System, das die Lücke schließt — zum Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p></div>
+              <div class="tl-pillar"><div class="n">03 · Garantie</div><div class="t">Refinanzierung in 90 Tagen</div><p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p></div>
+            </div>
+            <div class="tl-guar">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
+            <a href="/audit/" class="tl-cta">Profit-Gap-Analyse anfragen →</a>
+            <p class="tl-fine">Qualifikations-gated · nur DTC auf Shopify · <strong>Profitables Wachstum auf höchstem Niveau</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="legend">
+  <table>
+    <tr><td>Layout</td><td>Timeline (das-markenwerk): zentrale Linie füllt blau→accent beim Scrollen, Nodes leuchten blau beim Erreichen, Cards zickzack R/L/R/L/R.</td></tr>
+    <tr><td>Volle Animationen</td><td><strong>Geister-Nummer</strong> 01–05 hinter jeder Card (blau, accent bei 05) · <strong>animiertes Farbfeld</strong> (Ambient-Glow, breathing) · <strong>Blur-Reveal</strong> der Card (erst unsichtbar, dann blasst hoch) · Char-Reveal H2 + Headlines · Absatz + Chip-Stagger — wie Original bs-stage.</td></tr>
+    <tr><td>Weiß / Tokens / Copy</td><td>Weißer BG, Live-Tokens (Blau #0305C6, Accent #FF6B3D, Glas-Chips), Copy 1:1 aus index.html.</td></tr>
+  </table>
+</div>
+
+<script>
+(function(){
+  function split(el,raw){
+    if(!el||el.dataset.s)return;el.dataset.s=1;
+    var t=raw||el.textContent,i=0;el.innerHTML='';
+    t.split(/(\s+)/).forEach(function(tok){
+      if(tok==='')return;
+      if(/^\s+$/.test(tok)){var sp=document.createElement('span');sp.className='char space';sp.textContent=' ';sp.style.setProperty('--i',i++);el.appendChild(sp);}
+      else{var w=document.createElement('span');w.style.display='inline-block';w.style.whiteSpace='nowrap';
+        Array.from(tok).forEach(function(c){var s=document.createElement('span');s.className='char';s.textContent=c;s.style.setProperty('--i',i++);w.appendChild(s);});el.appendChild(w);}
+    });
+  }
+  var H=document.getElementById('tlH');split(H,H.dataset.raw);
+  [].forEach.call(document.querySelectorAll('.tl-card-h'),function(e){split(e);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.4});
+  io.observe(H);
+  var iio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.24,rootMargin:'0px 0px -6% 0px'});
+  [].forEach.call(document.querySelectorAll('.tl-item'),function(it){iio.observe(it);});
+  var track=document.getElementById('tlTrack'),prog=document.getElementById('tlProgress');
+  function onScroll(){var r=track.getBoundingClientRect(),vh=window.innerHeight,total=r.height,seen=Math.min(Math.max(vh*0.55-r.top,0),total);prog.style.height=(total>0?seen/total*100:0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+})();
+</script>
+
+</body>
+</html>

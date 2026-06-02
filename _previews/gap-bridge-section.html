@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preview · Ist → Lücke → Max → Loop · BB Brands</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#0305C6;--blue-tint:#EEF1FF;--accent:#FF6B3D;--accent-soft:#FFF1EC;--ink:#0A0A0F;--mut:#5a5852;--line:#e7e2d6;--green:#1c7a45}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f3f1ec;font-family:'Inter Tight',-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .frame{max-width:1240px;margin:32px auto;background:#fff;box-shadow:0 30px 80px -40px rgba(0,0,0,.3)}
+  .pvnote{max-width:1240px;margin:24px auto;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9a958a;text-align:center}
+
+  section.gapsec{background:#fff;font-family:'Montserrat',sans-serif;color:#000;padding:104px 0}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 56px}
+  .head{text-align:center;margin-bottom:20px}
+  .eyebrow{font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  h2{font-weight:700;font-size:clamp(31px,4.2vw,50px);line-height:1.07;letter-spacing:-.025em;color:var(--ink);max-width:880px;margin:0 auto 16px}
+  h2 em{font-style:normal;color:var(--blue);font-weight:800}
+  .sub{font-weight:500;font-size:clamp(15px,1.7vw,18px);line-height:1.5;color:var(--mut);max-width:620px;margin:0 auto}
+  .exlabel{text-align:center;font-family:'Inter Tight',sans-serif;font-size:12.5px;color:#a8a298;margin:0 0 44px}
+
+  /* ===== Schritt 1: Ist → Lücke → Max ===== */
+  .ba{display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:0;align-items:stretch;margin-bottom:14px}
+  .kpi{border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px;background:#fff}
+  .kpi.now{border-color:#dcdcd6}
+  .kpi.max{border-color:#cdd3f8;background:linear-gradient(180deg,#fbfcff,#fff)}
+  .kpi .tag{font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+  .kpi.now .tag{color:#8a877e}.kpi.max .tag{color:var(--blue)}
+  .kpi .ttl{font-family:'Montserrat',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:18px;color:var(--ink)}
+  .row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .row:last-child{border-bottom:none}
+  .row .l{font-family:'Inter Tight',sans-serif;font-size:13.5px;color:var(--mut)}
+  .row .v{font-family:'Montserrat',sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+  .kpi.max .v{color:var(--blue)}
+  .row .v small{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:12px;color:var(--green);margin-left:7px}
+  .row .v small.dn{color:var(--green)}
+
+  /* Brücke Mitte */
+  .bridge{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 14px;text-align:center}
+  .bridge svg{width:100%;height:84px;display:block}
+  .bridge .bt{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:10px 0 5px}
+  .bridge .bp{font-family:'Inter Tight',sans-serif;font-size:13px;line-height:1.5;color:var(--mut);max-width:230px}
+  .bridge .bp b{color:var(--ink);font-weight:700}
+
+  .seq{counter-reset:s;margin:36px 0 0}
+  .seqrow{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line)}
+  .seqrow:first-child{border-top:none}
+  .seqrow .num{counter-increment:s;flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .seqrow.s2 .num{background:var(--accent)}.seqrow.s3 .num{background:var(--blue)}.seqrow.s4 .num{background:var(--green)}
+  .seqrow .num::before{content:counter(s)}
+  .seqrow h4{font-family:'Montserrat',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;margin-bottom:3px}
+  .seqrow p{font-family:'Inter Tight',sans-serif;font-size:14px;line-height:1.55;color:var(--mut)}
+  .seqrow p b{color:var(--ink);font-weight:700}
+
+  /* dauerhaft strip */
+  .cont{margin:38px 0 0;border:1px dashed #cdd3f8;background:var(--blue-tint);border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .cont .ci{flex:none;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  .cont p{font-family:'Inter Tight',sans-serif;font-size:14.5px;line-height:1.55;color:#3a3d6b;flex:1;min-width:240px}
+  .cont p b{color:var(--blue);font-weight:700}
+  .cont .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .cont .pill{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--blue);background:#fff;border:1px solid #cdd3f8;border-radius:20px;padding:6px 13px}
+
+  /* Loop */
+  .loop{margin:36px 0 0;background:var(--ink);border-radius:18px;padding:32px 38px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center}
+  .loop svg{width:170px;height:170px;display:block}
+  .loop h3{font-family:'Montserrat',sans-serif;color:#fff;font-weight:800;font-size:clamp(20px,2.3vw,26px);letter-spacing:-.015em;margin-bottom:8px}
+  .loop p{font-family:'Inter Tight',sans-serif;font-size:15px;line-height:1.55;color:rgba(255,255,255,.72);max-width:560px}
+  .loop p b{color:var(--accent);font-weight:700}
+
+  .tie{margin:18px 0 0;background:var(--ink);color:#fff;border-radius:16px;padding:26px 36px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center;text-align:center;border:1px solid rgba(255,255,255,.12)}
+  .tie .ic{flex:none;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+  .tie .ic svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2}
+  .tie p{font-family:'Montserrat',sans-serif;font-weight:600;font-size:clamp(15px,1.7vw,18px);line-height:1.4;color:#fff;max-width:660px}
+  .tie p b{color:var(--accent);font-weight:800}
+  .tie .small{display:block;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:12.5px;color:rgba(255,255,255,.58);margin-top:6px}
+
+  /* reveal */
+  .an{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .reveal .an{opacity:1;transform:none}
+  .reveal .an.d1{transition-delay:.05s}.reveal .an.d2{transition-delay:.22s}.reveal .an.d3{transition-delay:.4s}
+  .reveal .an.d4{transition-delay:.58s}.reveal .an.d5{transition-delay:.76s}
+  .bdraw{stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1) .3s}
+  .reveal .bdraw{stroke-dashoffset:0}
+
+  @media (max-width:880px){
+    section.gapsec{padding:62px 0}.wrap{padding:0 22px}
+    .ba{grid-template-columns:1fr;gap:14px}
+    .bridge{padding:6px 0}.bridge svg{height:60px;transform:rotate(90deg) scale(.8)}
+    .loop{grid-template-columns:1fr;gap:18px;text-align:center}.loop svg{margin:0 auto}
+    .tie{flex-direction:column;gap:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .an,.reveal .an{opacity:1;transform:none;transition:none}
+    .bdraw,.reveal .bdraw{stroke-dashoffset:0;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="pvnote">Preview v6 — geführt mit konkreten (Beispiel-)Zahlen · Ist → Lücke → Max → dauerhaft → Loop</div>
+
+<div class="frame">
+<section class="gapsec" id="gapsec">
+  <div class="wrap" id="wrap">
+
+    <div class="head an d1">
+      <div class="eyebrow">So arbeiten wir</div>
+      <h2>Wo deine Marke <em>heute</em> steht — und wo sie <em>profitabel</em> stehen könnte.</h2>
+      <p class="sub">Die Strecke dazwischen ist die Lücke. Genau die schließen wir — und daraus bezahlt sich unsere Arbeit.</p>
+    </div>
+    <p class="exlabel an d1">Illustratives Beispiel — keine garantierten Werte. Im Audit rechnen wir es auf deinen echten Zahlen.</p>
+
+    <!-- IST → LÜCKE → MAX -->
+    <div class="ba">
+      <div class="kpi now an d2">
+        <div class="tag">Ist-Zustand · heute</div>
+        <div class="ttl">Wo du jetzt stehst</div>
+        <div class="row"><span class="l">Umsatz / Monat</span><span class="v">100.000 €</span></div>
+        <div class="row"><span class="l">Conversion-Rate</span><span class="v">1,4 %</span></div>
+        <div class="row"><span class="l">Ø Bestellwert (AOV)</span><span class="v">60 €</span></div>
+        <div class="row"><span class="l">Akquisekosten</span><span class="v">hoch</span></div>
+      </div>
+
+      <div class="bridge an d3">
+        <svg viewBox="0 0 220 90" aria-hidden="true">
+          <path d="M6 78 L70 78" stroke="#0A0A0F" stroke-width="5" stroke-linecap="round"/>
+          <path class="bdraw" d="M70 78 C 120 76 150 28 214 12" stroke="#FF6B3D" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#a6)"/>
+          <path d="M150 86 L214 12" stroke="#FF6B3D" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+          <defs><marker id="a6" viewBox="0 0 12 12" refX="7" refY="6" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L10 6 L1 11" fill="none" stroke="#FF6B3D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+        </svg>
+        <div class="bt">Die Lücke</div>
+        <div class="bp">Diese Strecke schließen wir gezielt über <b>Conversion, AOV &amp; Lifecycle</b>. Daraus bezahlt sich unsere Dienstleistung.</div>
+      </div>
+
+      <div class="kpi max an d4">
+        <div class="tag">Maximal profitabel</div>
+        <div class="ttl">Was möglich ist</div>
+        <div class="row"><span class="l">Umsatz / Monat</span><span class="v">deutlich höher <small>↑</small></span></div>
+        <div class="row"><span class="l">Conversion-Rate</span><span class="v">2,1 % <small>↑</small></span></div>
+        <div class="row"><span class="l">Ø Bestellwert (AOV)</span><span class="v">78 € <small>↑</small></span></div>
+        <div class="row"><span class="l">Akquisekosten</span><span class="v">niedriger <small class="dn">↓</small></span></div>
+      </div>
+    </div>
+
+    <!-- Reihenfolge / Erklärung -->
+    <div class="seq an d4">
+      <div class="seqrow s1"><div class="num"></div><div><h4>Heute: Profit bleibt liegen.</h4><p>Traffic, Flows, Creatives laufen — aber zwischen Ist und Möglich klafft eine Lücke, die du <b>spürst, aber nicht beziffert siehst</b>.</p></div></div>
+      <div class="seqrow s2"><div class="num"></div><div><h4>Setup: die Lücke schließen.</h4><p>Wir beziffern sie auf deinen echten Zahlen und schließen sie über Conversion, AOV &amp; Lifecycle. <b>Einmalig, Festpreis, keine Provision.</b></p></div></div>
+      <div class="seqrow s3"><div class="num"></div><div><h4>Maximal profitabel: kein Endzustand.</h4><p>Die Bestmarke wandert weiter — „fertig" gibt es nicht. Deshalb geht es danach erst richtig los.</p></div></div>
+      <div class="seqrow s4"><div class="num"></div><div><h4>Dauerhaft vorne bleiben.</h4><p>Laufende Optimierung hält dich an der Spitze — sonst fällst du zurück. Das ist der Retainer, kein Upsell.</p></div></div>
+    </div>
+
+    <div class="cont an d4">
+      <div class="ci">Danach · dauerhaft</div>
+      <p><b>Maximal profitabel ist kein Zustand, den man erreicht und behält</b> — er wandert. Wir halten dich dort über laufende Optimierung:</p>
+      <div class="pills"><span class="pill">A/B-Testing</span><span class="pill">neue Funnels</span><span class="pill">Lifecycle-Ausbau</span><span class="pill">PDP-Iteration</span></div>
+    </div>
+
+    <!-- Loop -->
+    <div class="loop an d5">
+      <svg viewBox="0 0 200 200" role="img" aria-label="Mehr Profit, mehr Akquise-Budget, mehr Marktanteil, zurück zu mehr Profit">
+        <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2" stroke-dasharray="4 6"/>
+        <path d="M100 38 A62 62 0 0 1 154 132" fill="none" stroke="#FF6B3D" stroke-width="3" marker-end="url(#fa)"/>
+        <path d="M154 132 A62 62 0 0 1 46 132" fill="none" stroke="#FF6B3D" stroke-width="3" marker-end="url(#fa)"/>
+        <path d="M46 132 A62 62 0 0 1 100 38" fill="none" stroke="#FF6B3D" stroke-width="3" marker-end="url(#fa)"/>
+        <defs><marker id="fa" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#FF6B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+        <g transform="translate(100,30)"><circle r="24" fill="#fff"/><text y="3" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9.5" font-weight="800" fill="#0A0A0F">+ Profit</text></g>
+        <g transform="translate(160,138)"><circle r="26" fill="#FF6B3D"/><text y="-2" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" font-weight="800" fill="#fff">+ Akquise-</text><text y="9" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" font-weight="800" fill="#fff">budget</text></g>
+        <g transform="translate(40,138)"><circle r="26" fill="#fff"/><text y="-2" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" font-weight="800" fill="#0A0A0F">+ Markt-</text><text y="9" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" font-weight="800" fill="#0A0A0F">anteil</text></g>
+      </svg>
+      <div>
+        <h3>Und dann: Profit kauft Wachstum.</h3>
+        <p>Wer profitabler ist, kann <b>mehr für jeden Neukunden bieten</b> — und holt sich Marktanteile, die Wettbewerber sich nicht leisten können. Mehr Marktanteil → mehr Profit → der Loop dreht schneller. <b>So wird aus geschlossener Lücke exponentielles Wachstum.</b></p>
+      </div>
+    </div>
+
+    <div class="tie an d5">
+      <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <p>Den Sprung tragen wir aus <b>genau dieser Lücke.</b><span class="small">Refinanziert sich die Profit-Schicht nicht in 120 Tagen, arbeiten wir kostenlos weiter — bis dein zusätzlicher Profit unsere Kosten gedeckt hat.</span></p>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<div class="pvnote">v6 · Ist/Max mit Beispiel-Zahlen · Lücke explizit benannt · 4-Schritt-Erklärung · dauerhaft · Loop · alles in einer Section</div>
+
+<script>
+(function(){
+  var w=document.getElementById('gapsec');
+  if(!w) return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){ w.classList.add('reveal'); return; }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){w.classList.add('reveal');io.disconnect();}});},{threshold:.2});
+  io.observe(w);
+})();
+</script>
+
+</body>
+</html>

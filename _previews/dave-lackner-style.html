@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BB Brands · Style-Preview (Dave Lackner)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- BB Brands · Brand Fonts V1: Inter Tight (Display+Body) + Saira Condensed (Akzent-Caps only) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Saira+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* BB Brands Brand Fonts V1 */
+    --display:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    --body:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    --accent-font:'Saira Condensed','Inter Tight',-apple-system,sans-serif;
+
+    --bg:#0a0a0a;
+    --bg-2:#121214;
+    --bg-3:#1a1a1d;
+    --line:rgba(255,255,255,.08);
+    --line-2:rgba(255,255,255,.12);
+    --text:#f5f5f3;
+    --text-2:rgba(245,245,243,.78);
+    --text-3:rgba(245,245,243,.55);
+    --accent:#3d4ef5;          /* BB Brands Bold Blue (heller für Dark-Mode) */
+    --accent-hover:#5a68ff;
+    --accent-glow:rgba(61,78,245,.35);
+    --green-dot:#22c55e;
+    --star:#facc15;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Subtiles Noise/Grid-Pattern für Premium-Dark-Mode-Feel */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(61,78,245,.10) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 35%, rgba(255,107,61,.06) 0%, transparent 50%);
+    pointer-events:none;z-index:0;
+  }
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.015) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;z-index:0;
+  }
+  .wrap{position:relative;z-index:1}
+
+  /* ============= PILL-NAV ============= */
+  .nav-shell{
+    position:sticky;top:18px;z-index:50;
+    display:flex;justify-content:center;
+    padding:0 24px;
+  }
+  .nav-pill{
+    display:flex;align-items:center;gap:32px;
+    background:rgba(20,20,22,.72);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--line-2);
+    border-radius:999px;
+    padding:10px 12px 10px 24px;
+    width:100%;max-width:920px;
+    box-shadow:0 12px 30px -10px rgba(0,0,0,.5);
+  }
+  .nav-logo{
+    color:var(--text);text-decoration:none;
+    display:inline-flex;align-items:baseline;gap:0;
+    font-family:var(--display);
+    font-weight:600;font-size:21px;letter-spacing:-.015em;line-height:1;
+    flex-shrink:0;
+  }
+  .nav-logo .mark{display:inline-block;transform:scaleX(-1);margin-right:-1px;font-weight:800}
+
+  .nav-items{
+    display:flex;gap:30px;
+    margin-left:auto;
+    font-size:14px;
+  }
+  .nav-items a{
+    color:var(--text-2);text-decoration:none;
+    transition:color .15s ease;
+  }
+  .nav-items a:hover{color:var(--text)}
+  .nav-cta{
+    background:var(--accent);color:#fff;text-decoration:none;
+    font-size:14px;font-weight:600;
+    padding:11px 22px;border-radius:999px;
+    transition:background .15s ease, transform .15s ease;
+    margin-left:8px;
+  }
+  .nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px)}
+
+  /* ============= HERO ============= */
+  .hero{
+    padding:120px 24px 96px;
+    text-align:center;
+    position:relative;
+  }
+  .hero-inner{max-width:920px;margin:0 auto}
+
+  /* Quartal-Badge · Saira Condensed Akzent-Caps */
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(20,20,22,.6);
+    border:1px solid var(--line-2);
+    border-radius:999px;
+    padding:8px 18px;
+    font-family:var(--accent-font);
+    font-size:12px;color:var(--text-2);
+    font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:42px;
+  }
+  .hero-badge .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--green-dot);
+    box-shadow:0 0 12px rgba(34,197,94,.6);
+    flex-shrink:0;
+  }
+
+  /* Hero Headline · Inter Tight 300 (Brand-Font) */
+  h1.hero-headline{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(40px, 6.2vw, 84px);
+    line-height:1.04;
+    letter-spacing:-.035em;
+    color:var(--text);
+    margin-bottom:30px;
+    max-width:880px;margin-left:auto;margin-right:auto;
+  }
+  h1.hero-headline em{
+    font-style:italic;font-weight:300;
+    color:var(--accent);
+    letter-spacing:-.03em;
+  }
+
+  .hero-sub{
+    font-size:17px;line-height:1.55;color:var(--text-2);
+    max-width:560px;margin:0 auto 44px;
+  }
+
+  /* Hero CTA + Stars Row */
+  .hero-cta-row{
+    display:flex;align-items:center;justify-content:center;gap:32px;
+    flex-wrap:wrap;
+    margin-bottom:64px;
+  }
+  .hero-cta{
+    background:var(--accent);color:#fff;text-decoration:none;
+    font-size:15px;font-weight:600;letter-spacing:-.005em;
+    padding:16px 28px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 8px 24px -4px var(--accent-glow);
+  }
+  .hero-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 12px 30px -4px var(--accent-glow)}
+  .hero-cta .emoji{font-size:16px}
+
+  .hero-trust{
+    display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px;
+    text-align:left;
+  }
+  .hero-stars{display:inline-flex;gap:2px;color:var(--star)}
+  .hero-stars svg{width:14px;height:14px}
+  .hero-trust-text{
+    font-size:13px;color:var(--text-2);
+  }
+
+  /* Logo Strip */
+  .hero-logos{
+    display:flex;align-items:center;justify-content:center;
+    gap:64px;flex-wrap:wrap;
+    margin-top:24px;
+    opacity:.62;
+  }
+  .hero-logos img{
+    height:26px;width:auto;
+    filter:grayscale(1) brightness(2.5) contrast(.65);
+    transition:opacity .2s ease;
+  }
+  .hero-logos img:hover{opacity:1}
+
+  /* ============= SECTION DEMO (Was wir machen — kurz) ============= */
+  .section{
+    padding:96px 24px;
+    text-align:center;
+    border-top:1px solid var(--line);
+  }
+  .section-inner{max-width:920px;margin:0 auto}
+  .section-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--accent-font);
+    font-size:13px;text-transform:uppercase;letter-spacing:.20em;font-weight:700;
+    color:var(--accent);
+    margin-bottom:20px;
+  }
+  .section-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  h2.section-headline{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(32px, 4.5vw, 56px);
+    line-height:1.08;letter-spacing:-.03em;
+    color:var(--text);
+    margin-bottom:18px;
+  }
+  h2.section-headline em{font-style:italic;font-weight:300;color:var(--accent)}
+  .section-sub{
+    font-size:16px;color:var(--text-2);
+    max-width:560px;margin:0 auto 56px;
+  }
+
+  /* 4 Bausteine als Cards */
+  .pillar-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    text-align:left;
+  }
+  .pillar{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 24px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .pillar:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .pillar-num{
+    display:inline-block;
+    font-family:var(--accent-font);
+    font-weight:700;letter-spacing:.10em;
+    font-size:14px;color:var(--accent);line-height:1;
+    margin-bottom:18px;
+    text-transform:uppercase;
+  }
+  .pillar h3{
+    font-family:var(--display);
+    font-size:18px;font-weight:600;letter-spacing:-.015em;
+    color:var(--text);margin-bottom:8px;
+  }
+  .pillar p{
+    font-size:13.5px;line-height:1.55;color:var(--text-2);
+  }
+
+  /* Final CTA */
+  .final-cta{
+    padding:120px 24px;
+    text-align:center;
+    border-top:1px solid var(--line);
+  }
+  .final-cta h2{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(36px, 5vw, 64px);
+    line-height:1.06;letter-spacing:-.035em;
+    margin-bottom:18px;
+  }
+  .final-cta h2 em{font-style:italic;font-weight:300;color:var(--accent)}
+  .final-cta p{
+    font-size:16px;color:var(--text-2);
+    max-width:540px;margin:0 auto 36px;
+  }
+
+  /* Footer */
+  footer{
+    padding:32px 24px 48px;
+    text-align:center;
+    border-top:1px solid var(--line);
+    font-size:13px;color:var(--text-3);
+  }
+  footer a{color:var(--text-2);text-decoration:none;margin:0 12px}
+  footer a:hover{color:var(--text)}
+
+  /* ============= RESPONSIVE ============= */
+  @media (max-width: 880px){
+    .nav-pill{gap:0;padding:8px 8px 8px 18px}
+    .nav-logo{font-size:22px}
+    .nav-logo .ink{font-size:17px}
+    .nav-items{display:none}
+    .nav-cta{padding:9px 16px;font-size:13px}
+    .hero{padding:80px 20px 56px}
+    h1.hero-headline{font-size:42px;letter-spacing:-.022em}
+    .hero-sub{font-size:15px;margin-bottom:32px}
+    .hero-cta-row{gap:20px}
+    .hero-trust{align-items:center;text-align:center}
+    .hero-logos{gap:32px;margin-top:8px}
+    .hero-logos img{height:20px}
+    .section{padding:64px 20px}
+    .pillar-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .pillar{padding:22px 20px;border-radius:14px}
+    .final-cta{padding:72px 20px}
+  }
+  @media (max-width: 480px){
+    .pillar-grid{grid-template-columns:1fr}
+  }
+
+  /* Preview-Banner oben (Style-Preview-Markierung) */
+  .preview-banner{
+    position:fixed;top:0;left:0;right:0;
+    background:rgba(61,78,245,.1);
+    border-bottom:1px solid rgba(61,78,245,.22);
+    color:var(--text-2);
+    font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    text-align:center;padding:6px 16px;
+    z-index:100;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  }
+  .preview-banner b{color:var(--text);font-weight:600}
+  body{padding-top:28px}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">
+  <b>Style-Preview</b> · BB Brands im Dave-Lackner-Look · Lokal, nicht deployed
+</div>
+
+<!-- ============= PILL NAV ============= -->
+<header class="nav-shell wrap">
+  <nav class="nav-pill">
+    <a href="#" class="nav-logo" aria-label="BB Brands"><span class="mark">B</span>Brands</a>
+    <div class="nav-items">
+      <a href="#was">Was wir machen</a>
+      <a href="#cases">Cases</a>
+      <a href="#wissen">Wissen</a>
+    </div>
+    <a href="#audit" class="nav-cta">Audit anfragen</a>
+  </nav>
+</header>
+
+<!-- ============= HERO ============= -->
+<section class="hero wrap">
+  <div class="hero-inner">
+
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span>Pro Quartal max. 3–4 neue Projekte</span>
+    </div>
+
+    <h1 class="hero-headline">
+      Wir machen wachsende DTC-Brands <em>profitabler.</em><br>
+      Damit sie morgen Marktführer sind.
+    </h1>
+
+    <p class="hero-sub">
+      Brand Systems. Conversion Infrastructure. Operational Scale.
+      Ein Founder als operativer Partner — keine Agentur-Loops.
+    </p>
+
+    <div class="hero-cta-row">
+      <a href="#audit" class="hero-cta">
+        <span class="emoji">👉</span>
+        Strategy Audit anfragen
+      </a>
+      <div class="hero-trust">
+        <span class="hero-stars" aria-label="5 von 5 Sternen">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18.2 22 12 18.3 5.8 22l1.7-7.2L2 10l7.1-1.1z"/></svg>
+        </span>
+        <span class="hero-trust-text">5+ DTC-Brands transformed</span>
+      </div>
+    </div>
+
+    <div class="hero-logos" aria-label="Partner, die uns vertrauen">
+      <img src="/assets/images/logos/hearo.png" alt="Hearo">
+      <img src="/assets/images/logos/bachgold.png" alt="Bachgold">
+      <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance">
+      <img src="/assets/images/logos/reerect.png" alt="Reerect">
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= 4 BAUSTEINE ============= -->
+<section class="section wrap" id="was">
+  <div class="section-inner">
+    <div class="section-eyebrow">Was wir machen</div>
+    <h2 class="section-headline">Vier Bausteine.<br>Ein <em>Profit-System.</em></h2>
+    <p class="section-sub">
+      Keine Phasen-Pakete, keine Pflicht-Bundles.
+      Du buchst, was du brauchst — wir verzahnen es.
+    </p>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Brand &amp; Positioning</h3>
+        <p>Markenstrategie als operatives Framework, nicht als Pitch-Deck.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Shopify Build</h3>
+        <p>Custom-Theme + Section-Library, die mit dir wächst.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Conversion &amp; E-Mail</h3>
+        <p>A/B-Tests + Klaviyo-Lifecycle auf Margen-Ebene.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <h3>AI Operations</h3>
+        <p>Workflows, die repetitive Prozesse ersetzen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= FINAL CTA ============= -->
+<section class="final-cta wrap" id="audit">
+  <h2>Bereit für dein <em>Profit-System?</em></h2>
+  <p>30-Minuten-Audit mit Founder. Diagnose deines Setups, konkrete Hebel, Timeline.</p>
+  <a href="#" class="hero-cta">
+    <span class="emoji">👉</span>
+    Strategy Audit anfragen
+  </a>
+</section>
+
+<footer class="wrap">
+  © 2026 BB Brands · Moritz Bohmbach
+  · <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+  · <a href="https://www.linkedin.com/in/moritz-bohmbach/">LinkedIn</a>
+</footer>
+
+</body>
+</html>

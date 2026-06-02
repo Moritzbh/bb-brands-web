@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Preview v3 · interaktiv · Angebot als 5. Step im selben Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff;--blue:#0305C6;--blue-deep:#02038F;
+  --accent:#FF6B3D;--accent-hover:#E85A2C;
+  --text:#141417;--text-2:#44443f;--text-3:#8a8a82;--line:#e9e5da;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#eceadf;color:var(--text-2);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.note-top{max-width:1180px;margin:0 auto;padding:24px 40px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3)}
+.note-top strong{color:var(--text)}
+
+section.was{background:var(--bg);max-width:1240px;margin:20px auto;border-radius:18px;box-shadow:0 1px 0 var(--line),0 40px 90px -50px rgba(0,0,0,.2);padding:78px 0 74px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 56px}
+@media(max-width:860px){.wrap{padding:0 24px}section.was{padding:52px 0 50px}}
+
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:9px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:22px}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--line)}
+.head-h{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1.03;letter-spacing:-1.8px;color:var(--text);text-align:center;margin:0 0 18px}
+.head-h em{font-style:normal;color:var(--blue)}
+.head-sub{font-size:17px;color:var(--text-2);text-align:center;max-width:600px;margin:0 auto 56px;line-height:1.6}
+.head-sub strong{color:var(--text);font-weight:600}
+
+/* ===== STAGE (immer offen, kein Accordion) ===== */
+.bs-stage{display:grid;grid-template-columns:248px 1fr;gap:60px;align-items:start;position:relative;min-height:460px;perspective:1600px}
+@media(max-width:860px){.bs-stage{grid-template-columns:1fr;gap:28px}}
+.bs-rail{position:relative;display:flex;flex-direction:column;gap:26px;padding-left:18px}
+@media(max-width:860px){.bs-rail{flex-direction:row;overflow-x:auto;gap:20px;padding:0 0 6px}.bs-rail::before{display:none}}
+.bs-rail::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line);border-radius:2px}
+.bs-rail-ind{position:absolute;left:5px;top:0;width:6px;height:22px;background:var(--blue);border-radius:6px;transition:transform .85s cubic-bezier(.34,1.56,.64,1),background .4s ease;box-shadow:0 0 14px rgba(3,5,198,.4)}
+.bs-rail-ind.is-offer{background:var(--accent);box-shadow:0 0 14px rgba(255,107,61,.5)}
+@media(max-width:860px){.bs-rail-ind{display:none}}
+.bs-tab{display:flex;align-items:center;gap:16px;background:none;border:none;padding:0;cursor:pointer;text-align:left;font-family:inherit;position:relative;flex-shrink:0}
+.bs-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--blue);background:#fff;flex-shrink:0;margin-left:-11px;transition:all .5s cubic-bezier(.16,1,.3,1)}
+@media(max-width:860px){.bs-dot{display:none}}
+@keyframes bsBreathe{0%,100%{box-shadow:0 0 0 0 rgba(3,5,198,.35);transform:scale(1)}50%{box-shadow:0 0 0 8px rgba(3,5,198,0);transform:scale(1.18)}}
+.bs-tab.active .bs-dot{background:var(--blue);animation:bsBreathe 2.4s infinite ease-in-out}
+.bs-tab.is-offer .bs-dot{border-color:var(--accent)}
+.bs-tab.is-offer.active .bs-dot{background:var(--accent);animation:none;box-shadow:0 0 0 6px rgba(255,107,61,.18)}
+.bs-tab-text{display:flex;flex-direction:column;gap:2px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.bs-tab:hover .bs-tab-text{transform:translateX(3px)}
+.bs-tab-phase{font-family:'Inter Tight',sans-serif;font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text-3);transition:color .4s}
+.bs-tab-name{font-family:'Inter Tight',sans-serif;font-size:15px;font-weight:600;color:var(--text-3);transition:color .4s;letter-spacing:-.005em}
+.bs-tab.active .bs-tab-phase,.bs-tab.active .bs-tab-name{color:var(--blue)}
+.bs-tab.active .bs-tab-name{font-weight:700}
+.bs-tab.is-offer.active .bs-tab-phase,.bs-tab.is-offer.active .bs-tab-name{color:var(--accent)}
+/* Pfeil-Cue: zieht vom letzten Baustein zum Angebot */
+.bs-tab.is-offer::after{content:"";position:absolute;left:-2px;top:-26px;width:10px;height:10px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);opacity:0;animation:arrowPulse 1.8s infinite}
+@keyframes arrowPulse{0%,100%{opacity:0;transform:rotate(-45deg) translateY(-3px)}50%{opacity:.7;transform:rotate(-45deg) translateY(2px)}}
+@media(max-width:860px){.bs-tab.is-offer::after{display:none}}
+
+.bs-content{position:relative;min-height:440px;transform-style:preserve-3d}
+.bs-bg-num{position:absolute;top:-78px;left:-30px;font-family:'Inter Tight',sans-serif;font-size:clamp(240px,28vw,420px);font-weight:900;line-height:1;letter-spacing:-.04em;-webkit-text-stroke:2px var(--blue);color:transparent;opacity:.06;pointer-events:none;user-select:none;z-index:0;transition:transform .55s cubic-bezier(.4,0,.2,1),opacity .5s ease,-webkit-text-stroke-color .4s ease}
+.bs-bg-num.is-offer{-webkit-text-stroke-color:var(--accent);opacity:.09}
+.bs-bg-num.swapping{opacity:0;transform:translateY(40px) scale(.92) rotate(-2deg)}
+
+.bs-step{position:absolute;top:0;left:0;width:100%;opacity:0;visibility:hidden;transform:translateY(28px) scale(.985);filter:blur(10px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1);padding-top:20px;z-index:1}
+.bs-step.active{position:relative;opacity:1;visibility:visible;transform:none;filter:blur(0)}
+.bs-tag{display:inline-block;font-family:'Inter Tight',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.bs-step h3{font-family:'Inter Tight',sans-serif;font-size:clamp(32px,4.2vw,52px);font-weight:700;color:var(--text);line-height:1.05;letter-spacing:-1.2px;margin:0 0 22px}
+.bs-step h3 .word{display:inline-block;white-space:nowrap}
+.bs-step h3 .char{display:inline-block;opacity:0;transform:translateY(.45em) rotateX(-65deg);transform-origin:50% 100%;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.bs-step h3 .char.space{width:.28em}
+.bs-step.active h3 .char{opacity:1;transform:none;transition-delay:calc(var(--i,0) * 22ms + 180ms)}
+.bs-step p{font-size:16.5px;color:var(--text-2);line-height:1.7;max-width:560px;margin:0 0 26px}
+.bs-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.bs-proof{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent-hover);display:flex;align-items:center;gap:8px}
+.bs-proof::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.bs-chips-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-3)}
+
+/* Step 04 → Pfeil-Forward zum Angebot */
+.bs-next{display:inline-flex;align-items:center;gap:9px;margin-top:28px;background:none;border:none;cursor:pointer;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:14px;color:var(--accent);padding:0}
+.bs-next svg{width:18px;height:18px;transition:transform .25s}
+.bs-next:hover svg{transform:translateX(4px)}
+
+/* ===== STEP 5 · DAS ANGEBOT (gleiche Mechanik, accent-Sprache) ===== */
+.offer-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 22px}
+@media(max-width:680px){.offer-pillars{grid-template-columns:1fr}}
+.offer-pillar{background:#fff;padding:18px 18px}
+.offer-pillar .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10.5px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.offer-pillar .t{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-bottom:5px}
+.offer-pillar p{font-size:12.5px;color:var(--text-2);margin:0;line-height:1.5}
+.offer-guar{background:#FFF4EE;border:1px solid #ffd6c2;border-radius:12px;padding:16px 20px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(15px,1.9vw,19px);color:var(--text);line-height:1.4;margin:0 0 22px}
+.offer-guar strong{color:var(--accent-hover)}
+.offer-cta{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;text-decoration:none;font-family:'Inter Tight',sans-serif;font-size:15px;font-weight:700;padding:16px 36px;transition:background .15s}
+.offer-cta:hover{background:var(--blue-deep)}
+.offer-fine{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);margin:16px 0 0;line-height:1.7}
+.offer-fine strong{color:var(--text-2)}
+
+.legend{max-width:1180px;margin:28px auto 60px;padding:0 40px;font-size:14px;color:var(--text-2)}
+.legend h4{font-family:'Inter Tight',sans-serif;color:var(--text);font-size:15px;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.legend table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
+.legend td{padding:10px 15px;border-bottom:1px solid #f1ede2;vertical-align:top}
+.legend tr:last-child td{border-bottom:0}.legend td:first-child{font-weight:700;color:var(--text);width:230px}
+</style>
+</head>
+<body>
+
+<div class="note-top"><strong>PREVIEW v3 · interaktiv · nicht live.</strong> Geliebte Mechanik bleibt — klick die Tabs / warte auf Auto-Advance. Kein Accordion. Das Angebot ist Step 05 im selben Flow (accent-Sprache, Pfeil-Cue zieht hin).</div>
+
+<section class="was">
+  <div class="wrap">
+
+    <div class="eyebrow">Was wir machen</div>
+    <h1 class="head-h">Vier Bausteine.<br>Ein <em>Profit-System.</em></h1>
+    <p class="head-sub">Brand, Store, Conversion und AI Operations — nicht vier Dienstleistungen, sondern <strong>eine Maschine, die messbar profitabler macht.</strong></p>
+
+    <div class="bs-stage" id="stage">
+      <div class="bs-rail" id="rail">
+        <div class="bs-rail-ind" id="railInd"></div>
+        <button class="bs-tab active" data-step="1"><span class="bs-dot"></span><span class="bs-tab-text"><span class="bs-tab-phase">Baustein 01</span><span class="bs-tab-name">Brand</span></span></button>
+        <button class="bs-tab" data-step="2"><span class="bs-dot"></span><span class="bs-tab-text"><span class="bs-tab-phase">Baustein 02</span><span class="bs-tab-name">Store</span></span></button>
+        <button class="bs-tab" data-step="3"><span class="bs-dot"></span><span class="bs-tab-text"><span class="bs-tab-phase">Baustein 03</span><span class="bs-tab-name">Conversion &amp; Lifecycle</span></span></button>
+        <button class="bs-tab" data-step="4"><span class="bs-dot"></span><span class="bs-tab-text"><span class="bs-tab-phase">Baustein 04</span><span class="bs-tab-name">AI Operations</span></span></button>
+        <button class="bs-tab is-offer" data-step="5"><span class="bs-dot"></span><span class="bs-tab-text"><span class="bs-tab-phase">Das Angebot</span><span class="bs-tab-name">Risiko: 0</span></span></button>
+      </div>
+
+      <div class="bs-content" id="content">
+        <div class="bs-bg-num" id="bgNum">01</div>
+
+        <div class="bs-step active" data-step="1">
+          <span class="bs-tag">Fundament</span>
+          <h3>Brand.</h3>
+          <p>Die Spine, auf der Store, Conversion und Lifecycle überhaupt erst profitabel werden. Kein Pitch-Deck — ein operatives Framework.</p>
+          <div class="bs-meta"><span class="bs-proof">Hearo: Basis für 14 PDPs · Bachgold: Repositioning vor Re-Launch</span><span class="bs-chips-line">Brand-Doctrine · Voice · Messaging-Framework</span></div>
+          <button class="bs-next" data-go="2">Weiter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <div class="bs-step" data-step="2">
+          <span class="bs-tag">Profit-Hebel AOV</span>
+          <h3>Store, der Marge bringt.</h3>
+          <p>Hochkonvertierender Custom-Shop plus Bundle-/AOV-Architektur als messbarer Margenhebel — sauber dem Euro zurechenbar.</p>
+          <div class="bs-meta"><span class="bs-proof">Hearo: 14+ Sections in 8 Wochen · Bachgold: Re-Launch ohne Traffic-Verlust</span><span class="bs-chips-line">Custom-Liquid · Section-Library · Bundle-/AOV · PageSpeed 85+</span></div>
+          <button class="bs-next" data-go="3">Weiter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <div class="bs-step" data-step="3">
+          <span class="bs-tag">Profit-Maschine</span>
+          <h3>Profit pro Visitor.</h3>
+          <p>Klaviyo-Lifecycle als Profit-Maschine. Jeder zusätzliche Euro steht in deinem eigenen Klaviyo — gegen eine eingefrorene Baseline. Genau hier messen wir die Refinanzierung.</p>
+          <div class="bs-meta"><span class="bs-proof">Per-Order-Math statt ROAS-Theater</span><span class="bs-chips-line">Klaviyo-Lifecycle · Eingefrorene Baseline · Welcome → Win-Back</span></div>
+          <button class="bs-next" data-go="4">Weiter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <div class="bs-step" data-step="4">
+          <span class="bs-tag">Effizienz-Verstärker</span>
+          <h3>AI Operations live.</h3>
+          <p>Operative Reibung raus — KI-Workflows, die messbar Zeit und Kosten sparen. Value-Add, kein Vanity.</p>
+          <div class="bs-meta"><span class="bs-proof">3 Stufen (Light · Medium · Heavy) — im Discovery gewählt</span><span class="bs-chips-line">Custom-Prompts · No-Code-Workflows · AI-Agents</span></div>
+          <button class="bs-next" data-go="5" style="color:var(--accent)">So bekommst du das System <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <div class="bs-step" data-step="5">
+          <span class="bs-tag">Das Angebot</span>
+          <h3>Das Risiko liegt auf unserer Seite.</h3>
+          <div class="offer-pillars">
+            <div class="offer-pillar"><div class="n">01 · Gratis</div><div class="t">Profit-Gap-Analyse</div><p>Wir rechnen dir auf deinen echten Zahlen vor, wie viel Profit du liegen lässt.</p></div>
+            <div class="offer-pillar"><div class="n">02 · Festpreis</div><div class="t">Ein fester Betrag</div><p>Keine Provision, kein Umsatz-Anteil, kein Abo-Zwang.</p></div>
+            <div class="offer-pillar"><div class="n">03 · Garantie</div><div class="t">Refinanzierung 90 Tage</div><p>Trägt sich's nicht über zusätzlichen Umsatz, arbeiten wir gratis weiter.</p></div>
+          </div>
+          <div class="offer-guar">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
+          <a href="#" class="offer-cta">Profit-Gap-Analyse anfragen →</a>
+          <p class="offer-fine">Nur DTC auf Shopify · DACH · 1–10 Mio € · Direkter Founder-Zugang · <strong>Kein klarer ROI = kein Auftrag</strong> · Profitables Wachstum auf höchstem Niveau</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="legend">
+  <h4>Was v3 anders macht (deine Vorgaben)</h4>
+  <table>
+    <tr><td>Mechanik bleibt</td><td>Rail-Indicator-Slide, Char-Reveal-Headline, BG-Nummer-Swap, Auto-Advance mit Tab-Klick — exakt die Interaktion, die du gut findest. 1:1 portiert, nur auf Weiß.</td></tr>
+    <tr><td>Kein Accordion</td><td>`&lt;details&gt;`-Gate raus. Section ist immer offen — sie ist zu wichtig zum Wegklicken.</td></tr>
+    <tr><td>Angebot = Step 05</td><td>Kein angeklebtes Band. Das Angebot ist der 5. Schritt im selben Rail/Flow — gleicher Char-Reveal, gleicher BG-Num-Swap (BG-Nummer wird „0" = Risiko Null).</td></tr>
+    <tr><td>Pfeil-Cue</td><td>Animierter Pfeil am Rail zieht vom letzten Baustein zum Angebot. Step 04 hat zusätzlich „So bekommst du das System →" als Forward-Button. Der Flow führt zwingend ins Angebot.</td></tr>
+    <tr><td>Sicherheit visuell angepasst</td><td>Step 05 spricht accent-Sprache: Rail-Dot/Indicator/BG-Num in Orange statt Blau, Garantie-Box im Accent-Stil — visuell als „Payoff" markiert, aber im selben System.</td></tr>
+    <tr><td>Alle Infos erhalten</td><td>Jeder Proof, jede Chip-Zeile, ganze Offer-Mechanik, Qualifikation (einmal, in Step 05 fine-print). Nichts gelöscht.</td></tr>
+  </table>
+  <p style="margin-top:14px;font-size:13px;color:var(--text-3)">Auto-Advance ist hier bewusst AUS (du sollst frei klicken zum Testen). Live kann der 5,5s-Progress-Ring + Auto-Advance wie im Original wieder rein — Step 05 wäre dann der natürliche Endpunkt der Auto-Tour.</p>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),tabs=[].slice.call(stage.querySelectorAll('.bs-tab')),
+      steps=[].slice.call(stage.querySelectorAll('.bs-step')),ind=document.getElementById('railInd'),
+      bg=document.getElementById('bgNum'),rail=document.getElementById('rail');
+  // Char-split (wort-bewusst): Text zuerst lesen, h3 leeren, dann Spans bauen
+  steps.forEach(function(s){
+    var h=s.querySelector('h3'); if(!h) return;
+    var text=h.textContent, i=0;
+    h.textContent='';
+    text.split(/(\s+)/).forEach(function(t){
+      if(t==='') return;
+      if(/^\s+$/.test(t)){
+        var sp=document.createElement('span');sp.className='char space';sp.textContent=' ';
+        sp.style.setProperty('--i',i++);h.appendChild(sp);
+      } else {
+        var w=document.createElement('span');w.className='word';
+        Array.from(t).forEach(function(c){
+          var cs=document.createElement('span');cs.className='char';cs.textContent=c;
+          cs.style.setProperty('--i',i++);w.appendChild(cs);
+        });
+        h.appendChild(w);
+      }
+    });
+  });
+
+  function moveInd(idx){var t=tabs[idx],r=rail.getBoundingClientRect(),tr=t.getBoundingClientRect();
+    var dot=t.querySelector('.bs-dot'),dr=dot.getBoundingClientRect();
+    ind.style.transform='translateY('+(dr.top-r.top+ (dr.height/2) -11)+'px)';
+    ind.classList.toggle('is-offer',idx===4);}
+  function go(n){var idx=n-1;
+    tabs.forEach(function(t,i){t.classList.toggle('active',i===idx);});
+    bg.classList.add('swapping');
+    setTimeout(function(){bg.textContent=(n===5?'0':('0'+n));bg.classList.toggle('is-offer',n===5);bg.classList.remove('swapping');},300);
+    steps.forEach(function(s){s.classList.toggle('active',+s.dataset.step===n);});
+    moveInd(idx);}
+  tabs.forEach(function(t){t.addEventListener('click',function(){go(+t.dataset.step);});});
+  stage.addEventListener('click',function(e){var b=e.target.closest('.bs-next');if(b){go(+b.dataset.go);}});
+  window.addEventListener('load',function(){setTimeout(function(){moveInd(0);},60);});
+  window.addEventListener('resize',function(){var a=tabs.findIndex(function(t){return t.classList.contains('active');});moveInd(a<0?0:a);});
+})();
+</script>
+
+</body>
+</html>

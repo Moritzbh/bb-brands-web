@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Preview · „Was wir machen" — Redesign-Vorschlag</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0305C6;--blue-deep:#02038F;--blue-tint:#EEF1FF;
+  --accent:#FF6B3D;--accent-bg:#FFF4EE;--accent-hover:#E85A2C;
+  --text:#16161a;--text-2:#3D3D3A;--text-3:#787872;
+  --line:#e4e0d4;--bg:#fff;
+  --disp:'Inter Tight',-apple-system,sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:var(--body);background:#f4f2ec;color:var(--text-2);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.note-top{max-width:1140px;margin:0 auto;padding:28px 32px 0;font-family:var(--mono);font-size:12px;color:var(--text-3);letter-spacing:.04em}
+.note-top strong{color:var(--text)}
+
+/* ============ ZONE WRAP ============ */
+section.was{background:#fff;padding:72px 0 64px;margin:24px auto;max-width:1240px;border-radius:16px;box-shadow:0 1px 0 var(--line),0 30px 70px -40px rgba(0,0,0,.18)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 40px}
+@media(max-width:740px){.wrap{padding:0 22px}section.was{padding:48px 0 44px}}
+
+/* ZONE 1 · Claim */
+.eyebrow{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-align:center;margin-bottom:16px}
+.z1-h{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:1.04;letter-spacing:-1.4px;color:var(--text);text-align:center;margin:0 0 16px}
+.z1-h em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--blue);letter-spacing:-.5px}
+.z1-sub{font-size:17px;color:var(--text-2);text-align:center;max-width:680px;margin:0 auto 38px;line-height:1.6}
+.z1-sub strong{color:var(--text);font-weight:600}
+.z1-video{max-width:880px;margin:0 auto 8px;aspect-ratio:16/8;border-radius:14px;background:linear-gradient(135deg,#1b2138,#11162a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.z1-video::after{content:"Founder-Video";position:absolute;bottom:14px;left:18px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase}
+.z1-play{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center}
+.z1-play svg{width:26px;height:26px;color:#11162a;margin-left:3px}
+
+/* ZONE 2 · System — 4 clean cards, 2x2, EIN Modell pro Karte */
+.z2{margin:54px 0 0}
+.z2-lead{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:740px){.grid{grid-template-columns:1fr}}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 30px 26px;overflow:hidden}
+.card-num{position:absolute;top:14px;right:22px;font-family:var(--disp);font-weight:800;font-size:76px;line-height:1;color:var(--blue);opacity:.07;letter-spacing:-3px}
+.card-name{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.6px;color:var(--text);margin:0 0 10px;position:relative}
+.card-val{font-size:15px;color:var(--text-2);line-height:1.6;margin:0 0 14px;max-width:42ch}
+.card-proof{font-family:var(--mono);font-size:11.5px;color:var(--accent-hover);letter-spacing:.02em;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.card-proof::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--body);font-size:12px;font-weight:700;color:var(--blue);background:var(--blue-tint);padding:7px 13px;border-radius:999px;letter-spacing:.01em}
+
+/* ZONE 3 · Offer — Resolution + absorbiert Qualifikation */
+.z3{margin:50px auto 0;background:linear-gradient(180deg,#fff,var(--blue-tint));border:1px solid var(--line);border-radius:20px;padding:42px 38px;text-align:center}
+.z3-eyebrow{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.z3-h{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3.4vw,38px);line-height:1.1;letter-spacing:-.5px;color:var(--text);margin:0 0 26px}
+.z3-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px;text-align:left}
+@media(max-width:740px){.z3-steps{grid-template-columns:1fr}}
+.z3-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.z3-step .n{font-family:var(--disp);font-weight:800;font-size:12px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.z3-step .st{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--text);margin-bottom:5px}
+.z3-step p{font-size:13.5px;color:var(--text-2);margin:0;line-height:1.55}
+.z3-guar{background:var(--accent-bg);border:1px solid #ffd6c2;border-radius:12px;padding:18px 24px;margin:0 0 24px;font-family:var(--disp);font-weight:700;font-size:clamp(16px,2vw,20px);color:var(--text);line-height:1.4}
+.z3-guar strong{color:var(--accent-hover)}
+.z3-cta{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;text-decoration:none;font-family:var(--disp);font-size:15px;font-weight:700;letter-spacing:.02em;padding:17px 38px;box-shadow:0 14px 36px -12px rgba(3,5,198,.45)}
+.z3-fine{font-family:var(--body);font-size:12.5px;color:var(--text-3);margin:16px 0 0;letter-spacing:.02em}
+.z3-fine strong{color:var(--text-2)}
+
+.legend{max-width:1140px;margin:30px auto 60px;padding:0 40px;font-size:14px;color:var(--text-2)}
+.legend h4{font-family:var(--disp);color:var(--text);font-size:15px;margin:22px 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.legend table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
+.legend td{padding:9px 14px;border-bottom:1px solid #efeae0;vertical-align:top}
+.legend tr:last-child td{border-bottom:0}
+.legend td:first-child{font-weight:700;color:var(--text);width:230px}
+.del{color:#b9342a}.keep{color:#1f8a4c}.merge{color:#a07a14}
+</style>
+</head>
+<body>
+
+<div class="note-top"><strong>PREVIEW · nicht live.</strong> Redesign-Vorschlag „Was wir machen". Gleiche Infos, 3 saubere Zonen statt 5 gestapelter Beats. Rationale unten.</div>
+
+<section class="was">
+  <div class="wrap">
+
+    <!-- ZONE 1 · CLAIM -->
+    <div class="eyebrow">Was wir machen</div>
+    <h1 class="z1-h">Vier Bausteine.<br>Ein <em>Profit-System.</em></h1>
+    <p class="z1-sub">Brand, Store, Conversion und AI Operations — nicht vier Dienstleistungen, sondern <strong>eine Maschine, die messbar profitabler macht.</strong></p>
+    <div class="z1-video"><div class="z1-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
+
+    <!-- ZONE 2 · SYSTEM -->
+    <div class="z2">
+      <div class="z2-lead">Die vier Bausteine — ein Modell pro Baustein, kein Doppel-Label</div>
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-num">01</div>
+          <div class="card-name">Brand</div>
+          <p class="card-val">Die Spine, auf der Store, Conversion und Lifecycle überhaupt erst profitabel werden. Kein Pitch-Deck — ein operatives Framework.</p>
+          <div class="card-proof">Hearo: Basis für 14 PDPs · Bachgold: Repositioning vor Re-Launch</div>
+          <div class="chips"><span class="chip">Brand-Doctrine</span><span class="chip">Voice-Guidelines</span><span class="chip">Messaging-Framework</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-num">02</div>
+          <div class="card-name">Store</div>
+          <p class="card-val">Hochkonvertierender Custom-Shop + Bundle-/AOV-Architektur als messbarer Margenhebel — sauber dem Euro zurechenbar.</p>
+          <div class="card-proof">Hearo: 14+ Sections in 8 Wochen · Bachgold: Re-Launch ohne Traffic-Verlust</div>
+          <div class="chips"><span class="chip">Custom-Liquid</span><span class="chip">Section-Library</span><span class="chip">Bundle-/AOV-Hebel</span><span class="chip">PageSpeed 85+</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-num">03</div>
+          <div class="card-name">Conversion &amp; Lifecycle</div>
+          <p class="card-val">Klaviyo-Lifecycle als Profit-Maschine. Jeder zusätzliche Euro steht in deinem eigenen Klaviyo — gegen eine eingefrorene Baseline. Genau hier messen wir die Refinanzierung.</p>
+          <div class="card-proof">Per-Order-Math statt ROAS-Theater</div>
+          <div class="chips"><span class="chip">Klaviyo-Lifecycle</span><span class="chip">Eingefrorene Baseline</span><span class="chip">Welcome → Win-Back</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-num">04</div>
+          <div class="card-name">AI Operations</div>
+          <p class="card-val">Operative Reibung raus — KI-Workflows, die messbar Zeit und Kosten sparen. Value-Add, kein Vanity.</p>
+          <div class="card-proof">3 Stufen (Light · Medium · Heavy) — im Discovery gewählt</div>
+          <div class="chips"><span class="chip">Custom-Prompts</span><span class="chip">No-Code-Workflows</span><span class="chip">AI-Agents</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ZONE 3 · OFFER (Resolution + Qualifikation an EINER Stelle) -->
+    <div class="z3">
+      <div class="z3-eyebrow">Das Angebot</div>
+      <h2 class="z3-h">Das Risiko liegt auf unserer Seite. Nicht auf deiner.</h2>
+      <div class="z3-steps">
+        <div class="z3-step"><div class="n">01 · Gratis</div><div class="st">Profit-Gap-Analyse</div><p>Wir rechnen dir auf deinen echten Shopify- &amp; Klaviyo-Zahlen vor, wie viel Profit du liegen lässt.</p></div>
+        <div class="z3-step"><div class="n">02 · Festpreis</div><div class="st">Ein fester Betrag</div><p>Das System, das die Lücke schließt — Festpreis. Keine Provision, kein Umsatz-Anteil, kein Abo.</p></div>
+        <div class="z3-step"><div class="n">03 · Garantie</div><div class="st">Refinanzierung 90 Tage</div><p>Trägt sich das Setup nicht über zusätzlichen Umsatz, arbeiten wir kostenlos weiter — bis es das tut.</p></div>
+      </div>
+      <div class="z3-guar">„Refinanziert sich das Setup nicht binnen 90 Tagen über zusätzlichen Umsatz, <strong>arbeiten wir kostenlos weiter, bis es das tut.</strong>"</div>
+      <a href="#" class="z3-cta">Profit-Gap-Analyse anfragen →</a>
+      <p class="z3-fine">Nur DTC auf Shopify · DACH · 1–10 Mio € · Direkter Founder-Zugang · <strong>Kein klarer ROI = kein Auftrag</strong> · Profitables Wachstum auf höchstem Niveau</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="legend">
+  <h4>Was sich ändert — alle Infos bleiben, nur sauberer gehaust</h4>
+  <table>
+    <tr><td class="del">RAUS · Accordion-Gate</td><td>„Im Detail nachlesen"-`&lt;details&gt;` weg. Das System IST der Wert — es gehört nicht hinter einen Klick versteckt. (Doppel-Gate: Accordion + Tabs aufgelöst.)</td></tr>
+    <tr><td class="del">RAUS · bb-facts-Zeile oben</td><td>Re-Brand/Re-Launch/Skalierung · Founder-Zugang · DACH 1–10 Mio · Kein ROI = kein Auftrag — war doppelt (oben + im Offer-Fine-Print). Lebt jetzt <strong>einmal</strong>, in Zone 3.</td></tr>
+    <tr><td class="merge">MERGE · Label-Layer</td><td>Pro Baustein vorher 5 Layer (Nr. + Kategorie-Tag + Headline + Body + Chips). Jetzt 4: Nr. (Ghost) + Name + Value-Line + Chips. Der redundante „Baustein 0X · Kategorie"-Tag fällt weg — Nummer + Name sagt es bereits.</td></tr>
+    <tr><td class="merge">MERGE · „Profit-System"</td><td>Vorher ~5× verstreut (H2, Accordion-Meta, Day-Tags, Offer). Jetzt: 1× stark in der H2, 1× als Beweis-Anker in Baustein 03. Nicht verdünnt.</td></tr>
+    <tr><td class="keep">BLEIBT · alle Proof-Punkte</td><td>Hearo 14 PDPs / 14+ Sections in 8 Wochen · Bachgold Re-Launch ohne Traffic-Verlust / Repositioning · Per-Order-Math · eingefrorene Baseline — alles erhalten, als knappe Proof-Zeile pro Karte statt Fließtext.</td></tr>
+    <tr><td class="keep">BLEIBT · alle Chips</td><td>Jeder Deliverable-Chip bleibt. Nur visuell ruhiger (Pill-Form, eine Reihe).</td></tr>
+    <tr><td class="keep">BLEIBT · Founder-Video</td><td>Als Trust-Anker in Zone 1. Position unverändert.</td></tr>
+    <tr><td class="keep">BLEIBT · Offer-Mechanik</td><td>Gratis-Audit → Festpreis → Refinanzierungs-Garantie + CTA — unverändert, jetzt als sauberer Abschluss (Resolution) statt angeklebtes Band.</td></tr>
+  </table>
+  <h4>Ergebnis</h4>
+  <p>5 gestapelte Beats → <strong>3 klare Zonen</strong>: Claim → System → Angebot. Eine Erzähllinie statt fünf parallele. Jede Info aus der alten Section ist noch da — nur ohne Doppel-Hausung und ohne Versteck-Accordion.</p>
+  <p style="margin-top:14px;font-size:13px;color:var(--text-3)"><strong>Offene Design-Frage:</strong> Die alte Tab-/Char-Reveal-Animation entfällt in diesem Grid-Modell (ruhiger = clean, dein Wunsch). Wenn du die Motion behalten willst, kann Zone 2 alternativ als 4er-Tab-Slider laufen — der Clutter-Fix (Accordion raus, Label-Merge, Facts-Dedup) gilt in beiden Fällen.</p>
+</div>
+
+</body>
+</html>
