@@ -102,6 +102,22 @@ tr:hover td{background:#fafbff}
 .score{font-family:ui-monospace,monospace;font-weight:600}
 .empty{text-align:center;padding:60px 20px;color:var(--muted)}
 
+/* Sources / Quellen */
+.src-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.src-note{font-size:12.5px;color:var(--muted);background:#fff;border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:0 10px 10px 0;padding:11px 14px;margin-bottom:16px}
+.src-table{width:100%;border-collapse:collapse;font-size:13px}
+.src-table th{text-align:left;padding:10px 12px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.src-table td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.src-table tr:last-child td{border-bottom:none}
+.src-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.ch-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.srcbar{background:#eef0f6;border-radius:6px;height:9px;width:100%;min-width:80px;overflow:hidden}
+.srcbar span{display:block;height:100%;border-radius:6px}
+.meta-hl{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.meta-card{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;box-shadow:0 4px 16px rgba(10,24,80,.04)}
+.meta-card .v{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+.meta-card .l{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:2px}
+
 /* Drawer */
 #overlay{display:none;position:fixed;inset:0;background:rgba(10,24,80,.32);z-index:40}
 #drawer{display:none;position:fixed;top:0;right:0;height:100dvh;width:480px;max-width:94vw;background:#fff;z-index:50;box-shadow:-12px 0 40px rgba(10,24,80,.18);overflow-y:auto}
@@ -169,6 +185,7 @@ tr:hover td{background:#fafbff}
       <button class="tab active" data-tab="cockpit">📋 Cockpit</button>
       <button class="tab" data-tab="pipeline">🗂 Pipeline</button>
       <button class="tab" data-tab="list">📑 Liste</button>
+      <button class="tab" data-tab="sources">📊 Quellen</button>
     </div>
 
     <!-- COCKPIT -->
@@ -222,6 +239,11 @@ tr:hover td{background:#fafbff}
         <div class="empty" id="empty" style="display:none">Keine Leads.</div>
       </div>
     </div>
+
+    <!-- SOURCES / QUELLEN -->
+    <div class="view" id="view-sources">
+      <div id="srcWrap"></div>
+    </div>
   </div>
 </div>
 
@@ -259,6 +281,35 @@ tr:hover td{background:#fafbff}
   var SEG={tier1:['⚪ Pre-Revenue','seg-tier1'],red:['🔴 Profit erodiert','seg-red'],yellow:['🟡 Wachstum stoppt','seg-yellow'],green:['🟢 Sauber','seg-green']};
   var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
   var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check'};
+
+  // Traffic-Kanäle (Lead-Ebene). Reihenfolge = Anzeigereihenfolge.
+  var CHANNELS=[
+    ['meta','Meta Ads','#1d4ed8'],
+    ['google-paid','Google Ads','#dc2626'],
+    ['paid','Paid (sonstige)','#ff6b3d'],
+    ['organic','Organisch','#16a34a'],
+    ['referral','Referral','#7c3aed'],
+    ['direct','Direkt','#6b7280']
+  ];
+  var CH_MAP={}; CHANNELS.forEach(function(c){CH_MAP[c[0]]=c;});
+  // Kam der Lead über Meta (Ad-Klick oder FB/IG-Quelle)?
+  function fromMeta(l){
+    if(l.fbc)return true;
+    var src=(l.utmSource||'').toLowerCase(), ref=(l.referrerDomain||'').toLowerCase();
+    return /facebook|instagram|meta|fb\b|ig\b/.test(src)||/facebook|instagram/.test(ref);
+  }
+  // Klassifiziert einen Lead in genau einen Kanal.
+  function channelOf(l){
+    var src=(l.utmSource||'').toLowerCase(), med=(l.utmMedium||'').toLowerCase(), ref=(l.referrerDomain||'').toLowerCase();
+    var paidMed=/cpc|ppc|paid|ads|display|paid.?social/.test(med);
+    if(fromMeta(l)&&(paidMed||l.fbc))return 'meta';
+    if(/google/.test(src)&&paidMed)return 'google-paid';
+    if(paidMed)return 'paid';
+    if(fromMeta(l))return 'organic';                 // FB/IG ohne Paid-Medium → organisch social
+    if(/google|bing|duckduckgo|ecosia|yahoo/.test(ref)||/google|bing|organic|social/.test(med))return 'organic';
+    if(ref||src||med)return 'referral';
+    return 'direct';
+  }
 
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -300,7 +351,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -441,6 +492,56 @@ tr:hover td{background:#fafbff}
     }).join('');
   }
 
+  // ---- Sources / Quellen ----
+  // Zählt ob ein Lead schon einen Call gebucht hat (oder weiter ist).
+  function hasCall(l){var s=stageOf(l);return !!l.callBookedAt||['call-booked','call-done','proposal','negotiation','won'].indexOf(s)>=0;}
+  function renderSources(){
+    var stats={}; CHANNELS.forEach(function(c){stats[c[0]]={leads:0,calls:0,won:0,pipe:0};});
+    var totLeads=0,metaLeads=0,metaCalls=0,directOrg=0;
+    leads.forEach(function(l){
+      var ch=channelOf(l); if(!stats[ch])ch='direct';
+      var s=stats[ch]; s.leads++; totLeads++;
+      if(hasCall(l))s.calls++;
+      if(stageOf(l)==='won')s.won++;
+      if(isActive(l))s.pipe+=Number(l.dealValue)||0;
+      if(fromMeta(l)){metaLeads++;if(hasCall(l))metaCalls++;}
+      if(ch==='direct'||ch==='organic')directOrg++;
+    });
+    var max=Math.max(1,Math.max.apply(null,CHANNELS.map(function(c){return stats[c[0]].leads;})));
+    var pctMeta=totLeads?Math.round(metaLeads/totLeads*100):0;
+    var pctDO=totLeads?Math.round(directOrg/totLeads*100):0;
+
+    var bodyRows=CHANNELS.map(function(c){
+      var s=stats[c[0]]; if(!s.leads)return '';
+      var pct=totLeads?Math.round(s.leads/totLeads*100):0;
+      var conv=s.leads?Math.round(s.won/s.leads*100):0;
+      return '<tr>'+
+        '<td><span class="ch-dot" style="background:'+c[2]+'"></span>'+esc(c[1])+'</td>'+
+        '<td style="width:34%"><div class="srcbar"><span style="width:'+(s.leads/max*100).toFixed(1)+'%;background:'+c[2]+'"></span></div></td>'+
+        '<td class="num">'+s.leads+' <span class="sub">·'+pct+'%</span></td>'+
+        '<td class="num">'+s.calls+'</td>'+
+        '<td class="num">'+s.won+'</td>'+
+        '<td class="num">'+(s.leads?conv+'%':'—')+'</td>'+
+        '<td class="num">'+money(s.pipe)+'</td>'+
+      '</tr>';
+    }).join('');
+    if(!totLeads)bodyRows='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:34px">Noch keine Leads.</td></tr>';
+
+    $('srcWrap').innerHTML=
+      '<div class="src-note">Diese Auswertung zeigt <b>Lead-Quellen</b> — woher die Menschen kommen, die sich tatsächlich eingetragen oder einen Call gebucht haben. '+
+      'Den gesamten Website-Traffic (auch Besucher ohne Lead, organisch vs. paid) siehst du in <b>GA4</b>. Beides zusammen = volles Bild.</div>'+
+      '<div class="meta-hl">'+
+        '<div class="meta-card"><div class="v">'+totLeads+'</div><div class="l">Leads gesamt</div></div>'+
+        '<div class="meta-card"><div class="v" style="color:#1d4ed8">'+metaLeads+' <span style="font-size:13px;color:var(--muted)">·'+pctMeta+'%</span></div><div class="l">über Meta (Ad-Klick / FB·IG)</div></div>'+
+        '<div class="meta-card"><div class="v" style="color:#1d4ed8">'+metaCalls+'</div><div class="l">Calls gebucht über Meta</div></div>'+
+        '<div class="meta-card"><div class="v" style="color:#16a34a">'+directOrg+' <span style="font-size:13px;color:var(--muted)">·'+pctDO+'%</span></div><div class="l">Direkt + Organisch</div></div>'+
+      '</div>'+
+      '<div class="table-wrap"><table class="src-table">'+
+        '<thead><tr><th>Kanal</th><th>Verteilung</th><th class="num">Leads</th><th class="num">Calls</th><th class="num">Gewonnen</th><th class="num">Conv.</th><th class="num">Pipeline</th></tr></thead>'+
+        '<tbody>'+bodyRows+'</tbody>'+
+      '</table></div>';
+  }
+
   // ---- Drawer ----
   function openDrawer(id){openId=id;renderDrawer();$('overlay').style.display='block';$('drawer').style.display='block';}
   function closeDrawer(){openId=null;$('overlay').style.display='none';$('drawer').style.display='none';}
@@ -456,6 +557,8 @@ tr:hover td{background:#fafbff}
     kv+=row('E-Mail',l.email?'<a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>':'');
     kv+=row('Marke',esc(l.brand||l.company||''));
     kv+=row('Quelle',esc(MAGNET[l.magnet]||l.magnet||'')+' · '+esc(source(l)));
+    var chL=CH_MAP[channelOf(l)];
+    kv+=row('Kanal',(chL?'<span class="ch-dot" style="background:'+chL[2]+'"></span>'+esc(chL[1]):'')+(fromMeta(l)?' <span class="badge" style="background:#e0e7ff;color:#1d4ed8">Meta</span>':''));
     kv+=row('Segment',seg?seg[0]+(l.tier?' · Tier '+l.tier:''):'');
     kv+=row('Bereitschaft',qual?qual[0]:'');
     kv+=row('Scores',(l.profitScore!=null||l.growthScore!=null)?'Profit '+(l.profitScore!=null?l.profitScore:'?')+' · Growth '+(l.growthScore!=null?l.growthScore:'?'):'');
