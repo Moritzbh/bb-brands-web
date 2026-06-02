@@ -12,4 +12,7 @@ window.BB_TRACKING = {
   pixelId: '990096973809534',  // ← Meta Pixel-/Datensatz-ID (BB Brands Web)
   ga4Id: 'G-C8SDVBEGPK',  // ← GA4 Mess-ID (BB Brands)
   debug: false,           // true = Konsolen-Logs zum Debuggen
+  // 'auto' = Interim: GA4 lädt sofort, Meta-Pixel wartet auf CMP-Opt-in.
+  // Sobald die CMP (Cookiebot/Usercentrics) steht → auf 'cmp' umstellen.
+  consentMode: 'auto',
 };

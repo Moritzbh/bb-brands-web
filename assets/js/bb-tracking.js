@@ -22,6 +22,9 @@
   var PIXEL_ID = (CFG.pixelId || '').trim();
   var GA4_ID = (CFG.ga4Id || '').trim();
   var DEBUG = !!CFG.debug;
+  // consentMode: 'cmp'  = alles wartet auf CMP-Opt-in (DSGVO-Endzustand)
+  //              'auto' = Interim: GA4 lädt sofort (IP-anonymisiert), Pixel bleibt gated
+  var MODE = (CFG.consentMode || 'cmp');
 
   function log() {
     if (DEBUG && window.console) console.log.apply(console, ['[bb-tracking]'].concat([].slice.call(arguments)));
@@ -123,8 +126,11 @@
     log('Consent erteilt → Pixel + GA4 laden');
     loadPixel();
     loadGA4();
-    // Falls vor Consent Events gepuffert wurden: jetzt nachfeuern
-    (pendingEvents || []).forEach(function (e) { track(e.name, e.params, e.opts); });
+    // Gepufferte Events: NUR den Pixel nachfeuern (GA4 wurde im auto-Modus
+    // schon beim Original-Aufruf gefeuert → kein Doppelzählen).
+    (pendingEvents || []).forEach(function (e) {
+      if (window.fbq) { try { window.fbq('track', e.name, e.params || {}, { eventID: e.opts.eventId }); } catch (_) {} }
+    });
     pendingEvents = [];
   }
   function revokeConsent() {
@@ -139,17 +145,16 @@
   function track(name, params, opts) {
     opts = opts || {};
     var eventId = opts.eventId || newEventId();
-    if (!consentGranted || !window.fbq) {
-      pendingEvents.push({ name: name, params: params, opts: { eventId: eventId } });
-      log('Event gepuffert (kein Consent/Pixel):', name);
-      return eventId;
-    }
-    try {
-      window.fbq('track', name, params || {}, { eventID: eventId });
-      log('Event gefeuert:', name, eventId);
-    } catch (e) { /* ignore */ }
-    if (window.gtag) {
+    // GA4 feuert unabhängig, sobald geladen (auch im 'auto'-Interim-Modus)
+    if (ga4Loaded && window.gtag) {
       try { window.gtag('event', name, params || {}); } catch (e) { /* ignore */ }
+    }
+    // Meta-Pixel nur mit echtem Consent; sonst puffern und nach grantConsent nachfeuern
+    if (consentGranted && window.fbq) {
+      try { window.fbq('track', name, params || {}, { eventID: eventId }); log('Event gefeuert:', name, eventId); } catch (e) { /* ignore */ }
+    } else {
+      pendingEvents.push({ name: name, params: params, opts: { eventId: eventId } });
+      log('Pixel-Event gepuffert (kein Consent):', name);
     }
     return eventId;
   }
@@ -208,5 +213,9 @@
   window.addEventListener('bb:consent-granted', grantConsent);
   window.addEventListener('bb:consent-revoked', revokeConsent);
 
-  log('bb-tracking initialisiert', { pixel: !!PIXEL_ID, ga4: !!GA4_ID });
+  // Interim-Modus ('auto'): GA4 sofort laden (Traffic-Übersicht), Meta-Pixel
+  // bleibt bis zum echten Opt-in (CMP) aus. Sobald CMP steht → consentMode:'cmp'.
+  if (MODE === 'auto') { loadGA4(); }
+
+  log('bb-tracking initialisiert', { mode: MODE, pixel: !!PIXEL_ID, ga4: !!GA4_ID });
 })();
