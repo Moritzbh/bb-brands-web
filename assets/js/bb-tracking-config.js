@@ -10,6 +10,6 @@
    ============================================================ */
 window.BB_TRACKING = {
   pixelId: '990096973809534',  // ← Meta Pixel-/Datensatz-ID (BB Brands Web)
-  ga4Id: '',              // ← Schritt 4: GA4 Mess-ID (z.B. 'G-XXXXXXXXXX')
+  ga4Id: 'G-C8SDVBEGPK',  // ← GA4 Mess-ID (BB Brands)
   debug: false,           // true = Konsolen-Logs zum Debuggen
 };
