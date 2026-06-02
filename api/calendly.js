@@ -25,6 +25,9 @@
 
 const crypto = require('crypto');
 
+// Meta Conversions API (optional — läuft nur wenn META_PIXEL_ID + META_CAPI_TOKEN gesetzt)
+const { sendCapiEvent } = require('./_capi');
+
 const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
 const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 const HASH_KEY = 'bb:leads';
@@ -132,6 +135,35 @@ async function sendPush(title, message) {
   }
 }
 
+// Feuert ein serverseitiges Meta-"Schedule"-Event für eine Calendly-Buchung.
+// Das ist die wertvollste Conversion: echte E-Mail aus dem Booking + (falls
+// der Lead über den Funnel kam) gespeichertes fbp/fbc → Match-Quality 8–9/10.
+// event_id = invitee-UUID → dedupt mit einem optionalen Browser-Schedule auf /funnel/danke.
+async function fireScheduleCapi({ email, name, rec, payload }) {
+  try {
+    const inviteeUuid = String(payload.uri || '').split('/').filter(Boolean).pop() || '';
+    await sendCapiEvent({
+      eventName: 'Schedule',
+      eventId: inviteeUuid ? `sch_${inviteeUuid}` : undefined,
+      userData: {
+        email,
+        // fbp/fbc nur vorhanden, wenn der Lead über den Funnel kam und wir sie gespeichert haben
+        fbp: rec && rec.fbp,
+        fbc: rec && rec.fbc,
+      },
+      customData: {
+        content_name: 'discovery-call',
+        ...(rec && rec.segment ? { segment: rec.segment } : {}),
+        ...(rec && rec.utmCampaign ? { utm_campaign: rec.utmCampaign } : {}),
+      },
+      eventSourceUrl: 'https://bb-brands.de/funnel/danke',
+      actionSource: 'website',
+    });
+  } catch (err) {
+    console.error('[calendly] CAPI Schedule failed:', err.message);
+  }
+}
+
 module.exports = async function handler(req, res) {
   // Health-Check
   if (req.method === 'GET') {
@@ -221,6 +253,7 @@ module.exports = async function handler(req, res) {
           '📅 Call gebucht (bestehender Lead)',
           `${name || email}\n${startNice}\nSegment: ${rec.segment || '–'} · Quelle: ${isFunnel ? 'Funnel' : 'Website'}`
         );
+        await fireScheduleCapi({ email, name, rec, payload: p });
         res.statusCode = 200;
         return res.end(JSON.stringify({ ok: true, action: 'updated', id: found.id }));
       }
@@ -250,6 +283,7 @@ module.exports = async function handler(req, res) {
         '📅 Neuer Call gebucht',
         `${name || email}\n${startNice}\nQuelle: ${isFunnel ? 'Funnel' : 'Website'}`
       );
+      await fireScheduleCapi({ email, name, rec, payload: p });
       res.statusCode = 200;
       return res.end(JSON.stringify({ ok: true, action: 'created', id }));
     }

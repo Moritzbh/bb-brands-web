@@ -47,6 +47,9 @@ const NTFY_SERVER = (process.env.NTFY_SERVER || 'https://ntfy.sh').trim().replac
 const KLAVIYO_API_KEY = process.env.KLAVIYO_API_KEY || '';
 const KLAVIYO_LIST_ID = process.env.KLAVIYO_LIST_ID || '';
 
+// Meta Conversions API (optional — läuft nur wenn META_PIXEL_ID + META_CAPI_TOKEN gesetzt)
+const { sendCapiEvent } = require('./_capi');
+
 const HASH_KEY = 'bb:leads';
 
 const PAIN_LABELS = {
@@ -179,7 +182,44 @@ function extractAttribution(body) {
     referrerDomain: str(body.referrer_domain, 120),
     landingPath: str(body.landing_path, 300),
     submitPath: str(body.submit_path, 300),
+    // Meta-Attribution: für CAPI-Match + Browser/Server-Dedup
+    fbp: str(body.fbp, 120),               // _fbp Cookie (vom Pixel gesetzt)
+    fbc: str(body.fbc, 200),               // _fbc Cookie / aus fbclid abgeleitet
+    fbEventId: str(body.event_id, 80),     // gleiche ID wie das Browser-fbq-Event
   };
+}
+
+// Feuert ein serverseitiges Meta-"Lead"-Event für einen frisch gespeicherten Lead.
+// Best-effort: No-Op ohne CAPI-Env-Vars, wirft nie. event_id = fbEventId des
+// Browsers → Meta dedupliziert Browser-Pixel + dieses Server-Event.
+async function fireLeadCapi(record, req) {
+  try {
+    const submitPath = record.submitPath || record.landingPath || '';
+    const eventSourceUrl = submitPath
+      ? `https://bb-brands.de${submitPath.startsWith('/') ? '' : '/'}${submitPath}`
+      : 'https://bb-brands.de';
+    await sendCapiEvent({
+      eventName: 'Lead',
+      eventId: record.fbEventId || record.id,
+      userData: {
+        email: record.email,
+        phone: record.phone,
+        fbp: record.fbp,
+        fbc: record.fbc,
+        ip: record.ip || (req.headers['x-forwarded-for'] || '').split(',')[0].trim(),
+        userAgent: record.userAgent || str(req.headers['user-agent'] || '', 300),
+      },
+      customData: {
+        content_name: record.magnet || 'lead',
+        ...(record.segment ? { segment: record.segment } : {}),
+        ...(record.tier ? { tier: record.tier } : {}),
+      },
+      eventSourceUrl,
+      actionSource: 'website',
+    });
+  } catch (err) {
+    console.error('[/api/leads] CAPI Lead failed:', err.message);
+  }
 }
 
 function checkAdmin(req) {
@@ -308,6 +348,9 @@ module.exports = async function handler(req, res) {
           console.error('[/api/leads] push notify failed:', err)
         );
 
+        // Meta CAPI: serverseitiges Lead-Event (dedupt mit Browser-fbq via event_id)
+        await fireLeadCapi(record, req);
+
         return jsonResponse(res, 200, { ok: true, id });
       }
 
@@ -371,6 +414,9 @@ module.exports = async function handler(req, res) {
           console.error('[/api/leads] push notify failed:', err)
         );
 
+        // Meta CAPI: serverseitiges Lead-Event
+        await fireLeadCapi(record, req);
+
         return jsonResponse(res, 200, { ok: true, id });
       }
 
@@ -425,6 +471,9 @@ module.exports = async function handler(req, res) {
           console.error('[/api/leads] push notify failed:', err)
         );
 
+        // Meta CAPI: serverseitiges Lead-Event
+        await fireLeadCapi(record, req);
+
         return jsonResponse(res, 200, { ok: true, id });
       }
 
@@ -478,6 +527,9 @@ module.exports = async function handler(req, res) {
       await sendPushNotification(record).catch((err) =>
         console.error('[/api/leads] push notify failed:', err)
       );
+
+      // Meta CAPI: serverseitiges Lead-Event
+      await fireLeadCapi(record, req);
 
       return jsonResponse(res, 200, { ok: true, id });
     }
