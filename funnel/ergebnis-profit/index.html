@@ -107,7 +107,8 @@ html,body{overflow-x:clip;max-width:100%}
 @media (max-width:560px){.diag-top{flex-direction:column;align-items:flex-start;gap:9px}.diag-body{padding:22px 20px}}
 
 /* ===== VIDEO (Baulig) ===== */
-.bb-video{max-width:760px;margin:0 auto;background:#fff;box-shadow:1px 1px 30px rgba(0,0,0,.15);position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.34)),var(--bg-founder-1);background-size:cover;background-position:center;overflow:hidden}
+.bb-video{max-width:760px;margin:0 auto;background:#000;box-shadow:1px 1px 30px rgba(0,0,0,.15);position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bb-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .bb-video-play{width:84px;height:84px;border-radius:50%;background:var(--bg-amber);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(255,107,61,.5);cursor:pointer;position:relative}
 .bb-video-play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.4);animation:ring 2.4s ease-out infinite}
 @keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
@@ -320,11 +321,12 @@ footer .footer-links a:hover{color:var(--accent)}
         <h2>Warum dein Gewinn schrumpft, während der Umsatz wächst.</h2>
       </div>
       <div class="bb-video">
-        <div class="bb-video-play" role="button" aria-label="Video startet in Kürze">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <span class="bb-video-time">2:10</span>
-        <span class="bb-video-cap">Moritz: wo profit-erodierte Brands den Hebel zuerst ansetzen.</span>
+        <video controls preload="none" playsinline
+               poster="/assets/videos/ergebnis-rot-poster.webp"
+               controlslist="nodownload">
+          <source src="/assets/videos/ergebnis-rot.mp4" type="video/mp4">
+          Dein Browser kann dieses Video nicht abspielen.
+        </video>
       </div>
     </div>
   </section>
