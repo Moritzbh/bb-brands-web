@@ -194,17 +194,25 @@ html,body{overflow-x:clip;max-width:100%}
 .bb-hero-video{
   background:#fff;padding:0;
   box-shadow:1px 1px 30px rgba(0,0,0,.15);
-  position:relative;aspect-ratio:16/10;
+  position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   background-image:linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)),var(--bg-founder-1);
   background-size:cover;background-position:center;
+}
+.bb-hero-video-el{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;background:#fff;
 }
 .bb-video-play{
   width:80px;height:80px;border-radius:50%;
   background:rgba(255,255,255,.95);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 4px 24px rgba(0,0,0,.18);cursor:pointer;
+  position:relative;z-index:2;border:none;padding:0;
+  transition:opacity .25s ease, transform .25s ease;
 }
+.bb-hero-video:hover .bb-video-play{transform:scale(1.06)}
+.bb-hero-video.is-playing .bb-video-play{opacity:0;pointer-events:none}
 .bb-video-play svg{width:32px;height:32px;color:#000;margin-left:4px}
 
 .bb-hero-bullets-list{list-style:disc outside;padding-left:22px;margin:0}
@@ -803,10 +811,13 @@ html,body{overflow-x:clip;max-width:100%}
     <p class="bb-hero-sub">Wie du die Frameworks, die wir intern bei Hearo, Bachgold und Wake einsetzen, 1:1 in deinem eigenen Stack adaptierst. komplett offen, ohne uns als Agentur zu buchen.</p>
 
     <div class="bb-hero-grid">
-      <div class="bb-hero-video">
-        <div class="bb-video-play">
+      <div class="bb-hero-video" id="wissenVideoBox">
+        <video class="bb-hero-video-el" id="wissenVideo" poster="/assets/img/wissen-film-poster.jpg" preload="metadata" playsinline>
+          <source src="/assets/video/wissen-film.mp4" type="video/mp4">
+        </video>
+        <button class="bb-video-play" id="wissenPlay" type="button" aria-label="Video abspielen">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+        </button>
       </div>
 
       <div>
@@ -1285,6 +1296,28 @@ html,body{overflow-x:clip;max-width:100%}
     });
   }, { threshold: 0.5, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.tool-icon').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- Wissen-Hero-Video: Click-to-Play (Ton an) -->
+<script>
+(function(){
+  var box=document.getElementById('wissenVideoBox'),
+      v=document.getElementById('wissenVideo');
+  if(!box||!v) return;
+  function play(){
+    if(box.classList.contains('is-playing')) return;
+    v.setAttribute('controls','controls');
+    box.classList.add('is-playing');
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }
+  box.addEventListener('click', function(e){
+    if(box.classList.contains('is-playing')) return;
+    e.preventDefault(); play();
+  });
+  v.addEventListener('pause', function(){
+    if(v.currentTime===0||v.ended) box.classList.remove('is-playing');
+  });
 })();
 </script>
 
