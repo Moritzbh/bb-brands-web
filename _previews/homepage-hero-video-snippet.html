@@ -1,0 +1,27 @@
+<!--
+  ENTWURF · Homepage Hero-Video-Platzhalter ("Video folgt")
+  Entfernt von der Live-Startseite am 2026-06-03 (reversibel).
+
+  REAKTIVIEREN: diesen Block (zwischen den ==== Linien) wieder an der Marker-Stelle
+  in index.html einsetzen (Marker-Kommentar "Hero-Video-Platzhalter ENTFERNT …",
+  direkt vor "<!-- ===== STAGE · WAS WIR MACHEN …").
+  Das zugehörige CSS (.v2-hero-video* in index.html) ist weiterhin aktiv —
+  kein weiterer Schritt nötig.
+
+  Sobald ein echtes Video da ist: statt des Platzhalters einen <video>-Player
+  einsetzen (Muster siehe wissen/index.html · .bb-hero-video Click-to-Play).
+-->
+
+<!-- ==================== SNIPPET START ==================== -->
+<!-- Hero-Video · liegt mittig AUF der Wellenlinie (Platzhalter) -->
+<div class="v2-hero-video-rail">
+  <div class="v2-hero-video" role="img" aria-label="Video-Platzhalter — folgt">
+    <div class="v2-hero-video-ph">
+      <span class="play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+      <span>Video folgt</span>
+    </div>
+  </div>
+</div>
+<!-- ==================== SNIPPET ENDE ===================== -->
