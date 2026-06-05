@@ -209,5 +209,39 @@ html,body{overflow-x:clip;max-width:100%}
   </div>
 
 </div>
+
+<!-- ============================================================
+     Schedule-Conversion (Call gebucht) · Browser-Seite.
+     Feuert NUR wenn Calendly die invitee_uuid an die Redirect-URL hängt
+     ("Pass event details to redirect" muss im Calendly-Event AN sein).
+     event_id = sch_<invitee_uuid> → IDENTISCH zum Server-CAPI-Event
+     (api/calendly.js → fireScheduleCapi) → Meta dedupt Browser + Server.
+     Ohne invitee_uuid übernimmt allein das Server-CAPI (kein Doppel).
+     track() puffert vor Consent und feuert nach Opt-in (DSGVO-konform).
+     ============================================================ -->
+<script>
+(function () {
+  var qs;
+  try { qs = new URLSearchParams(window.location.search); } catch (e) { return; }
+  var inviteeUuid = (qs.get('invitee_uuid') || '').trim();
+  if (!inviteeUuid) return;                       // keine Buchungs-Details → nur Server-CAPI zählt
+  var eventId  = 'sch_' + inviteeUuid;            // muss exakt zum Server-event_id passen
+  var guardKey = 'bb_sched_' + eventId;           // Refresh-/Doppel-Schutz pro Buchung
+  function fire() {
+    var bb = window.BBTracking;
+    if (!bb || typeof bb.track !== 'function') return false;
+    try {
+      if (!sessionStorage.getItem(guardKey)) {
+        sessionStorage.setItem(guardKey, '1');
+        bb.track('Schedule', { content_name: 'discovery-call' }, { eventId: eventId });
+      }
+    } catch (e) { /* ignore */ }
+    return true;
+  }
+  if (!fire()) {                                  // BBTracking ist defer-geladen → kurz warten
+    var n = 0, iv = setInterval(function () { if (fire() || ++n > 40) clearInterval(iv); }, 250);
+  }
+})();
+</script>
 </body>
 </html>
