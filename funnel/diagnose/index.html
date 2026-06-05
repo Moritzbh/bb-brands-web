@@ -147,7 +147,20 @@ html,body{overflow-x:clip;max-width:100%}
 @media(max-width:780px){.case{grid-template-columns:1fr}}
 .case-shot{position:relative;background:#f2ece2;min-height:300px}
 .case-shot img{width:100%;height:100%;object-fit:cover}
-.case-badge{position:absolute;top:16px;left:16px;background:#000;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px}
+.case-badge{position:absolute;top:16px;left:16px;background:#000;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px;z-index:2}
+.shop-window{position:relative;display:flex;flex-direction:column;background:#fff;text-decoration:none;overflow:hidden;min-height:300px}
+.sw-bar{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#f3f4f6;border-bottom:1px solid #e7e9ec}
+.sw-dots{display:inline-flex;gap:7px;flex-shrink:0}
+.sw-dots i{width:11px;height:11px;border-radius:50%;background:#d4d7dc;display:block}
+.sw-dots i:nth-child(1){background:#ff5f57}.sw-dots i:nth-child(2){background:#febc2e}.sw-dots i:nth-child(3){background:#28c840}
+.sw-url{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:1px solid #e7e9ec;border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:12px;color:#555}
+.sw-url svg{width:12px;height:12px;color:#22c55e;flex-shrink:0}
+.sw-shot{position:relative;flex:1;overflow:hidden;min-height:260px}
+.sw-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .55s ease}
+.shop-window:hover .sw-shot img{transform:scale(1.035)}
+.sw-view{position:absolute;bottom:14px;right:14px;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.8);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.05em;padding:8px 13px;border-radius:7px;opacity:0;transform:translateY(7px);transition:opacity .25s ease,transform .25s ease;z-index:2}
+.shop-window:hover .sw-view{opacity:1;transform:translateY(0)}
+.sw-view svg{width:13px;height:13px}
 .case-body{padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
 .case-brand{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#000;margin-bottom:20px}
 .case-brand span{color:var(--bg-text-muted);font-weight:600;font-size:14px}
@@ -362,10 +375,17 @@ footer .footer-links a:hover{color:var(--accent)}
       </ul>
 
       <div class="case">
-        <div class="case-shot">
-          <img src="/assets/images/cases/showcase-bachgold-outdoor.jpg" alt="Bachgold Shop, von BB Brands gebaut">
-          <span class="case-badge">Unser letzter Build</span>
-        </div>
+        <a class="shop-window" href="https://bachgold-outdoor.com" target="_blank" rel="noopener" aria-label="Bachgold Shop ansehen — von BB Brands gebaut">
+          <div class="sw-bar">
+            <span class="sw-dots"><i></i><i></i><i></i></span>
+            <span class="sw-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>bachgold-outdoor.com</span>
+          </div>
+          <div class="sw-shot">
+            <img src="/assets/images/cases/showcase-bachgold-outdoor.jpg" alt="Bachgold Shop, von BB Brands gebaut">
+            <span class="case-badge">Unser letzter Build</span>
+            <span class="sw-view">Shop ansehen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+        </a>
         <div class="case-body">
           <div class="case-brand">Bachgold <span>· Selfpress Wasserfilter</span></div>
           <div class="case-metrics">
@@ -382,7 +402,7 @@ footer .footer-links a:hover{color:var(--accent)}
           </div>
           <div class="case-refi">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/></svg>
-            <span><b>In 90 Tagen komplett refinanziert.</b> Der Re-Launch hat sich aus dem Mehr-Umsatz selbst bezahlt.</span>
+            <span><b>In 120 Tagen komplett refinanziert.</b> Der Re-Launch hat sich aus dem Mehr-Umsatz selbst bezahlt.</span>
           </div>
           <p class="case-ctx">Re-Launch auf ein profitables Fundament. Erst das System, dann das Budget.</p>
         </div>
