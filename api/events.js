@@ -101,8 +101,18 @@ async function readJsonBody(req) {
 // Whitelist der Event-Namen die der Store akzeptiert (keine Müll-Events).
 const ALLOWED = new Set([
   'DiagnoseView', 'QuizStart', 'QuizStep', 'QuizAnswer',
-  'QuizComplete', 'Lead', 'QuizResult', 'PageView',
+  'QuizComplete', 'Lead', 'QualifiedLead', 'QuizResult', 'PageView',
 ]);
+
+// Attribution kompakt + sicher übernehmen (src/cmp/cnt/med/trm).
+function cleanAttr(a) {
+  if (!a || typeof a !== 'object') return {};
+  const out = {};
+  ['src', 'cmp', 'cnt', 'med', 'trm'].forEach((k) => {
+    if (a[k]) out[k] = str(String(a[k]), 80);
+  });
+  return out;
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -136,6 +146,7 @@ module.exports = async function handler(req, res) {
         params,
         path: str(body.path, 120),
         ref: str(body.ref, 120),       // referrer-domain (optional, vom Client)
+        attr: cleanAttr(body.attr),    // First-Touch UTMs (src/cmp/cnt/med/trm)
         ts: Date.now(),
       };
       const payload = JSON.stringify(evt);
@@ -169,24 +180,44 @@ module.exports = async function handler(req, res) {
         return jsonResponse(res, 200, { ok: true, sid, journey });
       }
 
-      // --- Aggregate über Zeitfenster ---
+      // --- Aggregate über Zeitfenster (+ optionale Kampagnen-Filter) ---
       const days = Math.min(365, Math.max(1, parseInt(url.searchParams.get('days') || '90', 10) || 90));
       const since = Date.now() - days * 86400000;
+      const fSrc = str(url.searchParams.get('source') || '', 80);
+      const fCmp = str(url.searchParams.get('campaign') || '', 80);
+      const fCnt = str(url.searchParams.get('content') || '', 80);
       const raw = (await redis('LRANGE', EVENTS_KEY, '0', '-1')) || [];
 
-      const funnel = { DiagnoseView: 0, QuizStart: 0, QuizComplete: 0, Lead: 0, QuizResult: 0 };
+      const funnel = { DiagnoseView: 0, QuizStart: 0, QuizComplete: 0, Lead: 0, QualifiedLead: 0, QuizResult: 0 };
       const reached = {};   // step → distinct sessions die Frage gesehen haben
       const answered = {};  // step → distinct sessions die Frage beantwortet haben
       for (let i = 1; i <= 8; i++) { reached[i] = new Set(); answered[i] = new Set(); }
-      const setOf = { DiagnoseView: new Set(), QuizStart: new Set(), QuizComplete: new Set(), Lead: new Set(), QuizResult: new Set() };
+      const setOf = { DiagnoseView: new Set(), QuizStart: new Set(), QuizComplete: new Set(), Lead: new Set(), QualifiedLead: new Set(), QuizResult: new Set() };
       const pages = {};
       const segments = {};
       const byDay = {};     // 'YYYY-MM-DD' → {start, lead}
+      // Kampagnen-Breakdown (immer über ALLE Events, damit Filter-Dropdown vollständig)
+      const campMap = {};   // 'src|cmp|cnt' → {src,cmp,cnt,start,lead}
       let total = 0;
 
       for (const r of raw) {
         let e; try { e = JSON.parse(r); } catch { continue; }
         if (!e || e.ts < since) continue;
+        const a = e.attr || {};
+
+        // Kampagnen-Liste (ungefiltert) — nur aus Start/Lead, sonst zu viel Rauschen
+        if (e.name === 'QuizStart' || e.name === 'Lead') {
+          const key = (a.src || '') + '|' + (a.cmp || '') + '|' + (a.cnt || '');
+          campMap[key] = campMap[key] || { src: a.src || '', cmp: a.cmp || '', cnt: a.cnt || '', start: 0, lead: 0 };
+          if (e.name === 'QuizStart') campMap[key].start++;
+          if (e.name === 'Lead') campMap[key].lead++;
+        }
+
+        // Filter anwenden (leerer Filter = alles)
+        if (fSrc && (a.src || '') !== fSrc) continue;
+        if (fCmp && (a.cmp || '') !== fCmp) continue;
+        if (fCnt && (a.cnt || '') !== fCnt) continue;
+
         total++;
         const sd = e.sid || '?';
         if (e.name === 'PageView') { pages[e.path] = (pages[e.path] || 0) + 1; continue; }
@@ -214,7 +245,12 @@ module.exports = async function handler(req, res) {
       funnel.QuizStart = setOf.QuizStart.size;
       funnel.QuizComplete = setOf.QuizComplete.size;
       funnel.Lead = setOf.Lead.size;
+      funnel.QualifiedLead = setOf.QualifiedLead.size;
       funnel.QuizResult = setOf.QuizResult.size;
+
+      // Kampagnen sortiert (meiste Starts zuerst), Top 40
+      const campaigns = Object.values(campMap)
+        .sort((x, y) => y.start - x.start).slice(0, 40);
 
       // Pro-Frage-Auswertung mit Absprung
       const questions = QUIZ_QUESTIONS.map((q) => {
@@ -229,10 +265,12 @@ module.exports = async function handler(req, res) {
         ok: true,
         windowDays: days,
         totalEvents: total,
+        filter: { source: fSrc, campaign: fCmp, content: fCnt },
         funnel,
         questions,
         pages,
         segments,
+        campaigns,
         byDay,
       });
     }

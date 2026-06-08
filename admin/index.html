@@ -288,6 +288,12 @@ tr:hover td{background:#fafbff}
           <option value="90" selected>90 Tage</option>
           <option value="365">12 Monate</option>
         </select>
+        <label class="fn-hint">Quelle</label>
+        <select id="fnSource"><option value="">Alle</option></select>
+        <label class="fn-hint">Kampagne</label>
+        <select id="fnCampaign"><option value="">Alle</option></select>
+        <label class="fn-hint">Creative</label>
+        <select id="fnContent"><option value="">Alle</option></select>
         <button class="btn" id="fnRefresh">↻ Laden</button>
         <span class="fn-hint" id="fnMeta"></span>
       </div>
@@ -601,9 +607,28 @@ tr:hover td{background:#fafbff}
   async function loadFunnel(){
     funnelLoading=true;
     var days=($('fnDays')&&$('fnDays').value)||'90';
-    try{funnelData=await apiEvents('?days='+days);}catch(e){if(e.message!=='401')funnelData={ok:false};}
+    var qs='?days='+days;
+    var src=$('fnSource')&&$('fnSource').value, cmp=$('fnCampaign')&&$('fnCampaign').value, cnt=$('fnContent')&&$('fnContent').value;
+    if(src)qs+='&source='+encodeURIComponent(src);
+    if(cmp)qs+='&campaign='+encodeURIComponent(cmp);
+    if(cnt)qs+='&content='+encodeURIComponent(cnt);
+    try{funnelData=await apiEvents(qs);}catch(e){if(e.message!=='401')funnelData={ok:false};}
     funnelLoading=false;
+    if(funnelData&&funnelData.campaigns)populateFunnelFilters(funnelData);
     if(tab==='funnel')paintFunnel();
+  }
+  // Filter-Dropdowns aus dem Kampagnen-Breakdown füllen (Auswahl beibehalten).
+  function populateFunnelFilters(d){
+    var camps=d.campaigns||[];
+    function fill(id,vals){
+      var el=$(id);if(!el)return;var cur=el.value;
+      var uniq=[...new Set(vals.filter(Boolean))].sort();
+      el.innerHTML='<option value="">Alle</option>'+uniq.map(function(v){return '<option value="'+esc(v)+'">'+esc(v)+'</option>';}).join('');
+      el.value=cur; if(el.value!==cur)el.value='';
+    }
+    fill('fnSource',camps.map(function(c){return c.src;}));
+    fill('fnCampaign',camps.map(function(c){return c.cmp;}));
+    fill('fnContent',camps.map(function(c){return c.cnt;}));
   }
   function renderFunnel(){
     if(!funnelData){$('funnelWrap').innerHTML='<div class="empty">Lade Funnel-Daten …</div>';if(!funnelLoading)loadFunnel();return;}
@@ -625,6 +650,7 @@ tr:hover td{background:#fafbff}
     qs.forEach(function(q){stages.push({l:'F'+q.step+' · '+q.label,n:q.reached,t:'step',drop:q.dropAfter});});
     stages.push({l:'Alle Fragen durch (Gate)',n:f.QuizComplete||0,t:'step'});
     stages.push({l:'Lead · E-Mail eingetragen',n:f.Lead||0,t:'lead'});
+    stages.push({l:'★ Qualified Lead (ICP + Budget)',n:f.QualifiedLead||0,t:'lead'});
     stages.push({l:'Ergebnis gesehen',n:f.QuizResult||0,t:''});
     var top=Math.max(1,stages[0].n||0,Math.max.apply(null,stages.map(function(s){return s.n;})));
     var bars='';
@@ -795,6 +821,7 @@ tr:hover td{background:#fafbff}
   $('refreshBtn').onclick=load;
   $('fnRefresh').onclick=loadFunnel;
   $('fnDays').addEventListener('change',loadFunnel);
+  ['fnSource','fnCampaign','fnContent'].forEach(function(id){var el=$(id);if(el)el.addEventListener('change',loadFunnel);});
   $('logoutBtn').onclick=function(){localStorage.removeItem(TOKEN_KEY);token='';showLogin('');};
   $('exportBtn').onclick=function(){
     var cols=['createdAt','email','name','brand','magnet','status','dealValue','nextAction','nextFollowUp','disposition','lostReason','segment','tier','profitScore','growthScore','qualification','utmSource','utmCampaign'];

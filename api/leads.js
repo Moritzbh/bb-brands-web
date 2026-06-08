@@ -231,6 +231,33 @@ async function fireLeadCapi(record, req) {
       eventSourceUrl,
       actionSource: 'website',
     });
+
+    // Qualified Lead = ICP-Segment (red/yellow) + Budget (hot/warm).
+    // Eigenes Meta-Event für qualitäts-basierte Ad-Optimierung statt rohem
+    // Lead-Volumen. Server-only (Browser feuert es nicht → kein Doppelzählen).
+    const _seg = record.segment, _q = record.qualification;
+    if ((_seg === 'red' || _seg === 'yellow') && (_q === 'hot' || _q === 'warm')) {
+      await sendCapiEvent({
+        eventName: 'QualifiedLead',
+        eventId: 'ql_' + record.id,
+        userData: {
+          email: record.email,
+          phone: record.phone,
+          fbp: record.fbp,
+          fbc: record.fbc,
+          ip: record.ip || (req.headers['x-forwarded-for'] || '').split(',')[0].trim(),
+          userAgent: record.userAgent || str(req.headers['user-agent'] || '', 300),
+        },
+        customData: {
+          content_name: record.magnet || 'lead',
+          segment: _seg,
+          ...(record.tier ? { tier: record.tier } : {}),
+        },
+        eventSourceUrl,
+        actionSource: 'website',
+      });
+      console.log('[capi] QualifiedLead fired for', record.id, _seg, _q);
+    }
   } catch (err) {
     console.error('[/api/leads] CAPI Lead failed:', err.message);
   }

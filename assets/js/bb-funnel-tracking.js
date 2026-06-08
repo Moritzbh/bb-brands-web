@@ -45,12 +45,31 @@
     } catch (e) { return ''; }
   }
 
+  // ---------- Attribution (First-Touch UTMs) ----------
+  // bb-tracking.js speichert First-Touch-UTMs in localStorage 'bb_utms'.
+  // Wir hängen sie KOMPAKT an jedes Event → Funnel pro Kampagne/Creative
+  // filterbar. Für Ad-Granularität in Meta die Ad-URLs mit Makros bauen:
+  //   utm_source=meta&utm_campaign={{campaign.name}}
+  //   &utm_content={{ad.name}}&utm_term={{adset.name}}
+  function attr() {
+    try {
+      var u = JSON.parse(localStorage.getItem('bb_utms') || '{}');
+      var a = {};
+      if (u.utm_source)   a.src = String(u.utm_source).slice(0, 80);
+      if (u.utm_campaign) a.cmp = String(u.utm_campaign).slice(0, 80);
+      if (u.utm_content)  a.cnt = String(u.utm_content).slice(0, 80);
+      if (u.utm_medium)   a.med = String(u.utm_medium).slice(0, 40);
+      if (u.utm_term)     a.trm = String(u.utm_term).slice(0, 80);
+      return a;
+    } catch (e) { return {}; }
+  }
+
   // ---------- First-Party-Store (best effort, blockiert nie) ----------
   function store(name, params) {
     try {
       var data = JSON.stringify({
         sid: sid, name: name, params: params || {},
-        path: location.pathname, ref: refDomain(),
+        path: location.pathname, ref: refDomain(), attr: attr(),
       });
       // keepalive → geht auch beim Seitenwechsel (z.B. Redirect aufs Ergebnis) durch
       fetch('/api/events', {
@@ -82,6 +101,11 @@
       // Pixel-"Lead" feuert das Quiz bereits via BBTracking.track('Lead',…)
       // → hier nur in den First-Party-Store (Journey-Abschluss).
       store('Lead', { segment: segment || '', tier: tier || 0 });
+    },
+    // Qualified Lead (ICP-Segment + Budget). Store-only — das Meta-Event
+    // feuert server-seitig per CAPI (leads.js), um Doppelzählung zu vermeiden.
+    qualified: function (segment, tier) {
+      store('QualifiedLead', { segment: segment || '', tier: tier || 0 });
     },
   };
 

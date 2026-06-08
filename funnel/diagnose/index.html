@@ -658,7 +658,7 @@ footer .footer-links a:hover{color:var(--accent)}
     var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:result.tier,segment:result.segment,profit_score:result.profitScore,growth_score:result.growthScore,store_gap:result.storeGap,email_gap:result.emailGap,bias:result.bias,qualification:result.qual,answers:answerDump,consentNewsletter:true},attr);
     // Meta-Tracking: gemeinsame event_id (Browser↔Server-Dedup), Match-Keys (fbp/fbc), Consent-Flag.
     // bb.track feuert den Pixel nur bei Consent (sonst gepuffert); GA4 unabhängig.
-    try{payload.sid=(window.BBFunnel&&BBFunnel.sid)||'';if(window.BBFunnel)BBFunnel.lead(result.segment,result.tier);}catch(_){}
+    try{payload.sid=(window.BBFunnel&&BBFunnel.sid)||'';if(window.BBFunnel){BBFunnel.lead(result.segment,result.tier);var _ql=(result.segment==='red'||result.segment==='yellow')&&(result.qual==='hot'||result.qual==='warm');if(_ql)BBFunnel.qualified(result.segment,result.tier);}}catch(_){}
     var bb=window.BBTracking, eventId=bb?bb.newEventId():null;
     if(bb){
       bb.track('Lead',{content_name:'gratis-profit-analyse',segment:result.segment,tier:result.tier||0},{eventId:eventId});
