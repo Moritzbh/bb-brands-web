@@ -150,6 +150,38 @@ tr:hover td{background:#fafbff}
 .dw-actions a,.dw-actions button{font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none;font-family:inherit}
 .dw-del{color:var(--red);border-color:#f3c9c9;margin-left:auto}
 
+/* Funnel / Quiz-Absprung */
+.fn-controls{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.fn-controls select{font-size:13px;padding:8px 11px;border:1px solid var(--line);border-radius:9px;font-family:inherit;background:#fff;color:var(--ink)}
+.fn-controls .fn-hint{font-size:12px;color:var(--muted)}
+.fn-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:900px){.fn-grid{grid-template-columns:1fr}}
+.fn-stage{margin-bottom:6px}
+.fn-bar-row{display:flex;align-items:center;gap:10px}
+.fn-bar{position:relative;flex:1;height:38px;background:#eef0f6;border-radius:9px;overflow:hidden}
+.fn-bar span{position:absolute;inset:0;border-radius:9px;background:linear-gradient(90deg,var(--navy),#2f3f8f);min-width:3px;transition:width .4s}
+.fn-bar.is-step span{background:linear-gradient(90deg,#3344b5,#5566dd)}
+.fn-bar.is-lead span{background:linear-gradient(90deg,var(--orange),#ff8a63)}
+.fn-bar-lbl{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;z-index:2;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.fn-bar-cnt{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12.5px;font-weight:800;color:#fff;z-index:2}
+.fn-drop{font-size:11px;font-weight:700;color:var(--muted);padding:2px 0 4px 13px}
+.fn-drop b{color:var(--red)}
+.fn-drop.warn b{color:var(--orange)}
+.fn-q-table td.pct{font-variant-numeric:tabular-nums;font-weight:800;text-align:right}
+.fn-q-table .drop-hi{color:var(--red)}
+.fn-q-table .drop-mid{color:var(--orange)}
+.fn-q-table .drop-lo{color:var(--green)}
+.fn-mini{font-size:11px;color:var(--muted)}
+/* Journey im Drawer */
+.jrn{position:relative;padding-left:18px}
+.jrn::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.jrn-item{position:relative;padding:5px 0 9px}
+.jrn-item::before{content:"";position:absolute;left:-16px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--navy);border:2px solid #fff}
+.jrn-item.is-lead::before{background:var(--orange)}
+.jrn-item .jt{font-size:11px;color:var(--muted)}
+.jrn-item .jn{font-size:12.5px;font-weight:700}
+.jrn-item .jp{font-size:11.5px;color:var(--muted)}
+
 @media(max-width:900px){.cockpit{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.wrap{padding:0 12px}#drawer{width:100vw;max-width:100vw}}
 </style>
@@ -186,6 +218,7 @@ tr:hover td{background:#fafbff}
       <button class="tab" data-tab="pipeline">🗂 Pipeline</button>
       <button class="tab" data-tab="list">📑 Liste</button>
       <button class="tab" data-tab="sources">📊 Quellen</button>
+      <button class="tab" data-tab="funnel">🔬 Funnel</button>
     </div>
 
     <!-- COCKPIT -->
@@ -243,6 +276,22 @@ tr:hover td{background:#fafbff}
     <!-- SOURCES / QUELLEN -->
     <div class="view" id="view-sources">
       <div id="srcWrap"></div>
+    </div>
+
+    <!-- FUNNEL / QUIZ-ABSPRUNG -->
+    <div class="view" id="view-funnel">
+      <div class="fn-controls">
+        <label class="fn-hint">Zeitfenster</label>
+        <select id="fnDays">
+          <option value="7">7 Tage</option>
+          <option value="30">30 Tage</option>
+          <option value="90" selected>90 Tage</option>
+          <option value="365">12 Monate</option>
+        </select>
+        <button class="btn" id="fnRefresh">↻ Laden</button>
+        <span class="fn-hint" id="fnMeta"></span>
+      </div>
+      <div id="funnelWrap"></div>
     </div>
   </div>
 </div>
@@ -351,7 +400,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -542,9 +591,111 @@ tr:hover td{background:#fafbff}
       '</table></div>';
   }
 
+  // ---- Funnel / Quiz-Absprung ----
+  var funnelData=null, funnelLoading=false;
+  async function apiEvents(qs){
+    var r=await fetch('/api/events'+(qs||''),{headers:{'Authorization':'Bearer '+token}});
+    if(r.status===401){localStorage.removeItem(TOKEN_KEY);token='';showLogin('Token ungültig.');throw new Error('401');}
+    return r.json();
+  }
+  async function loadFunnel(){
+    funnelLoading=true;
+    var days=($('fnDays')&&$('fnDays').value)||'90';
+    try{funnelData=await apiEvents('?days='+days);}catch(e){if(e.message!=='401')funnelData={ok:false};}
+    funnelLoading=false;
+    if(tab==='funnel')paintFunnel();
+  }
+  function renderFunnel(){
+    if(!funnelData){$('funnelWrap').innerHTML='<div class="empty">Lade Funnel-Daten …</div>';if(!funnelLoading)loadFunnel();return;}
+    paintFunnel();
+  }
+  function pctW(n,top){return Math.max(1.5,Math.min(100,top?(n/top*100):0)).toFixed(1);}
+  function convPct(n,prev){return prev>0?Math.round(n/prev*100):0;}
+  function paintFunnel(){
+    var d=funnelData;
+    if(!d||d.ok===false){$('funnelWrap').innerHTML='<div class="empty">Funnel-Daten nicht ladbar. Läuft <code>/api/events</code> schon live (deployt)?</div>';return;}
+    if($('fnMeta'))$('fnMeta').textContent=(d.totalEvents||0)+' Events · '+(d.windowDays||90)+' Tage';
+    if(!d.totalEvents){
+      $('funnelWrap').innerHTML='<div class="src-note">Noch keine Funnel-Events im Store. Sobald die neue Tracking-Schicht <b>live (deployt)</b> ist und jemand die Profit-Analyse startet, füllt sich das hier in Echtzeit: Absprung nach jeder Frage, komplette Journey pro Lead, Retargeting-Audiences im Pixel.</div>';
+      return;
+    }
+    var f=d.funnel||{}, qs=d.questions||[];
+    // Stufen: LP → Start → F1..F8 (erreicht) → Gate → Lead → Ergebnis
+    var stages=[{l:'LP · /funnel/diagnose',n:f.DiagnoseView||0,t:''},{l:'Quiz gestartet',n:f.QuizStart||0,t:'step'}];
+    qs.forEach(function(q){stages.push({l:'F'+q.step+' · '+q.label,n:q.reached,t:'step',drop:q.dropAfter});});
+    stages.push({l:'Alle Fragen durch (Gate)',n:f.QuizComplete||0,t:'step'});
+    stages.push({l:'Lead · E-Mail eingetragen',n:f.Lead||0,t:'lead'});
+    stages.push({l:'Ergebnis gesehen',n:f.QuizResult||0,t:''});
+    var top=Math.max(1,stages[0].n||0,Math.max.apply(null,stages.map(function(s){return s.n;})));
+    var bars='';
+    stages.forEach(function(s,i){
+      var prev=i>0?stages[i-1].n:0;
+      var conv=i>0?convPct(s.n,prev):100;
+      bars+='<div class="fn-stage"><div class="fn-bar-row"><div class="fn-bar'+(s.t?' is-'+s.t:'')+'">'+
+        '<span style="width:'+pctW(s.n,top)+'%"></span>'+
+        '<div class="fn-bar-lbl">'+esc(s.l)+'</div>'+
+        '<div class="fn-bar-cnt">'+s.n+(i>0?' · '+conv+'%':'')+'</div>'+
+      '</div></div>';
+      if(typeof s.drop==='number'&&s.n>0){
+        var cls=s.drop>=50?' warn':'';
+        bars+='<div class="fn-drop'+cls+'">↓ '+(s.t==='step'?'Absprung nach dieser Frage: ':'')+'<b>'+s.drop+'%</b></div>';
+      }
+      bars+='</div>';
+    });
+
+    // Pro-Frage-Tabelle
+    var qrows=qs.map(function(q){
+      var cls=q.dropAfter>=40?'drop-hi':(q.dropAfter>=25?'drop-mid':'drop-lo');
+      return '<tr><td><b>F'+q.step+'</b> '+esc(q.label)+'<div class="fn-mini">'+esc(q.qid)+'</div></td>'+
+        '<td class="num">'+q.reached+'</td><td class="num">'+q.answered+'</td><td class="num">'+q.nextReached+'</td>'+
+        '<td class="pct '+cls+'">'+q.dropAfter+'%</td></tr>';
+    }).join('');
+
+    // Seiten + Segmente
+    var pageRows=Object.keys(d.pages||{}).sort(function(a,b){return d.pages[b]-d.pages[a];}).slice(0,12)
+      .map(function(p){return '<tr><td>'+esc(p)+'</td><td class="num">'+d.pages[p]+'</td></tr>';}).join('')||'<tr><td colspan="2" class="sub" style="padding:14px">—</td></tr>';
+    var SEGN={red:'🔴 Profit erodiert',yellow:'🟡 Wachstum stoppt',green:'🟢 Sauber',tier1:'⚪ Pre-Revenue',email:'✉️ E-Mail/Retention'};
+    var segRows=Object.keys(d.segments||{}).sort(function(a,b){return d.segments[b]-d.segments[a];})
+      .map(function(s){return '<tr><td>'+esc(SEGN[s]||s)+'</td><td class="num">'+d.segments[s]+'</td></tr>';}).join('')||'<tr><td colspan="2" class="sub" style="padding:14px">—</td></tr>';
+
+    $('funnelWrap').innerHTML=
+      '<div class="fn-grid">'+
+        '<div class="panel"><div class="panel-h">Quiz-Funnel · Absprung pro Stufe</div><div class="panel-body" style="max-height:none;padding:16px">'+bars+'</div></div>'+
+        '<div>'+
+          '<div class="panel" style="margin-bottom:16px"><div class="panel-h hot">Absprung pro Frage</div>'+
+            '<div class="table-wrap" style="box-shadow:none;border:none"><table class="fn-q-table"><thead><tr><th>Frage</th><th class="num" style="text-align:right">Erreicht</th><th class="num" style="text-align:right">Beantw.</th><th class="num" style="text-align:right">Weiter</th><th style="text-align:right">Absprung</th></tr></thead><tbody>'+qrows+'</tbody></table></div></div>'+
+          '<div class="panel" style="margin-bottom:16px"><div class="panel-h">Ergebnis-Segmente</div><div class="table-wrap" style="box-shadow:none;border:none"><table class="fn-q-table"><tbody>'+segRows+'</tbody></table></div></div>'+
+          '<div class="panel"><div class="panel-h">Seitenaufrufe</div><div class="table-wrap" style="box-shadow:none;border:none"><table class="fn-q-table"><tbody>'+pageRows+'</tbody></table></div></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="src-note">„Erreicht" = eindeutige Sessions, die diese Frage gesehen haben. „Weiter" = davon zur nächsten Frage. „Absprung" = wie viele danach abgesprungen sind. Zahlen sind <b>entdoppelt pro Session</b> (bb_sid), unabhängig von GA4. Retargeting-Audiences baust du in Meta auf den gleichnamigen Pixel-Events.</div>';
+  }
+
   // ---- Drawer ----
-  function openDrawer(id){openId=id;renderDrawer();$('overlay').style.display='block';$('drawer').style.display='block';}
+  function openDrawer(id){openId=id;renderDrawer();$('overlay').style.display='block';$('drawer').style.display='block';loadJourney();}
   function closeDrawer(){openId=null;$('overlay').style.display='none';$('drawer').style.display='none';}
+  // Lädt die komplette Klick-Journey eines Leads (verknüpft via bb_sid).
+  async function loadJourney(){
+    var sec=$('dwJourneySec'); if(!sec)return;
+    var l=leads.find(function(x){return x.id===openId;});
+    if(!l||!l.sid)return;                    // Alt-Leads ohne sid → keine Journey
+    var NM={DiagnoseView:'LP betreten',QuizStart:'Quiz gestartet',QuizStep:'Frage erreicht',QuizAnswer:'Frage beantwortet',QuizComplete:'Alle Fragen durch',Lead:'E-Mail eingetragen',QuizResult:'Ergebnis gesehen',PageView:'Seitenaufruf'};
+    try{
+      var d=await apiEvents('?sid='+encodeURIComponent(l.sid));
+      var j=(d&&d.journey)||[];
+      if(!j.length||openId!==l.id)return;
+      var html=j.map(function(e){
+        var p=e.params||{},detail='';
+        if(e.name==='QuizStep')detail='F'+(p.step||'?')+' · '+(p.question_id||'');
+        else if(e.name==='QuizAnswer')detail='F'+(p.step||'?')+': '+(p.answer||'');
+        else if(e.name==='QuizResult')detail='Segment: '+(p.segment||'');
+        else detail=e.path||'';
+        return '<div class="jrn-item'+(e.name==='Lead'?' is-lead':'')+'"><div class="jt">'+fmtDate(e.ts)+'</div><div class="jn">'+esc(NM[e.name]||e.name)+'</div><div class="jp">'+esc(detail)+'</div></div>';
+      }).join('');
+      $('dwJourney').innerHTML='<div class="jrn">'+html+'</div>';
+      sec.style.display='block';
+    }catch(e){}
+  }
   function renderDrawer(){
     var l=leads.find(function(x){return x.id===openId;});if(!l){closeDrawer();return;}
     var seg=SEG[l.segment];var qual=QUAL[l.qualification];
@@ -593,6 +744,7 @@ tr:hover td{background:#fafbff}
         '</div>'+
         '<div class="dw-sec"><h3>Kontakt & Qualifikation</h3>'+kv+'</div>'+
         answers+
+        '<div class="dw-sec" id="dwJourneySec" style="display:none"><h3>Funnel-Journey</h3><div id="dwJourney"></div></div>'+
         '<div class="dw-sec"><h3>Aktivität</h3>'+
           '<div class="note-input"><textarea id="noteInput" placeholder="Notiz / Call-Ergebnis …"></textarea><button class="note-add" data-note>+</button></div>'+
           log+
@@ -641,6 +793,8 @@ tr:hover td{background:#fafbff}
 
   ['search','fSegment','fStatus','fMagnet'].forEach(function(id){$(id).addEventListener('input',renderList);$(id).addEventListener('change',renderList);});
   $('refreshBtn').onclick=load;
+  $('fnRefresh').onclick=loadFunnel;
+  $('fnDays').addEventListener('change',loadFunnel);
   $('logoutBtn').onclick=function(){localStorage.removeItem(TOKEN_KEY);token='';showLogin('');};
   $('exportBtn').onclick=function(){
     var cols=['createdAt','email','name','brand','magnet','status','dealValue','nextAction','nextFollowUp','disposition','lostReason','segment','tier','profitScore','growthScore','qualification','utmSource','utmCampaign'];

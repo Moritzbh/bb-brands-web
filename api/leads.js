@@ -173,6 +173,9 @@ function isUrl(s) {
 // Wird von allen 3 Magnet-Handlern gleich benutzt, damit jeder Lead Herkunft hat.
 function extractAttribution(body) {
   return {
+    // First-Party Funnel-Session-ID (bb_sid) → verknüpft den Lead mit seiner
+    // kompletten Klick-Journey im Event-Store (/api/events?sid=…).
+    sid: str(body.sid, 60),
     utmSource: str(body.utm_source, 120),
     utmMedium: str(body.utm_medium, 120),
     utmCampaign: str(body.utm_campaign, 120),
