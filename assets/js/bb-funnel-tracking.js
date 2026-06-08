@@ -87,6 +87,9 @@
 
   // ---------- Auto-Fire je Seite ----------
   var p = location.pathname;
+  // Generischer Seitenaufruf (nur First-Party-Store → füllt das „Seitenaufrufe"-
+  // Panel + Basis für Bounce; NICHT an den Pixel, der hat seinen eigenen PageView).
+  store('PageView', {});
   if (/\/funnel\/diagnose\/?$/.test(p)) {
     // Landing der Profit-Analyse betreten → Retargeting-Audience "LP besucht"
     fire('DiagnoseView', {});
