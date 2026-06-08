@@ -181,6 +181,32 @@ tr:hover td{background:#fafbff}
 .jrn-item .jt{font-size:11px;color:var(--muted)}
 .jrn-item .jn{font-size:12.5px;font-weight:700}
 .jrn-item .jp{font-size:11.5px;color:var(--muted)}
+/* Media-Buyer / Kampagnen-Scorecard */
+.mb-controls{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.mb-controls select{font-size:13px;padding:8px 11px;border:1px solid var(--line);border-radius:9px;font-family:inherit;background:#fff;color:var(--ink)}
+.mb-controls .fn-hint{font-size:12px;color:var(--muted)}
+.mb-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:760px){.mb-kpis{grid-template-columns:1fr 1fr}}
+.mb-tablewrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto;box-shadow:0 6px 24px rgba(10,24,80,.05)}
+.mb-table{width:100%;border-collapse:collapse;font-size:12.5px;white-space:nowrap}
+.mb-table th{text-align:right;padding:11px 12px;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+.mb-table th:first-child,.mb-table td:first-child{text-align:left}
+.mb-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.mb-table tr:last-child td{border-bottom:none}
+.mb-table tr:hover td{background:#fafbff}
+.mb-camp{font-weight:700;color:var(--ink)}
+.mb-camp .src{font-size:11px;color:var(--muted);font-weight:500}
+.tiermix{display:inline-flex;height:9px;border-radius:5px;overflow:hidden;width:96px;background:#eef0f6;vertical-align:middle}
+.tiermix i{display:block;height:100%}
+.tm1{background:#f0a830}.tm2{background:#1d4ed8}.tm3{background:#16a34a}.tmu{background:#cbd2e0}
+.mb-q{font-weight:800}.mb-q.good{color:var(--green)}.mb-q.mid{color:var(--amber)}.mb-q.bad{color:var(--red)}
+.verdict{font-weight:800;font-size:11px;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.v-scale{color:#15803d;background:#dcfce7}.v-watch{color:#a16207;background:#fef3c7}.v-kill{color:#b91c1c;background:#fde8e8}
+.mb-spend{width:78px;font-size:12px;padding:5px 7px;border:1px solid var(--line);border-radius:7px;font-family:inherit;text-align:right;color:var(--ink)}
+.mb-spend:focus{outline:none;border-color:var(--orange)}
+.mb-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:10px}
+.mb-legend span{display:inline-flex;align-items:center;gap:6px}
+.mb-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 
 @media(max-width:900px){.cockpit{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.wrap{padding:0 12px}#drawer{width:100vw;max-width:100vw}}
@@ -219,6 +245,7 @@ tr:hover td{background:#fafbff}
       <button class="tab" data-tab="list">📑 Liste</button>
       <button class="tab" data-tab="sources">📊 Quellen</button>
       <button class="tab" data-tab="funnel">🔬 Funnel</button>
+      <button class="tab" data-tab="mediabuyer">📈 Media Buyer</button>
     </div>
 
     <!-- COCKPIT -->
@@ -298,6 +325,22 @@ tr:hover td{background:#fafbff}
         <span class="fn-hint" id="fnMeta"></span>
       </div>
       <div id="funnelWrap"></div>
+    </div>
+
+    <!-- MEDIA BUYER / KAMPAGNEN-SCORECARD -->
+    <div class="view" id="view-mediabuyer">
+      <div class="mb-controls">
+        <label class="fn-hint">Gruppieren nach</label>
+        <select id="mbGroup">
+          <option value="utmCampaign">Kampagne</option>
+          <option value="utmContent">Creative</option>
+          <option value="utmSource">Quelle</option>
+        </select>
+        <button class="btn" id="mbRefresh">↻ Laden</button>
+        <span class="fn-hint" id="mbMeta"></span>
+      </div>
+      <div class="mb-kpis" id="mbKpis"></div>
+      <div id="mbWrap"></div>
     </div>
   </div>
 </div>
@@ -406,7 +449,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -697,6 +740,99 @@ tr:hover td{background:#fafbff}
       '<div class="src-note">„Erreicht" = eindeutige Sessions, die diese Frage gesehen haben. „Weiter" = davon zur nächsten Frage. „Absprung" = wie viele danach abgesprungen sind. Zahlen sind <b>entdoppelt pro Session</b> (bb_sid), unabhängig von GA4. Retargeting-Audiences baust du in Meta auf den gleichnamigen Pixel-Events.</div>';
   }
 
+  // ---- Media Buyer / Kampagnen-Scorecard ----
+  var mbCampaigns=null, mbLoading=false;
+  var SMAP={utmCampaign:'cmp',utmContent:'cnt',utmSource:'src'};
+  async function loadMb(){
+    mbLoading=true;
+    try{var d=await apiEvents('?days=365');mbCampaigns=(d&&d.campaigns)||[];}catch(e){if(e.message!=='401')mbCampaigns=[];}
+    mbLoading=false;
+    if(tab==='mediabuyer')renderMediaBuyer();
+  }
+  function mbIsQ(l){return (l.segment==='red'||l.segment==='yellow')&&(l.qualification==='hot'||l.qualification==='warm');}
+  function mbSpendKey(field,key){return 'bb_mb_spend:'+field+':'+key;}
+  function mbSpend(field,key){var v=parseFloat(localStorage.getItem(mbSpendKey(field,key))||'');return isFinite(v)?v:0;}
+  function startsFor(field,key){
+    var k=SMAP[field], match=(key==='(ohne / direkt)'?'':key), s=0;
+    (mbCampaigns||[]).forEach(function(c){if((c[k]||'')===match)s+=c.start||0;});
+    return s;
+  }
+  function tierBar(g){var n=g.leads||1;function w(x){return (x/n*100).toFixed(1);}
+    return '<span class="tiermix" title="Tier1 '+g.t1+' · Tier2 '+g.t2+' · Tier3 '+g.t3+' · unbek. '+g.tu+'">'+
+      '<i class="tm1" style="width:'+w(g.t1)+'%"></i><i class="tm2" style="width:'+w(g.t2)+'%"></i>'+
+      '<i class="tm3" style="width:'+w(g.t3)+'%"></i><i class="tmu" style="width:'+w(g.tu)+'%"></i></span>';
+  }
+  function mbVerdict(qRate,t1Share,leads){
+    if(leads<3)return ['Zu wenig Daten','v-watch'];
+    if(qRate>=0.4&&t1Share<=0.25)return ['🟢 Skalieren','v-scale'];
+    if(t1Share>0.5||qRate<0.1)return ['🔴 Killen-Kandidat','v-kill'];
+    return ['🟡 Beobachten','v-watch'];
+  }
+  function renderMediaBuyer(){
+    if(mbCampaigns===null){$('mbWrap').innerHTML='<div class="empty">Lade Kampagnen-Daten …</div>';if(!mbLoading)loadMb();return;}
+    var field=($('mbGroup')&&$('mbGroup').value)||'utmCampaign';
+    var groups={};
+    leads.forEach(function(l){
+      var key=String(l[field]||'').trim()||'(ohne / direkt)';
+      var g=groups[key]||(groups[key]={leads:0,q:0,t1:0,t2:0,t3:0,tu:0,pain:0,painN:0});
+      g.leads++; if(mbIsQ(l))g.q++;
+      var t=Number(l.tier); if(t===1)g.t1++;else if(t===2)g.t2++;else if(t===3)g.t3++;else g.tu++;
+      if(l.profitScore!=null&&isFinite(Number(l.profitScore))){g.pain+=Number(l.profitScore);g.painN++;}
+    });
+    var rows=Object.keys(groups).map(function(k){groups[k].key=k;return groups[k];}).sort(function(a,b){return b.leads-a.leads;});
+    var totLeads=0,totQ=0,totSpend=0,totStarts=0;
+    var body=rows.map(function(g){
+      var starts=startsFor(field,g.key);
+      var cr=starts>0?Math.round(g.leads/starts*100):null;
+      var qRate=g.leads?g.q/g.leads:0;
+      var tierKnown=g.t1+g.t2+g.t3;
+      var t1Share=tierKnown?g.t1/tierKnown:0;
+      var pain=g.painN?(g.pain/g.painN):null;
+      var spend=mbSpend(field,g.key);
+      var cpl=spend>0&&g.leads?spend/g.leads:null;
+      var cpql=spend>0&&g.q?spend/g.q:null;
+      var v=mbVerdict(qRate,t1Share,g.leads);
+      var qCls=qRate>=0.4?'good':(qRate>=0.15?'mid':'bad');
+      totLeads+=g.leads;totQ+=g.q;totSpend+=spend;totStarts+=starts;
+      var name=g.key==='(ohne / direkt)'?'<span class="src">(ohne UTM / direkt)</span>':esc(g.key);
+      return '<tr>'+
+        '<td><span class="mb-camp">'+name+'</span></td>'+
+        '<td>'+(starts||'<span class="sub">—</span>')+'</td>'+
+        '<td>'+g.leads+'</td>'+
+        '<td>'+(cr!=null?cr+'%':'<span class="sub">—</span>')+'</td>'+
+        '<td>'+g.q+'</td>'+
+        '<td><span class="mb-q '+qCls+'">'+Math.round(qRate*100)+'%</span></td>'+
+        '<td>'+tierBar(g)+' <span class="sub">'+Math.round(t1Share*100)+'% T1</span></td>'+
+        '<td>'+(pain!=null?pain.toFixed(1):'<span class="sub">—</span>')+'</td>'+
+        '<td><input class="mb-spend" type="number" min="0" step="50" placeholder="€" value="'+(spend||'')+'" data-spend="'+esc(field+'|'+g.key)+'"></td>'+
+        '<td>'+(cpl!=null?money(Math.round(cpl)):'<span class="sub">—</span>')+'</td>'+
+        '<td>'+(cpql!=null?money(Math.round(cpql)):'<span class="sub">—</span>')+'</td>'+
+        '<td><span class="verdict '+v[1]+'">'+v[0]+'</span></td>'+
+      '</tr>';
+    }).join('');
+    if(!rows.length)body='<tr><td colspan="12" style="text-align:center;color:var(--muted);padding:34px">Noch keine Leads.</td></tr>';
+
+    var blendedCpl=totSpend>0&&totLeads?money(Math.round(totSpend/totLeads)):'—';
+    var blendedCpql=totSpend>0&&totQ?money(Math.round(totSpend/totQ)):'—';
+    if($('mbMeta'))$('mbMeta').textContent=rows.length+' Gruppen · '+totLeads+' Leads';
+    $('mbKpis').innerHTML=
+      kpi(totLeads,'Leads gesamt')+
+      kpi(totQ+' <span style="font-size:13px;color:var(--muted)">·'+(totLeads?Math.round(totQ/totLeads*100):0)+'%</span>','Qualified (ICP+Budget)')+
+      kpi(blendedCpl,'Ø CPL (gesamt)')+
+      kpi(blendedCpql,'Ø Cost / Qualified');
+
+    $('mbWrap').innerHTML=
+      '<div class="src-note"><b>Traffic-Qualität pro '+(field==='utmCampaign'?'Kampagne':field==='utmContent'?'Creative':'Quelle')+'.</b> '+
+      '„Qualified" = ICP-Segment (rot/gelb) + Budget (hot/warm). „T1" = Anteil Pre-Revenue/Tier-1 (Junk-Indikator). '+
+      '„Pain Ø" = Profit-Score (höher = mehr Probleme = besserer Fit für uns). Spend eintragen → CPL/CPQL rechnet automatisch. '+
+      'Starts kommen aus dem Event-Store, brauchen UTMs in den Ad-URLs.</div>'+
+      '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
+        '<th>'+(field==='utmCampaign'?'Kampagne':field==='utmContent'?'Creative':'Quelle')+'</th>'+
+        '<th>Starts</th><th>Leads</th><th>CR</th><th>Qual.</th><th>Q-Rate</th><th>Tier-Mix</th><th>Pain Ø</th><th>Spend</th><th>CPL</th><th>CPQL</th><th>Bewertung</th>'+
+      '</tr></thead><tbody>'+body+'</tbody></table></div>'+
+      '<div class="mb-legend"><span><i class="tm1"></i>Tier 1 (Pre-Rev)</span><span><i class="tm2"></i>Tier 2</span><span><i class="tm3"></i>Tier 3</span><span><i class="tmu"></i>unbekannt</span></div>';
+  }
+
   // ---- Drawer ----
   function openDrawer(id){openId=id;renderDrawer();$('overlay').style.display='block';$('drawer').style.display='block';loadJourney();}
   function closeDrawer(){openId=null;$('overlay').style.display='none';$('drawer').style.display='none';}
@@ -822,6 +958,17 @@ tr:hover td{background:#fafbff}
   $('fnRefresh').onclick=loadFunnel;
   $('fnDays').addEventListener('change',loadFunnel);
   ['fnSource','fnCampaign','fnContent'].forEach(function(id){var el=$(id);if(el)el.addEventListener('change',loadFunnel);});
+  $('mbRefresh').onclick=loadMb;
+  $('mbGroup').addEventListener('change',renderMediaBuyer);
+  // Spend-Eingabe (Media-Buyer-Tab): speichern + CPL/CPQL neu rechnen
+  document.addEventListener('change',function(e){
+    var el=e.target; if(!el.classList||!el.classList.contains('mb-spend'))return;
+    var raw=el.getAttribute('data-spend')||'',i=raw.indexOf('|');
+    var field=raw.slice(0,i),key=raw.slice(i+1),val=el.value.trim();
+    if(val==='')localStorage.removeItem(mbSpendKey(field,key));
+    else localStorage.setItem(mbSpendKey(field,key),String(parseFloat(val)||0));
+    if(tab==='mediabuyer')renderMediaBuyer();
+  });
   $('logoutBtn').onclick=function(){localStorage.removeItem(TOKEN_KEY);token='';showLogin('');};
   $('exportBtn').onclick=function(){
     var cols=['createdAt','email','name','brand','magnet','status','dealValue','nextAction','nextFollowUp','disposition','lostReason','segment','tier','profitScore','growthScore','qualification','utmSource','utmCampaign'];
