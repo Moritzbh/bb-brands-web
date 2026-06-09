@@ -195,6 +195,7 @@ module.exports = async function handler(req, res) {
           let e; try { e = JSON.parse(r); } catch { continue; }
           if (!e || !e.name || e.name.indexOf('Pitch') !== 0) continue;
           const slug = (e.params && e.params.prospect) || (e.path || '').split('/').filter(Boolean)[0] || '?';
+          if (slug.indexOf('__') === 0) continue;   // Test-/Platzhalter-Slugs ausblenden
           const p = rec(slug);
           if (e.name === 'PitchGenerated') {
             p.generated = true;
