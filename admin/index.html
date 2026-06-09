@@ -859,17 +859,23 @@ tr:hover td{background:#fafbff}
     var opened=list.filter(function(p){return p.opened;}).length;
     var watched=list.filter(function(p){return p.videoPct>=50;}).length;
     var ctas=list.reduce(function(a,p){return a+(p.cta>0?1:0);},0);
+    var followups=list.filter(function(p){return p.opened&&p.cta===0&&daysSince(p.lastView)>=2;}).length;
     if($('obMeta'))$('obMeta').textContent=list.length+' Prospects';
     $('obKpis').innerHTML=
       kpi(list.length,'Pitches gesamt')+
       kpi(opened+' <span style="font-size:13px;color:var(--muted)">·'+(list.length?Math.round(opened/list.length*100):0)+'%</span>','Geöffnet')+
       kpi(watched,'Video ≥50% gesehen')+
-      kpi(ctas,'CTA geklickt');
+      kpi(followups,'Nachfassen fällig');
     var rows=list.map(function(p){
       var name=esc(p.company||p.prospect);
       var status=p.opened?'<span class="verdict v-scale">🟢 Geöffnet</span>':(p.generated?'<span class="verdict v-watch">⚪ Noch nicht</span>':'<span class="sub">—</span>');
       var vid=p.videoPlay?obBar(p.videoPct):'<span class="sub">—</span>';
       var cta=p.cta>0?'<span class="mb-q good">✓ '+p.cta+'</span>':'<span class="sub">—</span>';
+      var fu='<span class="sub">—</span>';
+      if(p.opened){
+        if(p.cta>0){fu='<span class="sub">in Bewegung</span>';}
+        else{var dd=daysSince(p.lastView),hot=p.videoPct>=50;fu='<span class="'+((hot||dd>=3)?'over-txt':'sub')+'">'+(hot?'🔥 ':'')+dd+' T kalt</span>';}
+      }
       var url='https://videos.bb-brands.de/'+encodeURIComponent(p.prospect)+'/';
       return '<tr>'+
         '<td><span class="mb-camp">'+name+'</span><div class="src">'+esc(p.prospect)+'</div></td>'+
@@ -877,16 +883,17 @@ tr:hover td{background:#fafbff}
         '<td>'+(p.views||0)+(p.visitors>1?' <span class="sub">/'+p.visitors+' Pers.</span>':'')+'</td>'+
         '<td style="text-align:left">'+vid+'</td>'+
         '<td>'+cta+'</td>'+
+        '<td>'+fu+'</td>'+
         '<td class="sub">'+(p.firstView?fmtDate(p.firstView):'—')+'</td>'+
         '<td class="sub">'+(p.lastView?fmtDate(p.lastView):'—')+'</td>'+
         '<td><a href="'+url+'" target="_blank" rel="noopener">↗</a></td>'+
       '</tr>';
     }).join('');
-    if(!list.length)rows='<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
+    if(!list.length)rows='<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
     $('obWrap').innerHTML=
       '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). Wer hat seine Seite geöffnet, wie weit das Founder-Video gesehen, CTA geklickt. „Noch nicht" = Seite angelegt, aber noch nicht geöffnet. Heiß = geöffnet + Video ≥50% + noch kein Call → sofort nachfassen.</div>'+
       '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
-        '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
+        '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th>Nachfassen</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
       '</tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
 
