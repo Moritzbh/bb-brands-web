@@ -289,6 +289,7 @@ tr:hover td{background:#fafbff}
         </select>
         <select id="fStatus"><option value="">Alle Stufen</option></select>
         <select id="fMagnet"><option value="">Alle Quellen</option></select>
+        <select id="fType"><option value="">Leads + Kontakte</option><option value="lead">Nur Leads</option><option value="contact">Nur Kontakte</option></select>
       </div>
       <div class="table-wrap">
         <table>
@@ -389,7 +390,8 @@ tr:hover td{background:#fafbff}
   var LOST=['Preis','Timing','Kein Budget','Ghosting','Wettbewerb','Nicht ICP','Sonstiges'];
   var SEG={tier1:['⚪ Pre-Revenue','seg-tier1'],red:['🔴 Profit erodiert','seg-red'],yellow:['🟡 Wachstum stoppt','seg-yellow'],green:['🟢 Sauber','seg-green']};
   var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
-  var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check'};
+  var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt'};
+  function isContact(l){return l.type==='contact';}
 
   // Traffic-Kanäle (Lead-Ebene). Reihenfolge = Anzeigereihenfolge.
   var CHANNELS=[
@@ -574,8 +576,10 @@ tr:hover td{background:#fafbff}
   // ---- List ----
   function filtered(){
     var q=$('search').value.trim().toLowerCase();
-    var fs=$('fSegment').value,fst=$('fStatus').value,fm=$('fMagnet').value;
+    var fs=$('fSegment').value,fst=$('fStatus').value,fm=$('fMagnet').value,ftyp=$('fType').value;
     return leads.filter(function(l){
+      if(ftyp==='contact'&&!isContact(l))return false;
+      if(ftyp==='lead'&&isContact(l))return false;
       if(fs&&l.segment!==fs)return false;
       if(fst&&stageOf(l)!==fst)return false;
       if(fm&&l.magnet!==fm)return false;
@@ -608,6 +612,7 @@ tr:hover td{background:#fafbff}
     var stats={}; CHANNELS.forEach(function(c){stats[c[0]]={leads:0,calls:0,won:0,pipe:0};});
     var totLeads=0,metaLeads=0,metaCalls=0,directOrg=0;
     leads.forEach(function(l){
+      if(isContact(l))return;   // Import-Kontakte sind keine Lead-Quelle
       var ch=channelOf(l); if(!stats[ch])ch='direct';
       var s=stats[ch]; s.leads++; totLeads++;
       if(hasCall(l))s.calls++;
@@ -784,6 +789,7 @@ tr:hover td{background:#fafbff}
     var field=($('mbGroup')&&$('mbGroup').value)||'utmCampaign';
     var groups={};
     leads.forEach(function(l){
+      if(isContact(l))return;   // Import-Kontakte zählen nicht als Kampagnen-Lead
       var key=String(l[field]||'').trim()||'(ohne / direkt)';
       var g=groups[key]||(groups[key]={leads:0,q:0,t1:0,t2:0,t3:0,tu:0,pain:0,painN:0});
       g.leads++; if(mbIsQ(l))g.q++;
@@ -1017,7 +1023,7 @@ tr:hover td{background:#fafbff}
     api('PATCH',patch).then(function(r){if(r&&r.lead){updateLocal(r.lead);render();if(field==='status')renderDrawer();}}).catch(function(){});
   });
 
-  ['search','fSegment','fStatus','fMagnet'].forEach(function(id){$(id).addEventListener('input',renderList);$(id).addEventListener('change',renderList);});
+  ['search','fSegment','fStatus','fMagnet','fType'].forEach(function(id){$(id).addEventListener('input',renderList);$(id).addEventListener('change',renderList);});
   $('refreshBtn').onclick=load;
   $('fnRefresh').onclick=loadFunnel;
   $('fnDays').addEventListener('change',loadFunnel);

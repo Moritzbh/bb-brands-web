@@ -307,6 +307,43 @@ module.exports = async function handler(req, res) {
       }
 
       const magnet = str(body.magnet, 40) || 'style-guide';
+
+      // ========== KONTAKT-IMPORT (eigener Typ, KEIN Sales-Lead) ==========
+      // Bulk-Import aus Kalender / Klaviyo / Gmail. Bewusst STILL: kein Push,
+      // kein CAPI, kein Klaviyo-Sync. Geparkt im 'nurture'-Bucket, type='contact'
+      // → taucht NICHT in der heißen Pipeline auf. Dedup reichert bestehende
+      // (echte) Leads nur an, stuft sie nie herab.
+      if (magnet === 'contact') {
+        const email = str(body.email, 200).toLowerCase();
+        if (!email || !isEmail(email)) return jsonResponse(res, 400, { ok: false, error: 'invalid email' });
+        const name = str(body.name, 120);
+        const company = str(body.company || body.brand, 160);
+        const source = str(body.source, 40) || 'import';
+        const note = str(body.note, 300);
+        const now = new Date().toISOString();
+        const existing = await findLeadByEmail(email);
+        if (existing) {
+          const rec = existing.record;
+          rec.name = rec.name || name;
+          rec.brand = rec.brand || company;
+          rec.importSources = Array.from(new Set([...(rec.importSources || []), source]));
+          if (note) { rec.activity = rec.activity || []; rec.activity.push({ ts: now, text: 'Import (' + source + '): ' + note }); }
+          rec.updatedAt = now;
+          await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          return jsonResponse(res, 200, { ok: true, id: existing.id, deduped: true });
+        }
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const record = {
+          id, email, name, brand: company,
+          magnet: 'contact', type: 'contact', source, importSources: [source],
+          status: 'nurture', consentNewsletter: false,
+          activity: note ? [{ ts: now, text: 'Importiert (' + source + '): ' + note }] : [],
+          createdAt: now, updatedAt: now,
+        };
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        return jsonResponse(res, 200, { ok: true, id });
+      }
+
       const isWhatsAppFunnel = magnet === 'whatsapp-chat';
       const isErstgespraech = magnet === 'erstgespraech';
       const isQuizDiagnose = magnet === 'quiz-diagnose';
