@@ -132,6 +132,14 @@ module.exports = async function handler(req, res) {
       if (!name || !ALLOWED.has(name) || !sid) {
         return jsonResponse(res, 400, { ok: false, error: 'invalid event' });
       }
+      // Bot-/Scanner-Filter: E-Mail-Security-Gateways & Link-Preview-Bots öffnen Pitch-Links
+      // automatisch (Proofpoint/SafeLinks/Mimecast/Slackbot …) → würden falsche "geöffnet" erzeugen.
+      // Solche Requests gar nicht erst speichern. Echte Menschen (auch Support-Mitarbeiter) kommen durch.
+      const ua = (req.headers['user-agent'] || '').toLowerCase();
+      const BOT_RE = /bot\b|crawl|spider|preview|scan|monitor|proofpoint|mimecast|barracuda|safelinks|urldefense|slackbot|facebookexternalhit|whatsapp|telegram|linkedinbot|twitterbot|discordbot|curl|wget|python-requests|headless|phantom|googlebot|bingbot|google-?image|googleimageproxy|outlook|fetch\b/i;
+      if (!ua || BOT_RE.test(ua)) {
+        return jsonResponse(res, 200, { ok: true, skipped: 'bot' });
+      }
       // Params kompakt + sicher (max 12 Felder, kurze Strings/Zahlen)
       const params = {};
       if (body.params && typeof body.params === 'object') {

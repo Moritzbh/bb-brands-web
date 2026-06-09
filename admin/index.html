@@ -862,25 +862,27 @@ tr:hover td{background:#fafbff}
     if(!obData){$('obWrap').innerHTML='<div class="empty">Lade Pitch-Daten …</div>';if(!obLoading)loadOb();return;}
     if(obData.ok===false){$('obWrap').innerHTML='<div class="empty">Pitch-Daten nicht ladbar. Läuft <code>/api/events</code> mit Pitch-Events (deployt)?</div>';return;}
     var list=obData.prospects||[];
+    function realInt(p){return p.videoPlay||p.videoPct>0||p.cta>0;}  // echtes Interesse, nicht nur Support/Scanner
     var opened=list.filter(function(p){return p.opened;}).length;
+    var interested=list.filter(realInt).length;
     var watched=list.filter(function(p){return p.videoPct>=50;}).length;
-    var ctas=list.reduce(function(a,p){return a+(p.cta>0?1:0);},0);
-    var followups=list.filter(function(p){return p.opened&&p.cta===0&&daysSince(p.lastView)>=2;}).length;
+    var followups=list.filter(function(p){return realInt(p)&&p.cta===0&&daysSince(p.lastView)>=2;}).length;
     if($('obMeta'))$('obMeta').textContent=list.length+' Prospects';
     $('obKpis').innerHTML=
       kpi(list.length,'Pitches gesamt')+
-      kpi(opened+' <span style="font-size:13px;color:var(--muted)">·'+(list.length?Math.round(opened/list.length*100):0)+'%</span>','Geöffnet')+
+      kpi(interested,'Echtes Interesse <span style="font-size:13px;color:var(--muted)">(Video gestartet)</span>')+
       kpi(watched,'Video ≥50% gesehen')+
       kpi(followups,'Nachfassen fällig');
     var rows=list.map(function(p){
       var name=esc(p.company||p.prospect);
-      var status=p.opened?'<span class="verdict v-scale">🟢 Geöffnet</span>':(p.generated?'<span class="verdict v-watch">⚪ Noch nicht</span>':'<span class="sub">—</span>');
+      var ri=realInt(p);
+      var status=ri?'<span class="verdict v-scale">🟢 Echtes Interesse</span>':(p.opened?'<span class="verdict v-watch">👀 Geöffnet (evtl. Support)</span>':(p.generated?'<span class="sub">⚪ Noch nicht</span>':'<span class="sub">—</span>'));
       var vid=p.videoPlay?obBar(p.videoPct):'<span class="sub">—</span>';
       var cta=p.cta>0?'<span class="mb-q good">✓ '+p.cta+'</span>':'<span class="sub">—</span>';
       var fu='<span class="sub">—</span>';
-      if(p.opened){
+      if(ri){
         if(p.cta>0){fu='<span class="sub">in Bewegung</span>';}
-        else{var dd=daysSince(p.lastView),hot=p.videoPct>=50;fu='<span class="'+((hot||dd>=3)?'over-txt':'sub')+'">'+(hot?'🔥 ':'')+dd+' T kalt</span>';}
+        else{var dd=daysSince(p.lastView),hot=p.videoPct>=50;fu='<span class="'+(hot?'over-txt':'sub')+'">'+(hot?'🔥 ':'')+dd+' T kalt</span>';}
       }
       var url='https://videos.bb-brands.de/'+encodeURIComponent(p.prospect)+'/';
       return '<tr>'+
@@ -897,7 +899,7 @@ tr:hover td{background:#fafbff}
     }).join('');
     if(!list.length)rows='<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
     $('obWrap').innerHTML=
-      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). Wer hat seine Seite geöffnet, wie weit das Founder-Video gesehen, CTA geklickt. „Noch nicht" = Seite angelegt, aber noch nicht geöffnet. Heiß = geöffnet + Video ≥50% + noch kein Call → sofort nachfassen.</div>'+
+      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). 🟢 Echtes Interesse = Video gestartet (nicht nur geöffnet). 👀 Geöffnet (evtl. Support) = Seite aufgerufen, aber Video nie gestartet, oft nur Kundensupport. Bekannte Bots/Scanner werden serverseitig herausgefiltert. Heiß = Video ≥50% + noch kein Call → sofort nachfassen.</div>'+
       '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
         '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th>Nachfassen</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
       '</tr></thead><tbody>'+rows+'</tbody></table></div>';
