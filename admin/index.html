@@ -246,6 +246,7 @@ tr:hover td{background:#fafbff}
       <button class="tab" data-tab="sources">📊 Quellen</button>
       <button class="tab" data-tab="funnel">🔬 Funnel</button>
       <button class="tab" data-tab="mediabuyer">📈 Media Buyer</button>
+      <button class="tab" data-tab="outbound">📹 Outbound</button>
     </div>
 
     <!-- COCKPIT -->
@@ -341,6 +342,16 @@ tr:hover td{background:#fafbff}
       </div>
       <div class="mb-kpis" id="mbKpis"></div>
       <div id="mbWrap"></div>
+    </div>
+
+    <!-- OUTBOUND / VIDEO-PITCH-TRACKING -->
+    <div class="view" id="view-outbound">
+      <div class="mb-controls">
+        <button class="btn" id="obRefresh">↻ Laden</button>
+        <span class="fn-hint" id="obMeta"></span>
+      </div>
+      <div class="mb-kpis" id="obKpis"></div>
+      <div id="obWrap"></div>
     </div>
   </div>
 </div>
@@ -449,7 +460,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else if(tab==='outbound')renderOutbound();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -833,6 +844,52 @@ tr:hover td{background:#fafbff}
       '<div class="mb-legend"><span><i class="tm1"></i>Tier 1 (Pre-Rev)</span><span><i class="tm2"></i>Tier 2</span><span><i class="tm3"></i>Tier 3</span><span><i class="tmu"></i>unbekannt</span></div>';
   }
 
+  // ---- Outbound / Video-Pitch-Tracking ----
+  var obData=null, obLoading=false;
+  async function loadOb(){
+    obLoading=true;
+    try{obData=await apiEvents('?view=pitch');}catch(e){if(e.message!=='401')obData={ok:false};}
+    obLoading=false; if(tab==='outbound')renderOutbound();
+  }
+  function obBar(pct){var c=pct>=75?'tm3':pct>=50?'tm2':pct>=25?'tm1':'tmu';return '<span class="tiermix" style="width:60px"><i class="'+c+'" style="width:'+pct+'%"></i></span> <span class="sub">'+pct+'%</span>';}
+  function renderOutbound(){
+    if(!obData){$('obWrap').innerHTML='<div class="empty">Lade Pitch-Daten …</div>';if(!obLoading)loadOb();return;}
+    if(obData.ok===false){$('obWrap').innerHTML='<div class="empty">Pitch-Daten nicht ladbar. Läuft <code>/api/events</code> mit Pitch-Events (deployt)?</div>';return;}
+    var list=obData.prospects||[];
+    var opened=list.filter(function(p){return p.opened;}).length;
+    var watched=list.filter(function(p){return p.videoPct>=50;}).length;
+    var ctas=list.reduce(function(a,p){return a+(p.cta>0?1:0);},0);
+    if($('obMeta'))$('obMeta').textContent=list.length+' Prospects';
+    $('obKpis').innerHTML=
+      kpi(list.length,'Pitches gesamt')+
+      kpi(opened+' <span style="font-size:13px;color:var(--muted)">·'+(list.length?Math.round(opened/list.length*100):0)+'%</span>','Geöffnet')+
+      kpi(watched,'Video ≥50% gesehen')+
+      kpi(ctas,'CTA geklickt');
+    var rows=list.map(function(p){
+      var name=esc(p.company||p.prospect);
+      var status=p.opened?'<span class="verdict v-scale">🟢 Geöffnet</span>':(p.generated?'<span class="verdict v-watch">⚪ Noch nicht</span>':'<span class="sub">—</span>');
+      var vid=p.videoPlay?obBar(p.videoPct):'<span class="sub">—</span>';
+      var cta=p.cta>0?'<span class="mb-q good">✓ '+p.cta+'</span>':'<span class="sub">—</span>';
+      var url='https://videos.bb-brands.de/'+encodeURIComponent(p.prospect)+'/';
+      return '<tr>'+
+        '<td><span class="mb-camp">'+name+'</span><div class="src">'+esc(p.prospect)+'</div></td>'+
+        '<td style="text-align:left">'+status+'</td>'+
+        '<td>'+(p.views||0)+(p.visitors>1?' <span class="sub">/'+p.visitors+' Pers.</span>':'')+'</td>'+
+        '<td style="text-align:left">'+vid+'</td>'+
+        '<td>'+cta+'</td>'+
+        '<td class="sub">'+(p.firstView?fmtDate(p.firstView):'—')+'</td>'+
+        '<td class="sub">'+(p.lastView?fmtDate(p.lastView):'—')+'</td>'+
+        '<td><a href="'+url+'" target="_blank" rel="noopener">↗</a></td>'+
+      '</tr>';
+    }).join('');
+    if(!list.length)rows='<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
+    $('obWrap').innerHTML=
+      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). Wer hat seine Seite geöffnet, wie weit das Founder-Video gesehen, CTA geklickt. „Noch nicht" = Seite angelegt, aber noch nicht geöffnet. Heiß = geöffnet + Video ≥50% + noch kein Call → sofort nachfassen.</div>'+
+      '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
+        '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
+      '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }
+
   // ---- Drawer ----
   function openDrawer(id){openId=id;renderDrawer();$('overlay').style.display='block';$('drawer').style.display='block';loadJourney();}
   function closeDrawer(){openId=null;$('overlay').style.display='none';$('drawer').style.display='none';}
@@ -960,6 +1017,7 @@ tr:hover td{background:#fafbff}
   ['fnSource','fnCampaign','fnContent'].forEach(function(id){var el=$(id);if(el)el.addEventListener('change',loadFunnel);});
   $('mbRefresh').onclick=loadMb;
   $('mbGroup').addEventListener('change',renderMediaBuyer);
+  $('obRefresh').onclick=loadOb;
   // Spend-Eingabe (Media-Buyer-Tab): speichern + CPL/CPQL neu rechnen
   document.addEventListener('change',function(e){
     var el=e.target; if(!el.classList||!el.classList.contains('mb-spend'))return;

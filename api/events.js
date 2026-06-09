@@ -102,6 +102,9 @@ async function readJsonBody(req) {
 const ALLOWED = new Set([
   'DiagnoseView', 'QuizStart', 'QuizStep', 'QuizAnswer',
   'QuizComplete', 'Lead', 'QualifiedLead', 'QuizResult', 'PageView',
+  // Outbound Video-Pitch (videos.bb-brands.de/{prospect})
+  'PitchGenerated', 'PitchView', 'PitchVideoPlay', 'PitchVideoProgress',
+  'PitchVideoComplete', 'PitchCTAClick',
 ]);
 
 // Attribution kompakt + sicher übernehmen (src/cmp/cnt/med/trm).
@@ -178,6 +181,40 @@ module.exports = async function handler(req, res) {
         const journey = raw.map((r) => { try { return JSON.parse(r); } catch { return null; } })
           .filter(Boolean).sort((a, b) => a.ts - b.ts);
         return jsonResponse(res, 200, { ok: true, sid, journey });
+      }
+
+      // --- Pitch / Outbound-Engagement (videos.bb-brands.de/{prospect}) ---
+      if (url.searchParams.get('view') === 'pitch') {
+        const raw2 = (await redis('LRANGE', EVENTS_KEY, '0', '-1')) || [];
+        const P = {};
+        const rec = (slug) => P[slug] || (P[slug] = {
+          prospect: slug, company: '', generated: false, generatedAt: 0,
+          views: 0, visitors: new Set(), firstView: 0, lastView: 0, play: 0, videoPct: 0, cta: 0,
+        });
+        for (const r of raw2) {
+          let e; try { e = JSON.parse(r); } catch { continue; }
+          if (!e || !e.name || e.name.indexOf('Pitch') !== 0) continue;
+          const slug = (e.params && e.params.prospect) || (e.path || '').split('/').filter(Boolean)[0] || '?';
+          const p = rec(slug);
+          if (e.name === 'PitchGenerated') {
+            p.generated = true;
+            if (!p.generatedAt || e.ts < p.generatedAt) p.generatedAt = e.ts;
+            if (e.params && e.params.company) p.company = e.params.company;
+          } else if (e.name === 'PitchView') {
+            p.views++; if (e.sid) p.visitors.add(e.sid);
+            if (!p.firstView || e.ts < p.firstView) p.firstView = e.ts;
+            if (e.ts > p.lastView) p.lastView = e.ts;
+          } else if (e.name === 'PitchVideoPlay') { p.play++; }
+          else if (e.name === 'PitchVideoProgress') { const pct = Number(e.params && e.params.pct) || 0; if (pct > p.videoPct) p.videoPct = pct; }
+          else if (e.name === 'PitchVideoComplete') { p.videoPct = 100; }
+          else if (e.name === 'PitchCTAClick') { p.cta++; }
+        }
+        const prospects = Object.values(P).map((p) => ({
+          prospect: p.prospect, company: p.company, generated: p.generated, generatedAt: p.generatedAt,
+          opened: p.views > 0, views: p.views, visitors: p.visitors.size,
+          firstView: p.firstView, lastView: p.lastView, videoPlay: p.play > 0, videoPct: p.videoPct, cta: p.cta,
+        })).sort((a, b) => (Number(b.opened) - Number(a.opened)) || (b.lastView - a.lastView) || (b.generatedAt - a.generatedAt));
+        return jsonResponse(res, 200, { ok: true, prospects });
       }
 
       // --- Aggregate über Zeitfenster (+ optionale Kampagnen-Filter) ---
