@@ -1,0 +1,6 @@
+# Dateien/Ordner, die NICHT mit deployed werden (bleiben aber im Repo erhalten).
+
+# --- Cases-Seite vorübergehend offline (2026-06-10) ---
+# Die Seite /cases ist live nicht erreichbar, die Dateien liegen aber 1:1 erhalten.
+# WIEDER AKTIVIEREN: einfach die nächste Zeile löschen (oder auskommentieren) und neu deployen.
+cases/
