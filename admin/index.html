@@ -866,21 +866,26 @@ tr:hover td{background:#fafbff}
     var opened=list.filter(function(p){return p.opened;}).length;
     var interested=list.filter(realInt).length;
     var watched=list.filter(function(p){return p.videoPct>=50;}).length;
-    var followups=list.filter(function(p){return realInt(p)&&p.cta===0&&daysSince(p.lastView)>=2;}).length;
+    var booked=list.filter(function(p){return p.booked>0;}).length;
+    var bookingOpen=list.filter(function(p){return p.bookingStarted>0&&!p.booked;}).length;
     if($('obMeta'))$('obMeta').textContent=list.length+' Prospects';
     $('obKpis').innerHTML=
       kpi(list.length,'Pitches gesamt')+
       kpi(interested,'Echtes Interesse <span style="font-size:13px;color:var(--muted)">(Video gestartet)</span>')+
       kpi(watched,'Video ≥50% gesehen')+
-      kpi(followups,'Nachfassen fällig');
+      kpi(bookingOpen,'🔥 Fast gebucht <span style="font-size:13px;color:var(--muted)">(Datum gewählt)</span>')+
+      kpi(booked,'Termine gebucht');
     var rows=list.map(function(p){
       var name=esc(p.company||p.prospect);
       var ri=realInt(p);
       var status=ri?'<span class="verdict v-scale">🟢 Echtes Interesse</span>':(p.opened?'<span class="verdict v-watch">👀 Geöffnet (evtl. Support)</span>':(p.generated?'<span class="sub">⚪ Noch nicht</span>':'<span class="sub">—</span>'));
       var vid=p.videoPlay?obBar(p.videoPct):'<span class="sub">—</span>';
       var cta=p.cta>0?'<span class="mb-q good">✓ '+p.cta+'</span>':'<span class="sub">—</span>';
+      var book=p.booked>0?'<span class="mb-q good">✅ gebucht</span>':(p.bookingStarted>0?'<span class="over-txt">📅 Datum gewählt</span>':'<span class="sub">—</span>');
       var fu='<span class="sub">—</span>';
-      if(ri){
+      if(p.booked>0){fu='<span class="sub">Call steht</span>';}
+      else if(p.bookingStarted>0){fu='<span class="over-txt">🔥 fast gebucht</span>';}
+      else if(ri){
         if(p.cta>0){fu='<span class="sub">in Bewegung</span>';}
         else{var dd=daysSince(p.lastView),hot=p.videoPct>=50;fu='<span class="'+(hot?'over-txt':'sub')+'">'+(hot?'🔥 ':'')+dd+' T kalt</span>';}
       }
@@ -891,17 +896,18 @@ tr:hover td{background:#fafbff}
         '<td>'+(p.views||0)+(p.visitors>1?' <span class="sub">/'+p.visitors+' Pers.</span>':'')+'</td>'+
         '<td style="text-align:left">'+vid+'</td>'+
         '<td>'+cta+'</td>'+
+        '<td style="text-align:left">'+book+'</td>'+
         '<td>'+fu+'</td>'+
         '<td class="sub">'+(p.firstView?fmtDate(p.firstView):'—')+'</td>'+
         '<td class="sub">'+(p.lastView?fmtDate(p.lastView):'—')+'</td>'+
         '<td><a href="'+url+'" target="_blank" rel="noopener">↗</a></td>'+
       '</tr>';
     }).join('');
-    if(!list.length)rows='<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
+    if(!list.length)rows='<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
     $('obWrap').innerHTML=
-      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). 🟢 Echtes Interesse = Video gestartet (nicht nur geöffnet). 👀 Geöffnet (evtl. Support) = Seite aufgerufen, aber Video nie gestartet, oft nur Kundensupport. Bekannte Bots/Scanner werden serverseitig herausgefiltert. Heiß = Video ≥50% + noch kein Call → sofort nachfassen.</div>'+
+      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). 🟢 Echtes Interesse = Video gestartet (nicht nur geöffnet). 👀 Geöffnet (evtl. Support) = Seite aufgerufen, aber Video nie gestartet, oft nur Kundensupport. 📅 Datum gewählt = hat im Calendly schon Datum und Uhrzeit angeklickt, aber noch nicht bestätigt → heißester Lead, sofort nachfassen. Bekannte Bots/Scanner werden serverseitig herausgefiltert.</div>'+
       '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
-        '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th>Nachfassen</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
+        '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th style="text-align:left">Termin</th><th>Nachfassen</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
       '</tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
 
