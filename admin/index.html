@@ -874,6 +874,8 @@ tr:hover td{background:#fafbff}
     return 'Hallo '+v+',\n\nich häng mich nicht weiter rein, das war meine letzte Nachricht dazu. Falls mehr Profit aus dem gleichen Traffic bei '+f+' irgendwann Thema wird, das Video und die gratis Profitanalyse bleiben online:\n'+link+'\n\nAlles Gute\nMoritz';
   }
   function copyFU(slug,stage){copyTxt(fuText(slug,stage));}
+  // Inline-onclick in den gerenderten Zeilen läuft im globalen Scope → Funktionen exposen:
+  window.obAction=obAction; window.showFU=showFU; window.copyTxt=copyTxt;
   function showFU(slug,stage){
     var c=obContacts[slug]||{slug:slug}, txt=fuText(slug,stage);
     var m=document.getElementById('fuModal');
