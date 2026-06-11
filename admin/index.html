@@ -868,10 +868,19 @@ tr:hover td{background:#fafbff}
   function obToast(msg){var t=document.getElementById('obToast');if(!t){t=document.createElement('div');t.id='obToast';t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f1320;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity .2s';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';},1600);}
   function copyTxt(txt){navigator.clipboard.writeText(txt).then(function(){obToast('Kopiert ✓');});}
   function fuText(slug,stage){
-    var c=obContacts[slug]||{slug:slug}; var v=c.firstName||''; var f=c.company||slug; var link='https://videos.bb-brands.de/'+slug+'/';
-    if(stage===1)return 'Hallo '+v+',\n\nkurz nach oben geschoben, falls untergegangen. Das Video zu eurer Seite sind 60 Sekunden und du siehst direkt, wo bei euch Profit liegen bleibt:\n'+link+'\n\nBeste Grüße\nMoritz';
-    if(stage===2)return 'Hallo '+v+',\n\nnoch ein Gedanke zu '+f+': in der gratis Profitanalyse gehen wir an euren echten Zahlen durch, wo Profit liegen bleibt, ganz unverbindlich. Falls es dich interessiert, das Video liegt hier:\n'+link+'\n\nBeste Grüße\nMoritz';
-    return 'Hallo '+v+',\n\nich häng mich nicht weiter rein, das war meine letzte Nachricht dazu. Falls mehr Profit aus dem gleichen Traffic bei '+f+' irgendwann Thema wird, das Video und die gratis Profitanalyse bleiben online:\n'+link+'\n\nAlles Gute\nMoritz';
+    var c=obContacts[slug]||{slug:slug}; var v=c.firstName||''; var f=c.company||slug; var h=c.hook||''; var link='https://videos.bb-brands.de/'+slug+'/';
+    if(stage===1){
+      var b1=h?('mir ist die eine Sache bei '+f+' nicht mehr aus dem Kopf gegangen: '+h+'. Genau das hab ich dir in 60 Sekunden aufgenommen, du siehst dabei deine eigene Seite:')
+            :('ich hab dir ein 60-Sekunden-Video zu '+f+' gemacht, du siehst dabei direkt deine eigene Seite und wo gerade Geld liegen bleibt:');
+      return 'Hey '+v+',\n\nich weiß, dein Postfach ist voll, ich halt es deshalb kurz. '+b1+'\n'+link+'\n\nWenn es nichts für dich ist, sag einfach kurz Bescheid, dann bin ich still.\n\nBeste Grüße\nMoritz';
+    }
+    if(stage===2){
+      var b2=h?('weil mir eine Sache bei '+f+' keine Ruhe lässt: '+h+'. Das ist bares Geld, das gerade liegen bleibt')
+            :('weil ich bei '+f+' wirklich Potenzial sehe, das gerade liegen bleibt');
+      return 'Hey '+v+',\n\nich häng ehrlich nochmal an, '+b2+', und genau sowas schau ich mir in der kostenlosen Profitanalyse mit dir an euren echten Zahlen an, ganz ohne dass du irgendwas kaufst.\n\nDas Video dazu:\n'+link+'\n\nFalls gerade einfach kein guter Moment ist, völlig okay, dann meld dich, wann es besser passt.\n\nBeste Grüße\nMoritz';
+    }
+    var b3=h?(' ('+h+')'):'';
+    return 'Hey '+v+',\n\nletzte Mail von mir, versprochen, ich will nicht nerven. Ehrlich gesagt hätte ich gar nicht geschrieben, wenn ich nicht das Gefühl hätte, dass ihr gerade Profit liegen lasst, den ihr leicht holen könntet'+b3+'. Falls es irgendwann passt, das Video und die kostenlose Profitanalyse bleiben für dich online:\n'+link+'\n\nSo oder so, ich drück euch die Daumen mit '+f+'.\n\nBeste Grüße\nMoritz';
   }
   function copyFU(slug,stage){copyTxt(fuText(slug,stage));}
   // Inline-onclick in den gerenderten Zeilen läuft im globalen Scope → Funktionen exposen:
