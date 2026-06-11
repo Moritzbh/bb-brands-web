@@ -870,8 +870,8 @@ tr:hover td{background:#fafbff}
   function fuText(slug,stage){
     var c=obContacts[slug]||{slug:slug}; var v=c.firstName||''; var f=c.company||slug; var h=c.hook||''; var link='https://videos.bb-brands.de/'+slug+'/';
     if(stage===1){
-      var b1=h?('mir ist die eine Sache bei '+f+' nicht mehr aus dem Kopf gegangen: '+h+'. Genau das hab ich dir in 60 Sekunden aufgenommen, du siehst dabei deine eigene Seite:')
-            :('ich hab dir ein 60-Sekunden-Video zu '+f+' gemacht, du siehst dabei direkt deine eigene Seite und wo gerade Geld liegen bleibt:');
+      var b1=h?('Mir ist die eine Sache bei '+f+' nicht mehr aus dem Kopf gegangen: '+h+'. Genau das hab ich dir in 60 Sekunden aufgenommen, du siehst dabei deine eigene Seite:')
+            :('Ich hab dir ein 60-Sekunden-Video zu '+f+' gemacht, du siehst dabei direkt deine eigene Seite und wo gerade Geld liegen bleibt:');
       return 'Hey '+v+',\n\nich weiß, dein Postfach ist voll, ich halt es deshalb kurz. '+b1+'\n'+link+'\n\nWenn es nichts für dich ist, sag einfach kurz Bescheid, dann bin ich still.\n\nBeste Grüße\nMoritz';
     }
     if(stage===2){
