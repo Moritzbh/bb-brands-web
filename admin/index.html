@@ -851,12 +851,29 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Outbound / Video-Pitch-Tracking ----
-  var obData=null, obLoading=false;
+  var obData=null, obLoading=false, obState={}, obContacts={};
   async function loadOb(){
     obLoading=true;
     try{obData=await apiEvents('?view=pitch');}catch(e){if(e.message!=='401')obData={ok:false};}
+    try{var s=await apiEvents('?view=outbound'); obState=(s&&s.state)||{};}catch(e){}
+    try{var r=await fetch('https://videos.bb-brands.de/outbound-contacts.json',{cache:'no-store'}); if(r.ok){var arr=await r.json(); obContacts={}; (arr||[]).forEach(function(c){obContacts[c.slug]=c;});}}catch(e){}
     obLoading=false; if(tab==='outbound')renderOutbound();
   }
+  async function apiEventsPost(body){
+    var r=await fetch('/api/events',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(r.status===401){localStorage.removeItem(TOKEN_KEY);token='';showLogin('Token ungültig.');throw new Error('401');}
+    return r.json();
+  }
+  async function obAction(slug,action){ try{await apiEventsPost({kind:'ob-action',slug:slug,action:action});}catch(e){if(e.message==='401')return;} await loadOb(); }
+  function obToast(msg){var t=document.getElementById('obToast');if(!t){t=document.createElement('div');t.id='obToast';t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f1320;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity .2s';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';},1600);}
+  function copyTxt(txt){navigator.clipboard.writeText(txt).then(function(){obToast('Kopiert ✓');});}
+  function fuText(slug,stage){
+    var c=obContacts[slug]||{slug:slug}; var v=c.firstName||''; var f=c.company||slug; var link='https://videos.bb-brands.de/'+slug+'/';
+    if(stage===1)return 'Hallo '+v+',\n\nkurz nach oben geschoben, falls untergegangen. Das Video zu eurer Seite sind 60 Sekunden und du siehst direkt, wo bei euch Profit liegen bleibt:\n'+link+'\n\nBeste Grüße\nMoritz';
+    if(stage===2)return 'Hallo '+v+',\n\nnoch ein Gedanke zu '+f+': in der gratis Profitanalyse gehen wir an euren echten Zahlen durch, wo Profit liegen bleibt, ganz unverbindlich. Falls es dich interessiert, das Video liegt hier:\n'+link+'\n\nBeste Grüße\nMoritz';
+    return 'Hallo '+v+',\n\nich häng mich nicht weiter rein, das war meine letzte Nachricht dazu. Falls mehr Profit aus dem gleichen Traffic bei '+f+' irgendwann Thema wird, das Video und die gratis Profitanalyse bleiben online:\n'+link+'\n\nAlles Gute\nMoritz';
+  }
+  function copyFU(slug,stage){copyTxt(fuText(slug,stage));}
   function obBar(pct){var c=pct>=75?'tm3':pct>=50?'tm2':pct>=25?'tm1':'tmu';return '<span class="tiermix" style="width:60px"><i class="'+c+'" style="width:'+pct+'%"></i></span> <span class="sub">'+pct+'%</span>';}
   function renderOutbound(){
     if(!obData){$('obWrap').innerHTML='<div class="empty">Lade Pitch-Daten …</div>';if(!obLoading)loadOb();return;}
@@ -882,12 +899,16 @@ tr:hover td{background:#fafbff}
       var vid=p.videoPlay?obBar(p.videoPct):'<span class="sub">—</span>';
       var cta=p.cta>0?'<span class="mb-q good">✓ '+p.cta+'</span>':'<span class="sub">—</span>';
       var book=p.booked>0?'<span class="mb-q good">✅ gebucht</span>':(p.bookingStarted>0?'<span class="over-txt">📅 Datum gewählt</span>':'<span class="sub">—</span>');
-      var fu='<span class="sub">—</span>';
-      if(p.booked>0){fu='<span class="sub">Call steht</span>';}
-      else if(p.bookingStarted>0){fu='<span class="over-txt">🔥 fast gebucht</span>';}
-      else if(ri){
-        if(p.cta>0){fu='<span class="sub">in Bewegung</span>';}
-        else{var dd=daysSince(p.lastView),hot=p.videoPct>=50;fu='<span class="'+(hot?'over-txt':'sub')+'">'+(hot?'🔥 ':'')+dd+' T kalt</span>';}
+      var st=obState[p.prospect]||{}, c=obContacts[p.prospect]||{}, fu;
+      if(p.booked>0||st.status==='done'){
+        fu='<span class="sub">✅ erledigt</span> <a class="fu-link sub" onclick="obAction(\''+p.prospect+'\',\'reset\')" title="zurücksetzen">↺</a>';
+      } else if(!st.sentAt){
+        fu='<button class="fu-btn" onclick="obAction(\''+p.prospect+'\',\'sent\')">✉ Gesendet</button>'+(c.email?'<div class="src" style="margin-top:3px">'+esc(c.email)+'</div>':'');
+      } else {
+        var dd=daysSince(st.sentAt), stg=dd>=9?3:dd>=5?2:dd>=2?1:0;
+        var due=(stg===0)?('<span class="sub">FU1 in '+(2-dd)+' T</span>'):('<span class="over-txt">FU'+stg+' fällig</span>');
+        fu=due+' <button class="fu-btn" onclick="copyFU(\''+p.prospect+'\','+(stg||1)+')">📋 FU'+(stg||1)+'</button> <a class="fu-link" onclick="obAction(\''+p.prospect+'\',\'done\')" title="erledigt">✓</a>'
+          +(c.email?'<div class="src" style="margin-top:3px"><a class="fu-link" onclick="copyTxt(\''+c.email+'\')" title="E-Mail kopieren">'+esc(c.email)+'</a></div>':'');
       }
       var url='https://videos.bb-brands.de/'+encodeURIComponent(p.prospect)+'/';
       return '<tr>'+
@@ -905,7 +926,8 @@ tr:hover td{background:#fafbff}
     }).join('');
     if(!list.length)rows='<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:34px">Noch keine Pitch-Daten. Sobald die Tracking-Schicht live ist + jemand eine Pitch-Seite öffnet, erscheint hier alles.</td></tr>';
     $('obWrap').innerHTML=
-      '<div class="src-note"><b>Video-Pitch-Engagement</b> (videos.bb-brands.de). 🟢 Echtes Interesse = Video gestartet (nicht nur geöffnet). 👀 Geöffnet (evtl. Support) = Seite aufgerufen, aber Video nie gestartet, oft nur Kundensupport. 📅 Datum gewählt = hat im Calendly schon Datum und Uhrzeit angeklickt, aber noch nicht bestätigt → heißester Lead, sofort nachfassen. Bekannte Bots/Scanner werden serverseitig herausgefiltert.</div>'+
+      '<style>.fu-btn{font-size:11px;padding:3px 9px;border:1px solid #cdd2ff;background:#eef0ff;color:#0305c6;border-radius:6px;cursor:pointer;font-family:inherit}.fu-btn:hover{background:#dfe3ff}.fu-link{cursor:pointer}.fu-link:hover{text-decoration:underline}</style>'+
+      '<div class="src-note"><b>Video-Pitch-Engagement + Follow-ups</b> (videos.bb-brands.de). 🟢 Echtes Interesse = Video gestartet. 👀 Geöffnet (evtl. Support) = Seite auf, Video nie gestartet. 📅 Datum gewählt = Calendly-Datum angeklickt, nicht bestätigt → heißester Lead. <b>Spalte Nachfassen:</b> sobald du eine Mail rausgeschickt hast, „✉ Gesendet" klicken → das Dashboard zeigt dann FU1 (Tag 2-3), FU2 (Tag 5-6), FU3 (Tag 9-10). „📋 FU"-Button kopiert den fertigen Follow-up-Text, die E-Mail-Adresse steht darunter (Klick = kopieren). „✓" = erledigt. Bots/Scanner serverseitig gefiltert.</div>'+
       '<div class="mb-tablewrap"><table class="mb-table"><thead><tr>'+
         '<th>Prospect</th><th style="text-align:left">Status</th><th>Aufrufe</th><th style="text-align:left">Video</th><th>CTA</th><th style="text-align:left">Termin</th><th>Nachfassen</th><th>Erstaufruf</th><th>Letzter</th><th>Seite</th>'+
       '</tr></thead><tbody>'+rows+'</tbody></table></div>';

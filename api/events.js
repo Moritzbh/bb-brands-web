@@ -127,6 +127,23 @@ module.exports = async function handler(req, res) {
     // ============ POST: ein Event anhängen (public) ============
     if (req.method === 'POST') {
       const body = req.body || (await readJsonBody(req));
+
+      // ---- Outbound Follow-up Status (admin-authed): Gesendet/Erledigt markieren ----
+      if (body.kind === 'ob-action') {
+        if (!checkAdmin(req)) return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
+        const slug = str(body.slug, 60), action = str(body.action, 20);
+        if (!slug) return jsonResponse(res, 400, { ok: false, error: 'no slug' });
+        let map = {};
+        try { const cur = await redis('GET', 'bb:ob:state'); if (cur) map = JSON.parse(cur) || {}; } catch {}
+        const r = map[slug] || { sentAt: 0, status: 'new' };
+        if (action === 'sent') { r.sentAt = Date.now(); r.status = 'sent'; }
+        else if (action === 'done') { r.status = 'done'; }
+        else if (action === 'reset') { r.sentAt = 0; r.status = 'new'; }
+        map[slug] = r;
+        try { await redis('SET', 'bb:ob:state', JSON.stringify(map)); } catch { return jsonResponse(res, 500, { ok: false, error: 'store' }); }
+        return jsonResponse(res, 200, { ok: true, record: r });
+      }
+
       const name = str(body.name, 40);
       const sid = str(body.sid, 60);
       if (!name || !ALLOWED.has(name) || !sid) {
@@ -189,6 +206,13 @@ module.exports = async function handler(req, res) {
         const journey = raw.map((r) => { try { return JSON.parse(r); } catch { return null; } })
           .filter(Boolean).sort((a, b) => a.ts - b.ts);
         return jsonResponse(res, 200, { ok: true, sid, journey });
+      }
+
+      // --- Outbound Follow-up Status (Gesendet-Datum + Status pro Prospect) ---
+      if (url.searchParams.get('view') === 'outbound') {
+        let map = {};
+        try { const cur = await redis('GET', 'bb:ob:state'); if (cur) map = JSON.parse(cur) || {}; } catch {}
+        return jsonResponse(res, 200, { ok: true, state: map });
       }
 
       // --- Pitch / Outbound-Engagement (videos.bb-brands.de/{prospect}) ---
