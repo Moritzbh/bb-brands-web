@@ -115,6 +115,15 @@
 .deep .dh{font-size:14px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .deep .df{font-size:15px;font-weight:600;margin-bottom:12px}
 .spin{width:15px;height:15px;border:2.5px solid #c4cffa;border-top-color:#0305C6;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+.lockwrap{position:relative;border-radius:16px;overflow:hidden;margin-top:6px}
+.lockwrap .blurred{filter:blur(5px);opacity:.5;pointer-events:none;user-select:none}
+.lockover{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.6) 42%,#fff 80%)}
+.lockcard{text-align:center;padding:14px 14px 4px;width:100%}
+.lockttl{font-weight:900;font-size:18px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:7px}
+.lockttl u{text-underline-offset:3px}
+.lockreasons{list-style:none;display:inline-block;text-align:left;margin:6px auto 16px}
+.lockreasons li{font-size:14px;padding:4px 0 4px 24px;position:relative;color:var(--ink)}
+.lockreasons li:before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:800}
 </style>
 </head>
 <body>
@@ -170,10 +179,13 @@
   var $=function(id){return document.getElementById(id);};
   var WA_NUMBER='491608725947';
   var WA_SVG='<svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right:2px"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>';
+  var ctx={};
   function eur(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Math.max(0,Math.round(n)));}
   function pct(n){return n.toFixed(2).replace('.',',')+' %';}
   function band(aov){if(aov<50)return[3.5,5.0];if(aov<100)return[2.5,3.8];if(aov<200)return[1.2,2.2];return[0.8,1.4];}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function waBtn(label){return '<a class="btn js-wa" href="'+ctx.waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' '+esc(label)+'</a>';}
+  function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
 
   function compute(v){
     var b=band(v.aov), tf=0.92;
@@ -197,33 +209,28 @@
     var v=r.v, head, close, showLeak=(r.segment!=='tier1'&&r.segment!=='green');
     if(r.segment==='tier1'){
       head='Deine Brand ist noch unter <mark>10k €/Monat</mark>.';
-      close='<p>Diese KI Analyse ist auf Shops ab 10k €/Monat geeicht. Bei dir geht es zuerst um die ersten profitablen Verkäufe. Hol dir per WhatsApp den passenden Startpunkt.</p>';
+      close='<p>Diese KI Analyse ist auf Shops ab 10k €/Monat geeicht. Bei dir geht es zuerst um die ersten profitablen Verkäufe.</p>';
     } else if(r.segment==='green'){
       head='Dein Shop liegt <mark>nah am Realistischen</mark> für seine Preisklasse.';
-      close='<p>Deine Conversion ist für AOV '+eur(v.aov)+' nicht das Hauptproblem. Der größere Hebel sitzt bei <b>Bestellwert &amp; Wiederkauf</b> (Bundles, Email). Die KI Tiefenanalyse unten zeigt dir wo.</p>';
+      close='<p>Deine Conversion ist für AOV '+eur(v.aov)+' nicht das Hauptproblem. Der größere Hebel sitzt bei <b>Bestellwert &amp; Wiederkauf</b>.</p>';
     } else {
       head='Dein Shop lässt rund <mark>'+eur(r.leakMo)+'/Monat</mark> liegen.';
-      close='<p><b>1.</b> Du konvertierst bei ~'+pct(r.ist)+'. Für deine Preisklasse (AOV '+eur(v.aov)+') ist <b>'+pct(r.tLo)+'–'+pct(r.tHi)+'</b> realistisch.</p>'+
+      close='<p><b>1.</b> Du konvertierst bei ~'+pct(r.ist)+'. Für deine Preisklasse (AOV '+eur(v.aov)+') ist <b>'+pct(r.tLo)+' bis '+pct(r.tHi)+'</b> realistisch.</p>'+
             '<p><b>2.</b> Das sind ~<b>'+eur(r.leakMo)+'/Monat</b> mehr Umsatz aus demselben Traffic, rund <b>'+eur(r.leakYr)+'/Jahr</b>.</p>'+
             '<p><b>3.</b> Was würdest du mit '+eur(r.leakMo)+' mehr im Monat machen, ohne einen Euro mehr für Ads?</p>';
     }
     var stats = showLeak ?
       '<div class="stats">'+
-        '<div class="stat"><div class="l">Realistisch</div><div class="v">'+pct(r.tLo)+'–'+pct(r.tHi)+'</div></div>'+
+        '<div class="stat"><div class="l">Realistisch</div><div class="v">'+pct(r.tLo)+' bis '+pct(r.tHi)+'</div></div>'+
         '<div class="stat"><div class="l">Deine CR</div><div class="v">'+pct(r.ist)+'</div></div>'+
-        '<div class="stat"><div class="l">€/Besucher</div><div class="v">'+eur(r.rpvNow)+'→'+eur(r.rpvTarget)+'</div></div>'+
+        '<div class="stat"><div class="l">€/Besucher</div><div class="v">'+eur(r.rpvNow)+' → '+eur(r.rpvTarget)+'</div></div>'+
       '</div>' : '';
     var leak = showLeak ?
-      '<div class="leak"><div class="l">Dein behebbares Profit Leck</div><div class="big">'+eur(r.leakMo)+'/Mo</div><div class="yr">rund '+eur(r.leakYr)+' / Jahr</div><div class="cap">Nur der realistisch behebbare Anteil, konservativ gerechnet, kein Versprechen.</div></div>' : '';
+      '<div class="leak"><div class="l">Dein behebbares Profit Leck</div><div class="big">'+eur(r.leakMo)+'/Mo</div><div class="yr">rund '+eur(r.leakYr)+' / Jahr</div><div class="cap">Nur der realistisch behebbare Anteil, konservativ gerechnet.</div></div>' : '';
 
-    var scanBlock='';
-    if(scan && scan.reachable && scan.leaks && scan.leaks.length){
-      var items=scan.leaks.map(function(l){return '<div class="sl"><span class="d"></span><span><b>'+esc(l.t)+'</b> <span class="im">· '+esc(l.impact)+'</span></span></div>';}).join('');
-      scanBlock='<div class="scan"><div class="sh">Im Live Scan deines Shops gefunden</div>'+items+'</div>';
-    }
-
-    var waMsg='Hey Moritz, ich hab gerade die KI Profit Analyse für '+(v.url||'meinen Shop')+' gemacht'+(showLeak?(', Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+'–'+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis Analyse + die 3 wichtigsten Hebel für meinen Shop.';
-    var waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg);
+    var waMsg='Hey Moritz, ich hab gerade die KI Profit Analyse für '+(v.url||'meinen Shop')+' gemacht'+(showLeak?(', Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+' bis '+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis Analyse + die 3 wichtigsten Hebel für meinen Shop.';
+    ctx.waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg);
+    ctx.r=r;
 
     $('resultInner').innerHTML =
       '<div class="res-card">'+
@@ -232,30 +239,19 @@
         stats+leak+
       '</div>'+
       '<div class="close">'+close+'</div>'+
-      scanBlock+
       '<div id="deepSlot"></div>'+
-      '<div class="capture">'+
+      '<div class="capture" id="capBox">'+
         '<h3>Komplette Gratis Analyse per WhatsApp</h3>'+
-        '<p class="cs">Hol dir die ausführliche KI Auswertung + die 3 wichtigsten Hebel für deinen Shop, direkt per WhatsApp von Moritz. Ein Tipp, fertig. Kein Account, kein Spam.</p>'+
-        '<a class="btn" id="waBtn" href="'+waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' Gratis Analyse per WhatsApp holen</a>'+
+        '<p class="cs">Hol dir die ausführliche KI Auswertung + die 3 wichtigsten Hebel für deinen Shop, direkt per WhatsApp von Moritz. Ein Tipp, fertig.</p>'+
+        waBtn('Gratis Analyse per WhatsApp holen')+
       '</div>'+
       '<p class="assume">KI Analyse gegen 110+ Conversion Kriterien + Benchmarks (Littledata/Shopify, Baymard, Google). Keine garantierten Ergebnisse, dein realistisches Potenzial.</p>';
 
-    bindWa(r);
+    bindWa();
     deepAnalyze(v.url);
     try{if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
   }
 
-  function bindWa(r){
-    var wa=$('waBtn'); if(!wa) return;
-    wa.addEventListener('click',function(){
-      try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo),channel:'whatsapp',ts:Date.now()}));}catch(_){}
-      try{ if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){}
-      try{ var bb=window.BBTracking; if(bb){ var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid}); } }catch(_){}
-    });
-  }
-
-  // Stufe 3 · KI-Doktrin-Scan, feuert automatisch beim Ergebnis (inaktiv ohne Key → Slot leer)
   function deepAnalyze(url){
     var slot=$('deepSlot'); if(!slot||!url) return;
     slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI bewertet deinen Shop gegen die Konversionsdoktrin (110+ Kriterien) …</div></div>';
@@ -263,20 +259,44 @@
       .then(function(r){return r.json();})
       .then(function(d){
         if(!d||!d.enabled){ slot.innerHTML=''; return; }
-        if(d.error||!d.reachable||!d.findings){ slot.innerHTML='<div class="deep"><div class="dh">🔍 Vollständige KI Tiefenanalyse: hol sie dir per WhatsApp.</div></div>'; return; }
+        if(d.error||!d.reachable||!d.findings){ slot.innerHTML=''; return; }
         renderDeep(d.findings);
       }).catch(function(){ slot.innerHTML=''; });
   }
+  function row(s){ return '<div class="sl"><span class="d"></span><span><b>'+esc(s.step)+(s.hebel?' · '+esc(s.hebel):'')+'</b> '+esc(s.evidenz||'')+(s.impact?' <span class="im">('+esc(s.impact)+')</span>':'')+'</span></div>'; }
   function renderDeep(f){
     var slot=$('deepSlot'); if(!slot) return;
     var steps=(f.steps||[]).filter(function(s){return s&&(s.severity==='Critical'||s.severity==='High'||s.status==='leck'||s.status==='schwach');});
-    var rows=steps.map(function(s){
-      return '<div class="sl"><span class="d"></span><span><b>'+esc(s.step)+(s.hebel?' · '+esc(s.hebel):'')+'</b>, '+esc(s.evidenz||'')+(s.impact?' <span class="im">('+esc(s.impact)+')</span>':'')+'</span></div>';
-    }).join('');
-    slot.innerHTML='<div class="deep"><div class="dh">🔍 KI Tiefenanalyse deines Shops</div>'+
-      (f.fazit?'<p class="df">'+esc(f.fazit)+'</p>':'')+
-      (rows||'<div class="sl"><span>Keine kritischen Lecks im sichtbaren Bereich gefunden.</span></div>')+
-      (f.engpass?'<div class="nc">Größter Engpass: <b>'+esc(f.engpass)+'</b>, die vollständige Auswertung + Fixes gibt es per WhatsApp.</div>':'')+'</div>';
+    var vis=steps.slice(0,2), rest=steps.slice(2);
+    var more=rest.length + 3; // weitere Findings + 3 Hebel im Fix-Plan
+    var blurred=rest.map(row).join('') +
+      '<div class="sl"><span class="d"></span><span><b>Hebel 1</b> konkreter Fix + erwarteter Conversion-Uplift für deinen Shop</span></div>'+
+      '<div class="sl"><span class="d"></span><span><b>Hebel 2</b> konkreter Fix + erwarteter AOV-Uplift</span></div>'+
+      '<div class="sl"><span class="d"></span><span><b>Hebel 3</b> konkreter Fix + Reihenfolge der Umsetzung</span></div>';
+    slot.innerHTML =
+      '<div class="deep">'+
+        '<div class="dh">🔍 KI Tiefenanalyse deines Shops</div>'+
+        (f.fazit?'<p class="df">'+esc(f.fazit)+'</p>':'')+
+        (f.engpass?'<div class="nc" style="margin-bottom:10px">Größter Engpass: <b>'+esc(f.engpass)+'</b></div>':'')+
+        (vis.map(row).join('')||'<div class="sl"><span>Mehrere Conversion Lecks erkannt.</span></div>')+
+      '</div>'+
+      '<div class="lockwrap">'+
+        '<div class="blurred"><div class="scan" style="margin-top:0">'+blurred+'</div></div>'+
+        '<div class="lockover"><div class="lockcard">'+
+          '<div class="lockttl">🔒 Hier kommt dein <u>Fix-Plan</u></div>'+
+          '<p style="font-size:14.5px;font-weight:600;margin:0 auto 4px;max-width:430px">Die KI hat noch <b>'+more+' weitere Punkte</b> für deinen Shop gefunden, die du oben nicht lesen kannst.</p>'+
+          '<ul class="lockreasons">'+
+            '<li>Alle gefundenen Lecks im Detail</li>'+
+            '<li>Die <b>3 wichtigsten Hebel</b> mit konkretem Fix</li>'+
+            '<li>Wie viel € jeder Hebel zurückholt</li>'+
+            '<li>Persönlich von Moritz, kein Bot</li>'+
+          '</ul>'+
+          waBtn('Kompletten Fix-Plan per WhatsApp holen')+
+          '<p style="font-size:12px;color:var(--muted);margin-top:10px">Kostenlos · ein Tipp · keine Mail, kein Spam</p>'+
+        '</div></div>'+
+      '</div>';
+    var cap=$('capBox'); if(cap) cap.style.display='none';
+    bindWa();
   }
 
   var LOAD=['KI ruft deinen Shop auf …','Scannt Startseite, Produktseite &amp; Checkout …','Misst Ladezeit gegen Google Benchmarks …','Gleicht mit DTC Benchmarks ab (Baymard · Shopify · Littledata) …','Prüft 110+ Conversion Kriterien …','Berechnet dein Profit Leck …'];
