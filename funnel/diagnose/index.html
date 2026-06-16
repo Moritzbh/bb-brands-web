@@ -124,6 +124,34 @@
 .lockreasons{list-style:none;display:inline-block;text-align:left;margin:6px auto 16px}
 .lockreasons li{font-size:14px;padding:4px 0 4px 24px;position:relative;color:var(--ink)}
 .lockreasons li:before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:800}
+/* ===== ROBUSTHEIT + MOBILE ===== */
+body{overflow-x:hidden}
+.wrap,.res-card,.deep,.capture,.scan,.lockcard,.close p,.sl span{overflow-wrap:break-word;word-break:break-word}
+.res-eyebrow{overflow-wrap:anywhere}
+@media(max-width:560px){
+  .wrap{padding:0 16px}
+  .top{padding:18px 0 0}
+  .hero{padding:24px 0 6px}
+  .eyebrow{margin-bottom:16px;font-size:11px;padding:6px 12px}
+  h1{font-size:clamp(27px,8.2vw,38px);margin-bottom:13px}
+  .sub{font-size:15.5px}
+  .card{padding:20px 15px;margin-top:20px;border-radius:18px}
+  .inputs{gap:11px}
+  .btn{font-size:16px;padding:16px 14px}
+  .res-card{padding:22px 17px}
+  .res-head{font-size:clamp(20px,6.2vw,26px)}
+  .stats{grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+  .stat{display:flex;justify-content:space-between;align-items:baseline;padding:11px 13px}
+  .stat .v{font-size:16px;margin-top:0}
+  .leak{padding:18px 14px}
+  .leak .big{font-size:clamp(32px,11vw,46px)}
+  .close p{font-size:14.5px;padding-left:13px}
+  .deep,.capture,.scan{padding:16px 15px}
+  .deep .df{font-size:14px}
+  .lockcard{padding:12px 4px 2px}
+  .lockreasons li{font-size:13px}
+  .assume{font-size:11px}
+}
 </style>
 </head>
 <body>
