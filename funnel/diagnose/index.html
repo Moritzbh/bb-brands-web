@@ -19,7 +19,7 @@
 <style>
   :root{
     --ink:#0b0b0c; --paper:#ffffff; --muted:#6b6e76; --line:#e6e6e8;
-    --card:#fafafa; --hl:#ffe94d; --hl-deep:#ffd400; --ok:#16a34a; --red:#d6453c;
+    --card:#fafafa; --hl:#d0d8ff; --hl-deep:#0305C6; --blue:#0305C6; --ok:#16a34a; --red:#d6453c;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -53,7 +53,7 @@
   .btn:active{transform:translateY(0)}
   .btn svg{width:18px;height:18px}
   .btn[disabled]{opacity:.55;cursor:wait;transform:none}
-  .btn-yellow{background:var(--hl);color:var(--ink)}
+  .btn-yellow{background:var(--blue);color:#fff}
   .err-msg{display:none;color:var(--red);font-size:13.5px;font-weight:600;margin-top:12px;text-align:center}
   .err-msg.show{display:block}
   .formnote{font-size:12px;color:#a0a2a9;margin-top:13px;text-align:center;line-height:1.5}
@@ -111,10 +111,10 @@
 .sl .d{flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:var(--red);margin-top:7px}
 .sl .im{color:var(--muted);font-size:12.5px}
 .scan .nc,.deep .nc{font-size:12.5px;color:#a0a2a9;margin-top:10px}
-.deep{background:#fff7d6;border:1px solid #ffe94d;border-radius:16px;padding:18px 20px;margin-top:14px}
+.deep{background:#eef1ff;border:1px solid #d0d8ff;border-radius:16px;padding:18px 20px;margin-top:14px}
 .deep .dh{font-size:14px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .deep .df{font-size:15px;font-weight:600;margin-bottom:12px}
-.spin{width:15px;height:15px;border:2.5px solid #e6d36a;border-top-color:#0b0b0c;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+.spin{width:15px;height:15px;border:2.5px solid #c4cffa;border-top-color:#0305C6;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
 </style>
 </head>
 <body>
