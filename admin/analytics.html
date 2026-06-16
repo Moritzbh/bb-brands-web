@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Seiten-Analytics · Admin · BB Brands</title>
+<style>
+  :root{--ink:#0b0b0c;--muted:#6b6e76;--line:#e6e6e8;--bg:#f6f7f9;--card:#fff;--blue:#0305C6;--ok:#16a34a;--red:#d6453c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding:24px 16px 80px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  select,button{font-family:inherit;font-size:15px;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff;cursor:pointer}
+  select{flex:1;min-width:220px;font-weight:600}
+  button{font-weight:700;background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.ghost{background:#fff;color:var(--ink)}
+  .pins{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .pin{font-size:13px;font-weight:700;padding:8px 12px;border-radius:9px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
+  .pin.active{background:#eef1ff;border-color:var(--blue);color:var(--blue)}
+  .meta{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .kpi .l{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .kpi .v{font-size:30px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .card h2{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:12px}
+  .row{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+  .row:first-of-type{border-top:0}
+  .row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .ct{font-weight:800;font-variant-numeric:tabular-nums}
+  .barbg{flex:0 0 120px;height:8px;background:#eef1ff;border-radius:99px;overflow:hidden}
+  .barfg{height:100%;background:var(--blue);border-radius:99px}
+  .empty{text-align:center;color:var(--muted);padding:30px}
+  .err{background:#fdecea;border:1px solid var(--red);color:#a3271f;border-radius:10px;padding:12px;margin-bottom:14px;font-size:14px;display:none}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:8px 8px;border-top:1px solid var(--line)}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.cur td{background:#eef1ff;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Seiten-Analytics</h1>
+  <p class="sub">First-Party-Tracking pro Seite: Aufrufe, eindeutige Besucher, woher der Traffic kam, was geklickt wurde. (Anonym, ab Live-Schaltung.)</p>
+
+  <div class="pins" id="pins"></div>
+  <div class="bar">
+    <select id="page"></select>
+    <select id="days" style="flex:0 0 130px">
+      <option value="7">7 Tage</option>
+      <option value="30" selected>30 Tage</option>
+      <option value="90">90 Tage</option>
+    </select>
+    <button id="reload">↻</button>
+    <a href="/admin" style="text-decoration:none"><button class="ghost">← CRM</button></a>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div class="err" id="err"></div>
+  <div id="detail"></div>
+
+  <div class="card" id="allCard" style="display:none">
+    <h2>Alle Seiten</h2>
+    <table><thead><tr><th>Seite</th><th class="num">Aufrufe</th><th class="num">Besucher</th></tr></thead><tbody id="allRows"></tbody></table>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var KEY='bb_admin_token';
+  var PINS=['/funnel/diagnose','/','/wissen'];
+  var PIN_LABELS={'/funnel/diagnose':'Profit-Analyse','/':'Homepage','/wissen':'Wissens-Hub'};
+  var data=[], cur=null;
+  function token(){ var t=localStorage.getItem(KEY); if(!t){ t=prompt('Admin-Token:'); if(t) localStorage.setItem(KEY,t); } return t||''; }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function page(p){ for(var i=0;i<data.length;i++){ if(data[i].path===p) return data[i]; } return null; }
+
+  function rows(items,total){
+    if(!items||!items.length) return '<div class="empty">Keine Daten.</div>';
+    var max=items[0].count||1;
+    return items.map(function(it){
+      var pc=total?Math.round(it.count/total*100):0;
+      return '<div class="row"><span class="nm">'+esc(it.name)+'</span><span class="barbg"><span class="barfg" style="width:'+Math.round(it.count/max*100)+'%"></span></span><span class="ct">'+it.count+(total?' · '+pc+'%':'')+'</span></div>';
+    }).join('');
+  }
+
+  function renderDetail(){
+    var d=cur?page(cur):null, el=$('detail');
+    if(!d){ el.innerHTML='<div class="empty">Für diese Seite noch keine Daten im Zeitraum.</div>'; return; }
+    el.innerHTML=
+      '<div class="kpis">'+
+        '<div class="kpi"><div class="l">Aufrufe</div><div class="v">'+d.views+'</div></div>'+
+        '<div class="kpi"><div class="l">Eindeutige Besucher</div><div class="v">'+d.uniques+'</div></div>'+
+      '</div>'+
+      '<div class="card"><h2>Woher der Traffic kam</h2>'+rows(d.sources,d.views)+'</div>'+
+      '<div class="card"><h2>Was geklickt wurde</h2>'+rows(d.clicks,0)+'</div>';
+  }
+  function renderPins(){ $('pins').innerHTML=PINS.map(function(p){ return '<button class="pin'+(p===cur?' active':'')+'" data-p="'+esc(p)+'">'+esc(PIN_LABELS[p]||p)+'</button>'; }).join(''); $('pins').querySelectorAll('.pin').forEach(function(b){ b.addEventListener('click',function(){ cur=b.dataset.p; sync(); }); }); }
+  function renderSelect(){
+    var paths=data.map(function(d){return d.path;});
+    PINS.forEach(function(p){ if(paths.indexOf(p)<0) paths.unshift(p); });
+    var seen={}; paths=paths.filter(function(p){ if(seen[p])return false; seen[p]=1; return true; });
+    $('page').innerHTML=paths.map(function(p){ var d=page(p); return '<option value="'+esc(p)+'"'+(p===cur?' selected':'')+'>'+esc(p)+(d?' ('+d.views+')':' (0)')+'</option>'; }).join('');
+  }
+  function renderAll(){
+    if(!data.length){ $('allCard').style.display='none'; return; }
+    $('allCard').style.display='';
+    $('allRows').innerHTML=data.map(function(d){ return '<tr class="'+(d.path===cur?'cur':'')+'"><td>'+esc(d.path)+'</td><td class="num">'+d.views+'</td><td class="num">'+d.uniques+'</td></tr>'; }).join('');
+  }
+  function sync(){ renderPins(); renderSelect(); renderDetail(); renderAll(); }
+
+  function load(){
+    var t=token(); if(!t){ return; }
+    $('meta').textContent='Lade …'; $('err').style.display='none';
+    fetch('/api/pages?token='+encodeURIComponent(t)+'&days='+$('days').value)
+      .then(function(r){ if(r.status===401){ localStorage.removeItem(KEY); throw new Error('Token falsch — neu laden.'); } return r.json(); })
+      .then(function(d){ data=d.pages||[]; if(!cur){ cur=page('/funnel/diagnose')?'/funnel/diagnose':(data[0]&&data[0].path)||'/funnel/diagnose'; } $('meta').textContent=(d.total||0)+' Aufrufe gesamt · '+data.length+' Seiten ('+$('days').value+' Tage)'+(d.note?' · '+d.note:''); sync(); })
+      .catch(function(e){ $('err').style.display='block'; $('err').textContent=String(e.message||e); $('meta').textContent=''; });
+  }
+
+  $('page').addEventListener('change',function(){ cur=$('page').value; renderDetail(); renderAll(); renderPins(); });
+  $('days').addEventListener('change',load);
+  $('reload').addEventListener('click',load);
+  load();
+})();
+</script>
+</body>
+</html>
