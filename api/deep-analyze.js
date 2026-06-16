@@ -13,7 +13,7 @@
 //  Feuert nur per POST + nur nachdem das Frontend ein E-Mail-Opt-in hatte.
 // ============================================================
 const UA='Mozilla/5.0 (compatible; BBProfitCheck/1.0; +https://bb-brands.de)';
-const MODEL=process.env.PROFIT_SCAN_MODEL||'gemini-2.0-flash';
+const MODEL=process.env.PROFIT_SCAN_MODEL||'gemini-2.5-flash';
 
 function normUrl(raw){ var u=(raw||'').trim(); if(!u) return null; if(!/^https?:\/\//i.test(u)) u='https://'+u; try{ return new URL(u).href; }catch(e){ return null; } }
 
