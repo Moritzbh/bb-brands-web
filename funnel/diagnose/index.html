@@ -123,9 +123,9 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">Kostenlos · 60 Sekunden · kein Call</span>
+    <span class="eyebrow">🤖 KI-Analyse · 60 Sekunden · kostenlos</span>
     <h1>Wie viel Umsatz lässt dein Shop <mark>liegen</mark> — jeden Monat?</h1>
-    <p class="sub">Trag 4 Zahlen aus deinem Shopify-Dashboard ein. Du siehst <b>sofort</b>, wie viel Umsatz zwischen Klick und Kauf verloren geht — und was für deine Preisklasse realistisch drin ist.</p>
+    <p class="sub">Trag 4 Zahlen ein — eine <b>KI durchleuchtet deinen Shop</b> in Sekunden gegen 110+ Conversion-Kriterien und DTC-Benchmarks aus Baymard, Shopify &amp; Google. Du siehst <b>sofort</b>, wo zwischen Klick und Kauf Umsatz verloren geht.</p>
 
     <div class="card" id="toolCard">
       <form id="toolForm" novalidate>
@@ -136,11 +136,11 @@
           <div><label>Conversion-Rate (%)</label><input type="number" id="inCr" placeholder="1,4" step="0.1" inputmode="decimal"><p class="ihint">Shopify → „Conversion rate"</p></div>
           <div><label>Bruttomarge (%)</label><input type="number" id="inMargin" placeholder="60" inputmode="numeric"></div>
         </div>
-        <button class="btn" type="submit">Mein Profit-Leck zeigen
+        <button class="btn" type="submit">Shop von der KI scannen lassen
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
         <p class="err-msg" id="inErr">Bitte URL, Besucher, Bestellwert und Conversion-Rate eintragen.</p>
-        <p class="formnote">Wir speichern nichts, solange du dein Ergebnis nicht selbst per Mail anforderst.</p>
+        <p class="formnote">🤖 KI-gestützt · 110+ Conversion-Kriterien · Benchmarks: Baymard · Shopify · Google. Kein Account, kein Spam.</p>
       </form>
     </div>
 
@@ -148,7 +148,8 @@
 
     <div class="loading" id="loading">
       <div class="spinner"></div>
-      <p>Dein Profit-Leck wird berechnet …</p>
+      <p id="loadMsg" style="font-weight:700;font-size:17px">KI ruft deinen Shop auf …</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;font-weight:500">Analyse gegen 110+ Conversion-Kriterien &amp; DTC-Benchmarks</p>
     </div>
   </div>
 </section>
@@ -167,6 +168,8 @@
 (function(){
   'use strict';
   var $=function(id){return document.getElementById(id);};
+  var WA_NUMBER='491608725947';
+  var WA_SVG='<svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right:2px"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>';
   function eur(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Math.max(0,Math.round(n)));}
   function pct(n){return n.toFixed(2).replace('.',',')+' %';}
   function band(aov){if(aov<50)return[3.5,5.0];if(aov<100)return[2.5,3.8];if(aov<200)return[1.2,2.2];return[0.8,1.4];}
@@ -194,10 +197,10 @@
     var v=r.v, head, close, showLeak=(r.segment!=='tier1'&&r.segment!=='green');
     if(r.segment==='tier1'){
       head='Deine Brand ist noch unter <mark>10k €/Monat</mark>.';
-      close='<p>Diese Analyse ist auf Shops ab 10k €/Monat geeicht. Bei dir geht es zuerst um die ersten profitablen Verkäufe. Trag dich ein, ich schick dir den passenden Startpunkt.</p>';
+      close='<p>Diese KI-Analyse ist auf Shops ab 10k €/Monat geeicht. Bei dir geht es zuerst um die ersten profitablen Verkäufe. Hol dir per WhatsApp den passenden Startpunkt.</p>';
     } else if(r.segment==='green'){
       head='Dein Shop liegt <mark>nah am Realistischen</mark> für seine Preisklasse.';
-      close='<p>Deine Conversion ist für AOV '+eur(v.aov)+' nicht das Hauptproblem. Der größere Hebel sitzt bei <b>Bestellwert &amp; Wiederkauf</b> (Bundles, Email). Das schauen wir uns an.</p>';
+      close='<p>Deine Conversion ist für AOV '+eur(v.aov)+' nicht das Hauptproblem. Der größere Hebel sitzt bei <b>Bestellwert &amp; Wiederkauf</b> (Bundles, Email). Die KI-Tiefen-Analyse unten zeigt dir wo.</p>';
     } else {
       head='Dein Shop lässt rund <mark>'+eur(r.leakMo)+'/Monat</mark> liegen.';
       close='<p><b>1.</b> Du konvertierst bei ~'+pct(r.ist)+'. Für deine Preisklasse (AOV '+eur(v.aov)+') ist <b>'+pct(r.tLo)+'–'+pct(r.tHi)+'</b> realistisch.</p>'+
@@ -213,77 +216,54 @@
     var leak = showLeak ?
       '<div class="leak"><div class="l">Dein behebbares Profit-Leck</div><div class="big">'+eur(r.leakMo)+'/Mo</div><div class="yr">rund '+eur(r.leakYr)+' / Jahr</div><div class="cap">Nur der realistisch behebbare Anteil — konservativ gerechnet, kein Versprechen.</div></div>' : '';
 
-    // Stufe 2 · Live-Scan-Funde (fail-safe: nur wenn vorhanden)
     var scanBlock='';
     if(scan && scan.reachable && scan.leaks && scan.leaks.length){
       var items=scan.leaks.map(function(l){return '<div class="sl"><span class="d"></span><span><b>'+esc(l.t)+'</b> <span class="im">· '+esc(l.impact)+'</span></span></div>';}).join('');
-      scanBlock='<div class="scan"><div class="sh">Im Live-Scan deines Shops gefunden</div>'+items+
-        (scan.notCheckable&&scan.notCheckable.length?'<div class="nc">Tiefer prüfbar (Checkout, Trust-Platzierung, …) in der Komplett-Analyse.</div>':'')+'</div>';
+      scanBlock='<div class="scan"><div class="sh">Im Live-Scan deines Shops gefunden</div>'+items+'</div>';
     }
+
+    var waMsg='Hey Moritz, ich hab gerade die KI-Profit-Analyse für '+(v.url||'meinen Shop')+' gemacht'+(showLeak?(' — Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit-Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+'–'+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis-Analyse + die 3 wichtigsten Hebel für meinen Shop.';
+    var waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg);
 
     $('resultInner').innerHTML =
       '<div class="res-card">'+
-        '<div class="res-eyebrow">Dein Ergebnis'+(v.url?' · '+esc(v.url):'')+'</div>'+
+        '<div class="res-eyebrow">🤖 KI-Ergebnis'+(v.url?' · '+esc(v.url):'')+'</div>'+
         '<div class="res-head">'+head+'</div>'+
         stats+leak+
       '</div>'+
       '<div class="close">'+close+'</div>'+
       scanBlock+
-      '<div class="capture">'+
-        '<h3>Die Komplett-Analyse + dein Plan</h3>'+
-        '<p class="cs">Ich schick dir die Detail-Auswertung für deinen Shop + die 3 konkretesten Hebel. Kein Spam.</p>'+
-        '<form id="capForm" novalidate>'+
-          '<input type="email" id="capEmail" placeholder="deine@brand.de" autocomplete="email" inputmode="email" required>'+
-          '<label class="consent"><input type="checkbox" id="capConsent" required><span>Schick mir mein Ergebnis und 1×/Woche, wie DTC-Shops profitabler werden. Abmeldung jederzeit. <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutz</a>.</span></label>'+
-          '<input type="text" id="capGotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">'+
-          '<button class="btn btn-yellow" type="submit" id="capBtn">Komplett-Analyse holen'+
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'+
-          '<p class="err-msg" id="capErr">Bitte gültige E-Mail + Einwilligung.</p>'+
-        '</form>'+
-      '</div>'+
       '<div id="deepSlot"></div>'+
-      '<p class="assume">Annahme: gemischte Traffic-Qualität. Benchmarks: Littledata/Shopify, Baymard, Google. Keine garantierten Ergebnisse — dein realistisches Potenzial.</p>';
+      '<div class="capture">'+
+        '<h3>Komplette Gratis-Analyse per WhatsApp</h3>'+
+        '<p class="cs">Hol dir die ausführliche KI-Auswertung + die 3 wichtigsten Hebel für deinen Shop — direkt per WhatsApp von Moritz. Ein Tipp, fertig. Kein Account, kein Spam.</p>'+
+        '<a class="btn" id="waBtn" href="'+waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' Gratis-Analyse per WhatsApp holen</a>'+
+      '</div>'+
+      '<p class="assume">KI-Analyse gegen 110+ Conversion-Kriterien + Benchmarks (Littledata/Shopify, Baymard, Google). Keine garantierten Ergebnisse — dein realistisches Potenzial.</p>';
 
-    bindCapture(r);
+    bindWa(r);
+    deepAnalyze(v.url);
     try{if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
   }
 
-  function bindCapture(r){
-    var form=$('capForm'); if(!form) return;
-    var elE=$('capEmail'), elC=$('capConsent'), elErr=$('capErr'), btn=$('capBtn'), sending=false;
-    function ok(s){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);}
-    form.addEventListener('submit',function(e){
-      e.preventDefault(); if(sending) return;
-      var email=elE.value.trim(), valid=ok(email)&&elC.checked;
-      elE.classList.toggle('err',!ok(email));
-      if(!valid){elErr.classList.add('show');return;} elErr.classList.remove('show');
-      if($('capGotcha').value) return;
-      sending=true; btn.disabled=true; btn.innerHTML='Wird vorbereitet …';
-      var v=r.v;
-      var answers=[{q:'url',label:v.url||''},{q:'visitors',label:String(v.visitors)},{q:'aov',label:String(v.aov)+'EUR'},{q:'cr',label:String(v.cr)+'%'},{q:'margin',label:String(v.margin)+'%'},{q:'leak_eur_month',label:eur(r.leakMo)}];
-      try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,qualification:r.qual,leakMo:Math.round(r.leakMo),leakYr:Math.round(r.leakYr),istCr:r.ist,aov:v.aov,visitors:v.visitors,revenue:Math.round(r.revenue),email:email,ts:Date.now()}));}catch(_){}
-      var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
-      var payload=Object.assign({magnet:'quiz-diagnose',email:email,tier:r.tier,segment:r.segment,profit_score:r.profitScore,growth_score:r.growthScore,store_gap:r.storeGap,qualification:r.qual,answers:answers,consentNewsletter:true},attr);
-      try{payload.sid=(window.BBFunnel&&BBFunnel.sid)||'';if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);}}catch(_){}
-      var bb=window.BBTracking, eid=bb?bb.newEventId():null;
-      if(bb){bb.track('Lead',{content_name:'gratis-profit-analyse',segment:r.segment,tier:r.tier||0},{eventId:eid});bb.attachToLead(payload,{eventId:eid});payload.tracking_consent=bb.isReady();}
-      fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){}).finally(function(){ success(); deepAnalyze(v.url); });
+  function bindWa(r){
+    var wa=$('waBtn'); if(!wa) return;
+    wa.addEventListener('click',function(){
+      try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo),channel:'whatsapp',ts:Date.now()}));}catch(_){}
+      try{ if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){}
+      try{ var bb=window.BBTracking; if(bb){ var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid}); } }catch(_){}
     });
-    function success(){
-      var cap=document.querySelector('.capture');
-      if(cap)cap.innerHTML='<div class="success"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><h3>Check dein Postfach.</h3><p class="cs">Deine Komplett-Analyse + die 3 Hebel sind unterwegs. Antworte direkt auf die Mail, wenn du es mit mir durchgehen willst.</p></div>';
-    }
   }
 
-  // Stufe 3 · KI-Doktrin-Scan (nur nach E-Mail; inaktiv ohne API-Key → Slot bleibt leer)
+  // Stufe 3 · KI-Doktrin-Scan — feuert automatisch beim Ergebnis (inaktiv ohne Key → Slot leer)
   function deepAnalyze(url){
     var slot=$('deepSlot'); if(!slot||!url) return;
-    slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI analysiert deinen Shop gegen die Konversions-Doktrin …</div></div>';
+    slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI bewertet deinen Shop gegen die Konversions-Doktrin (110+ Kriterien) …</div></div>';
     fetch('/api/deep-analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({url:url})})
       .then(function(r){return r.json();})
       .then(function(d){
-        if(!d||!d.enabled){ slot.innerHTML=''; return; }                 // Key nicht gesetzt → still ausblenden
-        if(d.error||!d.reachable||!d.findings){ slot.innerHTML='<div class="deep"><div class="dh">KI-Tiefen-Analyse folgt per Mail.</div></div>'; return; }
+        if(!d||!d.enabled){ slot.innerHTML=''; return; }
+        if(d.error||!d.reachable||!d.findings){ slot.innerHTML='<div class="deep"><div class="dh">🔍 Vollständige KI-Tiefen-Analyse: hol sie dir per WhatsApp.</div></div>'; return; }
         renderDeep(d.findings);
       }).catch(function(){ slot.innerHTML=''; });
   }
@@ -296,8 +276,10 @@
     slot.innerHTML='<div class="deep"><div class="dh">🔍 KI-Tiefen-Analyse deines Shops</div>'+
       (f.fazit?'<p class="df">'+esc(f.fazit)+'</p>':'')+
       (rows||'<div class="sl"><span>Keine kritischen Lecks im sichtbaren Bereich gefunden.</span></div>')+
-      (f.engpass?'<div class="nc">Größter Engpass: <b>'+esc(f.engpass)+'</b></div>':'')+'</div>';
+      (f.engpass?'<div class="nc">Größter Engpass: <b>'+esc(f.engpass)+'</b> — die vollständige Auswertung + Fixes gibt es per WhatsApp.</div>':'')+'</div>';
   }
+
+  var LOAD=['KI ruft deinen Shop auf …','Scannt Startseite, Produktseite &amp; Checkout …','Misst Ladezeit gegen Google-Benchmarks …','Gleicht mit DTC-Benchmarks ab (Baymard · Shopify · Littledata) …','Prüft 110+ Conversion-Kriterien …','Berechnet dein Profit-Leck …'];
 
   $('toolForm').addEventListener('submit',function(e){
     e.preventDefault();
@@ -307,10 +289,12 @@
     err.classList.remove('show');
     try{if(window.BBFunnel)BBFunnel.fire('QuizStart',{funnel:'gratis-profit-analyse'});else if(window.BBTracking)BBTracking.trackCustom('QuizStart',{funnel:'gratis-profit-analyse'});}catch(_){}
     $('toolCard').style.display='none'; $('loading').style.display='block';
-    var done=false;
-    function finish(scan){ if(done)return; done=true; $('loading').style.display='none'; render(compute(v),scan); $('result').style.display='block'; $('result').scrollIntoView({behavior:'smooth',block:'start'}); }
-    fetch('/api/analyze?url='+encodeURIComponent(v.url)).then(function(r){return r.json();}).then(function(s){finish(s);}).catch(function(){finish(null);});
-    setTimeout(function(){finish(null);},9000); // Hard-Fallback: Ergebnis spätestens nach 9s, auch ohne Scan
+    var li=0; var lt=setInterval(function(){ li=(li+1)%LOAD.length; var el=$('loadMsg'); if(el)el.innerHTML=LOAD[li]; },1400);
+    var t0=Date.now(), done=false;
+    function go(scan){ var wait=3300-(Date.now()-t0); if(wait>0){ setTimeout(function(){_go(scan);},wait); } else _go(scan); }
+    function _go(scan){ if(done)return; done=true; clearInterval(lt); $('loading').style.display='none'; render(compute(v),scan); $('result').style.display='block'; $('result').scrollIntoView({behavior:'smooth',block:'start'}); }
+    fetch('/api/analyze?url='+encodeURIComponent(v.url)).then(function(r){return r.json();}).then(function(s){go(s);}).catch(function(){go(null);});
+    setTimeout(function(){go(null);},9000);
   });
 })();
 </script>
