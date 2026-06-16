@@ -184,6 +184,7 @@
   function pct(n){return n.toFixed(2).replace('.',',')+' %';}
   function band(aov){if(aov<50)return[3.5,5.0];if(aov<100)return[2.5,3.8];if(aov<200)return[1.2,2.2];return[0.8,1.4];}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function domain(u){if(!u)return '';try{var h=new URL(/^https?:\/\//i.test(u)?u:'https://'+u).hostname;return h.replace(/^www\./,'');}catch(e){return String(u).replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0];}}
   function waBtn(label){return '<a class="btn js-wa" href="'+ctx.waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' '+esc(label)+'</a>';}
   function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
 
@@ -228,19 +229,19 @@
     var leak = showLeak ?
       '<div class="leak"><div class="l">Dein behebbares Profit Leck</div><div class="big">'+eur(r.leakMo)+'/Mo</div><div class="yr">rund '+eur(r.leakYr)+' / Jahr</div><div class="cap">Nur der realistisch behebbare Anteil, konservativ gerechnet.</div></div>' : '';
 
-    var waMsg='Hey Moritz, ich hab gerade die KI Profit Analyse für '+(v.url||'meinen Shop')+' gemacht'+(showLeak?(', Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+' bis '+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis Analyse + die 3 wichtigsten Hebel für meinen Shop.';
+    var waMsg='Hey Moritz, ich hab gerade die KI Profit Analyse für '+(domain(v.url)||'meinen Shop')+' gemacht'+(showLeak?(', Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+' bis '+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis Analyse + die 3 wichtigsten Hebel für meinen Shop.';
     ctx.waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg);
     ctx.r=r;
 
     $('resultInner').innerHTML =
       '<div class="res-card">'+
-        '<div class="res-eyebrow">KI Ergebnis'+(v.url?' · '+esc(v.url):'')+'</div>'+
+        '<div class="res-eyebrow">KI Ergebnis'+(v.url?' · '+esc(domain(v.url)):'')+'</div>'+
         '<div class="res-head">'+head+'</div>'+
         stats+leak+
       '</div>'+
       '<div class="close">'+close+'</div>'+
       '<div id="deepSlot"></div>'+
-      '<div class="capture" id="capBox">'+
+      '<div class="capture" id="capBox" style="display:none">'+
         '<h3>Komplette Gratis Analyse per WhatsApp</h3>'+
         '<p class="cs">Hol dir die ausführliche KI Auswertung + die 3 wichtigsten Hebel für deinen Shop, direkt per WhatsApp von Moritz. Ein Tipp, fertig.</p>'+
         waBtn('Gratis Analyse per WhatsApp holen')+
@@ -252,16 +253,17 @@
     try{if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
   }
 
+  function showCap(){ var c=$('capBox'); if(c) c.style.display=''; }
   function deepAnalyze(url){
-    var slot=$('deepSlot'); if(!slot||!url) return;
+    var slot=$('deepSlot'); if(!slot||!url){ showCap(); return; }
     slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI bewertet deinen Shop gegen die Konversionsdoktrin (110+ Kriterien) …</div></div>';
     fetch('/api/deep-analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({url:url})})
       .then(function(r){return r.json();})
       .then(function(d){
-        if(!d||!d.enabled){ slot.innerHTML=''; return; }
-        if(d.error||!d.reachable||!d.findings){ slot.innerHTML=''; return; }
+        if(!d||!d.enabled){ slot.innerHTML=''; showCap(); return; }
+        if(d.error||!d.reachable||!d.findings){ slot.innerHTML=''; showCap(); return; }
         renderDeep(d.findings);
-      }).catch(function(){ slot.innerHTML=''; });
+      }).catch(function(){ slot.innerHTML=''; showCap(); });
   }
   function row(s){ return '<div class="sl"><span class="d"></span><span><b>'+esc(s.step)+(s.hebel?' · '+esc(s.hebel):'')+'</b> '+esc(s.evidenz||'')+(s.impact?' <span class="im">('+esc(s.impact)+')</span>':'')+'</span></div>'; }
   function renderDeep(f){
