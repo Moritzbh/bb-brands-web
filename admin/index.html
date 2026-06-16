@@ -195,7 +195,7 @@
   function num(n){ return new Intl.NumberFormat('de-DE').format(n||0); }
   function dt(ts){ try{ return new Date(ts).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
   function startOfToday(){ var d=new Date(); d.setHours(0,0,0,0); return d.getTime(); }
-  async function api(path){ var sep=path.indexOf('?')>=0?'&':'?'; var r=await fetch(path+(TOKEN?sep+'token='+encodeURIComponent(TOKEN):''),{headers:{}}); if(r.status===401){ throw {auth:true}; } return r.json(); }
+  async function api(path){ var sep=path.indexOf('?')>=0?'&':'?'; var r=await fetch(path+(TOKEN?sep+'token='+encodeURIComponent(TOKEN):''),{headers:TOKEN?{Authorization:'Bearer '+TOKEN}:{}}); if(r.status===401){ throw {auth:true}; } return r.json(); }
 
   // ---------- NAV ----------
   var NAV=[
@@ -233,7 +233,7 @@
     setHead('overview');
     $('view').innerHTML='<div class="kpis">'+Array(4).fill('<div class="kpi"><div class="skel" style="width:50%"></div><div class="skel" style="width:70%;height:26px;margin-top:12px"></div></div>').join('')+'</div>';
     var leads=[],scans=[],pages=[],ptotal=0,pagesErr=false,authErr=false;
-    try{ var dl=await api('/api/leads'); leads=dl.leads||(Array.isArray(dl)?dl:[]); }catch(e){ if(e.auth)authErr=true; }
+    try{ var dl=await api('/api/leads'); leads=dl.leads||(Array.isArray(dl)?dl:[]); }catch(e){ /* Leads-Fehler nicht fatal */ }
     try{ var ds=await api('/api/scans?days=365'); scans=ds.scans||[]; }catch(e){ if(e.auth)authErr=true; }
     try{ var dp=await (await fetch('/api/pages?days=30')).json(); pages=dp.pages||[]; ptotal=dp.total||0; }catch(e){ pagesErr=true; }
     if(authErr){ logout(); return; }
