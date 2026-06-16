@@ -37,8 +37,7 @@ module.exports = async function(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS') return res.status(200).end();
   var q=req.query||{};
-  var token=q.token||(req.headers.authorization||'').replace(/^Bearer\s+/i,'');
-  if(!ADMIN_TOKEN || token!==ADMIN_TOKEN) return res.status(401).json({error:'unauthorized'});
+  // Öffentlich lesbar — reine, anonyme Traffic-Aggregate (kein PII, keine Lead-Daten).
   if(!KV_URL||!KV_TOKEN) return res.status(200).json({pages:[],note:'Redis nicht konfiguriert'});
 
   try{

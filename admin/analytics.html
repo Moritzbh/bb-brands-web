@@ -18,7 +18,7 @@
   button{font-weight:700;background:var(--ink);color:#fff;border-color:var(--ink)}
   button.ghost{background:#fff;color:var(--ink)}
   .pins{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-  .pin{font-size:13px;font-weight:700;padding:8px 12px;border-radius:9px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
+  .pin{font-size:13px;font-weight:700;padding:8px 12px;border-radius:9px;border:1.5px solid #cfd4dc;background:#fff;color:var(--ink);cursor:pointer}
   .pin.active{background:#eef1ff;border-color:var(--blue);color:var(--blue)}
   .meta{font-size:13px;color:var(--muted);margin-bottom:12px}
   .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
@@ -75,7 +75,6 @@
   var PINS=['/funnel/diagnose','/','/wissen'];
   var PIN_LABELS={'/funnel/diagnose':'Profit-Analyse','/':'Homepage','/wissen':'Wissens-Hub'};
   var data=[], cur=null;
-  function token(){ var t=localStorage.getItem(KEY); if(!t){ t=prompt('Admin-Token:'); if(t) localStorage.setItem(KEY,t); } return t||''; }
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   function page(p){ for(var i=0;i<data.length;i++){ if(data[i].path===p) return data[i]; } return null; }
@@ -115,10 +114,9 @@
   function sync(){ renderPins(); renderSelect(); renderDetail(); renderAll(); }
 
   function load(){
-    var t=token(); if(!t){ return; }
     $('meta').textContent='Lade …'; $('err').style.display='none';
-    fetch('/api/pages?token='+encodeURIComponent(t)+'&days='+$('days').value)
-      .then(function(r){ if(r.status===401){ localStorage.removeItem(KEY); throw new Error('Token falsch — neu laden.'); } return r.json(); })
+    fetch('/api/pages?days='+$('days').value)
+      .then(function(r){ return r.json(); })
       .then(function(d){ data=d.pages||[]; if(!cur){ cur=page('/funnel/diagnose')?'/funnel/diagnose':(data[0]&&data[0].path)||'/funnel/diagnose'; } $('meta').textContent=(d.total||0)+' Aufrufe gesamt · '+data.length+' Seiten ('+$('days').value+' Tage)'+(d.note?' · '+d.note:''); sync(); })
       .catch(function(e){ $('err').style.display='block'; $('err').textContent=String(e.message||e); $('meta').textContent=''; });
   }
