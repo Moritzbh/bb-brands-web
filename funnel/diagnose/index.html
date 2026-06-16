@@ -214,7 +214,7 @@ body{overflow-x:hidden}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function domain(u){if(!u)return '';try{var h=new URL(/^https?:\/\//i.test(u)?u:'https://'+u).hostname;return h.replace(/^www\./,'');}catch(e){return String(u).replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0];}}
   function waBtn(label){return '<a class="btn js-wa" href="'+ctx.waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' '+esc(label)+'</a>';}
-  function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
+  function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.fire('WhatsAppClick',{segment:r.segment});BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
 
   function compute(v){
     var b=band(v.aov), tf=0.92;
@@ -278,14 +278,17 @@ body{overflow-x:hidden}
 
     bindWa();
     deepAnalyze(v.url);
-    try{if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
+    try{if(window.BBFunnel)BBFunnel.fire('ResultViewed',{segment:r.segment});if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
   }
 
   function showCap(){ var c=$('capBox'); if(c) c.style.display=''; }
   function deepAnalyze(url){
     var slot=$('deepSlot'); if(!slot||!url){ showCap(); return; }
     slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI bewertet deinen Shop gegen die Konversionsdoktrin (110+ Kriterien) …</div></div>';
-    fetch('/api/deep-analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({url:url})})
+    var r=ctx.r||{}, v=r.v||{};
+    var src=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():null;
+    var body={url:url,visitors:v.visitors,aov:v.aov,cr:v.cr,margin:v.margin,leakMo:Math.round(r.leakMo||0),segment:r.segment,source:src};
+    fetch('/api/deep-analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
       .then(function(r){return r.json();})
       .then(function(d){
         if(!d||!d.enabled){ slot.innerHTML=''; showCap(); return; }

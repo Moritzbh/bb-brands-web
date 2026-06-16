@@ -15,6 +15,14 @@
 const UA='Mozilla/5.0 (compatible; BBProfitCheck/1.0; +https://bb-brands.de)';
 const MODEL=process.env.PROFIT_SCAN_MODEL||'gemini-2.5-flash';
 
+// Redis (Upstash, gleich wie leads.js/events.js) — speichert jede Analyse für den Admin
+const KV_URL=process.env.KV_REST_API_URL||process.env.UPSTASH_REDIS_REST_URL||'';
+const KV_TOKEN=process.env.KV_REST_API_TOKEN||process.env.UPSTASH_REDIS_REST_TOKEN||'';
+const SCANS_KEY='bb:scans';
+async function redis(){ if(!KV_URL||!KV_TOKEN) return null; try{ var r=await fetch(KV_URL,{method:'POST',headers:{Authorization:'Bearer '+KV_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(Array.prototype.slice.call(arguments))}); if(!r.ok) return null; var d=await r.json(); return d.result; }catch(e){ return null; } }
+function dom(u){ try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return ''; } }
+async function storeScan(rec){ try{ var id=String(Date.now())+'-'+Math.random().toString(36).slice(2,8); await redis('HSET',SCANS_KEY,id,JSON.stringify(Object.assign({id:id},rec))); return id; }catch(e){ return null; } }
+
 function normUrl(raw){ var u=(raw||'').trim(); if(!u) return null; if(!/^https?:\/\//i.test(u)) u='https://'+u; try{ return new URL(u).href; }catch(e){ return null; } }
 
 async function getText(url){
@@ -87,7 +95,15 @@ module.exports = async function(req,res){
     try{ var rr=await fetch(url,{headers:{'User-Agent':UA}}); var html=await rr.text(); var pm=html.match(/href=["']([^"']*\/products\/[^"'?#]+)["']/i); if(pm){ var pu=pm[1].indexOf('http')===0?pm[1]:new URL(pm[1],url).href; pdp=await getText(pu);} }catch(e){}
     var content='[HOMEPAGE]\n'+home+(pdp?('\n\n[PRODUKTSEITE]\n'+pdp):'');
     var findings=await callGemini(content);
-    return res.status(200).json({enabled:true, reachable:true, url:url, model:MODEL, findings:findings});
+    // Komplette Analyse für den Admin speichern (Domain-Suche → senden)
+    var scanId=await storeScan({
+      ts:Date.now(), domain:dom(url), url:url, model:MODEL,
+      inputs:{ visitors:+q.visitors||null, aov:+q.aov||null, cr:+q.cr||null, margin:+q.margin||null },
+      leak_eur_month:+q.leakMo||null, segment:q.segment||null,
+      source:q.source||null,
+      findings:findings
+    });
+    return res.status(200).json({enabled:true, reachable:true, url:url, model:MODEL, scanId:scanId, findings:findings});
   }catch(e){
     return res.status(200).json({enabled:true, error:String(e&&e.message||e)});
   }

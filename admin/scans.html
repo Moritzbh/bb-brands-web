@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Profit-Analysen · Admin · BB Brands</title>
+<style>
+  :root{--ink:#0b0b0c;--muted:#6b6e76;--line:#e6e6e8;--bg:#f6f7f9;--card:#fff;--blue:#0305C6;--ok:#16a34a;--red:#d6453c;--amber:#b45309}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding:24px 16px 80px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+  input,button{font-family:inherit;font-size:15px;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff}
+  input{flex:1;min-width:200px}
+  input:focus{outline:none;border-color:var(--ink)}
+  button{cursor:pointer;font-weight:700;background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.ghost{background:#fff;color:var(--ink)}
+  .meta{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .dom{font-size:18px;font-weight:800}
+  .dom a{color:var(--blue);text-decoration:none}
+  .ts{font-size:12px;color:var(--muted)}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .pill{font-size:12px;font-weight:700;padding:4px 9px;border-radius:7px;background:#eef1ff;color:var(--blue)}
+  .pill.red{background:#fdecea;color:var(--red)} .pill.amber{background:#fef3c7;color:var(--amber)} .pill.ok{background:#eafaf0;color:var(--ok)}
+  .nums{font-size:13.5px;color:#33333c;margin-bottom:10px}
+  .fazit{font-size:14.5px;font-weight:600;margin-bottom:10px}
+  .find{font-size:13.5px;padding:5px 0;border-top:1px solid var(--line)}
+  .find:first-of-type{border-top:0}
+  .find b{font-weight:700}
+  .find .sev{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-right:6px}
+  .sev.High,.sev.Critical{color:var(--red)} .sev.Medium{color:var(--amber)} .sev.Low{color:var(--muted)}
+  .actions{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .copied{color:var(--ok);font-weight:700;font-size:13px;align-self:center}
+  .empty{text-align:center;color:var(--muted);padding:40px}
+  .err{background:#fdecea;border:1px solid var(--red);color:#a3271f;border-radius:10px;padding:12px;margin-bottom:14px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Profit-Analysen</h1>
+  <p class="sub">Jede KI-Analyse wird hier gespeichert. Jemand schreibt dir per WhatsApp mit seiner Domain → such die Domain → „Analyse kopieren" → in WhatsApp einfügen.</p>
+
+  <div class="bar">
+    <input id="q" type="text" placeholder="Domain suchen (z.B. biohackify)…" autocomplete="off">
+    <button id="reload">Neu laden</button>
+    <button class="ghost" id="logout" title="Admin-Token vergessen">Token ändern</button>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div id="err" class="err" style="display:none"></div>
+  <div id="list"></div>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var KEY='bb_admin_token';
+  var all=[];
+  function token(){ var t=localStorage.getItem(KEY); if(!t){ t=prompt('Admin-Token:'); if(t) localStorage.setItem(KEY,t); } return t||''; }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function eur(n){ if(n==null) return '–'; return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n); }
+  function dt(ts){ try{ return new Date(ts).toLocaleString('de-DE'); }catch(e){ return ''; } }
+  function segClass(s){ return s==='red'?'red':s==='yellow'?'amber':s==='green'?'ok':''; }
+
+  function copyText(s){
+    var f=s.findings||{};
+    var L=[];
+    L.push('Profit-Analyse für '+(s.domain||s.url||''));
+    L.push('');
+    var i=s.inputs||{};
+    L.push('Deine Zahlen: '+(i.visitors||'?')+' Besucher/Mo · AOV '+eur(i.aov)+' · CR '+(i.cr||'?')+'% · Marge '+(i.margin||'?')+'%');
+    if(s.leak_eur_month) L.push('Geschätztes Profit-Leck: ~'+eur(s.leak_eur_month)+'/Monat');
+    if(f.engpass) L.push('Größter Engpass: '+f.engpass);
+    L.push('');
+    if(f.fazit) { L.push(f.fazit); L.push(''); }
+    if(f.steps && f.steps.length){
+      L.push('Gefundene Punkte:');
+      f.steps.forEach(function(st){ L.push('- '+(st.step||'')+(st.hebel?' ['+st.hebel+']':'')+' ('+(st.severity||'')+'): '+(st.evidenz||'')+(st.impact?' — '+st.impact:'')); });
+      L.push('');
+    }
+    L.push('Die 3 wichtigsten Hebel + wie wir das konkret fixen, gehen wir am besten kurz durch. Wann passt dir?');
+    return L.join('\n');
+  }
+
+  function render(list){
+    var el=$('list');
+    if(!list.length){ el.innerHTML='<div class="empty">Keine Analysen gefunden.</div>'; return; }
+    el.innerHTML=list.map(function(s,idx){
+      var f=s.findings||{}; var i=s.inputs||{};
+      var steps=(f.steps||[]).map(function(st){ return '<div class="find"><span class="sev '+esc(st.severity||'')+'">'+esc(st.severity||'')+'</span><b>'+esc(st.step||'')+(st.hebel?' · '+esc(st.hebel):'')+'</b> '+esc(st.evidenz||'')+(st.impact?' <span style="color:#6b6e76">('+esc(st.impact)+')</span>':'')+'</div>'; }).join('');
+      return '<div class="card">'+
+        '<div class="top"><span class="dom"><a href="'+esc(s.url||'#')+'" target="_blank" rel="noopener">'+esc(s.domain||s.url||'?')+'</a></span><span class="ts">'+esc(dt(s.ts))+'</span></div>'+
+        '<div class="pills">'+
+          (s.segment?'<span class="pill '+segClass(s.segment)+'">'+esc(s.segment)+'</span>':'')+
+          (s.leak_eur_month?'<span class="pill">Leck ~'+esc(eur(s.leak_eur_month))+'/Mo</span>':'')+
+          (s.source?'<span class="pill">'+esc(typeof s.source==='string'?s.source:JSON.stringify(s.source).slice(0,40))+'</span>':'')+
+        '</div>'+
+        '<div class="nums">'+(i.visitors||'?')+' Besucher/Mo · AOV '+esc(eur(i.aov))+' · CR '+(i.cr||'?')+'% · Marge '+(i.margin||'?')+'%</div>'+
+        (f.fazit?'<div class="fazit">'+esc(f.fazit)+(f.engpass?' · Engpass: '+esc(f.engpass):'')+'</div>':'')+
+        steps+
+        '<div class="actions"><button data-i="'+idx+'" class="copybtn">📋 Analyse kopieren</button>'+
+          '<a href="https://wa.me/491608725947" target="_blank" rel="noopener"><button class="ghost">WhatsApp öffnen</button></a></div>'+
+      '</div>';
+    }).join('');
+    el.querySelectorAll('.copybtn').forEach(function(b){ b.addEventListener('click',function(){ var s=list[+b.dataset.i]; var txt=copyText(s); navigator.clipboard.writeText(txt).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='📋 Analyse kopieren';},1800); }).catch(function(){ prompt('Kopieren:',txt); }); }); });
+  }
+
+  function load(){
+    var t=token(); if(!t){ $('err').style.display='block'; $('err').textContent='Kein Token.'; return; }
+    $('meta').textContent='Lade …'; $('err').style.display='none';
+    fetch('/api/scans?token='+encodeURIComponent(t)+'&days=180')
+      .then(function(r){ if(r.status===401){ localStorage.removeItem(KEY); throw new Error('Token falsch — neu laden.'); } return r.json(); })
+      .then(function(d){ all=d.scans||[]; $('meta').textContent=all.length+' Analysen (letzte 180 Tage)'+(d.note?' · '+d.note:''); filter(); })
+      .catch(function(e){ $('err').style.display='block'; $('err').textContent=String(e.message||e); $('meta').textContent=''; });
+  }
+  function filter(){ var q=($('q').value||'').toLowerCase().trim(); render(q?all.filter(function(s){return (s.domain||'').toLowerCase().indexOf(q)>=0||(s.url||'').toLowerCase().indexOf(q)>=0;}):all); }
+
+  $('q').addEventListener('input',filter);
+  $('reload').addEventListener('click',load);
+  $('logout').addEventListener('click',function(){ localStorage.removeItem(KEY); location.reload(); });
+  load();
+})();
+</script>
+</body>
+</html>
