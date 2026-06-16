@@ -78,6 +78,8 @@
   .seg button{font-family:inherit;font-size:13px;font-weight:600;padding:8px 12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
   .seg button.on{background:var(--ink);color:#fff}
   .view{padding:26px;max-width:1180px;width:100%}
+  .view.frame{padding:0;max-width:none}
+  .crmframe{width:100%;height:calc(100vh - 61px);border:0;display:block;background:#f5f6fb}
   input.search,select.search{font-family:inherit;font-size:14px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;width:100%}
   input.search:focus,select.search:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px var(--blue-tint)}
 
@@ -203,15 +205,15 @@
       {id:'overview',label:'Übersicht',icon:'M3 13h8V3H3v10zm10 8h8V3h-8v18zM3 21h8v-6H3v6z'}
     ]},
     {grp:'Akquise',items:[
-      {id:'leads',label:'Leads',ext:'/admin/crm.html',icon:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'},
+      {id:'leads',label:'Leads',icon:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'},
       {id:'scans',label:'Profit-Analysen',icon:'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35'},
-      {id:'funnel',label:'Funnel',ext:'/admin/crm.html#funnel',icon:'M22 3H2l8 9.46V19l4 2v-8.54L22 3z'}
+      {id:'funnel',label:'Funnel',icon:'M22 3H2l8 9.46V19l4 2v-8.54L22 3z'}
     ]},
     {grp:'Insights',items:[
       {id:'analytics',label:'Analytics',icon:'M3 3v18h18M7 15l4-4 3 3 5-6'}
     ]},
     {grp:'Vertrieb',items:[
-      {id:'outbound',label:'Outbound',ext:'/admin/crm.html#outbound',icon:'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'}
+      {id:'outbound',label:'Outbound',icon:'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'}
     ]}
   ];
   function renderNav(active){
@@ -344,11 +346,22 @@
     $('view').querySelectorAll('[data-p]').forEach(function(b){ b.onclick=function(){ anCur=b.dataset.p; renderAn(total); }; });
   }
 
+  // CRM EMBED (Leads / Funnel / Outbound — eingebettet, eine Fläche)
+  var CRM_VIEWS={leads:['cockpit','Leads / CRM'],funnel:['funnel','Funnel'],outbound:['outbound','Outbound']};
+  function viewCRM(route){
+    var cfg=CRM_VIEWS[route]||['cockpit','Leads / CRM'];
+    $('ptitle').textContent=cfg[1];
+    $('pactions').innerHTML='<a class="btn" href="/admin/crm.html#'+cfg[0]+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>Vollbild</a>';
+    $('view').classList.add('frame');
+    $('view').innerHTML='<iframe class="crmframe" src="/admin/crm.html#'+cfg[0]+'" title="'+cfg[1]+'"></iframe>';
+  }
+
   // ---------- ROUTER ----------
-  var VIEWS={overview:viewOverview,scans:viewScans,analytics:viewAnalytics};
+  var VIEWS={overview:viewOverview,scans:viewScans,analytics:viewAnalytics,
+    leads:function(){viewCRM('leads');},funnel:function(){viewCRM('funnel');},outbound:function(){viewCRM('outbound');}};
   function route(){
     var v=(location.hash.replace('#/','')||'overview'); if(!VIEWS[v]) v='overview';
-    renderNav(v); window.scrollTo(0,0); VIEWS[v]();
+    $('view').classList.remove('frame'); renderNav(v); window.scrollTo(0,0); VIEWS[v]();
   }
   function closeSide(){ $('side').classList.remove('open'); $('scrim').classList.remove('open'); }
 

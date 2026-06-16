@@ -12,6 +12,9 @@
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:var(--navy)}
 .wrap{max-width:1400px;margin:0 auto;padding:0 18px}
+html.embedded #backBtn,html.embedded .topbar h1{display:none}
+html.embedded .topbar{margin-top:8px;justify-content:flex-end}
+html.embedded #login{background:#f5f6fb}
 
 /* Login */
 #login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
@@ -226,12 +229,13 @@ tr:hover td{background:#fafbff}
 </div>
 
 <!-- APP -->
+<script>if(window.self!==window.top)document.documentElement.classList.add('embedded');</script>
 <div id="app">
   <div class="wrap">
     <div class="topbar">
       <h1>BB <b>Sales-CRM</b></h1>
       <div class="tb-actions">
-        <a class="btn" href="/admin" style="text-decoration:none;background:#0305C6;color:#fff;border-color:#0305C6">← Agentur OS</a>
+        <a class="btn" id="backBtn" href="/admin" style="text-decoration:none;background:#0305C6;color:#fff;border-color:#0305C6">← Agentur OS</a>
         <button class="btn" id="refreshBtn">↻ Aktualisieren</button>
         <button class="btn" id="exportBtn">⤓ CSV</button>
         <button class="btn btn-ghost" id="logoutBtn">Logout</button>
@@ -1119,6 +1123,10 @@ tr:hover td{background:#fafbff}
   $('token').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
   if(token){showApp();load();}else{showLogin('');}
+
+  // Tab via URL-Hash öffnen (für Embed aus Agentur OS: #funnel / #outbound …)
+  (function(){var h=(location.hash||'').replace(/^#/,'');if(h&&token){var b=document.querySelector('.tab[data-tab="'+h+'"]');if(b)b.click();}})();
+  window.addEventListener('hashchange',function(){var h=(location.hash||'').replace(/^#/,'');if(h&&token){var b=document.querySelector('.tab[data-tab="'+h+'"]');if(b)b.click();}});
 })();
 </script>
 
