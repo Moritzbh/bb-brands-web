@@ -54,7 +54,7 @@ async function callGemini(content){
   var body={
     system_instruction:{parts:[{text:DOCTRINE+'\n\n'+SCHEMA_HINT}]},
     contents:[{role:'user',parts:[{text:'Hier ist der gefetchte Inhalt von Homepage + Produktseite des Shops. Bewerte ihn gegen die Doktrin und gib NUR das JSON zurück.\n\n'+content}]}],
-    generationConfig:{maxOutputTokens:1800,temperature:0.3,responseMimeType:'application/json'}
+    generationConfig:{maxOutputTokens:4096,temperature:0.3,responseMimeType:'application/json',thinkingConfig:{thinkingBudget:0}}
   };
   var ctrl=new AbortController(), t=setTimeout(function(){ctrl.abort();},45000);
   var r=await fetch(url,{method:'POST',signal:ctrl.signal,headers:{'content-type':'application/json'},body:JSON.stringify(body)});
@@ -63,8 +63,9 @@ async function callGemini(content){
   var d=await r.json();
   var txt='';
   try{ txt=d.candidates[0].content.parts.map(function(p){return p.text||'';}).join(''); }catch(_){ txt=''; }
-  var m=txt.match(/\{[\s\S]*\}/);
-  return m? JSON.parse(m[0]) : {raw:txt};
+  var obj=null;
+  try{ obj=JSON.parse(txt); }catch(_){ var m=txt.match(/\{[\s\S]*\}/); if(m){ try{ obj=JSON.parse(m[0]); }catch(e){} } }
+  return obj||{raw:txt};
 }
 
 module.exports = async function(req,res){
