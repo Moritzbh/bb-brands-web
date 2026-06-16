@@ -43,7 +43,10 @@ const DOCTRINE = [
   '5 MOBILE: Mobile-first? Tap-Targets? Bottom-Nav?',
   '6 SPEED: LCP<2,5s, INP<200ms, CLS<0,1?',
   '7 TRUST/DACH: Social Proof? Garantie? Trusted Shops? Impressum/AGB?',
-  'Hebel-IDs: A1 Editorial-Hero, B1 Trust-Stack, B4 Reviews+Fotos, B5 Sticky-ATC, C2 Free-Shipping, F4 Express-Pay, E1 Hero-Preload, D3 Trust-Bar.',
+  '8 OFFER & POSITIONIERUNG (Schwartz): Klares Mechanism-Pair — echte Ursache des Problems (UMP) + proprietäre Lösung (UMS)? Oder austauschbar (tödlich in gesättigten Märkten)? Big Idea (neuer Frame statt Feature-Liste)? Holt die Seite den Bewusstseinsgrad des Käufers ab? Belief Chain bedient (Problem real -> andere scheitern -> diese Lösung -> diese Marke -> Social Proof -> Risk=0)? No-Brainer-Offer (Garantie/Risk-Reversal/Value-Stack/Grund-jetzt)?',
+  '9 PROFIT/UNIT-ECONOMICS: AOV/Pricing tragfähig? Erkennbarer AOV-Hebel (Bundle/Cross-Sell/Free-Shipping-Schwelle)? Hinweis: unter ~45% Bruttomarge nach allen Kosten kein Ad-Spielraum (Strukturproblem).',
+  'COPY/VoC: Trifft Headline/PDP-Copy einen konkreten, wiedererkennbaren Pain in Kundensprache — oder generischer Marketing-Lärm (Leck)?',
+  'Hebel-IDs: A1 Editorial-Hero, B1 Trust-Stack, B4 Reviews+Fotos, B5 Sticky-ATC, C2 Free-Shipping, F4 Express-Pay, E1 Hero-Preload, D3 Trust-Bar, O1 Mechanism-Pair, O5 No-Brainer-Offer.',
   'Severity: Critical (Kauf unmöglich/Checkout kaputt) - High (großer messbarer Verlust) - Medium - Low. Nenne dem Kunden nur Critical+High. Voice: direkt, du-Form, keine Buzzwords.'
 ].join('\n');
 
