@@ -173,27 +173,25 @@
 .ctaCol h3{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
 .ctaCol .cs{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.5}
 .ctaCol .reassure{font-size:12px;color:#a0a2a9;margin-top:10px}
-/* Analyse-Cover — Premium-Dossier, immer in Markenfarbe (gegradeter Verlauf) */
-.cover{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.26);aspect-ratio:3/4;color:#fff;display:flex;flex-direction:column;padding:18px 18px 0;background:linear-gradient(158deg,var(--bc,#0305C6),var(--bc2,#020374) 70%,var(--bc3,#01023f))}
-.cover .cv-glow{position:absolute;inset:0;background:radial-gradient(120% 80% at 82% -10%,rgba(255,255,255,.18),transparent 55%);z-index:1}
-.cover .cv-top{position:relative;z-index:2;display:flex;align-items:center;gap:9px}
-.cover .cv-logo{position:relative;width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.94);color:#111;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:900;font-size:14px}
+/* Analyse-Cover — Magazine-Style: Moritz als grosser Hero, Markenfarben-Verlauf, Text-Overlay */
+.cover{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.26);aspect-ratio:3/4;color:#fff;background:linear-gradient(158deg,var(--bc,#0305C6),var(--bc2,#020374) 68%,var(--bc3,#01023f))}
+.cover .cv-glow{position:absolute;inset:0;z-index:1;background:radial-gradient(115% 75% at 78% -8%,rgba(255,255,255,.20),transparent 55%)}
+.cover .cv-hero{position:absolute;right:-7%;bottom:0;height:99%;width:auto;z-index:2;filter:drop-shadow(0 8px 22px rgba(0,0,0,.42))}
+.cover .cv-scrim{position:absolute;inset:0;z-index:3;background:linear-gradient(90deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.14) 42%,transparent 66%),linear-gradient(180deg,rgba(0,0,0,.20),transparent 26%,transparent 72%,rgba(0,0,0,.42))}
+.cover .cv-in{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;padding:16px 16px 40px}
+.cover .cv-top{display:flex;align-items:center;gap:8px}
+.cover .cv-logo{position:relative;width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.94);color:#111;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:900;font-size:13px}
 .cover .cv-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:2px}
-.cover .cv-brand{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.92;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cover .cv-stamp{position:absolute;top:16px;right:14px;z-index:3;font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.5);color:rgba(255,255,255,.85);padding:4px 6px;border-radius:5px;transform:rotate(6deg)}
-.cover .cv-line{position:relative;z-index:2;height:2px;width:42px;background:rgba(255,255,255,.55);margin:15px 0 12px}
-.cover .cv-ey{position:relative;z-index:2;font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;opacity:.72}
-.cover .cv-title{position:relative;z-index:2;font-size:28px;font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:6px}
-.cover .cv-for{position:relative;z-index:2;font-size:14px;font-weight:600;opacity:.9;margin-top:5px;overflow-wrap:anywhere}
-.cover .cv-mx{position:relative;z-index:2;margin-top:auto;font-size:11.5px}
-.cover .cv-mx div{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.22)}
+.cover .cv-brand{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.95;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.cover .cv-stamp{position:absolute;top:15px;right:13px;z-index:5;font-size:7.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.55);color:rgba(255,255,255,.9);padding:3px 6px;border-radius:5px;transform:rotate(6deg)}
+.cover .cv-ey{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;opacity:.78;margin-top:16px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.cover .cv-title{font-size:30px;font-weight:900;line-height:.98;letter-spacing:-.02em;margin-top:6px;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.cover .cv-for{font-size:13.5px;font-weight:600;opacity:.92;margin-top:5px;max-width:62%;overflow-wrap:anywhere;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+.cover .cv-mx{margin-top:auto;max-width:66%;font-size:11px}
+.cover .cv-mx div{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.28)}
 .cover .cv-mx b{font-weight:800;font-variant-numeric:tabular-nums}
-.cover .cv-ft{position:relative;z-index:2;display:flex;align-items:center;gap:9px;padding:11px 0;border-top:1px solid rgba(255,255,255,.22);margin-top:9px}
-.cover .cv-ph{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.14) url('/assets/images/founder-cover-portrait.png') center 18% / 126% no-repeat}
-.cover .cv-fn{font-size:10.5px;line-height:1.3}
-.cover .cv-fn b{font-weight:800}
-.cover .cv-fn span{opacity:.72}
-.cover .cv-lockbar{position:relative;z-index:3;margin:0 -18px;background:rgba(0,0,0,.28);font-size:10.5px;font-weight:800;text-align:center;padding:9px}
+.cover .cv-sign{font-size:9.5px;opacity:.75;margin-top:9px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.cover .cv-lockbar{position:absolute;left:0;right:0;bottom:0;z-index:5;background:rgba(0,0,0,.42);backdrop-filter:blur(2px);font-size:10.5px;font-weight:800;text-align:center;padding:9px}
 /* Hero-Split: freigestellter Moritz neben der Headline (auf Weiß, dezentes Panel) */
 .hero-grid{max-width:660px;margin:0 auto;padding:0 22px}
 .hero-main{text-align:center;min-width:0}
@@ -345,18 +343,20 @@ body{overflow-x:hidden}
     var crVal= showLeak?(pct(r.ist)+' → '+pct(r.tHi)):pct(r.ist);
     return '<div class="cover" style="--bc:'+bc+';--bc2:'+bc2+';--bc3:'+bc3+'">'+
       '<div class="cv-glow"></div>'+
-      '<div class="cv-top"><span class="cv-logo">'+initial+logo+'</span><span class="cv-brand">'+esc(name)+'</span></div>'+
-      '<span class="cv-stamp">Vertraulich</span>'+
-      '<div class="cv-line"></div>'+
-      '<div class="cv-ey">KI Profit-Analyse</div>'+
-      '<div class="cv-title">Profit-<br>Analyse</div>'+
-      '<div class="cv-for">für '+esc(name)+'</div>'+
-      '<div class="cv-mx">'+
-        leakRow+
-        '<div><span>Conversion-Rate</span><b>'+crVal+'</b></div>'+
-        '<div><span>Geprüfte Kriterien</span><b>110+</b></div>'+
+      '<img class="cv-hero" src="/assets/images/founder-cover-hero.png" alt="Moritz Bohmbach, Founder BB Brands">'+
+      '<div class="cv-scrim"></div>'+
+      '<div class="cv-in">'+
+        '<div class="cv-top"><span class="cv-logo">'+initial+logo+'</span><span class="cv-brand">'+esc(name)+'</span></div>'+
+        '<span class="cv-stamp">Vertraulich</span>'+
+        '<div class="cv-ey">KI Profit-Analyse</div>'+
+        '<div class="cv-title">Profit-<br>Analyse</div>'+
+        '<div class="cv-for">für '+esc(name)+'</div>'+
+        '<div class="cv-mx">'+
+          leakRow+
+          '<div><span>Conversion</span><b>'+crVal+'</b></div>'+
+        '</div>'+
+        '<div class="cv-sign">Analyse von Moritz Bohmbach · BB Brands</div>'+
       '</div>'+
-      '<div class="cv-ft"><span class="cv-ph"></span><span class="cv-fn"><b>Analyse von Moritz Bohmbach</b><br><span>BB Brands · Growth Infrastructure</span></span></div>'+
       '<div class="cv-lockbar">🔒 komplett per WhatsApp</div>'+
     '</div>';
   }
