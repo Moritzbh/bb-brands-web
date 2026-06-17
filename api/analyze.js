@@ -94,13 +94,19 @@ function pickBrandColor(html){
   if(best) return best;
   return tc?hex6(tc):null;
 }
+// Feste Overrides fuer Ziel-Brands (Domain ohne www) — schlagen die Auto-Erkennung.
+// Farbe ggf. per Screenshot der Homepage bestimmt; nur setzen was wirklich stimmt.
+var BRAND_OVERRIDES = {
+  'haferloewe.de': { color:'#efa727', name:'Haferlöwe' }
+};
 function brandAssets(html, baseUrl){
   var host=''; try{ host=new URL(baseUrl).hostname.replace(/^www\./,''); }catch(e){}
-  var color=pickBrandColor(html);
-  var logo=linkHref(html,'apple-touch-icon')||linkHref(html,'icon');
+  var ov=BRAND_OVERRIDES[host]||{};
+  var color=ov.color||pickBrandColor(html);
+  var logo=ov.logo||linkHref(html,'apple-touch-icon')||linkHref(html,'icon');
   try{ if(logo) logo=new URL(logo, baseUrl).href; }catch(e){ logo=null; }
   if(!logo && host) logo='https://www.google.com/s2/favicons?domain='+host+'&sz=128';
-  var name=metaContent(html,'og:site_name');
+  var name=ov.name||metaContent(html,'og:site_name');
   if(!name){ var t=(html.match(/<title[^>]*>([^<]+)<\/title>/i)||[])[1]; if(t) name=t.split(/[|–—·:\-]/)[0].trim(); }
   if(!name && host) name=host.split('.')[0];
   return {color:color, logo:logo, name:name||null};
