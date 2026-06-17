@@ -189,13 +189,15 @@
 .cover .cv-foot{font-size:9px;color:#a0a2a9;margin-top:9px;letter-spacing:.02em}
 .cover .cv-lock{position:absolute;top:10px;right:10px;background:rgba(11,11,12,.82);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:99px;backdrop-filter:blur(2px)}
 /* Hero-Split: freigestellter Moritz neben der Headline (auf Weiß, dezentes Panel) */
-.hero-grid{max-width:1040px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:320px 1fr;gap:30px;align-items:stretch}
+.hero-grid{max-width:660px;margin:0 auto;padding:0 22px}
 .hero-main{text-align:center;min-width:0}
-.hero-aside{order:-1;display:flex;align-items:flex-end;justify-content:center}
-.hero-moritz{width:auto;height:auto;max-height:520px;max-width:100%;object-fit:contain;align-self:flex-end;display:block}
-@media(max-width:780px){
-  .hero-grid{grid-template-columns:1fr;max-width:660px}
-  .hero-aside{display:none}
+.hero-aside{display:none}
+.hero-moritz{width:auto;height:auto;max-height:500px;max-width:100%;object-fit:contain;display:block}
+/* Ab breitem Desktop: 3-Spalten — Content bleibt EXAKT mittig, Foto in der linken Aussenspalte */
+@media(min-width:1150px){
+  .hero-grid{max-width:none;padding:0;display:grid;grid-template-columns:1fr minmax(0,620px) 1fr;align-items:start;column-gap:0}
+  .hero-main{grid-column:2}
+  .hero-aside{display:flex;grid-column:1;align-self:end;justify-content:flex-start;padding-left:clamp(20px,4vw,90px)}
 }
 /* ===== ROBUSTHEIT + MOBILE ===== */
 body{overflow-x:hidden}
