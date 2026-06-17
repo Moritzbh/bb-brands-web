@@ -312,7 +312,7 @@ body{overflow-x:hidden}
     </div>
    </div>
    <div class="hero-aside">
-     <img class="hero-moritz" src="/assets/images/founder-moritz-cutout.png" alt="Moritz Bohmbach, Founder BB Brands" loading="lazy">
+     <img class="hero-moritz" src="/assets/images/founder-moritz-cutout.png" alt="Moritz Bohmbach, Founder BB Brands" width="586" height="934">
    </div>
    <!-- Founder-Trust: Gesicht, Name, persönlich + Google-Bewertung (mobil unter dem Bild, Desktop in der Mitte unter dem Formular) -->
    <div class="founder">
@@ -596,7 +596,9 @@ body{overflow-x:hidden}
     var li=0; var lt=setInterval(function(){ li=(li+1)%LOAD.length; var el=$('loadMsg'); if(el)el.innerHTML=LOAD[li]; },1400);
     var t0=Date.now(), done=false;
     function go(scan){ var wait=2200-(Date.now()-t0); if(wait>0){ setTimeout(function(){_go(scan);},wait); } else _go(scan); }
-    function _go(scan){ if(done)return; done=true; clearInterval(lt); $('loading').style.display='none'; render(compute(v),scan); $('result').style.display='block'; $('result').scrollIntoView({behavior:'smooth',block:'start'}); }
+    function _go(scan){ if(done)return; done=true; clearInterval(lt); $('loading').style.display='none'; render(compute(v),scan); var rs=$('result'); rs.style.display='block';
+      var sc=function(){ try{ window.scrollTo({top:rs.getBoundingClientRect().top+window.pageYOffset-8,behavior:'smooth'}); }catch(_){ try{rs.scrollIntoView();}catch(e){} } };
+      requestAnimationFrame(sc); setTimeout(sc,350); setTimeout(sc,800); }
     (analyzePromise||Promise.resolve(null)).then(function(s){go(s);});
     setTimeout(function(){go(null);},9000);
   });
