@@ -55,6 +55,31 @@ function detect(html){
   };
 }
 
+// --- Brand-Assets fürs Analyse-Cover (Logo, Markenfarbe, Name) ---
+function metaContent(html, key){
+  var k=key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var m=html.match(new RegExp('<meta[^>]+(?:name|property)=["\']'+k+'["\'][^>]*content=["\']([^"\']+)["\']','i'))
+       || html.match(new RegExp('<meta[^>]+content=["\']([^"\']+)["\'][^>]*(?:name|property)=["\']'+k+'["\']','i'));
+  return m?m[1].trim():null;
+}
+function linkHref(html, rel){
+  var m=html.match(new RegExp('<link[^>]+rel=["\'][^"\']*'+rel+'[^"\']*["\'][^>]*href=["\']([^"\']+)["\']','i'))
+       || html.match(new RegExp('<link[^>]+href=["\']([^"\']+)["\'][^>]*rel=["\'][^"\']*'+rel+'[^"\']*["\']','i'));
+  return m?m[1].trim():null;
+}
+function validColor(c){ if(!c) return null; c=c.trim(); return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(c) ? c : null; }
+function brandAssets(html, baseUrl){
+  var host=''; try{ host=new URL(baseUrl).hostname.replace(/^www\./,''); }catch(e){}
+  var color=validColor(metaContent(html,'theme-color'));
+  var logo=linkHref(html,'apple-touch-icon')||linkHref(html,'icon');
+  try{ if(logo) logo=new URL(logo, baseUrl).href; }catch(e){ logo=null; }
+  if(!logo && host) logo='https://www.google.com/s2/favicons?domain='+host+'&sz=128';
+  var name=metaContent(html,'og:site_name');
+  if(!name){ var t=(html.match(/<title[^>]*>([^<]+)<\/title>/i)||[])[1]; if(t) name=t.split(/[|–—·:\-]/)[0].trim(); }
+  if(!name && host) name=host.split('.')[0];
+  return {color:color, logo:logo, name:name||null};
+}
+
 module.exports = async function(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');
@@ -90,6 +115,7 @@ module.exports = async function(req,res){
 
   return res.status(200).json({
     reachable:true, url:url,
+    brand: brandAssets(home.html, url),
     shop:{ isShopify:sig.isShopify, theme:sig.theme },
     cwv:cwv,
     leaks:leaks,

@@ -159,6 +159,35 @@
   .founder .pe{border-left:0;border-top:1px solid var(--line);flex-direction:row;width:100%;justify-content:center;gap:8px;padding:11px 0 1px}
   .founder .pe .pl{margin-top:0}
 }
+/* free-win card (echter Gratis-Hebel) */
+.freewin{background:#eafaf0;border:1px solid #bfe9cd;border-radius:14px;padding:15px 17px;margin-top:6px}
+.freewin .fw-tag{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ok);display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.freewin .fw-tag svg{width:14px;height:14px}
+.freewin .fw-find{font-size:14.5px;font-weight:700;line-height:1.4}
+.freewin .fw-find .hb{color:var(--muted);font-weight:600}
+.freewin .fw-fix{font-size:14px;line-height:1.5;margin-top:7px;padding-top:7px;border-top:1px dashed #bfe9cd}
+.freewin .fw-fix b{color:var(--ok)}
+/* 2-spaltige CTA-Box mit Cover */
+.cta2{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}
+@media(max-width:560px){.cta2{grid-template-columns:1fr;gap:16px}}
+.ctaCol h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.ctaCol .cs{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.ctaCol .reassure{font-size:12px;color:#a0a2a9;margin-top:10px}
+/* Analyse-Cover (custom in Markenfarbe) */
+.cover{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.14);aspect-ratio:3/4;background:#fff;display:flex;flex-direction:column}
+.cover .cv-band{background:var(--bc,#0305C6);color:var(--bt,#fff);padding:11px 13px;display:flex;align-items:center;gap:8px}
+.cover .cv-logo{position:relative;width:26px;height:26px;border-radius:6px;background:#fff;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:900;font-size:13px;color:var(--bc,#0305C6)}
+.cover .cv-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:2px}
+.cover .cv-brand{font-size:13px;font-weight:800;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cover .cv-body{flex:1;padding:14px 14px 12px;display:flex;flex-direction:column}
+.cover .cv-eyebrow{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cover .cv-title{font-size:18px;font-weight:900;line-height:1.08;letter-spacing:-.02em;margin-top:4px}
+.cover .cv-title b{color:var(--bc,#0305C6)}
+.cover .cv-metrics{margin-top:auto;display:grid;gap:5px;font-size:11.5px;color:#33333c}
+.cover .cv-metrics div{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:5px}
+.cover .cv-metrics b{font-variant-numeric:tabular-nums}
+.cover .cv-foot{font-size:9px;color:#a0a2a9;margin-top:9px;letter-spacing:.02em}
+.cover .cv-lock{position:absolute;top:10px;right:10px;background:rgba(11,11,12,.82);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:99px;backdrop-filter:blur(2px)}
 /* ===== ROBUSTHEIT + MOBILE ===== */
 body{overflow-x:hidden}
 .wrap,.res-card,.deep,.capture,.scan,.lockcard,.close p,.sl span{overflow-wrap:break-word;word-break:break-word}
@@ -276,6 +305,37 @@ body{overflow-x:hidden}
   function waBtn(label){return '<a class="btn js-wa" href="'+ctx.waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' '+esc(label)+'</a>';}
   function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.fire('WhatsAppClick',{segment:r.segment});BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
 
+  function readableOn(hex){ if(!hex||hex.charAt(0)!=='#') return '#fff'; var h=hex.slice(1); if(h.length===3) h=h.replace(/./g,'$&$&'); var r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16); return (0.299*r+0.587*g+0.114*b)/255>0.62?'#0b0b0c':'#fff'; }
+  function coverHtml(scan,r){
+    scan=scan||{}; var br=scan.brand||{}; var v=r.v||{};
+    var name=br.name||domain(v.url)||'deinen Shop';
+    var bc=(br.color&&/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(br.color))?br.color:'#0305C6';
+    var bt=readableOn(bc);
+    var initial=esc((name||'?').trim().charAt(0).toUpperCase());
+    var logo=br.logo?'<img src="'+esc(br.logo)+'" alt="" onerror="this.remove()">':'';
+    var showLeak=(r.segment!=='tier1'&&r.segment!=='green');
+    var metrics= showLeak
+      ? '<div><span>Profit-Leck</span><b>'+eur(r.leakMo)+'/Mo</b></div><div><span>Deine CR</span><b>'+pct(r.ist)+'</b></div><div><span>Realistisch</span><b>'+pct(r.tHi)+'</b></div>'
+      : '<div><span>Deine CR</span><b>'+pct(r.ist)+'</b></div><div><span>Bestellwert</span><b>'+eur(v.aov)+'</b></div><div><span>Status</span><b>Conversion-Check</b></div>';
+    return '<div class="cover" style="--bc:'+bc+';--bt:'+bt+'">'+
+      '<div class="cv-band"><span class="cv-logo">'+initial+logo+'</span><span class="cv-brand">'+esc(name)+'</span></div>'+
+      '<div class="cv-body">'+
+        '<div class="cv-eyebrow">KI Profit-Analyse</div>'+
+        '<div class="cv-title">Profit-Analyse für <b>'+esc(name)+'</b></div>'+
+        '<div class="cv-metrics">'+metrics+'</div>'+
+        '<div class="cv-foot">BB Brands · vertraulich erstellt für '+esc(name)+'</div>'+
+      '</div>'+
+      '<div class="cv-lock">🔒 komplett per WhatsApp</div>'+
+    '</div>';
+  }
+  function winCard(s){
+    if(!s) return '';
+    return '<div class="freewin"><div class="fw-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Dein Gratis-Hebel, sofort umsetzbar</div>'+
+      '<div class="fw-find"><b>'+esc(s.step||'')+'</b>'+(s.hebel?' <span class="hb">· '+esc(s.hebel)+'</span>':'')+' — '+esc(s.evidenz||'')+(s.impact?' <span class="hb">('+esc(s.impact)+')</span>':'')+'</div>'+
+      (s.fix?'<div class="fw-fix"><b>So behebst du es:</b> '+esc(s.fix)+'</div>':'')+
+    '</div>';
+  }
+
   function compute(v){
     var b=band(v.aov), tf=0.92;
     var tLo=b[0]*tf, tHi=b[1]*tf, tMid=(tLo+tHi)/2;
@@ -306,7 +366,7 @@ body{overflow-x:hidden}
       head='Dein Shop lässt rund <mark>'+eur(r.leakMo)+'/Monat</mark> liegen.';
       close='<p><b>1.</b> Du konvertierst bei ~'+pct(r.ist)+'. Für deine Preisklasse (AOV '+eur(v.aov)+') ist <b>'+pct(r.tLo)+' bis '+pct(r.tHi)+'</b> realistisch.</p>'+
             '<p><b>2.</b> Das sind ~<b>'+eur(r.leakMo)+'/Monat</b> mehr Umsatz aus demselben Traffic, rund <b>'+eur(r.leakYr)+'/Jahr</b>.</p>'+
-            '<p><b>3.</b> Was würdest du mit '+eur(r.leakMo)+' mehr im Monat machen, ohne einen Euro mehr für Ads?</p>';
+            '<p><b>3.</b> Was würdest du mit '+eur(r.leakMo)+' mehr im Monat machen, ohne einen Euro mehr für Ads? Oder du steckst sie zurück in Ads: gleiches Budget, höhere Marge pro Verkauf, und du wächst exponentiell statt linear.</p>';
     }
     var stats = showLeak ?
       '<div class="stats">'+
@@ -319,7 +379,7 @@ body{overflow-x:hidden}
 
     var waMsg='Hey Moritz, ich hab gerade die KI Profit Analyse für '+(domain(v.url)||'meinen Shop')+' gemacht'+(showLeak?(', Ergebnis: ~'+eur(r.leakMo)+'/Monat Profit Leck (CR '+pct(r.ist)+', realistisch '+pct(r.tLo)+' bis '+pct(r.tHi)+').'):'.')+' Schick mir bitte die komplette Gratis Analyse + die 3 wichtigsten Hebel für meinen Shop.';
     ctx.waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg);
-    ctx.r=r;
+    ctx.r=r; ctx.scan=scan;
 
     $('resultInner').innerHTML =
       '<div class="res-card">'+
@@ -330,9 +390,15 @@ body{overflow-x:hidden}
       '<div class="close">'+close+'</div>'+
       '<div id="deepSlot"></div>'+
       '<div class="capture" id="capBox" style="display:none">'+
-        '<h3>Komplette Gratis Analyse per WhatsApp</h3>'+
-        '<p class="cs">Hol dir die ausführliche KI Auswertung + die 3 wichtigsten Hebel für deinen Shop, direkt per WhatsApp von Moritz persönlich. Kein Bot, Antwort meist am selben Tag.</p>'+
-        waBtn('Gratis Analyse per WhatsApp holen')+
+        '<div class="cta2">'+
+          '<div class="coverCol">'+coverHtml(scan,r)+'</div>'+
+          '<div class="ctaCol">'+
+            '<h3>Deine komplette Analyse wartet</h3>'+
+            '<p class="cs">Den ausführlichen Report + die 3 wichtigsten Hebel für '+esc(domain(v.url)||'deinen Shop')+' schick ich dir direkt per WhatsApp. Persönlich von Moritz, kein Bot, Antwort meist am selben Tag.</p>'+
+            waBtn('Komplette Analyse per WhatsApp holen')+
+            '<p class="reassure">Kostenlos · unverbindlich · kein Sales-Anruf nötig</p>'+
+          '</div>'+
+        '</div>'+
       '</div>'+
       '<p class="assume">KI Analyse gegen 110+ Conversion Kriterien + Benchmarks (Littledata/Shopify, Baymard, Google). Keine garantierten Ergebnisse, dein realistisches Potenzial.</p>';
 
@@ -364,22 +430,23 @@ body{overflow-x:hidden}
   function renderDeep(f){
     var slot=$('deepSlot'); if(!slot) return;
     var steps=(f.steps||[]).filter(function(s){return s&&(s.severity==='Critical'||s.severity==='High'||s.status==='leck'||s.status==='schwach');});
-    var vis=steps.slice(0,2), rest=steps.slice(2);
+    var top=steps[0], second=steps[1], rest=steps.slice(2);
     var moreFindings=rest.length; // nur ECHTE weitere Lecks
-    // Blur-Inhalt: echte Restbefunde (falls vorhanden) + der Fix-Plan als klare Liefer-Vorschau
+    // Blur-Inhalt: echte Restbefunde (falls vorhanden) + der Fix-Plan als Liefer-Vorschau
     var blurred=rest.map(row).join('') +
       '<div class="sl"><span class="d"></span><span><b>Hebel 1</b> konkreter Fix + erwarteter Conversion-Uplift für deinen Shop</span></div>'+
       '<div class="sl"><span class="d"></span><span><b>Hebel 2</b> konkreter Fix + erwarteter AOV-Uplift</span></div>'+
       '<div class="sl"><span class="d"></span><span><b>Hebel 3</b> konkreter Fix + Reihenfolge der Umsetzung</span></div>';
     var lockLine=moreFindings>0
-      ? 'Die KI hat noch <b>'+moreFindings+' weitere Leck'+(moreFindings===1?'':'s')+'</b> für deinen Shop gefunden, plus deinen kompletten Fix-Plan.'
-      : 'Oben siehst du die 2 größten Lecks. Den kompletten Fix-Plan für deinen Shop bekommst du per WhatsApp.';
+      ? 'Die KI hat noch <b>'+moreFindings+' weitere Leck'+(moreFindings===1?'':'s')+'</b> für deinen Shop gefunden, plus den kompletten Fix-Plan.'
+      : 'Den ersten Hebel hast du oben gratis. Den kompletten Fix-Plan für deinen Shop bekommst du per WhatsApp.';
     slot.innerHTML =
       '<div class="deep">'+
         '<div class="dh">🔍 KI Tiefenanalyse deines Shops</div>'+
         (f.fazit?'<p class="df">'+esc(f.fazit)+'</p>':'')+
         (f.engpass?'<div class="nc" style="margin-bottom:10px">Größter Engpass: <b>'+esc(f.engpass)+'</b></div>':'')+
-        (vis.map(row).join('')||'<div class="sl"><span>Mehrere Conversion Lecks erkannt.</span></div>')+
+        (winCard(top)||'<div class="sl"><span>Mehrere Conversion Lecks erkannt.</span></div>')+
+        (second?'<div class="scan" style="margin-top:10px">'+row(second)+'</div>':'')+
       '</div>'+
       '<div class="lockwrap">'+
         '<div class="blurred"><div class="scan" style="margin-top:0">'+blurred+'</div></div>'+
@@ -392,11 +459,10 @@ body{overflow-x:hidden}
             '<li>Wie viel € jeder Hebel zurückholt</li>'+
             '<li>Persönlich von Moritz, kein Bot</li>'+
           '</ul>'+
-          waBtn('Kompletten Fix-Plan per WhatsApp holen')+
-          '<p style="font-size:12px;color:var(--muted);margin-top:10px">Kostenlos · ein Tipp · keine Mail, kein Spam · Antwort meist am selben Tag</p>'+
+          '<p style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">👇 Hol dir alles per WhatsApp</p>'+
         '</div></div>'+
       '</div>';
-    var cap=$('capBox'); if(cap) cap.style.display='none';
+    var cap=$('capBox'); if(cap) cap.style.display='';
     bindWa();
   }
 

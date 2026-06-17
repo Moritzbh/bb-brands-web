@@ -58,7 +58,7 @@ const DOCTRINE = [
   'Severity: Critical (Kauf unmöglich/Checkout kaputt) - High (großer messbarer Verlust) - Medium - Low. Nenne dem Kunden nur Critical+High. Voice: direkt, du-Form, keine Buzzwords.'
 ].join('\n');
 
-const SCHEMA_HINT = 'Gib NUR valides JSON dieser Form zurück: {"steps":[{"step":"PDP","status":"leck|schwach|solide|premium","evidenz":"was du konkret siehst","severity":"High","hebel":"B1","impact":"+8-18% PDP-Conv (Baymard)"}],"top_findings":["..."],"engpass":"PDP","fazit":"1 Satz, direkt, du-Form"}';
+const SCHEMA_HINT = 'Gib NUR valides JSON dieser Form zurück: {"steps":[{"step":"PDP","status":"leck|schwach|solide|premium","evidenz":"was du konkret siehst","severity":"High","hebel":"B1","impact":"+8-18% PDP-Conv (Baymard)","fix":"konkrete, sofort umsetzbare Maßnahme in 1 Satz, du-Form, spezifisch für DIESEN Shop"}],"top_findings":["..."],"engpass":"PDP","fazit":"1 Satz, direkt, du-Form"}';
 
 async function callGemini(content){
   var url='https://generativelanguage.googleapis.com/v1beta/models/'+MODEL+':generateContent?key='+encodeURIComponent(process.env.GEMINI_API_KEY);
