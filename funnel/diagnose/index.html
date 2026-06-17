@@ -405,7 +405,7 @@ body{overflow-x:hidden}
     scan=scan||{}; var br=scan.brand||{}; var v=r.v||{};
     var name=br.name||domain(v.url)||'deinen Shop';
     var bc=(br.color&&/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(br.color))?br.color:'#0305C6';
-    if(readableOn(bc)==='#0b0b0c') bc='#0305C6'; // sehr helle Marken-CI -> BB-Blau (weisse Schrift bleibt lesbar)
+    if(readableOn(bc)==='#0b0b0c') bc=darken(bc,0.40); // helle Marken-CI abdunkeln (Hue bleibt, weisse Schrift lesbar) statt auf Blau zu verwerfen
     var bc2=darken(bc,0.55), bc3=darken(bc,0.80);
     var initial=esc((name||'?').trim().charAt(0).toUpperCase());
     var logo=br.logo?'<img src="'+esc(br.logo)+'" alt="" onerror="this.remove()">':'';
