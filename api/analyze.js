@@ -68,9 +68,32 @@ function linkHref(html, rel){
   return m?m[1].trim():null;
 }
 function validColor(c){ if(!c) return null; c=c.trim(); return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(c) ? c : null; }
+function hex6(c){ var h=c.replace('#','').toLowerCase(); if(h.length===3) h=h.replace(/./g,'$&$&'); return '#'+h; }
+// "Brand-tauglich": nicht fast-weiß/-schwarz, nicht grau
+function isBrandy(c){
+  var h=hex6(c).slice(1); var r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
+  var max=Math.max(r,g,b),min=Math.min(r,g,b), lum=(0.299*r+0.587*g+0.114*b)/255, sat=max===0?0:(max-min)/max;
+  return lum<0.93 && lum>0.06 && sat>=0.18;
+}
+// Echte CI-Farbe aus der Seite ziehen: theme-color -> CSS-Brand-Variablen -> häufigste gesättigte Farbe
+function pickBrandColor(html){
+  var tc=validColor(metaContent(html,'theme-color'))||validColor(metaContent(html,'msapplication-TileColor'));
+  if(tc && isBrandy(tc)) return hex6(tc);
+  var styleBlob=((html.match(/<style[\s\S]*?<\/style>/gi)||[]).join(' '))+' '+((html.match(/style=["'][^"']*["']/gi)||[]).join(' '));
+  // 1) Brand-/Accent-/Button-CSS-Variablen bevorzugen
+  var varRe=/--[a-z0-9-]*(?:primary|accent|brand|button|cta|main|theme|color-base|highlight)[a-z0-9-]*\s*:\s*(#[0-9a-fA-F]{3,6})/gi, vm, varHit=null;
+  while((vm=varRe.exec(styleBlob))){ if(isBrandy(vm[1])){ varHit=hex6(vm[1]); break; } }
+  if(varHit) return varHit;
+  // 2) häufigste gesättigte Hex-Farbe im CSS
+  var hexes=styleBlob.match(/#[0-9a-fA-F]{6}\b/g)||[], freq={};
+  hexes.forEach(function(x){ x=x.toLowerCase(); if(isBrandy(x)) freq[x]=(freq[x]||0)+1; });
+  var best=null,n=0; Object.keys(freq).forEach(function(x){ if(freq[x]>n){n=freq[x];best=x;} });
+  if(best && n>=3) return best;
+  return tc?hex6(tc):null;
+}
 function brandAssets(html, baseUrl){
   var host=''; try{ host=new URL(baseUrl).hostname.replace(/^www\./,''); }catch(e){}
-  var color=validColor(metaContent(html,'theme-color'));
+  var color=pickBrandColor(html);
   var logo=linkHref(html,'apple-touch-icon')||linkHref(html,'icon');
   try{ if(logo) logo=new URL(logo, baseUrl).href; }catch(e){ logo=null; }
   if(!logo && host) logo='https://www.google.com/s2/favicons?domain='+host+'&sz=128';
