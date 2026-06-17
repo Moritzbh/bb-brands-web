@@ -292,10 +292,22 @@
         '<div class="nums">'+(inp.visitors||'?')+' Besucher/Mo · AOV '+esc(eur(inp.aov))+' · CR '+(inp.cr||'?')+'% · Marge '+(inp.margin||'?')+'%</div>'+
         (f.fazit?'<div class="fz">'+esc(f.fazit)+(f.engpass?' · Engpass: '+esc(f.engpass):'')+'</div>':'')+
         steps+
-        '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri copy" data-i="'+i+'">Analyse kopieren</button><a class="btn" href="https://wa.me/491608725947" target="_blank" rel="noopener">WhatsApp öffnen</a></div>'+
+        '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri wa" data-i="'+i+'">💬 WhatsApp-Text + Report-Link</button><a class="btn" href="'+esc(reportUrl(s))+'" target="_blank" rel="noopener">🔗 Report öffnen</a><button class="btn copy" data-i="'+i+'">📋 Rohtext</button></div>'+
       '</div>';
     }).join('');
-    $('view').querySelectorAll('.copy').forEach(function(b){ b.onclick=function(){ var s=list[+b.dataset.i]; var t=copyText(s); navigator.clipboard.writeText(t).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='Analyse kopieren';},1600); }).catch(function(){ prompt('Kopieren:',t); }); }; });
+    $('view').querySelectorAll('.copy').forEach(function(b){ b.onclick=function(){ var s=list[+b.dataset.i]; var t=copyText(s); navigator.clipboard.writeText(t).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='📋 Rohtext';},1600); }).catch(function(){ prompt('Kopieren:',t); }); }; });
+    $('view').querySelectorAll('.wa').forEach(function(b){ b.onclick=function(){ var s=list[+b.dataset.i]; var t=waPack(s); navigator.clipboard.writeText(t).then(function(){ b.textContent='✓ WhatsApp-Text kopiert'; setTimeout(function(){b.textContent='💬 WhatsApp-Text + Report-Link';},2000); }).catch(function(){ prompt('Kopieren:',t); }); }; });
+  }
+  function reportUrl(s){ return 'https://videos.bb-brands.de/analyse/?id='+encodeURIComponent(s.id||''); }
+  function waPack(s){
+    var f=s.findings||{}, L=[];
+    L.push('Hey 👋 hier ist deine Profit-Analyse für '+(s.domain||s.url||'')+':'); L.push('');
+    if(s.leak_eur_month) L.push('• Profit-Leck: rund '+eur(s.leak_eur_month)+'/Monat, aus demselben Traffic');
+    if(f.engpass) L.push('• Größter Engpass: '+f.engpass);
+    L.push('• Die wichtigsten Hebel + wie wir sie fixen, hab ich dir komplett aufbereitet:'); L.push('');
+    L.push(reportUrl(s)); L.push('');
+    L.push('Wenn du willst, schauen wir in 20 Min gemeinsam in deine Zahlen. Sag einfach Bescheid.');
+    return L.join('\n');
   }
   function copyText(s){
     var f=s.findings||{}, i=s.inputs||{}, L=[];

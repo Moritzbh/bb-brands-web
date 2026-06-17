@@ -88,6 +88,21 @@
     return L.join('\n');
   }
 
+  function reportUrl(s){ return 'https://videos.bb-brands.de/analyse/?id='+encodeURIComponent(s.id||''); }
+  function waPack(s){
+    var f=s.findings||{}, L=[];
+    L.push('Hey 👋 hier ist deine Profit-Analyse für '+(s.domain||s.url||'')+':');
+    L.push('');
+    if(s.leak_eur_month) L.push('• Profit-Leck: rund '+eur(s.leak_eur_month)+'/Monat, aus demselben Traffic');
+    if(f.engpass) L.push('• Größter Engpass: '+f.engpass);
+    L.push('• Die wichtigsten Hebel + wie wir sie fixen, hab ich dir komplett aufbereitet:');
+    L.push('');
+    L.push(reportUrl(s));
+    L.push('');
+    L.push('Wenn du willst, schauen wir in 20 Min gemeinsam in deine Zahlen. Sag einfach Bescheid.');
+    return L.join('\n');
+  }
+
   function render(list){
     var el=$('list');
     if(!list.length){ el.innerHTML='<div class="empty">Keine Analysen gefunden.</div>'; return; }
@@ -104,11 +119,13 @@
         '<div class="nums">'+(i.visitors||'?')+' Besucher/Mo · AOV '+esc(eur(i.aov))+' · CR '+(i.cr||'?')+'% · Marge '+(i.margin||'?')+'%</div>'+
         (f.fazit?'<div class="fazit">'+esc(f.fazit)+(f.engpass?' · Engpass: '+esc(f.engpass):'')+'</div>':'')+
         steps+
-        '<div class="actions"><button data-i="'+idx+'" class="copybtn">📋 Analyse kopieren</button>'+
-          '<a href="https://wa.me/491608725947" target="_blank" rel="noopener"><button class="ghost">WhatsApp öffnen</button></a></div>'+
+        '<div class="actions"><button data-w="'+idx+'" class="wabtn">💬 WhatsApp-Text + Report-Link</button>'+
+          '<a href="'+esc(reportUrl(s))+'" target="_blank" rel="noopener"><button class="ghost">🔗 Report öffnen</button></a>'+
+          '<button data-i="'+idx+'" class="copybtn ghost">📋 Rohtext</button></div>'+
       '</div>';
     }).join('');
-    el.querySelectorAll('.copybtn').forEach(function(b){ b.addEventListener('click',function(){ var s=list[+b.dataset.i]; var txt=copyText(s); navigator.clipboard.writeText(txt).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='📋 Analyse kopieren';},1800); }).catch(function(){ prompt('Kopieren:',txt); }); }); });
+    el.querySelectorAll('.copybtn').forEach(function(b){ b.addEventListener('click',function(){ var s=list[+b.dataset.i]; var txt=copyText(s); navigator.clipboard.writeText(txt).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='📋 Rohtext';},1800); }).catch(function(){ prompt('Kopieren:',txt); }); }); });
+    el.querySelectorAll('.wabtn').forEach(function(b){ b.addEventListener('click',function(){ var s=list[+b.dataset.w]; var txt=waPack(s); navigator.clipboard.writeText(txt).then(function(){ b.textContent='✓ WhatsApp-Text kopiert'; setTimeout(function(){b.textContent='💬 WhatsApp-Text + Report-Link';},2000); }).catch(function(){ prompt('Kopieren:',txt); }); }); });
   }
 
   function load(){

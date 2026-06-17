@@ -516,7 +516,7 @@ body{overflow-x:hidden}
     slot.innerHTML='<div class="deep"><div class="dh"><span class="spin"></span> KI bewertet deinen Shop gegen die Konversionsdoktrin (110+ Kriterien) …</div></div>';
     var r=ctx.r||{}, v=r.v||{};
     var src=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():null;
-    var body={url:url,visitors:v.visitors,aov:v.aov,cr:v.cr,margin:v.margin,leakMo:Math.round(r.leakMo||0),segment:r.segment,source:src};
+    var body={url:url,visitors:v.visitors,aov:v.aov,cr:v.cr,margin:v.margin,leakMo:Math.round(r.leakMo||0),segment:r.segment,source:src,brand:(ctx.scan&&ctx.scan.brand)||null};
     var done=false;
     // Sicherheitsnetz: hängt die KI, nach 12s sauber auf den WhatsApp-CTA zurückfallen (kein Endlos-Spinner)
     var to=setTimeout(function(){ if(done)return; done=true; slot.innerHTML=''; showCap(); },12000);

@@ -133,6 +133,7 @@ module.exports = async function(req,res){
       inputs:{ visitors:+q.visitors||null, aov:+q.aov||null, cr:+q.cr||null, margin:+q.margin||null },
       leak_eur_month:+q.leakMo||null, segment:q.segment||null,
       source:q.source||null,
+      brand:(q.brand&&typeof q.brand==='object')?{color:q.brand.color||null,logo:q.brand.logo||null,name:q.brand.name||null}:null,
       signals:signals,
       findings:findings
     });
