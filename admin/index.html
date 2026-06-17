@@ -241,13 +241,13 @@
     if(authErr){ logout(); return; }
     var t0=startOfToday();
     function todayCount(arr){ return arr.filter(function(x){ return (x.ts||0)>=t0; }).length; }
-    var diag=pages.filter(function(p){return p.path==='/funnel/diagnose';})[0]||{views:0,clicks:[]};
+    var diag=pages.filter(function(p){return p.path==='/gratis-profit-rechner';})[0]||{views:0,clicks:[]};
     function clickSum(re){ return (diag.clicks||[]).filter(function(c){return re.test(c.name||'');}).reduce(function(s,c){return s+c.count;},0); }
     var visits=diag.views||0, scanClicks=clickSum(/scann/i), waClicks=clickSum(/whatsapp/i);
     var kpi=[
       {l:'Leads gesamt',v:num(leads.length),c:'+'+todayCount(leads)+' heute',dot:'var(--blue)'},
       {l:'Profit-Analysen',v:num(scans.length),c:'+'+todayCount(scans)+' heute',dot:'var(--ok)'},
-      {l:'Traffic (30 T)',v:num(ptotal),c:num(visits)+' auf /funnel/diagnose',dot:'var(--amber)'},
+      {l:'Traffic (30 T)',v:num(ptotal),c:num(visits)+' auf /gratis-profit-rechner',dot:'var(--amber)'},
       {l:'WhatsApp-Klicks',v:num(waClicks),c:(visits?Math.round(waClicks/visits*100):0)+'% der Analyse-Besucher',dot:'var(--blue)'}
     ];
     var recent=scans.slice(0,6).map(function(s){
@@ -323,7 +323,7 @@
 
   // ANALYTICS
   var anData=[],anCur=null,anDays=30;
-  var PINS=[['/funnel/diagnose','Profit-Analyse'],['/','Homepage'],['/wissen','Wissens-Hub']];
+  var PINS=[['/gratis-profit-rechner','Profit-Analyse'],['/','Homepage'],['/wissen','Wissens-Hub']];
   async function viewAnalytics(){
     setHead('analytics');
     $('pactions').innerHTML='<div class="seg" id="anSeg"><button data-d="7">7T</button><button data-d="30" class="on">30T</button><button data-d="90">90T</button></div>';
@@ -333,7 +333,7 @@
   }
   function loadAn(){
     fetch('/api/pages?days='+anDays).then(function(r){return r.json();}).then(function(d){
-      anData=d.pages||[]; if(!anCur||!page(anCur)) anCur=page('/funnel/diagnose')?'/funnel/diagnose':(anData[0]&&anData[0].path)||'/funnel/diagnose';
+      anData=d.pages||[]; if(!anCur||!page(anCur)) anCur=page('/gratis-profit-rechner')?'/gratis-profit-rechner':(anData[0]&&anData[0].path)||'/gratis-profit-rechner';
       renderAn(d.total||0);
     }).catch(function(){ $('view').innerHTML='<div class="err-b">Konnte Traffic nicht laden.</div>'; });
   }

@@ -17,6 +17,16 @@
       "source": "/founder-os/:path+",
       "destination": "https://founder-os.bb-brands.de/:path+",
       "permanent": true
+    },
+    {
+      "source": "/funnel/diagnose",
+      "destination": "/gratis-profit-rechner",
+      "permanent": true
+    },
+    {
+      "source": "/funnel/diagnose/",
+      "destination": "/gratis-profit-rechner",
+      "permanent": true
     }
   ],
   "headers": [

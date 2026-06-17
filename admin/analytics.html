@@ -72,8 +72,8 @@
 (function(){
   var $=function(id){return document.getElementById(id);};
   var KEY='bb_admin_token';
-  var PINS=['/funnel/diagnose','/','/wissen'];
-  var PIN_LABELS={'/funnel/diagnose':'Profit-Analyse','/':'Homepage','/wissen':'Wissens-Hub'};
+  var PINS=['/gratis-profit-rechner','/','/wissen'];
+  var PIN_LABELS={'/gratis-profit-rechner':'Profit-Analyse','/':'Homepage','/wissen':'Wissens-Hub'};
   var data=[], cur=null;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
@@ -117,7 +117,7 @@
     $('meta').textContent='Lade …'; $('err').style.display='none';
     fetch('/api/pages?days='+$('days').value)
       .then(function(r){ return r.json(); })
-      .then(function(d){ data=d.pages||[]; if(!cur){ cur=page('/funnel/diagnose')?'/funnel/diagnose':(data[0]&&data[0].path)||'/funnel/diagnose'; } $('meta').textContent=(d.total||0)+' Aufrufe gesamt · '+data.length+' Seiten ('+$('days').value+' Tage)'+(d.note?' · '+d.note:''); sync(); })
+      .then(function(d){ data=d.pages||[]; if(!cur){ cur=page('/gratis-profit-rechner')?'/gratis-profit-rechner':(data[0]&&data[0].path)||'/gratis-profit-rechner'; } $('meta').textContent=(d.total||0)+' Aufrufe gesamt · '+data.length+' Seiten ('+$('days').value+' Tage)'+(d.note?' · '+d.note:''); sync(); })
       .catch(function(e){ $('err').style.display='block'; $('err').textContent=String(e.message||e); $('meta').textContent=''; });
   }
 

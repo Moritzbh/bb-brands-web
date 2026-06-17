@@ -710,7 +710,7 @@ tr:hover td{background:#fafbff}
     }
     var f=d.funnel||{}, qs=d.questions||[];
     // Stufen: LP → Start → F1..F8 (erreicht) → Gate → Lead → Ergebnis
-    var stages=[{l:'LP · /funnel/diagnose',n:f.DiagnoseView||0,t:''},{l:'Quiz gestartet',n:f.QuizStart||0,t:'step'}];
+    var stages=[{l:'LP · /gratis-profit-rechner',n:f.DiagnoseView||0,t:''},{l:'Quiz gestartet',n:f.QuizStart||0,t:'step'}];
     qs.forEach(function(q){stages.push({l:'F'+q.step+' · '+q.label,n:q.reached,t:'step',drop:q.dropAfter});});
     stages.push({l:'Alle Fragen durch (Gate)',n:f.QuizComplete||0,t:'step'});
     stages.push({l:'Lead · E-Mail eingetragen',n:f.Lead||0,t:'lead'});
