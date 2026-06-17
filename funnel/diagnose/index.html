@@ -191,13 +191,15 @@
 /* Hero-Split: freigestellter Moritz neben der Headline (auf Weiß, dezentes Panel) */
 .hero-grid{max-width:660px;margin:0 auto;padding:0 22px}
 .hero-main{text-align:center;min-width:0}
-.hero-aside{display:none}
-.hero-moritz{width:auto;height:auto;max-height:500px;max-width:100%;object-fit:contain;display:block}
-/* Ab breitem Desktop: 3-Spalten — Content bleibt EXAKT mittig, Foto in der linken Aussenspalte */
+/* Mobile/Tablet: Foto zentriert unter der Box */
+.hero-aside{display:flex;justify-content:center;margin-top:18px}
+.hero-moritz{width:auto;height:auto;max-height:380px;max-width:78%;object-fit:contain;display:block}
+/* Ab breitem Desktop: 3-Spalten — Content bleibt EXAKT mittig, Foto links aussen, Unterkante auf Box-Hoehe */
 @media(min-width:1150px){
   .hero-grid{max-width:none;padding:0;display:grid;grid-template-columns:1fr minmax(0,620px) 1fr;align-items:start;column-gap:0}
   .hero-main{grid-column:2;grid-row:1}
-  .hero-aside{display:flex;grid-column:1;grid-row:1;align-self:start;justify-content:flex-start;padding-left:clamp(20px,4vw,90px)}
+  .hero-aside{display:flex;grid-column:1;grid-row:1;align-self:start;justify-content:flex-start;padding-left:clamp(20px,4vw,90px);margin-top:clamp(105px,11vw,165px)}
+  .hero-moritz{max-height:500px;max-width:100%}
 }
 /* ===== ROBUSTHEIT + MOBILE ===== */
 body{overflow-x:hidden}
@@ -205,6 +207,7 @@ body{overflow-x:hidden}
 .res-eyebrow{overflow-wrap:anywhere}
 @media(max-width:560px){
   .wrap,.hero-grid{padding:0 16px}
+  .hero-moritz{max-height:320px}
   .top{padding:18px 0 0}
   .hero{padding:24px 0 6px}
   .eyebrow{margin-bottom:16px;font-size:11px;padding:6px 12px}
