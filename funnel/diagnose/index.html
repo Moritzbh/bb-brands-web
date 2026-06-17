@@ -168,26 +168,32 @@
 .freewin .fw-fix{font-size:14px;line-height:1.5;margin-top:7px;padding-top:7px;border-top:1px dashed #bfe9cd}
 .freewin .fw-fix b{color:var(--ok)}
 /* 2-spaltige CTA-Box mit Cover */
-.cta2{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}
-@media(max-width:560px){.cta2{grid-template-columns:1fr;gap:16px}}
-.ctaCol h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.cta2{display:grid;grid-template-columns:264px 1fr;gap:26px;align-items:center}
+@media(max-width:560px){.cta2{grid-template-columns:1fr;gap:18px}}
+.ctaCol h3{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
 .ctaCol .cs{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.5}
 .ctaCol .reassure{font-size:12px;color:#a0a2a9;margin-top:10px}
-/* Analyse-Cover (custom in Markenfarbe) */
-.cover{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.14);aspect-ratio:3/4;background:#fff;display:flex;flex-direction:column}
-.cover .cv-band{background:var(--bc,#0305C6);color:var(--bt,#fff);padding:11px 13px;display:flex;align-items:center;gap:8px}
-.cover .cv-logo{position:relative;width:26px;height:26px;border-radius:6px;background:#fff;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:900;font-size:13px;color:var(--bc,#0305C6)}
+/* Analyse-Cover — Premium-Dossier, immer in Markenfarbe (gegradeter Verlauf) */
+.cover{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.26);aspect-ratio:3/4;color:#fff;display:flex;flex-direction:column;padding:18px 18px 0;background:linear-gradient(158deg,var(--bc,#0305C6),var(--bc2,#020374) 70%,var(--bc3,#01023f))}
+.cover .cv-glow{position:absolute;inset:0;background:radial-gradient(120% 80% at 82% -10%,rgba(255,255,255,.18),transparent 55%);z-index:1}
+.cover .cv-top{position:relative;z-index:2;display:flex;align-items:center;gap:9px}
+.cover .cv-logo{position:relative;width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.94);color:#111;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:900;font-size:14px}
 .cover .cv-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:2px}
-.cover .cv-brand{font-size:13px;font-weight:800;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cover .cv-body{flex:1;padding:14px 14px 12px;display:flex;flex-direction:column}
-.cover .cv-eyebrow{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.cover .cv-title{font-size:18px;font-weight:900;line-height:1.08;letter-spacing:-.02em;margin-top:4px}
-.cover .cv-title b{color:var(--bc,#0305C6)}
-.cover .cv-metrics{margin-top:auto;display:grid;gap:5px;font-size:11.5px;color:#33333c}
-.cover .cv-metrics div{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:5px}
-.cover .cv-metrics b{font-variant-numeric:tabular-nums}
-.cover .cv-foot{font-size:9px;color:#a0a2a9;margin-top:9px;letter-spacing:.02em}
-.cover .cv-lock{position:absolute;top:10px;right:10px;background:rgba(11,11,12,.82);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:99px;backdrop-filter:blur(2px)}
+.cover .cv-brand{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.92;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cover .cv-stamp{position:absolute;top:16px;right:14px;z-index:3;font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.5);color:rgba(255,255,255,.85);padding:4px 6px;border-radius:5px;transform:rotate(6deg)}
+.cover .cv-line{position:relative;z-index:2;height:2px;width:42px;background:rgba(255,255,255,.55);margin:15px 0 12px}
+.cover .cv-ey{position:relative;z-index:2;font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;opacity:.72}
+.cover .cv-title{position:relative;z-index:2;font-size:28px;font-weight:900;line-height:1.0;letter-spacing:-.02em;margin-top:6px}
+.cover .cv-for{position:relative;z-index:2;font-size:14px;font-weight:600;opacity:.9;margin-top:5px;overflow-wrap:anywhere}
+.cover .cv-mx{position:relative;z-index:2;margin-top:auto;font-size:11.5px}
+.cover .cv-mx div{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.22)}
+.cover .cv-mx b{font-weight:800;font-variant-numeric:tabular-nums}
+.cover .cv-ft{position:relative;z-index:2;display:flex;align-items:center;gap:9px;padding:11px 0;border-top:1px solid rgba(255,255,255,.22);margin-top:9px}
+.cover .cv-ph{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.16) url('/assets/images/founder-moritz-v5.jpg') center 14% / 210% no-repeat}
+.cover .cv-fn{font-size:10.5px;line-height:1.3}
+.cover .cv-fn b{font-weight:800}
+.cover .cv-fn span{opacity:.72}
+.cover .cv-lockbar{position:relative;z-index:3;margin:0 -18px;background:rgba(0,0,0,.28);font-size:10.5px;font-weight:800;text-align:center;padding:9px}
 /* Hero-Split: freigestellter Moritz neben der Headline (auf Weiß, dezentes Panel) */
 .hero-grid{max-width:660px;margin:0 auto;padding:0 22px}
 .hero-main{text-align:center;min-width:0}
@@ -325,26 +331,33 @@ body{overflow-x:hidden}
   function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.fire('WhatsAppClick',{segment:r.segment});BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
 
   function readableOn(hex){ if(!hex||hex.charAt(0)!=='#') return '#fff'; var h=hex.slice(1); if(h.length===3) h=h.replace(/./g,'$&$&'); var r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16); return (0.299*r+0.587*g+0.114*b)/255>0.62?'#0b0b0c':'#fff'; }
+  function darken(hex,amt){ if(!hex||hex.charAt(0)!=='#') return hex; var h=hex.slice(1); if(h.length===3) h=h.replace(/./g,'$&$&'); var f=1-amt; var p=function(i){return Math.max(0,Math.round(parseInt(h.slice(i,i+2),16)*f));}; return '#'+[p(0),p(2),p(4)].map(function(x){return ('0'+x.toString(16)).slice(-2);}).join(''); }
   function coverHtml(scan,r){
     scan=scan||{}; var br=scan.brand||{}; var v=r.v||{};
     var name=br.name||domain(v.url)||'deinen Shop';
     var bc=(br.color&&/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(br.color))?br.color:'#0305C6';
-    var bt=readableOn(bc);
+    if(readableOn(bc)==='#0b0b0c') bc='#0305C6'; // sehr helle Marken-CI -> BB-Blau (weisse Schrift bleibt lesbar)
+    var bc2=darken(bc,0.55), bc3=darken(bc,0.80);
     var initial=esc((name||'?').trim().charAt(0).toUpperCase());
     var logo=br.logo?'<img src="'+esc(br.logo)+'" alt="" onerror="this.remove()">':'';
     var showLeak=(r.segment!=='tier1'&&r.segment!=='green');
-    var metrics= showLeak
-      ? '<div><span>Profit-Leck</span><b>'+eur(r.leakMo)+'/Mo</b></div><div><span>Deine CR</span><b>'+pct(r.ist)+'</b></div><div><span>Realistisch</span><b>'+pct(r.tHi)+'</b></div>'
-      : '<div><span>Deine CR</span><b>'+pct(r.ist)+'</b></div><div><span>Bestellwert</span><b>'+eur(v.aov)+'</b></div><div><span>Status</span><b>Conversion-Check</b></div>';
-    return '<div class="cover" style="--bc:'+bc+';--bt:'+bt+'">'+
-      '<div class="cv-band"><span class="cv-logo">'+initial+logo+'</span><span class="cv-brand">'+esc(name)+'</span></div>'+
-      '<div class="cv-body">'+
-        '<div class="cv-eyebrow">KI Profit-Analyse</div>'+
-        '<div class="cv-title">Profit-Analyse für <b>'+esc(name)+'</b></div>'+
-        '<div class="cv-metrics">'+metrics+'</div>'+
-        '<div class="cv-foot">BB Brands · vertraulich erstellt für '+esc(name)+'</div>'+
+    var leakRow= showLeak?'<div><span>Profit-Leck / Monat</span><b>'+eur(r.leakMo)+'</b></div>':'';
+    var crVal= showLeak?(pct(r.ist)+' → '+pct(r.tHi)):pct(r.ist);
+    return '<div class="cover" style="--bc:'+bc+';--bc2:'+bc2+';--bc3:'+bc3+'">'+
+      '<div class="cv-glow"></div>'+
+      '<div class="cv-top"><span class="cv-logo">'+initial+logo+'</span><span class="cv-brand">'+esc(name)+'</span></div>'+
+      '<span class="cv-stamp">Vertraulich</span>'+
+      '<div class="cv-line"></div>'+
+      '<div class="cv-ey">KI Profit-Analyse</div>'+
+      '<div class="cv-title">Profit-<br>Analyse</div>'+
+      '<div class="cv-for">für '+esc(name)+'</div>'+
+      '<div class="cv-mx">'+
+        leakRow+
+        '<div><span>Conversion-Rate</span><b>'+crVal+'</b></div>'+
+        '<div><span>Geprüfte Kriterien</span><b>110+</b></div>'+
       '</div>'+
-      '<div class="cv-lock">🔒 komplett per WhatsApp</div>'+
+      '<div class="cv-ft"><span class="cv-ph"></span><span class="cv-fn"><b>Analyse von Moritz Bohmbach</b><br><span>BB Brands · Growth Infrastructure</span></span></div>'+
+      '<div class="cv-lockbar">🔒 komplett per WhatsApp</div>'+
     '</div>';
   }
   function winCard(s){
