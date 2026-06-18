@@ -344,6 +344,61 @@ module.exports = async function handler(req, res) {
         return jsonResponse(res, 200, { ok: true, id });
       }
 
+      // ========== YOUTUBE CASE-BEWERBUNG (videos.bb-brands.de/case) ==========
+      // Eigener Lead-Typ. Echte Inbound-Bewerbung → type:'lead' + Push-Notify.
+      // Falls die E-Mail schon existiert: bestehenden Lead als Bewerber MARKIEREN
+      // (campaigns += youtube-case), niemals herabstufen oder Quelle überschreiben.
+      if (magnet === 'youtube-case') {
+        const email = str(body.email, 200).toLowerCase();
+        if (!email || !isEmail(email)) return jsonResponse(res, 400, { ok: false, error: 'invalid email' });
+        const now = new Date().toISOString();
+        const app = {
+          name: str(body.name, 120),
+          shop: str(body.website || body.shop || body.company, 300),
+          phone: str(body.phone, 60),
+          revenue: str(body.revenue, 160),
+          pain: str(body.pain, 1000),
+          appliedAt: now,
+        };
+        const summary = [
+          app.phone ? 'Tel: ' + app.phone : null,
+          app.shop ? 'Shop: ' + app.shop : null,
+          app.revenue ? 'Umsatz/Traffic: ' + app.revenue : null,
+          app.pain ? 'Engpass: ' + app.pain : null,
+        ].filter(Boolean).join(' · ');
+        const existing = await findLeadByEmail(email);
+        if (existing) {
+          const rec = existing.record;
+          rec.campaigns = Array.from(new Set([...(rec.campaigns || []), 'youtube-case']));
+          rec.caseApplication = app;
+          rec.name = rec.name || app.name;
+          rec.brand = rec.brand || app.shop;
+          rec.website = rec.website || app.shop;
+          rec.phone = rec.phone || app.phone;
+          rec.activity = rec.activity || [];
+          rec.activity.push({ ts: now, text: 'YouTube Case-Bewerbung: ' + summary });
+          rec.updatedAt = now;
+          await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          await sendPushNotification(rec).catch((err) => console.error('[/api/leads] push (youtube-case dedup) failed:', err));
+          return jsonResponse(res, 200, { ok: true, id: existing.id, deduped: true });
+        }
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const record = {
+          id, email,
+          magnet: 'youtube-case', type: 'lead', source: 'youtube-case',
+          campaigns: ['youtube-case'],
+          name: app.name, brand: app.shop, website: app.shop, phone: app.phone,
+          revenue: app.revenue, pain: app.pain, caseApplication: app,
+          status: 'new', consentNewsletter: false,
+          activity: [{ ts: now, text: 'YouTube Case-Bewerbung: ' + summary }],
+          createdAt: now, updatedAt: now,
+          ...extractAttribution(body),
+        };
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await sendPushNotification(record).catch((err) => console.error('[/api/leads] push (youtube-case) failed:', err));
+        return jsonResponse(res, 200, { ok: true, id });
+      }
+
       const isWhatsAppFunnel = magnet === 'whatsapp-chat';
       const isErstgespraech = magnet === 'erstgespraech';
       const isQuizDiagnose = magnet === 'quiz-diagnose';
@@ -1083,6 +1138,29 @@ function buildPushPayload(record) {
       message: lines.join('\n'),
       priority: 'default',
       tags: record.consentReference ? 'rocket,star' : 'rocket',
+      clickUrl: ADMIN_URL,
+      actions: actionsHeader,
+    };
+  }
+
+  // === YOUTUBE CASE-BEWERBUNG ===
+  if (record.magnet === 'youtube-case' || (record.campaigns && record.campaigns.indexOf('youtube-case') >= 0)) {
+    const app = record.caseApplication || {};
+    const title = `🎬 YouTube Case-Bewerbung · ${app.shop || record.brand || record.name || ''}`;
+    const lines = [
+      record.name ? `👤 ${record.name}` : null,
+      record.email ? `✉️ ${record.email}` : null,
+      app.phone ? `📱 ${app.phone}` : null,
+      app.shop ? `🛒 ${app.shop}` : null,
+      app.revenue ? `💰 ${app.revenue}` : null,
+      app.pain ? `\n🎯 ${app.pain}` : null,
+      time ? `\n🕐 ${time} Uhr` : null,
+    ].filter(Boolean);
+    return {
+      title,
+      message: lines.join('\n'),
+      priority: 'high',
+      tags: 'clapper,fire',
       clickUrl: ADMIN_URL,
       actions: actionsHeader,
     };

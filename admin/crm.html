@@ -402,12 +402,15 @@ tr:hover td{background:#fafbff}
   var LOST=['Preis','Timing','Kein Budget','Ghosting','Wettbewerb','Nicht ICP','Sonstiges'];
   var SEG={tier1:['⚪ Pre-Revenue','seg-tier1'],red:['🔴 Profit erodiert','seg-red'],yellow:['🟡 Wachstum stoppt','seg-yellow'],green:['🟢 Sauber','seg-green']};
   var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
-  var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt'};
+  var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt','youtube-case':'🎬 YouTube Bewerbung'};
   function isContact(l){return l.type==='contact';}
   // Kampagnen-Quelle (z.B. youtube-case) sichtbar machen
   var CAMPAIGN={'youtube-case':'🎬 YouTube Case'};
-  // NUR explizit bekannte Kampagnen (z.B. youtube-case). Niemals beliebige source-Werte.
+  // NUR echte YouTube-Bewerbungen. Sauberer Marker: magnet ODER campaigns ODER source.
+  // Niemals beliebige source-Werte (sonst tauchen fremde Leads auf).
   function campaignOf(l){
+    if(l.magnet==='youtube-case')return CAMPAIGN['youtube-case'];
+    if(Array.isArray(l.campaigns)&&l.campaigns.indexOf('youtube-case')>=0)return CAMPAIGN['youtube-case'];
     var s=String(l.source||'').toLowerCase().trim();
     for(var k in CAMPAIGN){if(s.indexOf(k)===0)return CAMPAIGN[k];}
     return '';
@@ -550,8 +553,13 @@ tr:hover td{background:#fafbff}
     $('appsCount').textContent=list.length;
     if(!list.length){$('appsList').innerHTML='<div class="empty" style="display:block">Noch keine Bewerbungen. Sobald sich jemand über videos.bb-brands.de/case bewirbt, erscheint sie hier.</div>';return;}
     $('appsList').innerHTML=list.map(function(l){
+      var a=l.caseApplication||{};
       var det='';
-      if(Array.isArray(l.activity))det=l.activity.map(function(a){return a&&a.text?a.text:'';}).filter(Boolean).join(' · ');
+      if(a.shop||a.revenue||a.pain||a.phone){
+        det=[a.phone?'📱 '+a.phone:'',a.shop?'🛒 '+a.shop:'',a.revenue?'💰 '+a.revenue:'',a.pain?'🎯 '+a.pain:''].filter(Boolean).join('\n');
+      }else if(Array.isArray(l.activity)){
+        det=l.activity.map(function(x){return x&&x.text?x.text:'';}).filter(Boolean).join(' · ');
+      }
       var st=STAGE_MAP[stageOf(l)];
       return '<div data-open="'+esc(l.id)+'" style="background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:10px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04)">'+
         '<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline">'+
