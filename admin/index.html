@@ -213,7 +213,8 @@
       {id:'analytics',label:'Analytics',icon:'M3 3v18h18M7 15l4-4 3 3 5-6'}
     ]},
     {grp:'Vertrieb',items:[
-      {id:'outbound',label:'Outbound',icon:'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'}
+      {id:'outbound',label:'Outbound',icon:'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'},
+      {id:'youtube',label:'YouTube Bewerbung',icon:'M22 8a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4V8zM10 9l5 3-5 3V9z'}
     ]}
   ];
   function renderNav(active){
@@ -359,7 +360,7 @@
   }
 
   // CRM EMBED (Leads / Funnel / Outbound — eingebettet, eine Fläche)
-  var CRM_VIEWS={leads:['cockpit','Leads / CRM'],funnel:['funnel','Funnel'],outbound:['outbound','Outbound']};
+  var CRM_VIEWS={leads:['cockpit','Leads / CRM'],funnel:['funnel','Funnel'],outbound:['outbound','Outbound'],youtube:['apps','YouTube Bewerbung']};
   function viewCRM(route){
     var cfg=CRM_VIEWS[route]||['cockpit','Leads / CRM'];
     $('ptitle').textContent=cfg[1];
@@ -370,7 +371,7 @@
 
   // ---------- ROUTER ----------
   var VIEWS={overview:viewOverview,scans:viewScans,analytics:viewAnalytics,
-    leads:function(){viewCRM('leads');},funnel:function(){viewCRM('funnel');},outbound:function(){viewCRM('outbound');}};
+    leads:function(){viewCRM('leads');},funnel:function(){viewCRM('funnel');},outbound:function(){viewCRM('outbound');},youtube:function(){viewCRM('youtube');}};
   function route(){
     var v=(location.hash.replace('#/','')||'overview'); if(!VIEWS[v]) v='overview';
     $('view').classList.remove('frame'); renderNav(v); window.scrollTo(0,0); VIEWS[v]();

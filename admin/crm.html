@@ -252,15 +252,12 @@ tr:hover td{background:#fafbff}
       <button class="tab" data-tab="funnel">🔬 Funnel</button>
       <button class="tab" data-tab="mediabuyer">📈 Media Buyer</button>
       <button class="tab" data-tab="outbound">📹 Outbound</button>
+      <button class="tab" data-tab="apps">🎬 YouTube Bewerbung</button>
     </div>
 
     <!-- COCKPIT -->
     <div class="view active" id="view-cockpit">
       <div class="cockpit">
-        <div class="panel">
-          <div class="panel-h" style="color:#0305C6">📥 Neue Bewerbungen <span class="pill" id="cnt-apps">0</span></div>
-          <div class="panel-body" id="p-apps"></div>
-        </div>
         <div class="panel">
           <div class="panel-h today">Heute dran <span class="pill" id="cnt-today">0</span></div>
           <div class="panel-body" id="p-today"></div>
@@ -314,6 +311,12 @@ tr:hover td{background:#fafbff}
     <!-- SOURCES / QUELLEN -->
     <div class="view" id="view-sources">
       <div id="srcWrap"></div>
+    </div>
+
+    <!-- YOUTUBE BEWERBUNGEN -->
+    <div class="view" id="view-apps">
+      <div style="margin-bottom:14px;font-size:14px;color:var(--muted)">Bewerbungen über <b>videos.bb-brands.de/case</b> · <span id="appsCount">0</span> gesamt. Klick auf eine Karte öffnet die Lead-Details.</div>
+      <div id="appsList"></div>
     </div>
 
     <!-- FUNNEL / QUIZ-ABSPRUNG -->
@@ -479,7 +482,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else if(tab==='outbound')renderOutbound();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else if(tab==='outbound')renderOutbound();else if(tab==='apps')renderApps();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -524,9 +527,6 @@ tr:hover td{background:#fafbff}
     fillPanel('p-over','cnt-over',over,function(l){return rowItem(l,'<span class="over-txt">'+fmtDay(l.nextFollowUp)+'</span>');},'Keine überfälligen Follow-ups.');
     fillPanel('p-hot','cnt-hot',hot,function(l){return rowItem(l,money(l.dealValue));},'Keine heißen Leads gerade.');
     fillPanel('p-stale','cnt-stale',stale,function(l){return rowItem(l,daysSince(lastTouch(l))+'d still');},'Alles in Bewegung. 👌');
-
-    var apps=leads.filter(function(l){return campaignOf(l);}).sort(function(a,b){return (b.createdAt||'').localeCompare(a.createdAt||'');});
-    fillPanel('p-apps','cnt-apps',apps,function(l){return rowItem(l,fmtDay(l.createdAt));},'Noch keine Bewerbungen.');
   }
   function fillPanel(bodyId,cntId,list,fn,emptyMsg){
     $(cntId).textContent=list.length;
@@ -542,6 +542,29 @@ tr:hover td{background:#fafbff}
       '<span class="badge '+h[1]+'">'+h[0]+'</span>'+
       '<div class="ri-right">'+right+'</div>'+
     '</div>';
+  }
+
+  // ---- YouTube Bewerbungen ----
+  function renderApps(){
+    var list=leads.filter(function(l){return campaignOf(l);}).sort(function(a,b){return (b.createdAt||'').localeCompare(a.createdAt||'');});
+    $('appsCount').textContent=list.length;
+    if(!list.length){$('appsList').innerHTML='<div class="empty" style="display:block">Noch keine Bewerbungen. Sobald sich jemand über videos.bb-brands.de/case bewirbt, erscheint sie hier.</div>';return;}
+    $('appsList').innerHTML=list.map(function(l){
+      var det='';
+      if(Array.isArray(l.activity))det=l.activity.map(function(a){return a&&a.text?a.text:'';}).filter(Boolean).join(' · ');
+      var st=STAGE_MAP[stageOf(l)];
+      return '<div data-open="'+esc(l.id)+'" style="background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:10px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04)">'+
+        '<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline">'+
+          '<span style="font-weight:800;font-size:16px;color:var(--navy)">'+esc(l.name||l.email||'—')+'</span>'+
+          '<span style="font-size:12.5px;color:var(--muted);white-space:nowrap">'+fmtDate(l.createdAt)+'</span></div>'+
+        '<div style="font-size:13.5px;margin-top:3px;color:#33333c">'+
+          (l.email?'<a href="mailto:'+esc(l.email)+'" onclick="event.stopPropagation()">'+esc(l.email)+'</a>':'')+
+          (l.brand?' · '+esc(l.brand):'')+
+          ' <span class="badge" style="background:#0305c61a;color:#0305C6">'+esc(campaignOf(l))+'</span>'+
+          (st?' <span class="badge" style="background:'+st[2]+'1a;color:'+st[2]+'">'+st[1]+'</span>':'')+'</div>'+
+        (det?'<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;color:#33333c;white-space:pre-wrap;word-break:break-word">'+esc(det)+'</div>':'')+
+      '</div>';
+    }).join('');
   }
 
   // ---- Pipeline (Kanban) ----
