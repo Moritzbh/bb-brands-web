@@ -258,6 +258,10 @@ tr:hover td{background:#fafbff}
     <div class="view active" id="view-cockpit">
       <div class="cockpit">
         <div class="panel">
+          <div class="panel-h" style="color:#0305C6">📥 Neue Bewerbungen <span class="pill" id="cnt-apps">0</span></div>
+          <div class="panel-body" id="p-apps"></div>
+        </div>
+        <div class="panel">
           <div class="panel-h today">Heute dran <span class="pill" id="cnt-today">0</span></div>
           <div class="panel-body" id="p-today"></div>
         </div>
@@ -397,6 +401,14 @@ tr:hover td{background:#fafbff}
   var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
   var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt'};
   function isContact(l){return l.type==='contact';}
+  // Kampagnen-Quelle (z.B. youtube-case) sichtbar machen
+  var CAMPAIGN={'youtube-case':'🎬 YouTube Case'};
+  function campaignOf(l){
+    var s=String(l.source||'').toLowerCase().trim();
+    if(!s||['import','manual','contact','unknown','direct'].indexOf(s)>=0)return '';
+    for(var k in CAMPAIGN){if(s.indexOf(k)===0)return CAMPAIGN[k];}
+    return l.source;
+  }
 
   // Traffic-Kanäle (Lead-Ebene). Reihenfolge = Anzeigereihenfolge.
   var CHANNELS=[
@@ -512,6 +524,9 @@ tr:hover td{background:#fafbff}
     fillPanel('p-over','cnt-over',over,function(l){return rowItem(l,'<span class="over-txt">'+fmtDay(l.nextFollowUp)+'</span>');},'Keine überfälligen Follow-ups.');
     fillPanel('p-hot','cnt-hot',hot,function(l){return rowItem(l,money(l.dealValue));},'Keine heißen Leads gerade.');
     fillPanel('p-stale','cnt-stale',stale,function(l){return rowItem(l,daysSince(lastTouch(l))+'d still');},'Alles in Bewegung. 👌');
+
+    var apps=leads.filter(function(l){return campaignOf(l);}).sort(function(a,b){return (b.createdAt||'').localeCompare(a.createdAt||'');});
+    fillPanel('p-apps','cnt-apps',apps,function(l){return rowItem(l,fmtDay(l.createdAt));},'Noch keine Bewerbungen.');
   }
   function fillPanel(bodyId,cntId,list,fn,emptyMsg){
     $(cntId).textContent=list.length;
@@ -588,7 +603,7 @@ tr:hover td{background:#fafbff}
       if(fs&&l.segment!==fs)return false;
       if(fst&&stageOf(l)!==fst)return false;
       if(fm&&l.magnet!==fm)return false;
-      if(q){var hay=((l.email||'')+' '+(l.name||'')+' '+(l.brand||'')+' '+(l.company||'')).toLowerCase();if(hay.indexOf(q)<0)return false;}
+      if(q){var hay=((l.email||'')+' '+(l.name||'')+' '+(l.brand||'')+' '+(l.company||'')+' '+(l.source||'')).toLowerCase();if(hay.indexOf(q)<0)return false;}
       return true;
     });
   }
@@ -599,7 +614,7 @@ tr:hover td{background:#fafbff}
       var st=STAGE_MAP[stageOf(l)];var seg=SEG[l.segment];var h=hotness(l);
       var next=l.nextFollowUp?('<span class="'+(isOverdue(l)?'over-txt':'')+'">'+fmtDay(l.nextFollowUp)+'</span>'):'<span class="sub">—</span>';
       return '<tr data-open="'+esc(l.id)+'">'+
-        '<td class="email">'+esc(l.name||l.email||'—')+(l.brand?'<div class="sub">'+esc(l.brand)+'</div>':'')+'</td>'+
+        '<td class="email">'+esc(l.name||l.email||'—')+(campaignOf(l)?' <span class="badge" style="background:#0305c61a;color:#0305C6">'+esc(campaignOf(l))+'</span>':'')+(l.brand?'<div class="sub">'+esc(l.brand)+'</div>':'')+'</td>'+
         '<td><span class="badge" style="background:'+(st?st[2]:'#999')+'1a;color:'+(st?st[2]:'#999')+'">'+(st?st[1]:'—')+'</span></td>'+
         '<td class="score">'+money(l.dealValue)+'</td>'+
         '<td>'+(seg?'<span class="badge '+seg[1]+'">'+seg[0]+'</span>':'<span class="sub">—</span>')+'</td>'+
@@ -1007,7 +1022,7 @@ tr:hover td{background:#fafbff}
     function row(k,v){return v?'<div class="kv"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>':'';}
     kv+=row('E-Mail',l.email?'<a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>':'');
     kv+=row('Marke',esc(l.brand||l.company||''));
-    kv+=row('Quelle',esc(MAGNET[l.magnet]||l.magnet||'')+' · '+esc(source(l)));
+    kv+=row('Quelle',esc(MAGNET[l.magnet]||l.magnet||'')+' · '+esc(source(l))+(campaignOf(l)?' · '+esc(campaignOf(l)):''));
     var chL=CH_MAP[channelOf(l)];
     kv+=row('Kanal',(chL?'<span class="ch-dot" style="background:'+chL[2]+'"></span>'+esc(chL[1]):'')+(fromMeta(l)?' <span class="badge" style="background:#e0e7ff;color:#1d4ed8">Meta</span>':''));
     kv+=row('Segment',seg?seg[0]+(l.tier?' · Tier '+l.tier:''):'');
