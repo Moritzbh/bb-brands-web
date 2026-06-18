@@ -406,11 +406,11 @@ tr:hover td{background:#fafbff}
   function isContact(l){return l.type==='contact';}
   // Kampagnen-Quelle (z.B. youtube-case) sichtbar machen
   var CAMPAIGN={'youtube-case':'🎬 YouTube Case'};
+  // NUR explizit bekannte Kampagnen (z.B. youtube-case). Niemals beliebige source-Werte.
   function campaignOf(l){
     var s=String(l.source||'').toLowerCase().trim();
-    if(!s||['import','manual','contact','unknown','direct'].indexOf(s)>=0)return '';
     for(var k in CAMPAIGN){if(s.indexOf(k)===0)return CAMPAIGN[k];}
-    return l.source;
+    return '';
   }
 
   // Traffic-Kanäle (Lead-Ebene). Reihenfolge = Anzeigereihenfolge.
