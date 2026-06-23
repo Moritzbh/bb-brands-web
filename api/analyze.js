@@ -117,6 +117,7 @@ module.exports = async function(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   if(req.method==='OPTIONS') return res.status(200).end();
   var q = req.method==='POST' ? (req.body||{}) : (req.query||{});
+  var quick = q.quick==='1' || q.quick===1 || q.quick===true;  // schneller Gate-Scan (videos.bb-brands.de/case): ohne PageSpeed, ~3s statt ~20s
   var url = normUrl(q.url);
   if(!url) return res.status(400).json({error:'URL fehlt'});
 
@@ -130,7 +131,7 @@ module.exports = async function(req,res){
     try{ var pdpUrl=pdpM[1].indexOf('http')===0?pdpM[1]:new URL(pdpM[1],url).href; var pdp=await getHtml(pdpUrl);
       if(pdp.ok){ var ps=detect(pdp.html); sig.aggregateRating=sig.aggregateRating||ps.aggregateRating; sig.reviewApp=sig.reviewApp||ps.reviewApp; sig.expressPay=sig.expressPay||ps.expressPay; sig.pdpImgCount=ps.imgCount; } }catch(e){}
   }
-  var cwv = await pagespeed(url);
+  var cwv = quick ? null : await pagespeed(url);
 
   // Leak-Marker (nur was server-seitig sicher erkennbar ist)
   var leaks=[];
