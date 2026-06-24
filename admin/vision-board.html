@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>/* Admin-Gate — konsistent mit /admin (bb_admin_token). Ohne Token zurueck zum Login. */try{if(!localStorage.getItem('bb_admin_token'))location.replace('/admin');}catch(e){location.replace('/admin');}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision Board — Moritz Bohmbach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080a; --bg2:#0e0f13; --panel:#131419; --panel2:#181a21;
+  --ink:#f3f4f6; --mut:#9aa0aa; --mut2:#646a73; --faint:#3a3d46;
+  --line:#1f212a; --line2:#2a2d37;
+  --blue:#4d4fe8; --blueSoft:#9b9df5; --blueDeep:#0305c6;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Schibsted Grotesk",-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --maxw:1240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  line-height:1.5; overflow-x:hidden; position:relative;
+}
+/* atmosphere */
+body::before{ /* top glow */
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(900px 520px at 50% -8%, rgba(77,79,232,.16), transparent 70%),
+    radial-gradient(700px 700px at 92% 8%, rgba(77,79,232,.05), transparent 60%),
+    radial-gradient(1100px 600px at 8% 100%, rgba(255,255,255,.025), transparent 60%);
+}
+body::after{ /* grain */
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.04; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; padding:clamp(28px,5vw,80px) clamp(20px,4vw,56px) 80px;}
+
+/* ---------- shared bits ---------- */
+.kick{font-family:var(--mono); font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--mut2);}
+.kick .dot{color:var(--blue);}
+.num{font-family:var(--mono); font-size:12px; color:var(--blue); letter-spacing:.12em;}
+.lede{color:var(--mut); font-size:15px; max-width:54ch;}
+.hr{height:1px; background:linear-gradient(90deg,transparent,var(--line2) 12%,var(--line2) 88%,transparent); border:0; margin:clamp(40px,6vw,72px) 0;}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(8px,2vw,24px);}
+.hero .kick{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+.hero .kick b{color:var(--mut); font-weight:500;}
+.manifest{
+  font-family:var(--serif); font-optical-sizing:auto;
+  font-weight:340; font-size:clamp(34px,6.2vw,76px); line-height:1.06; letter-spacing:-.015em;
+  margin:26px 0 0; max-width:18ch;
+}
+.manifest em{font-style:italic; color:var(--blueSoft); font-weight:340;}
+.manifest .q{color:var(--mut2); font-style:normal;}
+.hero .sub{margin-top:26px; display:flex; gap:28px; flex-wrap:wrap; align-items:baseline;}
+.hero .sub p{max-width:46ch; color:var(--mut); font-size:15.5px;}
+.sig{font-family:var(--mono); font-size:12px; color:var(--mut2); white-space:nowrap;}
+.sig b{color:var(--ink); font-weight:500;}
+
+/* ---------- realm headers ---------- */
+.realm-head{display:flex; align-items:baseline; gap:18px; margin-bottom:26px;}
+.realm-head .ix{font-family:var(--serif); font-style:italic; font-size:clamp(26px,3.5vw,40px); color:var(--blue); font-weight:400; line-height:1;}
+.realm-head h2{font-family:var(--sans); font-weight:600; font-size:clamp(19px,2.4vw,25px); letter-spacing:-.01em;}
+.realm-head .tag{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--mut2); margin-left:auto;}
+
+/* ---------- grid ---------- */
+.grid{display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(12px,1.4vw,18px);}
+.card{
+  background:linear-gradient(180deg,var(--panel),var(--bg2));
+  border:1px solid var(--line); border-radius:16px; padding:clamp(20px,2.2vw,30px);
+  position:relative; overflow:hidden;
+}
+.card::before{content:""; position:absolute; inset:0 0 auto 0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);}
+.card .lab{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--mut2); display:flex; align-items:center; gap:8px;}
+.card .lab::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--blue); box-shadow:0 0 10px var(--blue);}
+.card h3{font-family:var(--serif); font-weight:380; font-size:clamp(21px,2.5vw,30px); line-height:1.14; letter-spacing:-.01em; margin:16px 0 0;}
+.card h3.sm{font-size:clamp(18px,2vw,23px);}
+.card p{color:var(--mut); font-size:14px; margin-top:12px; max-width:42ch;}
+.card p strong{color:var(--ink); font-weight:600;}
+.card .em{color:var(--blueSoft);}
+
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c7{grid-column:span 7}
+.c6{grid-column:span 6} .c5{grid-column:span 5} .c4{grid-column:span 4}
+
+/* founder arc */
+.arc{display:flex; gap:0; margin-top:20px; flex-wrap:wrap;}
+.arc .step{flex:1 1 0; min-width:120px; padding:0 18px; border-left:1px solid var(--line2); position:relative;}
+.arc .step:first-child{padding-left:0; border-left:0;}
+.arc .age{font-family:var(--serif); font-style:italic; font-size:30px; color:var(--ink); line-height:1;}
+.arc .age .u{color:var(--blue);}
+.arc .step .t{font-weight:600; font-size:14px; margin-top:10px;}
+.arc .step .d{color:var(--mut2); font-size:12.5px; margin-top:5px; line-height:1.45;}
+
+/* value anchors */
+.anchors{list-style:none; margin-top:18px; display:flex; flex-direction:column; gap:0;}
+.anchors li{display:flex; gap:13px; padding:12px 0; border-top:1px solid var(--line); align-items:flex-start;}
+.anchors li:first-child{border-top:0; padding-top:4px;}
+.anchors .m{font-family:var(--mono); font-size:11px; color:var(--blue); margin-top:3px; min-width:20px;}
+.anchors .x b{color:var(--ink); font-weight:600; font-size:14.5px;}
+.anchors .x span{display:block; color:var(--mut2); font-size:12.5px; margin-top:2px;}
+
+/* phases */
+.phases{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:center; margin-top:20px;}
+.phase{background:var(--panel2); border:1px solid var(--line); border-radius:13px; padding:18px;}
+.phase .p{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut2);}
+.phase h4{font-family:var(--serif); font-weight:400; font-size:19px; margin:9px 0 7px;}
+.phase .d{color:var(--mut); font-size:12.5px; line-height:1.45;}
+.phase.now{border-color:var(--line2);}
+.phase.goal{border-color:rgba(77,79,232,.4); background:linear-gradient(180deg,rgba(77,79,232,.08),var(--panel2));}
+.arrow{font-family:var(--mono); color:var(--blue); font-size:20px;}
+.phases .bridge{grid-column:1/-1; color:var(--mut2); font-size:12.5px; margin-top:4px; text-align:center;}
+.phases .bridge b{color:var(--blueSoft); font-weight:500;}
+
+/* winner's loop */
+.loop{margin-top:22px;}
+.loop .chain{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.loop .node{background:var(--panel2); border:1px solid var(--line2); border-radius:11px; padding:13px 16px; font-weight:600; font-size:13.5px; flex:0 0 auto;}
+.loop .node small{display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--mut2); font-weight:400; margin-bottom:4px;}
+.loop .ar{color:var(--blue); font-family:var(--mono); font-size:17px;}
+.loop .prof{border-color:rgba(77,79,232,.5); background:linear-gradient(180deg,rgba(77,79,232,.12),var(--panel2)); color:var(--blueSoft);}
+.loop .recycle{display:flex; align-items:center; gap:10px; margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--mut);}
+.loop .recycle .sym{color:var(--blue); font-size:18px;}
+.creed{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); font-family:var(--serif); font-style:italic; font-size:clamp(19px,2.3vw,26px); color:var(--ink);}
+
+/* palette */
+.swatches{display:flex; gap:9px; margin-top:18px; flex-wrap:wrap;}
+.sw{flex:1 1 0; min-width:62px;}
+.sw .chip{height:46px; border-radius:9px; border:1px solid var(--line2);}
+.sw .hx{font-family:var(--mono); font-size:9.5px; color:var(--mut2); margin-top:7px; letter-spacing:.04em;}
+
+/* pillars */
+.pillars{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;}
+.pillars .pl{flex:1 1 0; min-width:90px; background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:13px; text-align:center;}
+.pillars .pl b{display:block; font-size:13px; font-weight:600;}
+.pillars .pl span{font-family:var(--mono); font-size:9.5px; color:var(--mut2); letter-spacing:.1em; text-transform:uppercase;}
+.pillars .pl.star{border-color:rgba(77,79,232,.4);}
+.pillars .pl.star b::after{content:" ★"; color:var(--blue);}
+
+/* north star */
+.north{
+  margin-top:clamp(40px,6vw,72px); border:1px solid var(--line2); border-radius:20px;
+  padding:clamp(30px,5vw,60px); text-align:center; position:relative; overflow:hidden;
+  background:radial-gradient(700px 300px at 50% 0%, rgba(77,79,232,.12), transparent 70%), var(--bg2);
+}
+.north .lab{font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--mut2);}
+.north .big{font-family:var(--serif); font-weight:330; font-size:clamp(40px,9vw,104px); line-height:1; letter-spacing:-.02em; margin:18px 0 10px;}
+.north .big u{text-decoration:none; color:var(--blueSoft);}
+.north .small{color:var(--mut); font-size:15px;}
+.north .small b{color:var(--ink); font-weight:600;}
+
+/* footer */
+.foot{margin-top:64px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;
+  font-family:var(--mono); font-size:11px; color:var(--mut2); letter-spacing:.04em;}
+.foot .b{color:var(--mut);}
+
+/* reveal anim */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0; transform:translateY(16px); animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1; transform:none}}
+}
+
+/* responsive */
+@media (max-width:880px){
+  .c8,.c7,.c6,.c5,.c4{grid-column:span 12}
+  .phases{grid-template-columns:1fr; }
+  .phases .arrow{transform:rotate(90deg); justify-self:center}
+  .realm-head .tag{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/admin" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut2);text-decoration:none;margin-bottom:8px">← Admin</a>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero reveal" style="animation-delay:.02s">
+    <div class="kick"><span>Vision Board</span> <span class="dot">·</span> <b>@moritz_bohmbach</b> <span class="dot">·</span> <span>das große Bild</span></div>
+    <h1 class="manifest"><span class="q">„</span>Nicht das beste Produkt gewinnt.<br>Der, der es sich <em>leisten</em> kann.<span class="q">"</span></h1>
+    <div class="sub">
+      <p>Ein lebendes Bild vom großen Ganzen — links <strong style="color:var(--ink);font-weight:600">wer ich werde</strong>, rechts <strong style="color:var(--ink);font-weight:600">wie ich mich zeige</strong>. Kein Ziel-Poster zum Wegklicken, ein Kompass zum Wiederkommen.</p>
+      <span class="sig">EST. MINDSET <b>2026</b> · BUILDING IN PUBLIC</span>
+    </div>
+  </header>
+
+  <hr class="hr reveal" style="animation-delay:.1s">
+
+  <!-- ===================== REALM I — INNEN ===================== -->
+  <section>
+    <div class="realm-head reveal" style="animation-delay:.12s">
+      <span class="ix">I</span>
+      <h2>Wer ich werde</h2>
+      <span class="tag">Innen · Identität</span>
+    </div>
+
+    <div class="grid">
+      <!-- one-liner -->
+      <div class="card c7 reveal" style="animation-delay:.16s">
+        <div class="lab">Der rote Faden</div>
+        <h3>Ich baue DTC-Brands zu <span class="em">Profit-Systemen</span>. Öffentlich. Auf dem Weg zu meiner eigenen.</h3>
+        <p>Die Marke „Moritz Bohmbach" wandert mit — egal, was das aktuelle Geschäft ist. Sie ist das einzige Asset, das in jede Phase trägt.</p>
+      </div>
+
+      <!-- decision filter -->
+      <div class="card c5 reveal" style="animation-delay:.2s">
+        <div class="lab">Filter für jede Entscheidung</div>
+        <h3 class="sm">Leverage statt Fleiß.</h3>
+        <p>Viel Wirkung, wenig Aufwand. Bringt es Cash, Lernen oder Marke näher — oder ist es nur Beschäftigung? <span class="em">Maximale Leverage, keine künstliche Skalierung.</span></p>
+      </div>
+
+      <!-- founder arc -->
+      <div class="card c12 reveal" style="animation-delay:.24s">
+        <div class="lab">Founder-Story · der Bogen</div>
+        <div class="arc">
+          <div class="step"><div class="age">16</div><div class="t">Eigenes Modelabel</div><div class="d">Erste Marke aus dem Nichts — Produkt, Shop, Verkauf. Ich rede nicht über Commerce, ich mache ihn.</div></div>
+          <div class="step"><div class="age">17</div><div class="t">Schule abgebrochen — bewusst</div><div class="d">All-in. Conviction, nicht Anti-Bildung. Den eigenen Weg über den vorgezeichneten gestellt.</div></div>
+          <div class="step"><div class="age">18</div><div class="t">BB Brands</div><div class="d">Hearo, Bachgold, Wake — echte Builds, echte Profit-Systeme. Operator, kein Vendor.</div></div>
+          <div class="step"><div class="age"><span class="u">→</span></div><div class="t">Die eigene Marke</div><div class="d">Wohin alles gebaut wird. Finanziert &amp; gelernt durch heute.</div></div>
+        </div>
+      </div>
+
+      <!-- values -->
+      <div class="card c5 reveal" style="animation-delay:.28s">
+        <div class="lab">Werte-Anker</div>
+        <ul class="anchors">
+          <li><span class="m">✝</span><span class="x"><b>Christ</b><span>Matthäus 6,25 in der Bio. Der Grund unter dem Ehrgeiz.</span></span></li>
+          <li><span class="m">01</span><span class="x"><b>Substanz vor Show</b><span>Arbeit sichtbar, Person im Hintergrund. Kein Lifestyle-Flex.</span></span></li>
+          <li><span class="m">02</span><span class="x"><b>Ruhig, „so ist es"</b><span>Kein Guru-Hype. Auch die unbequeme Wahrheit, klar gesagt.</span></span></li>
+        </ul>
+      </div>
+
+      <!-- two-phase mission -->
+      <div class="card c7 reveal" style="animation-delay:.32s">
+        <div class="lab">Die Zwei-Phasen-Mission</div>
+        <div class="phases">
+          <div class="phase now">
+            <div class="p">Phase 1 · jetzt</div>
+            <h4>Die Agentur als Vehikel</h4>
+            <div class="d">Lean, hochpreisig, garantie-gestützt. Wenige High-Ticket-Kunden. Zweck: Kapital + lernen, wofür der Markt zahlt.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="phase goal">
+            <div class="p">Phase 2 · Ziel</div>
+            <h4>Die eigene E-Com-Marke</h4>
+            <div class="d">Das skalierbare Modell. Hier landet der Skalierungs-Drang — finanziert &amp; gelernt durch Phase 1.</div>
+          </div>
+          <div class="bridge">Der Hebel, der beide trägt: <b>die Personal Brand.</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr reveal" style="animation-delay:.16s">
+
+  <!-- ===================== REALM II — AUSSEN ===================== -->
+  <section>
+    <div class="realm-head reveal" style="animation-delay:.18s">
+      <span class="ix">II</span>
+      <h2>Wie ich mich zeige</h2>
+      <span class="tag">Außen · Positionierung · Instagram</span>
+    </div>
+
+    <div class="grid">
+      <!-- winner's loop centerpiece -->
+      <div class="card c12 reveal" style="animation-delay:.22s">
+        <div class="lab">Das Main Ding · The Winner's Loop</div>
+        <div class="loop">
+          <div class="chain">
+            <div class="node"><small>Mehr Käufe</small>Conversion</div>
+            <span class="ar">→</span>
+            <div class="node"><small>Pro Warenkorb</small>AOV / Bundles</div>
+            <span class="ar">→</span>
+            <div class="node"><small>Über die Lebenszeit</small>Retention / CLTV</div>
+            <span class="ar">→</span>
+            <div class="node prof"><small>Pro Kunde</small>Mehr Profit</div>
+          </div>
+          <div class="recycle"><span class="sym">↻</span> Jede Runde größer — mehr Profit kauft mehr Marktanteil. <span style="color:var(--blueSoft)">Winner takes it all.</span></div>
+        </div>
+        <div class="creed">„Profitabilität vor Skalierung." — erst das System, dann das Budget.</div>
+      </div>
+
+      <!-- für wen -->
+      <div class="card c5 reveal" style="animation-delay:.26s">
+        <div class="lab">Für wen</div>
+        <h3 class="sm">Die richtigen 50, nicht die meisten.</h3>
+        <p>Nicht für Follower-Zahlen optimieren — dafür, dass die <span class="em">richtigen</span> Leute mich sehen. Avatar: Founder im Plateau — <strong>„Umsatz wächst, Profit nicht."</strong></p>
+      </div>
+
+      <!-- versprechen -->
+      <div class="card c7 reveal" style="animation-delay:.3s">
+        <div class="lab">Das Versprechen</div>
+        <h3 class="sm">Leute kaufen, wenn sie sich selbst im Ergebnis sehen.</h3>
+        <p>Was mein Content auslösen soll: <span class="em">„Ich will der nächste sein, dessen Brand zur Profit-Maschine wird."</span> — über echten Proof, eingeladen über Pain-Points statt Nische.</p>
+      </div>
+
+      <!-- voice -->
+      <div class="card c4 reveal" style="animation-delay:.34s">
+        <div class="lab">Voice</div>
+        <h3 class="sm">Direkt. Ruhig. „So ist es."</h3>
+        <p><strong>80 %</strong> Experte · <strong>20 %</strong> Persönlichkeit. Keine Hype-Wörter, kein „!!!", keine Buzzwords. Zahlen nur belegt.</p>
+      </div>
+
+      <!-- visual world -->
+      <div class="card c4 reveal" style="animation-delay:.38s">
+        <div class="lab">Visuelle Welt</div>
+        <h3 class="sm">Dunkel. Ruhig. Reduziert. Premium.</h3>
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#0A0A0C"></div><div class="hx">0A0A0C</div></div>
+          <div class="sw"><div class="chip" style="background:#15151A"></div><div class="hx">15151A</div></div>
+          <div class="sw"><div class="chip" style="background:#FFFFFF"></div><div class="hx">FFFFFF</div></div>
+          <div class="sw"><div class="chip" style="background:#4D4FE8"></div><div class="hx">4D4FE8</div></div>
+        </div>
+      </div>
+
+      <!-- building in public -->
+      <div class="card c4 reveal" style="animation-delay:.42s">
+        <div class="lab">Content-Engine</div>
+        <h3 class="sm">Meine Arbeit <span class="em">ist</span> der Content.</h3>
+        <p style="margin-bottom:2px">Nichts ausdenken — dokumentieren, was eh passiert. Echte Arbeit &gt; Theorie.</p>
+        <div class="pillars">
+          <div class="pl star"><b>Reels</b><span>Engine</span></div>
+          <div class="pl"><b>Carousel</b><span>Tiefe</span></div>
+          <div class="pl"><b>Statement</b><span>Haltung</span></div>
+          <div class="pl"><b>Stories</b><span>Nähe</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NORTH STAR ===================== -->
+  <div class="north reveal" style="animation-delay:.24s">
+    <div class="lab">Der nächste konkrete Beweis</div>
+    <div class="big"><u>9.800 €</u></div>
+    <div class="small">an einem Tag. <b>Noch nicht.</b> Aber genau dahin wird gebaut.</div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="foot reveal" style="animation-delay:.3s">
+    <span class="b">MORITZ BOHMBACH · PERSONAL BRAND</span>
+    <span>Lebendes Dokument · baut sich mit jedem Strategie-Schritt weiter auf</span>
+    <span>Quelle: PERSONAL-BRAND-BOOK · Stand 2026-06-24</span>
+  </div>
+
+</div>
+</body>
+</html>
