@@ -77,6 +77,48 @@ body::after{ /* grain */
 .manifest em{font-style:normal; font-weight:800; background:linear-gradient(90deg,#F97316 0%,#FB923C 16%,#4F46E5 40%,#4F46E5 60%,#FB923C 84%,#F97316 100%); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:kinetic 7s ease-in-out infinite;}
 @keyframes kinetic{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .manifest .q{color:var(--mut2); font-style:normal;}
+
+/* ── ecomflow-Patterns ── */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:30px;}
+.stat-c{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px 20px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+.stat-c .n{font-family:var(--serif); font-weight:800; font-size:clamp(28px,3.6vw,42px); letter-spacing:-.02em; line-height:1; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.stat-c .l{color:var(--mut); font-size:12.5px; margin-top:9px; line-height:1.4;}
+.proof{display:flex; align-items:center; gap:13px; flex-wrap:wrap; justify-content:center; margin-top:26px;}
+.proof .pl{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut2);}
+.proof .brand{font-family:var(--serif); font-weight:700; font-size:18px; color:var(--ink); letter-spacing:-.01em; opacity:.82;}
+.proof .sep{width:4px; height:4px; border-radius:50%; background:var(--line2);}
+.cmp{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;}
+.cmp .col{border:1px solid var(--line); border-radius:14px; padding:22px; background:var(--panel2);}
+.cmp .col.new{border-color:rgba(79,70,229,.28); background:linear-gradient(180deg,rgba(79,70,229,.05),var(--panel));}
+.cmp .badge{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:3px 9px; border-radius:20px; display:inline-block; margin-bottom:12px;}
+.cmp .col.old .badge{background:#F1F5F9; color:#94A3B8;}
+.cmp .col.new .badge{background:rgba(249,115,22,.12); color:#EA580C;}
+.cmp .ch{font-family:var(--serif); font-weight:700; font-size:16px; margin-bottom:14px; color:var(--ink);}
+.cmp .col.old .ch{color:var(--mut);}
+.cmp ul{list-style:none; display:flex; flex-direction:column; gap:11px;}
+.cmp li{display:flex; gap:9px; font-size:13.5px; line-height:1.4;}
+.cmp .col.old li{color:var(--mut2);}
+.cmp .col.new li{color:var(--ink);}
+.cmp .ic{flex:0 0 auto; margin-top:0; font-weight:800;}
+.cmp .col.old .ic{color:#CBD5E1;}
+.cmp .col.new .ic{color:#4F46E5;}
+.band{position:relative; z-index:2; background:#0B1020; border-radius:20px; padding:clamp(26px,3.4vw,42px); overflow:hidden; box-shadow:0 20px 60px rgba(15,23,42,.20);}
+.band::before{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 60% 60% at 18% -10%, rgba(79,70,229,.30), transparent 60%), radial-gradient(ellipse 55% 60% at 92% 115%, rgba(249,115,22,.18), transparent 60%);}
+.band>*{position:relative;}
+.band .blab{font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8B93FF;}
+.band h3{font-family:var(--serif); font-weight:800; font-size:clamp(22px,3vw,32px); color:#fff; margin:12px 0 6px; letter-spacing:-.02em;}
+.band .bsub{color:rgba(255,255,255,.6); font-size:14px; max-width:62ch;}
+.flow{display:flex; align-items:stretch; gap:6px; flex-wrap:wrap; margin-top:24px;}
+.flow .fn{flex:1 1 0; min-width:128px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:13px; padding:15px;}
+.flow .fn small{display:block; font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:6px;}
+.flow .fn b{color:#fff; font-size:14.5px; font-weight:600;}
+.flow .fn.prof{background:linear-gradient(180deg,rgba(249,115,22,.24),rgba(79,70,229,.16)); border-color:rgba(249,115,22,.4);}
+.flow .fa{display:flex; align-items:center; color:#FB923C; font-size:17px; flex:0 0 auto;}
+.band .brecycle{display:flex; align-items:center; gap:10px; margin-top:20px; color:rgba(255,255,255,.7); font-size:13.5px;}
+.band .brecycle .sym{color:#FB923C; font-size:18px;}
+.band .bcreed{margin-top:18px; padding-top:18px; border-top:1px solid rgba(255,255,255,.1); font-family:var(--serif); font-weight:600; font-size:clamp(17px,2vw,22px); color:#fff;}
+.band .bk{color:#FB923C;}
+@media(max-width:880px){.stats{grid-template-columns:repeat(2,1fr)} .cmp{grid-template-columns:1fr} .flow .fa{transform:rotate(90deg); width:100%; justify-content:center; padding:4px 0}}
 .hero .sub{margin-top:26px; display:flex; gap:28px; flex-wrap:wrap; align-items:baseline;}
 .hero .sub p{max-width:48ch; color:var(--mut); font-size:18px; font-weight:500; line-height:1.55;}
 .sig{font-family:var(--mono); font-size:12px; color:var(--mut2); white-space:nowrap;}
@@ -228,7 +270,22 @@ body::after{ /* grain */
     </div>
   </header>
 
-  <hr class="hr reveal" style="animation-delay:.1s">
+  <!-- stat strip + brand proof (ecomflow-Pattern) -->
+  <div class="stats reveal" style="animation-delay:.06s">
+    <div class="stat-c"><div class="n" data-count="16">0</div><div class="l">Jahre alt, erste eigene Marke gebaut</div></div>
+    <div class="stat-c"><div class="n" data-count="3">0</div><div class="l">DTC-Brands zu Profit-Systemen</div></div>
+    <div class="stat-c"><div class="n" data-count="30" data-suffix="k €">0</div><div class="l">Ziel pro Monat — in 1 Jahr</div></div>
+    <div class="stat-c"><div class="n">5,0 ★</div><div class="l">Google-Bewertung (belegt)</div></div>
+  </div>
+
+  <div class="proof reveal" style="animation-delay:.1s">
+    <span class="pl">Brands, die ich baue</span><span class="sep"></span>
+    <span class="brand">Hearo</span><span class="sep"></span>
+    <span class="brand">Bachgold</span><span class="sep"></span>
+    <span class="brand">Wake</span>
+  </div>
+
+  <hr class="hr reveal" style="animation-delay:.14s">
 
   <!-- ===================== REALM I — INNEN ===================== -->
   <section>
@@ -334,22 +391,50 @@ body::after{ /* grain */
           <div class="pcol"><div class="ph">Als Nächstes <span class="pt">International</span></div><div class="pd">Content auf Englisch, Auftritt global. Die Kategorie kennt keine Grenze.</div></div>
         </div>
       </div>
-      <!-- winner's loop centerpiece -->
-      <div class="card c12 reveal" style="animation-delay:.22s">
-        <div class="lab">Das System · The Winner's Loop — AI-powered</div>
-        <div class="loop">
-          <div class="chain">
-            <div class="node"><small>Mehr Käufe</small>Conversion</div>
-            <span class="ar">→</span>
-            <div class="node"><small>Pro Warenkorb</small>AOV / Bundles</div>
-            <span class="ar">→</span>
-            <div class="node"><small>Über die Lebenszeit</small>Retention / CLTV</div>
-            <span class="ar">→</span>
-            <div class="node prof"><small>Pro Kunde</small>Mehr Profit</div>
+      <!-- comparison: vs old way (ecomflow-Pattern) -->
+      <div class="card c12 reveal" style="animation-delay:.23s">
+        <div class="lab">Die Kategorie · alt vs. neu</div>
+        <h3>Klassisches E-Commerce ist kaputt. <span class="em">AI-Native Commerce</span> löst es.</h3>
+        <div class="cmp">
+          <div class="col old">
+            <div class="badge">Old way</div>
+            <div class="ch">Klassisches E-Com</div>
+            <ul>
+              <li><span class="ic">✕</span> Reichweite kaufen, bis die Marge weg ist</li>
+              <li><span class="ic">✕</span> ROAS-Theater, Per-Order-Denken</li>
+              <li><span class="ic">✕</span> Skalieren um jeden Preis</li>
+              <li><span class="ic">✕</span> Tools draufklatschen, blind ohne System</li>
+            </ul>
           </div>
-          <div class="recycle"><span class="sym">↻</span> Jede Runde größer — mehr Profit kauft mehr Marktanteil. <span style="color:var(--blueSoft)">Winner takes it all.</span></div>
+          <div class="col new">
+            <div class="badge">AI-Native Commerce</div>
+            <div class="ch">Mein Weg</div>
+            <ul>
+              <li><span class="ic">✓</span> Profitabilität vor Skalierung</li>
+              <li><span class="ic">✓</span> The Winner's Loop — CLTV statt Per-Order</li>
+              <li><span class="ic">✓</span> KI als Hebel auf jeder Stufe</li>
+              <li><span class="ic">✓</span> Erst das System, dann das Budget</li>
+            </ul>
+          </div>
         </div>
-        <div class="creed">„Profitabilität vor Skalierung." — erst das System, dann das Budget.</div>
+      </div>
+
+      <!-- winner's loop — dunkles Signature-Band (ecomflow-Pattern) -->
+      <div class="band c12 reveal" style="animation-delay:.24s">
+        <div class="blab">Das System · AI-powered</div>
+        <h3>The Winner's Loop</h3>
+        <div class="bsub">Die AI-Profit-Engine: jede Stufe macht den Kunden wertvoller — und finanziert die nächste Runde.</div>
+        <div class="flow">
+          <div class="fn"><small>Mehr Käufe</small><b>Conversion</b></div>
+          <div class="fa">→</div>
+          <div class="fn"><small>Pro Warenkorb</small><b>AOV / Bundles</b></div>
+          <div class="fa">→</div>
+          <div class="fn"><small>Über die Lebenszeit</small><b>Retention / CLTV</b></div>
+          <div class="fa">→</div>
+          <div class="fn prof"><small>Pro Kunde</small><b>Mehr Profit</b></div>
+        </div>
+        <div class="brecycle"><span class="sym">↻</span> Jede Runde größer — mehr Profit kauft mehr Marktanteil. <b style="color:#fff">Winner takes it all.</b></div>
+        <div class="bcreed">„Profitabilität vor Skalierung." — <span class="bk">KI</span> dreht jede Stufe schneller &amp; günstiger.</div>
       </div>
 
       <!-- für wen -->
@@ -418,7 +503,7 @@ body::after{ /* grain */
   <!-- ===================== NORTH STAR ===================== -->
   <div class="north reveal" style="animation-delay:.24s">
     <div class="lab">Nordstern · mein Ziel in 1 Jahr</div>
-    <div class="big"><u>30.000 €</u></div>
+    <div class="big"><u data-count="30000" data-suffix=" €">0 €</u></div>
     <div class="small">im Monat — die Agentur läuft, Bestand + neue Kunden. <b>Noch nicht</b>, aber dahin wird gebaut.<br>Dazu: ein Name in <b>AI-Native Commerce</b> (E-Com × KI).</div>
   </div>
 
@@ -430,5 +515,24 @@ body::after{ /* grain */
   </div>
 
 </div>
+<script>
+(function(){
+  function fmt(v){ return v>=1000 ? v.toLocaleString('de-DE') : String(v); }
+  function animate(el){
+    var target=parseFloat(el.getAttribute('data-count'))||0;
+    var suffix=el.getAttribute('data-suffix')||'';
+    var dur=1500, start=null;
+    function step(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3); var val=Math.round(eased*target);
+      el.textContent=fmt(val)+suffix; if(p<1){requestAnimationFrame(step);} else {el.textContent=fmt(target)+suffix;} }
+    requestAnimationFrame(step);
+  }
+  var els=document.querySelectorAll('[data-count]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } });},{threshold:.4});
+    els.forEach(function(e){ io.observe(e); });
+  } else { els.forEach(animate); }
+})();
+</script>
 </body>
 </html>
