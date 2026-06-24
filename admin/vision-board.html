@@ -142,6 +142,15 @@ body::after{ /* grain */
 .pillars .pl.star{border-color:rgba(77,79,232,.4);}
 .pillars .pl.star b::after{content:" ★"; color:var(--blue);}
 
+/* plattformen */
+.plat{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px;}
+.plat .pcol{background:var(--panel2); border:1px solid var(--line); border-radius:13px; padding:18px;}
+.plat .ph{font-family:var(--serif); font-weight:400; font-size:20px; display:flex; align-items:center; gap:10px;}
+.plat .pt{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--blueSoft); border:1px solid rgba(77,79,232,.4); border-radius:20px; padding:3px 9px;}
+.plat .pd{color:var(--mut); font-size:13px; margin-top:9px; line-height:1.5;}
+.plat .pd strong{color:var(--ink); font-weight:600;}
+@media (max-width:880px){.plat{grid-template-columns:1fr}}
+
 /* north star */
 .north{
   margin-top:clamp(40px,6vw,72px); border:1px solid var(--line2); border-radius:20px;
@@ -340,6 +349,21 @@ body::after{ /* grain */
           <div class="pl"><b>Carousel</b><span>Tiefe</span></div>
           <div class="pl"><b>Statement</b><span>Haltung</span></div>
           <div class="pl"><b>Stories</b><span>Nähe</span></div>
+        </div>
+      </div>
+
+      <!-- plattformen -->
+      <div class="card c12 reveal" style="animation-delay:.46s">
+        <div class="lab">Plattformen · wie ich auftrete</div>
+        <div class="plat">
+          <div class="pcol">
+            <div class="ph">Instagram</div>
+            <div class="pd">Authentisch — so wie ich bin &amp; werde. Fokus: <strong>Agentur als Sales-Motor</strong> (Inbound-Leads). Plus Fotos &amp; Privatleben. Das Schaufenster für die richtigen 50.</div>
+          </div>
+          <div class="pcol">
+            <div class="ph">YouTube <span class="pt">Spielplatz</span></div>
+            <div class="pd">Experimentieren, persönlich, viel Volumen — hier wird gebaut &amp; gelernt. <strong>Das Beste wandert recycelt rüber auf Instagram.</strong></div>
+          </div>
         </div>
       </div>
     </div>
