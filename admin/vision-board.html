@@ -12,10 +12,10 @@
 :root{
   --bg:#08080a; --bg2:#0e0f13; --panel:#131419; --panel2:#181a21;
   --ink:#f3f4f6; --mut:#9aa0aa; --mut2:#646a73; --faint:#3a3d46;
-  --line:#1f212a; --line2:#2a2d37;
-  /* Zovany-CI auf Black: Orange → Pink → Violett */
-  --blue:#FF7A1A; --blueSoft:#FFB488; --blueDeep:#8B5CF6; --pink:#F26FA6;
-  --grad:linear-gradient(105deg,#FF7A1A 0%,#F26FA6 48%,#8B5CF6 100%);
+  --line:#1c2030; --line2:#272d3f;   /* slate-getönt (Zovany-Neutrals) */
+  /* Zovany-CI (echte Tokens): Indigo + Violett Tiefe, Orange als warmer Akzent */
+  --blue:#6366F1; --blueSoft:#A78BFA; --blueDeep:#F97316; --violet:#A855F7; --orange:#F97316;
+  --grad:linear-gradient(135deg,#6366F1 0%,#A855F7 38%,#F97316 100%);
   --serif:"Fraunces",Georgia,serif;
   --sans:"Schibsted Grotesk",-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,monospace;
@@ -32,10 +32,10 @@ body{
 body::before{ /* top glow */
   content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
   background:
-    radial-gradient(900px 540px at 50% -10%, rgba(255,122,26,.20), transparent 66%),
-    radial-gradient(760px 620px at 88% 3%, rgba(139,92,246,.17), transparent 60%),
-    radial-gradient(820px 660px at 6% 20%, rgba(242,111,166,.12), transparent 58%),
-    radial-gradient(1100px 620px at 14% 102%, rgba(139,92,246,.10), transparent 60%);
+    radial-gradient(ellipse 78% 50% at 50% -12%, rgba(99,102,241,.22), transparent 70%),
+    radial-gradient(ellipse 52% 42% at 20% 4%, rgba(249,115,22,.11), transparent 62%),
+    radial-gradient(ellipse 58% 46% at 82% 0%, rgba(168,85,247,.18), transparent 66%),
+    radial-gradient(ellipse 66% 50% at 14% 102%, rgba(124,58,237,.10), transparent 64%);
 }
 body::after{ /* grain */
   content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.04; mix-blend-mode:overlay;
@@ -115,7 +115,7 @@ body::after{ /* grain */
 .phase h4{font-family:var(--serif); font-weight:400; font-size:19px; margin:9px 0 7px;}
 .phase .d{color:var(--mut); font-size:12.5px; line-height:1.45;}
 .phase.now{border-color:var(--line2);}
-.phase.goal{border-color:rgba(255,122,26,.4); background:linear-gradient(180deg,rgba(255,122,26,.08),var(--panel2));}
+.phase.goal{border-color:rgba(99,102,241,.4); background:linear-gradient(180deg,rgba(99,102,241,.08),var(--panel2));}
 .arrow{font-family:var(--mono); color:var(--blue); font-size:20px;}
 .phases .bridge{grid-column:1/-1; color:var(--mut2); font-size:12.5px; margin-top:4px; text-align:center;}
 .phases .bridge b{color:var(--blueSoft); font-weight:500;}
@@ -126,7 +126,7 @@ body::after{ /* grain */
 .loop .node{background:var(--panel2); border:1px solid var(--line2); border-radius:11px; padding:13px 16px; font-weight:600; font-size:13.5px; flex:0 0 auto;}
 .loop .node small{display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--mut2); font-weight:400; margin-bottom:4px;}
 .loop .ar{color:var(--blue); font-family:var(--mono); font-size:17px;}
-.loop .prof{border-color:rgba(255,122,26,.5); background:linear-gradient(180deg,rgba(255,122,26,.12),var(--panel2)); color:var(--blueSoft);}
+.loop .prof{border-color:rgba(99,102,241,.5); background:linear-gradient(180deg,rgba(99,102,241,.12),var(--panel2)); color:var(--blueSoft);}
 .loop .recycle{display:flex; align-items:center; gap:10px; margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--mut);}
 .loop .recycle .sym{color:var(--blue); font-size:18px;}
 .creed{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); font-family:var(--serif); font-style:italic; font-size:clamp(19px,2.3vw,26px); color:var(--ink);}
@@ -142,21 +142,21 @@ body::after{ /* grain */
 .pillars .pl{flex:1 1 0; min-width:90px; background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:13px; text-align:center;}
 .pillars .pl b{display:block; font-size:13px; font-weight:600;}
 .pillars .pl span{font-family:var(--mono); font-size:9.5px; color:var(--mut2); letter-spacing:.1em; text-transform:uppercase;}
-.pillars .pl.star{border-color:rgba(255,122,26,.4);}
+.pillars .pl.star{border-color:rgba(99,102,241,.4);}
 .pillars .pl.star b::after{content:" ★"; color:var(--blue);}
 
 /* plattformen */
 .plat{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px;}
 .plat .pcol{background:var(--panel2); border:1px solid var(--line); border-radius:13px; padding:18px;}
 .plat .ph{font-family:var(--serif); font-weight:400; font-size:20px; display:flex; align-items:center; gap:10px;}
-.plat .pt{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--blueSoft); border:1px solid rgba(255,122,26,.4); border-radius:20px; padding:3px 9px;}
+.plat .pt{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--blueSoft); border:1px solid rgba(99,102,241,.4); border-radius:20px; padding:3px 9px;}
 .plat .pd{color:var(--mut); font-size:13px; margin-top:9px; line-height:1.5;}
 .plat .pd strong{color:var(--ink); font-weight:600;}
 @media (max-width:880px){.plat{grid-template-columns:1fr}}
 
 /* category stack */
 .stack{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:18px;}
-.stack .scol{background:var(--panel2); border:1px solid rgba(255,122,26,.28); border-radius:11px; padding:14px;}
+.stack .scol{background:var(--panel2); border:1px solid rgba(99,102,241,.28); border-radius:11px; padding:14px;}
 .stack .sk{font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--blueSoft);}
 .stack .sv{font-family:var(--serif); font-size:16px; margin-top:6px; line-height:1.2; color:var(--ink);}
 .stack .sv span{font-family:var(--sans); font-size:11px; color:var(--mut2); display:block; margin-top:3px;}
@@ -166,7 +166,7 @@ body::after{ /* grain */
 .north{
   margin-top:clamp(40px,6vw,72px); border:1px solid var(--line2); border-radius:20px;
   padding:clamp(30px,5vw,60px); text-align:center; position:relative; overflow:hidden;
-  background:radial-gradient(700px 300px at 50% 0%, rgba(255,122,26,.12), transparent 70%), var(--bg2);
+  background:radial-gradient(700px 300px at 50% 0%, rgba(99,102,241,.12), transparent 70%), var(--bg2);
 }
 .north .lab{font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--mut2);}
 .north .big{font-family:var(--serif); font-weight:330; font-size:clamp(40px,9vw,104px); line-height:1; letter-spacing:-.02em; margin:18px 0 10px;}
