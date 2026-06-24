@@ -126,6 +126,7 @@ body::after{ /* grain */
 .mood .tile:hover{transform:translateY(-3px); box-shadow:0 14px 36px rgba(15,23,42,.16);}
 .mood .tile.ar34{aspect-ratio:3/4} .mood .tile.ar11{aspect-ratio:1/1} .mood .tile.ar43{aspect-ratio:4/3} .mood .tile.ar45{aspect-ratio:4/5} .mood .tile.ar32{aspect-ratio:3/2}
 .mood .grad{position:absolute; inset:0;}
+.mood .tile img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
 .mood .tile::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.44)); pointer-events:none;}
 .mood .hint{position:absolute; top:11px; right:11px; z-index:2; font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.85); background:rgba(0,0,0,.28); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); padding:4px 8px; border-radius:20px;}
 .mood .meta{position:absolute; left:0; right:0; bottom:0; z-index:2; padding:15px; display:flex; flex-direction:column; gap:3px;}
@@ -524,20 +525,20 @@ body::after{ /* grain */
       <span class="tag">Lookbook · Vibe</span>
     </div>
     <div class="mood reveal" style="animation-delay:.24s">
-      <figure class="tile ar34" data-img="building"><div class="grad" style="background:linear-gradient(160deg,#1E1B4B,#4F46E5)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Mindset</span><span class="mw">Building</span></figcaption></figure>
-      <figure class="tile ar11" data-img="office"><div class="grad" style="background:linear-gradient(160deg,#334155,#0F172A)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Umgebung</span><span class="mw">Premium Office</span></figcaption></figure>
-      <figure class="tile ar45" data-img="ai"><div class="grad" style="background:linear-gradient(160deg,#4F46E5,#7C3AED)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Kategorie</span><span class="mw">AI · Future</span></figcaption></figure>
-      <figure class="tile ar43" data-img="travel"><div class="grad" style="background:linear-gradient(160deg,#EA580C,#FDBA74)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Lifestyle</span><span class="mw">Travel</span></figcaption></figure>
-      <figure class="tile ar11" data-img="focus"><div class="grad" style="background:linear-gradient(160deg,#0B1020,#1E293B)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Haltung</span><span class="mw">Focus</span></figcaption></figure>
-      <figure class="tile ar34" data-img="workspace"><div class="grad" style="background:linear-gradient(160deg,#475569,#0F172A)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Arbeit</span><span class="mw">Workspace</span></figcaption></figure>
-      <figure class="tile ar11" data-img="wealth"><div class="grad" style="background:linear-gradient(160deg,#F97316,#FBBF24)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Ziel</span><span class="mw">Wealth</span></figcaption></figure>
-      <figure class="tile ar43" data-img="shenzhen"><div class="grad" style="background:linear-gradient(160deg,#4338CA,#0EA5E9)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Sourcing</span><span class="mw">China · Shenzhen</span></figcaption></figure>
-      <figure class="tile ar45" data-img="discipline"><div class="grad" style="background:linear-gradient(160deg,#1E293B,#0B1020)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Charakter</span><span class="mw">Discipline</span></figcaption></figure>
-      <figure class="tile ar11" data-img="faith"><div class="grad" style="background:linear-gradient(160deg,#C4B5FD,#7C3AED)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Fundament</span><span class="mw">Faith</span></figcaption></figure>
-      <figure class="tile ar43" data-img="freedom"><div class="grad" style="background:linear-gradient(160deg,#60A5FA,#FDBA74)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Antrieb</span><span class="mw">Freedom</span></figcaption></figure>
-      <figure class="tile ar34" data-img="thebuild"><div class="grad" style="background:linear-gradient(160deg,#4F46E5,#1E1B4B)"></div><span class="hint">Bild folgt</span><figcaption class="meta"><span class="mt">Building in Public</span><span class="mw">The Build</span></figcaption></figure>
+      <figure class="tile ar34"><img src="vision-board-img/focus.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Haltung</span><span class="mw">Focus</span></figcaption></figure>
+      <figure class="tile ar11"><img src="vision-board-img/office.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Umgebung</span><span class="mw">Premium Office</span></figcaption></figure>
+      <figure class="tile ar45"><img src="vision-board-img/ai.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Kategorie</span><span class="mw">AI · Future</span></figcaption></figure>
+      <figure class="tile ar43"><img src="vision-board-img/travel.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Lifestyle</span><span class="mw">Travel</span></figcaption></figure>
+      <figure class="tile ar11"><img src="vision-board-img/operator.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Arbeit</span><span class="mw">Operator</span></figcaption></figure>
+      <figure class="tile ar43"><img src="vision-board-img/thebuild.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Building in Public</span><span class="mw">The Build</span></figcaption></figure>
+      <figure class="tile ar11"><div class="grad" style="background:linear-gradient(160deg,#F97316,#FBBF24)"></div><figcaption class="meta"><span class="mt">Ziel</span><span class="mw">Wealth</span></figcaption></figure>
+      <figure class="tile ar43"><img src="vision-board-img/content.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Reichweite</span><span class="mw">Content</span></figcaption></figure>
+      <figure class="tile ar34"><img src="vision-board-img/freedom.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Antrieb</span><span class="mw">Freedom</span></figcaption></figure>
+      <figure class="tile ar11"><div class="grad" style="background:linear-gradient(160deg,#C4B5FD,#7C3AED)"></div><figcaption class="meta"><span class="mt">Fundament</span><span class="mw">Faith</span></figcaption></figure>
+      <figure class="tile ar11"><img src="vision-board-img/grounded.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Authentizität</span><span class="mw">Grounded</span></figcaption></figure>
+      <figure class="tile ar34"><div class="grad" style="background:linear-gradient(160deg,#1E293B,#0B1020)"></div><figcaption class="meta"><span class="mt">Charakter</span><span class="mw">Discipline</span></figcaption></figure>
     </div>
-    <p style="margin-top:16px;font-size:13px;color:var(--mut2)">Platzhalter — echte Bilder kommen 1:1 rein (gleiche Kacheln, du tauschst nur die Grafik gegen ein Foto, Aspect-Ratios bleiben).</p>
+    <p style="margin-top:16px;font-size:13px;color:var(--mut2)">9 echte Bilder + 3 Konzept-Kacheln (Wealth · Faith · Discipline). Weitere Fotos einfach in <code>admin/vision-board-img/</code> legen.</p>
   </section>
 
   <!-- ===================== NORTH STAR ===================== -->
