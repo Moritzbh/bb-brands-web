@@ -134,6 +134,23 @@ body::after{ /* grain */
 .mood .meta .mw{font-family:var(--serif); font-weight:700; font-size:17px; color:#fff; letter-spacing:-.01em;}
 @media(max-width:1024px){.mood{columns:3}}
 @media(max-width:680px){.mood{columns:2}}
+
+/* visual identity card + copy-paste prompt */
+.vi{margin-top:22px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:clamp(22px,2.4vw,30px); box-shadow:0 1px 3px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.03);}
+.vi h3{font-family:var(--serif); font-weight:700; font-size:clamp(19px,2.3vw,26px); margin:14px 0 0; letter-spacing:-.015em;}
+.vimodes{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;}
+.vimode{font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#C2410C; background:rgba(249,115,22,.10); border:1px solid rgba(249,115,22,.28); padding:6px 12px; border-radius:20px;}
+.vigrade{display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;}
+.vigrade span{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--mut);}
+.vigrade i{width:14px; height:14px; border-radius:4px; display:inline-block; border:1px solid rgba(15,23,42,.12);}
+.prompt{margin-top:20px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#0B1020;}
+.promptbar{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:#11182B; border-bottom:1px solid rgba(255,255,255,.08);}
+.promptbar .pl{font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:#8B93FF;}
+.copybtn{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.04em; color:#fff; background:linear-gradient(135deg,#F97316,#EA580C); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; transition:transform .15s, box-shadow .2s; box-shadow:0 0 16px rgba(249,115,22,.3);}
+.copybtn:hover{transform:translateY(-1px); box-shadow:0 0 24px rgba(249,115,22,.45);}
+.copybtn.done{background:linear-gradient(135deg,#10B981,#059669); box-shadow:none;}
+.prompttext{font-family:var(--mono); font-size:12px; line-height:1.6; color:rgba(255,255,255,.82); padding:16px; white-space:pre-wrap; margin:0;}
+.vinote{margin-top:12px; font-size:12px; color:var(--mut2);}
 .hero .sub{margin-top:26px; display:flex; gap:28px; flex-wrap:wrap; align-items:baseline;}
 .hero .sub p{max-width:48ch; color:var(--mut); font-size:18px; font-weight:500; line-height:1.55;}
 .sig{font-family:var(--mono); font-size:12px; color:var(--mut2); white-space:nowrap;}
@@ -542,6 +559,36 @@ body::after{ /* grain */
       <figure class="tile ar34"><img src="vision-board-img/reset.jpg" alt="" loading="lazy"><figcaption class="meta"><span class="mt">Balance</span><span class="mw">Reset</span></figcaption></figure>
     </div>
     <p style="margin-top:16px;font-size:13px;color:var(--mut2)">15 echte Bilder. Weitere Fotos einfach in <code>admin/vision-board-img/</code> legen.</p>
+
+    <div class="vi reveal" style="animation-delay:.26s">
+      <div style="font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mut2);display:flex;align-items:center;gap:8px"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue)"></span>Visual Identity · so muss ein Bild aussehen</div>
+      <h3>Cinematic, warm, grounded. Nie clean, nie laut, nie Flex.</h3>
+      <div class="vimodes">
+        <span class="vimode">A · Cinematic Dark</span>
+        <span class="vimode">B · Golden</span>
+        <span class="vimode">C · Retro/Film</span>
+      </div>
+      <div class="vigrade">
+        <span><i style="background:#FDBA74"></i>Warme Amber-Highlights</span>
+        <span><i style="background:#0F766E"></i>Teal/Petrol Shadows</span>
+        <span><i style="background:#1E293B"></i>Lifted matte Blacks</span>
+        <span><i style="background:#94A3B8"></i>Korn · 35mm-Film</span>
+      </div>
+      <div class="prompt">
+        <div class="promptbar"><span class="pl">Bild-Bewertungs-Prompt</span><button class="copybtn" type="button">Prompt kopieren</button></div>
+        <pre class="prompttext">Bewerte dieses Bild gegen meine Visual Identity (Personal Brand @moritz_bohmbach): cinematic, warm, grounded. Nie clean, laut oder Flex.
+
+Look: Film-Still oder 35mm-Filmfoto. Warme Amber-Highlights plus teal/petrol Shadows, angehobene matte Blacks, gedämpft-satte Farben, sichtbares Korn, low-key gerichtetes Licht (Lampe, Fenster, golden hour), candid und dokumentarisch, echte Arbeit/grounded im Zentrum, kein Status-Flex.
+
+Ordne das Bild einem Modus zu: A Cinematic Dark, B Golden, C Retro/Film, oder keiner.
+
+Gib zurück:
+1) passt / passt nicht
+2) Score 0 bis 60 über 6 Dimensionen (Color Grade, Licht und Mood, Komposition, Motiv und Authentizität, Premium-Gefühl, Film-Textur)
+3) was fehlt und welcher Grade-Schritt es fixen würde.</pre>
+      </div>
+      <p class="vinote">Volle Doktrin (Grading-Werte, Kamera-Settings, Scorecard): <code>kb/social-content/instagram/VISUAL-IDENTITY-DOKTRIN.md</code></p>
+    </div>
   </section>
 
   <!-- ===================== NORTH STAR ===================== -->
@@ -577,6 +624,14 @@ body::after{ /* grain */
     els.forEach(function(e){ io.observe(e); });
   } else { els.forEach(animate); }
 })();
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=b.closest('.prompt').querySelector('.prompttext'); var t=el?el.textContent:'';
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){ b.textContent='Kopiert'; b.classList.add('done'); setTimeout(function(){b.textContent='Prompt kopieren'; b.classList.remove('done');},1800); });
+    } else { var r=document.createRange(); r.selectNode(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');}catch(e){} s.removeAllRanges(); b.textContent='Kopiert'; b.classList.add('done'); setTimeout(function(){b.textContent='Prompt kopieren'; b.classList.remove('done');},1800); }
+  });
+});
 </script>
 </body>
 </html>
