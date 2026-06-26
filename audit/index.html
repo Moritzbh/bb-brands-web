@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="/assets/css/shared.css?v=20260514-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="/assets/js/attribution.js?v=20260509-7" defer></script>
 
 <!-- Calendly Inline Widget · async loaded -->
@@ -49,7 +49,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 /* ============= REDUCED HEADER · Logo + Back-Link ============= */
 .audit-header-min{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
+  background:rgba(10,10,12,.72);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
 .audit-header-min .wrap{
@@ -111,7 +111,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 /* LEFT · Hero Content */
 .hero-left{padding-top:24px;display:flex;flex-direction:column;min-width:0;max-width:100%}
 .hero-left .eyebrow{
-  font-family:'Saira Condensed',-apple-system,sans-serif;
+  font-family:'Inter Tight',-apple-system,sans-serif;
   font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);margin-bottom:18px;display:inline-block;
 }
@@ -199,7 +199,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 .brands-score-stars svg{width:16px;height:16px}
 .brands-score-num{
   font-family:'Inter Tight',-apple-system,sans-serif;
-  font-size:18px;font-weight:800;color:#000;
+  font-size:18px;font-weight:800;color:var(--text);
   letter-spacing:-.01em;line-height:1;
 }
 .brands-score-meta{font-size:12px;color:var(--text-3);margin-top:2px}
@@ -224,10 +224,10 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
     font-family:'Inter Tight',sans-serif;
     font-weight:700;font-size:15px;letter-spacing:.01em;
     border-radius:8px;text-decoration:none;
-    box-shadow:0 8px 24px rgba(255,107,61,.30);
+    box-shadow:0 8px 24px rgba(77,79,232,.30);
     transition:all .2s ease;align-self:flex-start;
   }
-  .hero-left .anchor-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(255,107,61,.40);text-decoration:none;color:#fff}
+  .hero-left .anchor-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(77,79,232,.40);text-decoration:none;color:#fff}
   .hero-left .anchor-cta svg{width:16px;height:16px}
 }
 @media (max-width:780px){
@@ -239,7 +239,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 /* RIGHT · Calendly Embed */
 .hero-right{position:relative;scroll-margin-top:80px;min-width:0;max-width:100%}
 .calendly-frame{
-  background:#fff;border:1px solid var(--line);border-radius:14px;
+  background:var(--bg-card);border:1px solid var(--line);border-radius:14px;
   overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.08);
   max-width:100%;
 }
@@ -305,7 +305,7 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 .audit-faq-mini .wrap{max-width:760px}
 .audit-faq-mini .faq-head{text-align:center;margin-bottom:36px}
 .audit-faq-mini .faq-eyebrow{
-  font-family:'Saira Condensed',sans-serif;
+  font-family:'Inter Tight',sans-serif;
   font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);margin-bottom:14px;display:inline-block;
 }
@@ -370,12 +370,12 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
 .audit-footer-min .links button:hover{color:var(--accent)}
 @media (max-width:600px){.audit-footer-min .wrap{flex-direction:column;text-align:center}}
 
-.bb-pe-tile{display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bg-line,#e7e2d6);border-radius:14px;padding:14px 20px;text-decoration:none;color:#0A0A0F;box-shadow:0 18px 40px -28px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease}
-.bb-pe-tile:hover{transform:translateY(-2px);box-shadow:0 22px 48px -26px rgba(0,0,0,.28);text-decoration:none;color:#0A0A0F}
+.bb-pe-tile{display:inline-flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--bg-line,rgba(255,255,255,.12));border-radius:14px;padding:14px 20px;text-decoration:none;color:var(--text);box-shadow:0 18px 40px -28px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease}
+.bb-pe-tile:hover{transform:translateY(-2px);box-shadow:0 22px 48px -26px rgba(0,0,0,.28);text-decoration:none;color:var(--text)}
 .bb-pe-tile-mark{flex:none;width:36px;height:36px;border-radius:50%;background:#C9A24B;color:#fff;display:flex;align-items:center;justify-content:center}
 .bb-pe-tile-mark svg{width:22px;height:22px}
 .bb-pe-tile-body{display:flex;flex-direction:column;gap:1px;line-height:1.15}
-.bb-pe-tile-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;color:#0A0A0F}
+.bb-pe-tile-name{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;color:var(--text)}
 .bb-pe-tile-stars{font-size:14px;color:#C9A24B;letter-spacing:1px}
 .bb-pe-tile-meta{font-family:'Inter Tight',sans-serif;font-size:11px;color:#7a786f;letter-spacing:.02em}
 @media(max-width:720px){.bb-pe-tile{padding:10px 14px;gap:10px}.bb-pe-tile-mark{width:30px;height:30px}.bb-pe-tile-name{font-size:12px}}

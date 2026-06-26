@@ -4,39 +4,37 @@
    ============================================ */
 
 :root{
-  /* Brand-Tokens — Quelle: Marke/Brand/brand-guidelines.html */
-  /* Primary */
-  --blue:#0305C6;
-  --blue-soft:#1E3AFF;
-  --blue-tint:#EEF1FF;
-  --blue-deep:#02038F;
-  /* Accent */
-  --accent:#FF6B3D;
-  --accent-bg:#FFF4EE;
-  --accent-hover:#E85A2C;
-  /* Neutrals */
-  --bg:#ffffff;
-  --bg-alt:#fafaf7;
-  --bg-card:#ffffff;
-  --bg-elev:#f5f5f0;
-  --bg-input:#fafaf7;
-  --cream:#F5F1E8;
-  --cream-2:#EFE9DA;
-  --text:#0a0a0a;
-  --text-2:#3D3D3A;
-  --text-3:#787872;
-  --text-4:#b8b8b3;
-  --line:#E8E8E3;
-  --line-strong:#D0D0CB;
+  /* ===== CI 2026 — Dunkel · Ruhig · Reduziert · Premium =====
+     Quelle: PERSONAL-BRAND-DOCTRINE + VISUAL-IDENTITY-DOKTRIN.
+     EIN Akzent (BB-Blau on-dark). Kein Orange, kein Cream, kein Saira. */
+  --blue:#4D4FE8;
+  --blue-soft:#7173FF;
+  --blue-tint:rgba(77,79,232,.14);
+  --blue-deep:#3A3CCC;
+  --accent:#4D4FE8;
+  --accent-bg:rgba(77,79,232,.12);
+  --accent-hover:#7173FF;
+  /* Surfaces — near-black, warm-neutral */
+  --bg:#0A0A0C;
+  --bg-alt:#0F0F12;
+  --bg-card:#141417;
+  --bg-elev:#1B1B1F;
+  --bg-input:#151518;
+  --cream:#0F0F12;
+  --cream-2:#1B1B1F;
+  --text:#F4F1EA;
+  --text-2:#B7B3AB;
+  --text-3:#827E77;
+  --text-4:#54524D;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.17);
   /* Status */
-  --green:#16a34a;
-  --green-bg:#ecfdf5;
-  /* Typography · BRAND-FONTS V1 (final · 2026-05-09)
-     · Body + Display: Inter Tight (single-font für h1/h2/h3 + body)
-     · Akzent: Saira Condensed (nur Eyebrows · Tags · Step-Labels · Caps) */
+  --green:#34D399;
+  --green-bg:rgba(52,211,153,.12);
+  /* Typography — eine Display-Sans, kein Condensed */
   --display:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
   --body:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
-  --accent-font:'Saira Condensed','Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+  --accent-font:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -113,10 +111,10 @@ a:hover{text-decoration:underline}
    beim Page-Wechsel pixel-genau an derselben Position bleiben. */
 header.site-header{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.92);
+  background:rgba(10,10,12,.72);
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid rgba(232,232,227,.5);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 header.site-header .wrap{
   /* Identisches Layout zu .bb-topnav (Baulig-Pages):
@@ -139,7 +137,7 @@ header.site-header .wrap{
    - Auf Blue: White */
 .brand-logo{
   display:inline-flex;align-items:baseline;
-  text-decoration:none;color:var(--blue);
+  text-decoration:none;color:var(--text);
   font-family:var(--display);
   font-weight:300;font-size:36px;line-height:1;
   letter-spacing:-.01em;
@@ -203,11 +201,11 @@ header.site-header .wrap{
   padding:11px 22px;border-radius:7px;
   font-size:13.5px;font-weight:700;letter-spacing:-.005em;
   transition:all .2s ease;
-  box-shadow:0 3px 10px rgba(255,107,61,.25);
+  box-shadow:0 3px 10px rgba(77,79,232,.25);
 }
 .header-cta:hover{
   background:var(--accent-hover);text-decoration:none;
-  transform:translateY(-1px);box-shadow:0 6px 16px rgba(255,107,61,.35);
+  transform:translateY(-1px);box-shadow:0 6px 16px rgba(77,79,232,.35);
 }
 
 .mobile-toggle{
@@ -235,7 +233,7 @@ header.site-header .wrap{
 .mobile-menu{
   display:none;
   position:fixed;top:64px;left:0;right:0;
-  background:#fff;border-bottom:1px solid var(--line);
+  background:var(--bg-card);border-bottom:1px solid var(--line);
   padding:24px;flex-direction:column;gap:18px;
   z-index:49;box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
