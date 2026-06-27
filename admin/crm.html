@@ -488,7 +488,8 @@ tr:hover td{background:#fafbff}
     var leak=leakOf(l);
     n += leak>=20000?20:leak>=10000?15:leak>=5000?10:leak>0?5:0;               // Wert
     n += l.qualification==='hot'?10:l.qualification==='warm'?7:l.qualification==='diy'?3:0; // Bereitschaft
-    var d=daysSince(l.createdAt);
+    var refTs=(l.profitRechner&&l.profitRechner.at)||l.createdAt;              // Profit-Intent zählt, nicht der alte Quiz-Eingang
+    var d=daysSince(refTs);
     n += d<=1?10:d<=3?7:d<=7?4:0;                                              // Aktualität
     if(n>100)n=100;
     var grade=n>=70?'A':n>=40?'B':'C';
@@ -500,7 +501,10 @@ tr:hover td{background:#fafbff}
   // Profit-Analyse-Lead?
   function isProfit(l){return l.magnet==='profit-rechner'||(Array.isArray(l.campaigns)&&l.campaigns.indexOf('profit-rechner')>=0)||!!l.profitRechner;}
   // Domain eines Leads (für Join mit der KI-Analyse aus bb:scans).
-  function domainOf(l){var u=l.website||'';if(!u)return '';try{if(!/^https?:/i.test(u))u='https://'+u;return new URL(u).hostname.replace(/^www\./,'').toLowerCase();}catch(e){return String(l.website||'').replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0].toLowerCase();}}
+  // WICHTIG: bei Profit-Leads die im Profit-Rechner angegebene Shop-URL bevorzugen.
+  // Das Top-Level-`website` kann veraltet/falsch sein (z.B. "test" aus einem anderen,
+  // früher zusammengeführten Funnel) und würde den Domain-Join sprengen.
+  function domainOf(l){var u=(l.profitRechner&&l.profitRechner.website)||l.website||'';if(!u||u==='test')return '';try{if(!/^https?:/i.test(u))u='https://'+u;return new URL(u).hostname.replace(/^www\./,'').toLowerCase();}catch(e){return String(u).replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0].toLowerCase();}}
   function scanFor(l){var d=domainOf(l);return d?scanByDom[d]:null;}
 
   // ---- Auth ----
@@ -757,7 +761,7 @@ tr:hover td{background:#fafbff}
       var next=l.nextFollowUp?('<span class="'+(isOverdue(l)?'over-txt':'')+'">'+fmtDay(l.nextFollowUp)+'</span>'):(noNextStep(l)?'<span class="over-txt">⚠ fehlt</span>':'<span class="sub">—</span>');
       var hasScan=scanFor(l)?' <span class="badge" style="background:#0305c61a;color:#0305C6" title="KI-Tiefenanalyse vorhanden">KI ✓</span>':'';
       return '<tr data-open="'+esc(l.id)+'">'+
-        '<td class="email">'+esc(l.name||l.email||'—')+(l.brand?'<div class="sub">'+esc(l.brand)+'</div>':(domainOf(l)?'<div class="sub">'+esc(domainOf(l))+'</div>':''))+'</td>'+
+        '<td class="email">'+esc(l.name||l.email||'—')+(domainOf(l)?'<div class="sub">'+esc(domainOf(l))+'</div>':(l.brand&&l.brand!=='test'?'<div class="sub">'+esc(l.brand)+'</div>':''))+'</td>'+
         '<td>'+scoreBadge(l)+'</td>'+
         '<td>'+(seg?'<span class="badge '+seg[1]+'">'+seg[0]+'</span>':'<span class="sub">—</span>')+'</td>'+
         '<td class="score">'+(leak?money(leak):'—')+'</td>'+
@@ -1165,8 +1169,12 @@ tr:hover td{background:#fafbff}
     var kv='';
     function row(k,v){return v?'<div class="kv"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>':'';}
     kv+=row('E-Mail',l.email?'<a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>':'');
-    kv+=row('Marke',esc(l.brand||l.company||''));
-    kv+=row('Quelle',esc(MAGNET[l.magnet]||l.magnet||'')+' · '+esc(source(l))+(campaignOf(l)?' · '+esc(campaignOf(l)):''));
+    var brandVal=(l.brand&&l.brand!=='test')?l.brand:((l.company&&l.company!=='test')?l.company:'');
+    kv+=row('Marke',esc(brandVal));
+    var srcs=[]; if(l.magnet)srcs.push(MAGNET[l.magnet]||l.magnet);
+    (Array.isArray(l.campaigns)?l.campaigns:[]).forEach(function(c){var lbl=MAGNET[c]||CAMPAIGN[c]||c; if(srcs.indexOf(lbl)<0)srcs.push(lbl);});
+    kv+=row('Kam über',esc(srcs.join(' · '))+(srcs.length>1?' <span class="badge" style="background:#fef3c7;color:#b45309" title="Mehrere Funnels per E-Mail zusammengeführt">zusammengeführt</span>':''));
+    kv+=row('Akquise-Quelle',esc(source(l)));
     var chL=CH_MAP[channelOf(l)];
     kv+=row('Kanal',(chL?'<span class="ch-dot" style="background:'+chL[2]+'"></span>'+esc(chL[1]):'')+(fromMeta(l)?' <span class="badge" style="background:#e0e7ff;color:#1d4ed8">Meta</span>':''));
     kv+=row('Segment',seg?seg[0]+(l.tier?' · Tier '+l.tier:''):'');
@@ -1176,7 +1184,7 @@ tr:hover td{background:#fafbff}
     kv+=row('Eingegangen',fmtDate(l.createdAt));
 
     var answers='';
-    if(Array.isArray(l.answers)&&l.answers.length){answers+='<div class="dw-sec"><h3>Quiz-Antworten</h3>'+l.answers.map(function(a){return '<div class="qa"><div class="q">'+esc(a.q||'')+'</div><div class="a">'+esc(a.label||'')+'</div></div>';}).join('')+'</div>';}
+    if(Array.isArray(l.answers)&&l.answers.length){answers+='<div class="dw-sec"><details><summary style="cursor:pointer;font-weight:700">Profit-Quiz · Antworten</summary><div class="sub" style="margin:6px 0 8px">Aus dem Profit-Quiz-Funnel (nicht dem Profit-Rechner).</div>'+l.answers.map(function(a){return '<div class="qa"><div class="q">'+esc(a.q||'')+'</div><div class="a">'+esc(a.label||'')+'</div></div>';}).join('')+'</details></div>';}
     if(Array.isArray(l.callAnswers)&&l.callAnswers.length){answers+='<div class="dw-sec"><h3>Antworten aus der Buchung</h3>'+l.callAnswers.map(function(a){return '<div class="qa"><div class="q">'+esc(a.q||'')+'</div><div class="a">'+esc(a.a||'')+'</div></div>';}).join('')+'</div>';}
 
     var log='';
@@ -1215,7 +1223,7 @@ tr:hover td{background:#fafbff}
     var calLink=l.calendlyRescheduleUrl||'';
 
     $('drawer').innerHTML=
-      '<div class="dw-h"><div><h2>'+esc(l.name||l.email||'Lead')+'</h2><div class="dw-sub">'+esc(l.brand||'')+'</div></div><button class="dw-close" data-close>×</button></div>'+
+      '<div class="dw-h"><div><h2>'+esc(l.name||l.email||'Lead')+'</h2><div class="dw-sub">'+esc((l.brand&&l.brand!=='test')?l.brand:(domainOf(l)||''))+'</div></div><button class="dw-close" data-close>×</button></div>'+
       '<div class="dw-body">'+
         '<div class="dw-sec">'+
           '<div class="grid2">'+
@@ -1232,7 +1240,7 @@ tr:hover td{background:#fafbff}
         '<div class="dw-sec"><h3>Kontakt & Qualifikation</h3>'+kv+'</div>'+
         profitSec+
         answers+
-        '<div class="dw-sec" id="dwJourneySec" style="display:none"><h3>Geräte-Aktivität (anonyme Session)</h3><div class="sub" style="margin:-4px 0 8px">Alle Schritte dieses Browsers (bb_sid), funnel-übergreifend, nicht zwingend nur dieser Lead.</div><div id="dwJourney"></div></div>'+
+        '<div class="dw-sec" id="dwJourneySec" style="display:none"><details><summary style="cursor:pointer;font-weight:700">Geräte-Aktivität (anonyme Session)</summary><div class="sub" style="margin:6px 0 8px">Alle Schritte dieses Browsers (bb_sid), funnel-übergreifend und über die ganze Zeit, nicht zwingend nur dieser Lead.</div><div id="dwJourney"></div></details></div>'+
         '<div class="dw-sec"><h3>Aktivität</h3>'+
           '<div class="note-input"><textarea id="noteInput" placeholder="Notiz / Call-Ergebnis …"></textarea><button class="note-add" data-note>+</button></div>'+
           log+
