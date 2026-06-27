@@ -271,59 +271,8 @@
       '</div>';
   }
 
-  // SCANS
-  var scansCache=[];
-  async function viewScans(){
-    setHead('scans');
-    $('pactions').innerHTML='<input class="search" id="scanQ" placeholder="Domain suchen…" style="width:230px"><button class="btn" id="scanReload">↻</button>';
-    $('view').innerHTML='<div class="panel"><div class="panel-b"><div class="skel" style="width:40%;margin:10px 0"></div><div class="skel" style="width:80%;margin:10px 0"></div></div></div>';
-    try{ var d=await api('/api/scans?days=365'); scansCache=d.scans||[]; }catch(e){ if(e.auth){logout();return;} $('view').innerHTML='<div class="err-b">Konnte Analysen nicht laden.</div>'; return; }
-    var qEl=$('scanQ'); if(qEl){ qEl.oninput=function(){renderScans(qEl.value);}; }
-    var rl=$('scanReload'); if(rl){ rl.onclick=function(){ scansCache=[]; viewScans(); }; }
-    renderScans('');
-  }
-  function renderScans(q){
-    q=(q||'').toLowerCase().trim();
-    var list=q?scansCache.filter(function(s){return (s.domain||'').toLowerCase().indexOf(q)>=0||(s.url||'').toLowerCase().indexOf(q)>=0;}):scansCache;
-    if(!list.length){ $('view').innerHTML='<div class="empty">Keine Analysen gefunden.</div>'; return; }
-    $('view').innerHTML=list.map(function(s,i){
-      var f=s.findings||{}, inp=s.inputs||{};
-      var seg=s.segment==='red'?'red':s.segment==='yellow'?'amber':s.segment==='green'?'ok':'blue';
-      var steps=(f.steps||[]).map(function(st){return '<div class="find"><span class="sev '+esc(st.severity||'')+'">'+esc(st.severity||'')+'</span><span><b>'+esc(st.step||'')+(st.hebel?' · '+esc(st.hebel):'')+'</b> '+esc(st.evidenz||'')+'</span></div>';}).join('');
-      return '<div class="scard">'+
-        '<div class="top"><span class="dom"><a href="'+esc(s.url||'#')+'" target="_blank" rel="noopener">'+esc(s.domain||s.url||'?')+'</a></span><span class="ts">'+esc(dt(s.ts))+'</span></div>'+
-        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px">'+(s.segment?'<span class="pill '+seg+'">'+esc(s.segment)+'</span>':'')+(s.leak_eur_month?'<span class="pill blue">Leck '+esc(eur(s.leak_eur_month))+'/Mo</span>':'')+'</div>'+
-        '<div class="nums">'+(inp.visitors||'?')+' Besucher/Mo · AOV '+esc(eur(inp.aov))+' · CR '+(inp.cr||'?')+'% · Marge '+(inp.margin||'?')+'%</div>'+
-        (f.fazit?'<div class="fz">'+esc(f.fazit)+(f.engpass?' · Engpass: '+esc(f.engpass):'')+'</div>':'')+
-        steps+
-        '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri wa" data-i="'+i+'">💬 WhatsApp-Text + Report-Link</button><a class="btn" href="'+esc(reportUrl(s))+'" target="_blank" rel="noopener">🔗 Report öffnen</a><button class="btn copy" data-i="'+i+'">📋 Rohtext</button></div>'+
-      '</div>';
-    }).join('');
-    $('view').querySelectorAll('.copy').forEach(function(b){ b.onclick=function(){ var s=list[+b.dataset.i]; var t=copyText(s); navigator.clipboard.writeText(t).then(function(){ b.textContent='✓ kopiert'; setTimeout(function(){b.textContent='📋 Rohtext';},1600); }).catch(function(){ prompt('Kopieren:',t); }); }; });
-    $('view').querySelectorAll('.wa').forEach(function(b){ b.onclick=function(){ var s=list[+b.dataset.i]; var t=waPack(s); navigator.clipboard.writeText(t).then(function(){ b.textContent='✓ WhatsApp-Text kopiert'; setTimeout(function(){b.textContent='💬 WhatsApp-Text + Report-Link';},2000); }).catch(function(){ prompt('Kopieren:',t); }); }; });
-  }
-  function reportUrl(s){ return 'https://videos.bb-brands.de/analyse/?id='+encodeURIComponent(s.id||''); }
-  function waPack(s){
-    var f=s.findings||{}, L=[];
-    L.push('Hey 👋 hier ist deine Profit-Analyse für '+(s.domain||s.url||'')+':'); L.push('');
-    if(s.leak_eur_month) L.push('• Profit-Leck: rund '+eur(s.leak_eur_month)+'/Monat, aus demselben Traffic');
-    if(f.engpass) L.push('• Größter Engpass: '+f.engpass);
-    L.push('• Die wichtigsten Hebel + wie wir sie fixen, hab ich dir komplett aufbereitet:'); L.push('');
-    L.push(reportUrl(s)); L.push('');
-    L.push('Wenn du willst, schauen wir in 20 Min gemeinsam in deine Zahlen. Sag einfach Bescheid.');
-    return L.join('\n');
-  }
-  function copyText(s){
-    var f=s.findings||{}, i=s.inputs||{}, L=[];
-    L.push('Profit-Analyse für '+(s.domain||s.url||''));L.push('');
-    L.push('Deine Zahlen: '+(i.visitors||'?')+' Besucher/Mo · AOV '+eur(i.aov)+' · CR '+(i.cr||'?')+'% · Marge '+(i.margin||'?')+'%');
-    if(s.leak_eur_month) L.push('Geschätztes Profit-Leck: ~'+eur(s.leak_eur_month)+'/Monat');
-    if(f.engpass) L.push('Größter Engpass: '+f.engpass); L.push('');
-    if(f.fazit){ L.push(f.fazit); L.push(''); }
-    if(f.steps&&f.steps.length){ L.push('Gefundene Punkte:'); f.steps.forEach(function(st){ L.push('- '+(st.step||'')+(st.hebel?' ['+st.hebel+']':'')+' ('+(st.severity||'')+'): '+(st.evidenz||'')+(st.impact?' — '+st.impact:'')); }); L.push(''); }
-    L.push('Die 3 wichtigsten Hebel + wie wir das konkret fixen, gehen wir am besten kurz durch. Wann passt dir?');
-    return L.join('\n');
-  }
+  // (Altes read-only Scans-Fenster entfernt — Profit-Analysen laufen jetzt im
+  //  CRM-Tab: die Nav „Profit-Analysen" rendert viewCRM('profit') → crm.html#profit.)
 
   // ANALYTICS
   var anData=[],anCur=null,anDays=30;
@@ -363,7 +312,7 @@
   }
 
   // CRM EMBED (Leads / Funnel / Outbound — eingebettet, eine Fläche)
-  var CRM_VIEWS={leads:['cockpit','Leads / CRM'],funnel:['funnel','Funnel'],outbound:['outbound','Outbound'],youtube:['apps','YouTube Bewerbung']};
+  var CRM_VIEWS={leads:['cockpit','Leads / CRM'],profit:['profit','Profit-Analyse'],funnel:['funnel','Funnel'],outbound:['outbound','Outbound'],youtube:['apps','YouTube Bewerbung']};
   function viewCRM(route){
     var cfg=CRM_VIEWS[route]||['cockpit','Leads / CRM'];
     $('ptitle').textContent=cfg[1];
@@ -373,7 +322,7 @@
   }
 
   // ---------- ROUTER ----------
-  var VIEWS={overview:viewOverview,scans:viewScans,analytics:viewAnalytics,
+  var VIEWS={overview:viewOverview,scans:function(){viewCRM('profit');},analytics:viewAnalytics,
     leads:function(){viewCRM('leads');},funnel:function(){viewCRM('funnel');},outbound:function(){viewCRM('outbound');},youtube:function(){viewCRM('youtube');}};
   function route(){
     var v=(location.hash.replace('#/','')||'overview'); if(!VIEWS[v]) v='overview';

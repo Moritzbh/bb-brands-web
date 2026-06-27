@@ -246,6 +246,7 @@ tr:hover td{background:#fafbff}
 
     <div class="tabs">
       <button class="tab active" data-tab="cockpit">📋 Cockpit</button>
+      <button class="tab" data-tab="profit">💸 Profit-Analyse</button>
       <button class="tab" data-tab="pipeline">🗂 Pipeline</button>
       <button class="tab" data-tab="list">📑 Liste</button>
       <button class="tab" data-tab="sources">📊 Quellen</button>
@@ -275,6 +276,11 @@ tr:hover td{background:#fafbff}
           <div class="panel-body" id="p-stale"></div>
         </div>
       </div>
+    </div>
+
+    <!-- PROFIT-ANALYSE (Lead-CRM, ersetzt das alte Scans-Fenster) -->
+    <div class="view" id="view-profit">
+      <div id="profitWrap"></div>
     </div>
 
     <!-- PIPELINE -->
@@ -379,6 +385,8 @@ tr:hover td{background:#fafbff}
   var TOKEN_KEY='bb_admin_token';
   var token=localStorage.getItem(TOKEN_KEY)||'';
   var leads=[];
+  var scans=[];          // KI-Analysen (bb:scans) für den Join im Profit-Lead
+  var scanByDom={};      // domain → neueste Analyse
   var tab='cockpit';
   var openId=null;
 
@@ -402,7 +410,7 @@ tr:hover td{background:#fafbff}
   var LOST=['Preis','Timing','Kein Budget','Ghosting','Wettbewerb','Nicht ICP','Sonstiges'];
   var SEG={tier1:['⚪ Pre-Revenue','seg-tier1'],red:['🔴 Profit erodiert','seg-red'],yellow:['🟡 Wachstum stoppt','seg-yellow'],green:['🟢 Sauber','seg-green']};
   var QUAL={hot:['🔥 Budget bereit','q-hot'],warm:['Bereit (Plan)','q-warm'],diy:['Selbst machen','q-diy'],none:['Kein Budget','q-none']};
-  var MAGNET={'quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt','youtube-case':'🎬 YouTube Bewerbung'};
+  var MAGNET={'profit-rechner':'💸 Profit-Analyse','quiz-diagnose':'Profit-Quiz','funnel-call':'Funnel-Call','website-call':'Website-Call','erstgespraech':'Erstgespräch','whatsapp-chat':'WhatsApp','style-guide':'Style-Guide','ai-readiness-check':'AI-Check','contact':'Kontakt','youtube-case':'🎬 YouTube Bewerbung'};
   function isContact(l){return l.type==='contact';}
   // Kampagnen-Quelle (z.B. youtube-case) sichtbar machen
   var CAMPAIGN={'youtube-case':'🎬 YouTube Case'};
@@ -460,6 +468,30 @@ tr:hover td{background:#fafbff}
   function lastTouch(l){return l.lastContact||l.updatedAt||l.createdAt;}
   function isOverdue(l){return l.nextFollowUp&&dpart(l.nextFollowUp)<todayStr()&&['won','lost'].indexOf(stageOf(l))<0;}
 
+  // ---- Lead-Scoring (Best Practice: ICP-Fit + Intent kombiniert → A/B/C) ----
+  function leakOf(l){ return Number(l.leakMo!=null?l.leakMo:(l.profitRechner&&l.profitRechner.leakMo))||0; }
+  function leadScore(l){
+    var n=0, tier=Number(l.tier)||0;
+    n += tier>=3?40:tier===2?30:(l.segment&&l.segment!=='tier1')?18:10;        // ICP-Fit
+    n += l.segment==='red'?20:l.segment==='yellow'?14:l.segment==='green'?6:4;  // Pain/Segment
+    var leak=leakOf(l);
+    n += leak>=20000?20:leak>=10000?15:leak>=5000?10:leak>0?5:0;               // Wert
+    n += l.qualification==='hot'?10:l.qualification==='warm'?7:l.qualification==='diy'?3:0; // Bereitschaft
+    var d=daysSince(l.createdAt);
+    n += d<=1?10:d<=3?7:d<=7?4:0;                                              // Aktualität
+    if(n>100)n=100;
+    var grade=n>=70?'A':n>=40?'B':'C';
+    return {n:Math.round(n),grade:grade};
+  }
+  function scoreBadge(l){var s=leadScore(l);var c=s.grade==='A'?'#16a34a':s.grade==='B'?'#d9870a':'#6b7280';return '<span class="badge" style="background:'+c+'1a;color:'+c+'" title="Lead-Score '+s.n+'/100 (ICP-Fit + Intent)">'+s.grade+' · '+s.n+'</span>';}
+  // Best Practice: jeder aktive Lead braucht einen nächsten Schritt.
+  function noNextStep(l){return isActive(l)&&!dpart(l.nextFollowUp)&&!(l.nextAction&&String(l.nextAction).trim());}
+  // Profit-Analyse-Lead?
+  function isProfit(l){return l.magnet==='profit-rechner'||(Array.isArray(l.campaigns)&&l.campaigns.indexOf('profit-rechner')>=0)||!!l.profitRechner;}
+  // Domain eines Leads (für Join mit der KI-Analyse aus bb:scans).
+  function domainOf(l){var u=l.website||'';if(!u)return '';try{if(!/^https?:/i.test(u))u='https://'+u;return new URL(u).hostname.replace(/^www\./,'').toLowerCase();}catch(e){return String(l.website||'').replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0].toLowerCase();}}
+  function scanFor(l){var d=domainOf(l);return d?scanByDom[d]:null;}
+
   // ---- Auth ----
   function showLogin(msg){$('login').style.display='flex';$('app').style.display='none';if(msg)$('loginErr').textContent=msg;$('token').focus();}
   function showApp(){$('login').style.display='none';$('app').style.display='block';}
@@ -473,6 +505,22 @@ tr:hover td{background:#fafbff}
   async function load(){
     try{var data=await api('GET');leads=(data&&data.leads)||[];buildFilters();render();}
     catch(e){if(e.message!=='401')console.error(e);}
+    loadScans();
+  }
+  // KI-Analysen laden + per Domain indexieren (neueste gewinnt) → Join im Profit-Lead.
+  async function loadScans(){
+    try{
+      var r=await fetch('/api/scans?days=365&token='+encodeURIComponent(token),{headers:{Authorization:'Bearer '+token}});
+      if(!r.ok)return; var d=await r.json(); scans=(d&&d.scans)||[];
+      scanByDom={};
+      scans.forEach(function(s){
+        var dom=String(s.domain||'').toLowerCase()||(function(){try{return new URL(s.url).hostname.replace(/^www\./,'').toLowerCase();}catch(e){return '';}})();
+        if(!dom)return;
+        if(!scanByDom[dom]||(s.ts||0)>(scanByDom[dom].ts||0))scanByDom[dom]=s;
+      });
+      if(tab==='profit')renderProfit();
+      if(openId)renderDrawer();
+    }catch(e){}
   }
   function updateLocal(lead){var i=leads.findIndex(function(x){return x.id===lead.id;});if(i>=0)leads[i]=lead;}
 
@@ -485,7 +533,7 @@ tr:hover td{background:#fafbff}
   }
 
   // ---- Render dispatch ----
-  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else if(tab==='outbound')renderOutbound();else if(tab==='apps')renderApps();else renderList();}
+  function render(){renderKPIs();if(tab==='cockpit')renderCockpit();else if(tab==='profit')renderProfit();else if(tab==='pipeline')renderPipeline();else if(tab==='sources')renderSources();else if(tab==='funnel')renderFunnel();else if(tab==='mediabuyer')renderMediaBuyer();else if(tab==='outbound')renderOutbound();else if(tab==='apps')renderApps();else renderList();}
 
   function renderKPIs(){
     var pipe=0,open=0,won=0,lost=0,noShow=0,showed=0;
@@ -643,17 +691,71 @@ tr:hover td{background:#fafbff}
     $('empty').style.display=list.length?'none':'block';
     $('rows').innerHTML=list.map(function(l){
       var st=STAGE_MAP[stageOf(l)];var seg=SEG[l.segment];var h=hotness(l);
-      var next=l.nextFollowUp?('<span class="'+(isOverdue(l)?'over-txt':'')+'">'+fmtDay(l.nextFollowUp)+'</span>'):'<span class="sub">—</span>';
+      var next=l.nextFollowUp?('<span class="'+(isOverdue(l)?'over-txt':'')+'">'+fmtDay(l.nextFollowUp)+'</span>'):(noNextStep(l)?'<span class="over-txt">⚠ fehlt</span>':'<span class="sub">—</span>');
       return '<tr data-open="'+esc(l.id)+'">'+
         '<td class="email">'+esc(l.name||l.email||'—')+(campaignOf(l)?' <span class="badge" style="background:#0305c61a;color:#0305C6">'+esc(campaignOf(l))+'</span>':'')+(l.brand?'<div class="sub">'+esc(l.brand)+'</div>':'')+'</td>'+
         '<td><span class="badge" style="background:'+(st?st[2]:'#999')+'1a;color:'+(st?st[2]:'#999')+'">'+(st?st[1]:'—')+'</span></td>'+
         '<td class="score">'+money(l.dealValue)+'</td>'+
         '<td>'+(seg?'<span class="badge '+seg[1]+'">'+seg[0]+'</span>':'<span class="sub">—</span>')+'</td>'+
-        '<td><span class="badge '+h[1]+'">'+h[0]+'</span></td>'+
+        '<td><span class="badge '+h[1]+'">'+h[0]+'</span> '+scoreBadge(l)+'</td>'+
         '<td>'+next+'</td>'+
         '<td class="sub">'+fmtDate(lastTouch(l))+'</td>'+
       '</tr>';
     }).join('');
+  }
+
+  // ---- Profit-Analyse (Lead-CRM, ersetzt das alte read-only Scans-Fenster) ----
+  var profitFilter='all';
+  function profitWaText(l){
+    var s=scanFor(l), f=(s&&s.findings)||{}, L=[];
+    var dom=domainOf(l)||l.brand||'deinen Shop';
+    var first=(l.name||'').trim().split(/\s+/)[0]||'';
+    L.push('Hey '+(first?first+' ':'')+'👋 hier ist deine Profit-Analyse für '+dom+':'); L.push('');
+    var leak=leakOf(l);
+    if(leak)L.push('• Profit-Leck: rund '+money(leak)+'/Monat, aus demselben Traffic');
+    if(f.engpass)L.push('• Größter Engpass: '+f.engpass);
+    if(f.fazit){ L.push(''); L.push(f.fazit); }
+    L.push(''); L.push('Die 3 wichtigsten Hebel + wie wir sie konkret fixen, gehen wir am besten kurz durch. Wann passt dir diese Woche?');
+    return L.join('\n');
+  }
+  function renderProfit(){
+    var all=leads.filter(isProfit);
+    var aCount=all.filter(function(l){return leadScore(l).grade==='A';}).length;
+    var openCnt=all.filter(isActive).length;
+    var noStep=all.filter(noNextStep).length;
+    var totLeak=all.reduce(function(s,l){return s+leakOf(l);},0);
+    var list=all.slice();
+    if(profitFilter==='a')list=list.filter(function(l){return leadScore(l).grade==='A';});
+    else if(profitFilter==='nostep')list=list.filter(noNextStep);
+    else if(profitFilter==='open')list=list.filter(isActive);
+    list.sort(function(a,b){return leadScore(b).n-leadScore(a).n||(b.createdAt||'').localeCompare(a.createdAt||'');});
+    function chip(id,lbl,n){return '<button class="btn" data-pf="'+id+'" style="'+(profitFilter===id?'background:#0d1017;color:#fff;border-color:#0d1017':'')+'">'+lbl+' ('+n+')</button>';}
+    var head=
+      '<div class="kpis" style="margin-bottom:14px">'+
+        '<div class="kpi"><div class="v">'+all.length+'</div><div class="l">Profit-Leads</div></div>'+
+        '<div class="kpi"><div class="v">'+aCount+'</div><div class="l">A-Leads (heiß)</div></div>'+
+        '<div class="kpi"><div class="v">'+money(totLeak)+'</div><div class="l">Profit-Leck gesamt/Mo</div></div>'+
+        '<div class="kpi"><div class="v" style="'+(noStep?'color:#dc2626':'')+'">'+noStep+'</div><div class="l">ohne nächsten Schritt</div></div>'+
+      '</div>'+
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'+
+        chip('all','Alle',all.length)+chip('open','Offen',openCnt)+chip('a','Nur A',aCount)+chip('nostep','⚠ ohne nächsten Schritt',noStep)+
+      '</div>';
+    if(!list.length){ $('profitWrap').innerHTML=head+'<div class="empty" style="display:block">Keine Profit-Analyse-Leads in dieser Ansicht. Sobald jemand den Gratis-Profit-Rechner ausfüllt, erscheint er hier.</div>'; return; }
+    var rows=list.map(function(l){
+      var st=STAGE_MAP[stageOf(l)];var seg=SEG[l.segment];var leak=leakOf(l);
+      var next=l.nextFollowUp?('<span class="'+(isOverdue(l)?'over-txt':'')+'">'+fmtDay(l.nextFollowUp)+'</span>'):(noNextStep(l)?'<span class="over-txt">⚠ fehlt</span>':'<span class="sub">—</span>');
+      var hasScan=scanFor(l)?' <span class="badge" style="background:#0305c61a;color:#0305C6" title="KI-Tiefenanalyse vorhanden">KI ✓</span>':'';
+      return '<tr data-open="'+esc(l.id)+'">'+
+        '<td class="email">'+esc(l.name||l.email||'—')+(l.brand?'<div class="sub">'+esc(l.brand)+'</div>':(domainOf(l)?'<div class="sub">'+esc(domainOf(l))+'</div>':''))+'</td>'+
+        '<td>'+scoreBadge(l)+'</td>'+
+        '<td>'+(seg?'<span class="badge '+seg[1]+'">'+seg[0]+'</span>':'<span class="sub">—</span>')+'</td>'+
+        '<td class="score">'+(leak?money(leak):'—')+'</td>'+
+        '<td><span class="badge" style="background:'+(st?st[2]:'#999')+'1a;color:'+(st?st[2]:'#999')+'">'+(st?st[1]:'—')+'</span></td>'+
+        '<td>'+next+hasScan+'</td>'+
+        '<td class="sub">'+fmtDate(l.createdAt)+'</td>'+
+      '</tr>';
+    }).join('');
+    $('profitWrap').innerHTML=head+'<div class="table-wrap"><table><thead><tr><th>Kontakt</th><th>Score</th><th>Segment</th><th>Leck/Mo</th><th>Stufe</th><th>Next</th><th>Eingegangen</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
 
   // ---- Sources / Quellen ----
@@ -1071,6 +1173,34 @@ tr:hover td{background:#fafbff}
       log=l.activity.slice().reverse().map(function(a){return '<div class="log-item"><div class="lt">'+fmtDate(a.ts)+'</div>'+esc(a.text)+'</div>';}).join('');
     }else{log='<div class="sub">Noch keine Notizen.</div>';}
 
+    var profitSec='';
+    if(isProfit(l)){
+      var pr=l.profitRechner||{}, sc=scanFor(l), f=(sc&&sc.findings)||{};
+      var leak=leakOf(l), yr=l.leakYr||pr.leakYr;
+      var pk='';
+      pk+=row('Profit-Leck', leak?'<b>'+money(leak)+'/Mo</b>'+(yr?' · '+money(yr)+'/Jahr':''):'');
+      pk+=row('Conversion', pr.cr!=null?String(pr.cr).replace('.',',')+' %':'');
+      pk+=row('Ø Bestellwert', pr.aov!=null?money(pr.aov):'');
+      pk+=row('Besucher/Mo', pr.visitors!=null?Number(pr.visitors).toLocaleString('de-DE'):'');
+      var sCalc=leadScore(l);
+      pk+=row('Lead-Score', sCalc.grade+' · '+sCalc.n+'/100');
+      var findHtml;
+      if(f.fazit||f.engpass||(f.steps&&f.steps.length)){
+        findHtml='<div style="margin-top:10px">'+
+          (f.engpass?'<div style="font-size:13px;margin-bottom:6px">Größter Engpass: <b>'+esc(f.engpass)+'</b></div>':'')+
+          (f.fazit?'<div style="font-size:13.5px;margin-bottom:6px;color:#33333c">'+esc(f.fazit)+'</div>':'')+
+          (f.steps||[]).slice(0,4).map(function(st){return '<div style="font-size:12.5px;padding:5px 0;border-top:1px solid var(--line)"><b>'+esc(st.step||'')+(st.hebel?' · '+esc(st.hebel):'')+'</b> '+esc(st.evidenz||'')+'</div>';}).join('')+
+        '</div>';
+      }else{
+        findHtml='<div class="sub" style="margin-top:8px">Keine KI-Tiefenanalyse zu '+esc(domainOf(l)||'dieser Domain')+' gefunden (Lead hat den Scan evtl. abgebrochen).</div>';
+      }
+      profitSec='<div class="dw-sec"><h3>💸 Profit-Analyse</h3>'+pk+findHtml+
+        '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">'+
+          '<button class="btn" data-wa="'+esc(l.id)+'">💬 WhatsApp-Text kopieren</button>'+
+          (sc&&sc.id?'<a class="btn" href="https://videos.bb-brands.de/analyse/?id='+encodeURIComponent(sc.id)+'" target="_blank" rel="noopener">🔗 Report</a>':'')+
+        '</div></div>';
+    }
+
     var calLink=l.calendlyRescheduleUrl||'';
 
     $('drawer').innerHTML=
@@ -1089,6 +1219,7 @@ tr:hover td{background:#fafbff}
           (stageOf(l)==='lost'?'<div class="field"><label>Verlustgrund</label><select class="edit" data-field="lostReason">'+lostOpts+'</select></div>':'')+
         '</div>'+
         '<div class="dw-sec"><h3>Kontakt & Qualifikation</h3>'+kv+'</div>'+
+        profitSec+
         answers+
         '<div class="dw-sec" id="dwJourneySec" style="display:none"><h3>Funnel-Journey</h3><div id="dwJourney"></div></div>'+
         '<div class="dw-sec"><h3>Aktivität</h3>'+
@@ -1106,6 +1237,10 @@ tr:hover td{background:#fafbff}
   // ---- Events ----
   document.addEventListener('click',function(e){
     var t=e.target;
+    var pf=t.closest('[data-pf]');
+    if(pf){ profitFilter=pf.getAttribute('data-pf'); renderProfit(); return; }
+    var waEl=t.closest('[data-wa]');
+    if(waEl){ var lw=leads.find(function(x){return x.id===waEl.getAttribute('data-wa');}); if(lw){ var txt=profitWaText(lw); navigator.clipboard.writeText(txt).then(function(){var o=waEl.textContent;waEl.textContent='✓ kopiert';setTimeout(function(){waEl.textContent=o;},1600);}).catch(function(){prompt('Kopieren:',txt);}); } return; }
     var openEl=t.closest('[data-open]');
     if(openEl&&!t.closest('.edit')&&!t.closest('[data-note]')){openDrawer(openEl.getAttribute('data-open'));return;}
     if(t.closest('[data-close]')){closeDrawer();return;}
