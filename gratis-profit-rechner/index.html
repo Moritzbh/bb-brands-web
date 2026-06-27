@@ -105,6 +105,22 @@
   .consent input{margin-top:3px;width:17px;height:17px;flex:0 0 auto;accent-color:var(--ink)}
   .consent span{font-size:12.5px;color:var(--muted);line-height:1.5}
   .consent a{text-decoration:underline}
+  /* Lead-Gate Pop-up */
+  .modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(11,11,12,.62);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:modalFade .2s ease}
+  @keyframes modalFade{from{opacity:0}to{opacity:1}}
+  .modal-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 28px;max-width:480px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:modalPop .24s cubic-bezier(.2,.9,.3,1);max-height:92vh;overflow:auto}
+  @keyframes modalPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+  .modal-badge{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:rgba(22,163,74,.10);border:1px solid rgba(22,163,74,.25);border-radius:99px;padding:6px 12px;margin-bottom:14px}
+  .modal-title{font-size:24px;font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:8px}
+  .modal-sub{font-size:14.5px;color:var(--muted);line-height:1.5;margin-bottom:18px}
+  .modal-sub b{color:var(--ink);font-weight:700}
+  .modal .inputs{margin-bottom:2px}
+  body.modal-open{overflow:hidden}
+  @media(max-width:560px){.modal-card{padding:24px 20px;border-radius:18px}.modal-title{font-size:21px}}
+  /* E-Mail-Zustellung als zweite Option im Ergebnis */
+  .btn-mail{background:#fff;color:var(--ink);border:1.5px solid var(--line);margin-top:10px}
+  .btn-mail:hover{border-color:var(--ink)}
+  .or-sep{text-align:center;font-size:12px;color:#a0a2a9;font-weight:600;margin:12px 0 2px}
   .success{text-align:center;padding:14px 0}
   .success .ic{width:54px;height:54px;border-radius:50%;background:#eafaf0;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
   .success .ic svg{width:26px;height:26px;color:var(--ok)}
@@ -278,18 +294,18 @@ body{overflow-x:hidden}
     <div class="card" id="toolCard">
       <!-- STEP 1 — nur die URL (Mini-Commitment) -->
       <form id="step1Form" novalidate>
-        <div class="step-tag">Schritt 1 von 2 · 100 % gratis</div>
+        <div class="step-tag">Schritt 1 von 3 · 100 % gratis</div>
         <label>Deine Shop URL</label>
         <input type="text" id="inUrl" placeholder="deinshop.de" autocomplete="url">
         <button class="btn" type="submit">Shop gratis von der KI scannen lassen
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
         <p class="err-msg" id="urlErr">Bitte gib deine Shop URL ein.</p>
-        <p class="formnote">100 % kostenlos · kein Account · kein Spam · KI gestützt gegen 110+ Kriterien (Baymard · Shopify · Google).</p>
+        <p class="formnote">100 % kostenlos · unverbindlich · kein Spam · KI gestützt gegen 110+ Kriterien (Baymard · Shopify · Google).</p>
       </form>
       <!-- STEP 2 — die Zahlen, während die KI im Hintergrund scannt -->
       <form id="step2Form" novalidate style="display:none">
-        <div class="step-tag">Schritt 2 von 2 <span class="scanning"><span class="spin-sm"></span> KI scannt deinen Shop …</span></div>
+        <div class="step-tag">Schritt 2 von 3 <span class="scanning"><span class="spin-sm"></span> KI scannt deinen Shop …</span></div>
         <p class="step2-lead">Damit die KI dein Profit-Leck in Euro zeigen kann, noch 3 Zahlen aus deinem Shopify:</p>
         <div class="inputs">
           <div><label>Besucher / Monat</label><input type="number" id="inVisitors" placeholder="40000" inputmode="numeric"></div>
@@ -335,11 +351,11 @@ body{overflow-x:hidden}
 <!-- SO FUNKTIONIERT'S -->
 <section class="lp"><div class="wrap">
   <h2>So funktioniert's</h2>
-  <p class="lead">In unter 60 Sekunden, ohne Call, ohne Account.</p>
+  <p class="lead">In unter 60 Sekunden, komplett kostenlos, ohne Call.</p>
   <div class="steps">
     <div class="step"><div class="n">1</div><h3>Shop-URL eintragen</h3><p>Du gibst nur deine Shop-Adresse ein. Die KI ruft deinen Shop sofort auf.</p></div>
     <div class="step"><div class="n">2</div><h3>KI durchleuchtet den Shop</h3><p>Gegen 110+ Conversion-Kriterien &amp; DTC-Benchmarks aus Baymard, Shopify &amp; Google, von Startseite bis Checkout.</p></div>
-    <div class="step"><div class="n">3</div><h3>Fix-Plan per WhatsApp</h3><p>Du siehst sofort dein Profit-Leck in Euro. Den kompletten Fix-Plan schick ich dir persönlich.</p></div>
+    <div class="step"><div class="n">3</div><h3>Fix-Plan per WhatsApp oder E-Mail</h3><p>Kurz Kontaktdaten eintragen, dann siehst du dein Profit-Leck in Euro. Den kompletten Fix-Plan schick ich dir persönlich, per WhatsApp oder E-Mail.</p></div>
   </div>
 </div></section>
 
@@ -359,7 +375,7 @@ body{overflow-x:hidden}
 <section class="lp"><div class="wrap">
   <h2>Häufige Fragen</h2>
   <div class="faq">
-    <details><summary>Ist das wirklich kostenlos?</summary><p>Ja. Die Analyse kostet nichts und ist unverbindlich. Kein Account, kein Abo, kein verstecktes Upsell.</p></details>
+    <details><summary>Ist das wirklich kostenlos?</summary><p>Ja, komplett kostenlos und unverbindlich. Kein Abo, kein verstecktes Upsell. Für deinen persönlichen Report brauche ich nur kurz deine Kontaktdaten, damit ich ihn dir schicken kann.</p></details>
     <details><summary>Muss ich dafür einen Call machen?</summary><p>Nein. Du bekommst Analyse und Fix-Plan per WhatsApp. Ob daraus mehr wird, entscheidest du.</p></details>
     <details><summary>Was passiert mit meinen Daten?</summary><p>Deine Zahlen nutze ich nur, um deine Analyse zu erstellen. Kein Weiterverkauf, kein Spam, keine Newsletter-Flut.</p></details>
     <details><summary>Wie genau ist die KI-Analyse?</summary><p>Die KI prüft deinen Shop gegen 110+ Conversion-Kriterien und echte DTC-Benchmarks (Baymard, Shopify, Google). Sie zeigt belastbare Schwachstellen, keine Zauberei, aber konkret und nachvollziehbar.</p></details>
@@ -384,6 +400,29 @@ body{overflow-x:hidden}
   </div>
 </footer>
 
+<!-- LEAD-GATE POP-UP — erscheint nach dem KI-Scan, schaltet das Ergebnis frei -->
+<div class="modal" id="gateModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="modal-card">
+    <div class="modal-badge">✓ KI Analyse fertig</div>
+    <h3 id="gateTitle" class="modal-title">Dein Ergebnis ist bereit</h3>
+    <p class="modal-sub">Trag kurz deine Kontaktdaten ein, dann schalte ich dir dein Profit-Leck direkt frei. <b>100 % kostenlos.</b></p>
+    <form id="gateForm" novalidate>
+      <div class="inputs">
+        <div class="full"><label>Dein Name</label><input type="text" id="inName" placeholder="Vor- und Nachname" autocomplete="name"></div>
+        <div><label>E-Mail</label><input type="email" id="inEmail" placeholder="du@deinshop.de" autocomplete="email" inputmode="email"></div>
+        <div><label>Telefon / WhatsApp</label><input type="tel" id="inPhone" placeholder="+49 …" autocomplete="tel" inputmode="tel"></div>
+      </div>
+      <label class="consent"><input type="checkbox" id="inConsent"> <span>Ich bin einverstanden, dass BB Brands mich zu meiner Analyse kontaktiert. Kein Spam, jederzeit widerrufbar. <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutz</a></span></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <button class="btn" type="submit" id="gateSubmit">Mein Ergebnis anzeigen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="err-msg" id="gateErr">Bitte Name, gültige E-Mail, Telefon und Einwilligung angeben.</p>
+      <p class="formnote">100 % kostenlos · unverbindlich · kein Sales-Anruf nötig. Deine Daten nutze ich nur für deine Analyse.</p>
+    </form>
+  </div>
+</div>
+
 <script>
 (function(){
   'use strict';
@@ -398,6 +437,27 @@ body{overflow-x:hidden}
   function domain(u){if(!u)return '';try{var h=new URL(/^https?:\/\//i.test(u)?u:'https://'+u).hostname;return h.replace(/^www\./,'');}catch(e){return String(u).replace(/^https?:\/\//i,'').replace(/^www\./,'').split('/')[0];}}
   function waBtn(label){return '<a class="btn js-wa" href="'+ctx.waUrl+'" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">'+WA_SVG+' '+esc(label)+'</a>';}
   function bindWa(){ document.querySelectorAll('.js-wa').forEach(function(a){ if(a.dataset.b)return; a.dataset.b='1'; a.addEventListener('click',function(){ var r=ctx.r||{}; try{sessionStorage.setItem('bb_quiz_result',JSON.stringify({segment:r.segment,tier:r.tier,leakMo:Math.round(r.leakMo||0),channel:'whatsapp',ts:Date.now()}));}catch(_){} try{ if(window.BBFunnel){BBFunnel.fire('WhatsAppClick',{segment:r.segment});BBFunnel.lead(r.segment,r.tier);var ql=(r.segment==='red'||r.segment==='yellow')&&(r.qual==='hot'||r.qual==='warm');if(ql)BBFunnel.qualified(r.segment,r.tier);} }catch(_){} try{ var bb=window.BBTracking; if(bb){var eid=bb.newEventId(); bb.track('Lead',{content_name:'gratis-profit-analyse-whatsapp',segment:r.segment,tier:r.tier||0},{eventId:eid});} }catch(_){} }); }); }
+
+  // Ergebnis per E-Mail: nutzt die im Pop-up erfassten Kontaktdaten, postet
+  // die Zustell-Präferenz ins CRM (Dedup) und bestätigt im Button.
+  function bindMail(){
+    document.querySelectorAll('.js-mailme').forEach(function(b){
+      if(b.dataset.b) return; b.dataset.b='1';
+      b.addEventListener('click',function(){
+        if(b.dataset.sent) return;
+        var lead=ctx.lead||{}, r=ctx.r||{}, v=r.v||{};
+        if(!lead.email){ b.disabled=true; b.innerHTML='Bitte oben Daten eintragen'; return; }
+        b.disabled=true; b.innerHTML='Wird gesendet …';
+        var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
+        var payload=Object.assign({magnet:'profit-rechner',name:lead.name,email:lead.email,phone:lead.phone,website:v.url||'',visitors:v.visitors,aov:v.aov,cr:v.cr,leakMo:Math.round(r.leakMo||0),leakYr:Math.round(r.leakYr||0),segment:r.segment,qualification:r.qual,tier:r.tier,consentContact:true,deliveryPreference:'email'},attr);
+        try{ if(window.BBTracking&&BBTracking.attachToLead) BBTracking.attachToLead(payload,{}); }catch(_){}
+        try{ payload.tracking_consent=!!(window.BBTracking&&BBTracking.isReady&&BBTracking.isReady()); }catch(_){}
+        try{ if(window.BBFunnel)BBFunnel.fire('EmailDeliveryChosen',{segment:r.segment}); }catch(_){}
+        fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+          .catch(function(){}).finally(function(){ b.dataset.sent='1'; b.disabled=true; b.innerHTML='✓ Schicke ich dir an '+esc(lead.email); });
+      });
+    });
+  }
 
   function readableOn(hex){ if(!hex||hex.charAt(0)!=='#') return '#fff'; var h=hex.slice(1); if(h.length===3) h=h.replace(/./g,'$&$&'); var r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16); return (0.299*r+0.587*g+0.114*b)/255>0.62?'#0b0b0c':'#fff'; }
   function darken(hex,amt){ if(!hex||hex.charAt(0)!=='#') return hex; var h=hex.slice(1); if(h.length===3) h=h.replace(/./g,'$&$&'); var f=1-amt; var p=function(i){return Math.max(0,Math.round(parseInt(h.slice(i,i+2),16)*f));}; return '#'+[p(0),p(2),p(4)].map(function(x){return ('0'+x.toString(16)).slice(-2);}).join(''); }
@@ -497,8 +557,10 @@ body{overflow-x:hidden}
           '<div class="coverCol">'+coverHtml(scan,r)+'</div>'+
           '<div class="ctaCol">'+
             '<h3>Deine komplette Analyse wartet</h3>'+
-            '<p class="cs">Den ausführlichen Report + die 3 wichtigsten Hebel für '+esc(domain(v.url)||'deinen Shop')+' schick ich dir direkt per WhatsApp. Persönlich von Moritz, kein Bot, Antwort meist am selben Tag.</p>'+
+            '<p class="cs">Den ausführlichen Report + die 3 wichtigsten Hebel für '+esc(domain(v.url)||'deinen Shop')+' bekommst du direkt. Persönlich von Moritz, kein Bot, Antwort meist am selben Tag.</p>'+
             waBtn('Komplette Analyse per WhatsApp holen')+
+            '<div class="or-sep">oder</div>'+
+            '<button type="button" class="btn btn-mail js-mailme">✉️ Ergebnis per E-Mail schicken</button>'+
             '<p class="reassure">Kostenlos · unverbindlich · kein Sales-Anruf nötig</p>'+
           '</div>'+
         '</div>'+
@@ -506,6 +568,7 @@ body{overflow-x:hidden}
       '<p class="assume">KI Analyse gegen 110+ Conversion Kriterien + Benchmarks (Littledata/Shopify, Baymard, Google). Keine garantierten Ergebnisse, dein realistisches Potenzial.</p>';
 
     bindWa();
+    bindMail();
     deepAnalyze(v.url);
     try{if(window.BBFunnel)BBFunnel.fire('ResultViewed',{segment:r.segment});if(window.BBTracking)BBTracking.trackCustom('FunnelResultViewed',{segment:r.segment});}catch(_){}
   }
@@ -596,11 +659,70 @@ body{overflow-x:hidden}
     var li=0; var lt=setInterval(function(){ li=(li+1)%LOAD.length; var el=$('loadMsg'); if(el)el.innerHTML=LOAD[li]; },1400);
     var t0=Date.now(), done=false;
     function go(scan){ var wait=2200-(Date.now()-t0); if(wait>0){ setTimeout(function(){_go(scan);},wait); } else _go(scan); }
-    function _go(scan){ if(done)return; done=true; clearInterval(lt); $('loading').style.display='none'; render(compute(v),scan); var rs=$('result'); rs.style.display='block';
-      var sc=function(){ try{ window.scrollTo({top:rs.getBoundingClientRect().top+window.pageYOffset-8,behavior:'smooth'}); }catch(_){ try{rs.scrollIntoView();}catch(e){} } };
-      requestAnimationFrame(sc); setTimeout(sc,350); setTimeout(sc,800); }
+    // Nach dem Scan NICHT direkt das Ergebnis zeigen, sondern das Lead-Gate (Schritt 3).
+    function _go(scan){ if(done)return; done=true; clearInterval(lt); $('loading').style.display='none';
+      ctx.pendingV=v; ctx.pendingScan=scan; ctx.pendingResult=compute(v); openGateModal(); }
     (analyzePromise||Promise.resolve(null)).then(function(s){go(s);});
     setTimeout(function(){go(null);},9000);
+  });
+
+  // Lead-Gate Pop-up öffnen (Kontaktdaten vor dem Ergebnis)
+  function openGateModal(){
+    var m=$('gateModal'); if(!m) return;
+    m.style.display='flex';
+    try{ document.body.classList.add('modal-open'); }catch(_){}
+    try{ if(window.BBFunnel)BBFunnel.fire('LeadGateViewed',{}); if(window.BBTracking)BBTracking.trackCustom('FunnelLeadGate',{}); }catch(_){}
+    var n=$('inName'); if(n) setTimeout(function(){try{n.focus();}catch(_){}} ,120);
+  }
+  function closeGateModal(){
+    var m=$('gateModal'); if(m) m.style.display='none';
+    try{ document.body.classList.remove('modal-open'); }catch(_){}
+  }
+
+  // Ergebnis freischalten (nach Lead-Submit)
+  function revealResult(){
+    if(ctx.revealed) return; ctx.revealed=true;
+    closeGateModal();
+    $('toolCard').style.display='none';
+    render(ctx.pendingResult, ctx.pendingScan);
+    var rs=$('result'); rs.style.display='block';
+    var sc=function(){ try{ window.scrollTo({top:rs.getBoundingClientRect().top+window.pageYOffset-8,behavior:'smooth'}); }catch(_){ try{rs.scrollIntoView();}catch(e){} } };
+    requestAnimationFrame(sc); setTimeout(sc,350); setTimeout(sc,800);
+  }
+
+  // Lead-Pop-up: Kontaktdaten → CRM-Lead → Ergebnis freischalten
+  $('gateForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(ctx.gateSubmitting) return;
+    var name=$('inName').value.trim(), email=$('inEmail').value.trim(), phone=$('inPhone').value.trim(), consent=$('inConsent').checked;
+    var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    var phoneOk=phone.replace(/\D/g,'').length>=6;
+    if(!name||!emailOk||!phoneOk||!consent){ $('gateErr').classList.add('show'); return; }
+    $('gateErr').classList.remove('show');
+    var hp=$('gateForm').querySelector('[name="_gotcha"]'); if(hp&&hp.value){ revealResult(); return; }
+    ctx.gateSubmitting=true; var sb=$('gateSubmit'); if(sb){ sb.disabled=true; sb.innerHTML='Ergebnis wird geladen …'; }
+    ctx.lead={name:name,email:email,phone:phone};
+
+    var r=ctx.pendingResult||{}, v=ctx.pendingV||r.v||{};
+    var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
+    var eid=(window.BBTracking&&BBTracking.newEventId)?BBTracking.newEventId():undefined;
+    var payload=Object.assign({
+      magnet:'profit-rechner', name:name, email:email, phone:phone,
+      website:v.url||'', visitors:v.visitors, aov:v.aov, cr:v.cr,
+      leakMo:Math.round(r.leakMo||0), leakYr:Math.round(r.leakYr||0),
+      segment:r.segment, qualification:r.qual, tier:r.tier,
+      consentContact:true
+    }, attr);
+    try{ if(window.BBTracking&&BBTracking.attachToLead) BBTracking.attachToLead(payload,{eventId:eid}); }catch(_){}
+    try{ payload.tracking_consent=!!(window.BBTracking&&BBTracking.isReady&&BBTracking.isReady()); }catch(_){}
+    // Browser-Lead-Event (dedupt serverseitig via event_id)
+    try{ if(window.BBTracking&&BBTracking.track) BBTracking.track('Lead',{content_name:'gratis-profit-analyse',segment:r.segment,tier:r.tier||0},{eventId:eid}); }catch(_){}
+    try{ if(window.BBFunnel){ BBFunnel.fire('LeadSubmit',{segment:r.segment}); BBFunnel.lead(r.segment,r.tier); } }catch(_){}
+
+    // Ergebnis nach Antwort freischalten, spätestens nach 2.5s (kein Hänger durch CRM)
+    fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .catch(function(){}).finally(function(){ setTimeout(revealResult,250); });
+    setTimeout(revealResult,2500);
   });
 })();
 </script>

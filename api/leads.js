@@ -399,6 +399,121 @@ module.exports = async function handler(req, res) {
         return jsonResponse(res, 200, { ok: true, id });
       }
 
+      // ========== GRATIS PROFIT-RECHNER (Landingpage /gratis-profit-rechner) ==========
+      // Lead-Gate VOR dem Ergebnis: Name + E-Mail + Telefon sind Pflicht.
+      // Speichert die Rechner-Daten (Shop, Zahlen, Profit-Leck, Segment) mit,
+      // feuert Push + Meta-CAPI. Dedup per E-Mail: bestehenden Lead anreichern,
+      // nie herabstufen oder Quelle überschreiben.
+      if (magnet === 'profit-rechner') {
+        const SEGMENTS = ['tier1', 'red', 'yellow', 'green'];
+        const name = str(body.name, 120);
+        const email = str(body.email, 200).toLowerCase();
+        const phone = str(body.phone, 60);
+        const website = str(body.website || body.url, 300);
+        const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
+
+        const consentContact =
+          body.consentContact === true ||
+          body.consentContact === 'true' ||
+          body.consentContact === 'on';
+        const deliveryPreference =
+          body.deliveryPreference === 'email' ? 'email'
+          : body.deliveryPreference === 'whatsapp' ? 'whatsapp'
+          : '';
+
+        const errors = {};
+        if (!name) errors.name = 'Name fehlt';
+        if (!email || !isEmail(email)) errors.email = 'E-Mail ungültig';
+        if (!phone || phone.replace(/\D/g, '').length < 6) errors.phone = 'Telefon ungültig';
+        if (!consentContact) errors.consentContact = 'Einwilligung erforderlich';
+        if (Object.keys(errors).length) {
+          return jsonResponse(res, 400, { ok: false, errors });
+        }
+
+        const analysis = {
+          visitors: num(body.visitors),
+          aov: num(body.aov),
+          cr: num(body.cr),
+          leakMo: num(body.leakMo),
+          leakYr: num(body.leakYr),
+          segment: SEGMENTS.includes(body.segment) ? body.segment : '',
+          qualification: ['hot', 'warm', 'diy', 'none'].includes(body.qualification) ? body.qualification : '',
+          tier: [1, 2, 3].includes(Number(body.tier)) ? Number(body.tier) : null,
+        };
+        const summary = [
+          website ? 'Shop: ' + website : null,
+          analysis.leakMo != null ? 'Profit-Leck: ' + analysis.leakMo + ' €/Mo' : null,
+          analysis.cr != null ? 'CR: ' + analysis.cr + ' %' : null,
+          analysis.segment ? 'Segment: ' + analysis.segment : null,
+        ].filter(Boolean).join(' · ');
+        const now = new Date().toISOString();
+        const attribution = extractAttribution(body);
+
+        const existing = await findLeadByEmail(email);
+        if (existing) {
+          const rec = existing.record;
+          rec.campaigns = Array.from(new Set([...(rec.campaigns || []), 'profit-rechner']));
+          rec.name = rec.name || name;
+          rec.phone = rec.phone || phone;
+          rec.website = rec.website || website;
+          rec.brand = rec.brand || website;
+          // jüngste Analyse-Werte gewinnen (User kann Zahlen korrigieren)
+          if (analysis.segment) rec.segment = analysis.segment;
+          if (analysis.tier != null) rec.tier = analysis.tier;
+          if (analysis.qualification) rec.qualification = analysis.qualification;
+          if (analysis.leakMo != null) rec.leakMo = analysis.leakMo;
+          if (analysis.leakYr != null) rec.leakYr = analysis.leakYr;
+          rec.profitRechner = { ...analysis, website, at: now };
+          rec.consentContact = true;
+          rec.consentContactAt = rec.consentContactAt || now;
+          rec.activity = rec.activity || [];
+          if (deliveryPreference) {
+            rec.deliveryPreference = deliveryPreference;
+            rec.activity.push({ ts: now, text: 'Zustell-Wunsch: ' + (deliveryPreference === 'email' ? 'Ergebnis per E-Mail' : 'per WhatsApp') });
+          } else {
+            rec.activity.push({ ts: now, text: 'Profit-Rechner: ' + summary });
+          }
+          rec.updatedAt = now;
+          // Tracking-Match-Keys nachziehen, falls vorher nicht vorhanden
+          if (attribution.fbp && !rec.fbp) rec.fbp = attribution.fbp;
+          if (attribution.fbc && !rec.fbc) rec.fbc = attribution.fbc;
+          if (attribution.trackingConsent) rec.trackingConsent = true;
+          await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          await sendPushNotification(rec).catch((err) => console.error('[/api/leads] push (profit-rechner dedup) failed:', err));
+          if (deliveryPreference === 'email') {
+            await sendResultEmail(rec).catch((err) => console.error('[/api/leads] result email failed:', err));
+          }
+          await fireLeadCapi(rec, req);
+          return jsonResponse(res, 200, { ok: true, id: existing.id, deduped: true });
+        }
+
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const record = {
+          id, email, name, phone,
+          magnet: 'profit-rechner', type: 'lead', source: 'profit-rechner',
+          campaigns: ['profit-rechner'],
+          website, brand: website,
+          segment: analysis.segment, tier: analysis.tier, qualification: analysis.qualification,
+          leakMo: analysis.leakMo, leakYr: analysis.leakYr,
+          profitRechner: { ...analysis, website, at: now },
+          deliveryPreference: deliveryPreference || null,
+          status: 'new', consentNewsletter: false,
+          consentContact: true, consentContactAt: now,
+          activity: [{ ts: now, text: 'Profit-Rechner: ' + summary }],
+          createdAt: now, updatedAt: now,
+          ...attribution,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
+          userAgent: str(req.headers['user-agent'] || '', 300),
+        };
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await sendPushNotification(record).catch((err) => console.error('[/api/leads] push (profit-rechner) failed:', err));
+        if (deliveryPreference === 'email') {
+          await sendResultEmail(record).catch((err) => console.error('[/api/leads] result email failed:', err));
+        }
+        await fireLeadCapi(record, req);
+        return jsonResponse(res, 200, { ok: true, id });
+      }
+
       const isWhatsAppFunnel = magnet === 'whatsapp-chat';
       const isErstgespraech = magnet === 'erstgespraech';
       const isQuizDiagnose = magnet === 'quiz-diagnose';
@@ -848,6 +963,61 @@ async function sendWhatsAppLeadEmail(record) {
   }
 }
 
+// ----- Result-Email an den Lead (Resend, optional) ---------
+// Schickt dem Interessenten sein Profit-Analyse-Ergebnis, wenn er im Ergebnis
+// "Ergebnis per E-Mail" wählt. No-Op ohne RESEND_API_KEY, wirft nur bei echtem
+// Resend-Fehler (Caller fängt das ab).
+async function sendResultEmail(record) {
+  if (!RESEND_API_KEY) {
+    console.log('[/api/leads] RESEND_API_KEY not set — skipping result email');
+    return;
+  }
+  if (!record.email || !isEmail(record.email)) return;
+  const pr = record.profitRechner || {};
+  const shop = record.website || 'deinen Shop';
+  const fmtEur = (n) => (n == null ? null : Number(n).toLocaleString('de-DE') + ' €');
+  const leakMo = pr.leakMo != null ? pr.leakMo : record.leakMo;
+  const escapeHtml = (s) =>
+    String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const firstName = (record.name || '').trim().split(/\s+/)[0] || '';
+  const greet = firstName ? `Hey ${escapeHtml(firstName)},` : 'Hey,';
+  const leakLine = leakMo != null
+    ? `Deine KI Profit-Analyse für <b>${escapeHtml(shop)}</b> zeigt ein behebbares Profit-Leck von rund <b>${escapeHtml(fmtEur(leakMo))}/Monat</b>${pr.cr != null ? ` (aktuelle Conversion ${escapeHtml(String(pr.cr).replace('.', ','))} %)` : ''}.`
+    : `Deine KI Profit-Analyse für <b>${escapeHtml(shop)}</b> ist fertig.`;
+  const subject = leakMo != null
+    ? `Deine Profit-Analyse: ~${fmtEur(leakMo)}/Monat liegen drin`
+    : `Deine Profit-Analyse für ${shop}`;
+
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#0B0B12;line-height:1.55;">
+      <p style="font-size:16px;margin:0 0 14px;">${greet}</p>
+      <p style="font-size:15px;margin:0 0 14px;">${leakLine}</p>
+      <p style="font-size:15px;margin:0 0 14px;">Den kompletten Fix-Plan mit den <b>3 wichtigsten Hebeln</b> für ${escapeHtml(shop)} schicke ich dir persönlich. Ich melde mich in Kürze, kein Bot.</p>
+      <p style="font-size:15px;margin:0 0 20px;">Wenn es schneller gehen soll, schreib mir einfach direkt auf WhatsApp zurück.</p>
+      <p style="font-size:15px;margin:0;">Beste Grüße<br>Moritz Bohmbach · BB Brands</p>
+    </div>`;
+  const text = [
+    greet, '',
+    leakMo != null
+      ? `Deine KI Profit-Analyse für ${shop} zeigt ein behebbares Profit-Leck von rund ${fmtEur(leakMo)}/Monat${pr.cr != null ? ` (Conversion ${String(pr.cr).replace('.', ',')} %)` : ''}.`
+      : `Deine KI Profit-Analyse für ${shop} ist fertig.`,
+    '',
+    'Den kompletten Fix-Plan mit den 3 wichtigsten Hebeln schicke ich dir persönlich. Ich melde mich in Kürze.',
+    '', 'Beste Grüße', 'Moritz Bohmbach · BB Brands',
+  ].join('\n');
+
+  const resp = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: NOTIFY_FROM, to: [record.email], reply_to: NOTIFY_EMAIL, subject, html, text }),
+  });
+  if (!resp.ok) {
+    const errText = await resp.text();
+    throw new Error(`Resend result-email ${resp.status}: ${errText}`);
+  }
+  console.log('[/api/leads] result email sent to', record.email);
+}
+
 // ----- Klaviyo subscribe (Email-Marketing, optional) -------
 // Legt/aktualisiert ein Profil an + abonniert die Liste MIT Consent (Double-Opt-in
 // via Klaviyo-Flow möglich). Custom-Properties (Segment/Tier/Scores/Qualifikation)
@@ -1161,6 +1331,35 @@ function buildPushPayload(record) {
       message: lines.join('\n'),
       priority: 'high',
       tags: 'clapper,fire',
+      clickUrl: ADMIN_URL,
+      actions: actionsHeader,
+    };
+  }
+
+  // === GRATIS PROFIT-RECHNER ===
+  if (record.magnet === 'profit-rechner' || (record.campaigns && record.campaigns.indexOf('profit-rechner') >= 0)) {
+    const pr = record.profitRechner || {};
+    const leak = pr.leakMo != null ? pr.leakMo : record.leakMo;
+    const SEG = { tier1: '⚪ <10k/Mo', red: '🔴 RED · Profit erodiert', yellow: '🟡 YELLOW · Wachstum stoppt', green: '🟢 GREEN · sauber' };
+    const qualified = record.segment === 'red' || record.segment === 'yellow';
+    const wantsEmail = record.deliveryPreference === 'email';
+    const title = `${wantsEmail ? '✉️ E-MAIL-Wunsch · ' : (qualified ? '🔥 ' : '')}💸 Profit-Rechner · ${record.name || record.website || 'Lead'}`;
+    const lines = [
+      record.name ? `👤 ${record.name}` : null,
+      record.phone ? `📱 ${record.phone}` : null,
+      record.email ? `✉️ ${record.email}` : null,
+      record.website ? `🛒 ${record.website}` : null,
+      leak != null ? `💰 Profit-Leck: ${Number(leak).toLocaleString('de-DE')} €/Mo` : null,
+      record.segment ? `📊 ${SEG[record.segment] || record.segment}` : null,
+      pr.cr != null ? `📈 CR: ${pr.cr} %` : null,
+      `\n${sourceLine}`,
+      time ? `🕐 ${time} Uhr` : null,
+    ].filter(Boolean);
+    return {
+      title,
+      message: lines.join('\n'),
+      priority: qualified ? 'high' : 'default',
+      tags: qualified ? 'fire,moneybag' : 'moneybag',
       clickUrl: ADMIN_URL,
       actions: actionsHeader,
     };
