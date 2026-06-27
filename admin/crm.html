@@ -434,9 +434,20 @@ tr:hover td{background:#fafbff}
     ['direct','Direkt','#6b7280']
   ];
   var CH_MAP={}; CHANNELS.forEach(function(c){CH_MAP[c[0]]=c;});
-  // Kam der Lead über Meta (Ad-Klick oder FB/IG-Quelle)?
+  // _fbc-Cookie hat Format fb.1.<timestamp_ms>.<fbclid>. Es überlebt ~90 Tage,
+  // d.h. seine bloße Existenz heißt NICHT, dass DIESER Lead von Meta kam.
+  // Nur werten, wenn der fbclid-Klick aus derselben Session stammt (±6h zu createdAt).
+  function fbcFresh(l){
+    if(!l.fbc)return false;
+    var m=String(l.fbc).match(/^fb\.\d+\.(\d+)\./); if(!m)return false;
+    var t=Number(m[1]); var created=new Date(l.createdAt||0).getTime();
+    if(!t||!created)return false;
+    return Math.abs(created-t)<=6*3600*1000;
+  }
+  // Kam der Lead über Meta? Nur über eigene Session-Signale (utm/referrer) oder
+  // ein FRISCHES fbc — niemals über ein altes, persistentes fbc-Cookie.
   function fromMeta(l){
-    if(l.fbc)return true;
+    if(fbcFresh(l))return true;
     var src=(l.utmSource||'').toLowerCase(), ref=(l.referrerDomain||'').toLowerCase();
     return /facebook|instagram|meta|fb\b|ig\b/.test(src)||/facebook|instagram/.test(ref);
   }
@@ -444,7 +455,7 @@ tr:hover td{background:#fafbff}
   function channelOf(l){
     var src=(l.utmSource||'').toLowerCase(), med=(l.utmMedium||'').toLowerCase(), ref=(l.referrerDomain||'').toLowerCase();
     var paidMed=/cpc|ppc|paid|ads|display|paid.?social/.test(med);
-    if(fromMeta(l)&&(paidMed||l.fbc))return 'meta';
+    if(fromMeta(l)&&(paidMed||fbcFresh(l)))return 'meta';
     if(/google/.test(src)&&paidMed)return 'google-paid';
     if(paidMed)return 'paid';
     if(fromMeta(l))return 'organic';                 // FB/IG ohne Paid-Medium → organisch social
@@ -1127,7 +1138,7 @@ tr:hover td{background:#fafbff}
     var sec=$('dwJourneySec'); if(!sec)return;
     var l=leads.find(function(x){return x.id===openId;});
     if(!l||!l.sid)return;                    // Alt-Leads ohne sid → keine Journey
-    var NM={DiagnoseView:'LP betreten',QuizStart:'Quiz gestartet',QuizStep:'Frage erreicht',QuizAnswer:'Frage beantwortet',QuizComplete:'Alle Fragen durch',Lead:'E-Mail eingetragen',QuizResult:'Ergebnis gesehen',PageView:'Seitenaufruf'};
+    var NM={DiagnoseView:'LP betreten',QuizStart:'Funnel gestartet',QuizStep:'Frage erreicht',QuizAnswer:'Frage beantwortet',QuizComplete:'Alle Fragen durch',Lead:'Kontaktdaten eingetragen',QuizResult:'Ergebnis gesehen',ResultViewed:'Ergebnis gesehen',FunnelResultViewed:'Ergebnis gesehen',LeadGateViewed:'Daten-Gate gesehen',FunnelLeadGate:'Daten-Gate gesehen',LeadSubmit:'Kontaktdaten abgeschickt',EmailDeliveryChosen:'Ergebnis per E-Mail gewählt',WhatsAppClick:'WhatsApp geklickt',QualifiedLead:'Qualified Lead',PageView:'Seitenaufruf'};
     try{
       var d=await apiEvents('?sid='+encodeURIComponent(l.sid));
       var j=(d&&d.journey)||[];
@@ -1221,11 +1232,15 @@ tr:hover td{background:#fafbff}
         '<div class="dw-sec"><h3>Kontakt & Qualifikation</h3>'+kv+'</div>'+
         profitSec+
         answers+
-        '<div class="dw-sec" id="dwJourneySec" style="display:none"><h3>Funnel-Journey</h3><div id="dwJourney"></div></div>'+
+        '<div class="dw-sec" id="dwJourneySec" style="display:none"><h3>Geräte-Aktivität (anonyme Session)</h3><div class="sub" style="margin:-4px 0 8px">Alle Schritte dieses Browsers (bb_sid), funnel-übergreifend, nicht zwingend nur dieser Lead.</div><div id="dwJourney"></div></div>'+
         '<div class="dw-sec"><h3>Aktivität</h3>'+
           '<div class="note-input"><textarea id="noteInput" placeholder="Notiz / Call-Ergebnis …"></textarea><button class="note-add" data-note>+</button></div>'+
           log+
         '</div>'+
+        '<div class="dw-sec"><details><summary style="cursor:pointer;font-weight:700;font-size:13px;color:var(--muted)">🛠 Rohdaten & Zuordnung (Debug)</summary>'+
+          '<pre style="white-space:pre-wrap;word-break:break-word;font-size:11px;line-height:1.45;background:#f6f7f9;border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:8px;max-height:360px;overflow:auto">'+
+          esc('— Zuordnung —\n'+JSON.stringify({kanal:channelOf(l),fromMeta:fromMeta(l),fbcFresh:fbcFresh(l),leadScore:leadScore(l),segment:l.segment||null,tier:l.tier||null,sid:l.sid||null,utm_source:l.utmSource||null,utm_medium:l.utmMedium||null,referrerDomain:l.referrerDomain||null,fbc:l.fbc||null},null,2)+'\n\n— Voller Datensatz —\n'+JSON.stringify(l,null,2))+
+          '</pre></details></div>'+
         '<div class="dw-actions">'+
           (l.email?'<a href="mailto:'+esc(l.email)+'">✉ E-Mail</a>':'')+
           (calLink?'<a href="'+esc(calLink)+'" target="_blank" rel="noopener">📅 Reschedule</a>':'')+
