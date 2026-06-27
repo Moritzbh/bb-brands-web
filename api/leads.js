@@ -50,6 +50,9 @@ const KLAVIYO_LIST_ID = process.env.KLAVIYO_LIST_ID || '';
 // Meta Conversions API (optional — läuft nur wenn META_PIXEL_ID + META_CAPI_TOKEN gesetzt)
 const { sendCapiEvent } = require('./_capi');
 
+// DNS für E-Mail-Domain-Prüfung (Bordmittel, keine Dependency)
+const dns = require('dns').promises;
+
 const HASH_KEY = 'bb:leads';
 
 const PAIN_LABELS = {
@@ -167,6 +170,49 @@ function isUrl(s) {
   } catch {
     return false;
   }
+}
+
+// ----- Kontakt-Verifizierung (E-Mail-Domain + Telefon) ------
+// Bewusst ohne Paid-API: prüft Plausibilität/Erreichbarkeit, NICHT die echte
+// Existenz des Postfachs/Anschlusses (das bräuchte ZeroBounce/Twilio Lookup).
+const DISPOSABLE_DOMAINS = new Set([
+  'mailinator.com', 'guerrillamail.com', '10minutemail.com', 'tempmail.com',
+  'temp-mail.org', 'trashmail.com', 'yopmail.com', 'getnada.com', 'sharklasers.com',
+  'dispostable.com', 'maildrop.cc', 'fakeinbox.com', 'throwawaymail.com', 'mohmal.com',
+  'mailnesia.com', 'emailondeck.com', 'tempr.email', 'discard.email', 'spam4.me',
+]);
+function isDisposableEmail(email) {
+  const d = String(email || '').toLowerCase().split('@')[1] || '';
+  return DISPOSABLE_DOMAINS.has(d);
+}
+// Prüft, ob die E-Mail-Domain überhaupt Mails annehmen kann (MX, sonst A/AAAA).
+async function emailDomainHasMx(email) {
+  const domain = String(email || '').toLowerCase().split('@')[1];
+  if (!domain) return false;
+  try {
+    const mx = await dns.resolveMx(domain);
+    if (Array.isArray(mx) && mx.length > 0) return true;
+  } catch { /* keine MX → weiter mit A/AAAA */ }
+  try { const a = await dns.resolve4(domain); if (a && a.length) return true; } catch { /* noop */ }
+  try { const a6 = await dns.resolve6(domain); if (a6 && a6.length) return true; } catch { /* noop */ }
+  return false;
+}
+// Normalisiert eine Telefonnummer nach E.164 (+49…). Default-Land DE (DACH).
+// Gibt { ok, e164 } zurück; ok=false wenn keine plausible Nummer.
+function normalizePhone(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return { ok: false };
+  const startsPlus = s.startsWith('+');
+  const starts00 = /^\s*00/.test(s);
+  let d = s.replace(/\D/g, '');
+  if (!d) return { ok: false };
+  if (starts00) d = d.replace(/^00/, '');
+  else if (startsPlus) { /* schon internationale Ziffern */ }
+  else if (d.startsWith('0')) d = '49' + d.replace(/^0+/, '');        // DE-national → +49
+  else if (!/^(49|41|43)/.test(d) && d.length <= 11) d = '49' + d;    // kurze Nummer ohne Land → DE
+  const e164 = '+' + d;
+  if (!/^\+[1-9]\d{7,14}$/.test(e164)) return { ok: false };
+  return { ok: true, e164 };
 }
 
 // Extrahiert Attribution-Felder (UTMs + Referrer + Landing + Submit-Page) aus Request-Body.
@@ -408,7 +454,7 @@ module.exports = async function handler(req, res) {
         const SEGMENTS = ['tier1', 'red', 'yellow', 'green'];
         const name = str(body.name, 120);
         const email = str(body.email, 200).toLowerCase();
-        const phone = str(body.phone, 60);
+        let phone = str(body.phone, 60);
         const website = str(body.website || body.url, 300);
         const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
 
@@ -423,9 +469,21 @@ module.exports = async function handler(req, res) {
 
         const errors = {};
         if (!name) errors.name = 'Name fehlt';
-        if (!email || !isEmail(email)) errors.email = 'E-Mail ungültig';
-        if (!phone || phone.replace(/\D/g, '').length < 6) errors.phone = 'Telefon ungültig';
         if (!consentContact) errors.consentContact = 'Einwilligung erforderlich';
+        // E-Mail: Format + Wegwerf-Domain
+        if (!email || !isEmail(email)) errors.email = 'E-Mail ungültig';
+        else if (isDisposableEmail(email)) errors.email = 'Bitte eine echte E-Mail (keine Wegwerf-Adresse)';
+        // Telefon: nach E.164 normalisieren (Default DE)
+        const pn = normalizePhone(phone);
+        if (!pn.ok) errors.phone = 'Telefon ungültig (bitte mit Vorwahl, z. B. +49 …)';
+        else phone = pn.e164;
+        // E-Mail-Domain-Erreichbarkeit (MX/A) nur prüfen, wenn Format ok — spart DNS-Calls.
+        // Best-effort: bei DNS-Fehler NICHT blocken (kein false-negative durch Netz-Hänger).
+        if (!errors.email) {
+          let mxOk = true;
+          try { mxOk = await emailDomainHasMx(email); } catch { mxOk = true; }
+          if (!mxOk) errors.email = 'E-Mail-Domain nicht erreichbar — bitte Adresse prüfen';
+        }
         if (Object.keys(errors).length) {
           return jsonResponse(res, 400, { ok: false, errors });
         }

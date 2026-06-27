@@ -690,18 +690,35 @@ body{overflow-x:hidden}
     requestAnimationFrame(sc); setTimeout(sc,350); setTimeout(sc,800);
   }
 
-  // Lead-Pop-up: Kontaktdaten → CRM-Lead → Ergebnis freischalten
+  // --- Kontakt-Validierung (Client, Soforthilfe) ---
+  var DISPOSABLE=['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','temp-mail.org','trashmail.com','yopmail.com','getnada.com','sharklasers.com','dispostable.com','maildrop.cc','throwawaymail.com','mohmal.com'];
+  var COMMON_DOMAINS=['gmail.com','googlemail.com','web.de','gmx.de','gmx.net','hotmail.com','hotmail.de','outlook.com','outlook.de','yahoo.com','yahoo.de','icloud.com','t-online.de','aol.com','proton.me','protonmail.com','me.com','live.de','freenet.de'];
+  function emailDom(e){ return String(e||'').toLowerCase().split('@')[1]||''; }
+  function lev(a,b){ a=a||'';b=b||''; var m=a.length,n=b.length,i,j,dp=[]; for(i=0;i<=m;i++)dp[i]=[i]; for(j=0;j<=n;j++)dp[0][j]=j; for(i=1;i<=m;i++)for(j=1;j<=n;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1)); return dp[m][n]; }
+  function suggestDomain(d){ if(!d||COMMON_DOMAINS.indexOf(d)>=0)return null; var best=null,bd=99; COMMON_DOMAINS.forEach(function(c){var x=lev(d,c); if(x<bd){bd=x;best=c;}}); return (bd>0&&bd<=2)?best:null; }
+  function setGateErr(msg){ var el=$('gateErr'); if(el){ el.textContent=msg; el.classList.add('show'); } }
+  function gateReenable(){ ctx.gateSubmitting=false; var sb=$('gateSubmit'); if(sb){ sb.disabled=false; sb.innerHTML='Mein Ergebnis anzeigen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; } }
+
+  // Lead-Pop-up: Kontaktdaten → Verifizierung + CRM-Lead → Ergebnis freischalten
   $('gateForm').addEventListener('submit',function(e){
     e.preventDefault();
     if(ctx.gateSubmitting) return;
-    var name=$('inName').value.trim(), email=$('inEmail').value.trim(), phone=$('inPhone').value.trim(), consent=$('inConsent').checked;
+    var name=$('inName').value.trim(), email=$('inEmail').value.trim().toLowerCase(), phone=$('inPhone').value.trim(), consent=$('inConsent').checked;
+    var dom=emailDom(email);
     var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    var phoneOk=phone.replace(/\D/g,'').length>=6;
-    if(!name||!emailOk||!phoneOk||!consent){ $('gateErr').classList.add('show'); return; }
+    var phoneDigits=phone.replace(/\D/g,'');
+    var phoneOk=phoneDigits.length>=7 && phoneDigits.length<=15;
+    if(!name){ setGateErr('Bitte deinen Namen eintragen.'); return; }
+    if(!emailOk){ setGateErr('Bitte eine gültige E-Mail-Adresse eintragen.'); return; }
+    if(DISPOSABLE.indexOf(dom)>=0){ setGateErr('Bitte eine echte E-Mail-Adresse (keine Wegwerf-Adresse).'); return; }
+    if(!phoneOk){ setGateErr('Bitte eine gültige Telefonnummer mit Vorwahl eintragen.'); return; }
+    if(!consent){ setGateErr('Bitte der Kontaktaufnahme zustimmen.'); return; }
+    // Tippfehler in der Domain? Einmal nachfragen, dann akzeptieren.
+    var sug=suggestDomain(dom);
+    if(sug && ctx.lastTypoDom!==dom){ ctx.lastTypoDom=dom; setGateErr('Meintest du @'+sug+'? Wenn die Adresse stimmt, tippe nochmal auf „Mein Ergebnis anzeigen".'); return; }
     $('gateErr').classList.remove('show');
     var hp=$('gateForm').querySelector('[name="_gotcha"]'); if(hp&&hp.value){ revealResult(); return; }
-    ctx.gateSubmitting=true; var sb=$('gateSubmit'); if(sb){ sb.disabled=true; sb.innerHTML='Ergebnis wird geladen …'; }
-    ctx.lead={name:name,email:email,phone:phone};
+    ctx.gateSubmitting=true; var sb=$('gateSubmit'); if(sb){ sb.disabled=true; sb.innerHTML='Wird geprüft …'; }
 
     var r=ctx.pendingResult||{}, v=ctx.pendingV||r.v||{};
     var attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{};
@@ -715,14 +732,33 @@ body{overflow-x:hidden}
     }, attr);
     try{ if(window.BBTracking&&BBTracking.attachToLead) BBTracking.attachToLead(payload,{eventId:eid}); }catch(_){}
     try{ payload.tracking_consent=!!(window.BBTracking&&BBTracking.isReady&&BBTracking.isReady()); }catch(_){}
-    // Browser-Lead-Event (dedupt serverseitig via event_id)
-    try{ if(window.BBTracking&&BBTracking.track) BBTracking.track('Lead',{content_name:'gratis-profit-analyse',segment:r.segment,tier:r.tier||0},{eventId:eid}); }catch(_){}
-    try{ if(window.BBFunnel){ BBFunnel.fire('LeadSubmit',{segment:r.segment}); BBFunnel.lead(r.segment,r.tier); } }catch(_){}
 
-    // Ergebnis nach Antwort freischalten, spätestens nach 2.5s (kein Hänger durch CRM)
+    function onValid(){
+      ctx.lead={name:name,email:email,phone:phone};
+      try{ if(window.BBTracking&&BBTracking.track) BBTracking.track('Lead',{content_name:'gratis-profit-analyse',segment:r.segment,tier:r.tier||0},{eventId:eid}); }catch(_){}
+      try{ if(window.BBFunnel){ BBFunnel.fire('LeadSubmit',{segment:r.segment}); BBFunnel.lead(r.segment,r.tier); } }catch(_){}
+      revealResult();
+    }
+
+    // Server prüft E-Mail-Domain (MX) + Telefon. Reveal erst bei ok.
+    var settled=false;
+    // Netz-/Server-Ausfall: nach 7s trotzdem freischalten (User nicht bestrafen)
+    var failTimer=setTimeout(function(){ if(settled)return; settled=true; onValid(); },7000);
     fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-      .catch(function(){}).finally(function(){ setTimeout(revealResult,250); });
-    setTimeout(revealResult,2500);
+      .then(function(resp){ return resp.json().then(function(d){return {status:resp.status,d:d};}).catch(function(){return {status:resp.status,d:null};}); })
+      .then(function(res){
+        if(settled) return; settled=true; clearTimeout(failTimer);
+        var d=res.d;
+        if(d && d.ok){ onValid(); return; }
+        if(res.status===400 && d && d.errors){
+          var er=d.errors;
+          setGateErr(er.email || er.phone || er.name || er.consentContact || 'Bitte deine Angaben prüfen.');
+          gateReenable();
+          return;
+        }
+        onValid(); // Server-Problem (5xx etc.): nicht blockieren
+      })
+      .catch(function(){ if(settled)return; settled=true; clearTimeout(failTimer); onValid(); });
   });
 })();
 </script>
