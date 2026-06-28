@@ -53,6 +53,10 @@ const { sendCapiEvent } = require('./_capi');
 // DNS für E-Mail-Domain-Prüfung (Bordmittel, keine Dependency)
 const dns = require('dns').promises;
 
+// Neues CRM-Modell (Supabase) — schreibt zusätzlich Contact/Submission/Deal.
+// No-Op solange SUPABASE_* nicht gesetzt ist → bestehender Flow bleibt unberührt.
+const { writeToCrm } = require('./_crm');
+
 const HASH_KEY = 'bb:leads';
 
 const PAIN_LABELS = {
@@ -376,6 +380,7 @@ module.exports = async function handler(req, res) {
           if (note) { rec.activity = rec.activity || []; rec.activity.push({ ts: now, text: 'Import (' + source + '): ' + note }); }
           rec.updatedAt = now;
           await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          await writeToCrm(rec).catch(function () {});
           return jsonResponse(res, 200, { ok: true, id: existing.id, deduped: true });
         }
         const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -387,6 +392,7 @@ module.exports = async function handler(req, res) {
           createdAt: now, updatedAt: now,
         };
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
         return jsonResponse(res, 200, { ok: true, id });
       }
 
@@ -425,6 +431,7 @@ module.exports = async function handler(req, res) {
           rec.activity.push({ ts: now, text: 'YouTube Case-Bewerbung: ' + summary });
           rec.updatedAt = now;
           await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          await writeToCrm(rec).catch(function () {});
           await sendPushNotification(rec).catch((err) => console.error('[/api/leads] push (youtube-case dedup) failed:', err));
           return jsonResponse(res, 200, { ok: true, id: existing.id, deduped: true });
         }
@@ -441,6 +448,7 @@ module.exports = async function handler(req, res) {
           ...extractAttribution(body),
         };
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
         await sendPushNotification(record).catch((err) => console.error('[/api/leads] push (youtube-case) failed:', err));
         return jsonResponse(res, 200, { ok: true, id });
       }
@@ -537,6 +545,7 @@ module.exports = async function handler(req, res) {
           if (attribution.fbc && !rec.fbc) rec.fbc = attribution.fbc;
           if (attribution.trackingConsent) rec.trackingConsent = true;
           await redis('HSET', HASH_KEY, existing.id, JSON.stringify(rec));
+          await writeToCrm(rec).catch(function () {});
           await sendPushNotification(rec).catch((err) => console.error('[/api/leads] push (profit-rechner dedup) failed:', err));
           if (deliveryPreference === 'email') {
             await sendResultEmail(rec).catch((err) => console.error('[/api/leads] result email failed:', err));
@@ -564,6 +573,7 @@ module.exports = async function handler(req, res) {
           userAgent: str(req.headers['user-agent'] || '', 300),
         };
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
         await sendPushNotification(record).catch((err) => console.error('[/api/leads] push (profit-rechner) failed:', err));
         if (deliveryPreference === 'email') {
           await sendResultEmail(record).catch((err) => console.error('[/api/leads] result email failed:', err));
@@ -641,6 +651,7 @@ module.exports = async function handler(req, res) {
         };
 
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
 
         // Email-Marketing: Lead in Klaviyo-Liste (nur bei Newsletter-Consent)
         if (record.consentNewsletter) {
@@ -712,6 +723,7 @@ module.exports = async function handler(req, res) {
         };
 
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
 
         // Await: Vercel Serverless killed die Function sofort nach res.end(),
         // dadurch wurde der fire-and-forget fetch() zu ntfy mittendrin abgebrochen.
@@ -766,6 +778,7 @@ module.exports = async function handler(req, res) {
         };
 
         await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        await writeToCrm(record).catch(function () {});
 
         // Fire-and-forget email notification (don't block response on failure)
         sendWhatsAppLeadEmail(record).catch((err) =>
@@ -828,6 +841,7 @@ module.exports = async function handler(req, res) {
       };
 
       await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+      await writeToCrm(record).catch(function () {});
 
       // Await: siehe Kommentar oben
       await sendPushNotification(record).catch((err) =>
@@ -927,6 +941,7 @@ module.exports = async function handler(req, res) {
       record.updatedAt = now;
       if (contactTouch) record.lastContact = now;
       await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+      await writeToCrm(record).catch(function () {});
       return jsonResponse(res, 200, { ok: true, lead: record });
     }
 
