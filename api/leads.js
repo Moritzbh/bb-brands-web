@@ -520,7 +520,7 @@ module.exports = async function handler(req, res) {
           const rec = existing.record;
           rec.campaigns = Array.from(new Set([...(rec.campaigns || []), 'profit-rechner']));
           rec.name = rec.name || name;
-          rec.phone = rec.phone || phone;
+          if (phone && (!rec.phone || rec.phone === 'test')) rec.phone = phone;
           rec.website = rec.website || website;
           rec.brand = rec.brand || website;
           // jüngste Analyse-Werte gewinnen (User kann Zahlen korrigieren)

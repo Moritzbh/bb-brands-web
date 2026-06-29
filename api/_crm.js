@@ -46,8 +46,10 @@ async function upsertContact(c) {
   if (found && found[0]) {
     const cur = found[0];
     const patch = {};
-    if (!cur.name && c.name) patch.name = c.name;
-    if (!cur.phone && c.phone) patch.phone = c.phone;
+    // clean() filtert leer/'test' → eine echte Angabe gewinnt über leer ODER Platzhalter,
+    // überschreibt aber nie eine bereits echte Angabe (kein Clobber guter Daten).
+    if (!clean(cur.name) && clean(c.name)) patch.name = c.name;
+    if (!clean(cur.phone) && clean(c.phone)) patch.phone = c.phone;
     if (!clean(cur.company) && clean(c.company)) patch.company = c.company;
     if (!clean(cur.website) && clean(c.website)) patch.website = c.website;
     if (c.consent) patch.consent = Object.assign({}, cur.consent || {}, c.consent);
@@ -65,7 +67,7 @@ async function upsertContact(c) {
     body: [{
       email,
       name: c.name || null,
-      phone: c.phone || null,
+      phone: clean(c.phone),
       company: clean(c.company),
       website: clean(c.website),
       first_touch: c.firstTouch || {},
