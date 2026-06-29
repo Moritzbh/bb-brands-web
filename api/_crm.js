@@ -111,6 +111,27 @@ async function addActivity(a) {
   });
 }
 
+// ----- events: append-only Verhaltens-Event (Segment-Muster, bb-os) -----
+async function insertEvent(ev) {
+  try {
+    return await sb('events', {
+      method: 'POST',
+      body: [{
+        contact_id: ev.contactId,
+        name: ev.name,
+        source: ev.source || 'web',
+        funnel: ev.funnel || null,
+        value_eur: ev.valueEur != null ? ev.valueEur : null,
+        props: ev.props || {},
+      }],
+      prefer: 'return=representation',
+    });
+  } catch (err) {
+    console.error('[crm] insertEvent failed:', err.message);
+    return null;
+  }
+}
+
 // ----- Mapping: ein leads.js-`record` → Entitäten -----
 const FUNNEL_OF = {
   'profit-rechner': 'profit-rechner',
@@ -187,6 +208,7 @@ async function writeToCrm(record) {
     });
     let deal = null;
     if (e.hasDeal) deal = await ensureOpenDeal(contact.id);
+    await insertEvent({ contactId: contact.id, name: 'funnel_submit', source: 'web', funnel: e.funnel, props: e.attribution });
     return { contactId: contact.id, submissionId: sub && sub.id, dealId: deal && deal.id };
   } catch (err) {
     console.error('[crm] writeToCrm failed:', err.message);
@@ -196,6 +218,6 @@ async function writeToCrm(record) {
 
 module.exports = {
   sb, sbConfigured, enc, clean,
-  upsertContact, insertSubmission, ensureOpenDeal, addActivity,
+  upsertContact, insertSubmission, ensureOpenDeal, addActivity, insertEvent,
   recordToEntities, writeToCrm,
 };
