@@ -247,12 +247,11 @@ body::after{
   .minfo{display:none;}
   .band .bsub{display:none;}
   .foot span:not(.b):not(.legal){display:none;}
-  /* Methode: horizontale Swipe-Reihe statt vertikalem Stapel, nur das Wort */
-  .flow{flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-top:6px; padding-bottom:12px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  /* Methode: jede Stufe eine eigene volle Box, eine pro Ansicht, horizontal swipebar */
+  .flow{flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px; margin-top:10px; padding-bottom:14px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
   .flow::-webkit-scrollbar{display:none;}
-  .flow .fn{flex:0 0 auto; width:58%; min-width:0; scroll-snap-align:center; padding:26px 18px; display:flex; align-items:center; justify-content:center; text-align:center;}
-  .flow .fn span,.flow .fn small{display:none;}
-  .flow .fn b{font-size:18px;}
+  .flow .fn{flex:0 0 auto; width:84%; min-width:0; scroll-snap-align:center; padding:22px;}
+  .flow .fn b{font-size:17px;}
   .flow .fa{display:none;}
 }
 </style>
