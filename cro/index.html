@@ -223,6 +223,9 @@ body::after{
 .foot{margin-top:36px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;
   font-family:var(--mono); font-size:11px; color:var(--mut2); letter-spacing:.04em;}
 .foot .b{color:var(--mut);}
+.foot .legal{display:flex; gap:18px;}
+.foot a{color:var(--mut2); text-decoration:none; transition:color .2s;}
+.foot a:hover{color:var(--ink);}
 
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0; transform:translateY(16px); animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
@@ -353,8 +356,8 @@ body::after{
   <!-- FOOTER -->
   <div class="foot reveal" style="animation-delay:.26s">
     <span class="b">MORITZ BOHMBACH · BB BRANDS</span>
-    <span>Conversion-Rate-Optimierung für DTC-Brands</span>
     <span>2 % → 4 %+ · 60 Tage · gleicher Traffic</span>
+    <span class="legal"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></span>
   </div>
 
 </div>
