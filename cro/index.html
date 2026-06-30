@@ -4,426 +4,173 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2 % auf 4 %+ Conversion Rate in 60 Tagen — Moritz Bohmbach</title>
+<meta name="description" content="Ich bringe deine Conversion Rate von 2 % auf 4 %+ in 60 Tagen. Gleicher Traffic, kein Euro mehr für Ads, doppelt so viel Profit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#F8FAFC; --bg2:#FFFFFF; --panel:#FFFFFF; --panel2:#F8FAFC;
-  --ink:#0F172A; --mut:#475569; --mut2:#64748B; --faint:#94A3B8;
-  --line:#E2E8F0; --line2:#CBD5E1;
-  --blue:#4F46E5; --blueSoft:#6366F1; --blueDeep:#4338CA; --orange:#F97316;
-  --grad:linear-gradient(135deg,#4F46E5 0%,#F97316 100%);
-  --serif:"Plus Jakarta Sans",system-ui,sans-serif;
-  --sans:"Inter",system-ui,-apple-system,sans-serif;
-  --mono:"Inter",system-ui,sans-serif;
-  --maxw:1080px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg); color:var(--ink); font-family:var(--sans);
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  line-height:1.5; overflow-x:hidden; position:relative;
-}
-body::before{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(ellipse 82% 54% at 50% 101%, rgba(253,186,116,.38), transparent 60%),
-    radial-gradient(ellipse 58% 48% at 24% 106%, rgba(249,168,212,.32), transparent 60%),
-    radial-gradient(ellipse 52% 46% at 5% 96%, rgba(196,181,253,.30), transparent 58%),
-    radial-gradient(ellipse 64% 44% at 82% 102%, rgba(249,115,22,.16), transparent 60%);
-}
-body::after{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.04; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.bg-layers{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
-.orb{position:fixed; border-radius:50%; filter:blur(76px); opacity:.42; will-change:transform;}
-.orb.b1{width:560px; height:440px; bottom:-150px; left:22%; background:radial-gradient(circle,rgba(253,186,116,.6),transparent 70%); animation:floatOrb 18s ease-in-out infinite;}
-.orb.b2{width:500px; height:400px; bottom:-140px; right:12%; background:radial-gradient(circle,rgba(249,168,212,.55),transparent 70%); animation:floatOrb 22s ease-in-out infinite -7s;}
-.orb.b3{width:460px; height:380px; bottom:-120px; left:-2%; background:radial-gradient(circle,rgba(196,181,253,.5),transparent 70%); animation:floatOrb 26s ease-in-out infinite -13s;}
-@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(4vw,-5vh) scale(1.07)} 66%{transform:translate(-3vw,4vh) scale(.95)}}
-.grid-bg{position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-image:linear-gradient(rgba(15,23,42,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.045) 1px,transparent 1px);
-  background-size:60px 60px;
-  -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%);
-  mask-image:linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%);}
-@media (prefers-reduced-motion:reduce){ .orb,.manifest em{animation:none} }
+  :root{
+    --ink:#0b0b0c; --paper:#ffffff; --muted:#6b6e76; --line:#e6e6e8;
+    --card:#fafafa; --hl:#d0d8ff; --blue:#0305C6; --ok:#16a34a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+  mark{background:var(--hl);color:var(--ink);padding:0 .08em;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
-.wrap{position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; padding:clamp(28px,5vw,72px) clamp(20px,4vw,56px) 72px;}
+  /* top */
+  .top{padding:22px 0 0}
+  .brand{font-weight:800;font-size:15px;letter-spacing:-.02em}
 
-.kick{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--mut2); display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
-.kick .dot{color:var(--blue);}
-.kick b{color:var(--mut); font-weight:500;}
-.hr{height:1px; background:linear-gradient(90deg,transparent,var(--line2) 12%,var(--line2) 88%,transparent); border:0; margin:clamp(40px,6vw,68px) 0;}
+  /* hero */
+  .hero{padding:40px 0 6px;text-align:center}
+  .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:7px 14px;margin-bottom:22px}
+  h1{font-size:clamp(33px,6.6vw,56px);font-weight:900;line-height:1.03;letter-spacing:-.03em;margin-bottom:18px}
+  .sub{font-size:clamp(16px,2.4vw,19px);color:var(--muted);max-width:520px;margin:0 auto;font-weight:500}
+  .sub b{color:var(--ink);font-weight:700}
+  .btn{width:100%;max-width:420px;margin:26px auto 0;font-family:inherit;font-weight:800;font-size:18px;letter-spacing:-.01em;color:#fff;background:var(--ink);border:none;border-radius:12px;padding:17px 22px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;transition:transform .15s,opacity .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn .ar{font-size:18px}
+  .microline{font-size:12.5px;color:#a0a2a9;margin-top:13px;line-height:1.5}
+  .proof{text-align:center;margin:24px auto 0;font-size:13px;color:var(--muted)}
+  .proof b{color:var(--ink);font-weight:700}
+  .proof .star{color:#0305C6}
 
-/* hero */
-.hero{padding-top:clamp(8px,2vw,20px);}
-.manifest{
-  font-family:var(--serif); font-optical-sizing:auto;
-  font-weight:800; font-size:clamp(34px,6.4vw,74px); line-height:1.06; letter-spacing:-.027em;
-  margin:24px 0 0; max-width:16ch;
-}
-.manifest em{font-style:normal; font-weight:800; background:linear-gradient(90deg,#F97316 0%,#FB923C 16%,#4F46E5 40%,#4F46E5 60%,#FB923C 84%,#F97316 100%); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:kinetic 7s ease-in-out infinite;}
-@keyframes kinetic{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.hero .sub{margin-top:24px; display:flex; gap:28px; flex-wrap:wrap; align-items:center;}
-.hero .sub p{max-width:46ch; color:var(--mut); font-size:18px; font-weight:500; line-height:1.55;}
-.hero .sub p b{color:var(--ink); font-weight:600;}
+  /* sections */
+  section{padding:46px 0}
+  .sec-head{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  h2{font-size:clamp(26px,4.6vw,38px);font-weight:900;line-height:1.05;letter-spacing:-.025em}
+  .lead{font-size:16px;color:var(--muted);margin-top:12px;font-weight:500;max-width:540px}
+  .lead b{color:var(--ink);font-weight:700}
 
-.cta{display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:700; font-size:15.5px; color:#fff; background:var(--grad); border:0; border-radius:12px; padding:15px 26px; cursor:pointer; text-decoration:none; box-shadow:0 8px 28px rgba(79,70,229,.32); transition:transform .15s, box-shadow .2s;}
-.cta:hover{transform:translateY(-2px); box-shadow:0 14px 38px rgba(79,70,229,.42);}
-.cta .ar{font-size:17px;}
-.microline{margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--mut2); letter-spacing:.02em;}
+  /* method steps */
+  .steps{margin-top:26px;display:grid;gap:10px}
+  .step{display:flex;gap:16px;align-items:baseline;border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--card)}
+  .step.peak{border-color:var(--ink);background:#fff}
+  .step .n{font-size:13px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;min-width:18px}
+  .step .t{font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .step .d{color:var(--muted);font-size:14px;margin-top:2px;font-weight:500}
+  .creed{margin-top:24px;font-size:clamp(18px,3vw,22px);font-weight:800;letter-spacing:-.01em;line-height:1.3}
+  .creed .bk{color:var(--blue)}
 
-/* stat strip */
-.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:34px;}
-.stat-c{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 18px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-.stat-c .n{font-family:var(--serif); font-weight:800; font-size:clamp(24px,3.4vw,38px); letter-spacing:-.02em; line-height:1; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.stat-c .l{color:var(--mut); font-size:12px; margin-top:8px; line-height:1.4;}
+  /* dark calc card */
+  .calc{background:var(--ink);color:#fff;border-radius:22px;padding:clamp(26px,4vw,38px)}
+  .calc .ce{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a9da6}
+  .calc h3{font-size:clamp(22px,4.4vw,30px);font-weight:900;line-height:1.12;letter-spacing:-.02em;margin:8px 0 22px}
+  .calc h3 mark{background:var(--hl);color:var(--ink)}
+  .rows{display:grid;gap:9px;margin-bottom:22px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 16px}
+  .row .k{font-size:13.5px;color:#c9cbd2;font-weight:600}
+  .row .v{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .leak{background:var(--hl);color:var(--ink);border-radius:16px;padding:22px;text-align:center}
+  .leak .big{font-size:clamp(40px,11vw,64px);font-weight:900;line-height:1;letter-spacing:-.03em}
+  .leak .cap{font-size:13px;font-weight:600;margin-top:8px;opacity:.8}
+  .calc .note{font-size:11.5px;color:#7e818b;margin-top:16px;text-align:center}
 
-/* dynamic logo marquee — wie bb-brands.de, an helle Seite angepasst */
-.logos{margin-top:34px; padding-top:30px; border-top:1px solid var(--line);}
-.logos-label{font-family:var(--mono); font-weight:600; font-size:11px; letter-spacing:.20em; text-transform:uppercase; color:var(--mut2); text-align:center; margin-bottom:26px;}
-.logos-marquee{overflow:hidden; position:relative;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 88%,transparent 100%);}
-.logos-track{display:flex; align-items:center; gap:96px; width:max-content; animation:logos-scroll 28s linear infinite;}
-.logos-track:hover{animation-play-state:paused;}
-.logos-track img{height:30px; width:auto; filter:brightness(0); opacity:.40; transition:opacity .25s ease; flex-shrink:0;}
-.logos-track img:hover{opacity:.85;}
-.logos-track img.logo-shopify{height:38px; align-self:center;}
-.logos-track .wm{font-family:'Inter Tight',var(--sans); font-weight:700; font-size:23px; letter-spacing:-.02em; color:var(--ink); opacity:.42; align-self:center; line-height:1; flex-shrink:0; white-space:nowrap; transition:opacity .25s ease;}
-.logos-track .wm:hover{opacity:.85;}
-.wm-klaviyo{font-style:italic; letter-spacing:-.01em;}
-.wm-gorgias{font-weight:800;}
-@keyframes logos-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 48px))}}
-@media (prefers-reduced-motion:reduce){.logos-track{animation:none}}
+  /* guarantee */
+  .guar{border-left:3px solid var(--ink);padding:4px 0 4px 18px;margin-top:8px}
+  .guar .gt{font-weight:800;font-size:17px;margin-bottom:6px}
+  .guar p{font-size:15px;color:var(--muted);line-height:1.55}
+  .guar p b{color:var(--ink);font-weight:700}
 
-/* section head */
-.shead{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--mut2); display:flex; align-items:center; gap:9px; margin-bottom:18px;}
-.shead::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--blue); box-shadow:0 0 10px var(--blue);}
-.sh2{font-family:var(--serif); font-weight:800; font-size:clamp(24px,3.4vw,38px); letter-spacing:-.02em; line-height:1.1; margin-bottom:6px;}
-.sh2 .em{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  /* booking */
+  .book{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,3.5vw,34px);text-align:center}
+  .book h2{font-size:clamp(24px,4.4vw,34px)}
+  .book .lead{margin:12px auto 0}
+  .calendly-inline-widget{margin-top:22px;min-width:280px;height:680px;border-radius:14px;overflow:hidden}
 
-/* compare old vs new */
-.cmp{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:22px;}
-.cmp .col{border:1px solid var(--line); border-radius:14px; padding:24px; background:var(--panel2);}
-.cmp .col.new{border-color:rgba(79,70,229,.28); background:linear-gradient(180deg,rgba(79,70,229,.05),var(--panel));}
-.cmp .badge{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:3px 9px; border-radius:20px; display:inline-block; margin-bottom:13px;}
-.cmp .col.old .badge{background:#F1F5F9; color:#94A3B8;}
-.cmp .col.new .badge{background:rgba(249,115,22,.12); color:#EA580C;}
-.cmp .ch{font-family:var(--serif); font-weight:700; font-size:16px; margin-bottom:15px; color:var(--ink);}
-.cmp .col.old .ch{color:var(--mut);}
-.cmp ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
-.cmp li{display:flex; gap:9px; font-size:14px; line-height:1.45;}
-.cmp .col.old li{color:var(--mut2);}
-.cmp .col.new li{color:var(--ink);}
-.cmp .ic{flex:0 0 auto; font-weight:800;}
-.cmp .col.old .ic{color:#CBD5E1;}
-.cmp .col.new .ic{color:#4F46E5;}
-
-/* dark signature band — the mechanism */
-.band{position:relative; z-index:2; background:#0B1020; border-radius:20px; padding:clamp(28px,3.4vw,46px); overflow:hidden; box-shadow:0 20px 60px rgba(15,23,42,.20);}
-.band::before{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 60% 60% at 18% -10%, rgba(79,70,229,.30), transparent 60%), radial-gradient(ellipse 55% 60% at 92% 115%, rgba(249,115,22,.18), transparent 60%);}
-.band>*{position:relative;}
-.band .blab{font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8B93FF;}
-.band h3{font-family:var(--serif); font-weight:800; font-size:clamp(22px,3vw,32px); color:#fff; margin:12px 0 6px; letter-spacing:-.02em;}
-.band .bsub{color:rgba(255,255,255,.6); font-size:14.5px; max-width:60ch;}
-.flow{display:flex; align-items:stretch; gap:6px; flex-wrap:wrap; margin-top:26px;}
-.flow .fn{flex:1 1 0; min-width:150px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:13px; padding:17px;}
-.flow .fn small{display:block; font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:7px;}
-.flow .fn b{color:#fff; font-size:15px; font-weight:600; display:block;}
-.flow .fn span{color:rgba(255,255,255,.55); font-size:12.5px; display:block; margin-top:5px; line-height:1.4;}
-.flow .fn.prof{background:linear-gradient(180deg,rgba(249,115,22,.24),rgba(79,70,229,.16)); border-color:rgba(249,115,22,.4);}
-.flow .fa{display:flex; align-items:center; color:#FB923C; font-size:17px; flex:0 0 auto;}
-.band .bcreed{margin-top:22px; padding-top:20px; border-top:1px solid rgba(255,255,255,.1); font-family:var(--serif); font-weight:600; font-size:clamp(17px,2vw,22px); color:#fff;}
-.band .bk{color:#FB923C;}
-.band .brecycle{display:flex; align-items:center; gap:10px; margin-top:20px; color:rgba(255,255,255,.7); font-size:13.5px; flex-wrap:wrap;}
-.band .brecycle .sym{color:#FB923C; font-size:18px;}
-/* info-reihe unter der methode */
-.minfo{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px;}
-.mcol{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-.mk{font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--blueSoft); margin-bottom:9px;}
-.mv{color:var(--mut); font-size:13.5px; line-height:1.5;}
-.mv b{color:var(--ink); font-weight:600;}
-@media(max-width:880px){.minfo{grid-template-columns:1fr}}
-/* rechnung / kalkulation */
-.calcwrap{margin-top:clamp(36px,5vw,60px);}
-.calcnote{font-family:var(--mono); font-size:12px; color:var(--mut2); margin:8px 0 22px; max-width:64ch; line-height:1.5;}
-.calc{display:flex; flex-direction:column; gap:12px;}
-.calc-base{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
-.calc-base span{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--mut); background:var(--panel2); border:1px solid var(--line); border-radius:20px; padding:8px 14px;}
-.calc-base span.eq{color:var(--ink); border-color:var(--line2);}
-.calc-step{display:grid; grid-template-columns:1fr auto; gap:6px 18px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 22px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-.cs-k{font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blueSoft); grid-column:1/-1;}
-.cs-math{font-size:14.5px; color:var(--mut); line-height:1.45;}
-.cs-res{font-family:var(--serif); font-weight:800; font-size:clamp(18px,2.4vw,24px); letter-spacing:-.01em; text-align:right; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; white-space:nowrap;}
-.cs-tag{grid-column:1/-1; font-size:12.5px; color:var(--mut2);}
-.calc-result{margin-top:16px; background:#0B1020; border-radius:18px; padding:clamp(24px,3vw,36px); text-align:center; position:relative; overflow:hidden; box-shadow:0 16px 48px rgba(15,23,42,.18);}
-.calc-result::before{content:""; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 50% -10%, rgba(79,70,229,.3), transparent 60%), radial-gradient(ellipse 50% 60% at 90% 120%, rgba(249,115,22,.18), transparent 60%);}
-.calc-result>*{position:relative;}
-.calc-result .big{font-family:var(--serif); font-weight:800; font-size:clamp(23px,4vw,40px); color:#fff; letter-spacing:-.02em; line-height:1.12;}
-.calc-result .big u{text-decoration:none; background:linear-gradient(90deg,#FB923C,#6366F1); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.calc-result .sub{color:rgba(255,255,255,.62); font-size:14.5px; margin-top:12px; max-width:54ch; margin-left:auto; margin-right:auto; line-height:1.5;}
-@media(max-width:560px){.calc-step{grid-template-columns:1fr} .cs-res{text-align:left}}
-/* auto-play balken-animation (transparent, klar verständlich) */
-.calc2{margin-top:clamp(32px,5vw,56px);}
-.calc2-bars{display:flex; align-items:flex-end; justify-content:center; gap:clamp(10px,3vw,40px); margin:36px auto 0; max-width:760px;}
-.barcol{flex:1 1 0; max-width:160px; display:flex; flex-direction:column; align-items:center;}
-.barcol .bval{font-family:var(--serif); font-weight:800; font-size:clamp(15px,2.3vw,24px); letter-spacing:-.01em; margin-bottom:10px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; opacity:0; transform:translateY(8px); transition:opacity .45s ease, transform .45s ease; white-space:nowrap;}
-.barcol.show .bval{opacity:1; transform:none;}
-.bar-wrap{position:relative; width:100%; height:240px;}
-.barcol .bar{position:absolute; left:0; bottom:0; width:100%; height:0; border-radius:12px 12px 0 0; transition:height .85s cubic-bezier(.16,1,.3,1); background:linear-gradient(180deg, rgba(99,102,241,.35), rgba(79,70,229,.9));}
-.barcol.peak .bar{background:linear-gradient(180deg, rgba(251,146,60,.55), rgba(249,115,22,.95)); box-shadow:0 0 34px rgba(249,115,22,.4);}
-.barcol .blab{font-family:var(--sans); font-weight:600; font-size:13.5px; color:var(--ink); margin-top:14px; text-align:center; line-height:1.25;}
-.barcol .bsmall{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--mut2); margin-top:4px;}
-.calc2-result{text-align:center; margin-top:30px; opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease;}
-.calc2-result.show{opacity:1; transform:none;}
-.calc2-result .big{font-family:var(--serif); font-weight:800; font-size:clamp(26px,4.6vw,48px); letter-spacing:-.025em; line-height:1.08;}
-.calc2-result .big u{text-decoration:none; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.calc2-result .sub{color:var(--mut); font-size:15px; margin-top:10px;}
-.calc2-loop{display:flex; align-items:center; justify-content:center; gap:13px; margin:24px auto 0; max-width:62ch; font-size:clamp(14px,1.9vw,17px); color:var(--mut); line-height:1.55; opacity:0; transform:translateY(10px); transition:opacity .7s ease, transform .7s ease;}
-.calc2-loop.show{opacity:1; transform:none;}
-.calc2-loop .sym{flex:0 0 auto; color:var(--orange); font-size:24px; animation:loopSpin 7s linear infinite;}
-.calc2-loop b{color:var(--ink); font-weight:600;}
-@keyframes loopSpin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.calc2-loop .sym{animation:none}}
-.calc2-foot{font-family:var(--mono); font-size:11px; color:var(--faint); text-align:center; margin-top:18px;}
-@media(max-width:600px){.calc2-bars{gap:7px} .bar-wrap{height:190px} .barcol .blab{font-size:11px} .barcol .bval{font-size:14px}}
-@media(max-width:880px){.flow .fa{transform:rotate(90deg); width:100%; justify-content:center; padding:4px 0}}
-
-/* guarantee */
-.guar{margin-top:22px; background:var(--panel); border:1px solid rgba(79,70,229,.28); border-radius:16px; padding:clamp(24px,2.6vw,34px); box-shadow:0 8px 24px rgba(15,23,42,.04); display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;}
-.guar .gi{font-size:30px; line-height:1;}
-.guar .gt{flex:1 1 280px;}
-.guar h3{font-family:var(--serif); font-weight:700; font-size:clamp(19px,2.3vw,25px); letter-spacing:-.015em; margin-bottom:8px;}
-.guar p{color:var(--mut); font-size:15px; max-width:62ch; line-height:1.55;}
-.guar p b{color:var(--ink); font-weight:600;}
-
-/* booking */
-.book{margin-top:clamp(40px,6vw,68px); border:1px solid var(--line2); border-radius:22px; padding:clamp(26px,4vw,44px); position:relative; overflow:hidden;
-  background:radial-gradient(700px 320px at 50% 0%, rgba(79,70,229,.12), transparent 70%), var(--bg2); text-align:center;}
-.book .lab{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--mut2);}
-.book h2{font-family:var(--serif); font-weight:800; font-size:clamp(28px,4.6vw,52px); line-height:1.05; letter-spacing:-.025em; margin:14px 0 10px;}
-.book h2 u{text-decoration:none; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.book .small{color:var(--mut); font-size:15px; max-width:52ch; margin:0 auto 8px;}
-.book .small b{color:var(--ink); font-weight:600;}
-.calendly-inline-widget{margin-top:26px; min-width:320px; height:700px; border-radius:14px; overflow:hidden;}
-
-/* footer */
-/* verifizierung · Google + Trustpilot */
-.trust{display:flex; justify-content:center; align-items:center; gap:clamp(12px,3vw,24px); flex-wrap:wrap; margin-top:clamp(40px,6vw,64px); padding-top:34px; border-top:1px solid var(--line);}
-.trustbadge{display:flex; align-items:center; gap:13px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:13px 20px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-.trustbadge .tb-logo{font-family:var(--serif); font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--ink); white-space:nowrap;}
-.trustbadge .tb-meta{display:flex; flex-direction:column; gap:3px;}
-.trustbadge .tb-score{font-family:var(--serif); font-weight:800; font-size:17px; color:var(--ink);}
-.trustbadge .tb-stars{font-size:13px; letter-spacing:1px; color:#F5B50A;}
-.trustbadge .tb-sub{font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut2);}
-.foot{margin-top:36px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;
-  font-family:var(--mono); font-size:11px; color:var(--mut2); letter-spacing:.04em;}
-.foot .b{color:var(--mut);}
-.foot .legal{display:flex; gap:18px;}
-.foot a{color:var(--mut2); text-decoration:none; transition:color .2s;}
-.foot a:hover{color:var(--ink);}
-
-@media (prefers-reduced-motion:no-preference){
-  .reveal{opacity:0; transform:translateY(16px); animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
-  @keyframes rise{to{opacity:1; transform:none}}
-}
-@media (max-width:880px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .cmp{grid-template-columns:1fr}
-}
-@media (max-width:600px){
-  .kick{font-size:10px; letter-spacing:.12em; gap:8px; row-gap:4px;}
-  .manifest{font-size:clamp(29px,8.6vw,40px);}
-  .hero .sub{gap:16px;}
-  .hero .sub p{font-size:16px;}
-  .cta{width:100%; justify-content:center;}
-  .foot{justify-content:center; text-align:center;}
-  /* weniger ist mehr: sekundaeres + redundantes auf Mobile ausblenden */
-  .microline{display:none;}
-  .minfo{display:none;}
-  .band .bsub{display:none;}
-  .foot span:not(.b):not(.legal){display:none;}
-  /* Methode: jede Stufe eine eigene volle Box, eine pro Ansicht, horizontal swipebar */
-  .flow{flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px; margin-top:10px; padding-bottom:14px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
-  .flow::-webkit-scrollbar{display:none;}
-  .flow .fn{flex:0 0 auto; width:84%; min-width:0; scroll-snap-align:center; padding:22px;}
-  .flow .fn b{font-size:17px;}
-  .flow .fa{display:none;}
-}
+  /* footer */
+  footer{border-top:1px solid var(--line);margin-top:20px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 40px;font-size:12.5px;color:var(--muted)}
+  .foot .b{font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .foot .legal{display:flex;gap:18px}
+  .foot a{text-decoration:none}
+  .foot a:hover{color:var(--ink)}
+  @media(max-width:560px){
+    section{padding:38px 0}
+    .foot{justify-content:center;text-align:center}
+    .calc h3 br{display:none}
+  }
 </style>
 </head>
 <body>
-<div class="bg-layers" aria-hidden="true"><span class="orb b1"></span><span class="orb b2"></span><span class="orb b3"></span></div>
-<div class="grid-bg" aria-hidden="true"></div>
 <div class="wrap">
 
+  <div class="top"><div class="brand">BB BRANDS</div></div>
+
   <!-- HERO -->
-  <header class="hero reveal" style="animation-delay:.02s">
-    <div class="kick"><span>Conversion-Rate-Optimierung</span> <span class="dot">·</span> <b>für wachsende DTC-Brands</b> <span class="dot">·</span> <span>Moritz Bohmbach</span></div>
-    <h1 class="manifest">Ich bringe dich von 2&nbsp;% auf <em>4&nbsp;%+</em> Conversion Rate. In 60&nbsp;Tagen.</h1>
-    <div class="sub">
-      <p><b>Gleicher Traffic. Kein Euro mehr für Ads.</b> Doppelt so viel von dem, was hinten rauskommt.</p>
-      <a class="cta" href="#buchen">Profit-Gap-Analyse buchen <span class="ar">→</span></a>
-    </div>
+  <header class="hero">
+    <span class="eyebrow">Conversion-Rate-Optimierung</span>
+    <h1>Ich bringe dich von 2&nbsp;% auf <mark>4&nbsp;%+</mark> Conversion Rate. In 60&nbsp;Tagen.</h1>
+    <p class="sub"><b>Gleicher Traffic. Kein Euro mehr für Ads.</b> Doppelt so viel von dem, was hinten rauskommt.</p>
+    <a class="btn" href="#buchen">Profit-Gap-Analyse buchen <span class="ar">→</span></a>
     <div class="microline">Bei den meisten heißt das 2&nbsp;→&nbsp;4&nbsp;%. Deine echten Zahlen klären wir in der Analyse.</div>
+    <div class="proof"><b>Google 5,0</b> <span class="star">★</span> · Hearo · Bachgold · Wake</div>
   </header>
 
-  <div class="logos reveal" style="animation-delay:.1s" aria-label="Brands, die ich gebaut habe, und Plattform-Partner">
-    <div class="logos-label">Gebaut für — &amp; Plattform-Partner</div>
-    <div class="logos-marquee">
-      <div class="logos-track">
-        <img src="/assets/images/logos/hearo.png" alt="Hearo">
-        <img src="/assets/images/logos/shopify-partner-v2.png" alt="Shopify Partner" class="logo-shopify">
-        <img src="/assets/images/logos/bachgold.png" alt="Bachgold">
-        <span class="wm wm-klaviyo" aria-label="Klaviyo Partner">klaviyo</span>
-        <img src="/assets/images/logos/wake-performance.png" alt="Wake Performance">
-        <span class="wm wm-gorgias" aria-label="Gorgias Partner">gorgias</span>
-        <img src="/assets/images/logos/reerect.png" alt="Reerect">
-        <!-- Duplikate für seamless loop -->
-        <img src="/assets/images/logos/hearo.png" alt="" aria-hidden="true">
-        <img src="/assets/images/logos/shopify-partner-v2.png" alt="" aria-hidden="true" class="logo-shopify">
-        <img src="/assets/images/logos/bachgold.png" alt="" aria-hidden="true">
-        <span class="wm wm-klaviyo" aria-hidden="true">klaviyo</span>
-        <img src="/assets/images/logos/wake-performance.png" alt="" aria-hidden="true">
-        <span class="wm wm-gorgias" aria-hidden="true">gorgias</span>
-        <img src="/assets/images/logos/reerect.png" alt="" aria-hidden="true">
-      </div>
+  <!-- METHODE -->
+  <section>
+    <div class="sec-head">Unsere Methode</div>
+    <h2>Die BB Brands Methode</h2>
+    <p class="lead">Ein Loop, den wir in deinem Shop bauen. Jeder Hebel der Reihe nach ans Maximum. Deshalb dauert eine Zusammenarbeit <b>3 bis 6 Monate</b>, kein Quick-Fix.</p>
+    <div class="steps">
+      <div class="step peak"><span class="n">1</span><div><div class="t">Conversion</div><div class="d">Das Fundament. Hier hole ich dich von 2 auf 4&nbsp;%+, mehr Käufe aus dem gleichen Traffic.</div></div></div>
+      <div class="step"><span class="n">2</span><div><div class="t">AOV</div><div class="d">Je mehr kaufen, desto mehr zählt jeder Warenkorb. Den maximieren wir als Nächstes.</div></div></div>
+      <div class="step"><span class="n">3</span><div><div class="t">Retention</div><div class="d">Mehr Käufer heißt mehr Leute fürs Retention-Marketing. Der exponentielle Effekt.</div></div></div>
+      <div class="step"><span class="n">4</span><div><div class="t">Mehr Profit</div><div class="d">Deutlich mehr Profit aus dem Traffic, den du schon hast. Er fließt zurück und dreht den Loop weiter.</div></div></div>
     </div>
-  </div>
-
-  <hr class="hr reveal" style="animation-delay:.12s">
-
-  <!-- METHODE · Überschrift ÜBER der Box -->
-  <div class="reveal" style="animation-delay:.14s; margin-bottom:22px;">
-    <div class="shead">Unsere Methode</div>
-    <div class="sh2">Die <span class="em">BB Brands</span> Methode</div>
-  </div>
-
-  <!-- METHODE · die Box -->
-  <div class="band reveal" style="animation-delay:.16s">
-    <div class="bsub">Ein Loop, den wir direkt in deinem Shop bauen. Wir nehmen jeden Hebel der Reihe nach und holen ihn ans Maximum. Deshalb dauert eine Zusammenarbeit 3 bis 6 Monate, kein Quick-Fix.</div>
-    <div class="flow">
-      <div class="fn prof"><small>Das Fundament · hier fangen wir an</small><b>Conversion</b><span>Wir holen das Maximum aus deinem Traffic. 2 auf 4 %+.</span></div>
-      <div class="fa">→</div>
-      <div class="fn"><small>Pro Warenkorb</small><b>AOV</b><span>Je mehr Leute kaufen, desto mehr zählt jeder Warenkorb. Den maximieren wir als Nächstes.</span></div>
-      <div class="fa">→</div>
-      <div class="fn"><small>Der exponentielle Effekt</small><b>Retention / CLTV</b><span>Mehr Käufer heißt mehr Leute fürs Retention-Marketing. Das verstärkt sich selbst.</span></div>
-      <div class="fa">→</div>
-      <div class="fn"><small>Aus dem Traffic, den du schon hast</small><b>Deutlich mehr Profit</b><span>Ohne einen Euro mehr Ad-Spend.</span></div>
-    </div>
-    <div class="brecycle"><span class="sym">↻</span> Und dieser Profit fließt zurück ins Werbebudget und dreht den Loop weiter. So skalierst du 2026: aus dem Fundament, nicht aus dem verrücktesten Media Buying.</div>
-    <div class="bcreed">„Das sollte <span class="bk">jeder Shopify-Store</span> haben."</div>
-  </div>
-
-  <!-- INFO unter der Methode -->
-  <div class="minfo reveal" style="animation-delay:.18s">
-    <div class="mcol"><div class="mk">Der Reihe nach</div><div class="mv">Conversion, AOV, Retention. <b>Einen Hebel nach dem anderen</b>, jeder ans Maximum. Darum 3 bis 6 Monate.</div></div>
-    <div class="mcol"><div class="mk">Der exponentielle Effekt</div><div class="mv">Mehr Conversion macht den AOV wichtiger und füllt dein Retention-Marketing. <b>Jeder Hebel verstärkt den nächsten.</b></div></div>
-    <div class="mcol"><div class="mk">So skaliert man 2026</div><div class="mv">Nicht über das verrückteste Media Buying. Aus einem Fundament, das <b>den Profit selbst zurück ins Wachstum dreht</b>.</div></div>
-  </div>
-
-  <!-- RECHNUNG · auto-play balken-animation -->
-  <section class="calc2 reveal" id="calc2" style="animation-delay:.2s" aria-label="Was die Methode bewirkt, vorgerechnet">
-    <div class="shead">Einfach vorgerechnet</div>
-    <div class="sh2">1.000 Besucher am Tag. <span class="em">Gleicher Traffic.</span></div>
-    <div class="calc2-bars" aria-hidden="true">
-      <div class="barcol"><div class="bval">0 €</div><div class="bar-wrap"><div class="bar" data-h="37"></div></div><div class="blab">Heute</div><div class="bsmall">2 % CVR</div></div>
-      <div class="barcol"><div class="bval">0 €</div><div class="bar-wrap"><div class="bar" data-h="74"></div></div><div class="blab">+ Conversion</div><div class="bsmall">2 → 4 %</div></div>
-      <div class="barcol"><div class="bval">0 €</div><div class="bar-wrap"><div class="bar" data-h="89"></div></div><div class="blab">+ AOV</div><div class="bsmall">+ 20 %</div></div>
-      <div class="barcol peak"><div class="bval">0 €</div><div class="bar-wrap"><div class="bar" data-h="100"></div></div><div class="blab">+ Retention</div><div class="bsmall">25 % Wiederkauf</div></div>
-    </div>
-    <div class="calc2-result">
-      <div class="big">Aus 36.000 € werden <u>~97.000 € im Monat</u>.</div>
-      <div class="sub">Rund 2,7×, ohne einen Euro mehr für Ads.</div>
-    </div>
-    <div class="calc2-loop"><span class="sym">↻</span><span>Und dieser Profit fließt zurück ins Werbebudget. Mehr Budget heißt mehr Traffic, und der Loop dreht sich größer. <b>Das ist Skalieren 2026.</b></span></div>
-    <div class="calc2-foot">Beispiel: AOV 60 €. Deine echten Zahlen in der Analyse.</div>
+    <p class="creed">So skalierst du 2026: aus dem Fundament, nicht aus dem verrücktesten Media Buying. <span class="bk">Das sollte jeder Shopify-Store haben.</span></p>
   </section>
 
-  <!-- GUARANTEE -->
-  <div class="guar reveal" style="animation-delay:.2s">
-    <div class="gi">🛡️</div>
-    <div class="gt">
-      <h3>Dein Risiko: keins.</h3>
-      <p>Die Analyse zeigt ehrlich, ob das Potenzial bei deinem Shop real da ist. Ist es das nicht, sage ich dir das, und wir starten nicht. Ist es da, nehme ich den Sprint an. <b>Triffst du die Zahl in 60 Tagen nicht, arbeite ich weiter, bis du sie hast.</b></p>
+  <!-- RECHNUNG -->
+  <section>
+    <div class="calc">
+      <div class="ce">Einfach vorgerechnet · 1.000 Besucher am Tag</div>
+      <h3>Aus <mark>36.000&nbsp;€</mark> werden <mark>~97.000&nbsp;€</mark> im Monat. Gleicher Traffic.</h3>
+      <div class="rows">
+        <div class="row"><span class="k">Conversion 2 → 4 %</span><span class="v">72.000 €</span></div>
+        <div class="row"><span class="k">+ AOV (+20 %)</span><span class="v">86.400 €</span></div>
+        <div class="row"><span class="k">+ Retention</span><span class="v">~97.000 €</span></div>
+      </div>
+      <div class="leak">
+        <div class="big">2,7×</div>
+        <div class="cap">mehr Umsatz, ohne einen Euro mehr für Ads</div>
+      </div>
+      <div class="note">Beispiel: AOV 60 €. Deine echten Zahlen rechnen wir in der Analyse.</div>
     </div>
-  </div>
-
-  <!-- BOOKING -->
-  <section class="book reveal" id="buchen" style="animation-delay:.22s">
-    <div class="lab">Profit-Gap-Analyse · kostenlos</div>
-    <h2>Lass uns deine Zahl <u>finden.</u></h2>
-    <p class="small">30 Minuten, in denen ich dir zeige, <b>wo dein Shop Conversion verliert</b> und was 2 auf 4 %+ bei deinem Umsatz konkret bedeutet. Kein Pitch-Deck, eine ehrliche Diagnose.</p>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/moritzbohmbach/profit-gap-analyse?hide_gdpr_banner=1&primary_color=4f46e5"></div>
   </section>
 
-  <!-- VERIFIZIERUNG · Google (ProvenExpert folgt, sobald echter Score vorliegt) -->
-  <div class="trust reveal" style="animation-delay:.24s" aria-label="Bewertungen">
-    <div class="trustbadge">
-      <span class="tb-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span>
-      <div class="tb-meta">
-        <div><span class="tb-score">5,0</span> <span class="tb-stars">★★★★★</span></div>
-        <div class="tb-sub">Google Bewertungen · verifiziert</div>
-      </div>
+  <!-- GARANTIE -->
+  <section style="padding-top:0">
+    <div class="guar">
+      <div class="gt">Dein Risiko: keins.</div>
+      <p>Die Analyse zeigt ehrlich, ob das Potenzial da ist. Ist es da, nehme ich den Sprint an. <b>Triffst du die Zahl in 60 Tagen nicht, arbeite ich weiter, bis du sie hast.</b></p>
     </div>
-  </div>
+  </section>
 
-  <!-- FOOTER -->
-  <div class="foot reveal" style="animation-delay:.26s">
-    <span class="b">MORITZ BOHMBACH · BB BRANDS</span>
-    <span>2 % → 4 %+ · 60 Tage · gleicher Traffic</span>
-    <span class="legal"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></span>
-  </div>
+  <!-- BUCHEN -->
+  <section id="buchen">
+    <div class="book">
+      <div class="sec-head" style="margin-bottom:8px">Profit-Gap-Analyse · kostenlos</div>
+      <h2>Lass uns deine Zahl finden.</h2>
+      <p class="lead">30 Minuten, in denen ich dir zeige, <b>wo dein Shop Conversion verliert</b> und was 2 auf 4&nbsp;%+ bei deinem Umsatz bedeutet. Kein Pitch, eine ehrliche Diagnose.</p>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/moritzbohmbach/profit-gap-analyse?hide_gdpr_banner=1&primary_color=0305c6"></div>
+    </div>
+  </section>
 
 </div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="b">MORITZ BOHMBACH · BB BRANDS</span>
+      <span class="legal"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script>
-(function(){
-  var sec=document.getElementById('calc2'); if(!sec) return;
-  var cols=[].slice.call(sec.querySelectorAll('.barcol'));
-  var result=sec.querySelector('.calc2-result');
-  var loopEl=sec.querySelector('.calc2-loop');
-  var vals=[36000,72000,86400,97200];
-  function eur(n){return (Math.round(n/100)*100).toLocaleString('de-DE')+' €';}
-  function countUp(el,to,dur){
-    var t0=null;
-    function step(ts){ if(t0===null)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3); el.textContent=eur(to*e); if(p<1) requestAnimationFrame(step); else el.textContent=eur(to); }
-    requestAnimationFrame(step);
-  }
-  function setBar(c){ var bar=c.querySelector('.bar'), wrap=c.querySelector('.bar-wrap'); bar.style.height=(parseFloat(bar.getAttribute('data-h'))/100*wrap.clientHeight)+'px'; }
-  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(reduce){
-    cols.forEach(function(c,i){ c.classList.add('show'); setBar(c); c.querySelector('.bval').textContent=eur(vals[i]); });
-    result.classList.add('show'); if(loopEl)loopEl.classList.add('show'); return;
-  }
-  var timers=[], playing=false;
-  var STEP=950, START=350, AFTER=1200, HOLD=6500;
-  function clearAll(){ timers.forEach(clearTimeout); timers=[]; }
-  function reset(){ cols.forEach(function(c){ c.classList.remove('show'); c.querySelector('.bar').style.height='0px'; c.querySelector('.bval').textContent='0 €'; }); result.classList.remove('show'); if(loopEl)loopEl.classList.remove('show'); }
-  function play(){
-    reset();
-    cols.forEach(function(c,i){
-      timers.push(setTimeout(function(){
-        c.classList.add('show');
-        setBar(c);
-        countUp(c.querySelector('.bval'), vals[i], 800);
-      }, START+i*STEP));
-    });
-    var endBase = START+cols.length*STEP;
-    timers.push(setTimeout(function(){ result.classList.add('show'); }, endBase));
-    timers.push(setTimeout(function(){ if(loopEl)loopEl.classList.add('show'); }, endBase+AFTER));
-    timers.push(setTimeout(play, endBase+AFTER+HOLD)); // Endbild bleibt ~6,5s stehen, dann Loop
-  }
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){
-    if(e.isIntersecting){ if(!playing){ playing=true; play(); } }
-    else { playing=false; clearAll(); }
-  }); }, {threshold:.3});
-  io.observe(sec);
-})();
-</script>
 </body>
 </html>
