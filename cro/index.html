@@ -159,7 +159,40 @@
       <p class="lead">30 Minuten, in denen ich dir zeige, <b>wo dein Shop Conversion verliert</b> und was der Loop bei deinem Umsatz bedeutet. Kein Pitch, eine ehrliche Diagnose.</p>
       <div class="calendly-inline-widget" data-url="https://calendly.com/moritzbohmbach/profit-gap-analyse?hide_gdpr_banner=1&primary_color=0305c6&utm_source=cro&utm_medium=landing&utm_campaign=cro-2auf4"></div>
     </div>
+
+    <!-- E-Mail-Fallback: wer (noch) nicht bucht, bekommt die Methode per Mail (Double-Opt-in via bb-os) -->
+    <div class="book" id="methode-mail" style="margin-top:18px;text-align:left">
+      <div class="sec-head" style="margin-bottom:8px">Noch nicht bereit für den Call?</div>
+      <h2 style="font-size:clamp(20px,3.4vw,26px)">Hol dir die Methode per E-Mail.</h2>
+      <p class="lead" style="margin-top:8px">Ich schick dir den Winner's Loop und wie du ihn selbst auf deinen Shop anwendest. <b>Kein Spam, jederzeit abmeldbar.</b></p>
+      <div id="mmForm" style="margin-top:16px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input type="email" id="mmEmail" placeholder="du@deinshop.de" autocomplete="email" inputmode="email" style="flex:1;min-width:220px;font-family:inherit;font-size:16px;font-weight:600;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px 15px">
+          <button type="button" id="mmBtn" style="font-family:inherit;font-weight:800;font-size:16px;color:#fff;background:var(--ink);border:0;border-radius:12px;padding:14px 22px;cursor:pointer">Methode holen</button>
+        </div>
+        <label style="display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.5;cursor:pointer"><input type="checkbox" id="mmConsent" style="margin-top:2px"><span>Ich möchte die Methode und gelegentlich Tipps von BB Brands per E-Mail. Abmeldung jederzeit. <a href="/datenschutz/" style="color:var(--ink);font-weight:600">Datenschutz</a>.</span></label>
+        <p id="mmErr" style="color:#d6453c;font-size:13px;font-weight:600;margin-top:8px"></p>
+      </div>
+      <div id="mmOk" style="display:none;margin-top:14px;font-size:15px;font-weight:600">✓ Fast geschafft: bestätige kurz die E-Mail, die wir dir gerade geschickt haben, dann kommt die Methode.</div>
+    </div>
   </section>
+
+  <script>
+  (function(){
+    var b=document.getElementById('mmBtn'); if(!b) return;
+    b.addEventListener('click',function(){
+      var email=(document.getElementById('mmEmail').value||'').trim().toLowerCase();
+      var err=document.getElementById('mmErr');
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Bitte eine gültige E-Mail-Adresse eintragen.'; return; }
+      if(!document.getElementById('mmConsent').checked){ err.textContent='Bitte die Zustimmung setzen.'; return; }
+      err.textContent=''; b.disabled=true; b.textContent='Einen Moment…';
+      var attr={}; try{ attr=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():{}; }catch(_){}
+      fetch('https://bb-os-theta.vercel.app/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,funnel:'cro-methode',optIn:true,createDeal:false,attribution:attr})})
+        .catch(function(){})
+        .finally(function(){ document.getElementById('mmForm').style.display='none'; document.getElementById('mmOk').style.display='block'; });
+    });
+  })();
+  </script>
 
 </div>
 
