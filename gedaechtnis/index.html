@@ -94,7 +94,7 @@
     <div class="card">
       <div class="form" id="form">
         <h2>Hol dir die Vorlage</h2>
-        <div class="ch">Trag deine E-Mail ein, dann kommst du direkt zum Download.</div>
+        <div class="ch">Trag deine E-Mail ein. Du bestätigst sie kurz per Mail, dann bekommst du die Datei.</div>
         <label for="name">Vorname (optional)</label>
         <input type="text" id="name" autocomplete="given-name" placeholder="Max">
         <label for="email">E-Mail</label>
@@ -106,10 +106,8 @@
       </div>
       <div class="success" id="success">
         <div class="ok">✓</div>
-        <h3>Fertig. Hier ist deine Vorlage.</h3>
-        <p>Der Download startet automatisch. Falls nicht, hier klicken.</p>
-        <a class="dl" id="dlpdf" href="/gedaechtnis/Gedaechtnis-File.pdf" download data-t="download-gedaechtnis-pdf">Gedächtnis-File (PDF) laden</a>
-        <a class="dlmd" href="/gedaechtnis/Gedaechtnis-File.md" download data-t="download-gedaechtnis-md">Lieber die reine .md-Datei? Hier laden</a>
+        <h3>Fast fertig. Bestätige deine E-Mail.</h3>
+        <p>Wir haben dir gerade eine Mail geschickt. Klick auf den Bestätigungslink, dann bekommst du das Gedächtnis-File sofort (Datei plus Download-Link). Schau auch kurz im Spam-Ordner.</p>
       </div>
     </div>
   </div>
@@ -160,12 +158,15 @@
     }, attr());
     // Meta/GA Lead-Event (via CMP) — zählt Downloads im Ads-/Tracking-Backend
     try{ if(window.BBTracking&&BBTracking.track){ var eid=BBTracking.newEventId?BBTracking.newEventId():undefined; BBTracking.track('Lead',{content_name:'gedaechtnis-file'},{eventId:eid}); if(eid) payload.eventId=eid; } }catch(_){}
-    fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    // 1) Bestehendes Lead-Handling (Notify/Tracking/Backup) unverändert.
+    fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+    // 2) bb-os: Kontakt + Double-Opt-in (Confirm-to-Unlock). Datei kommt erst nach Bestätigung.
+    fetch('https://bb-os-theta.vercel.app/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,name:name,funnel:'gedaechtnis',optIn:true,attribution:attr()})})
       .catch(function(){})
       .finally(function(){
         $('form').classList.add('off');
         $('success').classList.add('on');
-        try{ $('dlpdf').click(); }catch(e){}
+        // KEIN Auto-Download mehr: Datei wird erst nach E-Mail-Bestätigung freigeschaltet.
       });
   });
   $('email').addEventListener('keydown',function(e){ if(e.key==='Enter') btn.click(); });

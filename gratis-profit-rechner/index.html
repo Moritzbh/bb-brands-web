@@ -732,6 +732,8 @@ body{overflow-x:hidden}
     }, attr);
     try{ if(window.BBTracking&&BBTracking.attachToLead) BBTracking.attachToLead(payload,{eventId:eid}); }catch(_){}
     try{ payload.tracking_consent=!!(window.BBTracking&&BBTracking.isReady&&BBTracking.isReady()); }catch(_){}
+    // bb-os: Kontakt + Double-Opt-in. Ergebnis wird auf der Seite gezeigt; DOI sichert den Newsletter-Consent.
+    try{ fetch('https://bb-os-theta.vercel.app/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,name:name,phone:phone,funnel:'profit-rechner',optIn:true,attribution:attr})}).catch(function(){}); }catch(_){}
 
     function onValid(){
       ctx.lead={name:name,email:email,phone:phone};

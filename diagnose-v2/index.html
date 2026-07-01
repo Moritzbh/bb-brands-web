@@ -712,6 +712,8 @@ header.site-header,.mobile-menu,.top-bar{display:none !important}
     showScreen('loading'); window.scrollTo(0,0);
     var done=false; function go(){ if(done) return; done=true; location.href=RESULT_ROUTES[result.segment]||'/'; }
     fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){}).finally(function(){ setTimeout(go,350); });
+    // bb-os: Kontakt + Double-Opt-in (Ergebnis wird gezeigt; DOI sichert den Newsletter-Consent).
+    try{ fetch('https://bb-os-theta.vercel.app/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,funnel:'diagnose',optIn:true,attribution:attr})}).catch(function(){}); }catch(_){}
     setTimeout(go,2500);
   });
 
