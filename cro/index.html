@@ -61,10 +61,10 @@
   .calc h3{font-size:clamp(22px,4.4vw,30px);font-weight:900;line-height:1.12;letter-spacing:-.02em;margin:8px 0 22px}
   .calc h3 mark{background:var(--hl);color:var(--ink)}
   .rows{display:grid;gap:9px;margin-bottom:22px}
-  .row{display:flex;justify-content:space-between;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 16px}
-  .row .k{font-size:13.5px;color:#c9cbd2;font-weight:600}
-  .row .v{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;line-height:1.12}
-  .row .v .pct{font-size:12px;font-weight:700;color:#b3baff;margin-top:3px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:15px 17px}
+  .row .k{font-size:14.5px;color:#fff;font-weight:700;letter-spacing:-.01em}
+  .row .kd{font-size:12px;color:#9a9da6;font-weight:500;line-height:1.4;margin-top:3px}
+  .row .v{font-size:21px;font-weight:800;color:#aab2ff;white-space:nowrap;font-variant-numeric:tabular-nums}
   .leak{background:var(--hl);color:var(--ink);border-radius:16px;padding:22px;text-align:center}
   .leak .big{font-size:clamp(40px,11vw,64px);font-weight:900;line-height:1;letter-spacing:-.03em}
   .leak .cap{font-size:13px;font-weight:600;margin-top:8px;opacity:.8}
@@ -129,17 +129,17 @@
   <section>
     <div class="calc">
       <div class="ce">Einfach vorgerechnet · 1.000 Besucher am Tag</div>
-      <h3>Aus <mark>32.400&nbsp;€</mark> werden <mark>~67.500&nbsp;€</mark> im Monat. Gleicher Traffic.</h3>
+      <h3>Aus <mark>32.400&nbsp;€</mark> werden <mark>~56.000&nbsp;€</mark> im Monat. Gleicher Traffic.</h3>
       <div class="rows">
-        <div class="row"><span class="k">Conversion 1,8 → 2,5 %</span><span class="v">45.000 €<span class="pct">+39 % Umsatz</span></span></div>
-        <div class="row"><span class="k">+ AOV +20 %</span><span class="v">54.000 €<span class="pct">+67 % Umsatz</span></span></div>
-        <div class="row"><span class="k">+ Retention +25 % (Wiederkäufe)</span><span class="v">67.500 €<span class="pct">+108 % Umsatz</span></span></div>
+        <div class="row"><div class="kx"><div class="k">Conversion 1,8 → 2,5 %</div><div class="kd">Mehr Käufe aus dem Traffic, den du schon hast.</div></div><span class="v">+39 %</span></div>
+        <div class="row"><div class="kx"><div class="k">AOV +20 %</div><div class="kd">Jeder Warenkorb wird größer, über Bundles und Upsell.</div></div><span class="v">+20 %</span></div>
+        <div class="row"><div class="kx"><div class="k">Retention 20 → 30 %</div><div class="kd">Von 100 Käufern kaufen mehr nochmal. Nur echte Wiederkäufe, ohne E-Mail-Flows.</div></div><span class="v">+15 %</span></div>
       </div>
       <div class="leak">
-        <div class="big">+108 %</div>
-        <div class="cap">Gesamt-Anstieg, das sind 2,1× Umsatz, ohne einen Euro mehr für Ads</div>
+        <div class="big">+74 %</div>
+        <div class="cap">39 + 20 + 15 zusammen, das sind 1,7× Umsatz, ohne einen Euro mehr für Ads</div>
       </div>
-      <div class="note">Beispiel: 1.000 Besucher/Tag, AOV 60 €, +20 % AOV, +25 % durch Wiederkäufe (Retention). Konservativ gerechnet, deine echten Zahlen definieren wir gemeinsam in der Analyse.</div>
+      <div class="note">Konservativ und je Hebel isoliert gerechnet, das Zusammenspiel bringt real mehr. Retention = echte Wiederkäufe (Benchmark ~28 %), E-Mail-Flows (abgebrochener Warenkorb) nicht mitgezählt. Beispiel: AOV 60 €. Deine echten Zahlen definieren wir in der Analyse.</div>
     </div>
   </section>
 
