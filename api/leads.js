@@ -796,6 +796,55 @@ module.exports = async function handler(req, res) {
         return jsonResponse(res, 200, { ok: true, id });
       }
 
+      // ========== GEDÄCHTNIS-FILE (YouTube-Freebie /gedaechtnis) — Low-Friction: nur E-Mail + Consent ==========
+      if (magnet === 'gedaechtnis-file') {
+        const gfName = str(body.name, 120);
+        const gfEmail = str(body.email, 200).toLowerCase();
+        if (!gfEmail || !isEmail(gfEmail)) return jsonResponse(res, 400, { ok: false, error: 'invalid email' });
+        if (!(body.consentContact === true || body.consentContact === 'true' || body.consentContact === 'on')) {
+          return jsonResponse(res, 400, { ok: false, error: 'consent required' });
+        }
+        const gfNow = new Date().toISOString();
+        const gfSource = str(body.source, 60) || 'youtube';
+        const gfAttr = extractAttribution(body);
+        const gfExisting = await findLeadByEmail(gfEmail);
+        if (gfExisting) {
+          const rec = gfExisting.record;
+          rec.campaigns = Array.from(new Set([...(rec.campaigns || []), 'gedaechtnis-file']));
+          rec.name = rec.name || gfName;
+          rec.consentContact = true;
+          rec.consentContactAt = rec.consentContactAt || gfNow;
+          rec.activity = rec.activity || [];
+          rec.activity.push({ ts: gfNow, text: 'Gedächtnis-File geladen (' + gfSource + ')' });
+          rec.updatedAt = gfNow;
+          if (gfAttr.fbp && !rec.fbp) rec.fbp = gfAttr.fbp;
+          if (gfAttr.fbc && !rec.fbc) rec.fbc = gfAttr.fbc;
+          if (gfAttr.trackingConsent) rec.trackingConsent = true;
+          await redis('HSET', HASH_KEY, gfExisting.id, JSON.stringify(rec));
+          await writeToCrm(rec).catch(function () {});
+          await fireLeadCapi(rec, req);
+          return jsonResponse(res, 200, { ok: true, id: gfExisting.id, deduped: true });
+        }
+        const gfId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const gfRecord = {
+          id: gfId, email: gfEmail, name: gfName,
+          magnet: 'gedaechtnis-file', type: 'lead', source: 'gedaechtnis-file',
+          campaigns: ['gedaechtnis-file'],
+          status: 'new', consentNewsletter: false,
+          consentContact: true, consentContactAt: gfNow,
+          activity: [{ ts: gfNow, text: 'Gedächtnis-File geladen (' + gfSource + ')' }],
+          createdAt: gfNow, updatedAt: gfNow,
+          ...gfAttr,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
+          userAgent: str(req.headers['user-agent'] || '', 300),
+        };
+        await redis('HSET', HASH_KEY, gfId, JSON.stringify(gfRecord));
+        await writeToCrm(gfRecord).catch(function () {});
+        await sendPushNotification(gfRecord).catch((err) => console.error('[/api/leads] push (gedaechtnis) failed:', err));
+        await fireLeadCapi(gfRecord, req);
+        return jsonResponse(res, 200, { ok: true, id: gfId });
+      }
+
       // ========== EXISTING LEAD MAGNETS (style-guide / ai-readiness-check) ==========
       const lead = {
         name: str(body.name, 120),
