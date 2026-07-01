@@ -63,7 +63,8 @@
   .rows{display:grid;gap:9px;margin-bottom:22px}
   .row{display:flex;justify-content:space-between;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 16px}
   .row .k{font-size:13.5px;color:#c9cbd2;font-weight:600}
-  .row .v{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .row .v{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;line-height:1.12}
+  .row .v .pct{font-size:12px;font-weight:700;color:#b3baff;margin-top:3px}
   .leak{background:var(--hl);color:var(--ink);border-radius:16px;padding:22px;text-align:center}
   .leak .big{font-size:clamp(40px,11vw,64px);font-weight:900;line-height:1;letter-spacing:-.03em}
   .leak .cap{font-size:13px;font-weight:600;margin-top:8px;opacity:.8}
@@ -130,13 +131,13 @@
       <div class="ce">Einfach vorgerechnet · 1.000 Besucher am Tag</div>
       <h3>Aus <mark>36.000&nbsp;€</mark> werden <mark>~97.000&nbsp;€</mark> im Monat. Gleicher Traffic.</h3>
       <div class="rows">
-        <div class="row"><span class="k">Conversion 2 → 4 %</span><span class="v">72.000 €</span></div>
-        <div class="row"><span class="k">+ AOV (+20 %)</span><span class="v">86.400 €</span></div>
-        <div class="row"><span class="k">+ Retention</span><span class="v">~97.000 €</span></div>
+        <div class="row"><span class="k">Conversion 2 → 4 %</span><span class="v">72.000 €<span class="pct">+100 % Umsatz</span></span></div>
+        <div class="row"><span class="k">+ AOV (+20 %)</span><span class="v">86.400 €<span class="pct">+140 % Umsatz</span></span></div>
+        <div class="row"><span class="k">+ Retention</span><span class="v">~97.000 €<span class="pct">+170 % Umsatz</span></span></div>
       </div>
       <div class="leak">
-        <div class="big">2,7×</div>
-        <div class="cap">mehr Umsatz, ohne einen Euro mehr für Ads</div>
+        <div class="big">+170 %</div>
+        <div class="cap">Gesamt-Anstieg, das sind 2,7× Umsatz, ohne einen Euro mehr für Ads</div>
       </div>
       <div class="note">Beispielrechnung mit realistischen Zielen. Deine echten Zahlen definieren wir gemeinsam in der Analyse.</div>
     </div>
