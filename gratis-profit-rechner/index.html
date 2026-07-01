@@ -355,7 +355,7 @@ body{overflow-x:hidden}
   <div class="steps">
     <div class="step"><div class="n">1</div><h3>Shop-URL eintragen</h3><p>Du gibst nur deine Shop-Adresse ein. Die KI ruft deinen Shop sofort auf.</p></div>
     <div class="step"><div class="n">2</div><h3>KI durchleuchtet den Shop</h3><p>Gegen 110+ Conversion-Kriterien &amp; DTC-Benchmarks aus Baymard, Shopify &amp; Google, von Startseite bis Checkout.</p></div>
-    <div class="step"><div class="n">3</div><h3>Fix-Plan per WhatsApp oder E-Mail</h3><p>Kurz Kontaktdaten eintragen, dann siehst du dein Profit-Leck in Euro. Den kompletten Fix-Plan schick ich dir persönlich, per WhatsApp oder E-Mail.</p></div>
+    <div class="step"><div class="n">3</div><h3>Ergebnis + Fix-Plan per E-Mail</h3><p>Kurz Kontaktdaten eintragen und E-Mail bestätigen, dann siehst du dein Profit-Leck in Euro und bekommst den kompletten Fix-Plan persönlich per E-Mail.</p></div>
   </div>
 </div></section>
 
@@ -376,7 +376,7 @@ body{overflow-x:hidden}
   <h2>Häufige Fragen</h2>
   <div class="faq">
     <details><summary>Ist das wirklich kostenlos?</summary><p>Ja, komplett kostenlos und unverbindlich. Kein Abo, kein verstecktes Upsell. Für deinen persönlichen Report brauche ich nur kurz deine Kontaktdaten, damit ich ihn dir schicken kann.</p></details>
-    <details><summary>Muss ich dafür einen Call machen?</summary><p>Nein. Du bekommst Analyse und Fix-Plan per WhatsApp. Ob daraus mehr wird, entscheidest du.</p></details>
+    <details><summary>Muss ich dafür einen Call machen?</summary><p>Nein. Du bekommst Analyse und Fix-Plan per E-Mail. Ob daraus mehr wird, entscheidest du.</p></details>
     <details><summary>Was passiert mit meinen Daten?</summary><p>Deine Zahlen nutze ich nur, um deine Analyse zu erstellen. Kein Weiterverkauf, kein Spam, keine Newsletter-Flut.</p></details>
     <details><summary>Wie genau ist die KI-Analyse?</summary><p>Die KI prüft deinen Shop gegen 110+ Conversion-Kriterien und echte DTC-Benchmarks (Baymard, Shopify, Google). Sie zeigt belastbare Schwachstellen, keine Zauberei, aber konkret und nachvollziehbar.</p></details>
     <details><summary>Für wen ist das gedacht?</summary><p>Für DTC-/Shopify-Shops ab ca. 10k €/Monat Umsatz. Darunter geht es eher um die ersten profitablen Verkäufe als um Conversion-Feinschliff.</p></details>
@@ -410,7 +410,7 @@ body{overflow-x:hidden}
       <div class="inputs">
         <div class="full"><label>Dein Name</label><input type="text" id="inName" placeholder="Vor- und Nachname" autocomplete="name"></div>
         <div><label>E-Mail</label><input type="email" id="inEmail" placeholder="du@deinshop.de" autocomplete="email" inputmode="email"></div>
-        <div><label>Telefon / WhatsApp</label><input type="tel" id="inPhone" placeholder="+49 …" autocomplete="tel" inputmode="tel"></div>
+        <div><label>Telefon</label><input type="tel" id="inPhone" placeholder="+49 …" autocomplete="tel" inputmode="tel"></div>
       </div>
       <label class="consent"><input type="checkbox" id="inConsent"> <span>Ich bin einverstanden, dass BB Brands mich zu meiner Analyse kontaktiert. Kein Spam, jederzeit widerrufbar. <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutz</a></span></label>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -488,7 +488,7 @@ body{overflow-x:hidden}
         '</div>'+
         '<div class="cv-sign">Analyse von Moritz Bohmbach · BB Brands</div>'+
       '</div>'+
-      '<div class="cv-lockbar">🔒 komplett per WhatsApp</div>'+
+      '<div class="cv-lockbar">🔒 kompletter Report per E-Mail</div>'+
     '</div>';
   }
   function winCard(s){
@@ -556,12 +556,9 @@ body{overflow-x:hidden}
         '<div class="cta2">'+
           '<div class="coverCol">'+coverHtml(scan,r)+'</div>'+
           '<div class="ctaCol">'+
-            '<h3>Deine komplette Analyse wartet</h3>'+
-            '<p class="cs">Den ausführlichen Report + die 3 wichtigsten Hebel für '+esc(domain(v.url)||'deinen Shop')+' bekommst du direkt. Persönlich von Moritz, kein Bot, Antwort meist am selben Tag.</p>'+
-            waBtn('Komplette Analyse per WhatsApp holen')+
-            '<div class="or-sep">oder</div>'+
-            '<button type="button" class="btn btn-mail js-mailme">✉️ Ergebnis per E-Mail schicken</button>'+
-            '<p class="reassure">Kostenlos · unverbindlich · kein Sales-Anruf nötig</p>'+
+            '<h3>Dein Report ist unterwegs</h3>'+
+            '<p class="cs">Der ausführliche Report + die 3 wichtigsten Hebel für '+esc(domain(v.url)||'deinen Shop')+' kommen per E-Mail'+(ctx.lead&&ctx.lead.email?' an '+esc(ctx.lead.email):'')+'. <b>Bestätige kurz die E-Mail, die wir dir gerade geschickt haben</b>, dann ist er sofort bei dir. Persönlich von Moritz, kein Bot.</p>'+
+            '<p class="reassure">Kostenlos · unverbindlich · schau auch im Spam-Ordner</p>'+
           '</div>'+
         '</div>'+
       '</div>'+
@@ -581,7 +578,7 @@ body{overflow-x:hidden}
     var src=(window.bbAttribution&&window.bbAttribution.getAll)?window.bbAttribution.getAll():null;
     var body={url:url,visitors:v.visitors,aov:v.aov,cr:v.cr,margin:v.margin,leakMo:Math.round(r.leakMo||0),segment:r.segment,source:src,brand:(ctx.scan&&ctx.scan.brand)||null};
     var done=false;
-    // Sicherheitsnetz: hängt die KI, nach 12s sauber auf den WhatsApp-CTA zurückfallen (kein Endlos-Spinner)
+    // Sicherheitsnetz: hängt die KI, nach 12s sauber auf die Capture-Box zurückfallen (kein Endlos-Spinner)
     var to=setTimeout(function(){ if(done)return; done=true; slot.innerHTML=''; showCap(); },12000);
     fetch('/api/deep-analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
       .then(function(r){return r.json();})
@@ -605,7 +602,7 @@ body{overflow-x:hidden}
       '<div class="sl"><span class="d"></span><span><b>Hebel 3</b> konkreter Fix + Reihenfolge der Umsetzung</span></div>';
     var lockLine=moreFindings>0
       ? 'Die KI hat noch <b>'+moreFindings+' weitere Leck'+(moreFindings===1?'':'s')+'</b> für deinen Shop gefunden, plus den kompletten Fix-Plan.'
-      : 'Den ersten Hebel hast du oben gratis. Den kompletten Fix-Plan für deinen Shop bekommst du per WhatsApp.';
+      : 'Den ersten Hebel hast du oben gratis. Den kompletten Fix-Plan für deinen Shop bekommst du per E-Mail, sobald du deine Adresse bestätigst.';
     slot.innerHTML =
       '<div class="deep">'+
         '<div class="dh">🔍 KI Tiefenanalyse deines Shops</div>'+
@@ -625,7 +622,7 @@ body{overflow-x:hidden}
             '<li>Wie viel € jeder Hebel zurückholt</li>'+
             '<li>Persönlich von Moritz, kein Bot</li>'+
           '</ul>'+
-          '<p style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">👇 Hol dir alles per WhatsApp</p>'+
+          '<p style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">👇 Bestätige deine E-Mail, dann kommt alles</p>'+
         '</div></div>'+
       '</div>';
     var cap=$('capBox'); if(cap) cap.style.display='';
