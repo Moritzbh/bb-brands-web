@@ -454,7 +454,7 @@ module.exports = async function handler(req, res) {
       }
 
       // ========== GRATIS PROFIT-RECHNER (Landingpage /gratis-profit-rechner) ==========
-      // Lead-Gate VOR dem Ergebnis: Name + E-Mail + Telefon sind Pflicht.
+      // Lead-Gate VOR dem Ergebnis: Name + E-Mail sind Pflicht, Telefon ist optional.
       // Speichert die Rechner-Daten (Shop, Zahlen, Profit-Leck, Segment) mit,
       // feuert Push + Meta-CAPI. Dedup per E-Mail: bestehenden Lead anreichern,
       // nie herabstufen oder Quelle überschreiben.
@@ -481,16 +481,18 @@ module.exports = async function handler(req, res) {
         // E-Mail: Format + Wegwerf-Domain
         if (!email || !isEmail(email)) errors.email = 'E-Mail ungültig';
         else if (isDisposableEmail(email)) errors.email = 'Bitte eine echte E-Mail (keine Wegwerf-Adresse)';
-        // Telefon: nach E.164 normalisieren (Default DE)
-        const pn = normalizePhone(phone);
-        if (!pn.ok) errors.phone = 'Telefon ungültig (bitte mit Vorwahl, z. B. +49 …)';
-        else phone = pn.e164;
+        // Telefon: optional. Nur wenn angegeben, nach E.164 normalisieren (Default DE)
+        if (phone) {
+          const pn = normalizePhone(phone);
+          if (!pn.ok) errors.phone = 'Telefon ungültig (bitte mit Vorwahl, z. B. +49 …, oder Feld leer lassen)';
+          else phone = pn.e164;
+        }
         // E-Mail-Domain-Erreichbarkeit (MX/A) nur prüfen, wenn Format ok — spart DNS-Calls.
         // Best-effort: bei DNS-Fehler NICHT blocken (kein false-negative durch Netz-Hänger).
         if (!errors.email) {
           let mxOk = true;
           try { mxOk = await emailDomainHasMx(email); } catch { mxOk = true; }
-          if (!mxOk) errors.email = 'E-Mail-Domain nicht erreichbar — bitte Adresse prüfen';
+          if (!mxOk) errors.email = 'E-Mail-Domain nicht erreichbar, bitte Adresse prüfen';
         }
         if (Object.keys(errors).length) {
           return jsonResponse(res, 400, { ok: false, errors });
